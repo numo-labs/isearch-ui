@@ -16,7 +16,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel-loader?presets[]=react&presets[]=es2015'] // 'babel-loader' is also a legal name to reference
+        loaders: ['react-hot', 'babel'] // 'babel-loader' is also a legal name to reference
       },
       {
         test: /\.html$/,
