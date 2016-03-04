@@ -24,7 +24,7 @@
     "Search",
     "Grid"
   ],
-  "author": "Nikki Ravi & Jack Carlisle",
+  "author": "Nikki Ravi & Jack Carlisle & Jimmy Ruts",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/numo-labs/isearch-ui/issues"
@@ -56,12 +56,14 @@
     "react-dom": "^0.14.7",
     "react-masonry-component": "^4.0.0",
     "react-redux": "^4.4.0",
-    "redux": "^3.3.1"
+    "redux": "^3.3.1",
+    "material-ui": "^0.14.4",
   },
   "semistandard": {
     "globals": [
       "describe",
       "it"
-    ]
+    ],
+    "parser": "babel-eslint"
   }
 }
