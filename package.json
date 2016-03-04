@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test/**/*.test.js --compilers js:babel-register",
-    "build": "webpack --progress",
+    "build": "webpack",
     "dev": "webpack-dev-server --hot --inline",
     "lint": "semistandard"
   },
