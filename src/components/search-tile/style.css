@@ -1,0 +1,17 @@
+.tile {
+  width: 100px;
+  margin: 10px;
+  background-color: red;
+}
+
+.tile1 {
+  height: 100px;
+}
+
+.tile2 {
+  height: 50px;
+}
+
+.tile3 {
+  height: 200px;
+}
