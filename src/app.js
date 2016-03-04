@@ -4,5 +4,5 @@ import Greetings from './component/greetings';
 
 ReactDOM.render(
   <Greetings name='Gangsta' />,
-  document.body
+  document.getElementById('container')
 );
