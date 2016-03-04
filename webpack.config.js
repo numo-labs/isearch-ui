@@ -25,7 +25,11 @@ module.exports = {
         loader: "style-loader!css-loader"
       },
       {
-        test: /masonry|imagesloaded|fizzy\-ui\-utils|desandro\-|outlayer|get\-size|doc\-ready|eventie|eventemitter/,
+        test: /masonry-layout/,
+        loader: 'imports?define=>false&this=>window'
+      },
+      {
+        test: /imagesloaded/,
         loader: 'imports?define=>false&this=>window'
       }
     ]
