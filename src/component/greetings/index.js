@@ -13,7 +13,7 @@ export default React.createClass({
     const components = [];
     for (var i = 0; i < n; i++) {
       components.push(
-        <div>
+        <div key={i}>
           <Card>
             <CardMedia overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}>
               <img src="http://lorempixel.com/600/337/nature/" />
