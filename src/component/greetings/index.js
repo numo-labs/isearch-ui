@@ -1,5 +1,6 @@
 import React from 'react';
 import Tile from './tile';
+import AppBar from 'material-ui/lib/app-bar';
 
 const categories = ['abstract', 'animals', 'business', 'cats', 'city', 'food', 'nightlife',
   'fashion', 'people', 'nature', 'sports', 'technics', 'transport']
@@ -14,7 +15,7 @@ export default React.createClass({
 
     for (var i = 0; i < 100; i++) {
       const cat = categories[Math.floor((Math.random() * 11) + 1)];
-      images.push({category: cat, img: 'http://lorempixel.com/600/337/' + cat + '/' + Math.floor((Math.random() * 10) + 1)});
+      images.push('http://lorempixel.com/600/337/' + cat + '/' + Math.floor((Math.random() * 10) + 1));
     }
 
     return {
@@ -26,12 +27,10 @@ export default React.createClass({
 
     const components = [];
     for (var i = 0; i < n; i++) {
-      const k = Math.floor((Math.random() * 100) + 1);
-      const img = this.state.images[k].img;
-      const cat = this.state.images[k].category;
+      const img = this.state.images[Math.floor((Math.random() * 100) + 1)];
       components.push(
-        <div key={i}>
-          <Tile img={img} index={i} cat={cat} />
+        <div>
+          <Tile img={img} key={i} />
           <br />
         </div>
       )
@@ -42,6 +41,8 @@ export default React.createClass({
   render: function () {
     return (
       <div className='greeting'>
+        <AppBar showMenuIconButton="false" title="Inspirational App DEMO" />
+        <br />
         {this.renderRandomCards(10)}
       </div>
     );
