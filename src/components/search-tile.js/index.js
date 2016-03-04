@@ -1,9 +1,10 @@
 import React, { PropTypes, Component } from 'react';
+require('./style.css');
 
 export default class SearchTile extends Component {
   render () {
     return (
-      <div>{this.props.title}</div>
+      <div className='tile'>{this.props.title}</div>
     );
   }
 }

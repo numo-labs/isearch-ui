@@ -1,14 +1,16 @@
 import React, { PropTypes, Component } from 'react';
-import MasonryGrid from '../masonry-grid';
-import SearchTile from '../search-tile/index.js';
-
-export default class Home extends Component {
-
-  render () {
+import ReactGridLayout from 'react-grid-layout';
+require('./style.css');
+class Gallery extends Component {
+  render() {
     return (
-      <MasonryGrid>
-        <SearchTile title='tile'/>
-      </MasonryGrid>
+      <ReactGridLayout cols={12} rowHeight={30}>
+        <div className='tile' key="1" _grid={{x: 0, y: 0, w: 1, h: 2}}>1</div>
+        <div className='tile' key="2" _grid={{x: 1, y: 0, w: 1, h: 2}}>2</div>
+        <div className='tile' key="3" _grid={{x: 2, y: 0, w: 1, h: 2}}>3</div>
+      </ReactGridLayout>
     );
   }
-}
+};
+
+export default Gallery;
