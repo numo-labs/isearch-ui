@@ -1,5 +1,11 @@
+.container {
+  height: 200px;
+  width: 200px;
+}
+
 .tile {
   background-color: red;
   height: 100px;
   width: 100px;
+  margin: 10px;
 }

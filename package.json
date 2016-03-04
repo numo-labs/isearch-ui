@@ -52,11 +52,8 @@
     "react": "^0.14.7"
   },
   "dependencies": {
-    "imagesloaded": "^4.1.0",
     "imports-loader": "^0.6.5",
-    "masonry-layout": "^4.0.0",
     "react-dom": "^0.14.7",
-    "react-grid-layout": "^0.10.8",
     "react-masonry-component": "^4.0.0",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1"
