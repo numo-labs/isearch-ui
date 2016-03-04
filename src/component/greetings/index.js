@@ -1,8 +1,5 @@
 import React from 'react';
-import Card from 'material-ui/lib/card/card';
-import CardMedia from 'material-ui/lib/card/card-media';
-import CardText from 'material-ui/lib/card/card-text';
-import CardTitle from 'material-ui/lib/card/card-title';
+import Tile from './tile';
 
 const categories = ['abstract', 'animals', 'business', 'cats', 'city', 'food', 'nightlife',
   'fashion', 'people', 'nature', 'sports', 'technics', 'transport']
@@ -30,23 +27,11 @@ export default React.createClass({
     const components = [];
     for (var i = 0; i < n; i++) {
       const img = this.state.images[Math.floor((Math.random() * 100) + 1)];
-      console.log(img);
       components.push(
-        <div key={i}>
-          <Card>
-            <CardMedia overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}>
-              <img src={img} />
-            </CardMedia>
-            <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-            </CardText>
-          </Card>
+        <div>
+          <Tile img={img} key={i} />
           <br />
         </div>
-
       )
     }
     return (components);
