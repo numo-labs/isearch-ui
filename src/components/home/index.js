@@ -1,14 +1,14 @@
 import React, { PropTypes, Component } from 'react';
+import MasonryGrid from '../masonry-grid';
+import SearchTile from '../search-tile/index.js';
 
 export default class Home extends Component {
 
   render () {
     return (
-      <div>{this.props.name}</div>
+      <MasonryGrid>
+        <SearchTile title='tile'/>
+      </MasonryGrid>
     );
   }
 }
-
-Home.propTypes = {
-  name: PropTypes.string.isRequired
-};

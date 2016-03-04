@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
+import Home from '../../components/home/index.js';
 
 export default class Root extends Component {
 
@@ -8,7 +9,7 @@ export default class Root extends Component {
 
     return (
       <Provider store={store}>
-        <div>hello</div>
+        <Home />
       </Provider>
     );
   }
