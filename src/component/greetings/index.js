@@ -14,7 +14,7 @@ export default React.createClass({
 
     for (var i = 0; i < 100; i++) {
       const cat = categories[Math.floor((Math.random() * 11) + 1)];
-      images.push('http://lorempixel.com/600/337/' + cat + '/' + Math.floor((Math.random() * 10) + 1));
+      images.push({category: cat, img: 'http://lorempixel.com/600/337/' + cat + '/' + Math.floor((Math.random() * 10) + 1)});
     }
 
     return {
@@ -26,10 +26,12 @@ export default React.createClass({
 
     const components = [];
     for (var i = 0; i < n; i++) {
-      const img = this.state.images[Math.floor((Math.random() * 100) + 1)];
+      const k = Math.floor((Math.random() * 100) + 1);
+      const img = this.state.images[k].img;
+      const cat = this.state.images[k].category;
       components.push(
-        <div>
-          <Tile img={img} key={i} />
+        <div key={i}>
+          <Tile img={img} index={i} cat={cat} />
           <br />
         </div>
       )

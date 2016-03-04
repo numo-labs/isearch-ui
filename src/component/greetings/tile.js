@@ -8,7 +8,7 @@ export default React.createClass({
 
   render: function () {
 
-    const { img } = this.props;
+    const { img, key } = this.props;
 
     return (
       <Card>
@@ -23,5 +23,16 @@ export default React.createClass({
         </CardText>
       </Card>
     );
+  },
+  componentDidMount () {
+    // console.log(this.props);
+    dataLayer.push({
+     'ecommerce' : {
+       'impressions' : [{
+         'id' : 'iSearch-'+this.props.cat + '-' + this.props.index
+       }]
+     },
+     'event' : 'impressionsPushed'
+   });
   }
 });
