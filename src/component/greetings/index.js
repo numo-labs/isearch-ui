@@ -29,7 +29,7 @@ export default React.createClass({
     for (var i = 0; i < n; i++) {
       const img = this.state.images[Math.floor((Math.random() * 100) + 1)];
       components.push(
-        <div>
+        <div key={i}>
           <Tile img={img} key={i} />
           <br />
         </div>
@@ -41,7 +41,7 @@ export default React.createClass({
   render: function () {
     return (
       <div className='greeting'>
-        <AppBar showMenuIconButton="false" title="Inspirational App DEMO" />
+        <AppBar showMenuIconButton={false} title="Inspirational App DEMO" />
         <br />
         {this.renderRandomCards(10)}
       </div>
