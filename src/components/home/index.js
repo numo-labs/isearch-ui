@@ -1,15 +1,15 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import Masonry from 'react-masonry-component';
 import SearchTile from '../search-tile/index.js';
 
 const masonryOptions = {
-    transitionDuration: 0
+  transitionDuration: 0
 };
 
-import s from './style.css';
+// import s from './style.css'; // not used
 
 class Gallery extends Component {
-  render() {
+  render () {
     return (
       <Masonry
         elementType={'div'} // default 'div'
@@ -67,6 +67,6 @@ class Gallery extends Component {
       </Masonry>
     );
   }
-};
+}
 
 export default Gallery;
