@@ -1,5 +1,5 @@
 'use strict';
-
+var path = require('path');
 module.exports = {
   entry: {
     javascript: './src/app.js',
@@ -10,7 +10,10 @@ module.exports = {
     path: __dirname + '/dist'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    root: [
+      path.join(process.cwd(), "lib")
+    ]
   },
   module: {
     loaders: [
