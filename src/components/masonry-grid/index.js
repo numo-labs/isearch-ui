@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Masonry from 'masonry-layout';
 import imagesloaded from 'imagesloaded';
 
 let refName = 'masonryContainer';
 
-export default class MasonryGrid extends React.Component {
+export default class MasonryGrid extends Component {
   constructor () {
     super();
     this.masonry = false;
@@ -146,7 +146,10 @@ export default class MasonryGrid extends React.Component {
 }
 
 MasonryGrid.propTypes = {
-  options: React.PropTypes.object
+  options: PropTypes.object,
+  elementType: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.array
 };
 
 MasonryGrid.defaultProps = {

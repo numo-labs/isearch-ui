@@ -7,8 +7,9 @@ export default class SearchTile extends Component {
       <div className={'tile ' + 'tile' + this.props.width}>{this.props.title}</div>
     );
   }
-};
+}
 
 SearchTile.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string,
+  width: PropTypes.string
 };
