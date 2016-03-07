@@ -1,0 +1,65 @@
+@font-face {
+  font-family: TCScript;
+  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+.container {
+  border: 1px solid white;
+  box-sizing: border-box;
+  height: 230px;
+  width: 375px;
+}
+
+.question-mark-container {
+  border-radius: 13px;
+  border: 1px solid white;
+  border-color: #ffffff;
+  color: #ffffff;
+  font-family: SourceSansLight;
+  font-size: 1em;
+  float: right;
+  height: 23px;
+  margin-top: 10px;
+  margin-right: 10px;
+  text-align: center;
+  width: 23px;
+}
+
+.description {
+  color: #ffffff;
+  font-family: TCScript, sans-serif;
+  font-size: 1.5em;
+  line-height: 0.95;
+  margin-top: 2em;
+  text-align: center;
+}
+
+.big-word {
+  font-family: SourceSansSemiBold, sans-serif;
+  font-size: 3.5rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.stars-container {
+  text-align: center;
+  margin-top: 1.2em;
+}
+
+.star {
+  display: inline-block;
+}
+
+svg {
+  pointer-events: none;
+}
