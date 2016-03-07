@@ -1,20 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import jsdom from 'mocha-jsdom';
 import expect from 'expect';
 
-import Greetings from '../../../src/component/greetings';
+import SearchTile from '../../src/components/search-tile/index.js';
 
 function setup (propOverrides) {
   const props = Object.assign({
-    name: 'Jack'
+    title: 'Jack'
   }, propOverrides);
 
-  const greetings = <Greetings {...props} />;
+  const tile = <SearchTile {...props} />;
 
   const renderer = TestUtils.createRenderer();
-  renderer.render(greetings);
+  renderer.render(tile);
   const output = renderer.getRenderOutput();
 
   return {
@@ -27,9 +26,9 @@ function setup (propOverrides) {
 describe('components', function () {
   jsdom();
 
-  describe('Greetings', function () {
-    it('should render the Greetings container', function (done) {
-      const { output } = setup({name: 'Jimmy'});
+  describe('SearchTile', function () {
+    it('should render a tile', function (done) {
+      const { output } = setup({title: 'Jimmy', width: 3});
       expect(output.type).toBe('div');
       done();
     });
