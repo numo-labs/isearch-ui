@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 
 require('./style.css');
+
 export default class SearchTile extends Component {
   render () {
     return (
@@ -11,5 +12,5 @@ export default class SearchTile extends Component {
 
 SearchTile.propTypes = {
   title: PropTypes.string,
-  width: PropTypes.string
+  width: PropTypes.number
 };
