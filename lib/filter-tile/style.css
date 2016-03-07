@@ -16,8 +16,11 @@
 .container {
   border: 1px solid white;
   box-sizing: border-box;
-  height: 230px;
   width: 375px;
+}
+
+.inner-container {
+  padding: 20px;
 }
 
 .question-mark-container {
@@ -35,13 +38,16 @@
   width: 23px;
 }
 
+.description-container {
+  margin-top: 2em;
+}
+
 .description {
   color: #ffffff;
   font-family: TCScript, sans-serif;
   font-size: 1.5em;
-  line-height: 0.95;
-  margin-top: 2em;
   text-align: center;
+  padding-left: 0.6em;
 }
 
 .big-word {
@@ -49,11 +55,12 @@
   font-size: 3.5rem;
   color: #ffffff;
   text-align: center;
+  line-height: 0.98;
 }
 
 .stars-container {
   text-align: center;
-  margin-top: 1.2em;
+  margin-top: 1em;
 }
 
 .star {
