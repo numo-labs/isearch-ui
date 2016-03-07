@@ -12,7 +12,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     root: [
-      path.join(process.cwd(), "lib")
+      path.join(process.cwd(), 'lib')
     ]
   },
   module: {
