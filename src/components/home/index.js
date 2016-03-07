@@ -11,11 +11,10 @@ const masonryOptions = {
 
 class Gallery extends Component {
   render () {
-
     const filter1 = {
       part1: 'HOW IMPORTANT IS ',
       bigWord: 'NIGHTLIFE ?',
-      part2:''
+      part2: ''
     };
 
     const filter2 = {
