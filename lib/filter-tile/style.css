@@ -19,11 +19,11 @@
   width: 375px;
 }
 
-.inner-container {
+.contentContainer {
   padding: 20px;
 }
 
-.question-mark-container {
+.questionMarkContainer {
   border-radius: 13px;
   border: 1px solid white;
   border-color: #ffffff;
@@ -38,7 +38,7 @@
   width: 23px;
 }
 
-.description-container {
+.descriptionTextContainer {
   margin-top: 2em;
 }
 
@@ -50,7 +50,7 @@
   padding-left: 0.6em;
 }
 
-.big-word {
+.bigWord {
   font-family: SourceSansSemiBold, sans-serif;
   font-size: 3.5rem;
   color: #ffffff;
@@ -58,7 +58,7 @@
   line-height: 0.98;
 }
 
-.stars-container {
+.starsContainer {
   text-align: center;
   margin-top: 1em;
 }
