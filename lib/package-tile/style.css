@@ -17,7 +17,6 @@
   width: 375px;
 }
   .packageImage {
-    background-image: url('https://lh5.ggpht.com/X6S-3G1irwe649hOPWe2GYqcl4eSxK69r6Y1CGoC9oXk45MRwTTywpz0vdVoQS0_vVVX=h900');
     height: 200px;
     position: relative;
     width: inherit;;
@@ -34,6 +33,7 @@
       color: #ffffff;
       font-family: SourceSansSemiBold;
       font-size: 1em;
+      text-transform: uppercase;
     }
 
   .descriptionContainer {
