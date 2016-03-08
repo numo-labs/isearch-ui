@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Masonry from 'react-masonry-component';
-import SearchTile from 'search-tile';
 import FilterTile from 'filter-tile';
 import Tags from 'tags';
 import Article from 'article';
