@@ -46,8 +46,8 @@ class Gallery extends Component {
       rating: '4.4/5',
       packageDetails: 'Breakfast buffet',
       oldPrice: 30.280,
-      period: '16 nov 2015, 1 week' ,
-      newPrice: 27.440,
+      period: '16 nov 2015, 1 week',
+      newPrice: 27.440
     };
 
     return (
