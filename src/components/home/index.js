@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import Masonry from 'react-masonry-component';
 import FilterTile from 'filter-tile';
 import Tags from 'tags';
-<<<<<<< HEAD
 import PackageTile from 'package-tile';
-=======
 import Article from 'article';
 
 require('./style.css');
->>>>>>> b4a6329b9e77f5cc189125f3cd8250053aaf51c9
 
 const masonryOptions = {
   transitionDuration: 0,
