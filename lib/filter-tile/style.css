@@ -16,7 +16,7 @@
 .container {
   border: 1px solid white;
   box-sizing: border-box;
-  width: 375px;
+  width: 100%;
 }
 
 .contentContainer {

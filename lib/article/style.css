@@ -1,0 +1,68 @@
+@font-face {
+  font-family: TCScript;
+  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansBold;
+  src: url('../../fonts/SourceSansPro-Bold.otf');
+}
+
+
+
+
+
+
+.type {
+  position: absolute;
+  color: #ffffff;
+  display: inline-block;
+  background-color: #454545;
+  font-family: SourceSansLight;
+  text-align: left;
+  left: 0;
+  top: 1.8em;
+}
+
+h5 {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0.3em;
+  font-size: 0.9em;
+}
+
+.articleContainer {
+  text-align: center;
+  position: relative;
+  font-family: SourceSansLight;
+  height: 374px;
+}
+
+img {
+  width: 100%;
+}
+
+.text {
+  bottom: 8em;
+  position: relative;
+  line-height: 0.5em;
+  padding: 0.4em;
+  padding-bottom: 0.6em;
+  background-color: #ffffff;
+  opacity: 0.8;
+}
+
+h1 {
+  font-family: SourceSansSemiBold;
+  font-size: 2.1em;
+}

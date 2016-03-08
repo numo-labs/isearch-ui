@@ -1,0 +1,15 @@
+.homeContainer {
+  background-color: #E9E5E0;
+  width: 375px;
+  left: 0;
+  position: absolute;
+}
+
+.gridItem {
+  margin-bottom: 0.9em;
+  width: 375px;
+}
+
+.gridSizer {
+  width: 375px;
+}
