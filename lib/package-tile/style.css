@@ -1,0 +1,124 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+.container {
+  width: 375px;
+}
+
+.packageImage {
+  background-image: url('https://lh5.ggpht.com/X6S-3G1irwe649hOPWe2GYqcl4eSxK69r6Y1CGoC9oXk45MRwTTywpz0vdVoQS0_vVVX=h900');
+  height: 250px;
+  position: relative;
+  width: 375px;
+}
+
+.mintBar {
+  background-color: #6DB4A9;
+  opacity: 0.7;
+  position: absolute;
+  bottom: 0;
+  width: inherit;
+  text-align: center;
+  margin: 0 auto;
+  height: 30px;
+  color: #ffffff;
+  font-family: SourceSansSemiBold;
+  font-size: 1.2em;
+}
+
+.descriptionContainer {
+  padding: 5px;
+}
+
+.topContainer {
+
+}
+
+.packageTitle {
+  font-family: SourceSansSemiBold;
+  font-size: 1.5em;
+}
+
+.packageSubtitle {
+  font-family: SourceSansRegular;
+  font-size: 1.2em;
+  color: #939393;
+}
+
+.heartsContainer {
+  display: inline-block;
+  padding-top: 5px;
+}
+
+.heart {
+  height: 20px;
+  width: 30px;
+  padding: 2px;
+}
+
+.ratingNumerator {
+  display: inline-block;
+  font-size: 1.8em;
+  font-family: SourceSansRegular;
+  margin-left: 140px;
+}
+
+.ratingDenominator {
+  display: inline-block;
+  font-size: 1.2em;
+  font-family: SourceSansRegular;
+  color: #939393;
+}
+
+.row {
+  width: 375px;
+  position: relative;
+}
+
+.packageDetailsText {
+ display: inline-block;
+ font-family: SourceSansSemiBold;
+ font-size: 1.2em;
+}
+
+.strikethroughText {
+ display: inline-block;
+ position: absolute;
+ right: 20px;
+ font-size: 1.2em;
+ font-family: SourceSansLight;
+ text-decoration: line-through;
+}
+
+.date {
+ display: inline-block;
+ font-family: SourceSansLight;
+ font-size: 1.1em;
+ color: #7e7e7e;
+ line-height: 2em;
+}
+
+.price {
+ display: inline-block;
+ position: absolute;
+ right: 20px;
+ font-size: 2em;
+ color:  #DA3A68;
+ font-family: SourceSansSemiBold;
+}
+
+.bottomContainer {
+  margin-top: 20px;
+}

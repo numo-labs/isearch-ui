@@ -3,6 +3,7 @@ import Masonry from 'react-masonry-component';
 import SearchTile from 'search-tile';
 import FilterTile from 'filter-tile';
 import Tags from 'tags';
+import PackageTile from 'package-tile';
 
 const masonryOptions = {
   transitionDuration: 0,
@@ -38,6 +39,7 @@ class Gallery extends Component {
           options={masonryOptions}
           disableImagesLoaded={false}
         >
+          <PackageTile />
           <FilterTile description={filter1} color={'#B9CAA8'}/>
           <FilterTile description={filter2} color={'#F19024'}/>
           <FilterTile description={filter3} color={'#DA3A68'}/>
