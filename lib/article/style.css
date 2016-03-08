@@ -18,6 +18,11 @@
   src: url('../../fonts/SourceSansPro-SemiBold.otf');
 }
 
+
+
+
+
+
 .type {
   position: absolute;
   color: #ffffff;
@@ -29,9 +34,9 @@
   top: 1.8em;
 }
 
-.type h5 {
-  margin-top: 0px;
-  margin-bottom: 0px;
+h5 {
+  margin-top: 0;
+  margin-bottom: 0;
   padding: 0.3em;
   font-size: 0.9em;
 }
@@ -57,7 +62,7 @@ img {
   opacity: 0.8;
 }
 
-.articleContainer h1 {
+h1 {
   font-family: SourceSansSemiBold;
   font-size: 2.1em;
 }
