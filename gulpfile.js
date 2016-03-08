@@ -1,16 +1,7 @@
 var AWS = require('aws-sdk');
 var gulp = require('gulp');
-var runSequence = require('run-sequence');
 var fs = require('fs');
 var exec = require('child_process').exec;
-
-/**
- * removing the public folder
- */
-
-gulp.task('remove-public-folder', function () {
-  return exec('rm -rf public');
-});
 
 /**
  * building the bundle
@@ -57,12 +48,4 @@ gulp.task('upload', function () {
       else console.log('Object ' + filename + ' was created!');
     });
   });
-});
-
-gulp.task('deploy', function (callback) {
-  return runSequence(
-    ['remove-public-folder'],
-    ['build'],
-    callback
-  );
 });

@@ -51,7 +51,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
-      template: 'src/index.template.html'
+      template: 'src/index.html'
     })
   ],
   colors: true,
