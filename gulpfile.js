@@ -10,18 +10,18 @@ var exec = require('child_process').exec;
 gulp.task('deploy', function () {
   return exec('npm run build', function (error, stdout, stderr) {
     if (error === null) {
-      var s3 = new AWS.S3();
+      var s3 = new AWS.S3({region: 'eu-west-1'});
       var filesToUpload = fs.readdirSync(__dirname + '/public');
       console.log('>>>>>>>>>', filesToUpload);
       filesToUpload.forEach(function (filename) {
         var params = {
-          Bucket: 'isearch-ui',
-          Key: filename,
+          Bucket: 'www.tcdl.io',
+          Key: 'isearch/prototype/' + filename,
           Body: fs.readFileSync(__dirname + '/public/' + filename),
           ContentType: 'text/html'
         };
         s3.putObject(params, function (err, data) {
-          if (err) console.log('Object upload unsuccessful!');
+          if (err) console.log('Object upload unsuccessful!', err);
           else console.log('Object ' + filename + ' was created!');
         });
       });
