@@ -1,15 +1,16 @@
 'use strict';
-var path = require('path');
+
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 module.exports = {
-  entry: {
-    javascript: './src/app.js',
-    html: './src/index.html'
-  },
+  entry: [
+    './src/app.js'
+  ],
   output: {
-    filename: 'app.js',
-    path: __dirname + '/dist'
+    path: __dirname + '/public/',
+    filename: 'bundle-[hash:6].js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -20,13 +21,8 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ['react-hot', 'babel']
-      },
-      {
-        test: /\.html$/,
-        loader: 'file?name=[name].[ext]'
+        test: /\.js$/, exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       {
         test: /masonry-layout/,
@@ -38,17 +34,22 @@ module.exports = {
       },
       {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=fonts/[name].[ext]'
+        loader: 'file-loader?name=[path][name].[ext]'
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style!css'
       }
     ]
   },
-  devServer: {hot: true},
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-  inline: true,
-  progress: true,
-  colors: true
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      inject: 'body',
+      template: 'src/index.template.html'
+    })
+  ],
+  colors: true,
+  progress: true
 };
