@@ -7,7 +7,7 @@ var exec = require('child_process').exec;
  * building the bundle
  */
 
-gulp.task('build', function () {
+gulp.task('deploy', function () {
   return exec('npm run build', function (error, stdout, stderr) {
     if (error === null) {
       var s3 = new AWS.S3();
@@ -15,7 +15,7 @@ gulp.task('build', function () {
       console.log('>>>>>>>>>', filesToUpload);
       filesToUpload.forEach(function (filename) {
         var params = {
-          Bucket: 'ui-kitchensink',
+          Bucket: 'isearch-ui',
           Key: filename,
           Body: fs.readFileSync(__dirname + '/public/' + filename),
           ContentType: 'text/html'
@@ -26,26 +26,5 @@ gulp.task('build', function () {
         });
       });
     }
-  });
-});
-
-/**
- * upload files to S3
- */
-
-gulp.task('upload', function () {
-  var s3 = new AWS.S3();
-  var filesToUpload = fs.readdirSync(__dirname + '/public');
-  console.log('>>>>>>>>>', filesToUpload);
-  filesToUpload.forEach(function (filename) {
-    var params = {
-      Bucket: 'isearch-ui',
-      Key: filename,
-      Body: fs.readFileSync(__dirname + '/public' + filename)
-    };
-    s3.putObject(params, function (err, data) {
-      if (err) console.log('Object upload unsuccessful!');
-      else console.log('Object ' + filename + ' was created!');
-    });
   });
 });

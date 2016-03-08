@@ -22,11 +22,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/, exclude: /node_modules/,
-        loaders: ['babel-loader']
-      },
-      {
-        test: /\.html$/,
-        loader: 'file?name=[name].[ext]'
+        loader: 'babel-loader'
       },
       {
         test: /masonry-layout/,
@@ -38,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=fonts/[name].[ext]'
+        loader: 'file-loader'
       },
       {
         test: /\.css$/,
@@ -51,7 +47,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
-      template: 'src/index.html'
+      template: 'src/index.template.html'
     })
   ],
   colors: true,
