@@ -52,6 +52,9 @@ class Gallery extends Component {
             <FilterTile description={filter2} color={'#F19024'}/>
           </div>
           <div className='gridItem'>
+            <Article backgroundImage='https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/e35/10472010_1689478414643553_296617682_n.jpg' type='Explore' title='YOSEMITE' overview='5 HIDDEN SECRETS OF' />
+          </div>
+          <div className='gridItem'>
           <FilterTile description={filter3} color={'#DA3A68'}/>
           </div>
         </Masonry>
