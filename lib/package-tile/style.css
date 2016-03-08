@@ -37,7 +37,9 @@
     }
 
   .descriptionContainer {
-    padding: 5px;
+    padding: 10px;
+    padding-bottom: 15px;
+    background-color: #ffffff;
   }
     .topContainer {
 

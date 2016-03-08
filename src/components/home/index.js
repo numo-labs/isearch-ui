@@ -4,6 +4,7 @@ import FilterTile from 'filter-tile';
 import Tags from 'tags';
 import PackageTile from 'package-tile';
 import Article from 'article';
+import SearchSummary from 'search-summary';
 
 require('./style.css');
 
@@ -57,6 +58,7 @@ class Gallery extends Component {
 
     return (
       <div className='homeContainer'>
+        <SearchSummary city='Bodrum' country='Turkey' durationInWeeks={2} paxMix='2 adults, 2 children' departureDate='Sun 13 jul 2016' returnDate='Tue 15 jul 2016' />
         <Tags />
         <Masonry
           elementType={'div'}
