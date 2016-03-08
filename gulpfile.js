@@ -9,7 +9,7 @@ var exec = require('child_process').exec;
 
 gulp.task('build', function () {
   return exec('npm run build', function (error, stdout, stderr) {
-    if(error === null) {
+    if (error === null) {
       var s3 = new AWS.S3();
       var filesToUpload = fs.readdirSync(__dirname + '/public');
       console.log('>>>>>>>>>', filesToUpload);
