@@ -45,11 +45,11 @@ class Gallery extends Component {
           options={masonryOptions}
           disableImagesLoaded={false}
         >
-          <PackageTile />
           <FilterTile description={filter1} color={'#B9CAA8'}/>
           <FilterTile description={filter2} color={'#F19024'}/>
           <FilterTile description={filter3} color={'#DA3A68'}/>
           <FilterTile description={filter4} color={'#8FB8C3'}/>
+          <PackageTile />
           <SearchTile backgroundImage='https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xta1/t51.2885-15/e15/11245924_1592722294278649_2115388840_n.jpg' height='1' title='tile' />
           <SearchTile backgroundImage='https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xap1/t51.12885-15/e35/10354524_1569704863350745_1720947713_n.jpg' height='3' title='tile' />
           <SearchTile backgroundImage='https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xtp1/t51.12885-15/s750x750/sh0=108/e35/12479569_1511440029160330_2051512338_n.jpg' height='2' title='tile' />
