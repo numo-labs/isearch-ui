@@ -1,15 +1,16 @@
 'use strict';
-var path = require('path');
+
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 module.exports = {
-  entry: {
-    javascript: './src/app.js',
-    html: './src/index.html'
-  },
+  entry: [
+    './src/app.js'
+  ],
   output: {
-    filename: 'app.js',
-    path: __dirname + '/dist'
+    path: __dirname + '/public/',
+    filename: 'bundle-[hash:6].js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -20,9 +21,8 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ['react-hot', 'babel']
+        test: /\.js$/, exclude: /node_modules/,
+        loaders: ['babel-loader']
       },
       {
         test: /\.html$/,
@@ -42,13 +42,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style!css'
       }
     ]
   },
-  devServer: {hot: true},
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-  inline: true,
-  progress: true,
-  colors: true
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      inject: 'body',
+      template: 'src/index.template.html'
+    })
+  ],
+  colors: true,
+  progress: true
 };

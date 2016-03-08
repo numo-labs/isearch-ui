@@ -8,11 +8,13 @@
   },
   "scripts": {
     "test": "npm run lint && npm run coverage",
-    "dev:build": "webpack --progress",
-    "dev:serve": "webpack-dev-server --hot --inline",
+    "dev:build": "webpack --config ./webpack.development.config.js",
+    "dev:serve": "webpack-dev-server --config ./webpack.development.config.js",
     "lint": "semistandard",
     "nocov": "mocha test/**/*.test.js --compilers js:babel-register",
-    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/runner.js --report lcovonly -- -R spec"
+    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/runner.js --report lcovonly -- -R spec",
+    "clean": "rm -rf public && mkdir -p public/",
+    "build": "npm run clean && ./node_modules/.bin/webpack --config ./webpack.production.config.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,7 @@
     "babel-register": "^6.6.0",
     "css-loader": "^0.19.0",
     "expect": "^1.14.0",
+    "html-webpack-plugin": "^2.9.0",
     "imports-loader": "^0.6.5",
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
