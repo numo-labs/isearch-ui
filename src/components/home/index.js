@@ -46,7 +46,7 @@ class Gallery extends Component {
         <div className='gridSizer'/>
           <div className='gridItem'>
             <Article
-            backgroundImage='https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xfa1/t51.12885-15/s750x750/sh0=108/e35/12479379_141330706245237_420500081_n.jpg' type='Sun and Bathe' title='10 TURKISH GEMS' overview='CLOSE TO BEACH AND CITY' />
+            backgroundImage={`${instagramPrefix}s750x750/sh0=108/e35/12479379_141330706245237_420500081_n.jpg`} type='Sun and Bathe' title='10 TURKISH GEMS' overview='CLOSE TO BEACH AND CITY' />
           </div>
           <div className='gridItem'>
             <FilterTile description={filter1} color={'#B9CAA8'}/>
@@ -55,7 +55,7 @@ class Gallery extends Component {
             <FilterTile description={filter2} color={'#F19024'}/>
           </div>
           <div className='gridItem'>
-            <Article backgroundImage='https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/e35/10472010_1689478414643553_296617682_n.jpg' type='Explore' title='YOSEMITE' overview='5 HIDDEN SECRETS OF' />
+            <Article backgroundImage={`${instagramPrefix}e35/10472010_1689478414643553_296617682_n.jpg`} type='Explore' title='YOSEMITE' overview='5 HIDDEN SECRETS OF' />
           </div>
           <div className='gridItem'>
           <FilterTile description={filter3} color={'#DA3A68'}/>
