@@ -119,3 +119,13 @@ Include this script in your `package.json` to run your tests:
 ```json
 "test": "npm run lint && mocha test/**/*.test.js --compilers js:babel-register"
 ```
+
+## Deployment to S3
+
+Check to make sure you have the AWS Cli set up with the correct access keys. Then, in your terminal type
+
+```js
+npm run deploy
+```
+
+This will build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed and the index.html file will be built from the template in the src folder. The contents of the public folder will then be uploaded to the 'isearch-ui' Amazon S3 bucket.
