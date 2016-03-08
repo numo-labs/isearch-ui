@@ -19,7 +19,9 @@
   .packageImage {
     height: 200px;
     position: relative;
-    width: inherit;;
+    width: inherit;
+    background-size: 375px 200px;
+    background-repeat: no-repeat;
   }
     .mintBar {
       background-color: rgba(109,180,169, 0.7);
