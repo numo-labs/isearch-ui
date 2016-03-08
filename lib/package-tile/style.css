@@ -19,7 +19,7 @@
 
 .packageImage {
   background-image: url('https://lh5.ggpht.com/X6S-3G1irwe649hOPWe2GYqcl4eSxK69r6Y1CGoC9oXk45MRwTTywpz0vdVoQS0_vVVX=h900');
-  height: 250px;
+  height: 200px;
   position: relative;
   width: 375px;
 }
@@ -32,10 +32,11 @@
   width: inherit;
   text-align: center;
   margin: 0 auto;
-  height: 30px;
+  height: 25px;
+  line-height: 25px;
   color: #ffffff;
   font-family: SourceSansSemiBold;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .descriptionContainer {
@@ -48,12 +49,12 @@
 
 .packageTitle {
   font-family: SourceSansSemiBold;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .packageSubtitle {
-  font-family: SourceSansRegular;
-  font-size: 1.2em;
+  font-family: SourceSansLight;
+  font-size: 1em;
   color: #939393;
 }
 
@@ -63,21 +64,21 @@
 }
 
 .heart {
-  height: 20px;
-  width: 30px;
+  height: 15px;
+  width: 20px;
   padding: 2px;
 }
 
 .ratingNumerator {
   display: inline-block;
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-family: SourceSansRegular;
   margin-left: 140px;
 }
 
 .ratingDenominator {
   display: inline-block;
-  font-size: 1.2em;
+  font-size: 1em;
   font-family: SourceSansRegular;
   color: #939393;
 }
@@ -90,14 +91,14 @@
 .packageDetailsText {
  display: inline-block;
  font-family: SourceSansSemiBold;
- font-size: 1.2em;
+ font-size: 1em;
 }
 
 .strikethroughText {
  display: inline-block;
  position: absolute;
  right: 20px;
- font-size: 1.2em;
+ font-size: 1em;
  font-family: SourceSansLight;
  text-decoration: line-through;
 }
@@ -105,20 +106,20 @@
 .date {
  display: inline-block;
  font-family: SourceSansLight;
- font-size: 1.1em;
+ font-size: 0.9em;
  color: #7e7e7e;
- line-height: 2em;
+ line-height: 1.5em;
 }
 
 .price {
  display: inline-block;
  position: absolute;
  right: 20px;
- font-size: 2em;
+ font-size: 1.5em;
  color:  #DA3A68;
  font-family: SourceSansSemiBold;
 }
 
 .bottomContainer {
-  margin-top: 20px;
+  margin-top: 5px;
 }
