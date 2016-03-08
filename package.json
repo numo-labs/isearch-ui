@@ -9,7 +9,7 @@
   "scripts": {
     "test": "npm run lint && npm run coverage",
     "dev:build": "webpack --progress",
-    "dev:serve": "webpack-dev-server --hot --inline --host 192.168.101.44",
+    "dev:serve": "webpack-dev-server --hot --inline",
     "lint": "semistandard",
     "nocov": "mocha test/**/*.test.js --compilers js:babel-register",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/runner.js --report lcovonly -- -R spec"
