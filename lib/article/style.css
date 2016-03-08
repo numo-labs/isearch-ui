@@ -10,12 +10,12 @@
 
 @font-face {
   font-family: SourceSansSemiBold;
-  src: url('../../fonts/SourceSansPro-Bold.otf');
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
 }
 
 @font-face {
   font-family: SourceSansBold;
-  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+  src: url('../../fonts/SourceSansPro-Bold.otf');
 }
 
 
