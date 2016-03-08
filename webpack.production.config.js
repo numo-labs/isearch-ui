@@ -34,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=[path][name].[ext]'
+        loader: 'file-loader'
       },
       {
         test: /\.css$/,
