@@ -8,7 +8,7 @@ import Article from 'article';
 
 require('./style.css');
 
-export const masonryOptions = {
+const masonryOptions = {
   transitionDuration: 0,
   itemSelector: '.gridItem',
   columnWidth: '.gridSizer',
@@ -22,11 +22,10 @@ class TileGrid extends Component {
       filter2,
       filter3,
       filter4,
-      instagramPrefix,
-      packageInfo
+      article1,
+      article2,
+      package1
     } = this.props.tileData;
-
-    console.log("PROPS", this.props)
 
     return (
       <Masonry
@@ -36,30 +35,25 @@ class TileGrid extends Component {
       >
         <div className='gridSizer'/>
         <div className='gridItem'>
-          <PackageTile { ...packageInfo } />
+          <PackageTile {...package1} />
         </div>
         <div className='gridItem'>
           <FilterTile description={filter1} color={'#B9CAA8'}/>
         </div>
         <div className='gridItem'>
-          <Article
-            backgroundImage={`${instagramPrefix}s750x750/sh0=108/e35/12479379_141330706245237_420500081_n.jpg`}
-            type='Sun and Bathe'
-            title='10 TURKISH GEMS'
-            overview='CLOSE TO BEACH AND CITY'
-          />
+          <Article {...article1} />
         </div>
         <div className='gridItem'>
           <FilterTile description={filter4} color={'#8FB8C3'}/>
         </div>
         <div className='gridItem'>
-          <PackageTile { ...packageInfo } />
+          <PackageTile {...package1} />
         </div>
         <div className='gridItem'>
           <FilterTile description={filter2} color={'#F19024'}/>
         </div>
         <div className='gridItem'>
-          <Article backgroundImage={`${instagramPrefix}e35/10472010_1689478414643553_296617682_n.jpg`} type='Explore' title='YOSEMITE' overview='5 HIDDEN SECRETS OF' />
+          <Article {...article2} />
         </div>
         <div className='gridItem'>
           <FilterTile description={filter3} color={'#DA3A68'}/>

@@ -22,9 +22,23 @@ export const filter4 = {
   part2: 'do you want?'
 };
 
-export const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
+const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
 
-export const packageInfo = {
+export const article1 = {
+  backgroundImage: `${instagramPrefix}s750x750/sh0=108/e35/12479379_141330706245237_420500081_n.jpg`,
+  type: 'Sun and Bathe',
+  title: '10 TURKISH GEMS',
+  overview: 'CLOSE TO BEACH AND CITY'
+};
+
+export const article2 = {
+  backgroundImage: `${instagramPrefix}e35/10472010_1689478414643553_296617682_n.jpg`,
+  type: 'Explore',
+  title: 'YOSEMITE',
+  overview: '5 HIDDEN SECRETS OF'
+};
+
+export const package1 = {
   imageSrc: `${instagramPrefix}hphotos-ak-xap1/t51.12885-15/e35/12519323_1674541939492426_1587996260_n.jpg`,
   caption: 'Child friendly',
   title: 'Sunwing Side East Beach',
@@ -35,13 +49,4 @@ export const packageInfo = {
   oldPrice: 30.280,
   period: '16 nov 2015, 1 week',
   newPrice: 27.440
-};
-
-export default = {
-  filter1,
-  filter2,
-  filter3,
-  filter4,
-  instagramPrefix,
-  packageInfo
 };

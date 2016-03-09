@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Tags from 'tags';
 import SearchSummary from 'search-summary';
-import tileData from './fixtures.js';
+import * as tileData from './fixtures.js';
 import Grid from './grid.js';
 
 require('./style.css');
 
 class Gallery extends Component {
   render () {
-    console.log("TILEDATA", tileData);
     return (
       <div className='homeContainer'>
         <SearchSummary
