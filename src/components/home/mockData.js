@@ -1,3 +1,12 @@
+export const searchSummary = {
+  city: 'Bodrum',
+  country: 'Turkey',
+  durationInWeeks: 2,
+  paxMix: '2 adults, 2 children',
+  departureDate: 'Sun 13 jul 2016',
+  returnDate: 'Tue 15 jul 2016'
+};
+
 export const filter1 = {
   part1: 'How important is ',
   bigWord: 'nightlife ?',
