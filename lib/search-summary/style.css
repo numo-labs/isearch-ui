@@ -1,9 +1,4 @@
 @font-face {
-  font-family: TCScript;
-  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
-}
-
-@font-face {
   font-family: SourceSansLight;
   src: url('../../fonts/SourceSansPro-Light.otf');
 }
@@ -12,12 +7,6 @@
   font-family: SourceSansSemiBold;
   src: url('../../fonts/SourceSansPro-SemiBold.otf');
 }
-
-@font-face {
-  font-family: SourceSansBold;
-  src: url('../../fonts/SourceSansPro-Bold.otf');
-}
-
 @font-face {
   font-family: SourceSansRegular;
   src: url('../../fonts/SourceSansPro-Regular.otf');

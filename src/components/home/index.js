@@ -4,6 +4,7 @@ import SearchSummary from 'search-summary';
 import SearchBar from 'search-bar';
 import * as mockData from './mockData.js';
 import Grid from './grid.js';
+import AddMessage from 'add-message';
 
 require('./style.css');
 require('./normalise.css');
@@ -17,6 +18,7 @@ class Gallery extends Component {
         <SearchSummary {...searchSummary} />
         <Tags />
         <Grid tileData={tileData}/>
+        <AddMessage suggestedLocations='Croatia and Greece'/>
       </div>
     );
   }
