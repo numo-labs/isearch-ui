@@ -23,6 +23,7 @@
   src: url('../../fonts/SourceSansPro-SemiBold.otf');
 }
 
+
 .container {
   width: 100%;
 }
@@ -41,41 +42,80 @@
     line-height: 1.5em;
     width: 23px;
   }
-
   .questionMarkContainer:hover {
     transform:scale(0.8);
-    transition-duration: 0.5s;
-    transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
   }
   .contentContainer {
     padding: 20px;
   }
-    .descriptionTextContainer {
-      margin-top: 2em;
-    }
-    .description {
-      color: #ffffff;
-      font-family: TCScript, sans-serif;
-      font-size: 1.5em;
-      text-align: center;
-      padding-left: 0.6em;
-      text-transform: uppercase;
-    }
-    .bigWord {
-      font-family: ThomasHeadlineBold, sans-serif;
-      font-size: 3.5rem;
-      color: #ffffff;
-      text-align: center;
-      line-height: 0.98;
-      text-transform: uppercase;
-    }
-  .starsContainer {
+
+/**
+* FILTER TEXT
+**/
+
+.descriptionTextContainer {
+  margin-top: 2em;
+}
+  .description {
+    color: #ffffff;
+    font-family: TCScript, sans-serif;
+    font-size: 1.5em;
     text-align: center;
-    margin-top: 1em;
+    padding-left: 0.6em;
+    text-transform: uppercase;
   }
-    .star {
-      display: inline-block;
+  .bigWord {
+    font-family: ThomasHeadlineBold, sans-serif;
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-align: center;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+/**
+* STARS
+**/
+
+.starsContainer {
+  text-align: center;
+  margin-top: 1em;
+}
+  .star {
+    display: inline-block;
+  }
+    svg {
+      pointer-events: none;
     }
-      svg {
-        pointer-events: none;
-      }
+
+/**
+* POP UP INFO BOX
+**/
+
+.bubble {
+  position: absolute;
+  width: 260px;
+  height: 100px;
+  padding: 20px;
+  background: #FFFFFF;
+  right: 50px;
+  top: -10px;
+  font-family: SourceSansLight;
+  font-size: 1.2em;
+  color: #7e7e7e;
+  -moz-box-shadow:    3px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  box-shadow:         3px 3px 5px 0px rgba(0, 0, 0, 0.4);
+}
+  .bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 9px 0 9px 15px;
+    border-color: transparent #FFFFFF;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -15px;
+    top: 20px;
+  }
