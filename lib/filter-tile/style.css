@@ -9,66 +9,67 @@
 }
 
 @font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
+@font-face {
+  font-family: ThomasHeadlineLight;
+  src: url('../../fonts/ThomasHeadline-Light.otf');
+}
+
+@font-face {
   font-family: SourceSansSemiBold;
   src: url('../../fonts/SourceSansPro-SemiBold.otf');
 }
 
 .container {
-  border: 1px solid white;
-  box-sizing: border-box;
   width: 100%;
 }
-
-.contentContainer {
-  padding: 20px;
-}
-
-.questionMarkContainer {
-  border-radius: 13px;
-  border: 1px solid white;
-  border-color: #ffffff;
-  color: #ffffff;
-  font-family: SourceSansLight;
-  font-size: 1em;
-  float: right;
-  height: 23px;
-  margin-top: 10px;
-  margin-right: 10px;
-  text-align: center;
-  width: 23px;
-}
-
-.descriptionTextContainer {
-  margin-top: 2em;
-}
-
-.description {
-  color: #ffffff;
-  font-family: TCScript, sans-serif;
-  font-size: 1.5em;
-  text-align: center;
-  padding-left: 0.6em;
-  text-transform: uppercase;
-}
-
-.bigWord {
-  font-family: SourceSansSemiBold, sans-serif;
-  font-size: 3.5rem;
-  color: #ffffff;
-  text-align: center;
-  line-height: 0.98;
-  text-transform: uppercase;
-}
-
-.starsContainer {
-  text-align: center;
-  margin-top: 1em;
-}
-
-.star {
-  display: inline-block;
-}
-
-svg {
-  pointer-events: none;
-}
+  .questionMarkContainer {
+    border-radius: 13px;
+    border: 1px solid white;
+    border-color: #ffffff;
+    color: #ffffff;
+    font-family: ThomasHeadlineLight;
+    font-size: 1em;
+    float: right;
+    height: 23px;
+    margin-top: 10px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 1.5em;
+    width: 23px;
+  }
+  .contentContainer {
+    padding: 20px;
+  }
+    .descriptionTextContainer {
+      margin-top: 2em;
+    }
+    .description {
+      color: #ffffff;
+      font-family: TCScript, sans-serif;
+      font-size: 1.5em;
+      text-align: center;
+      padding-left: 0.6em;
+      text-transform: uppercase;
+    }
+    .bigWord {
+      font-family: ThomasHeadlineBold, sans-serif;
+      font-size: 3.5rem;
+      color: #ffffff;
+      text-align: center;
+      line-height: 0.98;
+      text-transform: uppercase;
+    }
+  .starsContainer {
+    text-align: center;
+    margin-top: 1em;
+  }
+    .star {
+      display: inline-block;
+    }
+      svg {
+        pointer-events: none;
+      }
