@@ -12,6 +12,7 @@ const masonryOptions = {
   transitionDuration: 0,
   itemSelector: '.gridItem',
   columnWidth: '.gridSizer',
+  fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
 };
 
@@ -32,6 +33,7 @@ class TileGrid extends Component {
         elementType={'div'}
         options={masonryOptions}
         disableImagesLoaded={false}
+        className='grid'
       >
         <div className='gridSizer'/>
         <div className='gridItem'>
