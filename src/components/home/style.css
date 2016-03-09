@@ -1,6 +1,9 @@
 .homeContainer {
   background-color: #E9E5E0;
 }
+  .grid {
+    margin: 0 auto;
+  }
   .gridItem {
     margin-bottom: 0.9em;
     width: 375px;

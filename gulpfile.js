@@ -15,8 +15,8 @@ gulp.task('deploy', function () {
       console.log('>>>>>>>>>', filesToUpload);
       filesToUpload.forEach(function (filename) {
         var params = {
-          Bucket: 'www.tcdl.io',
-          Key: 'isearch/prototype/' + filename,
+          Bucket: 'isearch-ui',
+          Key: filename,
           Body: fs.readFileSync(__dirname + '/public/' + filename),
           ContentType: 'text/html'
         };
