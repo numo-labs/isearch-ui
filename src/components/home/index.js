@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Tags from 'tags';
 import SearchSummary from 'search-summary';
-import * as tileData from './fixtures.js';
+import * as tileData from './mockTileData.js';
 import Grid from './grid.js';
 
 require('./style.css');
