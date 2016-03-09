@@ -5,6 +5,7 @@ import Tags from 'tags';
 import PackageTile from 'package-tile';
 import Article from 'article';
 import SearchSummary from 'search-summary';
+import SearchBar from 'search-bar';
 
 require('./style.css');
 
@@ -58,6 +59,7 @@ class Gallery extends Component {
   render () {
     return (
       <div className='homeContainer'>
+        <SearchBar />
         <SearchSummary city='Bodrum' country='Turkey' durationInWeeks={2} paxMix='2 adults, 2 children' departureDate='Sun 13 jul 2016' returnDate='Tue 15 jul 2016' />
         <Tags />
         <Masonry

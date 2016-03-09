@@ -1,0 +1,82 @@
+@font-face {
+  font-family: TCScript;
+  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansBold;
+  src: url('../../fonts/SourceSansPro-Bold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+.searchBarContainer {
+  text-align: center;
+  padding: 1em;
+  padding-bottom: 1.5em;
+  font-family: SourceSansSemiBold;
+  background-size: 375px 224px;
+  background-image: url('https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/hphotos-ak-xap1/t51.12885-15/e15/927366_690881694329526_383913181_n.jpg');
+}
+
+.searchContent {
+  display: block;
+}
+
+.inputBar {
+  height: 3em;
+  width: 31em;
+  bottom: 0;
+  margin-top: 2em;
+  border: none;
+}
+
+.inputContainer {
+  top: 3em;
+}
+
+.inspiration {
+  color: #ffffff;
+  font-size: 1.3em;
+}
+
+.logo {
+  width: 4em;
+  display: inline-block;
+  left: 4em;
+  padding-right: 0.2em;
+}
+
+.spies {
+  font-family: SourceSansBold;
+  display: inline-block;
+  color: #ffffff;
+  font-size: 2.8em;
+  left: 3em;
+  height: 0.5em;
+}
+
+.searchButton {
+  background-color: #F39100;
+  display: inline-block;
+  border-radius: 500px;
+  color: #ffffff;
+  font-size: 1.25em;
+  padding: 0.2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  margin-top: 1em;
+}
