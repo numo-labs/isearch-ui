@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tags from 'tags';
 import SearchSummary from 'search-summary';
+import SearchBar from 'search-bar';
 import * as mockData from './mockData.js';
 import Grid from './grid.js';
 
@@ -12,6 +13,7 @@ class Gallery extends Component {
 
     return (
       <div className='homeContainer'>
+        <SearchBar />
         <SearchSummary {...searchSummary} />
         <Tags />
         <Grid tileData={tileData}/>
