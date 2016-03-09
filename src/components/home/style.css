@@ -5,7 +5,7 @@
     margin: 0 auto;
   }
   .gridItem {
-    margin-bottom: 0.9em;
+    margin-bottom: 14px;
     width: 375px;
   }
   .gridSizer {

@@ -42,11 +42,40 @@
   bottom: 0;
   margin-top: 2em;
   border: none;
+  outline-width: 0;
+  outline: none !important;
 }
 
 .inputContainer {
   top: 3em;
 }
+
+.input:focus {
+  outline: none !important;
+  outline-width: 0;
+}
+
+/* removes placeholder text when input is clicked */
+.inputBar:focus::-webkit-input-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+}
+.inputBar:focus:-moz-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+} /* Firefox 18- */
+.inputBar:focus::-moz-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+  } /* Firefox 19+ */
+.inputBar:focus:-ms-input-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+} /* oldIE ;) */
 
 .inspiration {
   color: #ffffff;
@@ -79,4 +108,8 @@
   padding-left: 2em;
   padding-right: 2em;
   margin-top: 1em;
+}
+
+.searchButton:active {
+  background-color: #F37800;
 }
