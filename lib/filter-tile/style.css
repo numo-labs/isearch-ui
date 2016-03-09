@@ -16,7 +16,7 @@
 .container {
   border: 1px solid white;
   box-sizing: border-box;
-  width: 375px;
+  width: 100%;
 }
 
 .contentContainer {
@@ -48,6 +48,7 @@
   font-size: 1.5em;
   text-align: center;
   padding-left: 0.6em;
+  text-transform: uppercase;
 }
 
 .bigWord {
@@ -56,6 +57,7 @@
   color: #ffffff;
   text-align: center;
   line-height: 0.98;
+  text-transform: uppercase;
 }
 
 .starsContainer {
