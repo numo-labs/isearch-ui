@@ -81,12 +81,13 @@
   text-align: center;
   margin-top: 1em;
 }
-  .star {
-    display: inline-block;
+  .fa-star-o {
+    padding-right: 10px;
   }
-    svg {
-      pointer-events: none;
-    }
+
+  .fa-star {
+    padding-right: 10px;
+  }
 
 /**
 * POP UP INFO BOX
