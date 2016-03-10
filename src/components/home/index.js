@@ -12,13 +12,13 @@ class Gallery extends Component {
 
   render () {
     const { searchSummary, ...tileData } = mockData;
-    const { addMessageVisible, showAddMessage, hideAddMessage } = this.props;
+    const { addMessageVisible, showAddMessage, hideAddMessage, yesFilter, noFilter, filterVisible } = this.props;
     return (
       <div className='homeContainer'>
         <SearchBar />
         <SearchSummary {...searchSummary} />
         <Tags />
-        <Grid showAddMessage={showAddMessage} tileData={tileData}/>
+        <Grid yesFilter={yesFilter} noFilter={noFilter} filterVisible={filterVisible} showAddMessage={showAddMessage} tileData={tileData}/>
         {addMessageVisible && <AddMessage hideAddMessage={hideAddMessage} suggestedLocations='Croatia and Greece'/>}
       </div>
     );
@@ -28,7 +28,10 @@ class Gallery extends Component {
 Gallery.propTypes = {
   addMessageVisible: PropTypes.boolean,
   showAddMessage: PropTypes.func,
-  hideAddMessage: PropTypes.func
+  hideAddMessage: PropTypes.func,
+  yesFilter: PropTypes.func,
+  noFilter: PropTypes.func,
+  filterVisible: PropTypes.boolean
 };
 
 export default Gallery;
