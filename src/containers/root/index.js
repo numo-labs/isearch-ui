@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
-import Home from '../../components/home/index.js';
+import Home from '../../containers/home.js';
 
 export default class Root extends Component {
 

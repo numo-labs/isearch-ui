@@ -1,0 +1,2 @@
+export const HIDE_ADD_MESSAGE = 'HIDE_ADD_MESSAGE';
+export const SHOW_ADD_MESSAGE = 'SHOW_ADD_MESSAGE';
