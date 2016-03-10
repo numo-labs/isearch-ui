@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tags from 'tags';
+import Tags from '../../containers/tags';
 import SearchSummary from 'search-summary';
 import SearchBar from 'search-bar';
 import * as mockData from './mockData.js';
