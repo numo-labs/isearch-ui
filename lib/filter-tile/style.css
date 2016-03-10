@@ -4,11 +4,6 @@
 }
 
 @font-face {
-  font-family: SourceSansLight;
-  src: url('../../fonts/SourceSansPro-Light.otf');
-}
-
-@font-face {
   font-family: ThomasHeadlineBold;
   src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
@@ -17,12 +12,6 @@
   font-family: ThomasHeadlineLight;
   src: url('../../fonts/ThomasHeadline-Light.otf');
 }
-
-@font-face {
-  font-family: SourceSansSemiBold;
-  src: url('../../fonts/SourceSansPro-SemiBold.otf');
-}
-
 
 .container {
   width: 100%;
