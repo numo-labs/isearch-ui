@@ -101,23 +101,25 @@
     top: 20px;
   }
 
+/**
+* BUTTONS
+**/
+
 .filterButtonContainer {
   width: 100%;
   text-align: center;
   margin-top: 1em;
 }
-
-.filterButton {
-  display: inline-block;
-  font-family: TCScript, sans-serif;
-  font-size: 2rem;
-  color: #ffffff;
-  text-align: center;
-  line-height: 0.98;
-  text-transform: uppercase;
-}
-
-.buttonSpacer {
-  display: inline-block;
-  width: 2em;
-}
+  .filterButton {
+    display: inline-block;
+    font-family: TCScript, sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+  .buttonSpacer {
+    display: inline-block;
+    width: 2em;
+  }
