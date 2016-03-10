@@ -1,8 +1,9 @@
 'use-strict';
 
-import { REMOVE_TAG } from '../action-types.js';
+import { YES_FILTER, NO_FILTER, REMOVE_TAG } from '../action-types.js';
 
 const initialState = {
+  filterVisible: true,
   tags: [
     {
       tagName: 'Sunwing Family Resort',
@@ -23,9 +24,19 @@ const initialState = {
   ]
 };
 
-export default function tags (state = initialState, action) {
+export default function filter (state = initialState, action) {
   switch (action.type) {
-    case REMOVE_TAG :
+    case YES_FILTER:
+      return ({
+        ...state,
+        filterVisible: false
+      });
+    case NO_FILTER:
+    return ({
+      ...state,
+      filterVisible: false
+      });
+    case REMOVE_TAG:
       const newTags = state.tags.filter(tag => {
         return tag.tagName !== action.tagName;
       })

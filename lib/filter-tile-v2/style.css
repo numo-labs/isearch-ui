@@ -13,9 +13,16 @@
   src: url('../../fonts/ThomasHeadline-Light.otf');
 }
 
-.container {
+.filterContainer {
   width: 100%;
 }
+
+/*.filterContainer:hover {
+  transform:scale(0.97);
+}
+.filterContainer:active {
+  transform:scale(0.97);
+}*/
   .questionMarkContainer {
     border-radius: 13px;
     border: 1px solid white;
@@ -43,7 +50,7 @@
 **/
 
 .descriptionTextContainer {
-  margin-top: 2em;
+  margin-top: 1em;
 }
   .description {
     color: #ffffff;
@@ -63,30 +70,14 @@
   }
 
 /**
-* STARS
-**/
-
-.starsContainer {
-  text-align: center;
-  margin-top: 1em;
-}
-  .fa-star-o {
-    padding-right: 10px;
-  }
-
-  .fa-star {
-    padding-right: 10px;
-  }
-
-/**
 * POP UP INFO BOX
 **/
 
 .bubble {
   position: absolute;
   width: 260px;
-  height: 100px;
-  padding: 20px;
+  height: 75px;
+  padding: 15px;
   background: #FFFFFF;
   right: 50px;
   top: -10px;
@@ -108,4 +99,27 @@
     z-index: 1;
     right: -15px;
     top: 20px;
+  }
+
+/**
+* BUTTONS
+**/
+
+.filterButtonContainer {
+  width: 100%;
+  text-align: center;
+  margin-top: 1em;
+}
+  .filterButton {
+    display: inline-block;
+    font-family: TCScript, sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+  .buttonSpacer {
+    display: inline-block;
+    width: 2em;
   }

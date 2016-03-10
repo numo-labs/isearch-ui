@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import home from './home';
-import tags from './tags';
+import filter from './filter';
 const rootReducer = combineReducers({
   home,
-  tags
+  filter
 });
 
 export default rootReducer;

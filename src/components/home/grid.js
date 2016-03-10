@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Masonry from 'react-masonry-component';
-import FilterTile from 'filter-tile';
+import FilterTile from 'filter-tile-v2';
 import PackageTile from 'package-tile';
 import Article from 'article';
 

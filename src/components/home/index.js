@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Tags from '../../containers/tags';
 import SearchSummary from 'search-summary';
 import SearchBar from 'search-bar';
@@ -24,5 +24,11 @@ class Gallery extends Component {
     );
   }
 }
+
+Gallery.propTypes = {
+  addMessageVisible: PropTypes.boolean,
+  showAddMessage: PropTypes.func,
+  hideAddMessage: PropTypes.func
+};
 
 export default Gallery;

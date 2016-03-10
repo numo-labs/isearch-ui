@@ -21,7 +21,7 @@ TagsContainer.propTypes = {
 
 function mapStateToProps (state) {
   return ({
-    tags: state.tags.tags
+    tags: state.filter.tags
   });
 }
 
