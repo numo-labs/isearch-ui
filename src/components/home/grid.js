@@ -66,7 +66,7 @@ class TileGrid extends Component {
 }
 
 TileGrid.propTypes = {
-  tileData: PropTypes.obj,
+  tileData: PropTypes.object,
   showAddMessage: PropTypes.func
 };
 
