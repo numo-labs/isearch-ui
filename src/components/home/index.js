@@ -20,6 +20,7 @@ class Gallery extends Component {
 
   hideAddMessage () {
     this.setState({addMessageVisible: false});
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
   showAddMessage () {
