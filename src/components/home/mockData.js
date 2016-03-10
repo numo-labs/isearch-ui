@@ -8,27 +8,23 @@ export const searchSummary = {
 };
 
 export const filter1 = {
-  part1: 'How important is ',
-  bigWord: 'nightlife ?',
-  part2: ''
+  part1: 'I want vibrant',
+  bigWord: 'nightlife'
 };
 
 export const filter2 = {
-  part1: 'Show me places where ',
-  bigWord: 'Food & Drink',
-  part2: 'gets 4 stars'
+  part1: 'I want great',
+  bigWord: 'Food & Drink'
 };
 
 export const filter3 = {
-  part1: 'Show me places where ',
-  bigWord: 'sights',
-  part2: 'gets 2 stars'
+  part1: 'I want to see the',
+  bigWord: 'sights'
 };
 
 export const filter4 = {
-  part1: 'How much ',
-  bigWord: 'Sport & Adventure',
-  part2: 'do you want?'
+  part1: 'I want',
+  bigWord: 'Sport & Adventure'
 };
 
 const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';

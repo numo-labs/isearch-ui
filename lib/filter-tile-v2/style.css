@@ -1,0 +1,125 @@
+@font-face {
+  font-family: TCScript;
+  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
+}
+
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
+@font-face {
+  font-family: ThomasHeadlineLight;
+  src: url('../../fonts/ThomasHeadline-Light.otf');
+}
+
+.filterContainer {
+  width: 100%;
+}
+
+/*.filterContainer:hover {
+  transform:scale(0.97);
+}
+.filterContainer:active {
+  transform:scale(0.97);
+}*/
+  .questionMarkContainer {
+    border-radius: 13px;
+    border: 1px solid white;
+    border-color: #ffffff;
+    color: #ffffff;
+    font-family: ThomasHeadlineLight;
+    font-size: 1em;
+    float: right;
+    height: 23px;
+    margin-top: 10px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 1.5em;
+    width: 23px;
+  }
+  .questionMarkContainer:hover {
+    transform:scale(0.8);
+  }
+  .contentContainer {
+    padding: 20px;
+  }
+
+/**
+* FILTER TEXT
+**/
+
+.descriptionTextContainer {
+  margin-top: 1em;
+}
+  .description {
+    color: #ffffff;
+    font-family: TCScript, sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    padding-left: 0.6em;
+    text-transform: uppercase;
+  }
+  .bigWord {
+    font-family: ThomasHeadlineBold, sans-serif;
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-align: center;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+/**
+* POP UP INFO BOX
+**/
+
+.bubble {
+  position: absolute;
+  width: 260px;
+  height: 75px;
+  padding: 15px;
+  background: #FFFFFF;
+  right: 50px;
+  top: -10px;
+  font-family: SourceSansLight;
+  font-size: 1.2em;
+  color: #7e7e7e;
+  -moz-box-shadow:    3px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  box-shadow:         3px 3px 5px 0px rgba(0, 0, 0, 0.4);
+}
+  .bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 9px 0 9px 15px;
+    border-color: transparent #FFFFFF;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -15px;
+    top: 20px;
+  }
+
+/**
+* BUTTONS
+**/
+
+.filterButtonContainer {
+  width: 100%;
+  text-align: center;
+  margin-top: 1em;
+}
+  .filterButton {
+    display: inline-block;
+    font-family: TCScript, sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+  .buttonSpacer {
+    display: inline-block;
+    width: 2em;
+  }
