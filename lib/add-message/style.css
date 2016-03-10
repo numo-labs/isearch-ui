@@ -14,7 +14,7 @@
   width: 375px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 380px) {
   .addMessageContainer {
     display: none;
   }
@@ -43,9 +43,9 @@
 
 .message {
   font-family: SourceSansLight;
-  background-color: #454545;
+  background-color: #595959;
   display: inline-block;
-  color: #9C9C9C;
+  color: #ffffff;
   padding: 1em;
   padding-right: 3.2em;
   padding-left: 2.5em;

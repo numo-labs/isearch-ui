@@ -40,25 +40,25 @@ class TileGrid extends Component {
           <PackageTile {...package1} />
         </div>
         <div className='gridItem'>
-          <FilterTile description={filter1} color={'#B9CAA8'}/>
+          <FilterTile showAddMessage={this.props.showAddMessage} description={filter1} color={'#B9CAA8'}/>
         </div>
         <div className='gridItem'>
           <Article {...article1} />
         </div>
         <div className='gridItem'>
-          <FilterTile description={filter4} color={'#8FB8C3'}/>
+          <FilterTile showAddMessage={this.props.showAddMessage} description={filter4} color={'#8FB8C3'}/>
         </div>
         <div className='gridItem'>
           <PackageTile {...package1} />
         </div>
         <div className='gridItem'>
-          <FilterTile description={filter2} color={'#F19024'}/>
+          <FilterTile showAddMessage={this.props.showAddMessage} description={filter2} color={'#F19024'}/>
         </div>
         <div className='gridItem'>
           <Article {...article2} />
         </div>
         <div className='gridItem'>
-          <FilterTile description={filter3} color={'#DA3A68'}/>
+          <FilterTile showAddMessage={this.props.showAddMessage} description={filter3} color={'#DA3A68'}/>
         </div>
       </Masonry>
     );
@@ -66,7 +66,8 @@ class TileGrid extends Component {
 }
 
 TileGrid.propTypes = {
-  tileData: PropTypes.obj
+  tileData: PropTypes.obj,
+  showAddMessage: PropTypes.func
 };
 
 export default TileGrid;
