@@ -3,12 +3,11 @@ import Tags from 'tags';
 import SearchSummary from 'search-summary';
 import SearchBar from 'search-bar';
 import * as mockData from './mockData.js';
-import Grid from './grid.js';
+import Grid from '../grid';
 import AddMessage from 'add-message';
-import Modal from './modal.js';
+import Modal from '../modal';
 
 require('./style.css');
-require('./normalise.css');
 class Gallery extends Component {
   constructor () {
     super();

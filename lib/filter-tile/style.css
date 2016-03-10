@@ -45,7 +45,7 @@
 .descriptionTextContainer {
   margin-top: 2em;
 }
-  .description {
+  .descriptionText {
     color: #ffffff;
     font-family: TCScript, sans-serif;
     font-size: 1.5em;
@@ -53,9 +53,9 @@
     padding-left: 0.6em;
     text-transform: uppercase;
   }
-  .bigWord {
+  .bigCapsWord {
     font-family: ThomasHeadlineBold, sans-serif;
-    font-size: 3.5rem;
+    font-size: 3.5em;
     color: #ffffff;
     text-align: center;
     line-height: 0.98;

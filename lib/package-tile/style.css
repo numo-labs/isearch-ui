@@ -13,7 +13,7 @@
   src: url('../../fonts/SourceSansPro-Light.otf');
 }
 
-.container {
+.packageContainer {
   width: 100%;
 }
   .packageImage {
@@ -80,9 +80,8 @@
     .bottomContainer {
       margin-top: 5px;
     }
-      .row {
+      .descriptionRow {
         width: 100%;
-        position: relative;
       }
         .packageDetailsText {
          display: inline-block;

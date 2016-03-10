@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 class TagModal extends Component {
-  render() {
+  render () {
     return (
       <Modal show={this.props.showModal} onHide={this.props.close} dialogClassName='modal-xl'>
         <Modal.Body>
@@ -15,5 +15,10 @@ class TagModal extends Component {
     );
   }
 }
+
+TagModal.propTypes = {
+  showModal: PropTypes.func,
+  close: PropTypes.func
+};
 
 export default TagModal;
