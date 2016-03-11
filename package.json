@@ -2,7 +2,7 @@
   "name": "isearch-ui",
   "version": "1.0.1",
   "description": "UI for Inspirational Search",
-  "main": "src/app.js",
+  "main": "src/index.js",
   "directories": {
     "test": "test"
   },
@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "react": "^0.14.7",
+    "react-bootstrap": "^0.28.3",
     "react-dom": "^0.14.7",
     "react-masonry-component": "^4.0.0",
     "react-redux": "^4.4.0",
