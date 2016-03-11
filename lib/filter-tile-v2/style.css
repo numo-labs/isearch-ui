@@ -118,6 +118,11 @@
     text-align: center;
     line-height: 0.98;
     text-transform: uppercase;
+    border: 1px solid #ffffff;
+    border-radius: 1em;
+    width: 4em;
+    height: 1.5em;
+    line-height: 1.5em;
   }
   .buttonSpacer {
     display: inline-block;
