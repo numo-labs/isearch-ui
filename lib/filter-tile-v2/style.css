@@ -119,10 +119,10 @@
     line-height: 0.98;
     text-transform: uppercase;
     border: 1px solid #ffffff;
-    border-radius: 1em;
-    width: 4em;
-    height: 1.5em;
-    line-height: 1.5em;
+    border-radius: 1.5em;
+    width: 6em;
+    height: 2em;
+    line-height: 2em;
   }
   .buttonSpacer {
     display: inline-block;
