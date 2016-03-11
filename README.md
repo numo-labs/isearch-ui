@@ -3,7 +3,7 @@ The ui for inspirational search!
 
 ## Adding a component
 
-The aim is to abstract all the individual components (filter-tile, package-tile) into separate npm modules. Current the main elements of the project are structure as follows:
+The aim is to abstract all the individual components (filter-tile, package-tile) into separate npm modules. Currently the main elements of the project are structured as follows:
 
 ```
 ├── LICENSE

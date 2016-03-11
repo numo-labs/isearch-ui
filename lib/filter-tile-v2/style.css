@@ -108,7 +108,7 @@
 .filterButtonContainer {
   width: 100%;
   text-align: center;
-  margin-top: 1em;
+  margin-top: 2em;
 }
   .filterButton {
     display: inline-block;
@@ -118,6 +118,11 @@
     text-align: center;
     line-height: 0.98;
     text-transform: uppercase;
+    border: 1px solid #ffffff;
+    border-radius: 1.5em;
+    width: 6em;
+    height: 2em;
+    line-height: 2em;
   }
   .buttonSpacer {
     display: inline-block;

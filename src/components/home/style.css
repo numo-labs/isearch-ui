@@ -1,13 +1,26 @@
 .homeContainer {
   background-color: #E9E5E0;
 }
-  .grid {
-    margin: 0 auto;
+  .filterIcon {
+    border: 1px solid #3a3a3a;
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+    bottom: 20px;
+    position: fixed;
+    margin: 0;
+    right: 20px;
+    text-align: center;
+    line-height: 50px;
+    background-color: rgba(126, 126, 126, 0.4)
   }
-  .gridItem {
-    margin-bottom: 14px;
-    width: 375px;
+
+  .fa-filter {
+    color: #3a3a3a
   }
-  .gridSizer {
-    width: 375px;
+
+  @media (min-width: 380px) {
+    .filterIcon {
+      display: none;
+    }
   }
