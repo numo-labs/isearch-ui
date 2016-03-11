@@ -27,23 +27,23 @@ const initialState = {
 export default function filter (state = initialState, action) {
   switch (action.type) {
     case YES_FILTER:
-    const tagsAdded = [...state.tags, {tagName: action.tagName, colour: '#8EB8C4'}];
-    console.log('TAGS', tagsAdded);
-    console.log('state.tags', state.tags);
+      const tagsAdded = [...state.tags, {tagName: action.tagName, colour: '#8EB8C4'}];
+      console.log('TAGS', tagsAdded);
+      console.log('state.tags', state.tags);
       return ({
         ...state,
         filterVisible: false,
         tags: tagsAdded
       });
     case NO_FILTER:
-    return ({
-      ...state,
-      filterVisible: false
+      return ({
+        ...state,
+        filterVisible: false
       });
     case REMOVE_TAG:
       const newTags = state.tags.filter(tag => {
         return tag.tagName !== action.tagName;
-      })
+      });
       console.log(newTags);
       return {
         ...state,

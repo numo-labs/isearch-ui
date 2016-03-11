@@ -28,7 +28,7 @@ export default function tags (state = initialState, action) {
     case REMOVE_TAG :
       const newTags = state.tags.filter(tag => {
         return tag.tagName !== action.tagName;
-      })
+      });
       console.log(newTags);
       return {
         ...state,
