@@ -3,7 +3,7 @@ import Tags from '../../containers/tags';
 import SearchSummary from 'search-summary';
 import SearchBar from 'search-bar';
 import * as mockData from './mockData.js';
-import Grid from '../grid';
+import Grid from '../../containers/grid';
 import AddMessage from 'add-message';
 import Modal from '../modal';
 
@@ -28,14 +28,14 @@ class Gallery extends Component {
 
   render () {
     const { searchSummary, ...tileData } = mockData;
-    const { addMessageVisible, showAddMessage, hideAddMessage, yesFilter, noFilter, filterVisible } = this.props;
+    const { addMessageVisible, hideAddMessage } = this.props;
     return (
       <div className='homeContainer'>
         <Modal showModal={this.state.modalVisible} close={this.closeModal}/>
         <SearchBar />
         <SearchSummary {...searchSummary} />
         <Tags />
-        <Grid yesFilter={yesFilter} noFilter={noFilter} filterVisible={filterVisible} showAddMessage={showAddMessage} tileData={tileData}/>
+        <Grid tileData={tileData}/>
         {addMessageVisible && <AddMessage hideAddMessage={hideAddMessage} suggestedLocations='Croatia and Greece'/>}
         <div className='filterIcon' onClick={this.showModal}>
           <i className='fa fa-filter fa-2x'/>
@@ -47,11 +47,7 @@ class Gallery extends Component {
 
 Gallery.propTypes = {
   addMessageVisible: PropTypes.boolean,
-  showAddMessage: PropTypes.func,
-  hideAddMessage: PropTypes.func,
-  yesFilter: PropTypes.func,
-  noFilter: PropTypes.func,
-  filterVisible: PropTypes.boolean
+  hideAddMessage: PropTypes.func
 };
 
 export default Gallery;

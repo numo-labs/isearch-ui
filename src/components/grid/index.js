@@ -18,6 +18,7 @@ const masonryOptions = {
 
 class TileGrid extends Component {
   render () {
+    console.log(this.props);
     const {
       filter1,
       filter2,
