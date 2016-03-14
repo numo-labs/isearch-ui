@@ -5,11 +5,12 @@ import * as FilterActions from '../actionCreators/filter.js';
 
 class FilterContainer extends Component {
   render () {
-    const { yesFilter, noFilter, filterVisible } = this.props;
+    const { yesFilter, noFilter, filterVisible, addMessageVisible } = this.props;
     return (<Filter
       yesFilter={yesFilter}
       noFilter={noFilter}
       filterVisible={filterVisible}
+      addMessageVisible={addMessageVisible}
       />);
   }
 }

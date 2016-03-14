@@ -42,7 +42,7 @@ class TileGrid extends Component {
         </div>
         <div className='gridItem'>
           <FilterTile
-            filterVisible={this.props.filterVisible}
+            filterVisible={this.props.filters[filter1.bigWord]}
             yesFilter={this.props.yesFilter}
             noFilter={this.props.noFilter}
             showAddMessage={this.props.showAddMessage}
@@ -54,7 +54,7 @@ class TileGrid extends Component {
         </div>
         <div className='gridItem'>
           <FilterTile
-          filterVisible={this.props.filterVisible}
+          filterVisible={this.props.filters[filter4.bigWord]}
           yesFilter={this.props.yesFilter}
           noFilter={this.props.noFilter}
           showAddMessage={this.props.showAddMessage}
@@ -66,7 +66,7 @@ class TileGrid extends Component {
         </div>
         <div className='gridItem'>
           <FilterTile
-          filterVisible={this.props.filterVisible}
+          filterVisible={this.props.filters[filter2.bigWord]}
           yesFilter={this.props.yesFilter}
           noFilter={this.props.noFilter}
           showAddMessage={this.props.showAddMessage}
@@ -78,7 +78,7 @@ class TileGrid extends Component {
         </div>
         <div className='gridItem'>
           <FilterTile
-          filterVisible={this.props.filterVisible}
+          filterVisible={this.props.filters[filter3.bigWord]}
           yesFilter={this.props.yesFilter}
           noFilter={this.props.noFilter}
           showAddMessage={this.props.showAddMessage}

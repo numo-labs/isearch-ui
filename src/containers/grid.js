@@ -7,12 +7,12 @@ const ActionCreators = {...GridActions, ...FilterActions};
 
 class GridContainer extends Component {
   render () {
-    const { showAddMessage, yesFilter, noFilter, filterVisible, tileData } = this.props;
+    const { showAddMessage, yesFilter, noFilter, filters, tileData } = this.props;
     return (<Grid
       showAddMessage={showAddMessage}
       yesFilter={yesFilter}
       noFilter={noFilter}
-      filterVisible={filterVisible}
+      filters={filters}
       tileData={tileData}
     />);
   }
@@ -22,13 +22,13 @@ GridContainer.propTypes = {
   showAddMessage: PropTypes.func,
   yesFilter: PropTypes.func,
   noFilter: PropTypes.func,
-  filterVisible: PropTypes.boolean
+  filters: PropTypes.boolean
 };
 
 function mapStateToProps (state) {
-  const { filter: { filterVisible } } = state;
+  const { filter: { filters } } = state;
   return {
-    filterVisible
+    filters
   };
 }
 
