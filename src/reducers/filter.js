@@ -24,19 +24,19 @@ const initialState = {
   ],
   filters: [
     {
-      name: 'Adventure',
+      name: 'Sport & Adventure',
       colour: '#81C8BE'
     },
     {
-      tagName: 'Nightlife',
+      name: 'Nightlife',
       colour: '#8EB8C4'
     },
     {
-      tagName: 'Mediterranean',
+      name: 'Food & Drink',
       colour: '#B9CAA8'
     },
     {
-      tagName: 'Turkey',
+      name: 'Sights',
       colour: '#B9CAA8'
     }
   ]

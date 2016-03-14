@@ -9,17 +9,17 @@ export const searchSummary = {
 
 export const filter1 = {
   part1: 'Are you looking for',
-  bigWord: 'nightlife?'
+  bigWord: 'Nightlife'
 };
 
 export const filter2 = {
   part1: 'Are you looking for good',
-  bigWord: 'Food & Drink?'
+  bigWord: 'Food & Drink'
 };
 
 export const filter3 = {
   part1: 'Are you looking to see the',
-  bigWord: 'sights?'
+  bigWord: 'Sights'
 };
 
 export const filter4 = {
