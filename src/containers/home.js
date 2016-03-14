@@ -29,14 +29,26 @@ HomeContainer.propTypes = {
 };
 
 function mapStateToProps (state) {
-  return ({
-    addMessageVisible: state.home.addMessageVisible,
-    showAddMessage: state.filter.showAddMessage,
-    hideAddMessage: state.filter.hideAddMessage,
-    yesFilter: state.filter.yesFilter,
-    noFilter: state.filter.noFilter,
-    filterVisible: state.filter.filterVisible
-  });
+  const {
+    filter: {
+      showAddMessage,
+      hideAddMessage,
+      yesFilter,
+      noFilter,
+      filterVisible
+    },
+    home: {
+      addMessageVisible
+    }
+  } = state;
+  return {
+    addMessageVisible,
+    showAddMessage,
+    hideAddMessage,
+    yesFilter,
+    noFilter,
+    filterVisible
+  };
 }
 
 export default connect(mapStateToProps, ActionCreators)(HomeContainer);
