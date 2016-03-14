@@ -95,6 +95,10 @@
   margin-top: 1em;
 }
 
-.searchButton:active {
+.searchButton:hover {
   background-color: #F37800;
+}
+
+.searchButton:active {
+  background-color: #F39100;
 }
