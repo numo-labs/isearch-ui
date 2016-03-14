@@ -24,7 +24,7 @@ export const filter3 = {
 
 export const filter4 = {
   part1: 'Are you looking for',
-  bigWord: 'Sport & Adventure?'
+  bigWord: 'Sport & Adventure'
 };
 
 const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
