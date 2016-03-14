@@ -9,22 +9,22 @@ export const searchSummary = {
 
 export const filter1 = {
   part1: 'Are you looking for',
-  bigWord: 'nightlife?'
+  bigWord: 'Nightlife'
 };
 
 export const filter2 = {
   part1: 'Are you looking for good',
-  bigWord: 'Food & Drink?'
+  bigWord: 'Food & Drink'
 };
 
 export const filter3 = {
   part1: 'Are you looking to see the',
-  bigWord: 'sights?'
+  bigWord: 'Sights'
 };
 
 export const filter4 = {
   part1: 'Are you looking for',
-  bigWord: 'Sport & Adventure?'
+  bigWord: 'Sport & Adventure'
 };
 
 const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
