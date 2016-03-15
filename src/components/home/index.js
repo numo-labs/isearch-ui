@@ -36,10 +36,6 @@ class Gallery extends Component {
         <SearchSummary {...searchSummary} />
         <Tags />
         <Grid tileData={tileData}/>
-        {addMessageVisible && <AddMessage hideAddMessage={hideAddMessage} suggestedLocations='Croatia and Greece'/>}
-        <div className='filterIcon' onClick={this.showModal}>
-          <i className='fa fa-filter fa-2x'/>
-        </div>
       </div>
     );
   }

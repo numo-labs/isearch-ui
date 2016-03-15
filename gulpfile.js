@@ -2,6 +2,9 @@ var AWS = require('aws-sdk');
 var gulp = require('gulp');
 var fs = require('fs');
 var exec = require('child_process').exec;
+var pkg = require('./package.json');
+
+var version = pkg.version.split('.')[2];
 
 /**
  * building the bundle
@@ -15,8 +18,8 @@ gulp.task('deploy', function () {
       console.log('>>>>>>>>>', filesToUpload);
       filesToUpload.forEach(function (filename) {
         var params = {
-          Bucket: 'isearch-ui',
-          Key: filename,
+          Bucket: 'www.tcdl.io',
+          Key: '/0.' + version + '/' + filename,
           Body: fs.readFileSync(__dirname + '/public/' + filename),
           ContentType: 'text/html'
         };
