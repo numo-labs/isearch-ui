@@ -1,6 +1,8 @@
 # isearch-ui
 The ui for inspirational search!
 
+**NOTE** Currently the `demo` branch is the default branch which is used for Continuous Integration and deployment
+
 ## Adding a component
 
 The eventual aim is to abstract all the individual components (filter-tile, package-tile) into separate npm modules. Currently the main elements of the project are structured as follows:
@@ -56,7 +58,7 @@ npm run deploy
 
 This will build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed (to prevent caching by s3)and the index.html file will be built from the template in the src folder ('index.template.html'). The contents of the public folder will then be uploaded to the specified Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
 
-**We will use continuous integration with Codeship so the deployment will be done after code has been merged into master**
+**We will use continuous integration with Codeship so the deployment will be done after code has been merged into the demo branch**
 
 
 ## Setting up the React Webpack Babel Project
