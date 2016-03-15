@@ -1,6 +1,6 @@
 'use strict';
 
-import { SHOW_ADD_MESSAGE, HIDE_ADD_MESSAGE } from '../action-types.js';
+import { SHOW_ADD_MESSAGE, HIDE_ADD_MESSAGE } from '../actionTypes.js';
 
 const initialState = {
   addMessageVisible: false

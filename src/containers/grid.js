@@ -1,6 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+
+// components
 import Grid from '../components/grid/';
+
+// actions
 import * as GridActions from '../actionCreators/home.js';
 import * as FilterActions from '../actionCreators/filter.js';
 const ActionCreators = {...GridActions, ...FilterActions};
@@ -19,10 +23,16 @@ class GridContainer extends Component {
 }
 
 GridContainer.propTypes = {
+  // actions
   showAddMessage: PropTypes.func,
   yesFilter: PropTypes.func,
   noFilter: PropTypes.func,
-  filters: PropTypes.boolean
+
+  // store
+  filters: PropTypes.object,
+
+  // from parent component
+  tileData: PropTypes.object
 };
 
 function mapStateToProps (state) {

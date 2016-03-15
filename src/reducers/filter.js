@@ -1,6 +1,6 @@
 'use-strict';
 
-import { YES_FILTER, NO_FILTER, REMOVE_TAG } from '../action-types.js';
+import { YES_FILTER, NO_FILTER, REMOVE_TAG } from '../actionTypes.js';
 
 const initialState = {
   tags: [

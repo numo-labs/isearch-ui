@@ -8,7 +8,7 @@ import AddMessage from 'add-message';
 import Modal from '../modal';
 
 require('./style.css');
-class Gallery extends Component {
+class Home extends Component {
   constructor () {
     super();
     this.state = {
@@ -31,7 +31,7 @@ class Gallery extends Component {
     const { addMessageVisible, hideAddMessage } = this.props;
     return (
       <div className='homeContainer'>
-        <Modal showModal={this.state.modalVisible} close={this.closeModal}/>
+        <Modal modalVisible={this.state.modalVisible} close={this.closeModal}/>
         <SearchBar />
         <SearchSummary {...searchSummary} />
         <Tags />
@@ -45,9 +45,9 @@ class Gallery extends Component {
   }
 }
 
-Gallery.propTypes = {
-  addMessageVisible: PropTypes.boolean,
+Home.propTypes = {
+  addMessageVisible: PropTypes.bool,
   hideAddMessage: PropTypes.func
 };
 
-export default Gallery;
+export default Home;
