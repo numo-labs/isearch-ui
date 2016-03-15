@@ -1,9 +1,11 @@
 # isearch-ui
 The ui for inspirational search!
 
+**NOTE** Currently the `demo` branch is the default branch which is used for Continuous Integration and deployment
+
 ## Adding a component
 
-The aim is to abstract all the individual components (filter-tile, package-tile) into separate npm modules. Currently the main elements of the project are structured as follows:
+The eventual aim is to abstract all the individual components (filter-tile, package-tile) into separate npm modules. Currently the main elements of the project are structured as follows:
 
 ```
 ├── LICENSE
@@ -41,19 +43,22 @@ To test out a new component before publishing to NPM:
 * add a styles.css file for the component. If custom fonts are required, they have to be linked from the fonts folder in the root of the project (as otherwise webpack wont be able to resolve the paths)
 
 To move a component out into its own npm module
-* Set up a babel-react-webpack project
+* Set up a babel-react-webpack project (use the [canary project](https://github.com/numo-labs/react-canary-component) as a template)
 * Copy over the contents of the component from the lib folder
 * Create a font folder and copy over the necessary font files
 
 ## Deployment to S3
 
-A gulp script is used to deploy to the 'isearch-ui' s3 bucket. Check to make sure you have the AWS Cli set up with the correct access keys. Then, in your terminal type
+A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.  Currently the bucket folder is set to the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be '0.1'. You also need to check you have the AWS CLI set up with the correct access keys. Then, in your terminal type
 
 ```js
 npm run deploy
+
 ```
 
-This will build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed and the index.html file will be built from the template in the src folder ('index.template.html'). The contents of the public folder will then be uploaded to the 'isearch-ui' Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
+This will build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed (to prevent caching by s3)and the index.html file will be built from the template in the src folder ('index.template.html'). The contents of the public folder will then be uploaded to the specified Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
+
+**We will use continuous integration with Codeship so the deployment will be done after code has been merged into the demo branch**
 
 
 ## Setting up the React Webpack Babel Project

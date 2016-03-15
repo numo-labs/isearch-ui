@@ -4,7 +4,7 @@ import { Modal, Button } from 'react-bootstrap';
 class TagModal extends Component {
   render () {
     return (
-      <Modal show={this.props.showModal} onHide={this.props.close} dialogClassName='modal-xl'>
+      <Modal show={this.props.modalVisible} onHide={this.props.close} dialogClassName='modal-xl'>
         <Modal.Body>
           <h4>TAGS WILL BE SHOWN HERE</h4>
         </Modal.Body>
@@ -17,7 +17,7 @@ class TagModal extends Component {
 }
 
 TagModal.propTypes = {
-  showModal: PropTypes.func,
+  modalVisible: PropTypes.bool,
   close: PropTypes.func
 };
 

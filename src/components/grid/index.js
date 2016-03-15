@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Masonry from 'react-masonry-component';
-import FilterTile from 'filter-tile-v2';
+import FilterTile from 'filter-tile-yesno';
 import PackageTile from 'package-tile';
 import Article from 'article';
 
@@ -40,25 +40,52 @@ class TileGrid extends Component {
           <PackageTile {...package1} />
         </div>
         <div className='gridItem'>
-          <FilterTile showAddMessage={this.props.showAddMessage} description={filter1} color={'#B9CAA8'}/>
+          <FilterTile
+            filterVisible={this.props.filters[filter1.bigWord]}
+            yesFilter={this.props.yesFilter}
+            noFilter={this.props.noFilter}
+            showAddMessage={this.props.showAddMessage}
+            description={filter1} color={'#B9CAA8'}
+          />
         </div>
         <div className='gridItem'>
           <Article {...article1} />
         </div>
         <div className='gridItem'>
-          <FilterTile showAddMessage={this.props.showAddMessage} description={filter4} color={'#8FB8C3'}/>
+          <FilterTile
+            filterVisible={this.props.filters[filter4.bigWord]}
+            yesFilter={this.props.yesFilter}
+            noFilter={this.props.noFilter}
+            showAddMessage={this.props.showAddMessage}
+            description={filter4}
+            color={'#8FB8C3'}
+          />
         </div>
         <div className='gridItem'>
           <PackageTile {...package1} />
         </div>
         <div className='gridItem'>
-          <FilterTile showAddMessage={this.props.showAddMessage} description={filter2} color={'#F19024'}/>
+          <FilterTile
+            filterVisible={this.props.filters[filter2.bigWord]}
+            yesFilter={this.props.yesFilter}
+            noFilter={this.props.noFilter}
+            showAddMessage={this.props.showAddMessage}
+            description={filter2}
+            color={'#F19024'}
+          />
         </div>
         <div className='gridItem'>
           <Article {...article2} />
         </div>
         <div className='gridItem'>
-          <FilterTile showAddMessage={this.props.showAddMessage} description={filter3} color={'#DA3A68'}/>
+          <FilterTile
+            filterVisible={this.props.filters[filter3.bigWord]}
+            yesFilter={this.props.yesFilter}
+            noFilter={this.props.noFilter}
+            showAddMessage={this.props.showAddMessage}
+            description={filter3}
+            color={'#DA3A68'}
+          />
         </div>
       </Masonry>
     );
@@ -67,7 +94,10 @@ class TileGrid extends Component {
 
 TileGrid.propTypes = {
   tileData: PropTypes.object,
-  showAddMessage: PropTypes.func
+  showAddMessage: PropTypes.func,
+  yesFilter: PropTypes.func,
+  noFilter: PropTypes.func,
+  filters: PropTypes.object
 };
 
 export default TileGrid;
