@@ -23,6 +23,49 @@
     background-size: 375px 200px;
     background-repeat: no-repeat;
   }
+
+  @media (max-width: 1240px) {
+    .packageImage {
+      background-size: 305px 200px;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .packageImage {
+      background-size: 250px 200px;
+    }
+  }
+
+  @media (max-width: 810px) {
+    .packageImage {
+      background-size: 290px 200px;
+    }
+  }
+
+  @media (max-width: 635px) {
+    .packageImage {
+      background-size: 240px 200px;
+    }
+  }
+
+  @media (max-width: 525px) {
+    .packageImage {
+      background-size: 400px 200px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .packageImage {
+      background-size: 375px 200px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .packageImage {
+      background-size: 310px 200px;
+    }
+  }
+
     .mintBar {
       background-color: rgba(109,180,169, 0.7);
       position: absolute;

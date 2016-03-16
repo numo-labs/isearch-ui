@@ -9,9 +9,8 @@ import Article from 'article';
 require('./style.css');
 
 const masonryOptions = {
-  transitionDuration: 0,
+  transitionDuration: '0.1s',
   itemSelector: '.gridItem',
-  columnWidth: '.gridSizer',
   fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
 };
@@ -35,7 +34,6 @@ class TileGrid extends Component {
         disableImagesLoaded={false}
         className='grid'
       >
-        <div className='gridSizer'/>
         <div className='gridItem'>
           <PackageTile {...package1} />
         </div>
