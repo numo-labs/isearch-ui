@@ -49,7 +49,7 @@ To move a component out into its own npm module
 
 ## Deployment to S3
 
-A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.  Currently the bucket folder is set to the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be '0.1'. You also need to check you have the AWS CLI set up with the correct access keys. Then, in your terminal type
+A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.  Currently the bucket folder is set 'isearch/' plus the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be 'isearch/0.1'. You also need to check you have the AWS CLI set up with the correct access keys. Then, in your terminal type:
 
 ```js
 npm run deploy

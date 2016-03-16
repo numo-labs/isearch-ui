@@ -53,6 +53,12 @@ img {
   opacity: 0.8;
 }
 
+@@media (max-width: 1240px) {
+  /**
+  * need to add media queries for .text (padding bottom and bottom) and .articleContainer class (height)
+  **/
+}
+
 h1 {
   font-family: SourceSansSemiBold;
   font-size: 2.1em;

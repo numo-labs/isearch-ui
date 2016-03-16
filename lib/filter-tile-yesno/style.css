@@ -128,3 +128,21 @@
     display: inline-block;
     width: 2em;
   }
+
+  @media (max-width: 1240px) {
+    .filterButton {
+      width: 4em;
+    }
+    .buttonSpacer {
+      width: 1em;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .filterButton {
+      width: 6em;
+    }
+    .buttonSpacer {
+      width: 1em;
+    }
+  }
