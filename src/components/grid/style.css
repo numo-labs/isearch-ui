@@ -6,8 +6,57 @@
   margin-bottom: 14px;
   width: 375px;
 }
-.gridSizer {
+.tileSizer {
   width: 375px;
+}
+
+
+
+@media (max-width: 1240px) {
+  .gridItem {
+    width: 305px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .gridItem {
+    width: 250px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 810px) {
+  .gridItem {
+    width: 290px;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 635px) {
+  .gridItem {
+    width: 240px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 525px) {
+  .gridItem {
+    width: 400px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .gridItem {
+    width: 375px;
+    margin-bottom: 14px;
+  }
 }
 
 @media (max-width: 360px) {

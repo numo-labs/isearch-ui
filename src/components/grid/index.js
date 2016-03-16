@@ -12,7 +12,6 @@ require('./style.css');
 const masonryOptions = {
   transitionDuration: '0.4s',
   itemSelector: '.gridItem',
-  columnWidth: '.gridSizer',
   fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
 };
