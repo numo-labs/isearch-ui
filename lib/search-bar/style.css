@@ -14,7 +14,14 @@
   padding-bottom: 1.5em;
   font-family: SourceSansSemiBold;
   background-size: 100% 224px;
-  background-image: url('https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/hphotos-ak-xap1/t51.12885-15/e15/927366_690881694329526_383913181_n.jpg');
+  background-image: url('https://caseylrobinson.files.wordpress.com/2015/02/harveston-collage-1.jpg');
+}
+
+@media (min-width: 375px) {
+  .searchBarContainer {
+    background-image: url('https://caseylrobinson.files.wordpress.com/2015/02/harveston-collage-1.jpg');
+    background-size: 100% 100%;
+  }
 }
 
 .searchContent {

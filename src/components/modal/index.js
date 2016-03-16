@@ -8,7 +8,6 @@ class TagModal extends Component {
       <Modal show={this.props.modalVisible} onHide={this.props.close} dialogClassName='modal-xl'>
         <Modal.Body>
         <Tags />
-          <h4>TAGS WILL BE SHOWN HERE</h4>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.close}>Close</Button>
