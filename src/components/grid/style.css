@@ -9,3 +9,17 @@
 .gridSizer {
   width: 375px;
 }
+
+@media (max-width: 360px) {
+  .gridItem {
+    margin-bottom: 14px;
+    width: 360px;
+  }
+}
+
+@media (max-width: 320px) {
+  .gridItem {
+    margin-bottom: 14px;
+    width: 320px;
+  }
+}

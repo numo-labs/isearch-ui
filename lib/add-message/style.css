@@ -15,11 +15,7 @@
   width: 375px;
 }
 
-@media (min-width: 380px) {
-  .addMessageContainer {
-    display: none;
-  }
-}
+
 
 .arrow {
   width: 3em;
@@ -53,4 +49,24 @@
   padding-bottom: 1.3em;
   border-radius: 8px;
   margin-bottom: 1.2em;
+}
+
+@media (max-width: 321px) {
+  .addMessageContainer {
+    width: 320px;
+    padding: 0;
+  }
+  .message {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  .arrowContainer {
+    left: 14.7em;
+  }
+}
+
+@media (min-width: 380px) {
+  .addMessageContainer {
+    display: none;
+  }
 }

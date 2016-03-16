@@ -23,6 +23,12 @@
       -webkit-filter: invert(100%);
   }
 
+  @media (max-width: 321px) {
+    .filterIcon {
+      right: 7px;
+    }
+  }
+
   @media (min-width: 400px) {
     .filterIcon {
       display: none;
