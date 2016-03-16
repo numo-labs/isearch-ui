@@ -26,6 +26,9 @@ gulp.task('deploy', function () {
       console.log('>>>>>>>>> Bucket folder', bucketfolder);
 
       filesToUpload.forEach(function (filename) {
+        if (filename.indexOf('otf') > -1) {
+          return; // prevent the font files from also being uploaded! Only want to upload the index.html and bundle.js files
+        }
         var params = {
           Bucket: bucketName,
           Key: bucketfolder + filename,
