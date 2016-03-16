@@ -36,9 +36,10 @@ GridContainer.propTypes = {
 };
 
 function mapStateToProps (state) {
-  const { filter: { filters } } = state;
+  const { filter: { filters }, search: { items } } = state;
   return {
-    filters
+    filters,
+    items
   };
 }
 
