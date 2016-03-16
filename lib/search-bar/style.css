@@ -13,15 +13,8 @@
   padding: 1em;
   padding-bottom: 1.5em;
   font-family: SourceSansSemiBold;
-  background-size: 100% 224px;
+  background-size: 100% 250px;
   background-image: url('https://caseylrobinson.files.wordpress.com/2015/02/harveston-collage-1.jpg');
-}
-
-@media (min-width: 375px) {
-  .searchBarContainer {
-    background-image: url('https://caseylrobinson.files.wordpress.com/2015/02/harveston-collage-1.jpg');
-    background-size: 100% 100%;
-  }
 }
 
 .searchContent {
