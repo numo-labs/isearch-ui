@@ -28,8 +28,7 @@
 }
 
 .flights {
-  display: inline-block;
-  padding-bottom: 0.75em;
+  padding-bottom: 2em;
   line-height: 0.8em;
 }
 
@@ -37,7 +36,7 @@
   width: 2em;
   float: left;
   padding-right: 0.2em;
-  padding-left: 1em;
+  padding-left: 0.7em;
   color: #ffffff;
   top: 0.2em;
   filter: invert(100%);
@@ -83,6 +82,23 @@ h1 {
 
 .searchSummaryContainer {
   font-family: SourceSansSemiBold;
+}
+
+@media (min-width: 490px) {
+  .blueContainer {
+    padding-left: 3em;
+  }
+  .search {
+    padding-left: 3em;
+  }
+}
+@media (min-width: 650px) {
+  .blueContainer {
+    padding-left: 5em;
+  }
+  .search {
+    padding-left: 5em;
+  }
 }
 
 .weeks {
