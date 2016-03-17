@@ -39,7 +39,7 @@ export const article1 = {
 export const article2 = {
   backgroundImage: `${instagramPrefix}e35/10472010_1689478414643553_296617682_n.jpg`,
   type: 'Explore',
-  title: 'YOSEMITE',
+  title: 'TURKEY',
   overview: '5 HIDDEN SECRETS OF'
 };
 
