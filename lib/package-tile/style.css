@@ -147,6 +147,12 @@
          color: #7e7e7e;
          line-height: 1.5em;
         }
+        .nights {
+          font-family: SourceSansLight;
+          font-size: 0.9em;
+          color: #7e7e7e;
+          display: inline-block;
+        }
         .price {
          display: inline-block;
          position: absolute;
