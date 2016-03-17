@@ -38,7 +38,8 @@ class Home extends Component {
         <Grid tileData={tileData}/>
         {addMessageVisible && <AddMessage hideAddMessage={hideAddMessage} suggestedLocations='Croatia and Greece'/>}
         <div className='filterIcon' onClick={this.showModal}>
-          <i className='fa fa-filter fa-2x'/>
+          <img src='https://cloud.githubusercontent.com/assets/12450298/13809901/f6118360-eb64-11e5-95b5-da4a401dc5e6.png'
+          className='fa fa-filter fa-2x'/>
         </div>
       </div>
     );

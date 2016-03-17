@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 // components
-import Grid from '../components/grid/';
+import Grid from '../components/grid/index.js';
 
 // actions
 import * as GridActions from '../actionCreators/home.js';
@@ -36,9 +36,10 @@ GridContainer.propTypes = {
 };
 
 function mapStateToProps (state) {
-  const { filter: { filters } } = state;
+  const { filter: { filters }, search: { items } } = state;
   return {
-    filters
+    filters,
+    items
   };
 }
 

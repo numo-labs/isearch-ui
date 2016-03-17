@@ -5,11 +5,12 @@ import Masonry from 'react-masonry-component';
 import FilterTile from 'filter-tile-yesno';
 import PackageTile from 'package-tile';
 import Article from 'article';
+import items from '../../utils/mock-search-results.js';
 
 require('./style.css');
 
 const masonryOptions = {
-  transitionDuration: '0.1s',
+  transitionDuration: '0.4s',
   itemSelector: '.gridItem',
   fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
@@ -23,10 +24,8 @@ class TileGrid extends Component {
       filter3,
       filter4,
       article1,
-      article2,
-      package1
+      article2
     } = this.props.tileData;
-
     return (
       <Masonry
         elementType={'div'}
@@ -34,9 +33,25 @@ class TileGrid extends Component {
         disableImagesLoaded={false}
         className='grid'
       >
-        <div className='gridItem'>
-          <PackageTile {...package1} />
-        </div>
+        <div className='gridSizer'/>
+        {
+          items.map((item, i) => {
+            if (item.type === 'packageOffer') {
+              return (
+                <div className='gridItem'>
+                <PackageTile
+                  key={item.id}
+                  packageOffer={item.packageOffer}
+                />
+                </div>
+              );
+            } else if (item.type === 'tile') {
+              return (
+                <div></div>
+              );
+            }
+          })
+        }
         <div className='gridItem'>
           <FilterTile
             filterVisible={this.props.filters[filter1.bigWord]}
@@ -58,9 +73,6 @@ class TileGrid extends Component {
             description={filter4}
             color={'#8FB8C3'}
           />
-        </div>
-        <div className='gridItem'>
-          <PackageTile {...package1} />
         </div>
         <div className='gridItem'>
           <FilterTile

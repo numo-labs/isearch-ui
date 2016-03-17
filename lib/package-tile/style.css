@@ -32,7 +32,7 @@
 
   @media (max-width: 1000px) {
     .packageImage {
-      background-size: 250px 200px;
+      background-size: 305px 200px;
     }
   }
 
@@ -62,7 +62,7 @@
 
   @media (max-width: 380px) {
     .packageImage {
-      background-size: 310px 200px;
+      background-size: 375px 200px;
     }
   }
 

@@ -10,6 +10,8 @@
   width: 375px;
 }
 
+
+
 @media (max-width: 1240px) {
   .gridItem {
     width: 305px;
@@ -57,9 +59,16 @@
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 360px) {
   .gridItem {
-    width: 310px;
     margin-bottom: 14px;
+    width: 360px;
+  }
+}
+
+@media (max-width: 320px) {
+  .gridItem {
+    margin-bottom: 14px;
+    width: 320px;
   }
 }

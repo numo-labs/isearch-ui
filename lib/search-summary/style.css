@@ -34,7 +34,7 @@
 }
 
 .icon {
-  width: 14px;
+  width: 2em;
   float: left;
   padding-right: 0.2em;
   padding-left: 1em;
@@ -45,6 +45,7 @@
 }
 
 .returnIcon {
+  width: 1.8em;
   padding-right: 0;
   margin-left: 1em;
   -moz-transform: scaleX(-1);
