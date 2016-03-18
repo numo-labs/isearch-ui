@@ -31,7 +31,7 @@ class TileGrid extends Component {
         elementType={'div'}
         options={masonryOptions}
         disableImagesLoaded={false}
-        className='grid'
+        className='grid load-effect'
       >
         {
           items.map((item, i) => {

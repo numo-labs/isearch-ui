@@ -30,7 +30,7 @@ GridContainer.propTypes = {
 
   // store
   filters: PropTypes.object,
-  items: PropTypes.object,
+  items: PropTypes.array,
   // from parent component
   tileData: PropTypes.object
 };
