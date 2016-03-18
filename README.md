@@ -1,10 +1,67 @@
 # isearch-ui
 The ui for inspirational search!
 
-## How to Setup a React Webpack Babel Project
-Boilerplate for setting up a repository with minimal dependencies as a  across all projects.
+**NOTE** Currently the `demo` branch is the default branch which is used for Continuous Integration and deployment
 
-## Basic
+## Adding a component
+
+The eventual aim is to abstract all the individual components (filter-tile, package-tile) into separate npm modules. Currently the main elements of the project are structured as follows:
+
+```
+├── LICENSE
+├── package.json
+├── README.md
+├── fonts
+├── lib
+│   ├── filter-tile
+│         |── index.js
+│         └── styles.css
+├── src
+│     └──components
+│         └── home
+│               ├── index.js
+│               └── styles.css
+|     ├── index.js
+|     ├── index.html
+│     └── index.template.html
+├── test         
+```
+
+The webpack config is set up so that any folder inside the lib folder behaves like an npm module so can be required as e.g. `const FilterTile = require('filter-tile');`
+
+This line in the webpack config is the important part, so it can be removed once the modules have been published to npm:
+
+```js
+  root: [
+    path.join(process.cwd(), 'lib')
+  ]
+```
+
+To test out a new component before publishing to NPM:
+
+* add a folder to the lib folder with an index.js file with the component
+* add a styles.css file for the component. If custom fonts are required, they have to be linked from the fonts folder in the root of the project (as otherwise webpack wont be able to resolve the paths)
+
+To move a component out into its own npm module
+* Set up a babel-react-webpack project (use the [canary project](https://github.com/numo-labs/react-canary-component) as a template)
+* Copy over the contents of the component from the lib folder
+* Create a font folder and copy over the necessary font files
+
+## Deployment to S3
+
+A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.  Currently the bucket folder is set 'isearch/' plus the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be 'isearch/0.1'. You also need to check you have the AWS CLI set up with the correct access keys. Then, in your terminal type:
+
+```js
+npm run deploy
+
+```
+
+This will build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed (to prevent caching by s3)and the index.html file will be built from the template in the src folder ('index.template.html'). The contents of the public folder will then be uploaded to the specified Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
+
+**We will use continuous integration with Codeship so the deployment will be done after code has been merged into the demo branch**
+
+
+## Setting up the React Webpack Babel Project
 
 Initialize your project by running the `$ npm init` command in the terminal.  
 
@@ -15,7 +72,7 @@ Basic file structure:
 ├── package.json
 ├── README.md
 ├── src
-│   ├── app.js
+│   ├── index.js
 │   └── index.html
 ├── test         
 ```
@@ -30,12 +87,12 @@ Create a `webpack.config.js` file and include the following within it:
 ```js
 module.exports = {
   entry: {
-    javascript: './src/app.js',
+    javascript: './src/index.js',
     html: './src/index.html'
   },
 
   output: {
-    filename: 'app.js',
+    filename: 'index.js',
     path: __dirname + '/dist'
   },
   module: {

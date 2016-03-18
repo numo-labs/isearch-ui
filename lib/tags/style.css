@@ -1,0 +1,30 @@
+.cross {
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: lighter;
+  display: inline;
+  padding-left: 1.5em;
+  padding-right: 0.2em;
+}
+
+.tag {
+  padding: 0.2em;
+  padding-bottom: 0.3em;
+  padding-left: 0.6em;
+  display: inline-block;
+  margin-right: 0.7em;
+  margin-bottom: 0.4em;
+  font-size: 0.95em;
+}
+
+.tagContainer {
+  text-align: center;
+  padding-top: 0.3em;
+  padding-bottom: 0.5em;
+}
+
+.tagName {
+  color: #ffffff;
+  font-family: 'Source sans pro', sans-serif;
+  display: inline;
+}

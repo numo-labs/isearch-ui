@@ -1,12 +1,14 @@
 'use strict';
 var path = require('path');
+var webpack = require('webpack');
+
 module.exports = {
   entry: {
-    javascript: './src/app.js',
+    javascript: './src/index.js',
     html: './src/index.html'
   },
   output: {
-    filename: 'app.js',
+    filename: 'index.js',
     path: __dirname + '/dist'
   },
   resolve: {
@@ -27,17 +29,26 @@ module.exports = {
         loader: 'file?name=[name].[ext]'
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
         test: /masonry-layout/,
         loader: 'imports?define=>false&this=>window'
       },
       {
         test: /imagesloaded/,
         loader: 'imports?define=>false&this=>window'
+      },
+      {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader?name=fonts/[name].[ext]'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ]
-  }
+  },
+  devServer: {hot: true},
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+  inline: true,
+  progress: true,
+  colors: true
 };

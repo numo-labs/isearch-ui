@@ -1,0 +1,110 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansBold;
+  src: url('../../fonts/SourceSansPro-Bold.otf');
+}
+
+.searchBarContainer {
+  text-align: center;
+  padding: 1em;
+  padding-bottom: 1.5em;
+  font-family: SourceSansSemiBold;
+  background-size: 100% 250px;
+  background-image: url('https://caseylrobinson.files.wordpress.com/2015/02/harveston-collage-1.jpg');
+}
+
+.searchContent {
+  display: block;
+}
+
+.inputBar {
+  height: 3em;
+  width: 90%;
+  bottom: 0;
+  margin-top: 2em;
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+}
+
+@media (min-width: 450px) {
+  .inputBar {
+    width: 31em;
+  }
+}
+
+.inputContainer {
+  top: 3em;
+}
+
+.input:focus {
+  outline: none !important;
+  outline-width: 0;
+}
+
+/* removes placeholder text when input is clicked */
+.inputBar:focus::-webkit-input-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+}
+.inputBar:focus:-moz-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+} /* Firefox 18- */
+.inputBar:focus::-moz-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+  } /* Firefox 19+ */
+.inputBar:focus:-ms-input-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+} /* oldIE ;) */
+
+.inspiration {
+  color: #ffffff;
+  font-size: 1.3em;
+}
+
+.logo {
+  width: 4em;
+  display: inline-block;
+  left: 4em;
+  padding-right: 0.2em;
+}
+
+.spies {
+  font-family: SourceSansBold;
+  display: inline-block;
+  color: #ffffff;
+  font-size: 2.8em;
+  left: 3em;
+  height: 0.5em;
+}
+
+.searchButton {
+  background-color: #F39100;
+  display: inline-block;
+  border-radius: 500px;
+  color: #ffffff;
+  font-size: 1.25em;
+  padding: 0.2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  margin-top: 1em;
+}
+
+.searchButton:hover {
+  background-color: #F37800;
+}
+
+.searchButton:active {
+  background-color: #F39100;
+}
