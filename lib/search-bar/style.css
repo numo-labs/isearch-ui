@@ -14,7 +14,14 @@
   padding-bottom: 1.5em;
   font-family: SourceSansSemiBold;
   background-size: 100% 250px;
-  background-image: url('https://caseylrobinson.files.wordpress.com/2015/02/harveston-collage-1.jpg');
+  background: rgba(195,240,250,1);
+  background: -moz-linear-gradient(left, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(195,240,250,1)), color-stop(53%, rgba(146,216,235,1)), color-stop(100%, rgba(56,148,173,1)));
+  background: -webkit-linear-gradient(left, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
+  background: -o-linear-gradient(left, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
+  background: -ms-linear-gradient(left, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
+  background: linear-gradient(to right, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3f0fa', endColorstr='#3894ad', GradientType=1 );
 }
 
 .searchContent {

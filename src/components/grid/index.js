@@ -33,21 +33,20 @@ class TileGrid extends Component {
         disableImagesLoaded={false}
         className='grid'
       >
-        <div className='gridSizer'/>
         {
           items.map((item, i) => {
             if (item.type === 'packageOffer') {
               return (
                 <div className='gridItem'>
                 <PackageTile
-                  key={item.id}
+                  key={item.packageOffer.id}
                   packageOffer={item.packageOffer}
                 />
                 </div>
               );
             } else if (item.type === 'tile') {
               return (
-                <div></div>
+                <div key={item.id}></div>
               );
             }
           })

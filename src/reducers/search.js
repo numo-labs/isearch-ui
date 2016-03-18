@@ -4,7 +4,8 @@ const initialState = {
   items: [],
   bucketCount: 0,
   status: undefined,
-  id: undefined
+  id: undefined,
+  loading: true
 };
 
 export default function search (state = initialState, action) {

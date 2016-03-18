@@ -9,10 +9,16 @@ import * as HomeActions from '../actionCreators/home.js';
 
 class HomeContainer extends Component {
   render () {
-    const { addMessageVisible, hideAddMessage } = this.props;
+    const { addMessageVisible,
+      hideAddMessage,
+      fetchQuerySearchResults,
+      loading
+    } = this.props;
     return (<Home
       addMessageVisible={addMessageVisible}
       hideAddMessage={hideAddMessage}
+      fetchQuerySearchResults={fetchQuerySearchResults}
+      loading={loading}
     />);
   }
 }
@@ -20,13 +26,16 @@ class HomeContainer extends Component {
 HomeContainer.propTypes = {
   // actions
   addMessageVisible: PropTypes.bool,
-  hideAddMessage: PropTypes.func
+  hideAddMessage: PropTypes.func,
+  fetchQuerySearchResults: PropTypes.func,
+  loading: PropTypes.bool
 };
 
 function mapStateToProps (state) {
-  const { home: { addMessageVisible } } = state;
+  const { home: { addMessageVisible, loading } } = state;
   return {
-    addMessageVisible
+    addMessageVisible,
+    loading
   };
 }
 
