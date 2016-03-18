@@ -14,7 +14,7 @@ const makeAddMessageVisible = () => {
 export const fetchQuerySearchResults = () => (dispatch, getState) => {
   setTimeout(function () {
     return dispatch(fetchResults());
-  }, 2000);
+  }, 1000);
 };
 
 const fetchResults = () => {
