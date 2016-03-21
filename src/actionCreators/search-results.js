@@ -1,6 +1,6 @@
 import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
 import { MUTATION_START_SEARCH } from '../constants/mutations';
-import { RECEIVE_SEARCH_RESULT, START_SEARCH } from '../constants/actionTypes';
+import { RECEIVE_SEARCH_RESULT, START_SEARCH, BUSY_SEARCHING } from '../constants/actionTypes';
 import graphqlService from '../services/graphql';
 
 export function fetchQuerySearchResults (id, page, size) {
@@ -20,6 +20,13 @@ export function receiveSearchResult (items) {
     items,
     loading: false
   };
+}
+
+export function busySearching () {
+  return {
+    type: BUSY_SEARCHING,
+    loading: true
+  }
 }
 
 export function startSearch () {
