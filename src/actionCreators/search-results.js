@@ -8,7 +8,8 @@ export function fetchQuerySearchResults (id, page, size) {
     return graphqlService(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
     .then(json => {
       const items = json.data.viewer.searchResult.items;
-      if(!items.length) {
+      console.log(items);
+      if(!items || !items.length) {
         setTimeout(function () {
           console.log('Retrying')
           dispatch(fetchQuerySearchResults(id, page, size));

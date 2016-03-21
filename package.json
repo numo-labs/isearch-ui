@@ -1,6 +1,6 @@
 {
   "name": "isearch-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
@@ -63,6 +63,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "lodash.shuffle": "^4.0.0",
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.3",
