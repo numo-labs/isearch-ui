@@ -27,7 +27,11 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchQuerySearchResults('12345', 2, 20);
+    this.props.fetchQuerySearchResults('12345', 1, 20);
+  }
+
+  handleOnButtonClick () {
+    this.props.fetchQuerySearchResults('12345', 1, 20);
   }
   shuffleMockedTilesIntoResultSet (items) {
     if (items.length) {
@@ -52,7 +56,7 @@ class Home extends Component {
     return (
       <div className='homeContainer'>
         <Modal modalVisible={this.state.modalVisible} close={this.closeModal}/>
-        <SearchBar />
+        <SearchBar onButtonClick={this.handleOnButtonClick} />
         <SearchSummary {...searchSummary} />
         <Tags />
         {loading ? <LoadingSpinner /> : <Grid items={shuffledTiles} />}
