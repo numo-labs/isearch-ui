@@ -1,15 +1,18 @@
 'use strict';
+import { RECEIVE_SEARCH_RESULT } from '../constants/actionTypes';
 
 const initialState = {
   items: [],
   bucketCount: 0,
   status: undefined,
-  id: undefined
+  id: undefined,
+  loading: true
 };
 
 export default function search (state = initialState, action) {
   switch (action.type) {
-
+    case RECEIVE_SEARCH_RESULT:
+      return {...state, items: action.items, loading: action.loading};
     default:
       return state;
   }

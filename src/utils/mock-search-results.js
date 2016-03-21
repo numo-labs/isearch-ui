@@ -10,7 +10,7 @@ module.exports = [{
         'type': 'image/jpeg',
         'displaySequence': null,
         'primary': null,
-        'uri': 'https://scdn3.thomascook.com/crop?maxWidth=400&maxHeight=0&imageUrl=http://cdn.thomascook.com/H0/00/36/37/TCUK_STEP51_v1_668866.jpg'
+        'uri': '/H0/00/36/37/TCUK_STEP51_v1_668866.jpg'
       }, {
         'type': 'image/jpeg',
         'displaySequence': null,
@@ -137,7 +137,7 @@ module.exports = [{
         'type': 'image/jpeg',
         'displaySequence': null,
         'primary': null,
-        'uri': 'https://scdn3.thomascook.com/crop?maxWidth=400&maxHeight=0&imageUrl=http://cdn.thomascook.com/H0/10/18/97/TCUK_STEP51_v1_825457.jpg'
+        'uri': '/H0/10/18/97/TCUK_STEP51_v1_825457.jpg'
       }, {
         'type': 'image/jpeg',
         'displaySequence': null,

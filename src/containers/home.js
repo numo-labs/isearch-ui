@@ -6,13 +6,25 @@ import Home from '../components/home/';
 
 // actions
 import * as HomeActions from '../actionCreators/home.js';
+import * as SearchResultActions from '../actionCreators/search-results';
+
+const ActionCreators = {...HomeActions, ...SearchResultActions};
 
 class HomeContainer extends Component {
   render () {
-    const { addMessageVisible, hideAddMessage } = this.props;
+    const { addMessageVisible,
+      hideAddMessage,
+      fetchQuerySearchResults,
+      loading,
+      items
+    } = this.props;
+    console.log('home container items', items);
     return (<Home
       addMessageVisible={addMessageVisible}
       hideAddMessage={hideAddMessage}
+      fetchQuerySearchResults={fetchQuerySearchResults}
+      loading={loading}
+      items={items}
     />);
   }
 }
@@ -20,14 +32,19 @@ class HomeContainer extends Component {
 HomeContainer.propTypes = {
   // actions
   addMessageVisible: PropTypes.bool,
-  hideAddMessage: PropTypes.func
+  hideAddMessage: PropTypes.func,
+  fetchQuerySearchResults: PropTypes.func,
+  loading: PropTypes.bool,
+  items: PropTypes.array
 };
 
 function mapStateToProps (state) {
-  const { home: { addMessageVisible } } = state;
+  const { home: { addMessageVisible }, search: { loading, items } } = state;
   return {
-    addMessageVisible
+    addMessageVisible,
+    loading,
+    items
   };
 }
 
-export default connect(mapStateToProps, HomeActions)(HomeContainer);
+export default connect(mapStateToProps, ActionCreators)(HomeContainer);
