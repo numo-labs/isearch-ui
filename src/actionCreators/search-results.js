@@ -1,4 +1,5 @@
 import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
+import { MUTATION_START_SEARCH } from '../constants/mutations';
 import { RECEIVE_SEARCH_RESULT, START_SEARCH } from '../constants/actionTypes';
 import graphqlService from '../services/graphql';
 
@@ -22,8 +23,20 @@ export function receiveSearchResult (items) {
 }
 
 export function startSearch () {
-  return {
-    type: START_SEARCH,
-    loading: true
+  const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
+    return graphqlService(MUTATION_START_SEARCH, {
+      passengers: [
+        {
+          birthday: "1986-07-14"
+        },
+        {
+          birthday: "1986-07-14"
+        }
+      ]
+    })
+    .then(json => {
+      dispatch(fetchQuerySearchResults(json.data.viewer.searchResultId.id, 1, 20));
+    });
   };
+  return fetchQuerySearchResults_anonymousFn;
 }
