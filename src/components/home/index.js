@@ -7,7 +7,6 @@ import Grid from '../../containers/grid';
 import AddMessage from 'add-message';
 import Modal from '../modal';
 import LoadingSpinner from 'spinner';
-import shuffle from 'lodash.shuffle';
 
 require('./style.css');
 class Home extends Component {
@@ -32,15 +31,13 @@ class Home extends Component {
   }
   shuffleMockedTilesIntoResultSet (items) {
     if (items.length) {
-      return this.addTilesToSearchResult(items, 2, Math.floor((items.length + 6)/6), 0);
+      return this.addTilesToSearchResult(items, 2, Math.floor((items.length + 6) / 6), 0);
     } else {
       return items;
     }
   }
 
-
   addTilesToSearchResult (items, position, index, count) {
-
     items.splice(position, 0, tiles[count]);
     if (count === 5) {
       return items;

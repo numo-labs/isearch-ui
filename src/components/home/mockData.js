@@ -73,4 +73,4 @@ export const tiles = [
   filter3,
   filter4,
   article2
-]
+];
