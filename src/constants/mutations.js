@@ -6,4 +6,4 @@ mutation startSearch($query: String) {
     }
   }
 }
-`
+`;
