@@ -16,15 +16,16 @@ class HomeContainer extends Component {
       hideAddMessage,
       fetchQuerySearchResults,
       loading,
-      items
+      items,
+      startSearch
     } = this.props;
-    console.log('home container items', items);
     return (<Home
       addMessageVisible={addMessageVisible}
       hideAddMessage={hideAddMessage}
       fetchQuerySearchResults={fetchQuerySearchResults}
       loading={loading}
       items={items}
+      startSearch={startSearch}
     />);
   }
 }
@@ -35,7 +36,8 @@ HomeContainer.propTypes = {
   hideAddMessage: PropTypes.func,
   fetchQuerySearchResults: PropTypes.func,
   loading: PropTypes.bool,
-  items: PropTypes.array
+  items: PropTypes.array,
+  startSearch: PropTypes.func
 };
 
 function mapStateToProps (state) {

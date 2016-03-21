@@ -9,38 +9,48 @@ export const searchSummary = {
 
 export const filter1 = {
   part1: 'Are you looking for',
-  bigWord: 'Nightlife'
+  bigWord: 'Nightlife',
+  type: 'filter',
+  color: '#81C8BE'
 };
 
 export const filter2 = {
   part1: 'Are you looking for good',
-  bigWord: 'Food & Drink'
+  bigWord: 'Food & Drink',
+  type: 'filter',
+  color: '#F39110'
 };
 
 export const filter3 = {
   part1: 'Are you looking to see the',
-  bigWord: 'Sights'
+  bigWord: 'Sights',
+  type: 'filter',
+  color: '#8EB8C4'
 };
 
 export const filter4 = {
   part1: 'Are you looking for',
-  bigWord: 'Sport & Adventure'
+  bigWord: 'Sport & Adventure',
+  type: 'filter',
+  color: '#DC3767'
 };
 
 const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
 
 export const article1 = {
   backgroundImage: `${instagramPrefix}s750x750/sh0=108/e35/12479379_141330706245237_420500081_n.jpg`,
-  type: 'Sun and Bathe',
+  label: 'Sun and Bathe',
   title: '10 TURKISH GEMS',
-  overview: 'CLOSE TO BEACH AND CITY'
+  overview: 'CLOSE TO BEACH AND CITY',
+  type: 'article'
 };
 
 export const article2 = {
   backgroundImage: `${instagramPrefix}e35/10472010_1689478414643553_296617682_n.jpg`,
-  type: 'Explore',
+  label: 'Explore',
   title: 'TURKEY',
-  overview: '5 HIDDEN SECRETS OF'
+  overview: '5 HIDDEN SECRETS OF',
+  type: 'article'
 };
 
 export const package1 = {
@@ -55,3 +65,12 @@ export const package1 = {
   period: '16 nov 2015, 1 week',
   newPrice: 27.440
 };
+
+export const tiles = [
+  filter1,
+  filter2,
+  article1,
+  filter3,
+  filter4,
+  article2
+];

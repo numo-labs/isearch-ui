@@ -17,19 +17,9 @@ const masonryOptions = {
 
 class TileGrid extends Component {
   componentDidMount () {
-    console.log('Component mounted');
   }
   render () {
-    const {
-      filter1,
-      filter2,
-      filter3,
-      filter4,
-      article1,
-      article2
-    } = this.props.tileData;
-    const { items } = this.props;
-    console.log(items);
+    const { items, showAddMessage, yesFilter, noFilter, filters } = this.props;
     return (
       <Masonry
         elementType={'div'}
@@ -41,65 +31,34 @@ class TileGrid extends Component {
           items.map((item, i) => {
             if (item.type === 'packageOffer') {
               return (
-                <div className='gridItem'>
+                <div key={i} className='gridItem'>
                 <PackageTile
                   key={item.packageOffer.id}
                   packageOffer={item.packageOffer}
                 />
                 </div>
               );
-            } else if (item.type === 'tile') {
+            } else if (item.type === 'filter') {
               return (
-                <div key={item.id}></div>
+                <div key={i} className='gridItem'>
+                  <FilterTile
+                    filterVisible={filters[item.bigWord]}
+                    yesFilter={yesFilter}
+                    noFilter={noFilter}
+                    showAddMessage={showAddMessage}
+                    description={item} color={item.color}
+                  />
+                </div>
+              );
+            } else if (item.type === 'article') {
+              return (
+                <div key={i} className='gridItem'>
+                  <Article {...item} />
+                </div>
               );
             }
           })
         }
-        <div className='gridItem'>
-          <FilterTile
-            filterVisible={this.props.filters[filter1.bigWord]}
-            yesFilter={this.props.yesFilter}
-            noFilter={this.props.noFilter}
-            showAddMessage={this.props.showAddMessage}
-            description={filter1} color={'#B9CAA8'}
-          />
-        </div>
-        <div className='gridItem'>
-          <Article {...article1} />
-        </div>
-        <div className='gridItem'>
-          <FilterTile
-            filterVisible={this.props.filters[filter4.bigWord]}
-            yesFilter={this.props.yesFilter}
-            noFilter={this.props.noFilter}
-            showAddMessage={this.props.showAddMessage}
-            description={filter4}
-            color={'#8FB8C3'}
-          />
-        </div>
-        <div className='gridItem'>
-          <FilterTile
-            filterVisible={this.props.filters[filter2.bigWord]}
-            yesFilter={this.props.yesFilter}
-            noFilter={this.props.noFilter}
-            showAddMessage={this.props.showAddMessage}
-            description={filter2}
-            color={'#F19024'}
-          />
-        </div>
-        <div className='gridItem'>
-          <Article {...article2} />
-        </div>
-        <div className='gridItem'>
-          <FilterTile
-            filterVisible={this.props.filters[filter3.bigWord]}
-            yesFilter={this.props.yesFilter}
-            noFilter={this.props.noFilter}
-            showAddMessage={this.props.showAddMessage}
-            description={filter3}
-            color={'#DA3A68'}
-          />
-        </div>
       </Masonry>
     );
   }
