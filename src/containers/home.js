@@ -6,6 +6,9 @@ import Home from '../components/home/';
 
 // actions
 import * as HomeActions from '../actionCreators/home.js';
+import * as SearchResultActions from '../actionCreators/search-results';
+
+const ActionCreators = {...HomeActions, ...SearchResultActions};
 
 class HomeContainer extends Component {
   render () {
@@ -39,4 +42,4 @@ function mapStateToProps (state) {
   };
 }
 
-export default connect(mapStateToProps, HomeActions)(HomeContainer);
+export default connect(mapStateToProps, ActionCreators)(HomeContainer);

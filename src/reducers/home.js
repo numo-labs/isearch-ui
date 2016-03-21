@@ -1,6 +1,6 @@
 'use strict';
 
-import { SHOW_ADD_MESSAGE, HIDE_ADD_MESSAGE, QUERY_FETCH_SEARCH_RESULTS } from '../actionTypes.js';
+import { SHOW_ADD_MESSAGE, HIDE_ADD_MESSAGE, QUERY_FETCH_SEARCH_RESULTS } from '../constants/actionTypes';
 
 const initialState = {
   addMessageVisible: false,

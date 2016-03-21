@@ -9,7 +9,7 @@ import fetch from 'isomorphic-fetch';
 * Need to specify the content-type as 'application/json' in the request header.
 **/
 
-export function query (query, variables) {
+export default function query (query, variables) {
   return fetch('/graphql', {
     method: 'POST',
     headers: {

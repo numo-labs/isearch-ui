@@ -1,4 +1,5 @@
 'use strict';
+import { RECEIVE_SEARCH_RESULT } from '../constants/actionTypes';
 
 const initialState = {
   items: [],
@@ -10,7 +11,8 @@ const initialState = {
 
 export default function search (state = initialState, action) {
   switch (action.type) {
-
+    case RECEIVE_SEARCH_RESULT:
+    return {...state, items: action.items};
     default:
       return state;
   }
