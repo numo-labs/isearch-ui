@@ -18,7 +18,6 @@ class HomeContainer extends Component {
       loading,
       items
     } = this.props;
-    console.log('home container items', items);
     return (<Home
       addMessageVisible={addMessageVisible}
       hideAddMessage={hideAddMessage}
