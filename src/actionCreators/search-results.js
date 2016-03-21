@@ -10,9 +10,11 @@ export function fetchQuerySearchResults (id, page, size) {
       const items = json.data.viewer.searchResult.items;
       if(!items.length) {
         setTimeout(function () {
-          console.log('Retrying');
-          dispatch(receiveSearchResult(items));
+          console.log('Retrying')
+          dispatch(fetchQuerySearchResults(id, page, size));
         }, 1000);
+      } else {
+        dispatch(receiveSearchResult(items));
       }
     });
   };
