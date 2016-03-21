@@ -1,5 +1,5 @@
 'use strict';
-import { RECEIVE_SEARCH_RESULT } from '../constants/actionTypes';
+import { RECEIVE_SEARCH_RESULT, START_SEARCH } from '../constants/actionTypes';
 
 const initialState = {
   items: [],
@@ -13,6 +13,8 @@ export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
       return {...state, items: action.items, loading: action.loading};
+    case START_SEARCH:
+      return {...state, loading: action.loading};
     default:
       return state;
   }
