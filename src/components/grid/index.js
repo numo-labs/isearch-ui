@@ -5,7 +5,6 @@ import Masonry from 'react-masonry-component';
 import FilterTile from 'filter-tile-yesno';
 import PackageTile from 'package-tile';
 import Article from 'article';
-import items from '../../utils/mock-search-results.js';
 
 require('./style.css');
 
@@ -17,6 +16,9 @@ const masonryOptions = {
 };
 
 class TileGrid extends Component {
+  componentDidMount () {
+    console.log('Component mounted');
+  }
   render () {
     const {
       filter1,
@@ -26,28 +28,29 @@ class TileGrid extends Component {
       article1,
       article2
     } = this.props.tileData;
+    const { items } = this.props;
+    console.log(items);
     return (
       <Masonry
         elementType={'div'}
         options={masonryOptions}
         disableImagesLoaded={false}
-        className='grid'
+        className='grid load-effect'
       >
-        <div className='gridSizer'/>
         {
           items.map((item, i) => {
             if (item.type === 'packageOffer') {
               return (
                 <div className='gridItem'>
                 <PackageTile
-                  key={item.id}
+                  key={item.packageOffer.id}
                   packageOffer={item.packageOffer}
                 />
                 </div>
               );
             } else if (item.type === 'tile') {
               return (
-                <div></div>
+                <div key={item.id}></div>
               );
             }
           })
@@ -107,7 +110,8 @@ TileGrid.propTypes = {
   showAddMessage: PropTypes.func,
   yesFilter: PropTypes.func,
   noFilter: PropTypes.func,
-  filters: PropTypes.object
+  filters: PropTypes.object,
+  items: PropTypes.array
 };
 
 export default TileGrid;

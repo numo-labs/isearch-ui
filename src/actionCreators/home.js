@@ -1,4 +1,4 @@
-import { HIDE_ADD_MESSAGE, SHOW_ADD_MESSAGE } from '../actionTypes.js';
+import { HIDE_ADD_MESSAGE, SHOW_ADD_MESSAGE } from '../constants/actionTypes';
 
 export const showAddMessage = () => (dispatch, getState) => {
   setTimeout(function () {

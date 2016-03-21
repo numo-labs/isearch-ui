@@ -9,14 +9,14 @@ import fetch from 'isomorphic-fetch';
 * Need to specify the content-type as 'application/json' in the request header.
 **/
 
-export function query (query, variables) {
-  return fetch('/graphql', {
+export default function query (query, variables) {
+  return fetch('https://f0uih51vu0.execute-api.eu-west-1.amazonaws.com/ci/graphql', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ 'query': query, 'variables': variables })
+    body: JSON.stringify({ 'query': query, 'variables': JSON.stringify(variables) })
   })
   .then(res => res.json());
 }

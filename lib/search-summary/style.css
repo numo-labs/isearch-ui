@@ -101,6 +101,15 @@ h1 {
   }
 }
 
+@media (min-width: 1700px) {
+  .blueContainer {
+    padding-left: 13em;
+  }
+  .search {
+    padding-left: 13em;
+  }
+}
+
 .weeks {
   background-color: #81C8BE;
   display: inline-block;
