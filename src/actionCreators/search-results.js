@@ -32,16 +32,14 @@ export function busySearching () {
 export function startSearch () {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
     dispatch(busySearching());
-    return graphqlService(MUTATION_START_SEARCH, {
-      passengers: [
-        {
-          birthday: "1986-07-14"
-        },
-        {
-          birthday: "1986-07-14"
-        }
-      ]
-    })
+    return graphqlService(MUTATION_START_SEARCH, { 'query': JSON.stringify({passengers: [
+      {
+        birthday: "1986-07-14"
+      },
+      {
+        birthday: "1986-07-14"
+      }
+    ]})})
     .then(json => {
       console.log(json);
       console.log('Looking for id:', json.data.viewer.searchResultId.id);
