@@ -31,6 +31,7 @@ export function busySearching () {
 
 export function startSearch () {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
+    dispatch(busySearching);
     return graphqlService(MUTATION_START_SEARCH, {
       passengers: [
         {
