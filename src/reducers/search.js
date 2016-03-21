@@ -12,7 +12,6 @@ const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-    console.log('ITEMS', action.items);
       return {...state, items: action.items, loading: action.loading};
     default:
       return state;

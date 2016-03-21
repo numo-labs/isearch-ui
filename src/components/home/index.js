@@ -41,7 +41,7 @@ class Home extends Component {
         <SearchBar />
         <SearchSummary {...searchSummary} />
         <Tags />
-        {loading ? <LoadingSpinner /> : <Grid items={items} tileData={tileData} items={items} />}
+        {loading ? <LoadingSpinner /> : <Grid items={items} tileData={tileData} />}
         {addMessageVisible && <AddMessage hideAddMessage={hideAddMessage} suggestedLocations='Croatia and Greece'/>}
         <div className='filterIcon' onClick={this.showModal}>
           <img src='https://cloud.githubusercontent.com/assets/12450298/13809901/f6118360-eb64-11e5-95b5-da4a401dc5e6.png'

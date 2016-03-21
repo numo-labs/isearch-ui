@@ -34,7 +34,8 @@ HomeContainer.propTypes = {
   addMessageVisible: PropTypes.bool,
   hideAddMessage: PropTypes.func,
   fetchQuerySearchResults: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  items: PropTypes.array
 };
 
 function mapStateToProps (state) {

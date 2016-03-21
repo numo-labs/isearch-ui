@@ -110,7 +110,8 @@ TileGrid.propTypes = {
   showAddMessage: PropTypes.func,
   yesFilter: PropTypes.func,
   noFilter: PropTypes.func,
-  filters: PropTypes.object
+  filters: PropTypes.object,
+  items: PropTypes.array
 };
 
 export default TileGrid;
