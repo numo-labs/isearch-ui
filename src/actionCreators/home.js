@@ -1,4 +1,5 @@
 import { HIDE_ADD_MESSAGE, SHOW_ADD_MESSAGE, QUERY_FETCH_SEARCH_RESULTS } from '../constants/actionTypes';
+import graphqlService from '../services/graphql.js';
 
 export const showAddMessage = () => (dispatch, getState) => {
   setTimeout(function () {

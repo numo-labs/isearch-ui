@@ -27,19 +27,21 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchQuerySearchResults();
+    console.log('HELLO');
+    this.props.fetchQuerySearchResults('12345', 2, 20);
   }
 
   render () {
     const { searchSummary, ...tileData } = mockData;
-    const { addMessageVisible, hideAddMessage, loading } = this.props;
+    const { addMessageVisible, hideAddMessage, loading, items } = this.props;
+    console.log('Rendering...');
     return (
       <div className='homeContainer'>
         <Modal modalVisible={this.state.modalVisible} close={this.closeModal}/>
         <SearchBar />
         <SearchSummary {...searchSummary} />
         <Tags />
-        {loading ? <LoadingSpinner /> : <Grid tileData={tileData}/>}
+        {loading ? <LoadingSpinner /> : <Grid items={items} tileData={tileData} items={items} />}
         {addMessageVisible && <AddMessage hideAddMessage={hideAddMessage} suggestedLocations='Croatia and Greece'/>}
         <div className='filterIcon' onClick={this.showModal}>
           <img src='https://cloud.githubusercontent.com/assets/12450298/13809901/f6118360-eb64-11e5-95b5-da4a401dc5e6.png'
@@ -54,7 +56,8 @@ Home.propTypes = {
   addMessageVisible: PropTypes.bool,
   hideAddMessage: PropTypes.func,
   loading: PropTypes.bool,
-  fetchQuerySearchResults: PropTypes.func
+  fetchQuerySearchResults: PropTypes.func,
+  items: PropTypes.array
 };
 
 export default Home;

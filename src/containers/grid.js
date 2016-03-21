@@ -11,13 +11,14 @@ const ActionCreators = {...GridActions, ...FilterActions};
 
 class GridContainer extends Component {
   render () {
-    const { showAddMessage, yesFilter, noFilter, filters, tileData } = this.props;
+    const { showAddMessage, yesFilter, noFilter, filters, tileData, items } = this.props;
     return (<Grid
       showAddMessage={showAddMessage}
       yesFilter={yesFilter}
       noFilter={noFilter}
       filters={filters}
       tileData={tileData}
+      items={items}
     />);
   }
 }

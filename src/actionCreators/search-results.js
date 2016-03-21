@@ -1,21 +1,23 @@
 import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
 import { RECEIVE_SEARCH_RESULT } from '../constants/actionTypes';
 import graphqlService from '../services/graphql';
-console.log(graphqlService);
-export function fetchQuerySearchResults (id, page, size, isInitial) {
+let count = 0;
+export function fetchQuerySearchResults (id, page, size) {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
-    return graphqlService.query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
+    count++;
+    return graphqlService(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
     .then(json => {
       const items = json.data.viewer.searchResult.items;
-      const isSealed = json.data.viewer.searchResult.metadata.isSealed;
-      console.log(items.length);
-      console.log(isSealed);
       if (!items.length) {
+        console.log('AGAIN');
         setTimeout(() => {
-          dispatch(fetchQuerySearchResults(id, page, size, isInitial));
+          dispatch(fetchQuerySearchResults(id, page, size));
         }, 100);
       } else {
+        console.log(count);
+        count = 0;
         dispatch(receiveSearchResult(items));
+        dispatch();
       }
     });
   };
@@ -25,6 +27,7 @@ export function fetchQuerySearchResults (id, page, size, isInitial) {
 export function receiveSearchResult (items) {
   return {
     type: RECEIVE_SEARCH_RESULT,
-    items
+    items,
+    loading: false
   };
 }
