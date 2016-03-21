@@ -43,6 +43,7 @@ export function startSearch () {
       ]
     })
     .then(json => {
+      console.log(json);
       console.log('Looking for id:', json.data.viewer.searchResultId.id);
       dispatch(fetchQuerySearchResults(json.data.viewer.searchResultId.id, 1, 20));
     });
