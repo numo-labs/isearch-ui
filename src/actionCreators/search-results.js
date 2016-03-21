@@ -1,5 +1,6 @@
 import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
-import { RECEIVE_SEARCH_RESULT, START_SEARCH } from '../constants/actionTypes';
+import { MUTATION_START_SEARCH } from '../constants/mutations';
+import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING } from '../constants/actionTypes';
 import graphqlService from '../services/graphql';
 
 export function fetchQuerySearchResults (id, page, size) {
@@ -7,7 +8,15 @@ export function fetchQuerySearchResults (id, page, size) {
     return graphqlService(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
     .then(json => {
       const items = json.data.viewer.searchResult.items;
-      dispatch(receiveSearchResult(items));
+      console.log(items);
+      if (!items || !items.length) {
+        setTimeout(function () {
+          console.log('Retrying');
+          dispatch(fetchQuerySearchResults(id, page, size));
+        }, 1000);
+      } else {
+        dispatch(receiveSearchResult(items));
+      }
     });
   };
   return fetchQuerySearchResults_anonymousFn;
@@ -21,9 +30,29 @@ export function receiveSearchResult (items) {
   };
 }
 
-export function startSearch () {
+export function busySearching () {
   return {
-    type: START_SEARCH,
+    type: BUSY_SEARCHING,
     loading: true
   };
+}
+
+export function startSearch () {
+  const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
+    dispatch(busySearching());
+    return graphqlService(MUTATION_START_SEARCH, { 'query': JSON.stringify({passengers: [
+      {
+        birthday: '1986-07-14'
+      },
+      {
+        birthday: '1986-07-14'
+      }
+    ]})})
+    .then(json => {
+      console.log(json);
+      console.log('Looking for id:', json.data.viewer.searchResultId.id);
+      dispatch(fetchQuerySearchResults(json.data.viewer.searchResultId.id, 1, 20));
+    });
+  };
+  return fetchQuerySearchResults_anonymousFn;
 }

@@ -27,12 +27,11 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchQuerySearchResults('12345', 1, 20);
+    this.props.startSearch();
   }
 
   handleOnButtonClick () {
     this.props.startSearch();
-    this.props.fetchQuerySearchResults('12345', 1, 20);
   }
   shuffleMockedTilesIntoResultSet (items) {
     if (items.length) {
