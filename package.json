@@ -76,7 +76,8 @@
   "semistandard": {
     "globals": [
       "describe",
-      "it"
+      "it",
+      "dataLayer"
     ],
     "parser": "babel-eslint"
   }

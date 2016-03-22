@@ -23,17 +23,17 @@ class TileGrid extends Component {
 
   handleVisibility (isVisible, item) {
     if (isVisible) {
-      console.log(isVisible, item.packageOffer.id);
+      console.log('isVisible', isVisible, item.packageOffer.id);
       dataLayer.push({
-       'ecommerce' : {
-         'impressions' : [{
-           'id' : 'iSearch-' + item.packageOffer.id // + '-' + this.props.index
-         }]
-       },
-       'event' : 'impressionsPushed'
-     });
+        'ecommerce': {
+          'impressions': [{
+            'id': 'iSearch-' + item.packageOffer.id // + '-' + this.props.index
+          }]
+        },
+        'event': 'impressionsPushed'
+      });
     }
-    console.log(dataLayer);
+    // console.log(dataLayer);
   }
   render () {
     const { items, showAddMessage, yesFilter, noFilter, filters } = this.props;
