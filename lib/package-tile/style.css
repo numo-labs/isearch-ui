@@ -1,17 +1,4 @@
-@font-face {
-  font-family: SourceSansSemiBold;
-  src: url('../../fonts/SourceSansPro-SemiBold.otf');
-}
 
-@font-face {
-  font-family: SourceSansRegular;
-  src: url('../../fonts/SourceSansPro-Regular.otf');
-}
-
-@font-face {
-  font-family: SourceSansLight;
-  src: url('../../fonts/SourceSansPro-Light.otf');
-}
 
 .packageContainer {
   width: 100%;
