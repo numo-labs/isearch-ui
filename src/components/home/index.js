@@ -56,7 +56,7 @@ class Home extends Component {
     return (
       <div className='homeContainer'>
         <Modal modalVisible={this.state.modalVisible} close={this.closeModal}/>
-        <SearchBar onButtonClick={this.handleOnButtonClick.bind(this)} />
+        <SearchBar disableClick={loading} onButtonClick={this.handleOnButtonClick.bind(this)} />
         <SearchSummary {...searchSummary} />
         <Tags />
         {loading ? <LoadingSpinner /> : <Grid items={shuffledTiles} />}
