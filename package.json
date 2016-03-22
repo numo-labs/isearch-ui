@@ -60,6 +60,7 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "semistandard": "^7.0.5",
+    "simple-mock": "^0.6.0",
     "sinon": "^1.17.3",
     "style-loader": "^0.12.4",
     "webpack": "^1.12.14",

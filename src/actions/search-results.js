@@ -1,7 +1,7 @@
 import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
 import { MUTATION_START_SEARCH } from '../constants/mutations';
 import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING } from '../constants/actionTypes';
-import graphqlService from '../services/graphql';
+import * as graphqlService from '../services/graphql';
 
 export function fetchQuerySearchResults (id, page, size) {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
@@ -37,17 +37,10 @@ export function busySearching () {
   };
 }
 
-export function startSearch () {
+export function startSearch (query) {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
     dispatch(busySearching());
-    return graphqlService(MUTATION_START_SEARCH, { 'query': JSON.stringify({passengers: [
-      {
-        birthday: '1986-07-14'
-      },
-      {
-        birthday: '1986-07-14'
-      }
-    ]})})
+    return graphqlService.query(MUTATION_START_SEARCH, { 'query': JSON.stringify(query)})
     .then(json => {
       console.log(json);
       console.log('Looking for id:', json.data.viewer.searchResultId.id);
