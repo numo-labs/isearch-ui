@@ -4,7 +4,7 @@ import jsdom from 'mocha-jsdom';
 import { expect} from 'chai';
 import { shallow } from 'enzyme';
 
-import ISearch from '../../src/containers/isearch';
+import { ISearch }  from '../../src/containers/isearch';
 
 describe('containers', function () {
   jsdom();
@@ -13,7 +13,7 @@ describe('containers', function () {
 
   describe('<ISearch />', function () {
     it('should render our ISearch container', function (done) {
-      expect(children).to.have.length(3);
+      expect(children).to.have.length(4);
       done();
     });
     it('should render our <SearchBar /> as the first child', function (done) {
@@ -28,10 +28,16 @@ describe('containers', function () {
       expect(secondChild).to.deep.equal(searchSummary);
       done();
     });
-    it('should render our <Tags /> as the third child', function (done) {
+    it('should render our <TagContainer /> as the third child', function (done) {
       const thirdChild = children[2].type;
-      const tags = wrapper.find('Tags').node.type;
+      const tags = wrapper.find('TagContainer').node.type;
       expect(thirdChild).to.deep.equal(tags);
+      done();
+    });
+    it('should render our <SearchResults /> as the fourth child', function (done) {
+      const fourthChild = children[3].type;
+      const searchResults = wrapper.find('SearchResults').node.type;
+      expect(fourthChild).to.deep.equal(searchResults);
       done();
     });
   });

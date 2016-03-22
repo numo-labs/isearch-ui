@@ -1,15 +1,50 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SearchBar from '../../lib/search-bar';
 import SearchSummary from '../../lib/search-summary';
 import Tags from '../../lib/tags';
+import SearchResults from '../components/search-results';
 
-const ISearch = React.createClass({
+import * as TagActions from '../actions/tags';
+const Actions = {...TagActions};
+
+export const ISearch = React.createClass({
+
+  componentDidMount () {
+    this.generateMockedTags();
+  },
+
+  /**
+   * For testing and building purposes we pass through a list of fixed tags.
+   * TODO: Replace this with the proper solution!
+   */
+  generateMockedTags () {
+    this.props.addTags([
+      {
+        tagName: 'this',
+        colour: 'red'
+      },
+      {
+        tagName: 'is',
+        colour: 'green'
+      },
+      {
+        tagName: 'sparta',
+        colour: 'pink'
+      }
+    ])
+  },
 
   handleOnButtonClick () {
     console.log('clicked button');
   },
 
+  handleOnRemoveTag (tagName) {
+    console.log('Removing tag', tag);
+  },
+
   render () {
+    const { tags, addTags } = this.props;
     return (
       <section className='container'>
         <SearchBar onButtonClick={this.handleOnButtonClick} />
@@ -21,10 +56,18 @@ const ISearch = React.createClass({
           departureDate='Sun 13 jul 2016'
           returnDate='Tue 15 jul 2016'
          />
-         <Tags />
+         <Tags tags={tags} removeTag={this.handleOnRemoveTag} />
+         <SearchResults />
       </section>
     );
   }
 });
 
-export default ISearch;
+function mapStateToProps (state) {
+    const { tags: { tags } } = state;
+    return {
+      tags
+    };
+}
+
+export default connect(mapStateToProps, Actions)(ISearch);

@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux';
-import home from './home';
-import filter from './filter.js';
-import search from './search.js';
+import tags from './tags';
 
 const rootReducer = combineReducers({
-  home,
-  filter,
-  search
+  tags
 });
 
 export default rootReducer;
