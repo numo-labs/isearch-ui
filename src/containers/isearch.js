@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '../../lib/search-bar';
 import SearchSummary from '../../lib/search-summary';
+import Tags from '../../lib/tags';
 
 const ISearch = React.createClass({
 
@@ -20,6 +21,7 @@ const ISearch = React.createClass({
           departureDate='Sun 13 jul 2016'
           returnDate='Tue 15 jul 2016'
          />
+         <Tags />
       </section>
     );
   }
