@@ -5,6 +5,7 @@ import Masonry from 'react-masonry-component';
 import FilterTile from 'filter-tile-yesno';
 import PackageTile from 'package-tile';
 import Article from 'article';
+import VisbilitySensor from 'react-visibility-sensor';
 
 require('./style.css');
 
@@ -16,7 +17,23 @@ const masonryOptions = {
 };
 
 class TileGrid extends Component {
+
   componentDidMount () {
+  }
+
+  handleVisibility (isVisible, item) {
+    if (isVisible) {
+      console.log('isVisible', isVisible, item.id);
+      dataLayer.push({
+        'ecommerce': {
+          'impressions': [{
+            'id': 'iSearch-' + item.id // + '-' + this.props.index
+          }]
+        },
+        'event': 'impressionsPushed'
+      });
+    }
+    // console.log(dataLayer);
   }
   render () {
     const { items, showAddMessage, yesFilter, noFilter, filters } = this.props;
@@ -31,12 +48,14 @@ class TileGrid extends Component {
           items.map((item, i) => {
             if (item.type === 'packageOffer') {
               return (
-                <div key={i} className='gridItem'>
-                <PackageTile
-                  key={item.packageOffer.id}
-                  packageOffer={item.packageOffer}
-                />
-                </div>
+                <VisbilitySensor key={i} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                  <div key={i} className='gridItem'>
+                  <PackageTile
+                    key={item.packageOffer.id}
+                    packageOffer={item.packageOffer}
+                  />
+                  </div>
+                </VisbilitySensor>
               );
             } else if (item.type === 'filter') {
               return (
