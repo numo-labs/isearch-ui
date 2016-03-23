@@ -6,12 +6,14 @@ import Tags from '../../lib/tags';
 import SearchResults from '../components/search-results';
 
 import * as TagActions from '../actions/tags';
-const Actions = {...TagActions};
+import * as SearchActions from '../actions/search-results';
+const Actions = {...TagActions, ...SearchActions};
 
 export const ISearch = React.createClass({
 
   componentDidMount () {
     this.generateMockedTags();
+    this.fetchQueryResults();
   },
 
   /**
@@ -35,12 +37,16 @@ export const ISearch = React.createClass({
     ])
   },
 
+  fetchQueryResults () {
+    this.props.fetchQuerySearchResults(12345, 1, 20);
+  },
+
   handleOnButtonClick () {
     console.log('clicked button');
   },
 
   handleOnRemoveTag (tagName) {
-    console.log('Removing tag', tag);
+    console.log('Removing tag', tagName);
   },
 
   render () {
@@ -66,7 +72,8 @@ export const ISearch = React.createClass({
 function mapStateToProps (state) {
     const { tags: { tags }, search: { items } } = state;
     return {
-      tags
+      tags,
+      items
     };
 }
 
