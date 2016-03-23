@@ -14,7 +14,7 @@ export default function search (state = initialState, action) {
     case RECEIVE_SEARCH_RESULT:
       return {...state, items: action.items, loading: action.loading};
     case BUSY_SEARCHING:
-      return {...state, loading: action.loading};
+      return {...state, loading: action.loading, items: []};
     default:
       return state;
   }
