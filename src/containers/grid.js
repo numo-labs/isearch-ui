@@ -11,11 +11,11 @@ const ActionCreators = {...GridActions, ...FilterActions};
 
 class GridContainer extends Component {
   render () {
-    const { showAddMessage, yesFilter, noFilter, filters, items } = this.props;
+    const { showAddMessage, onYesFilter, onNoFilter, filters, items } = this.props;
     return (<Grid
       showAddMessage={showAddMessage}
-      yesFilter={yesFilter}
-      noFilter={noFilter}
+      onYesFilter={onYesFilter}
+      onNoFilter={onNoFilter}
       filters={filters}
       items={items}
     />);
@@ -25,8 +25,8 @@ class GridContainer extends Component {
 GridContainer.propTypes = {
   // actions
   showAddMessage: PropTypes.func,
-  yesFilter: PropTypes.func,
-  noFilter: PropTypes.func,
+  onYesFilter: PropTypes.func,
+  onNoFilter: PropTypes.func,
 
   // store
   filters: PropTypes.object,

@@ -36,7 +36,7 @@ class TileGrid extends Component {
     // console.log(dataLayer);
   }
   render () {
-    const { items, showAddMessage, yesFilter, noFilter, filters } = this.props;
+    const { items, showAddMessage, onYesFilter, onNoFilter, filters } = this.props;
     return (
       <Masonry
         elementType={'div'}
@@ -62,8 +62,8 @@ class TileGrid extends Component {
                 <div key={i} className='gridItem'>
                   <FilterTile
                     filterVisible={filters[item.bigWord]}
-                    yesFilter={yesFilter}
-                    noFilter={noFilter}
+                    onYesFilter={onYesFilter}
+                    onNoFilter={onNoFilter}
                     showAddMessage={showAddMessage}
                     description={item} color={item.color}
                   />
@@ -86,8 +86,8 @@ class TileGrid extends Component {
 TileGrid.propTypes = {
   tileData: PropTypes.object,
   showAddMessage: PropTypes.func,
-  yesFilter: PropTypes.func,
-  noFilter: PropTypes.func,
+  onYesFilter: PropTypes.func,
+  onNoFilter: PropTypes.func,
   filters: PropTypes.object,
   items: PropTypes.array
 };

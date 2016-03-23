@@ -1,5 +1,5 @@
 'use strict';
-import { TAG_ADD_TAGS, TAG_REMOVE_TAG } from '../constants/actionTypes';
+import { TAG_ADD_TAGS, TAG_REMOVE_TAG, TAG_ADD_SINGLE_TAG } from '../constants/actionTypes';
 
 const initialState = {
   tags: []
@@ -12,6 +12,11 @@ export default function tags (state = initialState, action) {
           ...state,
           tags: action.tags
         };
+      case TAG_ADD_SINGLE_TAG:
+        return {
+          ...state,
+          tags: [...state.tags, action.tag]
+        }
       case TAG_REMOVE_TAG:
         const newTags = state.tags.filter(tag => {
           return tag.tagName !== action.tagName;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Masonry from 'react-masonry-component';
 import FilterTile from 'filter-tile-yesno';
 import PackageTile from 'package-tile';
@@ -12,8 +12,15 @@ const masonryOptions = {
 };
 
 const SearchResults = React.createClass({
+  propTypes: {
+    onYesFilter: PropTypes.func,
+    onNoFilter: PropTypes.func,
+    showAddMessage: PropTypes.func,
+    items: PropTypes.array,
+    filterVisibleState: PropTypes.object
+  },
   render () {
-    const { items } = this.props;
+    const { items, filterVisibleState, onYesFilter, onNoFilter, showAddMessage } = this.props;
     return (
       <Masonry
         elementType={'div'}
@@ -36,9 +43,9 @@ const SearchResults = React.createClass({
               return (
                 <div key={index} className='gridItem'>
                   <FilterTile
-                    filterVisible={filters[item.bigWord]}
-                    yesFilter={yesFilter}
-                    noFilter={noFilter}
+                    filterVisible={filterVisibleState[item.bigWord]}
+                    onYesFilter={onYesFilter}
+                    onNoFilter={onNoFilter}
                     showAddMessage={showAddMessage}
                     description={item} color={item.color}
                   />
