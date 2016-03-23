@@ -5,16 +5,16 @@ import * as graphqlService from '../services/graphql';
 
 export function fetchQuerySearchResults (id, page, size) {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
-    return graphqlService(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
+    return graphqlService.query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
     .then(json => {
       const items = json.data.viewer.searchResult.items;
-      console.log(items);
       if (!items || !items.length) {
         setTimeout(function () {
           console.log('Retrying');
           dispatch(fetchQuerySearchResults(id, page, size));
         }, 1000);
       } else {
+        console.log('#######', items);
         dispatch(receiveSearchResult(items));
       }
     });

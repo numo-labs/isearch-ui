@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import * as actions from '../../src/actions/search-results';
 import simple from 'simple-mock';
 import * as graphqlService from '../../src/services/graphql';
+import mockResults from '../../src/utils/mock-search-results';
 
 describe('actions', function () {
   afterEach(function (done) {
@@ -12,7 +13,7 @@ describe('actions', function () {
   describe('search results', function () {
     describe('startSearch', function () {
       it('should dispatch an action to set loading to true', function (done) {
-        //GIVEN
+        // GIVEN
         const dispatch = simple.mock();
         // const state = simple.mock();
         simple.mock(graphqlService, 'query');
@@ -24,15 +25,15 @@ describe('actions', function () {
             birthday: '1986-07-14'
           }
         ]};
-        //WHEN
+        // WHEN
         actions.startSearch(query)(dispatch);
-        //THEN
+        // THEN
         expect(dispatch.callCount).to.equal(1);
         expect(dispatch.firstCall.arg.type).to.equal(BUSY_SEARCHING);
         done();
       });
       it('should dispatch an action fetchQuerySearchResults when graphql returns a json object', function (done) {
-        //GIVEN
+        // GIVEN
         const dispatch = simple.mock();
         const json = {
           data: {
@@ -45,13 +46,50 @@ describe('actions', function () {
         };
         simple.mock(graphqlService, 'query');
         graphqlService.query.resolveWith(json);
-        //WHEN
+        // WHEN
         actions.startSearch()(dispatch);
-        //THEN
+        // THEN
         graphqlService.query.lastCall.returned.then(json => {
           expect(dispatch.lastCall.arg.name).to.equal('fetchQuerySearchResults_anonymousFn');
         });
-        console.log(dispatch);
+        done();
+      });
+    });
+    describe('fetchQuerySearchResults', function () {
+      it('should dispatch an action fetchQuerySearchResults if no items have been returned from the graphql query', function (done) {
+        // GIVEN
+        const dispatch = simple.mock();
+        const json = {
+          data: {
+            viewer: {
+              searchResult: {
+                items: []
+              }
+            }
+          }
+        };
+        simple.mock(graphqlService, 'query');
+        graphqlService.query.resolveWith(json);
+        // WHEN
+        actions.fetchQuerySearchResults()(dispatch);
+        // THEN
+        graphqlService.query.lastCall.returned.then(json => {
+          expect(dispatch.lastCall.arg.name).to.equal('fetchQuerySearchResults');
+        });
+        done();
+      });
+      it('should dispatch an action receiveSearchResult if items have been returned from the graphql query', function (done) {
+        // GIVEN
+        const dispatch = simple.mock();
+        const json = mockResults;
+        simple.mock(graphqlService, 'query');
+        graphqlService.query.resolveWith(json);
+        // WHEN
+        actions.fetchQuerySearchResults()(dispatch);
+        // THEN
+        graphqlService.query.lastCall.returned.then(json => {
+          expect(dispatch.lastCall.arg.name).to.equal('receiveSearchResult');
+        });
         done();
       });
     });

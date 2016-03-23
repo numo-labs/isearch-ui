@@ -44,7 +44,7 @@ export const ISearch = React.createClass({
   },
 
   render () {
-    const { tags, addTags } = this.props;
+    const { tags, addTags, items } = this.props;
     return (
       <section className='container'>
         <SearchBar onButtonClick={this.handleOnButtonClick} />
@@ -57,14 +57,14 @@ export const ISearch = React.createClass({
           returnDate='Tue 15 jul 2016'
          />
          <Tags tags={tags} removeTag={this.handleOnRemoveTag} />
-         <SearchResults />
+         <SearchResults items={items} />
       </section>
     );
   }
 });
 
 function mapStateToProps (state) {
-    const { tags: { tags } } = state;
+    const { tags: { tags }, search: { items } } = state;
     return {
       tags
     };
