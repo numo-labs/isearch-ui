@@ -11,5 +11,5 @@ export function removeTag (tagName) {
   return {
     type: TAG_REMOVE_TAG,
     tagName: tagName
-  }
+  };
 }

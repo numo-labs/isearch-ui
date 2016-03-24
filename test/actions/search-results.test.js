@@ -1,4 +1,4 @@
-import { START_SEARCH, BUSY_SEARCHING } from '../../src/constants/actionTypes';
+import { BUSY_SEARCHING } from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/search-results';
 import simple from 'simple-mock';

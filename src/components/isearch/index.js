@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from 'react';
-import SearchBar from 'search-bar';
-import SearchSummary from 'search-summary';
-import Tags from 'tags';
+import SearchBar from '../../../lib/search-bar/';
+import SearchSummary from '../../../lib/search-summary/';
+import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 
 class ISearch extends Component {
 
-  constructor() {
+  constructor () {
     super();
     this.fetchQueryResults = this.fetchQueryResults.bind(this);
   }
@@ -29,17 +29,13 @@ class ISearch extends Component {
   }
 
   render () {
-
     const {
       tags,
-      addTags,
       items,
       onYesFilter,
       onFilterClick,
       showAddMessage,
-      hideAddMessage,
       filterVisibleState,
-      tiles,
       removeTag
     } = this.props;
 
@@ -65,18 +61,18 @@ class ISearch extends Component {
       </section>
     );
   }
-};
+}
 
 ISearch.propTypes = {
   tags: PropTypes.array,
-  addTags: PropTypes.func,
   items: PropTypes.array,
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
   showAddMessage: PropTypes.func,
   hideAddMessage: PropTypes.func,
   filterVisibleState: PropTypes.object,
-  tiles: PropTypes.array
-}
+  fetchQuerySearchResults: PropTypes.func,
+  removeTag: PropTypes.func
+};
 
 export default ISearch;

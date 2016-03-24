@@ -9,12 +9,11 @@ import {
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
   SHOW_ADD_MESSAGE,
-  HOW_ADD_MESSAGE,
-  HIDE_ADD_MESSAGE,
+  HIDE_ADD_MESSAGE
  } from '../constants/actionTypes';
 
- import { mockTiles, mockTags } from './utils/mockData.js';
- import shuffleMockedTilesIntoResultSet from './utils/helpers.js';
+import { mockTiles, mockTags } from './utils/mockData.js';
+import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
 
 const initialState = {
   items: [],
@@ -25,18 +24,18 @@ const initialState = {
   tags: [],
   filterVisibleState: {},
   tiles: [],
-  addMessageVisible: false,
+  addMessageVisible: false
 };
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const items = shuffleMockedTilesIntoResultSet(action.items, state.tiles.concat(state.tags))
+      const items = shuffleMockedTilesIntoResultSet(action.items, state.tiles.concat(state.tags));
       return {...state, items: items, loading: action.loading};
     case BUSY_SEARCHING:
       return {...state, loading: action.loading};
     case TAG_ADD_TAGS:
-     const tags = action.tags === undefined ? mockTags : action.tags;
+      const tags = action.tags === undefined ? mockTags : action.tags;
       return {
         ...state,
         tags: tags
@@ -45,7 +44,7 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         tags: [...state.tags, action.tag]
-      }
+      };
     case TAG_REMOVE_TAG:
       const newTags = state.tags.filter(tag => {
         return tag.tagName !== action.tagName;

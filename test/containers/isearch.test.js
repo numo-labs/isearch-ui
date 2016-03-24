@@ -1,14 +1,25 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
 import jsdom from 'mocha-jsdom';
-import { expect} from 'chai';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import { ISearch }  from '../../src/containers/isearch';
+import ISearch from '../../src/components/isearch/';
+
+const defaultProps = {
+  tags: [],
+  items: [],
+  onYesFilter: () => {},
+  onFilterClick: () => {},
+  showAddMessage: () => {},
+  hideAddMessage: () => {},
+  filterVisibleState: {},
+  fetchQuerySearchResults: () => {},
+  removeTag: () => {}
+};
 
 describe('containers', function () {
   jsdom();
-  const wrapper = shallow(<ISearch />);
+  const wrapper = shallow(<ISearch {...defaultProps} />);
   const children = wrapper.children().nodes;
 
   describe('<ISearch />', function () {

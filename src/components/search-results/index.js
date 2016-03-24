@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import Masonry from 'react-masonry-component';
-import FilterTile from 'filter-tile-yesno';
-import PackageTile from 'package-tile';
-import Article from 'article';
+import FilterTile from '../../../lib/filter-tile-yesno/';
+import PackageTile from '../../../lib/package-tile/';
+import Article from '../../../lib/article/';
 
 const masonryOptions = {
   transitionDuration: '0.4s',
@@ -14,7 +14,6 @@ const masonryOptions = {
 class SearchResults extends Component {
 
   render () {
-    console.log("PROPS", this.props)
     const { items, filterVisibleState, onYesFilter, onFilterClick, showAddMessage } = this.props;
     return (
       <Masonry
@@ -58,7 +57,7 @@ class SearchResults extends Component {
       </Masonry>
     );
   }
-};
+}
 
 SearchResults.propTypes = {
   onYesFilter: PropTypes.func,
@@ -66,6 +65,6 @@ SearchResults.propTypes = {
   showAddMessage: PropTypes.func,
   items: PropTypes.array,
   filterVisibleState: PropTypes.object
-}
+};
 
 export default SearchResults;

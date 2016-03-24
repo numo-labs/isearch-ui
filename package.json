@@ -81,7 +81,8 @@
     "globals": [
       "describe",
       "it",
-      "dataLayer"
+      "dataLayer",
+      "afterEach"
     ],
     "parser": "babel-eslint"
   }

@@ -21,7 +21,7 @@ export const mockTiles = [
     backgroundImage: `${instagramPrefix}s750x750/sh0=108/e35/12479379_141330706245237_420500081_n.jpg`,
     label: 'Sun and Bathe',
     title: '10 TURKISH GEMS',
-    overview: 'CLOSE TO BEACH AND CITY',
+    overview: 'CLOSE TO BEACH AND CITY'
   },
   {
     backgroundImage: `${instagramPrefix}e35/10472010_1689478414643553_296617682_n.jpg`,

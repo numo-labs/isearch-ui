@@ -1,4 +1,4 @@
-import { FILTER_ON_YES_FILTER, FILTER_ON_CLICK, TILES_ADD_TILES, TAG_ADD_SINGLE_TAG } from '../constants/actionTypes';
+import { FILTER_ON_CLICK, TILES_ADD_TILES, TAG_ADD_SINGLE_TAG } from '../constants/actionTypes';
 
 export const onYesFilter = (tagName) => (dispatch) => {
   dispatch(addSingleTag(tagName));
