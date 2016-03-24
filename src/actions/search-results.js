@@ -2,11 +2,15 @@ import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
 import { MUTATION_START_SEARCH } from '../constants/mutations';
 import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING } from '../constants/actionTypes';
 import * as graphqlService from '../services/graphql';
+import { addTags } from './tags.js';
+import { addTiles } from './tiles.js';
 
 export function fetchQuerySearchResults (id, page, size) {
+  console.log("CALLED");
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
     return graphqlService.query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
     .then(json => {
+      console.log('DATA');
       const items = json.data.viewer.searchResult.items;
       if (!items || !items.length) {
         setTimeout(function () {
@@ -15,6 +19,8 @@ export function fetchQuerySearchResults (id, page, size) {
         }, 1000);
       } else {
         console.log('#######', items);
+        dispatch(addTags());
+        dispatch(addTiles())
         dispatch(receiveSearchResult(items));
       }
     });
@@ -42,9 +48,12 @@ export function startSearch (query) {
     dispatch(busySearching());
     return graphqlService.query(MUTATION_START_SEARCH, { 'query': JSON.stringify(query)})
     .then(json => {
-      console.log(json);
+      console.log("json", json);
+      console.log("QUERY!!!!!!")
       console.log('Looking for id:', json.data.viewer.searchResultId.id);
       dispatch(fetchQuerySearchResults(json.data.viewer.searchResultId.id, 1, 20));
+
+      // temp fix for tiles and tags
     });
   };
   return fetchQuerySearchResults_anonymousFn;

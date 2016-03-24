@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Masonry from 'react-masonry-component';
 import FilterTile from 'filter-tile-yesno';
 import PackageTile from 'package-tile';
@@ -11,16 +11,11 @@ const masonryOptions = {
   gutter: 14 // horizontal spacing between tiles
 };
 
-const SearchResults = React.createClass({
-  propTypes: {
-    onYesFilter: PropTypes.func,
-    onNoFilter: PropTypes.func,
-    showAddMessage: PropTypes.func,
-    items: PropTypes.array,
-    filterVisibleState: PropTypes.object
-  },
+class SearchResults extends Component {
+
   render () {
-    const { items, filterVisibleState, onYesFilter, onNoFilter, showAddMessage } = this.props;
+    console.log("PROPS", this.props)
+    const { items, filterVisibleState, onYesFilter, onFilterClick, showAddMessage } = this.props;
     return (
       <Masonry
         elementType={'div'}
@@ -45,7 +40,7 @@ const SearchResults = React.createClass({
                   <FilterTile
                     filterVisible={filterVisibleState[item.bigWord]}
                     onYesFilter={onYesFilter}
-                    onNoFilter={onNoFilter}
+                    onNoFilter={onFilterClick}
                     showAddMessage={showAddMessage}
                     description={item} color={item.color}
                   />
@@ -63,6 +58,14 @@ const SearchResults = React.createClass({
       </Masonry>
     );
   }
-});
+};
+
+SearchResults.propTypes = {
+  onYesFilter: PropTypes.func,
+  onFilterClick: PropTypes.func,
+  showAddMessage: PropTypes.func,
+  items: PropTypes.array,
+  filterVisibleState: PropTypes.object
+}
 
 export default SearchResults;
