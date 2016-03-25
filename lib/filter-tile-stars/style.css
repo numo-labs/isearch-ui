@@ -1,17 +1,3 @@
-@font-face {
-  font-family: TCScript;
-  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
-}
-
-@font-face {
-  font-family: ThomasHeadlineBold;
-  src: url('../../fonts/ThomasHeadline-Bold.otf');
-}
-
-@font-face {
-  font-family: ThomasHeadlineLight;
-  src: url('../../fonts/ThomasHeadline-Light.otf');
-}
 
 .container {
   width: 100%;

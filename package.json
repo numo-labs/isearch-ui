@@ -12,9 +12,9 @@
     "dev:serve": "webpack-dev-server --config ./webpack.config.js",
     "lint": "semistandard",
     "nocov": "mocha ./lib/**/*.test.js --compilers js:babel-register",
-    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/runner.js --report lcovonly -- -R spec",
+    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js --report lcovonly -- -R spec",
     "clean": "rm -rf public && mkdir -p public/",
-    "build": "npm run clean && ./node_modules/.bin/webpack --config ./webpack.production.config.js",
+    "build": "npm run clean && ./node_modules/.bin/webpack",
     "deploy": "gulp deploy"
   },
   "repository": {
@@ -47,7 +47,6 @@
     "chai": "^3.5.0",
     "css-loader": "^0.19.0",
     "enzyme": "^2.2.0",
-    "expect": "^1.15.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.1",
     "html-webpack-plugin": "^2.9.0",
@@ -60,6 +59,7 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "semistandard": "^7.0.5",
+    "simple-mock": "^0.6.0",
     "sinon": "^1.17.3",
     "style-loader": "^0.12.4",
     "webpack": "^1.12.14",
@@ -80,7 +80,8 @@
     "globals": [
       "describe",
       "it",
-      "dataLayer"
+      "dataLayer",
+      "afterEach"
     ],
     "parser": "babel-eslint"
   }
