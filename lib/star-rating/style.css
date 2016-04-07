@@ -1,0 +1,14 @@
+.ratingIcon {
+  display: inline-block;
+  vertical-align: top;
+  width: 17px;
+  height: 13px;
+}
+
+.ratingIconBlur {
+  display: inline-block;
+  vertical-align: top;
+  width: 17px;
+  height: 13px;
+  opacity: 0.3;
+}

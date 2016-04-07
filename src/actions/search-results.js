@@ -2,6 +2,8 @@ import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
 import { MUTATION_START_SEARCH } from '../constants/mutations';
 import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING, SET_SEARCH_STRING } from '../constants/actionTypes';
 import * as graphqlService from '../services/graphql';
+import { addTags } from './tags.js';
+import { addTiles } from './tiles.js';
 
 export function fetchQuerySearchResults (id, page, size) {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
@@ -14,6 +16,8 @@ export function fetchQuerySearchResults (id, page, size) {
           dispatch(fetchQuerySearchResults(id, page, size));
         }, 1000);
       } else {
+        dispatch(addTags());
+        dispatch(addTiles());
         dispatch(receiveSearchResult(items));
       }
     });
@@ -55,7 +59,7 @@ export function startSearch () {
         }
       ]
     };
-    return graphqlService.query(MUTATION_START_SEARCH, { 'query': JSON.stringify(query) })
+    return graphqlService.query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
     .then(json => {
       dispatch(fetchQuerySearchResults(json.data.viewer.searchResultId.id, 1, 20));
     });

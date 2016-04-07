@@ -1,14 +1,9 @@
-import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import SearchBar from '../../lib/search-bar';
-import SearchSummary from '../../lib/search-summary';
-import Tags from '../../lib/tags';
-import SearchResults from '../components/search-results';
+import ISearch from '../components/isearch/';
 
 import * as TagActions from '../actions/tags';
 import * as SearchActions from '../actions/search-results';
 import * as TileActions from '../actions/tiles';
-import * as HomeActions from '../actions/home';
 
 const Actions = {...TagActions, ...SearchActions, ...TileActions};
 const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
@@ -170,14 +165,14 @@ export const ISearch = React.createClass({
 });
 
 function mapStateToProps (state) {
-    const { tags: { tags }, search: { items, searchString }, tiles: { tiles, filterVisibleState } } = state;
-    return {
-      tags,
-      items,
-      tiles,
-      filterVisibleState,
-      searchString
-    };
+  const { tags: { tags }, search: { items, searchString }, tiles: { tiles, filterVisibleState } } = state;
+  return {
+    tags,
+    items,
+    tiles,
+    filterVisibleState,
+    searchString
+  };
 }
 
 export default connect(mapStateToProps, Actions)(ISearch);
