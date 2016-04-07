@@ -14,7 +14,6 @@ export function fetchQuerySearchResults (id, page, size) {
           dispatch(fetchQuerySearchResults(id, page, size));
         }, 1000);
       } else {
-        console.log('#######', items);
         dispatch(receiveSearchResult(items));
       }
     });
@@ -42,8 +41,6 @@ export function startSearch (query) {
     dispatch(busySearching());
     return graphqlService.query(MUTATION_START_SEARCH, { 'query': JSON.stringify(query)})
     .then(json => {
-      console.log(json);
-      console.log('Looking for id:', json.data.viewer.searchResultId.id);
       dispatch(fetchQuerySearchResults(json.data.viewer.searchResultId.id, 1, 20));
     });
   };

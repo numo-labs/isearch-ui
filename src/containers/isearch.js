@@ -122,7 +122,6 @@ export const ISearch = React.createClass({
   },
 
   addTilesToSearchResult (items, position, index, count) {
-    console.log('*********', this.props.tiles);
     items.splice(position, 0, this.props.tiles[count]);
     if (count === 5) {
       return items;
@@ -143,6 +142,7 @@ export const ISearch = React.createClass({
       filterVisibleState,
       tiles
     } = this.props;
+    console.log(items);
     return (
       <section className='container'>
         <SearchBar onButtonClick={this.handleOnButtonClick} />
@@ -156,7 +156,7 @@ export const ISearch = React.createClass({
         />
         <Tags tags={tags} removeTag={this.handleOnRemoveTag} />
         <SearchResults
-          items={this.shuffledTiles}
+          items={this.shuffleMockedTilesIntoResultSet(items)}
           onYesFilter={onYesFilter}
           onNoFilter={onFilterClick}
           filterVisibleState={filterVisibleState}

@@ -1,0 +1,91 @@
+.grid {
+  margin: 0 auto;
+}
+
+.gridItem {
+  margin-bottom: 14px;
+  width: 375px;
+}
+.tileSizer {
+  width: 375px;
+}
+
+.load-effect div.animate {
+  -webkit-transform: translateY(200px);
+	transform: translateY(200px);
+	-webkit-animation: moveUp 0.65s ease forwards;
+	animation: moveUp 0.65s ease forwards;
+}
+
+@-webkit-keyframes moveUp {
+	0% { }
+	100% { -webkit-transform: translateY(0); opacity: 1; }
+}
+
+@keyframes moveUp {
+	0% { }
+	100% { -webkit-transform: translateY(0); transform: translateY(0); opacity: 1; }
+}
+
+
+
+@media (max-width: 1240px) {
+  .gridItem {
+    width: 305px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .gridItem {
+    width: 250px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 810px) {
+  .gridItem {
+    width: 290px;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 635px) {
+  .gridItem {
+    width: 240px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 525px) {
+  .gridItem {
+    width: 400px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .gridItem {
+    width: 375px;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .gridItem {
+    margin-bottom: 14px;
+    width: 360px;
+  }
+}
+
+@media (max-width: 320px) {
+  .gridItem {
+    margin-bottom: 14px;
+    width: 320px;
+  }
+}

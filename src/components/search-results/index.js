@@ -3,6 +3,7 @@ import Masonry from 'react-masonry-component';
 import FilterTile from 'filter-tile-yesno';
 import PackageTile from 'package-tile';
 import Article from 'article';
+import './style.css';
 
 const masonryOptions = {
   transitionDuration: '0.4s',
