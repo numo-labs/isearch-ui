@@ -11,3 +11,4 @@ export const TAG_ADD_SINGLE_TAG = 'TAG_ADD_SINGLE_TAG';
 export const TAG_ADD_TAGS = 'TAG_ADD_TAGS';
 export const TAG_REMOVE_TAG = 'TAG_REMOVE_TAG';
 export const TILES_ADD_TILES = 'TILES_ADD_TILES';
+export const SET_SEARCH_STRING = 'SET_SEARCH_STRING';

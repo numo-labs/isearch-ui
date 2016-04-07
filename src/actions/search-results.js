@@ -1,6 +1,6 @@
 import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
 import { MUTATION_START_SEARCH } from '../constants/mutations';
-import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING } from '../constants/actionTypes';
+import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING, SET_SEARCH_STRING } from '../constants/actionTypes';
 import * as graphqlService from '../services/graphql';
 
 export function fetchQuerySearchResults (id, page, size) {
@@ -29,6 +29,13 @@ export function receiveSearchResult (items) {
   };
 }
 
+export function setSearchString (searchString) {
+  return {
+    type: SET_SEARCH_STRING,
+    searchString
+  };
+}
+
 export function busySearching () {
   return {
     type: BUSY_SEARCHING,
@@ -36,10 +43,19 @@ export function busySearching () {
   };
 }
 
-export function startSearch (query) {
+export function startSearch () {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
     dispatch(busySearching());
-    return graphqlService.query(MUTATION_START_SEARCH, { 'query': JSON.stringify(query)})
+    const { search: { searchString } } = getState();
+    const query = {
+      geography: [searchString],
+      passengers: [
+        {
+          birthday: '1986-07-14'
+        }
+      ]
+    };
+    return graphqlService.query(MUTATION_START_SEARCH, { 'query': JSON.stringify(query) })
     .then(json => {
       dispatch(fetchQuerySearchResults(json.data.viewer.searchResultId.id, 1, 20));
     });

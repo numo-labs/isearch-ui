@@ -105,8 +105,8 @@ export const ISearch = React.createClass({
     this.props.fetchQuerySearchResults(12345, 1, 20);
   },
 
-  handleOnButtonClick () {
-    console.log('clicked button');
+  handleOnSearchButtonClick () {
+    this.props.startSearch()
   },
 
   handleOnRemoveTag (tagName) {
@@ -140,12 +140,14 @@ export const ISearch = React.createClass({
       showAddMessage,
       hideAddMessage,
       filterVisibleState,
-      tiles
+      tiles,
+      searchString,
+      setSearchString,
+      startSearch
     } = this.props;
-    console.log(items);
     return (
       <section className='container'>
-        <SearchBar onButtonClick={this.handleOnButtonClick} />
+        <SearchBar onSearchButtonClick={startSearch} setSearchString={setSearchString} searchString={searchString}/>
         <SearchSummary
           city='Bodrum'
           country='Turkey'
@@ -168,12 +170,13 @@ export const ISearch = React.createClass({
 });
 
 function mapStateToProps (state) {
-    const { tags: { tags }, search: { items }, tiles: { tiles, filterVisibleState } } = state;
+    const { tags: { tags }, search: { items, searchString }, tiles: { tiles, filterVisibleState } } = state;
     return {
       tags,
       items,
       tiles,
-      filterVisibleState
+      filterVisibleState,
+      searchString
     };
 }
 

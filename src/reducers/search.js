@@ -1,12 +1,13 @@
 'use strict';
-import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING } from '../constants/actionTypes';
+import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING, SET_SEARCH_STRING } from '../constants/actionTypes';
 
 const initialState = {
   items: [],
   bucketCount: 0,
   status: undefined,
   id: undefined,
-  loading: true
+  loading: true,
+  searchString: ''
 };
 
 export default function search (state = initialState, action) {
@@ -15,6 +16,8 @@ export default function search (state = initialState, action) {
       return {...state, items: action.items, loading: action.loading};
     case BUSY_SEARCHING:
       return {...state, loading: action.loading};
+    case SET_SEARCH_STRING:
+      return {...state, searchString: action.searchString};
     default:
       return state;
   }
