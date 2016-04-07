@@ -9,12 +9,12 @@ import {
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
   SHOW_ADD_MESSAGE,
-  HIDE_ADD_MESSAGE
+  HIDE_ADD_MESSAGE,
+  SET_SEARCH_STRING
  } from '../constants/actionTypes';
 
 import { mockTiles, mockTags } from './utils/mockData.js';
 import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
-import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING, SET_SEARCH_STRING } from '../constants/actionTypes';
 
 const initialState = {
   items: [],
