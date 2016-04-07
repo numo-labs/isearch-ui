@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Tags from '../../containers/tags';
-import SearchSummary from 'search-summary';
-import SearchBar from 'search-bar';
+import SearchSummary from '../../../lib/search-summary';
+import SearchBar from '../../../lib/search-bar';
 import { searchSummary, tiles } from './mockData.js';
 import Grid from '../../containers/grid';
-import AddMessage from 'add-message';
+import AddMessage from '../../../lib/add-message';
 import Modal from '../modal';
 import LoadingSpinner from 'spinner';
 
