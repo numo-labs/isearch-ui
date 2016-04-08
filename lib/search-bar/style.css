@@ -1,4 +1,12 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
 
+@font-face {
+  font-family: SourceSansBold;
+  src: url('../../fonts/SourceSansPro-Bold.otf');
+}
 
 .searchBarContainer {
   text-align: center;
