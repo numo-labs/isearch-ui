@@ -7,10 +7,12 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm run lint && npm run coverage",
+    "test": "npm run coverage && npm run lib:test && npm run src:test",
     "dev:build": "webpack --config ./webpack.config.js",
     "dev:serve": "webpack-dev-server --config ./webpack.config.js",
     "lint": "semistandard",
+    "lib:test": "mocha ./lib/**/*.test.js --compilers js:babel-register",
+    "src:test": "mocha ./test/**/*.test.js --compilers js:babel-register",
     "nocov": "mocha ./lib/**/*.test.js --compilers js:babel-register",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js --report lcovonly -- -R spec",
     "clean": "rm -rf public && mkdir -p public/",

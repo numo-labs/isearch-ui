@@ -4,6 +4,10 @@ import * as actions from '../../src/actions/search-results';
 import simple from 'simple-mock';
 import * as graphqlService from '../../src/services/graphql';
 import mockResults from '../../src/utils/mock-search-results';
+import configureMockStore from './test-helpers';
+import thunk from 'redux-thunk';
+
+const mockStore = configureMockStore([thunk]);
 
 describe('actions', function () {
   afterEach(function (done) {
@@ -14,27 +18,17 @@ describe('actions', function () {
     describe('startSearch', function () {
       it('should dispatch an action to set loading to true', function (done) {
         // GIVEN
-        const dispatch = simple.mock();
-        // const state = simple.mock();
+        const expectedActions = [ { type: 'BUSY_SEARCHING', loading: true } ];
         simple.mock(graphqlService, 'query');
-        const query = {passengers: [
-          {
-            birthday: '1986-07-14'
-          },
-          {
-            birthday: '1986-07-14'
-          }
-        ]};
-        // WHEN
-        actions.startSearch(query)(dispatch);
-        // THEN
-        expect(dispatch.callCount).to.equal(1);
-        expect(dispatch.firstCall.arg.type).to.equal(BUSY_SEARCHING);
-        done();
+        const store = mockStore({search: { searchString: 'h' }});
+        store.dispatch(actions.startSearch())
+          .then(() => {
+            expect(store.getActions()).to.deep.equal(expectedActions);
+          })
+          .then(done());
       });
       it('should dispatch an action fetchQuerySearchResults when graphql returns a json object', function (done) {
         // GIVEN
-        const dispatch = simple.mock();
         const json = {
           data: {
             viewer: {
@@ -46,13 +40,16 @@ describe('actions', function () {
         };
         simple.mock(graphqlService, 'query');
         graphqlService.query.resolveWith(json);
-        // WHEN
-        actions.startSearch()(dispatch);
-        // THEN
-        graphqlService.query.lastCall.returned.then(json => {
-          expect(dispatch.lastCall.arg.name).to.equal('fetchQuerySearchResults_anonymousFn');
-        });
-        done();
+        const expectedActions = [
+          { type: 'BUSY_SEARCHING', loading: true },
+          { type: 'SAVE_SEARCH_RESULT_ID', id: 12345 }
+        ];
+        const store = mockStore({search: { searchString: 'h' }});
+        store.dispatch(actions.startSearch())
+          .then(() => {
+            expect(store.getActions()).to.deep.equal(expectedActions);
+          })
+          .then(done());
       });
     });
     describe('fetchQuerySearchResults', function () {

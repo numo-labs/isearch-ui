@@ -1,6 +1,6 @@
 import { QUERY_FETCH_SEARCH_RESULT } from '../constants/queries';
 import { MUTATION_START_SEARCH } from '../constants/mutations';
-import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING, SET_SEARCH_STRING } from '../constants/actionTypes';
+import { RECEIVE_SEARCH_RESULT, BUSY_SEARCHING, SET_SEARCH_STRING, SAVE_SEARCH_RESULT_ID } from '../constants/actionTypes';
 import * as graphqlService from '../services/graphql';
 import { addTags } from './tags.js';
 import { addTiles } from './tiles.js';
@@ -47,6 +47,13 @@ export function busySearching () {
   };
 }
 
+export function saveSearchResultId (id) {
+  return {
+    type: SAVE_SEARCH_RESULT_ID,
+    id: id
+  };
+}
+
 export function startSearch () {
   const fetchQuerySearchResults_anonymousFn = function (dispatch, getState) {
     dispatch(busySearching());
@@ -61,7 +68,9 @@ export function startSearch () {
     };
     return graphqlService.query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
     .then(json => {
-      dispatch(fetchQuerySearchResults(json.data.viewer.searchResultId.id, 1, 20));
+      const searchResultId = json.data.viewer.searchResultId.id;
+      dispatch(saveSearchResultId(searchResultId))
+      dispatch(fetchQuerySearchResults(searchResultId, 1, 20));
     });
   };
   return fetchQuerySearchResults_anonymousFn;
