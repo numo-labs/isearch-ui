@@ -12,7 +12,7 @@ describe('Component', function () {
       expect(children).to.have.length(3);
       done();
     });
-    it.only('should render 3 elements with the class .gridItem', function (done) {
+    it('should render 3 elements with the class .gridItem', function (done) {
       expect(wrapper.find('.gridItem').length).to.equal(3);
       done();
     });
