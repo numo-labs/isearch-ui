@@ -24,10 +24,6 @@ class ISearch extends Component {
     this.props.fetchQuerySearchResults(12345, 1, 20);
   }
 
-  handleOnButtonClick () {
-    console.log('clicked button');
-  }
-
   render () {
     const {
       tags,
@@ -36,12 +32,19 @@ class ISearch extends Component {
       onFilterClick,
       showAddMessage,
       filterVisibleState,
-      removeTag
+      removeTag,
+      setSearchString,
+      searchString,
+      startSearch
     } = this.props;
 
     return (
       <section className='container'>
-        <SearchBar onButtonClick={this.handleOnButtonClick} />
+        <SearchBar
+         onSearchButtonClick={startSearch}
+         setSearchString={setSearchString}
+         searchString={searchString}
+        />
         <SearchSummary
           city='Bodrum'
           country='Turkey'
@@ -72,7 +75,10 @@ ISearch.propTypes = {
   hideAddMessage: PropTypes.func,
   filterVisibleState: PropTypes.object,
   fetchQuerySearchResults: PropTypes.func,
-  removeTag: PropTypes.func
+  removeTag: PropTypes.func,
+  setSearchString: PropTypes.func,
+  searchString: PropTypes.string,
+  startSearch: PropTypes.func
 };
 
 export default ISearch;
