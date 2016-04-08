@@ -9,7 +9,8 @@ import {
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
   SHOW_ADD_MESSAGE,
-  HIDE_ADD_MESSAGE
+  HIDE_ADD_MESSAGE,
+  SET_SEARCH_STRING
  } from '../constants/actionTypes';
 
 import { mockTiles, mockTags } from './utils/mockData.js';
@@ -24,7 +25,8 @@ const initialState = {
   tags: [],
   filterVisibleState: {},
   tiles: [],
-  addMessageVisible: false
+  addMessageVisible: false,
+  searchString: ''
 };
 
 export default function search (state = initialState, action) {
@@ -84,6 +86,8 @@ export default function search (state = initialState, action) {
         ...state,
         addMessageVisible: false
       });
+    case SET_SEARCH_STRING:
+      return {...state, searchString: action.searchString};
     default:
       return state;
   }

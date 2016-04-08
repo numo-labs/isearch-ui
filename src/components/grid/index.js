@@ -2,9 +2,9 @@
 
 import React, { Component, PropTypes } from 'react';
 import Masonry from 'react-masonry-component';
-import FilterTile from 'filter-tile-yesno';
-import PackageTile from 'package-tile';
-import Article from 'article';
+import FilterTile from '../../../lib/filter-tile-yesno';
+import PackageTile from '../../../lib/package-tile';
+import Article from '../../../lib/article';
 import VisbilitySensor from 'react-visibility-sensor';
 
 require('./style.css');
@@ -23,7 +23,6 @@ class TileGrid extends Component {
 
   handleVisibility (isVisible, item) {
     if (isVisible) {
-      console.log('isVisible', isVisible, item.id);
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -33,7 +32,6 @@ class TileGrid extends Component {
         'event': 'impressionsPushed'
       });
     }
-    // console.log(dataLayer);
   }
   render () {
     const { items, showAddMessage, onYesFilter, onNoFilter, filters } = this.props;

@@ -10,16 +10,18 @@ const expectedInitialState = {
   status: undefined,
   id: undefined,
   loading: true,
+  tags: [],
   filterVisibleState: {},
   tiles: [],
   addMessageVisible: false,
-  tags: []
+  searchString: ''
 };
 
 describe('reducers', function () {
   describe('search', function () {
     it('should return the initial state', function (done) {
       const initialState = reducer(undefined, {});
+      console.log(initialState);
       const expectedState = {
         ...expectedInitialState,
         items: [],
