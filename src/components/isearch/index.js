@@ -39,7 +39,7 @@ class ISearch extends Component {
     } = this.props;
 
     return (
-      <section className='container'>
+      <section>
         <SearchBar
          onSearchButtonClick={startSearch}
          setSearchString={setSearchString}
