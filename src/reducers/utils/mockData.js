@@ -1,15 +1,15 @@
 export const mockTags = [
   {
-    tagName: 'this',
-    colour: 'red'
+    tagName: 'here',
+    colour: '#8EB8C4'
   },
   {
-    tagName: 'is',
-    colour: 'green'
+    tagName: 'we',
+    colour: '#81C8BE'
   },
   {
-    tagName: 'sparta',
-    colour: 'pink'
+    tagName: 'go',
+    colour: '#DC3767'
   }
 ];
 
