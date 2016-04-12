@@ -21,7 +21,6 @@ describe('reducers', function () {
   describe('search', function () {
     it('should return the initial state', function (done) {
       const initialState = reducer(undefined, {});
-      console.log(initialState);
       const expectedState = {
         ...expectedInitialState,
         items: [],
