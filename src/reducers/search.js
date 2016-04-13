@@ -32,7 +32,14 @@ const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const items = shuffleMockedTilesIntoResultSet(action.items, state.tiles.concat(state.tags));
+      const packages = action.items.map(item => {
+        return {
+          ...item,
+          searchTerm: state.searchString
+          // adding a new key to each package to enable sorting based on filters
+        };
+      });
+      const items = shuffleMockedTilesIntoResultSet(packages, state.tiles);
       return {...state, items: items, loading: action.loading};
     case BUSY_SEARCHING:
       return {...state, loading: action.loading};
