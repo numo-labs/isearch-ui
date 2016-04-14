@@ -3,7 +3,7 @@ import SearchBar from '../../../lib/search-bar/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
-import LoadingSpinner from 'spinner';
+import LoadingSpinner from '../../../lib/spinner';
 
 class ISearch extends Component {
 
