@@ -10,13 +10,16 @@ import {
   TILES_ADD_TILES,
   SHOW_ADD_MESSAGE,
   HIDE_ADD_MESSAGE,
-  SET_SEARCH_STRING
+  SET_SEARCH_STRING,
+  UPDATE_DISPLAYED_ITEMS
  } from '../constants/actionTypes';
 
 import { mockTiles, mockTags } from './utils/mockData.js';
 import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
+import _ from 'lodash';
 
 const initialState = {
+  displayedItems: [],
   items: [],
   bucketCount: 0,
   status: undefined,
@@ -32,15 +35,20 @@ const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const packages = action.items.map(item => {
-        return {
-          ...item,
-          searchTerm: state.searchString
-          // adding a new key to each package to enable sorting based on filters
-        };
-      });
-      const items = shuffleMockedTilesIntoResultSet(packages, state.tiles);
-      return {...state, items: items, loading: action.loading};
+      const packageItems = shuffleMockedTilesIntoResultSet(packages, state.tiles);
+      const displayedItems = _.uniq(_.union(state.displayedItems, packageItems), (a) => a.offer.reference);
+      const items = _.uniq(_.union(state.items, action.results), (a) => a.offer.reference);
+      return {
+        ...state,
+        displayedItems,
+        items: items,
+        loading: action.loading
+      };
+    case UPDATE_DISPLAYED_ITEMS:
+      return {
+        ...state,
+        displayedItems: action.items
+      };
     case BUSY_SEARCHING:
       return {...state, loading: action.loading};
     case TAG_ADD_TAGS:

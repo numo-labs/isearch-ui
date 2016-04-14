@@ -1,15 +1,18 @@
 export const mockTags = [
   {
     tagName: 'here',
-    colour: '#8EB8C4'
+    colour: '#8EB8C4',
+    id: 'geo:geonames:12345'
   },
   {
     tagName: 'we',
-    colour: '#81C8BE'
+    colour: '#81C8BE',
+    id: 'geo:geonames:12345'
   },
   {
     tagName: 'go',
-    colour: '#DC3767'
+    colour: '#DC3767',
+    id: 'geo:geonames:12345'
   }
 ];
 
