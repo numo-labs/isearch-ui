@@ -77,7 +77,7 @@ export default function search (state = initialState, action) {
       };
     case TAG_REMOVE_TAG:
       const newTags = state.tags.filter(tag => {
-        return tag.tagName !== action.tagName;
+        return tag.displayName !== action.tagName;
       });
       return {
         ...state,
@@ -88,14 +88,14 @@ export default function search (state = initialState, action) {
         ...state,
         filterVisibleState: {
           ...state.filterVisibleState,
-          [action.tagName]: false
+          [action.displayName]: false
         }
       };
     case TILES_ADD_TILES:
       const tileArray = action.tileArray === undefined ? mockTiles : action.tileArray;
       const filterVisibleState = tileArray.reduce((obj, tile) => {
         if (tile.type === 'filter') {
-          obj[tile.bigWord] = true;
+          obj[tile.displayName] = true;
         }
         return obj;
       }, {});

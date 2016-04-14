@@ -154,7 +154,7 @@ function filterMap (array, filterString, mapKey) {
 }
 
 function formatQuery (tags, searchString) {
-  const geoTags = filterMap(tags, 'geo', 'tagName');
+  const geoTags = filterMap(tags, 'geo', 'displayName');
   const amenityTags = filterMap(tags, 'amenity', 'id');
   return {
     geography: geoTags.concat(searchString),

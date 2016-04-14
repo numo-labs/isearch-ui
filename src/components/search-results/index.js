@@ -39,7 +39,7 @@ class SearchResults extends Component {
               return (
                 <div key={index} className='gridItem'>
                   <FilterTile
-                    filterVisible={filterVisibleState[item.bigWord]}
+                    filterVisible={filterVisibleState[item.displayName]}
                     onYesFilter={onYesFilter}
                     onNoFilter={onFilterClick}
                     showAddMessage={showAddMessage}

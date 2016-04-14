@@ -18,27 +18,27 @@ export const mockTiles = [
     type: 'article'
   },
   {
-    part1: 'Are you looking for',
-    bigWord: 'Sport & Adventure',
+    prefix: 'Are you travelling with',
+    displayName: 'Kids',
     type: 'filter',
-    color: '#DC3767'
+    color: '#DC3767',
+    id: 'amenity:childrenpool',
+    filterString: 'childrenpool'
   },
   {
-    part1: 'Are you looking to see the',
-    bigWord: 'Sights',
+    prefix: 'Do you need access to',
+    displayName: 'Wifi',
     type: 'filter',
-    color: '#8EB8C4'
+    color: '#8EB8C4',
+    id: 'amenity:wifi',
+    filterString: 'wifi'
   },
   {
-    part1: 'Are you looking for good',
-    bigWord: 'Food & Drink',
+    prefix: 'Are you looking for',
+    displayName: 'All inclusive',
     type: 'filter',
-    color: '#F39110'
-  },
-  {
-    part1: 'Are you looking for',
-    bigWord: 'Nightlife',
-    type: 'filter',
-    color: '#81C8BE'
+    color: '#F39110',
+    id: 'amenity:allinclusive',
+    filterString: 'allinclusive'
   }
 ];
