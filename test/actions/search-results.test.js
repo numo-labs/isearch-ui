@@ -1,4 +1,4 @@
-import { BUSY_SEARCHING } from '../../src/constants/actionTypes';
+import { BUSY_SEARCHING, SAVE_SEARCH_RESULT_ID } from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/search-results';
 import simple from 'simple-mock';
@@ -41,8 +41,8 @@ describe('actions', function () {
         simple.mock(graphqlService, 'query');
         graphqlService.query.resolveWith(json);
         const expectedActions = [
-          { type: 'BUSY_SEARCHING', loading: true },
-          { type: 'SAVE_SEARCH_RESULT_ID', id: 12345 }
+          { type: BUSY_SEARCHING, loading: true },
+          { type: SAVE_SEARCH_RESULT_ID, id: 12345 }
         ];
         const store = mockStore({search: { searchString: 'h' }});
         store.dispatch(actions.startSearch())
