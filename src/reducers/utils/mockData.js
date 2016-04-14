@@ -1,20 +1,4 @@
-export const mockTags = [
-  {
-    tagName: 'here',
-    colour: '#8EB8C4',
-    id: 'geo:geonames:12345'
-  },
-  {
-    tagName: 'we',
-    colour: '#81C8BE',
-    id: 'geo:geonames:12345'
-  },
-  {
-    tagName: 'go',
-    colour: '#DC3767',
-    id: 'geo:geonames:12345'
-  }
-];
+export const mockTags = [];
 
 const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
 

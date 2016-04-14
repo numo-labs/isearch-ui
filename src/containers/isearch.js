@@ -8,10 +8,10 @@ import * as TileActions from '../actions/tiles';
 const Actions = {...TagActions, ...SearchActions, ...TileActions};
 
 function mapStateToProps (state) {
-  const { search: { items, tags, tiles, filterVisibleState, searchString } } = state;
+  const { search: { displayedItems, tags, tiles, filterVisibleState, searchString } } = state;
   return {
     tags,
-    items,
+    displayedItems,
     tiles,
     filterVisibleState,
     searchString

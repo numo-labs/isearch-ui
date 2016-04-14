@@ -27,7 +27,7 @@ class ISearch extends Component {
   render () {
     const {
       tags,
-      items,
+      displayedItems,
       onYesFilter,
       onFilterClick,
       showAddMessage,
@@ -55,7 +55,7 @@ class ISearch extends Component {
         />
         <Tags tags={tags} removeTag={removeTag} />
         <SearchResults
-          items={items}
+          items={displayedItems}
           onYesFilter={onYesFilter}
           onFilterClick={onFilterClick}
           filterVisibleState={filterVisibleState}
@@ -68,7 +68,7 @@ class ISearch extends Component {
 
 ISearch.propTypes = {
   tags: PropTypes.array,
-  items: PropTypes.array,
+  displayedItems: PropTypes.array,
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
   showAddMessage: PropTypes.func,

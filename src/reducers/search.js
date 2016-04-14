@@ -35,7 +35,7 @@ const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const packageItems = shuffleMockedTilesIntoResultSet(packages, state.tiles);
+      const packageItems = action.initialSearch ? shuffleMockedTilesIntoResultSet(action.items, state.tiles) : action.items;
       const displayedItems = _.uniq(_.union(state.displayedItems, packageItems), (a) => a.offer.reference);
       const items = _.uniq(_.union(state.items, action.results), (a) => a.offer.reference);
       return {
@@ -52,15 +52,14 @@ export default function search (state = initialState, action) {
     case BUSY_SEARCHING:
       return {...state, loading: action.loading};
     case TAG_ADD_TAGS:
-      const tags = action.tags === undefined ? mockTags : action.tags;
       return {
         ...state,
-        tags: tags
+        tags: action.tags === undefined ? mockTags : action.tags
       };
     case TAG_ADD_SINGLE_TAG:
       return {
         ...state,
-        tags: [...state.tags, action.tag]
+        tags: _.uniq([...state.tags, action.tag], 'tagName')
       };
     case TAG_REMOVE_TAG:
       const newTags = state.tags.filter(tag => {
@@ -82,7 +81,7 @@ export default function search (state = initialState, action) {
       const tileArray = action.tileArray === undefined ? mockTiles : action.tileArray;
       const filterVisibleState = tileArray.reduce((obj, tile) => {
         if (tile.type === 'filter') {
-          obj[tile.bigWord] = true;
+          obj[tile.displayName] = true;
         }
         return obj;
       }, {});
