@@ -3,26 +3,27 @@ import SearchBar from '../../../lib/search-bar/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
+import LoadingSpinner from 'spinner';
 
 class ISearch extends Component {
 
   constructor () {
     super();
-    this.fetchQueryResults = this.fetchQueryResults.bind(this);
+    // this.fetchQueryResults = this.fetchQueryResults.bind(this);
   }
 
-  componentWillMount () {
-    this.fetchQueryResults();
-  }
+  // componentWillMount () {
+  //   this.fetchQueryResults();
+  // }
 
   /**
    * For testing and building purposes we pass through a list of fixed tags.
    * TODO: Replace this with the proper solution!
    */
 
-  fetchQueryResults () {
-    this.props.fetchQuerySearchResults(12345, 1, 20);
-  }
+  // fetchQueryResults () {
+  //   this.props.fetchQuerySearchResults(12345, 1, 20, true);
+  // }
 
   render () {
     const {
@@ -35,7 +36,8 @@ class ISearch extends Component {
       removeTag,
       setSearchString,
       searchString,
-      startSearch
+      startSearch,
+      loading
     } = this.props;
 
     return (
@@ -54,13 +56,15 @@ class ISearch extends Component {
           returnDate='Tue 15 jul 2016'
         />
         <Tags tags={tags} removeTag={removeTag} />
-        <SearchResults
-          items={displayedItems}
-          onYesFilter={onYesFilter}
-          onFilterClick={onFilterClick}
-          filterVisibleState={filterVisibleState}
-          showAddMessage={showAddMessage}
-        />
+        { loading ? <LoadingSpinner />
+          : <SearchResults
+              items={displayedItems}
+              onYesFilter={onYesFilter}
+              onFilterClick={onFilterClick}
+              filterVisibleState={filterVisibleState}
+              showAddMessage={showAddMessage}
+            />
+        }
       </section>
     );
   }
@@ -78,7 +82,8 @@ ISearch.propTypes = {
   removeTag: PropTypes.func,
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
-  startSearch: PropTypes.func
+  startSearch: PropTypes.func,
+  loading: PropTypes.bool
 };
 
 export default ISearch;

@@ -35,6 +35,7 @@ class SearchResults extends Component {
                 </div>
               );
             } else if (item.type === 'filter') {
+              console.log('item', item);
               return (
                 <div key={index} className='gridItem'>
                   <FilterTile

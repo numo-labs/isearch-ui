@@ -24,7 +24,7 @@ const initialState = {
   bucketCount: 0,
   status: undefined,
   id: undefined,
-  loading: true,
+  loading: false,
   tags: [],
   filterVisibleState: {},
   tiles: [],
@@ -50,11 +50,24 @@ export default function search (state = initialState, action) {
         displayedItems: action.items
       };
     case BUSY_SEARCHING:
-      return {...state, loading: action.loading};
-    case TAG_ADD_TAGS:
       return {
         ...state,
-        tags: action.tags === undefined ? mockTags : action.tags
+        loading: true
+      };
+    case SEARCH_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      }
+    case TAG_ADD_TAGS:
+      /*
+      * use this action if there are an initial set of tags passed
+      * through when the page is first loaded
+      */
+      return {
+        ...state,
+        tags: action.tags
       };
     case TAG_ADD_SINGLE_TAG:
       return {
@@ -81,7 +94,7 @@ export default function search (state = initialState, action) {
       const tileArray = action.tileArray === undefined ? mockTiles : action.tileArray;
       const filterVisibleState = tileArray.reduce((obj, tile) => {
         if (tile.type === 'filter') {
-          obj[tile.displayName] = true;
+          obj[tile.bigWord] = true;
         }
         return obj;
       }, {});
