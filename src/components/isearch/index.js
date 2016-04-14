@@ -40,18 +40,18 @@ class ISearch extends Component {
 
     return (
       <section>
+        <SearchSummary
+          city='Bodrum'
+          country='Turkey'
+          durationInWeeks={1}
+          paxMix='2 adults, 2 children'
+          departureDate='Sun 13 jul 2016'
+          returnDate='Tue 15 jul 2016'
+        />
         <SearchBar
          onSearchButtonClick={startSearch}
          setSearchString={setSearchString}
          searchString={searchString}
-        />
-        <SearchSummary
-          city='Bodrum'
-          country='Turkey'
-          durationInWeeks={2}
-          paxMix='2 adults, 2 children'
-          departureDate='Sun 13 jul 2016'
-          returnDate='Tue 15 jul 2016'
         />
         <Tags tags={tags} removeTag={removeTag} />
         <SearchResults
