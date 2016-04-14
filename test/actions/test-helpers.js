@@ -2,36 +2,28 @@ import { applyMiddleware } from 'redux';
 
 const isFunction = arg => typeof arg === 'function';
 
-export default function configureStore (middlewares=[]) {
-
-  return function mockStore(getState={}) {
-    function mockStoreWithoutMiddleware() {
+export default function configureStore (middlewares = []) {
+  return function mockStore (getState = {}) {
+    function mockStoreWithoutMiddleware () {
       let actions = [];
-
       const self = {
-        getState() {
+        getState () {
           return isFunction(getState) ? getState() : getState;
         },
-
-        getActions() {
+        getActions () {
           return actions;
         },
-
-        dispatch(action) {
+        dispatch (action) {
           actions.push(action);
-
           return action;
         },
-
-        clearActions() {
+        clearActions () {
           actions = [];
         },
-
-        subscribe() {
+        subscribe () {
           return null;
         }
       };
-
       return self;
     }
 
@@ -41,5 +33,4 @@ export default function configureStore (middlewares=[]) {
 
     return mockStoreWithMiddleware();
   };
-
 }

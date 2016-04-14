@@ -11,10 +11,11 @@ import {
   SHOW_ADD_MESSAGE,
   HIDE_ADD_MESSAGE,
   SET_SEARCH_STRING,
-  UPDATE_DISPLAYED_ITEMS
+  UPDATE_DISPLAYED_ITEMS,
+  SEARCH_ERROR
  } from '../constants/actionTypes';
 
-import { mockTiles, mockTags } from './utils/mockData.js';
+import { mockTiles } from './utils/mockData.js';
 import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
 import _ from 'lodash';
 
@@ -59,7 +60,7 @@ export default function search (state = initialState, action) {
         ...state,
         loading: false,
         error: action.error
-      }
+      };
     case TAG_ADD_TAGS:
       /*
       * use this action if there are an initial set of tags passed
