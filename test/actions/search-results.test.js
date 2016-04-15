@@ -8,6 +8,7 @@ import configureMockStore from './test-helpers';
 import thunk from 'redux-thunk';
 
 const mockStore = configureMockStore([thunk]);
+const initialState = {search: { searchString: 'h', tags: [], displayedItems: [] }};
 
 describe('actions', function () {
   afterEach(function (done) {
@@ -17,10 +18,11 @@ describe('actions', function () {
   describe('search results', function () {
     describe('startSearch', function () {
       it('should dispatch an action to set loading to true', function (done) {
-        // GIVEN
-        const expectedActions = [ { type: 'BUSY_SEARCHING', loading: true } ];
+        // consts
+        const expectedActions = [ { type: BUSY_SEARCHING } ];
+        const store = mockStore(initialState);
+
         simple.mock(graphqlService, 'query');
-        const store = mockStore({search: { searchString: 'h' }});
         store.dispatch(actions.startSearch())
           .then(() => {
             expect(store.getActions()).to.deep.equal(expectedActions);
@@ -44,7 +46,7 @@ describe('actions', function () {
           { type: BUSY_SEARCHING, loading: true },
           { type: SAVE_SEARCH_RESULT_ID, id: 12345 }
         ];
-        const store = mockStore({search: { searchString: 'h' }});
+        const store = mockStore(initialState);
         store.dispatch(actions.startSearch())
           .then(() => {
             expect(store.getActions()).to.deep.equal(expectedActions);

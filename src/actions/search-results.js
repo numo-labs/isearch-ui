@@ -28,7 +28,6 @@ import { addTiles } from './tiles.js';
 */
 
 export function fetchQuerySearchResults (id, page, size, attempt) {
-  console.log('attempt', attempt);
   return (dispatch, getState) => {
     const { search: { displayedItems } } = getState();
     const initialSearch = displayedItems.length === 0;
@@ -183,7 +182,6 @@ export function startSearch () {
         dispatch(busySearching());
       }
       const query = formatQuery(tags);
-      console.log('query', query);
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
         .then(json => {

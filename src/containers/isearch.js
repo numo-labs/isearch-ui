@@ -16,7 +16,7 @@ function mapStateToProps (state) {
       filterVisibleState,
       searchString,
       loading,
-      error,
+      error
     }
   } = state;
   return {

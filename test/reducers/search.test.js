@@ -1,7 +1,7 @@
 import {
   RECEIVE_SEARCH_RESULT,
   BUSY_SEARCHING,
-  TAG_ADD_TAGS,
+  // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
   UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
@@ -13,16 +13,18 @@ import {
 
 import { expect } from 'chai';
 import reducer, { initialState } from '../../src/reducers/search';
-import mockResults, { items as mockItems } from '../../src/utils/mock-search-results.json';
+import mockResults from '../../src/utils/mock-search-results.json';
 import { mockTiles } from '../../src/reducers/utils/mockData.js';
 import { shuffleMockedTilesIntoResultSet } from '../../src/reducers/utils/helpers.js';
 
-const initialStateWithTiles= {
+const mockItems = mockResults.items;
+
+const initialStateWithTiles = {
   ...initialState,
-  tiles: mockTiles,
+  tiles: mockTiles
 };
 
-describe.only('reducers', function () {
+describe('reducers', function () {
   it('should return the initial state', function (done) {
     const state = reducer(undefined, {});
     expect(state).to.deep.equal(initialState);
@@ -77,7 +79,7 @@ describe.only('reducers', function () {
     const state = reducer(initialStateWithTiles, action);
     const expectedState = {
       ...initialStateWithTiles,
-      displayedItems: shuffledItems,
+      displayedItems: shuffledItems
     };
     expect(state).to.deep.equal(expectedState);
     done();
@@ -107,7 +109,7 @@ describe.only('reducers', function () {
     const initialStateWithTags = {
       ...initialState,
       tags: [{ displayName: 'hello' }]
-    }
+    };
     const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'world'}};
     const state = reducer(initialStateWithTags, action);
     const expectedState = {
@@ -121,7 +123,7 @@ describe.only('reducers', function () {
     const initialStateWithTags = {
       ...initialState,
       tags: [{ displayName: 'hello' }]
-    }
+    };
     const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'hello'}};
     const state = reducer(initialStateWithTags, action);
     const expectedState = {
@@ -135,7 +137,7 @@ describe.only('reducers', function () {
     const initialStateWithTags = {
       ...initialState,
       tags: [{ displayName: 'hello' }]
-    }
+    };
     const action = {type: TAG_REMOVE_TAG, displayName: 'hello'};
     const state = reducer(initialStateWithTags, action);
     const expectedState = {
