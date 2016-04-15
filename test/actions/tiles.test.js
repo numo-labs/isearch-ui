@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-import { TILES_ADD_TILES, TAG_ADD_SINGLE_TAG } from '../../src/constants/actionTypes';
-=======
 import { TILES_ADD_TILES, TAG_ADD_SINGLE_TAG, FILTER_ON_CLICK } from '../../src/constants/actionTypes';
->>>>>>> master
 import { expect } from 'chai';
 import * as actions from '../../src/actions/tiles';
-import simple from 'simple-mock';
-import configureMockStore from './test-helpers';
-import thunk from 'redux-thunk';
-
-const mockStore = configureMockStore([thunk]);
 
 describe('actions', function () {
   describe('tiles', function () {
