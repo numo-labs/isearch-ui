@@ -1,4 +1,4 @@
-import { BUSY_SEARCHING } from '../../src/constants/actionTypes';
+import { BUSY_SEARCHING, RECEIVE_SEARCH_RESULT } from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/search-results';
 import simple from 'simple-mock';
@@ -87,6 +87,18 @@ describe('actions', function () {
         graphqlService.query.lastCall.returned.then(json => {
           expect(dispatch.lastCall.arg.name).to.equal('receiveSearchResult');
         });
+        done();
+      });
+    });
+    describe('receiveSearchResult', function () {
+      it('should dispatch and action that returns search results and sets loading to false', function (done) {
+        const items = ['a', 'b', 'c'];
+        const expectedAction = {
+          type: RECEIVE_SEARCH_RESULT,
+          items: items,
+          loading: false
+        };
+        expect(actions.receiveSearchResult(items)).to.deep.equal(expectedAction);
         done();
       });
     });
