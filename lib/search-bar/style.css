@@ -13,7 +13,7 @@
   src: url('../../fonts/SourceSansPro-Light.otf');
 }
 
-.searchBarContainer {
+.searchBarContaine {
   text-align: center;
   padding: 1em;
   padding-bottom: 1.5em;
@@ -30,8 +30,27 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3f0fa', endColorstr='#3894ad', GradientType=1 );
 }
 
+.searchBarContainer {
+  text-align: center;
+  padding: 1em;
+  padding-bottom: 1.5em;
+  font-family: SourceSansSemiBold;
+  position: relative;
+  height: 17em;
+  display: inline-block;
+}
+
+.searchBarWrapper {
+  background-image: url('https://cloud.githubusercontent.com/assets/12450298/14560385/62833d9a-0307-11e6-8a23-a0d1793d4e72.jpg');
+  background-size: 100%;
+  text-align: center;
+}
+
 .searchContent {
-  display: block;
+  display: inline-block;
+  margin-top: 8em;
+  position: relative;
+  text-align: center;
 }
 
 .inputBar {
@@ -90,6 +109,9 @@
 .inspiration {
   color: #ffffff;
   font-size: 1.3em;
+  position: absolute;
+  left: 3em;
+  bottom: 2.7em;
 }
 
 .logo {
