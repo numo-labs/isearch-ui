@@ -7,10 +7,10 @@ import LoadingSpinner from '../../../lib/spinner';
 
 class ISearch extends Component {
 
-  constructor () {
-    super();
+  // constructor () {
+    // super();
     // this.fetchQueryResults = this.fetchQueryResults.bind(this);
-  }
+  // }
 
   // componentWillMount () {
   //   this.fetchQueryResults();
@@ -25,26 +25,47 @@ class ISearch extends Component {
   //   this.props.fetchQuerySearchResults(12345, 1, 20, true);
   // }
 
-  render () {
+  renderResults () {
     const {
-      tags,
       displayedItems,
       onYesFilter,
       onFilterClick,
       showAddMessage,
       filterVisibleState,
+      loading,
+      error
+    } = this.props;
+
+    if (loading) {
+      return <LoadingSpinner />;
+    } else if (error) {
+      return <div className='errorMessage'>{error}</div>;
+    } else {
+      return <SearchResults
+        items={displayedItems}
+        onYesFilter={onYesFilter}
+        onFilterClick={onFilterClick}
+        filterVisibleState={filterVisibleState}
+        showAddMessage={showAddMessage}
+        error={error}
+      />;
+    }
+  }
+
+  render () {
+    const {
+      tags,
       removeTag,
       setSearchString,
       searchString,
       startSearch,
-      addSearchStringTag,
-      loading
+      addSearchStringTag
     } = this.props;
 
     return (
       <section>
         <SearchBar
-         onSearchButtonClick={() => { addSearchStringTag(); startSearch() }}
+         onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
          setSearchString={setSearchString}
          searchString={searchString}
         />
@@ -57,15 +78,7 @@ class ISearch extends Component {
           returnDate='Tue 15 jul 2016'
         />
         <Tags tags={tags} removeTag={removeTag} />
-        { loading ? <LoadingSpinner />
-          : <SearchResults
-              items={displayedItems}
-              onYesFilter={onYesFilter}
-              onFilterClick={onFilterClick}
-              filterVisibleState={filterVisibleState}
-              showAddMessage={showAddMessage}
-            />
-        }
+        { this.renderResults() }
       </section>
     );
   }
@@ -85,7 +98,8 @@ ISearch.propTypes = {
   searchString: PropTypes.string,
   startSearch: PropTypes.func,
   addSearchStringTag: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  error: PropTypes.string
 };
 
 export default ISearch;

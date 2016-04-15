@@ -15,7 +15,8 @@ function mapStateToProps (state) {
       tiles,
       filterVisibleState,
       searchString,
-      loading
+      loading,
+      error,
     }
   } = state;
   return {
@@ -24,7 +25,8 @@ function mapStateToProps (state) {
     tiles,
     filterVisibleState,
     searchString,
-    loading
+    loading,
+    error
   };
 }
 

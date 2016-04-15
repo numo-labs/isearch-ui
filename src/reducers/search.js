@@ -30,13 +30,14 @@ export const initialState = {
   filterVisibleState: {},
   tiles: [],
   addMessageVisible: false,
-  searchString: ''
+  searchString: '',
+  error: ''
 };
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      console.log('ITEMS', state.items, action.items);
+      console.log('tiles', state.tiles)
       const packageItems = action.initialSearch ? shuffleMockedTilesIntoResultSet(action.items, state.tiles) : action.items;
       const displayedItems = _.uniq(_.union(state.displayedItems, packageItems), (a) => a.offer.reference);
       const items = _.uniq(_.union(state.items, action.items), (a) => a.offer.reference);
@@ -44,12 +45,14 @@ export default function search (state = initialState, action) {
         ...state,
         displayedItems,
         items,
-        loading: false
+        loading: false,
+        error: ''
       };
     case UPDATE_DISPLAYED_ITEMS:
+      const updatedTiles = shuffleMockedTilesIntoResultSet(action.items, state.tiles); // add the remaining tiles back in!
       return {
         ...state,
-        displayedItems: action.items
+        displayedItems: updatedTiles
       };
     case BUSY_SEARCHING:
       return {
@@ -72,6 +75,7 @@ export default function search (state = initialState, action) {
         tags: action.tags
       };
     case TAG_ADD_SINGLE_TAG:
+      console.log('tags', _.uniq([...state.tags, action.tag], 'displayName'));
       return {
         ...state,
         tags: _.uniq([...state.tags, action.tag], 'displayName')
@@ -90,7 +94,8 @@ export default function search (state = initialState, action) {
         filterVisibleState: {
           ...state.filterVisibleState,
           [action.displayName]: false
-        }
+        },
+        tiles: state.tiles.filter(tile => tile.displayName !== action.displayName)
       };
     case TILES_ADD_TILES:
       const tileArray = action.tileArray === undefined ? mockTiles : action.tileArray;
@@ -121,101 +126,3 @@ export default function search (state = initialState, action) {
       return state;
   }
 }
-
-/* the items array consists of package offer items and tile items
-
-package offer item object will have the following shape:
-
-         {
-          id,
-          type,
-          ranking,
-          packageOffer {
-            hotel {
-              id,
-              name,
-              images {
-                type,
-                displaySequence,
-                uri,
-                primary
-              }
-              starRating,
-              place {
-                name,
-                country,
-                region
-              }
-            },
-            flights {
-              outbound {
-                number,
-                departure {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                arrival {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                carrier {
-                  code
-                }
-              },
-              inbound {
-                number,
-                departure {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                arrival {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                carrier {
-                  code
-                }
-              }
-            },
-            price {
-              total,
-              perPerson,
-              currency
-            },
-            provider {
-              id,
-              reference,
-              context,
-              deepLink
-            },
-            nights
-          }
-        }
-
-tile item object will take the following form:
-         {
-          id,
-          type,
-          ranking,
-          tile {
-            title,
-            doc
-          }
-        }
-*/

@@ -1,16 +1,13 @@
-export function shuffleMockedTilesIntoResultSet (items, tiles) {
-  if (items.length) {
-    return addTilesToSearchResult(items, 2, Math.floor((items.length + tiles.length) / tiles.length), 0, tiles);
-  } else {
-    return items;
-  }
-}
+Array.prototype.insert = function (index, element) {
+  var copy = [...this];
+  Array.prototype.splice.apply(copy, [index, 0, element]);
+  return copy;
+};
 
-function addTilesToSearchResult (items, position, index, count, tiles) {
-  items.splice(position, 0, tiles[count]);
-  if (count === tiles.length - 1) {
-    return items;
-  } else {
-    return addTilesToSearchResult(items, position + index, index, ++count, tiles);
-  }
+export function shuffleMockedTilesIntoResultSet (items, tiles) {
+  var spacing = Math.floor((items.length + tiles.length) / tiles.length);
+  return tiles.reduce((result, tile, index) => {
+    var position = index * spacing;
+    return result.insert(position, tile);
+  }, items);
 }

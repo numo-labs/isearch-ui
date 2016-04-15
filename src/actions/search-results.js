@@ -28,6 +28,7 @@ import { addTiles } from './tiles.js';
 */
 
 export function fetchQuerySearchResults (id, page, size, attempt) {
+  console.log('attempt', attempt);
   return (dispatch, getState) => {
     const { search: { displayedItems } } = getState();
     const initialSearch = displayedItems.length === 0;
@@ -35,9 +36,8 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
       .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
       .then(json => {
         const items = json.data.viewer.searchResult.items;
-        console.log('ITEMS', json);
-        if (attempt > 10) {
-          return dispatch(searchError('No results found'));  // stop polling after 10 attempts
+        if (attempt > 9) {
+          return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts
         } else if ((!items || !items.length) && attempt < 10) {
           setTimeout(function () {
             console.log('Retrying', attempt);
@@ -72,7 +72,6 @@ export function receiveSearchResult (items, initialSearch) {
   return {
     type: RECEIVE_SEARCH_RESULT,
     items,
-    loading: false,
     initialSearch
   };
 }
@@ -132,15 +131,13 @@ export function updateDisplayedItems (results) {
 export function filterResults () {
   return (dispatch, getState) => {
     const { search: { tags, items } } = getState();
-    console.log('filtering existing items', items.length > 0);
     if (items.length > 0) {
       // const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
       const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
       const results = items.filter(item => {
-        console.log('item', item);
         return (
           // geoTags.some(tag => item.packageOffer.hotel.place.country === tag.displayName) && // e.g. either spain or greece
-          amenityTags.every(tag => item.packageOffer.amenities[tag.filterString]) // and with wifi and kids friendly
+          amenityTags.every(tag => item.packageOffer.amenities[tag.id.split(':')[1]]) // and with wifi and kids friendly
         );
       });
       dispatch(updateDisplayedItems(results));

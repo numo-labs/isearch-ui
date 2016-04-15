@@ -8,8 +8,8 @@ import { filterResults } from './search-results.js';
 
 export const onYesFilter = (displayName, id) => (dispatch) => {
   dispatch(addSingleTag(displayName, id));
-  dispatch(filterResults());
-  return dispatch(onFilterClick(displayName));
+  dispatch(onFilterClick(displayName));
+  return dispatch(filterResults());
 };
 
 /**
