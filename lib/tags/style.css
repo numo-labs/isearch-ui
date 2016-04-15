@@ -53,10 +53,17 @@
   text-align: center;
   padding-top: 0.3em;
   padding-bottom: 0.5em;
+  display: inline-block;
+  width: 25em;
 }
 
 .tagName {
   color: #ffffff;
   font-family: 'Source sans pro', sans-serif;
   display: inline;
+}
+
+.tagWrapper {
+  text-align: center;
+  margin: 0 auto;
 }
