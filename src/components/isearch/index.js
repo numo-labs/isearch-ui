@@ -49,11 +49,15 @@ class ISearch extends Component {
           returnDate='Tue 15 jul 2016'
         />
         <SearchBar
-         onSearchButtonClick={startSearch}
          setSearchString={setSearchString}
          searchString={searchString}
         />
-        <Tags tags={tags} removeTag={removeTag} />
+        <Tags
+          tags={tags}
+          removeTag={removeTag}
+          onSearchButtonClick={startSearch}
+          setSearchString={setSearchString}
+        />
         <SearchResults
           items={items}
           onYesFilter={onYesFilter}
