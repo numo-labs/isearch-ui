@@ -1,4 +1,10 @@
-import { BUSY_SEARCHING, SAVE_SEARCH_RESULT_ID } from '../../src/constants/actionTypes';
+import {
+  BUSY_SEARCHING,
+  SAVE_SEARCH_RESULT_ID,
+  RECEIVE_SEARCH_RESULT,
+  TILES_ADD_TILES,
+  SEARCH_ERROR
+} from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/search-results';
 import simple from 'simple-mock';
@@ -18,7 +24,6 @@ describe('actions', function () {
   describe('search results', function () {
     describe('startSearch', function () {
       it('should dispatch an action to set loading to true', function (done) {
-        // consts
         const expectedActions = [ { type: BUSY_SEARCHING } ];
         const store = mockStore(initialState);
 
@@ -26,8 +31,8 @@ describe('actions', function () {
         store.dispatch(actions.startSearch())
           .then(() => {
             expect(store.getActions()).to.deep.equal(expectedActions);
+            done();
           })
-          .then(done());
       });
       it('should dispatch an action fetchQuerySearchResults when graphql returns a json object', function (done) {
         // GIVEN
@@ -50,46 +55,76 @@ describe('actions', function () {
         store.dispatch(actions.startSearch())
           .then(() => {
             expect(store.getActions()).to.deep.equal(expectedActions);
+            done();
           })
-          .then(done());
       });
     });
     describe('fetchQuerySearchResults', function () {
-      it('should dispatch an action fetchQuerySearchResults if no items have been returned from the graphql query', function (done) {
-        // GIVEN
-        const dispatch = simple.mock();
-        const json = {
-          data: {
-            viewer: {
-              searchResult: {
-                items: []
-              }
+      const json = {
+        data: {
+          viewer: {
+            searchResult: {
+              items: [{}]
             }
           }
-        };
-        simple.mock(graphqlService, 'query');
-        graphqlService.query.resolveWith(json);
-        // WHEN
-        actions.fetchQuerySearchResults()(dispatch);
-        // THEN
-        graphqlService.query.lastCall.returned.then(json => {
-          expect(dispatch.lastCall.arg.name).to.equal('fetchQuerySearchResults');
-        });
-        done();
-      });
-      it('should dispatch an action receiveSearchResult if items have been returned from the graphql query', function (done) {
-        // GIVEN
+        }
+      };
+      it('no displayedItems -> should call the addTiles and receiveSearchResult actions with the items', function (done) {
         const dispatch = simple.mock();
-        const json = mockResults;
-        simple.mock(graphqlService, 'query');
-        graphqlService.query.resolveWith(json);
-        // WHEN
-        actions.fetchQuerySearchResults()(dispatch);
-        // THEN
-        graphqlService.query.lastCall.returned.then(json => {
-          expect(dispatch.lastCall.arg.name).to.equal('receiveSearchResult');
-        });
-        done();
+        const expectedActions = [
+          { type: 'TILES_ADD_TILES', tileArray: undefined },
+          {
+            type: 'RECEIVE_SEARCH_RESULT',
+            items: [{}],
+            initialSearch: true
+          }
+        ];
+        var stub = simple.mock(graphqlService, 'query').resolveWith(json);
+        const store = mockStore(initialState);
+        store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 0))
+          .then(() => {
+            expect(store.getActions()).to.deep.equal(expectedActions);
+            expect(stub.callCount).to.equal(1);
+            done();
+          })
+          .catch(done)
+      });
+      it('existing displayedItems -> should call only the receiveSearchResult action with the items', function (done) {
+        const dispatch = simple.mock();
+        const expectedActions = [
+          {
+            type: RECEIVE_SEARCH_RESULT,
+            items: [{}],
+            initialSearch: false
+          }
+        ];
+        var stub = simple.mock(graphqlService, 'query').resolveWith(json);
+        const store = mockStore({...initialState, search: {...initialState.search, displayedItems: [{}]}});
+        store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 0))
+          .then(() => {
+            console.log('actions', store.getActions());
+            expect(store.getActions()).to.deep.equal(expectedActions);
+            expect(stub.callCount).to.equal(1);
+            done();
+          })
+          .catch(done)
+      });
+      it.only('attempt > 9 -> should dispatch a search error', function (done) {
+        simple.mock(graphqlService, 'query').resolveWith(json);
+        const expectedActions = [
+          {
+            type: SEARCH_ERROR,
+            error: 'Something went wrong and no results were found'
+          }
+        ];
+        const store = mockStore(initialState);
+        store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 10))
+          .then(() => {
+            console.log('actions', store.getActions());
+            expect(store.getActions()).to.deep.equal(expectedActions);
+            done();
+          })
+          .catch(done)
       });
     });
   });
