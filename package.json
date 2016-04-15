@@ -14,7 +14,7 @@
     "lib:test": "mocha ./lib/**/*.test.js --compilers js:babel-register",
     "src:test": "mocha ./test/**/*.test.js --compilers js:babel-register",
     "nocov": "mocha ./lib/**/*.test.js --compilers js:babel-register",
-    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js --report lcov -- -R spec",
+    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js ./lib/**/*.test.js --report lcov -- -R spec",
     "clean": "rm -rf public && mkdir -p public/",
     "build": "npm run clean && ./node_modules/.bin/webpack --config ./webpack.production.config.js",
     "deploy": "gulp deploy"
