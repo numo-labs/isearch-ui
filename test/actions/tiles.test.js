@@ -1,4 +1,4 @@
-import { TILES_ADD_TILES } from '../../src/constants/actionTypes';
+import { TILES_ADD_TILES, TAG_ADD_SINGLE_TAG } from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/tiles';
 
@@ -10,8 +10,19 @@ describe('actions', function () {
         type: TILES_ADD_TILES,
         tileArray: tileArray
       };
-
       expect(actions.addTiles(tileArray)).to.deep.equal(expectedAction);
+      done();
+    });
+    it('should create an action to add a single tag', function (done) {
+      const tagName = 'test';
+      const expectedAction = {
+        type: TAG_ADD_SINGLE_TAG,
+        tag: {
+          tagName: tagName,
+          colour: '#8EB8C4'
+        }
+      };
+      expect(actions.addSingleTag(tagName)).to.deep.equal(expectedAction);
       done();
     });
   });
