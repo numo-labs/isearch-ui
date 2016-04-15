@@ -69,7 +69,7 @@ export function startSearch () {
     return graphqlService.query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
     .then(json => {
       const searchResultId = json.data.viewer.searchResultId.id;
-      dispatch(saveSearchResultId(searchResultId))
+      dispatch(saveSearchResultId(searchResultId));
       dispatch(fetchQuerySearchResults(searchResultId, 1, 20));
     });
   };
