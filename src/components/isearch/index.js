@@ -37,13 +37,14 @@ class ISearch extends Component {
       setSearchString,
       searchString,
       startSearch,
+      addSearchStringTag,
       loading
     } = this.props;
 
     return (
       <section>
         <SearchBar
-         onSearchButtonClick={startSearch}
+         onSearchButtonClick={() => { addSearchStringTag(); startSearch() }}
          setSearchString={setSearchString}
          searchString={searchString}
         />
@@ -83,6 +84,7 @@ ISearch.propTypes = {
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
   startSearch: PropTypes.func,
+  addSearchStringTag: PropTypes.func,
   loading: PropTypes.bool
 };
 

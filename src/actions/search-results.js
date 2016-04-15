@@ -15,7 +15,6 @@ import {
 // actions
 import * as graphqlService from '../services/graphql';
 import { addTiles } from './tiles.js';
-import { addSingleTag } from './tiles.js';
 
 /**
 * Gets the id of the searchBucket and initiates a graphql query to retrieve
@@ -36,6 +35,7 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
       .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
       .then(json => {
         const items = json.data.viewer.searchResult.items;
+        console.log('ITEMS', json);
         if (attempt > 10) {
           return dispatch(searchError('No results found'));  // stop polling after 10 attempts
         } else if ((!items || !items.length) && attempt < 10) {
@@ -132,13 +132,15 @@ export function updateDisplayedItems (results) {
 export function filterResults () {
   return (dispatch, getState) => {
     const { search: { tags, items } } = getState();
+    console.log('filtering existing items', items.length > 0);
     if (items.length > 0) {
-      const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
+      // const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
       const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
       const results = items.filter(item => {
+        console.log('item', item);
         return (
-          geoTags.some(tag => item.hotel.place.country === tag.displayName) && // e.g. either spain or greece
-          amenityTags.every(tag => item.amenities[tag.filterString]) // and with wifi and kids friendly
+          // geoTags.some(tag => item.packageOffer.hotel.place.country === tag.displayName) && // e.g. either spain or greece
+          amenityTags.every(tag => item.packageOffer.amenities[tag.filterString]) // and with wifi and kids friendly
         );
       });
       dispatch(updateDisplayedItems(results));
@@ -153,11 +155,11 @@ function filterMap (array, filterString, mapKey) {
     .map(tag => tag[mapKey]);
 }
 
-function formatQuery (tags, searchString) {
+function formatQuery (tags) {
   const geoTags = filterMap(tags, 'geo', 'displayName');
   const amenityTags = filterMap(tags, 'amenity', 'id');
   return {
-    geography: geoTags.concat(searchString),
+    geography: geoTags,
     amenity: amenityTags,
     passengers: [{birthday: '1986-07-14'}]
   };
@@ -169,7 +171,6 @@ function formatQuery (tags, searchString) {
 *    dispatching an action
 * 2. check if this is the first search - if it is, then call the busySearching
 *    action to show the loading spinner
-* 3. add the search string as a new tag
 * 4. format the query based on the tags
 * 5. launch a graphql mutation to return a searchBucketId
 */
@@ -177,15 +178,15 @@ function formatQuery (tags, searchString) {
 export function startSearch () {
   return (dispatch, getState) => {
     const { search: { searchString, tags, displayedItems } } = getState();
-    const tagExists = tags.filter(tag => tags.tagName === searchString).length > 0;
+    const tagExists = tags.filter(tag => tags.displayName === searchString).length > 0;
     if (tagExists) {
       return;
     } else {
       if (displayedItems.length === 0) {
         dispatch(busySearching());
       }
-      dispatch(addSingleTag(searchString, 'geo'));
-      const query = formatQuery(tags, searchString);
+      const query = formatQuery(tags);
+      console.log('query', query);
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
         .then(json => {

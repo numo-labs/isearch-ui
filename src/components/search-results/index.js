@@ -35,7 +35,7 @@ class SearchResults extends Component {
                 </div>
               );
             } else if (item.type === 'filter') {
-              console.log('item', item);
+              console.log('itemVisible', filterVisibleState[item.displayName]);
               return (
                 <div key={index} className='gridItem'>
                   <FilterTile
@@ -43,7 +43,8 @@ class SearchResults extends Component {
                     onYesFilter={onYesFilter}
                     onNoFilter={onFilterClick}
                     showAddMessage={showAddMessage}
-                    description={item} color={item.color}
+                    description={item}
+                    color={item.color}
                   />
                 </div>
               );

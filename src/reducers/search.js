@@ -19,7 +19,7 @@ import { mockTiles } from './utils/mockData.js';
 import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
 import _ from 'lodash';
 
-const initialState = {
+export const initialState = {
   displayedItems: [],
   items: [],
   bucketCount: 0,
@@ -36,14 +36,15 @@ const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
+      console.log('ITEMS', state.items, action.items);
       const packageItems = action.initialSearch ? shuffleMockedTilesIntoResultSet(action.items, state.tiles) : action.items;
       const displayedItems = _.uniq(_.union(state.displayedItems, packageItems), (a) => a.offer.reference);
-      const items = _.uniq(_.union(state.items, action.results), (a) => a.offer.reference);
+      const items = _.uniq(_.union(state.items, action.items), (a) => a.offer.reference);
       return {
         ...state,
         displayedItems,
-        items: items,
-        loading: action.loading
+        items,
+        loading: false
       };
     case UPDATE_DISPLAYED_ITEMS:
       return {
@@ -73,11 +74,11 @@ export default function search (state = initialState, action) {
     case TAG_ADD_SINGLE_TAG:
       return {
         ...state,
-        tags: _.uniq([...state.tags, action.tag], 'tagName')
+        tags: _.uniq([...state.tags, action.tag], 'displayName')
       };
     case TAG_REMOVE_TAG:
       const newTags = state.tags.filter(tag => {
-        return tag.displayName !== action.tagName;
+        return tag.displayName !== action.displayName;
       });
       return {
         ...state,

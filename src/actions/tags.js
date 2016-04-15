@@ -7,9 +7,9 @@ export function addTags (tags) {
   };
 }
 
-export function removeTag (tagName) {
+export function removeTag (displayName) {
   return {
     type: TAG_REMOVE_TAG,
-    tagName: tagName
+    displayName
   };
 }

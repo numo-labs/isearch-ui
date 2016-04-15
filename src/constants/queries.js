@@ -90,7 +90,24 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
               context,
               deepLink
             },
-            nights
+            nights,
+            amenities {
+            	outdoorpool,
+              distancetobeach,
+              distancetocenter,
+              bar,
+              childrenpool,
+              elevator,
+              poolbar,
+              restaurant,
+              minimarket,
+              cleaningdaysperweek,
+              wifi,
+              waterslide,
+              lolloandbernie,
+              isadulthotel,
+              allinclusive,
+            }
           }
         },
         ...on tileItem {
