@@ -24,7 +24,6 @@ export const initialState = {
   items: [],
   bucketCount: 0,
   status: undefined,
-  id: undefined,
   loading: false,
   tags: [],
   filterVisibleState: {},
@@ -37,7 +36,6 @@ export const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      console.log('tiles', state.tiles)
       const packageItems = action.initialSearch ? shuffleMockedTilesIntoResultSet(action.items, state.tiles) : action.items;
       const displayedItems = _.uniq(_.union(state.displayedItems, packageItems), (a) => a.offer.reference);
       const items = _.uniq(_.union(state.items, action.items), (a) => a.offer.reference);
@@ -75,10 +73,9 @@ export default function search (state = initialState, action) {
         tags: action.tags
       };
     case TAG_ADD_SINGLE_TAG:
-      console.log('tags', _.uniq([...state.tags, action.tag], 'displayName'));
       return {
         ...state,
-        tags: _.uniq([...state.tags, action.tag], 'displayName')
+        tags: _.uniqBy([...state.tags, action.tag], 'displayName')
       };
     case TAG_REMOVE_TAG:
       const newTags = state.tags.filter(tag => {
@@ -110,16 +107,16 @@ export default function search (state = initialState, action) {
         filterVisibleState,
         tiles: tileArray
       };
-    case SHOW_ADD_MESSAGE:
-      return ({
-        ...state,
-        addMessageVisible: true
-      });
-    case HIDE_ADD_MESSAGE:
-      return ({
-        ...state,
-        addMessageVisible: false
-      });
+    // case SHOW_ADD_MESSAGE:
+    //   return ({
+    //     ...state,
+    //     addMessageVisible: true
+    //   });
+    // case HIDE_ADD_MESSAGE:
+    //   return ({
+    //     ...state,
+    //     addMessageVisible: false
+    //   });
     case SET_SEARCH_STRING:
       return {...state, searchString: action.searchString};
     default:

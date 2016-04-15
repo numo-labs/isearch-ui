@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import SearchResults from '../../src/components/search-results';
-import mockTiles from '../../src/utils/mock-search-results';
+import mockTiles, { items } from '../../src/utils/mock-search-results';
 
 describe('Component', function () {
-  const wrapper = shallow(<SearchResults items={mockTiles}/>);
+  const wrapper = shallow(<SearchResults items={items}/>);
   const children = wrapper.children().nodes;
   describe('<SearchResults />', function () {
     it('should render our SearchResults component', function (done) {
