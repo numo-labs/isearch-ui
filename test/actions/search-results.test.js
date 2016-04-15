@@ -1,4 +1,4 @@
-import { BUSY_SEARCHING } from '../../src/constants/actionTypes';
+import { BUSY_SEARCHING, RECEIVE_SEARCH_RESULT, SET_SEARCH_STRING } from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/search-results';
 import simple from 'simple-mock';
@@ -87,6 +87,55 @@ describe('actions', function () {
         graphqlService.query.lastCall.returned.then(json => {
           expect(dispatch.lastCall.arg.name).to.equal('receiveSearchResult');
         });
+        done();
+      });
+      it('should dispatch an action addTags if items have been returned from the graphql query', function (done) {
+        const dispatch = simple.mock();
+        const json = mockResults;
+        simple.mock(graphqlService, 'query');
+        graphqlService.query.resolveWith(json);
+        // WHEN
+        actions.fetchQuerySearchResults()(dispatch);
+        // THEN
+        graphqlService.query.lastCall.returned.then(json => {
+          expect(dispatch.lastCall.arg.name).to.equal('addTags');
+        });
+        done();
+      });
+      it('should dispatch an action addTiles if items have been returned from the graphql query', function (done) {
+        const dispatch = simple.mock();
+        const json = mockResults;
+        simple.mock(graphqlService, 'query');
+        graphqlService.query.resolveWith(json);
+        // WHEN
+        actions.fetchQuerySearchResults()(dispatch);
+        // THEN
+        graphqlService.query.lastCall.returned.then(json => {
+          expect(dispatch.lastCall.arg.name).to.equal('addTiles');
+        });
+        done();
+      });
+    });
+    describe('receiveSearchResult', function () {
+      it('should dispatch and action that returns search results and sets loading to false', function (done) {
+        const items = ['a', 'b', 'c'];
+        const expectedAction = {
+          type: RECEIVE_SEARCH_RESULT,
+          items: items,
+          loading: false
+        };
+        expect(actions.receiveSearchResult(items)).to.deep.equal(expectedAction);
+        done();
+      });
+    });
+    describe('setSearchString', function () {
+      it('should dispatch an action that will set the searchstring', function (done) {
+        const searchString = 'spain';
+        const expectedAction = {
+          type: SET_SEARCH_STRING,
+          searchString: searchString
+        };
+        expect(actions.setSearchString(searchString)).to.deep.equal(expectedAction);
         done();
       });
     });

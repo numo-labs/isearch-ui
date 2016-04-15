@@ -27,15 +27,15 @@ describe('containers', function () {
       expect(children).to.have.length(4);
       done();
     });
-    it('should render our <SearchBar /> as the first child', function (done) {
+    it('should render our <SearchSummary /> as the first child', function (done) {
       const firstChild = children[0].type;
-      const searchBar = wrapper.find('SearchBar').node.type;
+      const searchBar = wrapper.find('SearchSummary').node.type;
       expect(firstChild).to.deep.equal(searchBar);
       done();
     });
-    it('should render our <SearchSummary /> as the second child', function (done) {
+    it('should render our <SearchBar /> as the second child', function (done) {
       const secondChild = children[1].type;
-      const searchSummary = wrapper.find('SearchSummary').node.type;
+      const searchSummary = wrapper.find('SearchBar').node.type;
       expect(secondChild).to.deep.equal(searchSummary);
       done();
     });
