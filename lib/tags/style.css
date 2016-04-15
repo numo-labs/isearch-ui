@@ -7,6 +7,38 @@
   padding-right: 0.2em;
 }
 
+.inputBar {
+  font-family: SourceSansLight;
+  height: 3em;
+  width: 21em;
+  bottom: 0;
+  margin-top: 1.3em;
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+  padding-left: 0.5em;
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.searchButton {
+  font-family: SourceSansLight;
+  background-color: #F39100;
+  display: inline-block;
+  border-radius: 100%;
+  color: #ffffff;
+  font-size: 1.25em;
+  padding-top: 0.3em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  padding-bottom: 0.25em;
+  margin-top: 1em;
+  float: left;
+  position: absolute;
+  top: 16.2em;
+}
+
 .tag {
   padding: 0.2em;
   padding-bottom: 0.3em;
