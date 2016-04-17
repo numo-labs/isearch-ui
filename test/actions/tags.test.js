@@ -15,13 +15,12 @@ describe('actions', function () {
       done();
     });
     it('should create an action to remove a tag', function (done) {
-      const tagName = 'sparta';
+      const displayName = 'sparta';
       const expectedAction = {
         type: TAG_REMOVE_TAG,
-        tagName: tagName
+        displayName
       };
-
-      expect(actions.removeTag(tagName)).to.deep.equal(expectedAction);
+      expect(actions.deleteTag(displayName)).to.deep.equal(expectedAction);
       done();
     });
   });
