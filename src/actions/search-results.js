@@ -15,6 +15,7 @@ import {
 // actions
 import * as graphqlService from '../services/graphql';
 import { addTiles } from './tiles.js';
+import { formatQuery } from './helpers.js';
 
 /**
 * Gets the id of the searchBucket and initiates a graphql query to retrieve
@@ -142,22 +143,6 @@ export function filterResults () {
       dispatch(updateDisplayedItems(results));
     }
     dispatch(startSearch());
-  };
-}
-
-function filterMap (array, filterString, mapKey) {
-  return array
-    .filter(tag => tag.id.indexOf(filterString) > -1)
-    .map(tag => tag[mapKey]);
-}
-
-function formatQuery (tags) {
-  const geoTags = filterMap(tags, 'geo', 'displayName');
-  const amenityTags = filterMap(tags, 'amenity', 'id');
-  return {
-    geography: geoTags,
-    amenity: amenityTags,
-    passengers: [{birthday: '1986-07-14'}]
   };
 }
 
