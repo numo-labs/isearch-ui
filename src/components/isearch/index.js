@@ -65,7 +65,6 @@ class ISearch extends Component {
     return (
       <section>
         <SearchBar
-         onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
          setSearchString={setSearchString}
          searchString={searchString}
         />
@@ -80,7 +79,7 @@ class ISearch extends Component {
         <Tags
           tags={tags}
           removeTag={removeTag}
-          onSearchButtonClick={startSearch}
+          onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
           setSearchString={setSearchString}
         />
         { this.renderResults() }

@@ -167,6 +167,7 @@ export function startSearch () {
         dispatch(busySearching());
       }
       const query = formatQuery(tags);
+      console.log('query', query);
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
         .then(json => {
