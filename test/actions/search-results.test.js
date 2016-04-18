@@ -31,7 +31,7 @@ describe('actions', function () {
   describe('startSearch', function () {
     it('should dispatch an action to set loading to true and an action fetchQuerySearchResults', function (done) {
       this.timeout(10100);
-      const json  = {
+      const json = {
         data: {
           viewer: {
             searchResultId: {
@@ -42,7 +42,6 @@ describe('actions', function () {
       };
       simple.mock(graphqlService, 'query').resolveWith(json);
       const store = mockStore(initialState);
-      const stub = simple.mock(store, 'dispatch').callOriginal();
       const expectedActions = [
         { type: BUSY_SEARCHING },
         { type: SAVE_SEARCH_RESULT_ID, id: 12345 }
@@ -133,7 +132,7 @@ describe('actions', function () {
         .catch(done);
     });
     it('no items returned from graphql -> should poll for more results', function (done) {
-      this.timeout(10100)
+      this.timeout(10100);
       const noItems = {data: { viewer: { searchResult: { items: [] } } }};
       simple.mock(graphqlService, 'query')
         .resolveWith(noItems);
@@ -143,13 +142,13 @@ describe('actions', function () {
 
       graphqlService.query.lastCall.returned
         .then(json => {
-           expect(json).to.equal(noItems);
-           setTimeout(function () {
-             expect(stub.lastCall.arg.name).to.equal('fetchQuerySearchResults_anonymousFn');
-             expect(graphqlService.query.callCount).to.equal(10); // exits after the 10th attempt (starts at 1)
-             done();
-           }, 10000);
-         })
+          expect(json).to.equal(noItems);
+          setTimeout(function () {
+            expect(stub.lastCall.arg.name).to.equal('fetchQuerySearchResults_anonymousFn');
+            expect(graphqlService.query.callCount).to.equal(10); // exits after the 10th attempt (starts at 1)
+            done();
+          }, 10000);
+        })
        .catch(done);
     });
   });
@@ -195,12 +194,11 @@ describe('actions', function () {
             }
           ]
         }
-      }
+      };
       const store = mockStore(stateWithTags);
-      const stub = simple.mock(store, 'dispatch').callOriginal();
       store.dispatch(actions.filterResults());
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });
-  })
+  });
 });

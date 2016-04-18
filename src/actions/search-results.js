@@ -29,7 +29,6 @@ import { formatQuery } from './helpers.js';
 */
 
 export function fetchQuerySearchResults (id, page, size, attempt) {
-  console.log('called');
   const fetchQuerySearchResults_anonymousFn = (dispatch, getState) => {
     const { search: { displayedItems } } = getState();
     const initialSearch = displayedItems.length === 0;
@@ -134,7 +133,7 @@ export function updateDisplayedItems (results) {
 export function filterResults () {
   return (dispatch, getState) => {
     const { search: { tags, items } } = getState();
-    console.log('state', getState());
+    console.log('state', getState().search.items);
     const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
     const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
     if (items.length > 0) {
