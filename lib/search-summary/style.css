@@ -166,6 +166,8 @@
   display: none;
 }
 
+
+
 .icon {
   width: 2em;
   float: left;
@@ -225,6 +227,7 @@ h1 {
 
 .searchSummaryContainer {
   font-family: SourceSansSemiBold;
+  width: 100%;
 }
 
 @media (min-width: 490px) {
