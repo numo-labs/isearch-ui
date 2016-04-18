@@ -3,18 +3,29 @@ import ISearch from '../components/isearch/';
 
 import * as TagActions from '../actions/tags';
 import * as SearchActions from '../actions/search-results';
-import * as TileActions from '../actions/tiles';
 
-const Actions = {...TagActions, ...SearchActions, ...TileActions};
+const Actions = {...TagActions, ...SearchActions};
 
 function mapStateToProps (state) {
-  const { search: { items, tags, tiles, filterVisibleState, searchString } } = state;
+  const {
+    search: {
+      displayedItems,
+      tags,
+      tiles,
+      filterVisibleState,
+      searchString,
+      loading,
+      error
+    }
+  } = state;
   return {
     tags,
-    items,
+    displayedItems,
     tiles,
     filterVisibleState,
-    searchString
+    searchString,
+    loading,
+    error
   };
 }
 

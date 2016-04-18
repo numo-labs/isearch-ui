@@ -1,17 +1,4 @@
-export const mockTags = [
-  {
-    tagName: 'here',
-    colour: '#8EB8C4'
-  },
-  {
-    tagName: 'we',
-    colour: '#81C8BE'
-  },
-  {
-    tagName: 'go',
-    colour: '#DC3767'
-  }
-];
+export const mockTags = [];
 
 const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
 

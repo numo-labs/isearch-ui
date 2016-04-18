@@ -1,45 +1,69 @@
 import React, { PropTypes, Component } from 'react';
-import SearchBar from '../../../lib/search-bar/';
+import Header from '../../../lib/header/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
+import LoadingSpinner from '../../../lib/spinner';
 
 class ISearch extends Component {
 
-  constructor () {
-    super();
-    this.fetchQueryResults = this.fetchQueryResults.bind(this);
-  }
+  // constructor () {
+    // super();
+    // this.fetchQueryResults = this.fetchQueryResults.bind(this);
+  // }
 
-  componentWillMount () {
-    this.fetchQueryResults();
-  }
+  // componentWillMount () {
+  //   this.fetchQueryResults();
+  // }
 
   /**
    * For testing and building purposes we pass through a list of fixed tags.
    * TODO: Replace this with the proper solution!
    */
 
-  fetchQueryResults () {
-    this.props.fetchQuerySearchResults(12345, 1, 20);
+  // fetchQueryResults () {
+  //   this.props.fetchQuerySearchResults(12345, 1, 20, true);
+  // }
+
+  renderResults () {
+    const {
+      displayedItems,
+      onYesFilter,
+      onFilterClick,
+      showAddMessage,
+      filterVisibleState,
+      loading,
+      error
+    } = this.props;
+
+    if (loading) {
+      return <LoadingSpinner />;
+    } else if (error) {
+      return <div className='errorMessage'>{error}</div>;
+    } else {
+      return <SearchResults
+        items={displayedItems}
+        onYesFilter={onYesFilter}
+        onFilterClick={onFilterClick}
+        filterVisibleState={filterVisibleState}
+        showAddMessage={showAddMessage}
+        error={error}
+      />;
+    }
   }
 
   render () {
     const {
       tags,
-      items,
-      onYesFilter,
-      onFilterClick,
-      showAddMessage,
-      filterVisibleState,
       removeTag,
       setSearchString,
-      searchString,
-      startSearch
+      startSearch,
+      addSearchStringTag
     } = this.props;
 
     return (
       <section>
+        <Header />
         <SearchSummary
           city='Bodrum'
           country='Turkey'
@@ -48,23 +72,13 @@ class ISearch extends Component {
           departureDate='Sun 13 jul 2016'
           returnDate='Tue 15 jul 2016'
         />
-        <SearchBar
-         setSearchString={setSearchString}
-         searchString={searchString}
-        />
         <Tags
           tags={tags}
           removeTag={removeTag}
-          onSearchButtonClick={startSearch}
+          onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
           setSearchString={setSearchString}
         />
-        <SearchResults
-          items={items}
-          onYesFilter={onYesFilter}
-          onFilterClick={onFilterClick}
-          filterVisibleState={filterVisibleState}
-          showAddMessage={showAddMessage}
-        />
+        { this.renderResults() }
       </section>
     );
   }
@@ -72,7 +86,7 @@ class ISearch extends Component {
 
 ISearch.propTypes = {
   tags: PropTypes.array,
-  items: PropTypes.array,
+  displayedItems: PropTypes.array,
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
   showAddMessage: PropTypes.func,
@@ -82,7 +96,10 @@ ISearch.propTypes = {
   removeTag: PropTypes.func,
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
-  startSearch: PropTypes.func
+  startSearch: PropTypes.func,
+  addSearchStringTag: PropTypes.func,
+  loading: PropTypes.bool,
+  error: PropTypes.string
 };
 
 export default ISearch;
