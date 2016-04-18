@@ -25,15 +25,15 @@ describe('containers', function () {
       expect(children).to.have.length(4);
       done();
     });
-    it('should render the <Header /> as the first child', function (done) {
+    it('should render the <SearchSummary /> as the first child', function (done) {
       const firstChild = children[0].type;
-      const header = wrapper.find('Header').node.type;
+      const header = wrapper.find('SearchSummary').node.type;
       expect(firstChild).to.deep.equal(header);
       done();
     });
-    it('should render the <SearchSummary /> as the second child', function (done) {
+    it('should render the <Header /> as the second child', function (done) {
       const secondChild = children[1].type;
-      const searchSummary = wrapper.find('SearchSummary').node.type;
+      const searchSummary = wrapper.find('Header').node.type;
       expect(secondChild).to.deep.equal(searchSummary);
       done();
     });
