@@ -31,6 +31,7 @@ h5 {
   text-align: center;
   font-family: SourceSansLight;
   display: inline-block;
+  cursor: pointer;
 }
 
 .articleImage {

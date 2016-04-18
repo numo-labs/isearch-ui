@@ -4,7 +4,12 @@ import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 
+import NavHeader from '../../../lib/nav-header/';
+import ArticleFullPage from '../../../lib/article-fullpage/';
+import ArticleFooter from '../../../lib/article-footer/';
+
 class ISearch extends Component {
+
 
   constructor () {
     super();
@@ -35,34 +40,49 @@ class ISearch extends Component {
       removeTag,
       setSearchString,
       searchString,
-      startSearch
+      startSearch,
+      viewArticle,
+      backToSearch,
+      articlePage,
+      articleContent
     } = this.props;
 
-    return (
-      <section>
-        <SearchBar
-         onSearchButtonClick={startSearch}
-         setSearchString={setSearchString}
-         searchString={searchString}
-        />
-        <SearchSummary
-          city='Bodrum'
-          country='Turkey'
-          durationInWeeks={2}
-          paxMix='2 adults, 2 children'
-          departureDate='Sun 13 jul 2016'
-          returnDate='Tue 15 jul 2016'
-        />
-        <Tags tags={tags} removeTag={removeTag} />
-        <SearchResults
-          items={items}
-          onYesFilter={onYesFilter}
-          onFilterClick={onFilterClick}
-          filterVisibleState={filterVisibleState}
-          showAddMessage={showAddMessage}
-        />
-      </section>
-    );
+    if(!articlePage) {
+      return (
+        <section>
+          <SearchBar
+           onSearchButtonClick={startSearch}
+           setSearchString={setSearchString}
+           searchString={searchString}
+          />
+          <SearchSummary
+            city='Bodrum'
+            country='Turkey'
+            durationInWeeks={2}
+            paxMix='2 adults, 2 children'
+            departureDate='Sun 13 jul 2016'
+            returnDate='Tue 15 jul 2016'
+          />
+          <Tags tags={tags} removeTag={removeTag} />
+          <SearchResults
+            items={items}
+            onYesFilter={onYesFilter}
+            onFilterClick={onFilterClick}
+            filterVisibleState={filterVisibleState}
+            showAddMessage={showAddMessage}
+            viewArticle={viewArticle}
+          />
+          </section>
+        );
+    } else {
+      return (
+        <section>
+          <NavHeader articleContent={articleContent} backToSearch={backToSearch}>SHARE</NavHeader>
+          <ArticleFullPage articleContent={articleContent}/>
+          <ArticleFooter articleContent={articleContent}/>
+        </section>
+      );
+    }
   }
 }
 
@@ -78,7 +98,18 @@ ISearch.propTypes = {
   removeTag: PropTypes.func,
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
-  startSearch: PropTypes.func
+  startSearch: PropTypes.func,
+  viewArticle: PropTypes.func,
+  backToSearch: PropTypes.func,
+  articlePage: PropTypes.bool,
+  articleContent: PropTypes.object
 };
+
+// {
+//   <section>
+//     <NavHeader articleContent={articleContent}>SHARE</NavHeader>
+//     <ArticleFullPage articleContent={articleContent}/>
+//   </section>
+// };
 
 export default ISearch;

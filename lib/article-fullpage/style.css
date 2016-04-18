@@ -1,0 +1,55 @@
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+.articleFullPageContainer {
+  text-align: left;
+  font-family: SourceSansLight;
+  display: inline-block;
+  background-color: #fff;
+}
+
+.articleFullPageContainer .articleSection {
+  margin-bottom: 2.5em;
+}
+
+.articleFullPageContainer .articleImage {
+  width: 100%;
+  display: inline-block;
+  /*max-height: 350px;*/
+}
+
+.articleFullPageContainer .articleText {
+  padding: 0 1.5em;
+  color: #666;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  /**
+  * need to add media queries for .text (padding bottom and bottom) and .articleContainer class (height)
+  **/
+  .articleFullPageContainer {
+    padding: 0 12em;
+  }
+}
+
+.articleFullPageContainer h1 {
+  text-align: center;
+  font-family: SourceSansSemiBold;
+  font-size: 2.1em;
+  padding: 1.5em;
+}
+
+.articleFullPageContainer h2 {
+  padding: 0 1.5em;
+  font-size: 1em;
+  font-family: SourceSansSemiBold;
+  color: #666;
+}

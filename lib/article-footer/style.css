@@ -1,0 +1,18 @@
+.articleFooter {
+  height: 20vh;
+  text-align: center;
+}
+
+.articleFooter .bookLink {
+  border-radius: 2em;
+  color: #fff;
+  background-color: #F39100;
+  padding: 1em 3.5em;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 20vh;
+}
+
+.articleFooter .bookLink:hover {
+  background-color: #F37800;
+}
