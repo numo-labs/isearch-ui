@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import SearchBar from '../../../lib/search-bar/';
+import Header from '../../../lib/header/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
@@ -57,17 +57,13 @@ class ISearch extends Component {
       tags,
       removeTag,
       setSearchString,
-      searchString,
       startSearch,
       addSearchStringTag
     } = this.props;
 
     return (
       <section>
-        <SearchBar
-         setSearchString={setSearchString}
-         searchString={searchString}
-        />
+        <Header />
         <SearchSummary
           city='Bodrum'
           country='Turkey'

@@ -16,26 +16,26 @@ describe('actions', function () {
   });
   describe('addSingleTag', function () {
     it('should create an action to add a single tag', function (done) {
-      const tagName = 'test';
       const expectedAction = {
         type: TAG_ADD_SINGLE_TAG,
         tag: {
-          tagName: tagName,
-          colour: '#8EB8C4'
+          displayName: 'test',
+          colour: '#8EB8C4',
+          filterString: 'test',
+          id: 'test'
         }
       };
-      expect(actions.addSingleTag(tagName)).to.deep.equal(expectedAction);
+      expect(actions.addSingleTag('test', 'test', 'test')).to.deep.equal(expectedAction);
       done();
     });
   });
   describe('onFilterClick', function () {
     it('should create an action to remove a filter once clicked', function (done) {
-      const tagName = 'test';
       const expectedAction = {
         type: FILTER_ON_CLICK,
-        tagName: tagName
+        displayName: 'test'
       };
-      expect(actions.onFilterClick(tagName)).to.deep.equal(expectedAction);
+      expect(actions.onFilterClick('test')).to.deep.equal(expectedAction);
       done();
     });
   });
