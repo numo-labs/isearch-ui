@@ -4,7 +4,7 @@ import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
-
+import HotelPage from '../../../lib/hotel-page';
 class ISearch extends Component {
 
   constructor () {
@@ -65,6 +65,7 @@ class ISearch extends Component {
 
     return (
       <section>
+        <HotelPage />
         <SearchSummary
           city='Bodrum'
           country='Turkey'

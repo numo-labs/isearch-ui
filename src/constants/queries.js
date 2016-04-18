@@ -31,7 +31,9 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
                 name,
                 country,
                 region
-              }
+              },
+              description,
+              tripUrl
             },
             flights {
               outbound {
