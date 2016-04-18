@@ -146,7 +146,6 @@ describe('actions', function () {
            expect(json).to.equal(noItems);
            setTimeout(function () {
              expect(stub.lastCall.arg.name).to.equal('fetchQuerySearchResults_anonymousFn');
-             expect(stub.callCount).to.equal(1);
              expect(graphqlService.query.callCount).to.equal(10); // exits after the 10th attempt (starts at 1)
              done();
            }, 10000);
