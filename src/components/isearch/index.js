@@ -7,23 +7,23 @@ import LoadingSpinner from '../../../lib/spinner';
 
 class ISearch extends Component {
 
-  // constructor () {
-    // super();
-    // this.fetchQueryResults = this.fetchQueryResults.bind(this);
-  // }
+  constructor () {
+    super();
+    this.fetchQueryResults = this.fetchQueryResults.bind(this);
+  }
 
-  // componentWillMount () {
-  //   this.fetchQueryResults();
-  // }
+  componentWillMount () {
+    this.fetchQueryResults();
+  }
 
   /**
    * For testing and building purposes we pass through a list of fixed tags.
    * TODO: Replace this with the proper solution!
    */
 
-  // fetchQueryResults () {
-  //   this.props.fetchQuerySearchResults(12345, 1, 20, true);
-  // }
+   fetchQueryResults () {
+     this.props.fetchQuerySearchResults(12345, 1, 20, 1);
+   }
 
   renderResults () {
     const {
@@ -41,14 +41,16 @@ class ISearch extends Component {
     } else if (error) {
       return <div className='errorMessage'>{error}</div>;
     } else {
-      return <SearchResults
-        items={displayedItems}
-        onYesFilter={onYesFilter}
-        onFilterClick={onFilterClick}
-        filterVisibleState={filterVisibleState}
-        showAddMessage={showAddMessage}
-        error={error}
-      />;
+      return (
+        <SearchResults
+          items={displayedItems}
+          onYesFilter={onYesFilter}
+          onFilterClick={onFilterClick}
+          filterVisibleState={filterVisibleState}
+          showAddMessage={showAddMessage}
+          error={error}
+        />
+      );
     }
   }
 
@@ -63,7 +65,6 @@ class ISearch extends Component {
 
     return (
       <section>
-        <Header />
         <SearchSummary
           city='Bodrum'
           country='Turkey'
@@ -72,6 +73,7 @@ class ISearch extends Component {
           departureDate='Sun 13 jul 2016'
           returnDate='Tue 15 jul 2016'
         />
+        <Header />
         <Tags
           tags={tags}
           removeTag={removeTag}
