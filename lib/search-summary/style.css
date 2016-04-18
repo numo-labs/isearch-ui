@@ -40,7 +40,7 @@
 
 .calendar thead td {
   padding: 10px 0;
-  color: black;
+  color: #4F4F4F;
 }
 
 .changeButton {
@@ -110,7 +110,7 @@
   cursor: pointer;
   padding: 7px 9px 6px;
   border: solid 1px #eee;
-  color: black;
+  color: #4F4F4F;
 }
 
 .dayActive {
