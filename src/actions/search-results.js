@@ -23,22 +23,24 @@ import { formatQuery } from './helpers.js';
 * @param {String} - id - searchbucketid
 * @param {Number} - page - page to start from
 * @param {Number} - size - number of results to retrieve
-* @param {Number} - attempt - the number of times the function has been called
+* @param {Number} - attempt - the number of times the function has been called (starts at 1)
 *
 * Polls graphql 10 times before returning an error
 */
 
 export function fetchQuerySearchResults (id, page, size, attempt) {
-  return (dispatch, getState) => {
+  console.log('called');
+  const fetchQuerySearchResults_anonymousFn = (dispatch, getState) => {
     const { search: { displayedItems } } = getState();
     const initialSearch = displayedItems.length === 0;
     return graphqlService
       .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
       .then(json => {
         const items = json.data.viewer.searchResult.items;
+        console.log(!items || !items.length);
         if (attempt > 9) {
           return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts
-        } else if ((!items || !items.length) && attempt < 10) {
+        } else if ((!items || !items.length)) {
           setTimeout(function () {
             console.log('Retrying', attempt);
             dispatch(fetchQuerySearchResults(id, page, size, ++attempt));
@@ -51,6 +53,7 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
         }
       });
   };
+  return fetchQuerySearchResults_anonymousFn; // needed for testing polling
 }
 
 /*
@@ -131,6 +134,7 @@ export function updateDisplayedItems (results) {
 export function filterResults () {
   return (dispatch, getState) => {
     const { search: { tags, items } } = getState();
+    console.log('state', getState());
     const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
     const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
     if (items.length > 0) {
@@ -175,7 +179,7 @@ export function startSearch () {
         .then(json => {
           const searchResultId = json.data.viewer.searchResultId.id;
           dispatch(saveSearchResultId(searchResultId));
-          dispatch(fetchQuerySearchResults(searchResultId, 1, 20, 0));
+          dispatch(fetchQuerySearchResults(searchResultId, 1, 20, 1));
         });
     }
   };
