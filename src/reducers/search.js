@@ -8,48 +8,79 @@ import {
   TAG_ADD_SINGLE_TAG,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
-  SHOW_ADD_MESSAGE,
-  HIDE_ADD_MESSAGE,
-  SET_SEARCH_STRING
+  // SHOW_ADD_MESSAGE,
+  // HIDE_ADD_MESSAGE,
+  SET_SEARCH_STRING,
+  UPDATE_DISPLAYED_ITEMS,
+  SEARCH_ERROR
  } from '../constants/actionTypes';
 
-import { mockTiles, mockTags } from './utils/mockData.js';
+import { mockTiles } from './utils/mockData.js';
 import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
+import _ from 'lodash';
 
-const initialState = {
+export const initialState = {
+  displayedItems: [],
   items: [],
   bucketCount: 0,
   status: undefined,
-  id: undefined,
-  loading: true,
+  loading: false,
   tags: [],
   filterVisibleState: {},
   tiles: [],
   addMessageVisible: false,
-  searchString: ''
+  searchString: '',
+  error: ''
 };
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const items = shuffleMockedTilesIntoResultSet(action.items, state.tiles.concat(state.tags));
-      return {...state, items: items, loading: action.loading};
-    case BUSY_SEARCHING:
-      return {...state, loading: action.loading};
-    case TAG_ADD_TAGS:
-      const tags = action.tags === undefined ? mockTags : action.tags;
+      const packages = state.displayedItems.filter(item => item.type === 'packageOffer'); // remove all articles and filter tiles
+      const packageItems = _.uniqBy(_.union(packages, action.items), (a) => a.packageOffer.provider.reference); // check for duplicates
+      const displayedItems = shuffleMockedTilesIntoResultSet(packageItems, state.tiles); // add filters back in
+      const items = _.uniqBy(_.union(state.items, action.items), (a) => a.packageOffer.provider.reference); // add to packages store as well
       return {
         ...state,
-        tags: tags
+        displayedItems,
+        items,
+        loading: false,
+        error: ''
+      };
+    case UPDATE_DISPLAYED_ITEMS:
+      const updatedTiles = shuffleMockedTilesIntoResultSet(action.items, state.tiles); // add the remaining tiles back in!
+      return {
+        ...state,
+        displayedItems: updatedTiles
+      };
+    case BUSY_SEARCHING:
+      return {
+        ...state,
+        loading: true
+      };
+    case SEARCH_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
+    case TAG_ADD_TAGS:
+      /*
+      * use this action if there are an initial set of tags passed
+      * through when the page is first loaded
+      */
+      return {
+        ...state,
+        tags: action.tags
       };
     case TAG_ADD_SINGLE_TAG:
       return {
         ...state,
-        tags: [...state.tags, action.tag]
+        tags: _.uniqBy([...state.tags, action.tag], 'displayName')
       };
     case TAG_REMOVE_TAG:
       const newTags = state.tags.filter(tag => {
-        return tag.tagName !== action.tagName;
+        return tag.displayName !== action.displayName;
       });
       return {
         ...state,
@@ -60,14 +91,15 @@ export default function search (state = initialState, action) {
         ...state,
         filterVisibleState: {
           ...state.filterVisibleState,
-          [action.tagName]: false
-        }
+          [action.displayName]: false
+        },
+        tiles: state.tiles.filter(tile => tile.displayName !== action.displayName)
       };
     case TILES_ADD_TILES:
       const tileArray = action.tileArray === undefined ? mockTiles : action.tileArray;
       const filterVisibleState = tileArray.reduce((obj, tile) => {
         if (tile.type === 'filter') {
-          obj[tile.bigWord] = true;
+          obj[tile.displayName] = true;
         }
         return obj;
       }, {});
@@ -76,117 +108,19 @@ export default function search (state = initialState, action) {
         filterVisibleState,
         tiles: tileArray
       };
-    case SHOW_ADD_MESSAGE:
-      return ({
-        ...state,
-        addMessageVisible: true
-      });
-    case HIDE_ADD_MESSAGE:
-      return ({
-        ...state,
-        addMessageVisible: false
-      });
+    // case SHOW_ADD_MESSAGE:
+    //   return ({
+    //     ...state,
+    //     addMessageVisible: true
+    //   });
+    // case HIDE_ADD_MESSAGE:
+    //   return ({
+    //     ...state,
+    //     addMessageVisible: false
+    //   });
     case SET_SEARCH_STRING:
       return {...state, searchString: action.searchString};
     default:
       return state;
   }
 }
-
-/* the items array consists of package offer items and tile items
-
-package offer item object will have the following shape:
-
-         {
-          id,
-          type,
-          ranking,
-          packageOffer {
-            hotel {
-              id,
-              name,
-              images {
-                type,
-                displaySequence,
-                uri,
-                primary
-              }
-              starRating,
-              place {
-                name,
-                country,
-                region
-              }
-            },
-            flights {
-              outbound {
-                number,
-                departure {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                arrival {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                carrier {
-                  code
-                }
-              },
-              inbound {
-                number,
-                departure {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                arrival {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                carrier {
-                  code
-                }
-              }
-            },
-            price {
-              total,
-              perPerson,
-              currency
-            },
-            provider {
-              id,
-              reference,
-              context,
-              deepLink
-            },
-            nights
-          }
-        }
-
-tile item object will take the following form:
-         {
-          id,
-          type,
-          ranking,
-          tile {
-            title,
-            doc
-          }
-        }
-*/

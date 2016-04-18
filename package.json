@@ -1,20 +1,20 @@
 {
   "name": "isearch-ui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "npm run coverage && npm run lib:test && npm run src:test",
+    "test": "npm run lint && npm run coverage",
     "dev:build": "webpack --config ./webpack.config.js",
     "dev:serve": "webpack-dev-server --config ./webpack.config.js",
     "lint": "semistandard",
     "lib:test": "mocha ./lib/**/*.test.js --compilers js:babel-register",
     "src:test": "mocha ./test/**/*.test.js --compilers js:babel-register",
-    "nocov": "mocha ./lib/**/*.test.js --compilers js:babel-register",
-    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js --report lcov -- -R spec",
+    "nocov": "npm run lib:test && npm run src:test",
+    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js ./lib/**/*.test.js --report lcov -- -R spec",
     "clean": "rm -rf public && mkdir -p public/",
     "build": "npm run clean && ./node_modules/.bin/webpack --config ./webpack.production.config.js",
     "deploy": "gulp deploy"
@@ -50,6 +50,7 @@
     "css-loader": "^0.19.0",
     "enzyme": "^2.2.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "font-awesome-webpack": "0.0.4",
     "gulp": "^3.9.1",
     "html-webpack-plugin": "^2.9.0",
     "imports-loader": "^0.6.5",
@@ -70,12 +71,15 @@
   "dependencies": {
     "file-loader": "^0.8.5",
     "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.11.1",
     "lodash.shuffle": "^4.0.0",
+    "moment": "^2.12.0",
     "react": "^0.14.7",
-    "react-bootstrap": "^0.28.3",
+    "react-bootstrap": "^0.28.5",
     "react-dom": "^0.14.7",
     "react-masonry-component": "^4.0.0",
     "react-redux": "^4.4.0",
+    "react-simple-datepicker": "^0.1.4",
     "react-visibility-sensor": "^3.0.0",
     "redux": "^3.3.1"
   },

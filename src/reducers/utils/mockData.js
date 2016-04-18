@@ -1,17 +1,4 @@
-export const mockTags = [
-  {
-    tagName: 'here',
-    colour: '#8EB8C4'
-  },
-  {
-    tagName: 'we',
-    colour: '#81C8BE'
-  },
-  {
-    tagName: 'go',
-    colour: '#DC3767'
-  }
-];
+export const mockTags = [];
 
 const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
 
@@ -136,19 +123,19 @@ export const mockTiles = [
     filterString: 'childrenpool'
   },
   {
-    prefix: 'Do you need access to',
-    displayName: 'Wifi',
-    type: 'filter',
-    color: '#8EB8C4',
-    id: 'amenity:wifi',
-    filterString: 'wifi'
-  },
-  {
     prefix: 'Are you looking for',
     displayName: 'All inclusive',
     type: 'filter',
     color: '#F39110',
     id: 'amenity:allinclusive',
     filterString: 'allinclusive'
+  },
+  {
+    prefix: 'Do you need access to',
+    displayName: 'Wifi',
+    type: 'filter',
+    color: '#8EB8C4',
+    id: 'amenity:wifi',
+    filterString: 'wifi'
   }
 ];

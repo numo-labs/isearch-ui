@@ -35,14 +35,16 @@ class SearchResults extends Component {
                 </div>
               );
             } else if (item.type === 'filter') {
+              console.log('itemVisible', filterVisibleState[item.displayName]);
               return (
                 <div key={index} className='gridItem'>
                   <FilterTile
-                    filterVisible={filterVisibleState[item.bigWord]}
+                    filterVisible={filterVisibleState[item.displayName]}
                     onYesFilter={onYesFilter}
                     onNoFilter={onFilterClick}
                     showAddMessage={showAddMessage}
-                    description={item} color={item.color}
+                    description={item}
+                    color={item.color}
                   />
                 </div>
               );

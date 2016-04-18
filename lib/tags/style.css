@@ -7,6 +7,38 @@
   padding-right: 0.2em;
 }
 
+.inputBar {
+  font-family: SourceSansLight;
+  height: 3em;
+  width: 21em;
+  bottom: 0;
+  margin-top: 0.5em;
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+  padding-left: 0.5em;
+  float: left;
+  margin-right: 0.3em;
+  margin-bottom: 0.4em;
+}
+
+.searchButton {
+  font-family: SourceSansLight;
+  background-color: #F39100;
+  display: inline-block;
+  border-radius: 100%;
+  color: #ffffff;
+  font-size: 1.25em;
+  padding-top: 0.3em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  padding-bottom: 0.25em;
+  margin-top: 0.4em;
+  float: left;
+  position: absolute;
+  top: 0.5em;
+}
+
 .tag {
   padding: 0.2em;
   padding-bottom: 0.3em;
@@ -21,10 +53,18 @@
   text-align: center;
   padding-top: 0.3em;
   padding-bottom: 0.5em;
+  display: inline-block;
+  width: 25em;
+  position: relative;
 }
 
 .tagName {
   color: #ffffff;
   font-family: 'Source sans pro', sans-serif;
   display: inline;
+}
+
+.tagWrapper {
+  text-align: center;
+  margin: 0 auto;
 }

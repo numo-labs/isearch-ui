@@ -17,7 +17,109 @@
   color: #ffffff;
   padding: 0.3em;
   padding-left: 0.8em;
-  margin-bottom: 0.5em;
+}
+
+.blueContainerActive {
+  background-color: #6DB4A9;
+  color: #ffffff;
+  padding: 0.3em;
+  padding-left: 0.8em;
+  position: fixed;
+  z-index: 30;
+  height: 100em;
+  width: 100%;
+}
+
+.calendar__day {
+    font-size: 13px;
+    cursor: pointer;
+    padding: 7px 9px 6px;
+    border: solid 1px #eee;
+    color: black;
+}
+
+.calendar thead td {
+  padding: 10px 0;
+  color: #4F4F4F;
+}
+
+.changeButton {
+  border-radius: 600px;
+  border: 1px solid #ffffff;
+  display: inline-block;
+  padding: 0.2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  font-size: 1.2em;
+  position: absolute;
+  right: 0;
+  margin-top: 0.3em;
+  margin-right: 0.5em;
+}
+
+.changeInputActive {
+  width: 100%;
+  margin-top: 5em;
+  text-align: center;
+  position: relative;
+}
+
+.changeInputButton {
+  background-color: #F39100;
+  display: inline-block;
+  border-radius: 500px;
+  color: #ffffff;
+  font-size: 1.25em;
+  padding: 0.2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  margin: 0 auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.changeInputInactive {
+  width: 100%;
+  margin-top: 3em;
+  display: none;
+  background-color: #6DB4A9;
+  height: 100em;
+}
+
+.datePicker {
+  width: 46%;
+  float: left;
+  margin-right: 0.9em;
+  display: inline-block;
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+  margin-top: 1em;
+  font-family: SourceSansLight;
+}
+
+.datePickerInput {
+  width: 100%;
+  color: black;
+  padding-bottom: 0.15em;
+  padding-top: 0.15em;
+}
+
+.day {
+  font-size: 13px;
+  cursor: pointer;
+  padding: 7px 9px 6px;
+  border: solid 1px #eee;
+  color: #4F4F4F;
+}
+
+.dayActive {
+  background-color: #6DB4A9;
+  color: #ffffff;
+}
+
+.dayOtherMonth {
+  color: #ccc;
 }
 
 .departure {
@@ -27,10 +129,44 @@
   border-right: 1px solid;
 }
 
+.departDate {
+  width: 46%;
+  float: left;
+  margin-right: 0.9em;
+}
+
+.departFrom {
+  margin: 0 auto;
+  margin-top: 0.5em;
+  margin-right: 1em;
+  width: 98%;
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+}
+
+.dropDown {
+  text-align: center;
+}
+
+.exitButton {
+  font-family: SourceSansLight;
+  font-size: 2em;
+  position: absolute;
+  bottom: 10.5em;
+  right: 0.5em;
+}
+
 .flights {
   padding-bottom: 2em;
   line-height: 0.8em;
 }
+
+.headerInactive {
+  display: none;
+}
+
+
 
 .icon {
   width: 2em;
@@ -41,6 +177,16 @@
   top: 0.2em;
   filter: invert(100%);
     -webkit-filter: invert(100%);
+}
+
+.input {
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+  margin-top: 1em;
+  font-family: SourceSansLight;
+  height: 2em;
+  color: black;
 }
 
 .returnIcon {
@@ -66,8 +212,8 @@ h1 {
 }
 
 .paxMix {
-  float: left;
-  padding-left: 0.5em;
+  font-family: SourceSansLight;
+  display: inline-block;
 }
 
 .return {
@@ -82,6 +228,7 @@ h1 {
 
 .searchSummaryContainer {
   font-family: SourceSansSemiBold;
+  width: 100%;
 }
 
 @media (min-width: 490px) {
@@ -99,6 +246,9 @@ h1 {
   .search {
     padding-left: 5em;
   }
+  .changeInputActive {
+    width: 25em;
+  }
 }
 
 @media (min-width: 1700px) {
@@ -110,17 +260,16 @@ h1 {
   }
 }
 
-.weeks {
-  background-color: #81C8BE;
-  display: inline-block;
-  border-radius: 600px;
-  padding-left: 0.7em;
-  padding-right: 0.7em;
-  padding-bottom: 0.2em;
-  float: left;
+.vacationLength {
+  width: 46%;
 }
 
-.weekPax {
+.weeks {
   display: inline-block;
-  margin-bottom: 1em;
+  padding-right: 0.7em;
+  padding-bottom: 0.2em;
+}
+
+.weeksPaxMix {
+  display: inline-block;
 }

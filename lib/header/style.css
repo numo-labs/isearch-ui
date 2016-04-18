@@ -8,34 +8,46 @@
   src: url('../../fonts/SourceSansPro-Bold.otf');
 }
 
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
 .searchBarContainer {
   text-align: center;
   padding: 1em;
   padding-bottom: 1.5em;
   font-family: SourceSansSemiBold;
-  background-size: 100% 250px;
-  background: rgba(195,240,250,1);
-  background: -moz-linear-gradient(left, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
-  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(195,240,250,1)), color-stop(53%, rgba(146,216,235,1)), color-stop(100%, rgba(56,148,173,1)));
-  background: -webkit-linear-gradient(left, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
-  background: -o-linear-gradient(left, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
-  background: -ms-linear-gradient(left, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
-  background: linear-gradient(to right, rgba(195,240,250,1) 0%, rgba(146,216,235,1) 53%, rgba(56,148,173,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3f0fa', endColorstr='#3894ad', GradientType=1 );
+  position: relative;
+  height: 17em;
+  display: inline-block;
+}
+
+.searchBarWrapper {
+  background-image: url('https://cloud.githubusercontent.com/assets/12450298/14560385/62833d9a-0307-11e6-8a23-a0d1793d4e72.jpg');
+  background-size: 100%;
+  text-align: center;
 }
 
 .searchContent {
-  display: block;
+  display: inline-block;
+  margin-top: 8em;
+  position: relative;
+  text-align: center;
 }
 
 .inputBar {
+  font-family: SourceSansLight;
   height: 3em;
-  width: 90%;
+  width: 21em;
   bottom: 0;
   margin-top: 1.3em;
   border: none;
   outline-width: 0;
   outline: none !important;
+  padding-left: 0.5em;
+  float: left;
+  margin-right: 1em;
 }
 
 @media (min-width: 450px) {
@@ -46,6 +58,8 @@
 
 .inputContainer {
   top: 3em;
+  display: inline-block;
+  margin-right: 2em;
 }
 
 .input:focus {
@@ -78,6 +92,9 @@
 .inspiration {
   color: #ffffff;
   font-size: 1.3em;
+  position: absolute;
+  left: 3em;
+  bottom: 2.7em;
 }
 
 .logo {
@@ -98,15 +115,20 @@
 }
 
 .searchButton {
+  font-family: SourceSansLight;
   background-color: #F39100;
   display: inline-block;
-  border-radius: 500px;
+  border-radius: 100%;
   color: #ffffff;
   font-size: 1.25em;
-  padding: 0.2em;
-  padding-left: 2em;
-  padding-right: 2em;
+  padding-top: 0.3em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  padding-bottom: 0.25em;
   margin-top: 1em;
+  float: left;
+  position: absolute;
+  top: 6em;
 }
 
 .searchButton:hover {
