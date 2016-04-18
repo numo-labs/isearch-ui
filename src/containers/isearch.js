@@ -3,9 +3,8 @@ import ISearch from '../components/isearch/';
 
 import * as TagActions from '../actions/tags';
 import * as SearchActions from '../actions/search-results';
-import * as TileActions from '../actions/tiles';
 
-const Actions = {...TagActions, ...SearchActions, ...TileActions};
+const Actions = {...TagActions, ...SearchActions};
 
 function mapStateToProps (state) {
   const {

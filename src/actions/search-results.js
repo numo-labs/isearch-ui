@@ -14,7 +14,7 @@ import {
 
 // actions
 import * as graphqlService from '../services/graphql';
-import { addTiles } from './tiles.js';
+import { addTiles } from './tags.js';
 import { formatQuery } from './helpers.js';
 
 /**
@@ -131,9 +131,9 @@ export function updateDisplayedItems (results) {
 export function filterResults () {
   return (dispatch, getState) => {
     const { search: { tags, items } } = getState();
+    const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
+    const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
     if (items.length > 0) {
-      // const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
-      const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
       const results = items.filter(item => {
         return (
           // geoTags.some(tag => item.packageOffer.hotel.place.country === tag.displayName) && // e.g. either spain or greece
@@ -142,7 +142,9 @@ export function filterResults () {
       });
       dispatch(updateDisplayedItems(results));
     }
-    dispatch(startSearch());
+    if (geoTags.length > 0) {
+      dispatch(startSearch());
+    }
   };
 }
 
