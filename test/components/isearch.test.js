@@ -16,11 +16,20 @@ const defaultProps = {
   removeTag: () => {}
 };
 
-describe('containers', function () {
-  const wrapper = shallow(<ISearch {...defaultProps} />);
-  const children = wrapper.children().nodes;
+const articleViewProps = {
+  fetchQuerySearchResults: () => {},
+  articlePage: true,
+  articleContent: {
+    sections: []
+  },
+  backToSearch: () => {}
+};
 
-  describe('<ISearch />', function () {
+describe('Component', function () {
+  describe('<ISearch /> Search view', function () {
+    const wrapper = shallow(<ISearch {...defaultProps} />);
+    const children = wrapper.children().nodes;
+
     it('should render the ISearch container', function (done) {
       expect(children).to.have.length(4);
       done();
@@ -61,6 +70,13 @@ describe('containers', function () {
       wrapper.setProps({loading: false, error: 'error'});
       const error = wrapper.find('.errorMessage');
       expect(error).to.have.length(1);
+      done();
+    });
+  });
+  describe('<ISearch /> Search view', function () {
+    const wrapper = shallow(<ISearch {...articleViewProps} />);
+    it('should display ArticleFullPage if there are article data', function (done) {
+      expect(wrapper.find('ArticleFullPage')).to.have.length(1);
       done();
     });
   });
