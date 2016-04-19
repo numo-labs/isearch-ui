@@ -12,7 +12,7 @@ export default function article (state = initialState, action) {
     case VIEW_ARTICLE:
       return {...state, articlePage: true, articleContent: action.content};
     case VIEW_SEARCH:
-      return {...state, articlePage: false, articleContent: {}};
+      return initialState;
     default:
       return state;
   }

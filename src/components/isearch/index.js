@@ -4,13 +4,9 @@ import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
-
-import NavHeader from '../../../lib/nav-header/';
-import ArticleFullPage from '../../../lib/article-fullpage/';
-import ArticleFooter from '../../../lib/article-footer/';
+import { ArticleFullPage } from '../../../lib/article';
 
 class ISearch extends Component {
-
 
   constructor () {
     super();
@@ -68,13 +64,12 @@ class ISearch extends Component {
       setSearchString,
       addSearchStringTag,
       startSearch,
-      viewArticle,
       backToSearch,
       articlePage,
       articleContent
     } = this.props;
 
-    if(!articlePage) {
+    if (!articlePage) {
       return (
         <section>
           <SearchSummary
@@ -97,11 +92,10 @@ class ISearch extends Component {
         );
     } else {
       return (
-        <section>
-          <NavHeader articleContent={articleContent} backToSearch={backToSearch}>SHARE</NavHeader>
-          <ArticleFullPage articleContent={articleContent}/>
-          <ArticleFooter articleContent={articleContent}/>
-        </section>
+        <ArticleFullPage
+          articleContent={articleContent}
+          backToSearch={backToSearch}
+        />
       );
     }
   }
@@ -128,14 +122,5 @@ ISearch.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.string
 };
-
-/**
- *
-   <SearchBar
-    onSearchButtonClick={startSearch}
-    setSearchString={setSearchString}
-    searchString={searchString}
-   />
- */
 
 export default ISearch;

@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Masonry from 'react-masonry-component';
 import FilterTile from '../../../lib/filter-tile-yesno';
 import PackageTile from '../../../lib/package-tile';
-import Article from '../../../lib/article';
+import { ArticleTile } from '../../../lib/article';
 import './style.css';
 
 const masonryOptions = {
@@ -51,7 +51,7 @@ class SearchResults extends Component {
             } else if (item.type === 'article') {
               return (
                 <div key={index} className='gridItem'>
-                  <Article {...item} viewArticle={viewArticle}/>
+                  <ArticleTile {...item} viewArticle={viewArticle}/>
                 </div>
               );
             }
