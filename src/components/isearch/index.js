@@ -6,6 +6,7 @@ import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
 import HotelPage from '../../../lib/hotel-page';
 const mockPackageOffer = {
+  'description': 'Lorem ipsum dolor sit amet, magna est placerat velit auctor aenean sodales. Interdum metus, mollis lorem tempor vel amet quisque hymenaeos, luctus in vehicula tristique sed molestie, sodales gravida vivamus placerat. Aliquam aliquet tempus, suspendisse dolor aenean rhoncus cras a, in turpis curabitur semper mi in mattis, justo augue nisl sit magna urna, nonummy proin id. Ac vel nisl pellentesque non, non arcu justo, dictum tempor aenean lacus ipsum. Nullam ut montes vitae suspendisse sociis vitae. Quam a ante tristique etiam tellus, morbi vitae eget eget in. Tortor mi nulla hac, faucibus cras in nascetur amet maecenas, per nulla vitae in et.',
   'hotel': {
     'id': 'hotel:mhid.ygky5mL',
     'name': 'Viva Sunrise',
