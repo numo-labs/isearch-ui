@@ -40,7 +40,6 @@
 .inputBar {
   font-family: SourceSansLight;
   height: 3em;
-  width: 21em;
   bottom: 0;
   margin-top: 1.3em;
   border: none;
@@ -49,6 +48,7 @@
   padding-left: 0.5em;
   float: left;
   margin-right: 1em;
+  width: 75%;
 }
 
 @media (min-width: 450px) {
@@ -61,6 +61,8 @@
   top: 3em;
   display: inline-block;
   margin-right: 2em;
+  width: 100%;
+  padding-left: 1.1em;
 }
 
 .input:focus {
@@ -130,6 +132,7 @@
   float: left;
   position: absolute;
   top: 6em;
+  right: 2.5em;
 }
 
 .searchButton:hover {
