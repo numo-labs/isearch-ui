@@ -1,0 +1,117 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+.amenity {
+  display: inline-block;
+  padding-left: 0.3em;
+  font-size: 0.9em;
+}
+
+.amenityBlock {
+  text-align: center;
+}
+
+.amenityContainer {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 3em;
+  text-align: left;
+}
+
+.amenityWrapper {
+  margin-top: 0.8em;
+  display: inline-block;
+  text-align: center;
+}
+
+.heartRatingContainer {
+  display: inline-block;
+  padding-top: 5px;
+  margin-left: 1.4em;
+}
+
+.heartShare {
+  background-color: #ffffff;
+  width: 1.7em;
+  opacity: 0.4;
+}
+
+.heartShareContainer {
+  border-radius: 100%;
+  background-color: #ffffff;
+  display: inline-block;
+  padding: 0.7em;
+  position: absolute;
+  right: 0.5em;
+  top: -1em;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.infoContainer {
+  background-color: #ffffff;
+  position: relative;
+  padding-top: 1em;
+}
+
+.mintBanner {
+  background-color: rgba(109,180,169, 0.9);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  height: 22px;
+  line-height: 25px;
+  color: #ffffff;
+  font-family: SourceSansSemiBold;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.more {
+  font-size: 0.9em;
+  opacity: 0.5;
+}
+
+.packageImage {
+  height: 200px;
+  position: relative;
+  width: inherit;
+  background-size: 375px 200px;
+  background-repeat: no-repeat;
+}
+
+.packageTitle {
+  font-family: SourceSansSemiBold;
+  font-size: 1.5em;
+  color: #1F1F1F;
+  margin-left: 1em;
+  position: relative;
+}
+
+.packageSubtitle {
+  font-family: SourceSansLight;
+  font-size: 1.2em;
+  color: #939393;
+  margin-left: 1.2em;
+}
+
+.tick {
+  display: inline-block;
+  width: 0.8em;
+}
