@@ -38,6 +38,26 @@
   text-align: center;
 }
 
+.bookButton {
+  border-radius: 600px;
+  color: #ffffff;
+  background-color: #F39110;
+  display: inline-block;
+  font-family: SourceSansRegular;
+  font-size: 1.1em;
+  padding: 0.4em;
+  padding-left: 1.3em;
+  padding-right: 1.3em;
+  margin-top: 0.7em;
+}
+
+.bookButtonContainer {
+  text-align: center;
+  background-color: #E9E5E0;
+  padding-top: 1.5em;
+  padding-bottom: 2em;
+}
+
 .descriptionWrapper {
   text-align: center;
   font-family: SourceSansRegular;
@@ -123,11 +143,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   color: #F39110;
   display: inline-block;
   font-family: SourceSansBold;
-  font-size: 1.1em;
+  font-size: 1.2em;
   padding: 0.3em;
   padding-left: 1em;
   padding-right: 1em;
   margin-top: 0.7em;
+  margin-bottom: 1.5em;
 }
 
 .packageImage {
