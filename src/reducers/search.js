@@ -12,7 +12,10 @@ import {
   // HIDE_ADD_MESSAGE,
   SET_SEARCH_STRING,
   UPDATE_DISPLAYED_ITEMS,
-  SEARCH_ERROR
+  SEARCH_ERROR,
+  SET_AUTOCOMPLETE_ERROR,
+  SET_AUTOCOMPLETE_OPTIONS,
+  SET_AUTOCOMPLETE_IN_SEARCH
  } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -30,7 +33,9 @@ export const initialState = {
   tiles: [],
   addMessageVisible: false,
   searchString: '',
-  error: ''
+  error: '',
+  autocompleteError: '',
+  autocompleteOptions: []
 };
 
 export default function search (state = initialState, action) {
@@ -119,7 +124,27 @@ export default function search (state = initialState, action) {
     //     addMessageVisible: false
     //   });
     case SET_SEARCH_STRING:
-      return {...state, searchString: action.searchString};
+      return {
+        ...state,
+        searchString: action.searchString
+    };
+    case SET_AUTOCOMPLETE_ERROR:
+      return {
+        ...state,
+        autocompleteError: action.error,
+        inAutocompleteSearch: false
+      }
+    case SET_AUTOCOMPLETE_OPTIONS:
+      return {
+        ...state,
+        autocompleteOptions: action.items,
+        inAutocompleteSearch: false
+      }
+    case SET_AUTOCOMPLETE_IN_SEARCH:
+      return {
+        ...state,
+        inAutocompleteSearch: true
+      }
     default:
       return state;
   }

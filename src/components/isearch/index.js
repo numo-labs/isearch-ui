@@ -60,7 +60,10 @@ class ISearch extends Component {
       removeTag,
       setSearchString,
       startSearch,
-      addSearchStringTag
+      addSearchStringTag,
+      autocompleteError,
+      autocompleteOptions,
+      searchString
     } = this.props;
 
     return (
@@ -79,6 +82,9 @@ class ISearch extends Component {
           removeTag={removeTag}
           onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
           setSearchString={setSearchString}
+          autocompleteError={autocompleteError}
+          autocompleteOptions={autocompleteOptions}
+          searchString={searchString}
         />
         { this.renderResults() }
       </section>
@@ -101,7 +107,9 @@ ISearch.propTypes = {
   startSearch: PropTypes.func,
   addSearchStringTag: PropTypes.func,
   loading: PropTypes.bool,
-  error: PropTypes.string
+  error: PropTypes.string,
+  autocompleteError: PropTypes.string,
+  autocompleteOptions: PropTypes.object
 };
 
 export default ISearch;

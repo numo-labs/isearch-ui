@@ -1,3 +1,6 @@
+export const QUERY_AUTOCOMPLETE_INPUT = `
+`;
+
 export const QUERY_FETCH_SEARCH_RESULT = `
 query searchResultQuery($id: String, $page: Int, $size: Int) {
   viewer {

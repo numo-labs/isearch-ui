@@ -15,7 +15,10 @@ function mapStateToProps (state) {
       filterVisibleState,
       searchString,
       loading,
-      error
+      error,
+      autocompleteError,
+      autocompleteOptions,
+      searchString
     }
   } = state;
   return {
@@ -25,7 +28,10 @@ function mapStateToProps (state) {
     filterVisibleState,
     searchString,
     loading,
-    error
+    error,
+    autocompleteError,
+    autocompleteOptions,
+    searchString
   };
 }
 
