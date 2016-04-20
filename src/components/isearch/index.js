@@ -35,7 +35,8 @@ class ISearch extends Component {
       showAddMessage,
       filterVisibleState,
       loading,
-      error
+      error,
+      viewHotel
     } = this.props;
 
     if (loading) {
@@ -51,6 +52,7 @@ class ISearch extends Component {
           filterVisibleState={filterVisibleState}
           showAddMessage={showAddMessage}
           error={error}
+          viewHotel={viewHotel}
         />
       );
     }
@@ -62,29 +64,39 @@ class ISearch extends Component {
       removeTag,
       setSearchString,
       startSearch,
-      addSearchStringTag
+      addSearchStringTag,
+      hotelPage,
+      backToSearch
     } = this.props;
-    return (
-      <section>
-        <HotelPage packageOffer={mockPackageOffer} />
-        <SearchSummary
-          city='Bodrum'
-          country='Turkey'
-          durationInWeeks={1}
-          paxMix='2 adults, 2 children'
-          departureDate='Sun 13 jul 2016'
-          returnDate='Tue 15 jul 2016'
+    if (!hotelPage) {
+      return (
+        <section>
+          <SearchSummary
+            city='Bodrum'
+            country='Turkey'
+            durationInWeeks={1}
+            paxMix='2 adults, 2 children'
+            departureDate='Sun 13 jul 2016'
+            returnDate='Tue 15 jul 2016'
+          />
+          <Header />
+          <Tags
+            tags={tags}
+            removeTag={removeTag}
+            onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
+            setSearchString={setSearchString}
+          />
+          { this.renderResults() }
+        </section>
+      );
+    } else {
+      return (
+        <HotelPage
+          backToSearch={backToSearch}
+          packageOffer={mockPackageOffer}
         />
-        <Header />
-        <Tags
-          tags={tags}
-          removeTag={removeTag}
-          onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
-          setSearchString={setSearchString}
-        />
-        { this.renderResults() }
-      </section>
-    );
+      );
+    }
   }
 }
 
@@ -103,7 +115,10 @@ ISearch.propTypes = {
   startSearch: PropTypes.func,
   addSearchStringTag: PropTypes.func,
   loading: PropTypes.bool,
-  error: PropTypes.string
+  error: PropTypes.string,
+  hotelPage: PropTypes.bool,
+  viewHotel: PropTypes.func,
+  backToSearch: PropTypes.func
 };
 
 export default ISearch;

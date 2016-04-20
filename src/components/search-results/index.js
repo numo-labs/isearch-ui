@@ -15,7 +15,7 @@ const masonryOptions = {
 class SearchResults extends Component {
 
   render () {
-    const { items, filterVisibleState, onYesFilter, onFilterClick, showAddMessage } = this.props;
+    const { items, filterVisibleState, onYesFilter, onFilterClick, showAddMessage, viewHotel } = this.props;
     return (
       <Masonry
         elementType={'div'}
@@ -31,6 +31,7 @@ class SearchResults extends Component {
                   <PackageTile
                     key={item.packageOffer.id}
                     packageOffer={item.packageOffer}
+                    viewHotel={viewHotel}
                   />
                 </div>
               );
@@ -67,7 +68,8 @@ SearchResults.propTypes = {
   onFilterClick: PropTypes.func,
   showAddMessage: PropTypes.func,
   items: PropTypes.array,
-  filterVisibleState: PropTypes.object
+  filterVisibleState: PropTypes.object,
+  viewHotel: PropTypes.func
 };
 
 export default SearchResults;

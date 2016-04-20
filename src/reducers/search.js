@@ -12,7 +12,8 @@ import {
   // HIDE_ADD_MESSAGE,
   SET_SEARCH_STRING,
   UPDATE_DISPLAYED_ITEMS,
-  SEARCH_ERROR
+  SEARCH_ERROR,
+  VIEW_SEARCH
  } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
