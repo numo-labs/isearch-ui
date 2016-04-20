@@ -103,6 +103,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 }
 
+.hotelPrice {
+  font-size: 2.5em;
+  color: #DC3767;
+  font-family: SourceSansSemiBold;
+}
+
 .imageContainer {
   position: relative;
 }
@@ -157,6 +163,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   width: inherit;
   background-size: 375px 200px;
   background-repeat: no-repeat;
+}
+
+.ppp {
+  font-family: SourceSansSemiBold;
+  font-size: 0.9em;
 }
 
 .titlePackage {
