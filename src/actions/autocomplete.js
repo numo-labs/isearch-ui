@@ -28,6 +28,8 @@ export function getAutocompleteOptions (searchString) {
           return dispatch(autocompleteError('No matches found'));
         }
       });
+    } else {
+      return;
     }
   };
 }

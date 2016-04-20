@@ -8,14 +8,14 @@ import {
   TAG_ADD_SINGLE_TAG,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
-  // SHOW_ADD_MESSAGE,
-  // HIDE_ADD_MESSAGE,
   SET_SEARCH_STRING,
   UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
   SET_AUTOCOMPLETE_ERROR,
   SET_AUTOCOMPLETE_OPTIONS,
   SET_AUTOCOMPLETE_IN_SEARCH
+  // SHOW_ADD_MESSAGE,
+  // HIDE_ADD_MESSAGE,
  } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -36,7 +36,7 @@ export const initialState = {
   error: '',
   autocompleteError: '',
   autocompleteOptions: [],
-  inAutoCompleteSearch: false
+  inAutoCompleteSearch: false // use to show loading spinner
 };
 
 export default function search (state = initialState, action) {
@@ -114,6 +114,28 @@ export default function search (state = initialState, action) {
         filterVisibleState,
         tiles: tileArray
       };
+    case SET_SEARCH_STRING:
+      return {
+        ...state,
+        searchString: action.searchString
+      };
+    case SET_AUTOCOMPLETE_ERROR:
+      return {
+        ...state,
+        autocompleteError: action.error,
+        inAutoCompleteSearch: false
+      };
+    case SET_AUTOCOMPLETE_OPTIONS:
+      return {
+        ...state,
+        autocompleteOptions: action.items,
+        inAutoCompleteSearch: false
+      };
+    case SET_AUTOCOMPLETE_IN_SEARCH:
+      return {
+        ...state,
+        inAutoCompleteSearch: true
+      };
     // case SHOW_ADD_MESSAGE:
     //   return ({
     //     ...state,
@@ -124,28 +146,6 @@ export default function search (state = initialState, action) {
     //     ...state,
     //     addMessageVisible: false
     //   });
-    case SET_SEARCH_STRING:
-      return {
-        ...state,
-        searchString: action.searchString
-    };
-    case SET_AUTOCOMPLETE_ERROR:
-      return {
-        ...state,
-        autocompleteError: action.error,
-        inAutoCompleteSearch: false
-      }
-    case SET_AUTOCOMPLETE_OPTIONS:
-      return {
-        ...state,
-        autocompleteOptions: action.items,
-        inAutoCompleteSearch: false
-      }
-    case SET_AUTOCOMPLETE_IN_SEARCH:
-      return {
-        ...state,
-        inAutoCompleteSearch: true
-      }
     default:
       return state;
   }

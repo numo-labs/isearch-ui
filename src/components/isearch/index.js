@@ -68,8 +68,6 @@ class ISearch extends Component {
       addSingleTag
     } = this.props;
 
-    console.log('rpsop', this.props);
-
     return (
       <section>
         <SearchSummary
