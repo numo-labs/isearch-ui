@@ -1,4 +1,14 @@
 export const QUERY_AUTOCOMPLETE_INPUT = `
+query autocomplete($input: String, $suggestor: SuggesterEnum, $size: Int) {
+  viewer {
+    autocomplete(text: $input, suggester: $suggestor, size: $size) {
+      items {
+        suggestion,
+        id
+      }
+    }
+  }
+}
 `;
 
 export const QUERY_FETCH_SEARCH_RESULT = `

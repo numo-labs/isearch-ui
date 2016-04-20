@@ -8,18 +8,19 @@ import {
 
 import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
 
-export function getAutocompleteOptions () {
+export function getAutocompleteOptions (searchString) {
   return (dispatch, getState) => {
     const { search: { searchString } } = getState();
     if (searchString.length >= 3) {
       dispatch(setAutocompleteInSearch());
-      graphqlService.query(QUERY_AUTOCOMPLETE_INPUT, {text: searchString, suggester: 'DISPLAYNAME', size: 250})
+      graphqlService.query(QUERY_AUTOCOMPLETE_INPUT, {input: searchString, suggester: 'DISPLAYNAME', size: 250})
       .then(json => {
+        console.log('autocomplete', json);
         if (json.data.viewer.autocomplete.items) {
           var items = json.data.viewer.autocomplete.items.map(function (item) {
             return {
-              value: item.id,
-              label: item.suggestion
+              id: item.id,
+              suggestion: item.suggestion
             };
           });
           return dispatch(setAutocompleteOptions(items));
@@ -40,5 +41,5 @@ export function autocompleteError (error) {
 }
 
 export function setAutocompleteInSearch () {
-  return { type: SET_AUTOCOMPLETE_IN_SEARCH, error };
+  return { type: SET_AUTOCOMPLETE_IN_SEARCH };
 }

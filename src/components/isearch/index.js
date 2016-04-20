@@ -60,11 +60,15 @@ class ISearch extends Component {
       removeTag,
       setSearchString,
       startSearch,
-      addSearchStringTag,
       autocompleteError,
       autocompleteOptions,
-      searchString
+      searchString,
+      getAutocompleteOptions,
+      inAutoCompleteSearch,
+      addSingleTag
     } = this.props;
+
+    console.log('rpsop', this.props);
 
     return (
       <section>
@@ -80,11 +84,13 @@ class ISearch extends Component {
         <Tags
           tags={tags}
           removeTag={removeTag}
-          onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
+          onOptionSelected={(option) => { addSingleTag(option.suggestion, option.id); startSearch(); }}
           setSearchString={setSearchString}
           autocompleteError={autocompleteError}
           autocompleteOptions={autocompleteOptions}
           searchString={searchString}
+          getAutocompleteOptions={getAutocompleteOptions}
+          inAutoCompleteSearch={inAutoCompleteSearch}
         />
         { this.renderResults() }
       </section>
@@ -108,8 +114,13 @@ ISearch.propTypes = {
   addSearchStringTag: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.string,
+
+  // tags autocomplete
   autocompleteError: PropTypes.string,
-  autocompleteOptions: PropTypes.object
+  autocompleteOptions: PropTypes.array,
+  inAutoCompleteSearch: PropTypes.bool,
+  getAutocompleteOptions: PropTypes.func,
+  addSingleTag: PropTypes.func
 };
 
 export default ISearch;

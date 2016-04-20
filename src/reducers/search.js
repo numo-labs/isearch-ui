@@ -35,7 +35,8 @@ export const initialState = {
   searchString: '',
   error: '',
   autocompleteError: '',
-  autocompleteOptions: []
+  autocompleteOptions: [],
+  inAutoCompleteSearch: false
 };
 
 export default function search (state = initialState, action) {
@@ -132,18 +133,18 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         autocompleteError: action.error,
-        inAutocompleteSearch: false
+        inAutoCompleteSearch: false
       }
     case SET_AUTOCOMPLETE_OPTIONS:
       return {
         ...state,
         autocompleteOptions: action.items,
-        inAutocompleteSearch: false
+        inAutoCompleteSearch: false
       }
     case SET_AUTOCOMPLETE_IN_SEARCH:
       return {
         ...state,
-        inAutocompleteSearch: true
+        inAutoCompleteSearch: true
       }
     default:
       return state;

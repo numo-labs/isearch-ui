@@ -1,14 +1,14 @@
 'use strict';
 
-export function filterMap (array, filterString, mapKey) {
+export function filterMap (array, filterString) {
   return array
     .filter(tag => tag.id.indexOf(filterString) > -1)
-    .map(tag => tag[mapKey]);
+    .map(tag => tag.id);
 }
 
 export function formatQuery (tags) {
-  const geoTags = filterMap(tags, 'geo', 'displayName');
-  const amenityTags = filterMap(tags, 'amenity', 'id');
+  const geoTags = filterMap(tags, 'geo');
+  const amenityTags = filterMap(tags, 'amenity');
   return {
     geography: geoTags,
     amenity: amenityTags,
