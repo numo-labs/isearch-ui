@@ -1,0 +1,22 @@
+.navBarContainer {
+  width: 100%;
+  height: 5vh;
+  min-height: 50px;
+  line-height: 100%;
+  background-color: #6DB4A9;
+}
+.navBarContainer .backButton {
+  padding: 1.2em;
+  float: left;
+  color: #fff;
+  height: 100%;
+  line-height: 4em;
+  padding: 0 1.5em;
+  cursor: pointer;
+}
+
+.navBarContainer .share {
+  padding: 1.2em 1.5em;
+  float: right;
+  color: #fff;
+}

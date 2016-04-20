@@ -4,6 +4,7 @@ import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
+import { ArticleFullPage } from '../../../lib/article';
 
 class ISearch extends Component {
 
@@ -33,7 +34,8 @@ class ISearch extends Component {
       showAddMessage,
       filterVisibleState,
       loading,
-      error
+      error,
+      viewArticle
     } = this.props;
 
     if (loading) {
@@ -49,6 +51,7 @@ class ISearch extends Component {
           filterVisibleState={filterVisibleState}
           showAddMessage={showAddMessage}
           error={error}
+          viewArticle={viewArticle}
         />
       );
     }
@@ -59,30 +62,42 @@ class ISearch extends Component {
       tags,
       removeTag,
       setSearchString,
+      addSearchStringTag,
       startSearch,
-      addSearchStringTag
+      backToSearch,
+      articlePage,
+      articleContent
     } = this.props;
 
-    return (
-      <section>
-        <SearchSummary
-          city='Bodrum'
-          country='Turkey'
-          durationInWeeks={1}
-          paxMix='2 adults, 2 children'
-          departureDate='Sun 13 jul 2016'
-          returnDate='Tue 15 jul 2016'
+    if (!articlePage) {
+      return (
+        <section>
+          <SearchSummary
+            city='Bodrum'
+            country='Turkey'
+            durationInWeeks={2}
+            paxMix='2 adults, 2 children'
+            departureDate='Sun 13 jul 2016'
+            returnDate='Tue 15 jul 2016'
+          />
+          <Header />
+          <Tags
+            tags={tags}
+            removeTag={removeTag}
+            onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
+            setSearchString={setSearchString}
+          />
+          { this.renderResults() }
+          </section>
+        );
+    } else {
+      return (
+        <ArticleFullPage
+          articleContent={articleContent}
+          backToSearch={backToSearch}
         />
-        <Header />
-        <Tags
-          tags={tags}
-          removeTag={removeTag}
-          onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
-          setSearchString={setSearchString}
-        />
-        { this.renderResults() }
-      </section>
-    );
+      );
+    }
   }
 }
 
@@ -99,6 +114,10 @@ ISearch.propTypes = {
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
   startSearch: PropTypes.func,
+  viewArticle: PropTypes.func,
+  backToSearch: PropTypes.func,
+  articlePage: PropTypes.bool,
+  articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.string
