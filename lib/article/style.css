@@ -83,6 +83,12 @@ h1 {
   width: 100%;
 }
 
+.articleFullPageContainer .tagSection {
+  width: 100%;
+  text-align: center;
+  padding: 2.5em;
+}
+
 @media (min-width: 960px) {
   .articleFullPageContainer {
     padding: 0 12em;
