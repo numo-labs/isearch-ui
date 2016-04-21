@@ -26,7 +26,9 @@ class TileGrid extends Component {
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
-            'id': item.packageOffer.provider.reference// + '-' + this.props.index
+            'id': item.packageOffer.provider.reference,
+            'brand': 'hotel_tile',
+            'list': 'inspirational search feed'
           }]
         },
         'event': 'impressionsPushed'
