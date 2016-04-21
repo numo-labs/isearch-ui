@@ -22,11 +22,12 @@ class TileGrid extends Component {
   }
 
   handleVisibility (isVisible, item) {
+    const reference = item.packageOffer.provider.reference;
     if (isVisible) {
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
-            'id': 'iSearch-' + item.id // + '-' + this.props.index
+            'id': item.packageOffer.provider.reference// + '-' + this.props.index
           }]
         },
         'event': 'impressionsPushed'
