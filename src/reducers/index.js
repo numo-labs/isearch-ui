@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import search from './search.js';
+import article from './article.js';
 
 const rootReducer = combineReducers({
-  search
+  search,
+  article
 });
 
 export default rootReducer;

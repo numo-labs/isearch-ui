@@ -25,3 +25,8 @@ export const SET_AUTOCOMPLETE_IN_SEARCH = 'SET_AUTOCOMPLETE_IN_SEARCH';
 
 // errors
 export const SEARCH_ERROR = 'SEARCH_ERROR';
+
+// temp routing
+
+export const VIEW_ARTICLE = 'VIEW_ARTICLE';
+export const VIEW_SEARCH = 'VIEW_SEARCH';

@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Masonry from 'react-masonry-component';
 import FilterTile from '../../../lib/filter-tile-yesno';
 import PackageTile from '../../../lib/package-tile';
-import Article from '../../../lib/article';
+import { ArticleTile } from '../../../lib/article';
 import './style.css';
 
 const masonryOptions = {
@@ -15,7 +15,7 @@ const masonryOptions = {
 class SearchResults extends Component {
 
   render () {
-    const { items, filterVisibleState, onYesFilter, onFilterClick, showAddMessage } = this.props;
+    const { items, filterVisibleState, onYesFilter, onFilterClick, showAddMessage, viewArticle } = this.props;
     return (
       <Masonry
         elementType={'div'}
@@ -51,7 +51,7 @@ class SearchResults extends Component {
             } else if (item.type === 'article') {
               return (
                 <div key={index} className='gridItem'>
-                  <Article {...item} />
+                  <ArticleTile {...item} viewArticle={viewArticle}/>
                 </div>
               );
             }
@@ -67,7 +67,8 @@ SearchResults.propTypes = {
   onFilterClick: PropTypes.func,
   showAddMessage: PropTypes.func,
   items: PropTypes.array,
-  filterVisibleState: PropTypes.object
+  filterVisibleState: PropTypes.object,
+  viewArticle: PropTypes.func
 };
 
 export default SearchResults;
