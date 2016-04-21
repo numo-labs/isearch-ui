@@ -62,7 +62,6 @@ describe('Component', function () {
       wrapper.setProps({loading: true});
       const children = wrapper.children().nodes;
       const fourthChild = children[3].type;
-      const spinner = wrapper.find('.spinnerContainer').node.type;
       expect(fourthChild).to.deep.equal('div');
       done();
     });
