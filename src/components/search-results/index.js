@@ -15,7 +15,7 @@ const masonryOptions = {
 
 class SearchResults extends Component {
   handleVisibility (isVisible, item) {
-    if (isVisible && item.type === 'packageOffer') {
+    if (dataLayer && isVisible && item.type === 'packageOffer') {
       console.log('datalayer: ', item.packageOffer.provider.reference);
       dataLayer.push({
         'ecommerce': {
@@ -27,7 +27,30 @@ class SearchResults extends Component {
         },
         'event': 'impressionsPushed'
       });
+    } else if (dataLayer && isVisible && item.type === 'filter') {
+      dataLayer.push({
+        'ecommerce': {
+          'impressions': [{
+            'id': item.displayName,
+            'brand': 'filter_tile',
+            'list': 'inspirational search feed'
+          }]
+        },
+        'event': 'impressionsPushed'
+      });
+    } else if (dataLayer && isVisible && item.type === 'article') {
+      dataLayer.push({
+        'event': 'impressionsPushed',
+        'ecommerce': {
+          'impressions': [{
+            'id': 'article name', // can this be extracted from the backend?
+            'category': 'article category', // can this be fetched?
+            'brand': 'article_tile', // hardcoded
+            'list': 'inspirational search feed'
+          }]
+        }});
     }
+    return;
   }
   render () {
     const { items, filterVisibleState, onYesFilter, onFilterClick, showAddMessage, viewArticle } = this.props;
