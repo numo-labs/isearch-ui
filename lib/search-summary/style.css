@@ -23,7 +23,6 @@
   background-color: #6DB4A9;
   color: #ffffff;
   padding: 0.3em;
-  padding-left: 0.8em;
   position: fixed;
   z-index: 30;
   height: 100em;
@@ -86,7 +85,7 @@
   height: 100em;
 }
 
-.datePicker {
+/*.datePicker {
   width: 46%;
   float: left;
   margin-right: 0.9em;
@@ -133,7 +132,7 @@
   width: 46%;
   float: left;
   margin-right: 0.9em;
-}
+}*/
 
 .departFrom {
   margin: 0 auto;

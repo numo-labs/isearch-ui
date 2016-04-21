@@ -1,0 +1,70 @@
+.calendar__day {
+    font-size: 13px;
+    cursor: pointer;
+    padding: 7px 9px 6px;
+    border: solid 1px #eee;
+    color: black;
+}
+
+.calendar thead td {
+  padding: 10px 0;
+  color: #4F4F4F;
+}
+
+.dateLabel {
+  color: black;
+  opacity: 0.4;
+  display: inline-block;
+  position: absolute;
+  left: 1em;
+  font-size: 0.75em;
+  top: 1.7em;
+}
+
+.datePicker {
+  width: 46%;
+  float: left;
+  margin-right: 0.9em;
+  display: inline-block;
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+  margin-top: 1em;
+  color: black;
+  height: 2em;
+}
+
+.datePickerContainer {
+  position: relative;
+}
+
+.datePickerInput {
+  width: 100%;
+  color: black;
+  padding-bottom: 0.15em;
+  padding-top: 0.15em;
+  font-family: "ThomasHeadlineBold", serif;
+  padding-top: 1.5em;
+  padding-left: 0.5em;
+}
+
+.day {
+  font-size: 13px;
+  cursor: pointer;
+  padding: 7px 9px 6px;
+  border: solid 1px #eee;
+  color: #4F4F4F;
+}
+
+.dayActive {
+  background-color: #6DB4A9;
+  color: #ffffff;
+}
+
+.dayOtherMonth {
+  color: #ccc;
+}
+
+.departDate {
+  height: 2em;
+}
