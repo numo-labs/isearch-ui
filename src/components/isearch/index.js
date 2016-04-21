@@ -65,7 +65,8 @@ class ISearch extends Component {
       searchString,
       getAutocompleteOptions,
       inAutoCompleteSearch,
-      addSingleTag
+      addSingleTag,
+      clearSearchString
     } = this.props;
 
     return (
@@ -82,13 +83,15 @@ class ISearch extends Component {
         <Tags
           tags={tags}
           removeTag={removeTag}
-          onOptionSelected={(option) => { addSingleTag(option.suggestion, option.id); startSearch(); }}
+          addSingleTag={addSingleTag}
+          startSearch={startSearch}
           setSearchString={setSearchString}
           autocompleteError={autocompleteError}
           autocompleteOptions={autocompleteOptions}
           searchString={searchString}
           getAutocompleteOptions={getAutocompleteOptions}
           inAutoCompleteSearch={inAutoCompleteSearch}
+          clearSearchString={clearSearchString}
         />
         { this.renderResults() }
       </section>
@@ -118,7 +121,8 @@ ISearch.propTypes = {
   autocompleteOptions: PropTypes.array,
   inAutoCompleteSearch: PropTypes.bool,
   getAutocompleteOptions: PropTypes.func,
-  addSingleTag: PropTypes.func
+  addSingleTag: PropTypes.func,
+  clearSearchString: PropTypes.func
 };
 
 export default ISearch;

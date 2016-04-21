@@ -13,7 +13,8 @@ import {
   SEARCH_ERROR,
   SET_AUTOCOMPLETE_ERROR,
   SET_AUTOCOMPLETE_OPTIONS,
-  SET_AUTOCOMPLETE_IN_SEARCH
+  SET_AUTOCOMPLETE_IN_SEARCH,
+  CLEAR_SEARCH_STRING
   // SHOW_ADD_MESSAGE,
   // HIDE_ADD_MESSAGE,
  } from '../constants/actionTypes';
@@ -118,6 +119,11 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         searchString: action.searchString
+      };
+    case CLEAR_SEARCH_STRING:
+      return {
+        ...state,
+        searchString: ''
       };
     case SET_AUTOCOMPLETE_ERROR:
       return {
