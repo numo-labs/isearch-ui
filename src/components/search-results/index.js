@@ -15,7 +15,14 @@ const masonryOptions = {
 class SearchResults extends Component {
 
   render () {
-    const { items, filterVisibleState, onYesFilter, onFilterClick, showAddMessage, viewArticle } = this.props;
+    const {
+      items,
+      filterVisibleState,
+      onYesFilter,
+      onFilterClick,
+      showAddMessage,
+      viewArticle
+    } = this.props;
     return (
       <Masonry
         elementType={'div'}

@@ -10,7 +10,7 @@ Array.prototype.insert = function (index, element) {
 export function shuffleMockedTilesIntoResultSet (items, tiles) {
   var spacing = Math.floor((items.length + tiles.length) / tiles.length);
   return tiles.reduce((result, tile, index) => {
-    var position = index * spacing;
+    var position = (index + 1) * spacing;
     return result.insert(position, tile);
   }, items);
 }

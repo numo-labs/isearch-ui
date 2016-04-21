@@ -5,6 +5,7 @@ import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
 import { ArticleFullPage } from '../../../lib/article';
+import './style.css';
 
 class ISearch extends Component {
 
@@ -39,8 +40,6 @@ class ISearch extends Component {
 
     if (loading) {
       return <LoadingSpinner />;
-    } else if (error) {
-      return <div className='errorMessage'>{error}</div>;
     } else {
       return (
         <SearchResults
@@ -49,7 +48,6 @@ class ISearch extends Component {
           onFilterClick={onFilterClick}
           filterVisibleState={filterVisibleState}
           // showAddMessage={showAddMessage}
-          error={error}
           viewArticle={viewArticle}
         />
       );
@@ -71,7 +69,8 @@ class ISearch extends Component {
       clearSearchString,
       backToSearch,
       articlePage,
-      articleContent
+      articleContent,
+      error
     } = this.props;
 
     if (!articlePage) {
@@ -99,6 +98,7 @@ class ISearch extends Component {
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
           />
+          { error && <div className='errorMessage'>{error}</div> }
           { this.renderResults() }
           </section>
         );
