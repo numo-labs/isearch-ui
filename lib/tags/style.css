@@ -61,7 +61,7 @@
   padding-top: 0.3em;
   padding-bottom: 0.5em;
   display: inline-block;
-  width: 25em;
+  width: 80%;
   position: relative;
 }
 
@@ -76,10 +76,24 @@
   margin: 0 auto;
 }
 
+.tags {
+  display: inline-block;
+  width: 100%
+}
+
+.list-group-item a:hover {
+  text-decoration: none;
+}
+
+.list-group-item a {
+  color: black;
+}
+
 .list-group-item:hover {
   background-color: #F39100;
 }
 
-a:hover {
-  text-decoration: none;
+.list-group-item.active, .list-group-item.active:hover {
+  background-color: #F39100;
+  border-color: #F39100;
 }
