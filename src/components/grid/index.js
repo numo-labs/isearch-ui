@@ -22,7 +22,6 @@ class TileGrid extends Component {
   }
 
   handleVisibility (isVisible, item) {
-    const reference = item.packageOffer.provider.reference;
     if (isVisible) {
       dataLayer.push({
         'ecommerce': {
