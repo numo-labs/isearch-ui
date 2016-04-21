@@ -19,9 +19,9 @@ const mockStore = configureMockStore([thunk]);
 
 describe('Autocomplete actions', () => {
   it(`getAutocompleteOptions does not launch graphql query when the
-      searchString value is less than 3`, (done) => {
+      searchString value is 0`, (done) => {
     const expectedActions = [];
-    const store = mockStore({search: { searchString: 's' }});
+    const store = mockStore({search: { searchString: '' }});
     store.dispatch(actions.getAutocompleteOptions());
     expect(store.getActions()).to.deep.equal(expectedActions);
     done();
@@ -64,7 +64,7 @@ describe('Autocomplete actions', () => {
       .catch(done);
   });
   it(`getAutocompleteOptions launches a graphql autocomplete query when the
-      searchString value is greater than 3 and set an error if no items
+      searchString value is greater than 0 and set an error if no items
       returned`, (done) => {
     const json = {
       data: {
@@ -82,7 +82,7 @@ describe('Autocomplete actions', () => {
         error: 'No matches found'
       }
     ];
-    const store = mockStore({search: { searchString: 'spa' }});
+    const store = mockStore({search: { searchString: 's' }});
     var stub = simple.mock(graphqlService, 'query').resolveWith(json);
     store.dispatch(actions.getAutocompleteOptions());
     graphqlService.query.lastCall.returned

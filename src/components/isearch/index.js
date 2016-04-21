@@ -3,8 +3,9 @@ import Header from '../../../lib/header/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
-import LoadingSpinner from '../../../lib/spinner';
+import LoadingSpinner from '../../../lib/spinner4';
 import { ArticleFullPage } from '../../../lib/article';
+import './style.css';
 
 class ISearch extends Component {
 
@@ -23,7 +24,7 @@ class ISearch extends Component {
    */
 
    fetchQueryResults () {
-     this.props.fetchQuerySearchResults(12345, 1, 20, 1);
+     this.props.fetchQuerySearchResults('29105eb0-07e6-11e6-a9f1-a9adafcac240', 1, 20, 1);
    }
 
   renderResults () {
@@ -32,28 +33,19 @@ class ISearch extends Component {
       onYesFilter,
       onFilterClick,
       filterVisibleState,
-      loading,
-      error,
       viewArticle
     } = this.props;
 
-    if (loading) {
-      return <LoadingSpinner />;
-    } else if (error) {
-      return <div className='errorMessage'>{error}</div>;
-    } else {
-      return (
-        <SearchResults
-          items={displayedItems}
-          onYesFilter={onYesFilter}
-          onFilterClick={onFilterClick}
-          filterVisibleState={filterVisibleState}
-          // showAddMessage={showAddMessage}
-          error={error}
-          viewArticle={viewArticle}
-        />
-      );
-    }
+    return (
+      <SearchResults
+        items={displayedItems}
+        onYesFilter={onYesFilter}
+        onFilterClick={onFilterClick}
+        filterVisibleState={filterVisibleState}
+        // showAddMessage={showAddMessage}
+        viewArticle={viewArticle}
+      />
+    );
   }
 
   render () {
@@ -71,7 +63,9 @@ class ISearch extends Component {
       clearSearchString,
       backToSearch,
       articlePage,
-      articleContent
+      articleContent,
+      error,
+      loading
     } = this.props;
 
     if (!articlePage) {
@@ -99,6 +93,12 @@ class ISearch extends Component {
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
           />
+          { loading &&
+            <div className='spinnerContainer'>
+              <LoadingSpinner/>
+            </div>
+          }
+          { error && <div className='errorMessage'>{error}</div> }
           { this.renderResults() }
           </section>
         );
