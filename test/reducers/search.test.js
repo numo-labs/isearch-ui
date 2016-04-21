@@ -217,7 +217,7 @@ describe('Search Reducer', () => {
       expect(state).to.deep.equal(expectedState);
       done();
     });
-  })
+  });
   describe('Autocomplete actions', () => {
     it(`SET_AUTOCOMPLETE_OPTIONS -> updates the autocompleteOptions state with
         the items and sets inAutocompleteSearch to false`, (done) => {

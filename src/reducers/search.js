@@ -70,15 +70,15 @@ export default function search (state = initialState, action) {
         loading: false,
         error: action.error
       };
-    case TAG_ADD_TAGS:
-      /*
-      * use this action if there are an initial set of tags passed
-      * through when the page is first loaded
-      */
-      return {
-        ...state,
-        tags: action.tags
-      };
+    // case TAG_ADD_TAGS:
+    //   /*
+    //   * use this action if there are an initial set of tags passed
+    //   * through when the page is first loaded
+    //   */
+    //   return {
+    //     ...state,
+    //     tags: action.tags
+    //   };
     case TAG_ADD_SINGLE_TAG:
       return {
         ...state,
