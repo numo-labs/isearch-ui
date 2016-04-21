@@ -12,14 +12,14 @@
   height: 3em;
   width: 21em;
   bottom: 0;
-  margin-top: 0.5em;
+  margin-top: 1.5em;
   border: none;
   outline-width: 0;
   outline: none !important;
   padding-left: 0.5em;
   float: left;
   margin-right: 0.3em;
-  margin-bottom: 0.4em;
+  margin-bottom: 0.1em;
 }
 
 .input-results {
@@ -40,11 +40,57 @@
   padding-left: 0.75em;
   padding-right: 0.75em;
   padding-bottom: 0.25em;
-  margin-top: 0.4em;
   float: left;
   position: absolute;
   top: 0.5em;
 }
+
+.searchButton:hover {
+  background-color: #F37800;
+}
+
+.searchButton:active {
+  background-color: #F39100;
+}
+
+/*@media (min-width: 450px) {
+  .inputBar {
+    width: 31em;
+  }
+}*/
+
+.inputContainer {
+  top: 3em;
+  display: inline-block;
+  margin-right: 2em;
+}
+
+.input:focus {
+  outline: none !important;
+  outline-width: 0;
+}
+
+/* removes placeholder text when input is clicked */
+.inputBar:focus::-webkit-input-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+}
+.inputBar:focus:-moz-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+} /* Firefox 18- */
+.inputBar:focus::-moz-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+  } /* Firefox 19+ */
+.inputBar:focus:-ms-input-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+} /* oldIE ;) */
 
 .tag {
   padding: 0.2em;
@@ -61,8 +107,9 @@
   padding-top: 0.3em;
   padding-bottom: 0.5em;
   display: inline-block;
-  width: 25em;
+  width: 80%;
   position: relative;
+  margin-bottom: 0.5em;
 }
 
 .tagName {
@@ -76,10 +123,24 @@
   margin: 0 auto;
 }
 
+.tags {
+  display: inline-block;
+  width: 100%
+}
+
+.list-group-item a:hover {
+  text-decoration: none;
+}
+
+.list-group-item a {
+  color: black;
+}
+
 .list-group-item:hover {
   background-color: #F39100;
 }
 
-a:hover {
-  text-decoration: none;
+.list-group-item.active, .list-group-item.active:hover {
+  background-color: #F39100;
+  border-color: #F39100;
 }

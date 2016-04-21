@@ -17,7 +17,7 @@ import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
 export function getAutocompleteOptions () {
   return (dispatch, getState) => {
     const { search: { searchString } } = getState();
-    if (searchString.length >= 3) {
+    if (searchString.length > 0) {
       dispatch(setAutocompleteInSearch());
       const variables = {
         input: searchString,
