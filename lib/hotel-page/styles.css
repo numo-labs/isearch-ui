@@ -195,10 +195,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 }
 
 .packageImage {
-  height: 200px;
+  height: 400px;
   position: relative;
-  width: inherit;
-  background-size: 375px 200px;
+  width: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -273,10 +273,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
     margin-top: 2em;
     padding-left: 1em;
     margin-top: 1em;
-    height: 100vh;
+    margin-bottom: 2em;
   }
   .infoContentContainer {
     padding-top: 1em;
+    width: 100%;
   }
   .mintBanner {
     opacity: 0;
@@ -318,4 +319,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 .slick-slider .slick-next {
   right: 25px;
+}
+
+.descriptionSlider {
+  width: 100%;
+  padding: 0 1em;
+  margin-bottom: 2em;
+}
+
+@media (max-width: 750px) {
+  .descriptionSlider,
+  .packageImage {
+    display: none;
+  }
+}
+@media (min-width: 750px) {
+  .headerSlider {
+    display: none;
+  }
 }
