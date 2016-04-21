@@ -149,6 +149,11 @@
   text-align: center;
 }
 
+.dropWrapper {
+  width: 20em;
+  margin: 0 auto;
+}
+
 .exitButton {
   font-family: SourceSansLight;
   font-size: 2em;
