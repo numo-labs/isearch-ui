@@ -144,8 +144,16 @@
   outline: none !important;
 }
 
+.departurePaxmix {
+  width: 95%;
+  margin-top: 0.3em;
+}
+
 .dropDown {
   text-align: center;
+  width: 20em;
+  margin: 0 auto;
+  margin-top: 6em;
 }
 
 .dropWrapper {
@@ -155,9 +163,9 @@
 
 .exitButton {
   font-family: SourceSansLight;
-  font-size: 2em;
+  font-size: 1.5em;
   position: absolute;
-  bottom: 10.5em;
+  bottom: 17em;
   right: 0.5em;
 }
 
@@ -236,17 +244,11 @@ h1 {
 }
 
 @media (min-width: 490px) {
-  .blueContainer {
-    padding-left: 3em;
-  }
   .search {
     padding-left: 3em;
   }
 }
 @media (min-width: 650px) {
-  .blueContainer {
-    padding-left: 5em;
-  }
   .search {
     padding-left: 5em;
   }
@@ -255,9 +257,20 @@ h1 {
   }
 }
 
+@media (min-width: 750px) {
+  .exitButton {
+    border-radius: 100%;
+    border: 1px solid #ffffff;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    right: 0;
+    margin-top: 2em;
+  }
+}
+
 @media (min-width: 1700px) {
   .blueContainer {
-    padding-left: 13em;
+
   }
   .search {
     padding-left: 13em;
