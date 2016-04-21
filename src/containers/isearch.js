@@ -22,7 +22,6 @@ function mapStateToProps (state) {
       inAutoCompleteSearch
     }
   } = state;
-  console.log('state', state);
   return {
     tags,
     displayedItems,
