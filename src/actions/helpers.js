@@ -1,17 +1,26 @@
 'use strict';
-
-export function filterMap (array, filterString, mapKey) {
-  return array
-    .filter(tag => tag.id.indexOf(filterString) > -1)
-    .map(tag => tag[mapKey]);
-}
-
+/*
+* Function to format the query and add keys to the query object based on the tags
+*
+* Returned object should look like:
+*  {
+*    passengers: [],
+*    geography: [] // key only added if there are geo tags
+*  }
+*/
 export function formatQuery (tags) {
-  const geoTags = filterMap(tags, 'geo', 'displayName');
-  const amenityTags = filterMap(tags, 'amenity', 'id');
-  return {
-    geography: geoTags,
-    amenity: amenityTags,
-    passengers: [{birthday: '1986-07-14'}]
-  };
+  const query = {passengers: [{birthday: '1986-07-14'}]};
+  return tags.reduce((q, tag) => {
+    const type = tag.id.split(':')[0];
+    const field = type === 'geo' ? 'geography' : type;
+    const value = q[type] || {};
+    const updatedQuery = {
+      ...q,
+      [field]: [
+        ...value,
+        tag.id
+      ]
+    };
+    return updatedQuery;
+  }, query);
 }

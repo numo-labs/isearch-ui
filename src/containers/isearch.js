@@ -2,10 +2,16 @@ import { connect } from 'react-redux';
 import ISearch from '../components/isearch/';
 
 import * as TagActions from '../actions/tags';
+import * as AutocompleteActions from '../actions/autocomplete';
 import * as SearchActions from '../actions/search-results';
 import * as ArticleActions from '../actions/article';
 
-const Actions = {...TagActions, ...SearchActions, ...ArticleActions};
+const Actions = {
+  ...TagActions,
+  ...SearchActions,
+  ...AutocompleteActions,
+  ...ArticleActions
+};
 
 function mapStateToProps (state) {
   const {
@@ -16,7 +22,10 @@ function mapStateToProps (state) {
       filterVisibleState,
       searchString,
       loading,
-      error
+      error,
+      autocompleteError,
+      autocompleteOptions,
+      inAutoCompleteSearch
     },
     article: {
       articlePage,
@@ -32,7 +41,10 @@ function mapStateToProps (state) {
     articlePage,
     articleContent,
     loading,
-    error
+    error,
+    autocompleteError,
+    autocompleteOptions,
+    inAutoCompleteSearch
   };
 }
 

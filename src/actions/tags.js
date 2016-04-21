@@ -3,7 +3,8 @@ import {
   TAG_REMOVE_TAG,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
-  TAG_ADD_SINGLE_TAG
+  TAG_ADD_SINGLE_TAG,
+  CLEAR_SEARCH_STRING
 } from '../constants/actionTypes';
 import { filterResults } from './search-results.js';
 
@@ -84,12 +85,9 @@ export const addSingleTag = (displayName, id, filterString) => {
 };
 
 /**
-* Action to add the search string as a geotag
+* Action to clear the search string
 */
 
-export const addSearchStringTag = () => {
-  return (dispatch, getState) => {
-    const { search: { searchString } } = getState();
-    return dispatch(addSingleTag(searchString, 'geo'));
-  };
+export const clearSearchString = () => {
+  return { type: CLEAR_SEARCH_STRING };
 };
