@@ -62,8 +62,8 @@ describe('Component', function () {
       wrapper.setProps({loading: true});
       const children = wrapper.children().nodes;
       const fourthChild = children[3].type;
-      const spinner = wrapper.find('LoadingSpinner').node.type;
-      expect(fourthChild).to.deep.equal(spinner);
+      const spinner = wrapper.find('.spinnerContainer').node.type;
+      expect(fourthChild).to.deep.equal('div');
       done();
     });
     it('should render a <div/> with class errorMessage as the fourth child if the loading prop is false but there is an error', function (done) {

@@ -163,7 +163,7 @@ export function filterResults () {
 
 export function startSearch () {
   return (dispatch, getState) => {
-    const { search: { searchString, tags, displayedItems } } = getState();
+    const { search: { searchString, tags } } = getState();
     const tagExists = tags.filter(tag => tags.displayName === searchString).length > 0;
     if (tagExists) {
       return;

@@ -19,7 +19,7 @@
   100% {
     box-shadow: 0 -1.5em 0 0.1em #B2A37B, 1em -1em 0 0em #B2A37B, 1.5em 0 0 -0.5em #B2A37B, 1em 1em 0 -0.5em #B2A37B, 0 1.5em 0 -0.5em #B2A37B, -1em 1em 0 -0.5em #B2A37B, -1.5em 0 0 -0.5em #B2A37B, -1em -1em 0 0 #B2A37B;
   }
-  /*12.5% {
+  12.5% {
     box-shadow: 0 -3em 0 0 #B2A37B, 2em -2em 0 0.2em #B2A37B, 3em 0 0 0 #B2A37B, 2em 2em 0 -1em #B2A37B, 0 3em 0 -1em #B2A37B, -2em 2em 0 -1em #B2A37B, -3em 0 0 -1em #B2A37B, -2em -2em 0 -1em #B2A37B;
   }
   25% {
@@ -39,14 +39,14 @@
   }
   87.5% {
     box-shadow: 0em -3em 0 0 #B2A37B, 2em -2em 0 -1em #B2A37B, 3em 0 0 -1em #B2A37B, 2em 2em 0 -1em #B2A37B, 0 3em 0 -1em #B2A37B, -2em 2em 0 0 #B2A37B, -3em 0em 0 0 #B2A37B, -2em -2em 0 0.2em #B2A37B;
-  }*/
+  }
 }
 @keyframes load4 {
   0%,
   100% {
     box-shadow: 0 -1.5em 0 0.1em #B2A37B, 1em -1em 0 0em #B2A37B, 1.5em 0 0 -0.5em #B2A37B, 1em 1em 0 -0.5em #B2A37B, 0 1.5em 0 -0.5em #B2A37B, -1em 1em 0 -0.5em #B2A37B, -1.5em 0 0 -0.5em #B2A37B, -1em -1em 0 0 #B2A37B;
   }
-  /*12.5% {
+  12.5% {
     box-shadow: 0 -3em 0 0 #B2A37B, 2em -2em 0 0.2em #B2A37B, 3em 0 0 0 #B2A37B, 2em 2em 0 -1em #B2A37B, 0 3em 0 -1em #B2A37B, -2em 2em 0 -1em #B2A37B, -3em 0 0 -1em #B2A37B, -2em -2em 0 -1em #B2A37B;
   }
   25% {
@@ -66,7 +66,7 @@
   }
   87.5% {
     box-shadow: 0em -3em 0 0 #B2A37B, 2em -2em 0 -1em #B2A37B, 3em 0 0 -1em #B2A37B, 2em 2em 0 -1em #B2A37B, 0 3em 0 -1em #B2A37B, -2em 2em 0 0 #B2A37B, -3em 0em 0 0 #B2A37B, -2em -2em 0 0.2em #B2A37B;
-  }*/
+  }
 }
 
 .spinnerContainer {

@@ -24,7 +24,7 @@ class ISearch extends Component {
    */
 
    fetchQueryResults () {
-     this.props.fetchQuerySearchResults(12345, 1, 20, 1);
+     this.props.fetchQuerySearchResults('29105eb0-07e6-11e6-a9f1-a9adafcac240', 1, 20, 1);
    }
 
   renderResults () {
