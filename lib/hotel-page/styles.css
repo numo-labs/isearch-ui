@@ -291,3 +291,31 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
     margin-right: 2em;
   }
 }
+
+.slick-slider {
+  margin-bottom: 0;
+}
+
+.slick-slider .sliderImage {
+  width: auto;
+  max-height: 400px;
+  min-height: 250px;
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.slick-slider .sliderImage img {
+  visibility: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+.slick-slider .slick-prev {
+  left: 25px;
+}
+
+.slick-slider .slick-next {
+  right: 25px;
+}
