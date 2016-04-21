@@ -168,9 +168,7 @@ export function startSearch () {
     if (tagExists) {
       return;
     } else {
-      if (displayedItems.length === 0) {
-        dispatch(busySearching());
-      }
+      dispatch(busySearching());
       const query = formatQuery(tags);
       console.log('query', query);
       return graphqlService

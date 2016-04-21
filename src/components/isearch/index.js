@@ -3,7 +3,7 @@ import Header from '../../../lib/header/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
-import LoadingSpinner from '../../../lib/spinner';
+import LoadingSpinner from '../../../lib/spinner4';
 import { ArticleFullPage } from '../../../lib/article';
 import './style.css';
 
@@ -33,25 +33,19 @@ class ISearch extends Component {
       onYesFilter,
       onFilterClick,
       filterVisibleState,
-      loading,
-      error,
       viewArticle
     } = this.props;
 
-    if (loading) {
-      return <LoadingSpinner />;
-    } else {
-      return (
-        <SearchResults
-          items={displayedItems}
-          onYesFilter={onYesFilter}
-          onFilterClick={onFilterClick}
-          filterVisibleState={filterVisibleState}
-          // showAddMessage={showAddMessage}
-          viewArticle={viewArticle}
-        />
-      );
-    }
+    return (
+      <SearchResults
+        items={displayedItems}
+        onYesFilter={onYesFilter}
+        onFilterClick={onFilterClick}
+        filterVisibleState={filterVisibleState}
+        // showAddMessage={showAddMessage}
+        viewArticle={viewArticle}
+      />
+    );
   }
 
   render () {
@@ -70,7 +64,8 @@ class ISearch extends Component {
       backToSearch,
       articlePage,
       articleContent,
-      error
+      error,
+      loading
     } = this.props;
 
     if (!articlePage) {
@@ -98,6 +93,11 @@ class ISearch extends Component {
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
           />
+          { loading &&
+            <div className='spinnerContainer'>
+              <LoadingSpinner/>
+            </div>
+          }
           { error && <div className='errorMessage'>{error}</div> }
           { this.renderResults() }
           </section>
