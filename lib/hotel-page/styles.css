@@ -13,6 +13,11 @@
   src: url('../../fonts/SourceSansPro-Light.otf');
 }
 
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
 .amenity {
   display: inline-block;
   padding-left: 0.3em;
@@ -59,9 +64,37 @@
 }
 
 .descriptionWrapper {
-  text-align: center;
   font-family: SourceSansRegular;
   margin-top: 0.3em;
+}
+
+.factContainer {
+  font-size: 0.9em;
+}
+
+.factHeading {
+  font-family: SourceSansSemiBold;
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+}
+
+.factHolder {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.factTitles {
+  display: inline-block;
+}
+
+.factValues {
+  display: inline-block;
+  float: right;
+}
+
+.factWrapper {
+  font-family: SourceSansRegular;
+  margin-bottom: 2em;
 }
 
 .gradientOut {
@@ -97,10 +130,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   position: absolute;
   right: 0.5em;
   top: -1em;
+  display: none;
 }
 
 .hotelDescription {
 
+}
+
+.hotelPageContainer {
 }
 
 .hotelPrice {
@@ -171,7 +208,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 }
 
 .titlePackage {
-  font-family: SourceSansSemiBold;
+  font-family: ThomasHeadlineBold;
   font-size: 1.5em;
   color: #1F1F1F;
   margin-left: 1em;
@@ -193,10 +230,64 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 }
 
 .textVisible {
-  padding: 1em;
+  padding: 1.5em;
+}
+
+.textWrapper {
+  width: 100%;
 }
 
 .tick {
   display: inline-block;
   width: 0.8em;
+}
+
+@media (min-width: 750px) {
+  .amenityWrapper {
+    width: 25%;
+    position: absolute;
+    right: 0;
+    top: 12em;
+    text-align: left;
+    display: inline-block;
+  }
+  .bookButtonContainer {
+    display: inline-block;
+    position: absolute;
+    right: 1em;
+    top: 3em;
+    width: 25%;
+    background-color: #ffffff;
+  }
+  .descriptionWrapper {
+    width: 75%;
+  }
+  .factHolder {
+    margin: 0;
+    margin-left: 1.5em;
+    width: 50%;
+  }
+  .infoContainer {
+    width: 750px;
+    margin: 0 auto;
+    margin-top: 2em;
+    padding-left: 1em;
+    margin-top: 1em;
+    height: 100vh;
+  }
+  .infoContentContainer {
+    padding-top: 1em;
+  }
+  .mintBanner {
+    opacity: 0;
+  }
+  .more {
+    text-align: center;
+  }
+  .packageImage {
+    margin-bottom: 3em;
+  }
+  .textVisible {
+    margin-right: 2em;
+  }
 }

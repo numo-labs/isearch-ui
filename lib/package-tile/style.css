@@ -13,6 +13,12 @@
   src: url('../../fonts/SourceSansPro-Light.otf');
 }
 
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
+
 .packageContainer {
   width: 100%;
 }
@@ -90,7 +96,7 @@
 
     }
       .packageTitle {
-        font-family: SourceSansSemiBold;
+        font-family: ThomasHeadlineBold;
         font-size: 1.2em;
       }
       .packageSubtitle {

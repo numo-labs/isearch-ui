@@ -3,7 +3,7 @@
 import { VIEW_HOTEL, VIEW_SEARCH } from '../constants/actionTypes';
 
 const initialState = {
-  hotelPage: false
+  hotelPage: true
 };
 
 export default function hotel (state = initialState, action) {
