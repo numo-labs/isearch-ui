@@ -31,7 +31,6 @@ class ISearch extends Component {
       displayedItems,
       onYesFilter,
       onFilterClick,
-      showAddMessage,
       filterVisibleState,
       loading,
       error,
@@ -49,7 +48,7 @@ class ISearch extends Component {
           onYesFilter={onYesFilter}
           onFilterClick={onFilterClick}
           filterVisibleState={filterVisibleState}
-          showAddMessage={showAddMessage}
+          // showAddMessage={showAddMessage}
           error={error}
           viewArticle={viewArticle}
         />
@@ -62,8 +61,14 @@ class ISearch extends Component {
       tags,
       removeTag,
       setSearchString,
-      addSearchStringTag,
       startSearch,
+      autocompleteError,
+      autocompleteOptions,
+      searchString,
+      getAutocompleteOptions,
+      inAutoCompleteSearch,
+      addSingleTag,
+      clearSearchString,
       backToSearch,
       articlePage,
       articleContent
@@ -84,8 +89,15 @@ class ISearch extends Component {
           <Tags
             tags={tags}
             removeTag={removeTag}
-            onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
+            addSingleTag={addSingleTag}
+            startSearch={startSearch}
             setSearchString={setSearchString}
+            autocompleteError={autocompleteError}
+            autocompleteOptions={autocompleteOptions}
+            searchString={searchString}
+            getAutocompleteOptions={getAutocompleteOptions}
+            inAutoCompleteSearch={inAutoCompleteSearch}
+            clearSearchString={clearSearchString}
           />
           { this.renderResults() }
           </section>
@@ -102,15 +114,25 @@ class ISearch extends Component {
 }
 
 ISearch.propTypes = {
-  tags: PropTypes.array,
+  // for random initial results
+  fetchQuerySearchResults: PropTypes.func,
+
+  // results
+  loading: PropTypes.bool,
+  error: PropTypes.string,
   displayedItems: PropTypes.array,
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
-  showAddMessage: PropTypes.func,
-  hideAddMessage: PropTypes.func,
   filterVisibleState: PropTypes.object,
-  fetchQuerySearchResults: PropTypes.func,
-  removeTag: PropTypes.func,
+
+  // autocomplete
+  autocompleteError: PropTypes.string,
+  autocompleteOptions: PropTypes.array,
+  inAutoCompleteSearch: PropTypes.bool,
+  getAutocompleteOptions: PropTypes.func,
+
+  // search bar
+  clearSearchString: PropTypes.func,
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
   startSearch: PropTypes.func,
@@ -119,8 +141,14 @@ ISearch.propTypes = {
   articlePage: PropTypes.bool,
   articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,
-  loading: PropTypes.bool,
-  error: PropTypes.string
+
+  // tags
+  tags: PropTypes.array,
+  addSingleTag: PropTypes.func,
+  removeTag: PropTypes.func
+
+  // showAddMessage: PropTypes.func,
+  // hideAddMessage: PropTypes.func,
 };
 
 export default ISearch;

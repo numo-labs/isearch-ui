@@ -3,16 +3,20 @@
 import {
   RECEIVE_SEARCH_RESULT,
   BUSY_SEARCHING,
-  TAG_ADD_TAGS,
+  // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
   TAG_ADD_SINGLE_TAG,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
-  // SHOW_ADD_MESSAGE,
-  // HIDE_ADD_MESSAGE,
   SET_SEARCH_STRING,
   UPDATE_DISPLAYED_ITEMS,
-  SEARCH_ERROR
+  SEARCH_ERROR,
+  SET_AUTOCOMPLETE_ERROR,
+  SET_AUTOCOMPLETE_OPTIONS,
+  SET_AUTOCOMPLETE_IN_SEARCH,
+  CLEAR_SEARCH_STRING
+  // SHOW_ADD_MESSAGE,
+  // HIDE_ADD_MESSAGE,
  } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -30,7 +34,10 @@ export const initialState = {
   tiles: [],
   addMessageVisible: false,
   searchString: '',
-  error: ''
+  error: '',
+  autocompleteError: '',
+  autocompleteOptions: [],
+  inAutoCompleteSearch: false // use to show loading spinner
 };
 
 export default function search (state = initialState, action) {
@@ -64,15 +71,15 @@ export default function search (state = initialState, action) {
         loading: false,
         error: action.error
       };
-    case TAG_ADD_TAGS:
-      /*
-      * use this action if there are an initial set of tags passed
-      * through when the page is first loaded
-      */
-      return {
-        ...state,
-        tags: action.tags
-      };
+    // case TAG_ADD_TAGS:
+    //   /*
+    //   * use this action if there are an initial set of tags passed
+    //   * through when the page is first loaded
+    //   */
+    //   return {
+    //     ...state,
+    //     tags: action.tags
+    //   };
     case TAG_ADD_SINGLE_TAG:
       return {
         ...state,
@@ -108,6 +115,33 @@ export default function search (state = initialState, action) {
         filterVisibleState,
         tiles: tileArray
       };
+    case SET_SEARCH_STRING:
+      return {
+        ...state,
+        searchString: action.searchString
+      };
+    case CLEAR_SEARCH_STRING:
+      return {
+        ...state,
+        searchString: ''
+      };
+    case SET_AUTOCOMPLETE_ERROR:
+      return {
+        ...state,
+        autocompleteError: action.error,
+        inAutoCompleteSearch: false
+      };
+    case SET_AUTOCOMPLETE_OPTIONS:
+      return {
+        ...state,
+        autocompleteOptions: action.items,
+        inAutoCompleteSearch: false
+      };
+    case SET_AUTOCOMPLETE_IN_SEARCH:
+      return {
+        ...state,
+        inAutoCompleteSearch: true
+      };
     // case SHOW_ADD_MESSAGE:
     //   return ({
     //     ...state,
@@ -118,8 +152,6 @@ export default function search (state = initialState, action) {
     //     ...state,
     //     addMessageVisible: false
     //   });
-    case SET_SEARCH_STRING:
-      return {...state, searchString: action.searchString};
     default:
       return state;
   }
