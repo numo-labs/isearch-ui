@@ -8,28 +8,33 @@ import {
 
 import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
 
-export function getAutocompleteOptions (searchString) {
+/**
+* Function to fetch the autocomplete options from the graphql suggestion
+* service
+* Uses the searchString from the redux store
+*/
+
+export function getAutocompleteOptions () {
   return (dispatch, getState) => {
     const { search: { searchString } } = getState();
     if (searchString.length >= 3) {
       dispatch(setAutocompleteInSearch());
-      graphqlService.query(QUERY_AUTOCOMPLETE_INPUT, {input: searchString, suggester: 'DISPLAYNAME', size: 250})
-      .then(json => {
-        console.log('autocomplete', json);
-        if (json.data.viewer.autocomplete.items) {
-          var items = json.data.viewer.autocomplete.items.map(function (item) {
-            return {
-              id: item.id,
-              suggestion: item.suggestion
-            };
-          });
-          return dispatch(setAutocompleteOptions(items));
-        } else {
-          return dispatch(autocompleteError('No matches found'));
-        }
-      });
-    } else {
-      return;
+      const variables = {
+        input: searchString,
+        suggester: 'DISPLAYNAME',
+        size: 250
+      };
+      graphqlService
+        .query(QUERY_AUTOCOMPLETE_INPUT, variables)
+        .then(json => {
+          console.log('Autocomplete response', json);
+          const { data: { viewer: { autocomplete } } } = json;
+          if (autocomplete && autocomplete.items) {
+            return dispatch(setAutocompleteOptions(autocomplete.items));
+          } else {
+            return dispatch(setAutocompleteError('No matches found'));
+          }
+        });
     }
   };
 }
@@ -38,7 +43,7 @@ export function setAutocompleteOptions (items) {
   return { type: SET_AUTOCOMPLETE_OPTIONS, items };
 }
 
-export function autocompleteError (error) {
+export function setAutocompleteError (error) {
   return { type: SET_AUTOCOMPLETE_ERROR, error };
 }
 
