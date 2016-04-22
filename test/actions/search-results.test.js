@@ -65,7 +65,9 @@ describe('actions', function () {
       data: {
         viewer: {
           searchResult: {
-            items: [{}]
+            items: [{
+              type: 'packageOffer'
+            }]
           }
         }
       }
@@ -75,7 +77,9 @@ describe('actions', function () {
         { type: 'TILES_ADD_TILES', tileArray: undefined },
         {
           type: 'RECEIVE_SEARCH_RESULT',
-          items: [{}],
+          items: [{
+            type: 'packageOffer'
+          }],
           initialSearch: true
         }
       ];
@@ -93,7 +97,9 @@ describe('actions', function () {
       const expectedActions = [
         {
           type: RECEIVE_SEARCH_RESULT,
-          items: [{}],
+          items: [{
+            type: 'packageOffer'
+          }],
           initialSearch: false
         }
       ];

@@ -40,7 +40,7 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
         console.log(!items || !items.length);
         if (attempt > 9) {
           return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts
-        } else if ((!items || !items.length)) {
+        } else if ((!items || !items.length || !packageOffersReturned(items))) {
           setTimeout(function () {
             console.log('Retrying', attempt);
             dispatch(fetchQuerySearchResults(id, page, size, ++attempt));
@@ -54,6 +54,12 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
       });
   };
   return fetchQuerySearchResults_anonymousFn; // needed for testing polling
+}
+
+function packageOffersReturned (items) {
+  return items.some(function (item) {
+    if (item.type === 'packageOffer') return true;
+  });
 }
 
 /*
@@ -139,10 +145,14 @@ export function filterResults () {
     const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
     if (items.length > 0) {
       const results = items.filter(item => {
-        return (
-          // geoTags.some(tag => item.packageOffer.hotel.place.country === tag.displayName) && // e.g. either spain or greece
-          amenityTags.every(tag => item.packageOffer.amenities[tag.id.split(':')[1]]) // and with wifi and kids friendly
-        );
+        if (item.packageOffer) {
+          return (
+            // geoTags.some(tag => item.packageOffer.hotel.place.country === tag.displayName) && // e.g. either spain or greece
+            amenityTags.every(tag => item.packageOffer.amenities[tag.id.split(':')[1]]) // and with wifi and kids friendly
+          );
+        } else {
+          return true;
+        }
       });
       dispatch(updateDisplayedItems(results));
     }
@@ -177,7 +187,7 @@ export function startSearch () {
         .then(json => {
           const searchResultId = json.data.viewer.searchResultId.id;
           dispatch(saveSearchResultId(searchResultId));
-          dispatch(fetchQuerySearchResults(searchResultId, 1, 20, 1));
+          dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
         });
     }
   };
