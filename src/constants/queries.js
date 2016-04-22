@@ -34,10 +34,18 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
               id,
               name,
               images {
-                type,
-                displaySequence,
-                uri,
-                primary
+                large {
+                  type,
+                  displaySequence,
+                  uri,
+                  primary
+                },
+                small {
+                  type,
+                  displaySequence,
+                  uri,
+                  primary
+                }
               }
               starRating,
               place {

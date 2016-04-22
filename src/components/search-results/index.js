@@ -100,7 +100,8 @@ class SearchResults extends Component {
                 </VisbilitySensor>
 
               );
-            } else if (item.type === 'article') {
+            } else if (item.type === 'tile') {
+              console.log('tile', item);
               return (
                 <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                   <div key={index} className='gridItem'>

@@ -43,10 +43,20 @@ export const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const packages = state.displayedItems.filter(item => item.type === 'packageOffer'); // remove all articles and filter tiles
-      const packageItems = _.uniqBy(_.union(action.items, packages), (a) => a.packageOffer.provider.reference); // check for duplicates
-      const displayedItems = shuffleMockedTilesIntoResultSet(packageItems, state.tiles); // add filters back in
-      const items = _.uniqBy(_.union(state.items, action.items), (a) => a.packageOffer.provider.reference); // add to packages store as well
+      const currentPackages = state.displayedItems.filter(item => item.type === 'packageOffer'); // remove all articles and filter tiles
+      const currentTiles = state.displayedItems.filter(item => item.type === 'tile');
+      const newPackages = action.items.filter(item => item.type === 'packageOffer');
+      const newTiles = action.items.filter(item => item.type === 'tile');
+      const mergedPackageItems = _.uniqBy(_.union(newPackages, currentPackages), (a) => a.packageOffer.provider.reference ); // check for duplicates
+      const mergedTileItems = _.uniqBy(_.union(newTiles, currentTiles), (a) => a.tile.id );
+      const displayedItems = shuffleMockedTilesIntoResultSet(mergedPackageItems, mergedTileItems.concat(state.tiles)); // add filters back in
+      const items = _.uniqBy(_.union(state.items, action.items), (a) => {
+        if (a.packageOffer) {
+          return a.packageOffer.provider.reference;
+        } else if (a.tile) {
+          return a.tile.id;
+        }
+      });
       return {
         ...state,
         displayedItems,

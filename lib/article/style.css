@@ -35,8 +35,9 @@ h5 {
 }
 
 .articleImage {
-  width: 100%;
   display: inline-block;
+  height: 20em;
+  width: 100%;
 }
 
 .text {
