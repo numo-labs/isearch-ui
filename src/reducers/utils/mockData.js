@@ -1,7 +1,5 @@
 export const mockTags = [];
 
-const instagramPrefix = 'https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpf1/t51.12885-15/';
-
 export const mockTiles = [
   {
     prefix: 'Are you travelling with',

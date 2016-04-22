@@ -31,3 +31,5 @@ export const SEARCH_ERROR = 'SEARCH_ERROR';
 export const VIEW_ARTICLE = 'VIEW_ARTICLE';
 export const VIEW_HOTEL = 'VIEW_HOTEL';
 export const VIEW_SEARCH = 'VIEW_SEARCH';
+
+export const SET_HOTEL_PAGE = 'SET_HOTEL_PAGE';

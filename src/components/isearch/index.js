@@ -6,7 +6,6 @@ import SearchResults from '../search-results';
 import HotelPage from '../../../lib/hotel-page';
 import LoadingSpinner from '../../../lib/spinner4';
 import { ArticleFullPage } from '../../../lib/article';
-import mockPackageOffer from '../../utils/mock-package-offer';
 import './style.css';
 
 class ISearch extends Component {
@@ -36,7 +35,8 @@ class ISearch extends Component {
       onFilterClick,
       filterVisibleState,
       viewHotel,
-      viewArticle
+      viewArticle,
+      setHotelPage
     } = this.props;
 
     return (
@@ -48,6 +48,7 @@ class ISearch extends Component {
         // showAddMessage={showAddMessage}
         viewArticle={viewArticle}
         viewHotel={viewHotel}
+        setHotelPage={setHotelPage}
       />
     );
   }
@@ -70,14 +71,15 @@ class ISearch extends Component {
       articleContent,
       error,
       loading,
-      hotelPage
+      hotelPage,
+      hotelInView
     } = this.props;
 
     if (hotelPage) {
       return (
         <HotelPage
           backToSearch={backToSearch}
-          packageOffer={mockPackageOffer}
+          packageOffer={hotelInView}
         />
       );
     } else if (articlePage) {
@@ -159,7 +161,9 @@ ISearch.propTypes = {
   // tags
   tags: PropTypes.array,
   addSingleTag: PropTypes.func,
-  removeTag: PropTypes.func
+  removeTag: PropTypes.func,
+  setHotelPage: PropTypes.func,
+  hotelInView: PropTypes.object
 
   // showAddMessage: PropTypes.func,
   // hideAddMessage: PropTypes.func,
