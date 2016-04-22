@@ -20,7 +20,7 @@ class SearchResults extends Component {
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
-            'id': item.packageOffer.provider.referen,
+            'id': item.packageOffer.provider.reference,
             'brand': 'hotel_tile',
             'list': 'inspirational search feed'
           }]
