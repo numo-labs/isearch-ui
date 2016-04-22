@@ -44,7 +44,11 @@ export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
       const packages = state.displayedItems.filter(item => item.type === 'packageOffer'); // remove all articles and filter tiles
-      const packageItems = _.uniqBy(_.union(action.items, packages), (a) => a.packageOffer.provider.reference); // check for duplicates
+      const tiles = a.packageOffer.provider.reference
+      const packageItems = _.uniqBy(_.union(action.items, packages), (a) => {
+        if (a.packageOffer) a.packageOffer.provider.reference;
+        else if (a.tile) a.tile.id;
+      }); // check for duplicates
       const displayedItems = shuffleMockedTilesIntoResultSet(packageItems, state.tiles); // add filters back in
       const items = _.uniqBy(_.union(state.items, action.items), (a) => a.packageOffer.provider.reference); // add to packages store as well
       return {
