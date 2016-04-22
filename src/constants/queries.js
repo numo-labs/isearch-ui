@@ -126,10 +126,15 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
         ...on tileItem {
           id,
           type,
-          ranking,
           tile {
-            title,
-            doc
+            id,
+            name,
+            url,
+            sections {
+              title,
+              image,
+              text
+            },
           }
         }
       }
