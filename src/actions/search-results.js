@@ -36,6 +36,7 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
     return graphqlService
       .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
       .then(json => {
+        console.log('json', json);
         const items = json.data.viewer.searchResult.items;
         console.log(!items || !items.length);
         if (attempt > 9) {
@@ -164,14 +165,12 @@ export function filterResults () {
 
 export function startSearch () {
   return (dispatch, getState) => {
-    const { search: { searchString, tags, displayedItems } } = getState();
+    const { search: { searchString, tags } } = getState();
     const tagExists = tags.filter(tag => tags.displayName === searchString).length > 0;
     if (tagExists) {
       return;
     } else {
-      if (displayedItems.length === 0) {
-        dispatch(busySearching());
-      }
+      dispatch(busySearching());
       const query = formatQuery(tags);
       console.log('query', query);
       return graphqlService

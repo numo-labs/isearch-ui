@@ -8,7 +8,7 @@ describe('Tile Helpers', () => {
     var a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
     var b = [1, 2, 3];
     var res = shuffleMockedTilesIntoResultSet(a, b);
-    expect(res).to.deep.equal([1, 'a', 'b', 'c', 2, 'd', 'e', 'f', 3, 'g', 'h', 'i']);
+    expect(res).to.deep.equal([ 'a', 'b', 'c', 'd', 1, 'e', 'f', 'g', 2, 'h', 'i', 3 ]);
     expect(a).to.equal(a); // check no mutation
     done();
   });

@@ -1,6 +1,6 @@
 {
   "name": "isearch-ui",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
@@ -71,6 +71,7 @@
   "dependencies": {
     "file-loader": "^0.8.5",
     "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.11.1",
     "lodash.shuffle": "^4.0.0",
     "moment": "^2.12.0",
     "react": "^0.14.7",
@@ -78,8 +79,10 @@
     "react-dom": "^0.14.7",
     "react-masonry-component": "^4.0.0",
     "react-redux": "^4.4.0",
+    "react-select": "^0.9.1",
     "react-simple-datepicker": "^0.1.4",
     "react-slick": "^0.12.0",
+    "react-typeahead": "^1.1.9",
     "react-visibility-sensor": "^3.0.0",
     "redux": "^3.3.1"
   },

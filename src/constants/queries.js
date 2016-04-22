@@ -1,3 +1,16 @@
+export const QUERY_AUTOCOMPLETE_INPUT = `
+query autocomplete($input: String, $suggestor: SuggesterEnum, $size: Int) {
+  viewer {
+    autocomplete(text: $input, suggester: $suggestor, size: $size) {
+      items {
+        suggestion,
+        id
+      }
+    }
+  }
+}
+`;
+
 export const QUERY_FETCH_SEARCH_RESULT = `
 query searchResultQuery($id: String, $page: Int, $size: Int) {
   viewer {
@@ -115,10 +128,15 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
         ...on tileItem {
           id,
           type,
-          ranking,
           tile {
-            title,
-            doc
+            id,
+            name,
+            url,
+            sections {
+              title,
+              image,
+              text
+            },
           }
         }
       }

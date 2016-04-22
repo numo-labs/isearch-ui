@@ -3,9 +3,11 @@ import Header from '../../../lib/header/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
-import LoadingSpinner from '../../../lib/spinner';
 import HotelPage from '../../../lib/hotel-page';
+import LoadingSpinner from '../../../lib/spinner4';
+import { ArticleFullPage } from '../../../lib/article';
 import mockPackageOffer from '../../utils/mock-package-offer';
+import './style.css';
 
 class ISearch extends Component {
 
@@ -24,7 +26,7 @@ class ISearch extends Component {
    */
 
    fetchQueryResults () {
-     this.props.fetchQuerySearchResults(12345, 1, 20, 1);
+     this.props.fetchQuerySearchResults('29105eb0-07e6-11e6-a9f1-a9adafcac240', 1, 20, 1);
    }
 
   renderResults () {
@@ -32,30 +34,22 @@ class ISearch extends Component {
       displayedItems,
       onYesFilter,
       onFilterClick,
-      showAddMessage,
       filterVisibleState,
-      loading,
-      error,
-      viewHotel
+      viewHotel,
+      viewArticle
     } = this.props;
 
-    if (loading) {
-      return <LoadingSpinner />;
-    } else if (error) {
-      return <div className='errorMessage'>{error}</div>;
-    } else {
-      return (
-        <SearchResults
-          items={displayedItems}
-          onYesFilter={onYesFilter}
-          onFilterClick={onFilterClick}
-          filterVisibleState={filterVisibleState}
-          showAddMessage={showAddMessage}
-          error={error}
-          viewHotel={viewHotel}
-        />
-      );
-    }
+    return (
+      <SearchResults
+        items={displayedItems}
+        onYesFilter={onYesFilter}
+        onFilterClick={onFilterClick}
+        filterVisibleState={filterVisibleState}
+        // showAddMessage={showAddMessage}
+        viewArticle={viewArticle}
+        viewHotel={viewHotel}
+      />
+    );
   }
 
   render () {
@@ -64,17 +58,42 @@ class ISearch extends Component {
       removeTag,
       setSearchString,
       startSearch,
-      addSearchStringTag,
-      hotelPage,
-      backToSearch
+      autocompleteError,
+      autocompleteOptions,
+      searchString,
+      getAutocompleteOptions,
+      inAutoCompleteSearch,
+      addSingleTag,
+      clearSearchString,
+      backToSearch,
+      articlePage,
+      articleContent,
+      error,
+      loading,
+      hotelPage
     } = this.props;
-    if (!hotelPage) {
+
+    if (hotelPage) {
+      return (
+        <HotelPage
+          backToSearch={backToSearch}
+          packageOffer={mockPackageOffer}
+        />
+      );
+    } else if (articlePage) {
+      return (
+        <ArticleFullPage
+          articleContent={articleContent}
+          backToSearch={backToSearch}
+        />
+      );
+    } else {
       return (
         <section>
           <SearchSummary
             city='Bodrum'
             country='Turkey'
-            durationInWeeks={1}
+            durationInWeeks={2}
             paxMix='2 adults, 2 children'
             departureDate='Sun 13 jul 2016'
             returnDate='Tue 15 jul 2016'
@@ -83,42 +102,67 @@ class ISearch extends Component {
           <Tags
             tags={tags}
             removeTag={removeTag}
-            onSearchButtonClick={() => { addSearchStringTag(); startSearch(); }}
+            addSingleTag={addSingleTag}
+            startSearch={startSearch}
             setSearchString={setSearchString}
+            autocompleteError={autocompleteError}
+            autocompleteOptions={autocompleteOptions}
+            searchString={searchString}
+            getAutocompleteOptions={getAutocompleteOptions}
+            inAutoCompleteSearch={inAutoCompleteSearch}
+            clearSearchString={clearSearchString}
           />
+          { loading &&
+            <div className='spinnerContainer'>
+              <LoadingSpinner/>
+            </div>
+          }
+          { error && <div className='errorMessage'>{error}</div> }
           { this.renderResults() }
         </section>
-      );
-    } else {
-      return (
-        <HotelPage
-          backToSearch={backToSearch}
-          packageOffer={mockPackageOffer}
-        />
       );
     }
   }
 }
 
 ISearch.propTypes = {
-  tags: PropTypes.array,
+  // for random initial results
+  fetchQuerySearchResults: PropTypes.func,
+
+  // results
+  loading: PropTypes.bool,
+  error: PropTypes.string,
   displayedItems: PropTypes.array,
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
-  showAddMessage: PropTypes.func,
-  hideAddMessage: PropTypes.func,
   filterVisibleState: PropTypes.object,
-  fetchQuerySearchResults: PropTypes.func,
-  removeTag: PropTypes.func,
+
+  // autocomplete
+  autocompleteError: PropTypes.string,
+  autocompleteOptions: PropTypes.array,
+  inAutoCompleteSearch: PropTypes.bool,
+  getAutocompleteOptions: PropTypes.func,
+
+  // search bar
+  clearSearchString: PropTypes.func,
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
   startSearch: PropTypes.func,
+  viewArticle: PropTypes.func,
+  backToSearch: PropTypes.func,
+  articlePage: PropTypes.bool,
+  articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,
-  loading: PropTypes.bool,
-  error: PropTypes.string,
   hotelPage: PropTypes.bool,
   viewHotel: PropTypes.func,
-  backToSearch: PropTypes.func
+
+  // tags
+  tags: PropTypes.array,
+  addSingleTag: PropTypes.func,
+  removeTag: PropTypes.func
+
+  // showAddMessage: PropTypes.func,
+  // hideAddMessage: PropTypes.func,
 };
 
 export default ISearch;

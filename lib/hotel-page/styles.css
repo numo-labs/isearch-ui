@@ -49,6 +49,7 @@
   background-color: #F39110;
   display: inline-block;
   font-family: SourceSansRegular;
+  font-weight: bold;
   font-size: 1.1em;
   padding: 0.4em;
   padding-left: 1.3em;
@@ -73,7 +74,8 @@
 }
 
 .factHeading {
-  font-family: SourceSansSemiBold;
+  font-family: SourceSansRegular;
+  font-weight: bold;
   font-size: 1.1em;
   margin-bottom: 0.5em;
 }
@@ -143,7 +145,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .hotelPrice {
   font-size: 2.5em;
   color: #DC3767;
-  font-family: SourceSansSemiBold;
+  font-family: SourceSansRegular;
+  font-weight: bold;
 }
 
 .imageContainer {
@@ -170,7 +173,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   height: 22px;
   line-height: 25px;
   color: #ffffff;
-  font-family: SourceSansSemiBold;
+  font-family: SourceSansRegular;
   font-size: 1em;
   text-transform: uppercase;
 }
@@ -194,7 +197,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   margin-bottom: 1.5em;
 }
 
-.packageImage {
+.hotelPackageImage {
   height: 400px;
   position: relative;
   width: 100%;
@@ -203,7 +206,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 }
 
 .ppp {
-  font-family: SourceSansSemiBold;
+  font-family: SourceSansRegular;
+  font-weight: bold;
   font-size: 0.9em;
 }
 
@@ -285,7 +289,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   .more {
     text-align: center;
   }
-  .packageImage {
+  .hotelPackageImage {
     margin-bottom: 3em;
   }
   .textVisible {
@@ -329,7 +333,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 @media (max-width: 750px) {
   .descriptionSlider,
-  .packageImage {
+  .hotelPackageImage {
     display: none;
   }
 }

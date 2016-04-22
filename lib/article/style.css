@@ -31,6 +31,7 @@ h5 {
   text-align: center;
   font-family: SourceSansLight;
   display: inline-block;
+  cursor: pointer;
 }
 
 .articleImage {
@@ -48,13 +49,69 @@ h5 {
   width: 100%;
 }
 
-@@media (max-width: 1240px) {
-  /**
-  * need to add media queries for .text (padding bottom and bottom) and .articleContainer class (height)
-  **/
-}
-
 h1 {
   font-family: SourceSansSemiBold;
   font-size: 2.1em;
+}
+
+.articleFullPageContainer {
+  text-align: center;
+  font-family: SourceSansLight;
+  display: inline-block;
+  background-color: #fff;
+  width: 100%;
+}
+
+.articleFullPageContainer .articleHeader {
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: 50%;
+}
+
+.articleFullPageContainer .articleSection {
+  margin: auto;
+  margin-bottom: 2.5em;
+  max-width: 700px;
+}
+
+.articleFullPageContainer .articleImage {
+  width: auto;
+  max-height: 350px;
+  height: auto;
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+.articleFullPageContainer .articleImage img {
+  visibility: hidden;
+  max-width: 100%;
+}
+
+.articleFullPageContainer .articleText {
+  padding: 0 1.5em;
+  color: #666;
+  width: 100%;
+  text-align: left;
+}
+
+.articleFullPageContainer .tagSection {
+  width: 100%;
+  text-align: center;
+  padding: 2.5em;
+}
+
+.articleFullPageContainer h1 {
+  text-align: center;
+  font-family: SourceSansSemiBold;
+  font-size: 2.1em;
+  padding: 1.5em;
+}
+
+.articleFullPageContainer h2 {
+  padding: 0 1.5em;
+  font-size: 1em;
+  font-family: SourceSansSemiBold;
+  color: #666;
+  text-align: left;
 }

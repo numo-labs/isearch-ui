@@ -3,18 +3,22 @@
 import {
   RECEIVE_SEARCH_RESULT,
   BUSY_SEARCHING,
-  TAG_ADD_TAGS,
+  // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
   TAG_ADD_SINGLE_TAG,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
-  // SHOW_ADD_MESSAGE,
-  // HIDE_ADD_MESSAGE,
   SET_SEARCH_STRING,
   UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
-  VIEW_SEARCH
- } from '../constants/actionTypes';
+  VIEW_SEARCH,
+  SET_AUTOCOMPLETE_ERROR,
+  SET_AUTOCOMPLETE_OPTIONS,
+  SET_AUTOCOMPLETE_IN_SEARCH,
+  CLEAR_SEARCH_STRING
+  // SHOW_ADD_MESSAGE,
+  // HIDE_ADD_MESSAGE,
+} from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
 import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
@@ -31,14 +35,17 @@ export const initialState = {
   tiles: [],
   addMessageVisible: false,
   searchString: '',
-  error: ''
+  error: '',
+  autocompleteError: '',
+  autocompleteOptions: [],
+  inAutoCompleteSearch: false // use to show loading spinner
 };
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
       const packages = state.displayedItems.filter(item => item.type === 'packageOffer'); // remove all articles and filter tiles
-      const packageItems = _.uniqBy(_.union(packages, action.items), (a) => a.packageOffer.provider.reference); // check for duplicates
+      const packageItems = _.uniqBy(_.union(action.items, packages), (a) => a.packageOffer.provider.reference); // check for duplicates
       const displayedItems = shuffleMockedTilesIntoResultSet(packageItems, state.tiles); // add filters back in
       const items = _.uniqBy(_.union(state.items, action.items), (a) => a.packageOffer.provider.reference); // add to packages store as well
       return {
@@ -65,15 +72,15 @@ export default function search (state = initialState, action) {
         loading: false,
         error: action.error
       };
-    case TAG_ADD_TAGS:
-      /*
-      * use this action if there are an initial set of tags passed
-      * through when the page is first loaded
-      */
-      return {
-        ...state,
-        tags: action.tags
-      };
+    // case TAG_ADD_TAGS:
+    //   /*
+    //   * use this action if there are an initial set of tags passed
+    //   * through when the page is first loaded
+    //   */
+    //   return {
+    //     ...state,
+    //     tags: action.tags
+    //   };
     case TAG_ADD_SINGLE_TAG:
       return {
         ...state,
@@ -85,7 +92,8 @@ export default function search (state = initialState, action) {
       });
       return {
         ...state,
-        tags: newTags
+        tags: newTags,
+        error: ''
       };
     case FILTER_ON_CLICK:
       return {
@@ -109,6 +117,33 @@ export default function search (state = initialState, action) {
         filterVisibleState,
         tiles: tileArray
       };
+    case SET_SEARCH_STRING:
+      return {
+        ...state,
+        searchString: action.searchString
+      };
+    case CLEAR_SEARCH_STRING:
+      return {
+        ...state,
+        searchString: ''
+      };
+    case SET_AUTOCOMPLETE_ERROR:
+      return {
+        ...state,
+        autocompleteError: action.error,
+        inAutoCompleteSearch: false
+      };
+    case SET_AUTOCOMPLETE_OPTIONS:
+      return {
+        ...state,
+        autocompleteOptions: action.items,
+        inAutoCompleteSearch: false
+      };
+    case SET_AUTOCOMPLETE_IN_SEARCH:
+      return {
+        ...state,
+        inAutoCompleteSearch: true
+      };
     // case SHOW_ADD_MESSAGE:
     //   return ({
     //     ...state,
@@ -119,8 +154,6 @@ export default function search (state = initialState, action) {
     //     ...state,
     //     addMessageVisible: false
     //   });
-    case SET_SEARCH_STRING:
-      return {...state, searchString: action.searchString};
     default:
       return state;
   }
