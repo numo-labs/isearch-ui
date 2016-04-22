@@ -78,6 +78,7 @@ class SearchResults extends Component {
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
+                      viewHotel={viewHotel}
                     />
                   </div>
                 </VisbilitySensor>
