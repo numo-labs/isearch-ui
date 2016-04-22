@@ -37,6 +37,7 @@ h5 {
 .articleImage {
   display: inline-block;
   height: 20em;
+  width: 100%;
 }
 
 .text {

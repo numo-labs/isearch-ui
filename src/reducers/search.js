@@ -49,7 +49,7 @@ export default function search (state = initialState, action) {
       const newTiles = action.items.filter(item => item.type === 'tile');
       const mergedPackageItems = _.uniqBy(_.union(newPackages, currentPackages), (a) => a.packageOffer.provider.reference ); // check for duplicates
       const mergedTileItems = _.uniqBy(_.union(newTiles, currentTiles), (a) => a.tile.id );
-      const displayedItems = shuffleMockedTilesIntoResultSet(mergedPackageItems, mergedTileItems); // add filters back in
+      const displayedItems = shuffleMockedTilesIntoResultSet(mergedPackageItems, mergedTileItems.concat(state.tiles)); // add filters back in
       const items = _.uniqBy(_.union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;

@@ -145,10 +145,14 @@ export function filterResults () {
     const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
     if (items.length > 0) {
       const results = items.filter(item => {
-        return (
-          // geoTags.some(tag => item.packageOffer.hotel.place.country === tag.displayName) && // e.g. either spain or greece
-          amenityTags.every(tag => item.packageOffer.amenities[tag.id.split(':')[1]]) // and with wifi and kids friendly
-        );
+        if (item.packageOffer) {
+          return (
+            // geoTags.some(tag => item.packageOffer.hotel.place.country === tag.displayName) && // e.g. either spain or greece
+            amenityTags.every(tag => item.packageOffer.amenities[tag.id.split(':')[1]]) // and with wifi and kids friendly
+          );
+        } else {
+          return true;
+        }
       });
       dispatch(updateDisplayedItems(results));
     }
