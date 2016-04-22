@@ -13,13 +13,14 @@ const defaultProps = {
   hideAddMessage: () => {},
   filterVisibleState: {},
   fetchQuerySearchResults: () => {},
-  removeTag: () => {}
+  removeTag: () => {},
+  addSingleTag: () => {}
 };
 
 const articleViewProps = {
   fetchQuerySearchResults: () => {},
   articlePage: true,
-  articleContent: {
+  tile: {
     sections: []
   },
   backToSearch: () => {}
@@ -73,7 +74,7 @@ describe('Component', function () {
     });
   });
   describe('<ISearch /> Search view', function () {
-    const wrapper = shallow(<ISearch {...articleViewProps} />);
+    const wrapper = shallow(<ISearch {...defaultProps} {...articleViewProps} />);
     it('should display ArticleFullPage if there are article data', function (done) {
       expect(wrapper.find('ArticleFullPage')).to.have.length(1);
       done();
