@@ -35,6 +35,7 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
     return graphqlService
       .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
       .then(json => {
+        console.log('json', json);
         const items = json.data.viewer.searchResult.items;
         console.log(!items || !items.length);
         if (attempt > 9) {
