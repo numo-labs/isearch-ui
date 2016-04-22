@@ -61,8 +61,7 @@ class SearchResults extends Component {
       showAddMessage,
       viewArticle,
       viewHotel,
-      setHotelPage,
-      hotelInView
+      setHotelPage
     } = this.props;
     return (
       <Masonry
