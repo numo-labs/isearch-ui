@@ -61,7 +61,8 @@ class SearchResults extends Component {
       showAddMessage,
       viewArticle,
       viewHotel,
-      setHotelPage
+      setHotelPage,
+      hotelInView
     } = this.props;
     return (
       <Masonry
@@ -127,7 +128,8 @@ SearchResults.propTypes = {
   filterVisibleState: PropTypes.object,
   viewHotel: PropTypes.func,
   viewArticle: PropTypes.func,
-  setHotelPage: PropTypes.func
+  setHotelPage: PropTypes.func,
+  hotelInView: PropTypes.func
 };
 
 export default SearchResults;

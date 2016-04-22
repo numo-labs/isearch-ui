@@ -29,7 +29,8 @@ function mapStateToProps (state) {
       inAutoCompleteSearch
     },
     hotel: {
-      hotelPage
+      hotelPage,
+      hotelInView
     },
     article: {
       articlePage,
@@ -49,7 +50,8 @@ function mapStateToProps (state) {
     hotelPage,
     autocompleteError,
     autocompleteOptions,
-    inAutoCompleteSearch
+    inAutoCompleteSearch,
+    hotelInView
   };
 }
 

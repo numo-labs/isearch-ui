@@ -74,6 +74,7 @@ class ISearch extends Component {
       hotelPage,
       hotelInView
     } = this.props;
+    console.log('HOTEL IN VIEW --->', hotelInView);
 
     if (hotelPage) {
       return (
