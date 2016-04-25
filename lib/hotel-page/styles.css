@@ -1,0 +1,345 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
+.amenity {
+  display: inline-block;
+  padding-left: 0.3em;
+  font-size: 0.9em;
+}
+
+.amenityBlock {
+  text-align: left;
+}
+
+.amenityContainer {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 3em;
+  text-align: left;
+  padding-left: 0.6em;
+}
+
+.amenityWrapper {
+  font-family: SourceSansRegular;
+  margin-top: 0.8em;
+  display: inline-block;
+  text-align: center;
+}
+
+.bookButton {
+  border-radius: 600px;
+  color: #ffffff;
+  background-color: #F39110;
+  display: inline-block;
+  font-family: SourceSansRegular;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 0.4em;
+  padding-left: 1.3em;
+  padding-right: 1.3em;
+  margin-top: 0.7em;
+}
+
+.bookButtonContainer {
+  text-align: center;
+  background-color: #E9E5E0;
+  padding-top: 1.5em;
+  padding-bottom: 2em;
+}
+
+.descriptionWrapper {
+  font-family: SourceSansRegular;
+  margin-top: 0.3em;
+}
+
+.factContainer {
+  font-size: 0.9em;
+}
+
+.factHeading {
+  font-family: SourceSansRegular;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+}
+
+.factHolder {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.factTitles {
+  display: inline-block;
+}
+
+.factValues {
+  display: inline-block;
+  float: right;
+}
+
+.factWrapper {
+  font-family: SourceSansRegular;
+  margin-bottom: 2em;
+}
+
+.gradientOut {
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    width:100%;
+    height:50px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100,1+100,1+102,1+102 */
+background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 102%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+}
+
+.heartRatingContainer {
+  display: inline-block;
+  padding-top: 5px;
+  margin-left: 1.4em;
+}
+
+.heartShare {
+  background-color: #ffffff;
+  width: 1.7em;
+  opacity: 0.4;
+}
+
+.heartShareContainer {
+  border-radius: 100%;
+  background-color: #ffffff;
+  display: inline-block;
+  padding: 0.7em;
+  position: absolute;
+  right: 0.5em;
+  top: -1em;
+  display: none;
+}
+
+.hotelDescription {
+
+}
+
+.hotelPageContainer {
+}
+
+.hotelPrice {
+  font-size: 2.5em;
+  color: #DC3767;
+  font-family: SourceSansRegular;
+  font-weight: bold;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.infoContainer {
+  background-color: #ffffff;
+  position: relative;
+  padding-top: 1em;
+}
+
+.infoContentContainer {
+  display: inline-block;
+  width: 100%;
+}
+
+.mintBanner {
+  background-color: rgba(109,180,169, 0.9);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  height: 22px;
+  line-height: 25px;
+  color: #ffffff;
+  font-family: SourceSansRegular;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.more {
+  font-size: 0.9em;
+  opacity: 0.5;
+}
+
+.moreButton {
+  border-radius: 600px;
+  border: 1px solid #F39110;
+  color: #F39110;
+  display: inline-block;
+  font-family: SourceSansBold;
+  font-size: 1.2em;
+  padding: 0.3em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top: 0.7em;
+  margin-bottom: 1.5em;
+}
+
+.hotelPackageImage {
+  height: 400px;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.ppp {
+  font-family: SourceSansRegular;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.titlePackage {
+  font-family: ThomasHeadlineBold;
+  font-size: 1.5em;
+  color: #1F1F1F;
+  margin-left: 1em;
+  position: relative;
+}
+
+.subtitlePackage {
+  font-family: SourceSansLight;
+  font-size: 1.2em;
+  color: #939393;
+  margin-left: 1.2em;
+}
+
+.textHidden {
+  height: 5em;
+  overflow: hidden;
+  position: relative;
+  padding: 1em;
+}
+
+.textVisible {
+  padding: 1.5em;
+}
+
+.textWrapper {
+  width: 100%;
+}
+
+.tick {
+  display: inline-block;
+  width: 0.8em;
+}
+
+@media (min-width: 750px) {
+  .amenityWrapper {
+    width: 25%;
+    position: absolute;
+    right: 0;
+    top: 12em;
+    text-align: left;
+    display: inline-block;
+  }
+  .bookButtonContainer {
+    display: inline-block;
+    position: absolute;
+    right: 1em;
+    top: 3em;
+    width: 25%;
+    background-color: #ffffff;
+  }
+  .descriptionWrapper {
+    width: 75%;
+  }
+  .factHolder {
+    margin: 0;
+    margin-left: 1.5em;
+    width: 50%;
+  }
+  .infoContainer {
+    width: 750px;
+    margin: 0 auto;
+    margin-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-top: 1em;
+  }
+  .infoContentContainer {
+    padding-top: 1em;
+    width: 100%;
+  }
+  .mintBanner {
+    opacity: 0;
+  }
+  .more {
+    text-align: center;
+  }
+  .hotelPackageImage {
+    margin-bottom: 3em;
+  }
+  .textVisible {
+    margin-right: 2em;
+  }
+}
+
+.slick-slider {
+  margin-bottom: 0;
+}
+
+.slick-slider .sliderImage {
+  width: auto;
+  max-height: 400px;
+  min-height: 250px;
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.slick-slider .sliderImage img {
+  visibility: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+.slick-slider .slick-prev {
+  left: 25px;
+}
+
+.slick-slider .slick-next {
+  right: 25px;
+}
+
+.descriptionSlider {
+  width: 100%;
+  padding: 0 1em;
+  margin-bottom: 4em;
+}
+
+@media (max-width: 750px) {
+  .descriptionSlider,
+  .hotelPackageImage {
+    display: none;
+  }
+}
+@media (min-width: 750px) {
+  .headerSlider {
+    display: none;
+  }
+}

@@ -27,6 +27,7 @@
   background-image: url('https://cloud.githubusercontent.com/assets/12450298/14560385/62833d9a-0307-11e6-8a23-a0d1793d4e72.jpg');
   background-size: 100%;
   text-align: center;
+  height: 15em;
 }
 
 .headerContent {
@@ -36,30 +37,13 @@
   text-align: center;
 }
 
-.inputBar {
-  font-family: SourceSansLight;
-  height: 3em;
-  width: 21em;
-  bottom: 0;
-  margin-top: 1.3em;
-  border: none;
-  outline-width: 0;
-  outline: none !important;
-  padding-left: 0.5em;
-  float: left;
-  margin-right: 1em;
-}
 
-@media (min-width: 450px) {
-  .inputBar {
-    width: 31em;
-  }
-}
-
-.inputContainer {
+.containerInput {
   top: 3em;
   display: inline-block;
   margin-right: 2em;
+  width: 100%;
+  padding-left: 1.1em;
 }
 
 .input:focus {
@@ -114,22 +98,6 @@
   height: 0.5em;
 }
 
-.searchButton {
-  font-family: SourceSansLight;
-  background-color: #F39100;
-  display: inline-block;
-  border-radius: 100%;
-  color: #ffffff;
-  font-size: 1.25em;
-  padding-top: 0.3em;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-  padding-bottom: 0.25em;
-  margin-top: 1em;
-  float: left;
-  position: absolute;
-  top: 6em;
-}
 
 .searchButton:hover {
   background-color: #F37800;

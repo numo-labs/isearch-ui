@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
 import ISearch from '../components/isearch/';
-
 import * as TagActions from '../actions/tags';
 import * as AutocompleteActions from '../actions/autocomplete';
 import * as SearchActions from '../actions/search-results';
+import * as HotelActions from '../actions/hotel';
 import * as ArticleActions from '../actions/article';
 
 const Actions = {
   ...TagActions,
   ...SearchActions,
   ...AutocompleteActions,
-  ...ArticleActions
+  ...ArticleActions,
+  ...HotelActions
 };
 
 function mapStateToProps (state) {
@@ -27,6 +28,10 @@ function mapStateToProps (state) {
       autocompleteOptions,
       inAutoCompleteSearch
     },
+    hotel: {
+      hotelPage,
+      hotelInView
+    },
     article: {
       articlePage,
       articleContent
@@ -42,9 +47,11 @@ function mapStateToProps (state) {
     articleContent,
     loading,
     error,
+    hotelPage,
     autocompleteError,
     autocompleteOptions,
-    inAutoCompleteSearch
+    inAutoCompleteSearch,
+    hotelInView
   };
 }
 
