@@ -48,7 +48,6 @@ describe('actions', function () {
         tag: {
           displayName: 'test',
           colour: '#8EB8C4',
-          filterString: 'test',
           id: 'test'
         }
       };
