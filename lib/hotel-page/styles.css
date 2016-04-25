@@ -25,7 +25,7 @@
 }
 
 .amenityBlock {
-  text-align: center;
+  text-align: left;
 }
 
 .amenityContainer {
@@ -163,6 +163,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 .infoContentContainer {
   display: inline-block;
+  width: 100%;
 }
 
 .mintBanner {
