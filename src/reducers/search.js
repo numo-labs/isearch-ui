@@ -17,7 +17,7 @@ import {
   CLEAR_SEARCH_STRING
   // SHOW_ADD_MESSAGE,
   // HIDE_ADD_MESSAGE,
- } from '../constants/actionTypes';
+} from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
 import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';

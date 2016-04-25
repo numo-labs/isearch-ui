@@ -9,7 +9,8 @@ import {
   SET_SEARCH_STRING,
   SAVE_SEARCH_RESULT_ID,
   UPDATE_DISPLAYED_ITEMS,
-  SEARCH_ERROR
+  SEARCH_ERROR,
+  VIEW_SEARCH
 } from '../constants/actionTypes';
 
 // actions
@@ -192,3 +193,5 @@ export function startSearch () {
     }
   };
 }
+
+export const backToSearch = () => { return {type: VIEW_SEARCH}; };

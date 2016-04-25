@@ -3,6 +3,7 @@ import Header from '../../../lib/header/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
+import HotelPage from '../../../lib/hotel-page';
 import LoadingSpinner from '../../../lib/spinner4';
 import { ArticleFullPage } from '../../../lib/article';
 import './style.css';
@@ -34,7 +35,9 @@ class ISearch extends Component {
       onYesFilter,
       onFilterClick,
       filterVisibleState,
-      viewArticle
+      viewHotel,
+      viewArticle,
+      setHotelPage
     } = this.props;
 
     return (
@@ -45,6 +48,8 @@ class ISearch extends Component {
         filterVisibleState={filterVisibleState}
         // showAddMessage={showAddMessage}
         viewArticle={viewArticle}
+        viewHotel={viewHotel}
+        setHotelPage={setHotelPage}
       />
     );
   }
@@ -66,10 +71,27 @@ class ISearch extends Component {
       articlePage,
       articleContent,
       error,
-      loading
+      loading,
+      hotelPage,
+      hotelInView
     } = this.props;
+    console.log('HOTEL IN VIEW --->', hotelInView);
 
-    if (!articlePage) {
+    if (hotelPage) {
+      return (
+        <HotelPage
+          backToSearch={backToSearch}
+          packageOffer={hotelInView}
+        />
+      );
+    } else if (articlePage) {
+      return (
+        <ArticleFullPage
+          articleContent={articleContent}
+          backToSearch={backToSearch}
+        />
+      );
+    } else {
       return (
         <section>
           <SearchSummary
@@ -101,14 +123,7 @@ class ISearch extends Component {
           }
           { error && <div className='errorMessage'>{error}</div> }
           { this.renderResults() }
-          </section>
-        );
-    } else {
-      return (
-        <ArticleFullPage
-          articleContent={articleContent}
-          backToSearch={backToSearch}
-        />
+        </section>
       );
     }
   }
@@ -142,11 +157,15 @@ ISearch.propTypes = {
   articlePage: PropTypes.bool,
   articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,
+  hotelPage: PropTypes.bool,
+  viewHotel: PropTypes.func,
 
   // tags
   tags: PropTypes.array,
   addSingleTag: PropTypes.func,
-  removeTag: PropTypes.func
+  removeTag: PropTypes.func,
+  setHotelPage: PropTypes.func,
+  hotelInView: PropTypes.object
 
   // showAddMessage: PropTypes.func,
   // hideAddMessage: PropTypes.func,

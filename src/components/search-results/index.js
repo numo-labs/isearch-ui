@@ -59,7 +59,9 @@ class SearchResults extends Component {
       onYesFilter,
       onFilterClick,
       showAddMessage,
-      viewArticle
+      viewArticle,
+      viewHotel,
+      setHotelPage
     } = this.props;
     return (
       <Masonry
@@ -77,6 +79,8 @@ class SearchResults extends Component {
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
+                      viewHotel={viewHotel}
+                      setHotelPage={setHotelPage}
                     />
                   </div>
                 </VisbilitySensor>
@@ -121,7 +125,10 @@ SearchResults.propTypes = {
   showAddMessage: PropTypes.func,
   items: PropTypes.array,
   filterVisibleState: PropTypes.object,
-  viewArticle: PropTypes.func
+  viewHotel: PropTypes.func,
+  viewArticle: PropTypes.func,
+  setHotelPage: PropTypes.func,
+  hotelInView: PropTypes.func
 };
 
 export default SearchResults;
