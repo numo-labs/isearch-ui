@@ -20,7 +20,13 @@ import {
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
-import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
+import {
+  shuffleMockedTilesIntoResultSet,
+  getUniqueTiles,
+  getUniquePackages,
+  getPackages,
+  getTiles
+} from './utils/helpers.js';
 import _ from 'lodash';
 
 export const initialState = {
@@ -43,12 +49,12 @@ export const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const currentPackages = state.displayedItems.filter(item => item.type === 'packageOffer'); // remove all articles and filter tiles
-      const currentTiles = state.displayedItems.filter(item => item.type === 'tile');
-      const newPackages = action.items.filter(item => item.type === 'packageOffer');
-      const newTiles = action.items.filter(item => item.type === 'tile');
-      const mergedPackageItems = _.uniqBy(_.union(newPackages, currentPackages), (a) => a.packageOffer.provider.reference); // check for duplicates
-      const mergedTileItems = _.uniqBy(_.union(newTiles, currentTiles), (a) => a.tile.id);
+      const currentPackages = getPackages(state.displayedItems); // remove all articles and filter tiles
+      const currentTiles = getTiles(state.displayedItems);
+      const newPackages = getPackages(action.items);
+      const newTiles = getTiles(action.items);
+      const mergedPackageItems = getUniquePackages(newPackages, currentPackages); // check for duplicates
+      const mergedTileItems = getUniqueTiles(newTiles, currentTiles);
       const displayedItems = shuffleMockedTilesIntoResultSet(mergedPackageItems, mergedTileItems.concat(state.tiles)); // add filters back in
       const items = _.uniqBy(_.union(state.items, action.items), (a) => {
         if (a.packageOffer) {
@@ -65,7 +71,9 @@ export default function search (state = initialState, action) {
         error: ''
       };
     case UPDATE_DISPLAYED_ITEMS:
-      const updatedTiles = shuffleMockedTilesIntoResultSet(action.items, state.tiles); // add the remaining tiles back in!
+      const packages = getPackages(action.items); // remove all articles and filter tiles
+      const tiles = getTiles(action.items);
+      const updatedTiles = shuffleMockedTilesIntoResultSet(packages, tiles); // add the remaining tiles back in!
       return {
         ...state,
         displayedItems: updatedTiles
