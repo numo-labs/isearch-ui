@@ -1,3 +1,8 @@
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
 .calendar__day {
     font-size: 13px;
     cursor: pointer;
@@ -25,23 +30,31 @@
 }
 
 .datePickerContainer {
+  font-family: SourceSansRegular;
   color: black;
   width: 10em;
   float: left;
   background-color: #ffffff;
   margin-top: 0.3em;
+  text-align: left;
 }
 
-.datePicker {
+/*.datePicker {
   height: 2em;
   width: 100%;
-}
+  text-align: left;
+}*/
 
 .datePickerContainer input {
-  height: 2em;
+  height: 2.1em;
   padding-top: 1em;
   padding-bottom: 0.8em;
+  padding-left: 0.7em;
   width: 10em;
+  border-top: #ffffff;
+  border-left: #ffffff;
+  border-bottom: #ffffff;
+  border-right: #ffffff;
 }
 
 .day {
@@ -59,4 +72,11 @@
 
 .dayOtherMonth {
   color: #ccc;
+}
+
+@media (min-width: 650px) {
+  .datePickerContainer {
+    height: 3.55em;
+    width: 12.95em;
+  }
 }
