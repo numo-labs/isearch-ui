@@ -1,41 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import ArticleFooter from './article-footer.js';
-import NavHeader from '../nav-header/';
-import Tag from '../tags/tag.js';
-import { Link } from 'react-router';
+import ArticleFooter from '../../../lib/article/article-footer.js';
+import NavHeader from '../../../lib/nav-header/';
+import Tag from '../../../lib/tags/tag.js';
 
-require('./style.css');
-
-function moveScrollToTop (w = window) {
-  w.scrollTo(0, 0);
-}
-
-export class ArticleTile extends Component {
-  render () {
-    const { tile } = this.props;
-    return (
-      <Link to={`article/${tile.id}`}>
-        <div className='articleContainer'
-          onClick={ () => {
-            moveScrollToTop(this.props.window);
-            this.props.viewArticle(this.props.tile);
-          }}
-        >
-          <img className='articleImage' src={tile.sections && tile.sections[0].image} />
-          <div className='type'>
-            <h5>{'article'}</h5>
-          </div>
-          <div className='text'>
-            <h4>{this.props.overview}</h4>
-            <h1>{tile.name}</h1>
-          </div>
-        </div>
-      </Link>
-    );
-  }
-}
-
-export class ArticleFullPage extends Component {
+export default class ArticleFullPage extends Component {
   render () {
     const { articleContent, backToSearch } = this.props;
 
@@ -90,15 +58,4 @@ export class ArticleFullPage extends Component {
 ArticleFullPage.propTypes = {
   articleContent: PropTypes.object,
   backToSearch: PropTypes.func
-};
-
-ArticleTile.propTypes = {
-  window: PropTypes.object,
-  backgroundImage: PropTypes.string,
-  title: PropTypes.string,
-  overview: PropTypes.string,
-  type: PropTypes.string,
-  content: PropTypes.object,
-  viewArticle: PropTypes.func,
-  tile: PropTypes.object
 };

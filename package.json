@@ -79,6 +79,7 @@
     "react-dom": "^0.14.7",
     "react-masonry-component": "^4.0.0",
     "react-redux": "^4.4.0",
+    "react-router": "^2.3.0",
     "react-select": "^0.9.1",
     "react-simple-datepicker": "^0.1.4",
     "react-typeahead": "^1.1.9",
