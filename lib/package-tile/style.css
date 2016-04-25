@@ -21,6 +21,7 @@
 
 .packageContainer {
   width: 100%;
+  cursor: pointer;
 }
   .packageImage {
     height: 200px;
