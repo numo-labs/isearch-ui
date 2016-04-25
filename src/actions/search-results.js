@@ -163,31 +163,22 @@ export function filterResults () {
 
 /**
 * Action to start the search
-* 1. check if the searchString is already a tag. If so then return without
-*    dispatching an action
-* 2. check if this is the first search - if it is, then call the busySearching
-*    action to show the loading spinner
-* 4. format the query based on the tags
-* 5. launch a graphql mutation to return a searchBucketId
+* 1. format the query based on the tags
+* 2. launch a graphql mutation to return a searchBucketId
 */
 
 export function startSearch () {
   return (dispatch, getState) => {
-    const { search: { searchString, tags } } = getState();
-    const tagExists = tags.filter(tag => tags.displayName === searchString).length > 0;
-    if (tagExists) {
-      return;
-    } else {
-      dispatch(busySearching());
-      const query = formatQuery(tags);
-      console.log('query', query);
-      return graphqlService
-        .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
-        .then(json => {
-          const searchResultId = json.data.viewer.searchResultId.id;
-          dispatch(saveSearchResultId(searchResultId));
-          dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
-        });
-    }
+    const { search: { tags } } = getState();
+    dispatch(busySearching());
+    const query = formatQuery(tags);
+    console.log('query', query);
+    return graphqlService
+      .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
+      .then(json => {
+        const searchResultId = json.data.viewer.searchResultId.id;
+        dispatch(saveSearchResultId(searchResultId));
+        dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
+      });
   };
 }

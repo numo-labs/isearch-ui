@@ -8,9 +8,14 @@ import {
 import { expect } from 'chai';
 import * as actions from '../../src/actions/tags';
 
-describe('actions', function () {
-  describe('tags', function () {
-    it('should create an action to add tags', function (done) {
+import thunk from 'redux-thunk';
+import configureMockStore from './test-helpers';
+const mockStore = configureMockStore([thunk]);
+const initialState = {search: {tags: [], items: []}};
+
+describe('actions', () => {
+  describe('tags', () => {
+    it('should create an action to add tags', (done) => {
       const tags = ['a', 'b', 'c'];
       const expectedAction = {
         type: TAG_ADD_TAGS,
@@ -20,7 +25,7 @@ describe('actions', function () {
       expect(actions.addTags(tags)).to.deep.equal(expectedAction);
       done();
     });
-    it('should create an action to remove a tag', function (done) {
+    it('should create an action to remove a tag', (done) => {
       const displayName = 'sparta';
       const expectedAction = {
         type: TAG_REMOVE_TAG,
@@ -30,8 +35,8 @@ describe('actions', function () {
       done();
     });
   });
-  describe('tiles', function () {
-    it('should create an action to add tiles', function (done) {
+  describe('tiles', () => {
+    it('should create an action to add tiles', (done) => {
       const tileArray = ['a', 'b', 'c'];
       const expectedAction = {
         type: TILES_ADD_TILES,
@@ -41,8 +46,9 @@ describe('actions', function () {
       done();
     });
   });
-  describe('addSingleTag', function () {
-    it('should create an action to add a single tag', function (done) {
+  describe('addSingleTag', () => {
+    it(`should create an action to add a single tag if the tag doesnt exist`, (done) => {
+      const store = mockStore(initialState);
       const expectedAction = {
         type: TAG_ADD_SINGLE_TAG,
         tag: {
@@ -51,12 +57,13 @@ describe('actions', function () {
           id: 'test'
         }
       };
-      expect(actions.addSingleTag('test', 'test', 'test')).to.deep.equal(expectedAction);
+      store.dispatch(actions.addSingleTag('test', 'test'));
+      expect(store.getActions()).to.deep.equal([expectedAction]);
       done();
     });
   });
-  describe('onFilterClick', function () {
-    it('should create an action to remove a filter once clicked', function (done) {
+  describe('onFilterClick', () => {
+    it('should create an action to remove a filter once clicked', (done) => {
       const expectedAction = {
         type: FILTER_ON_CLICK,
         displayName: 'test'
