@@ -57,7 +57,7 @@
   }
 }
 
-.inputContainer {
+.containerInput {
   top: 3em;
   display: inline-block;
   margin-right: 2em;
@@ -117,23 +117,6 @@
   height: 0.5em;
 }
 
-.searchButton {
-  font-family: SourceSansLight;
-  background-color: #F39100;
-  display: inline-block;
-  border-radius: 100%;
-  color: #ffffff;
-  font-size: 1.25em;
-  padding-top: 0.3em;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-  padding-bottom: 0.25em;
-  margin-top: 1em;
-  float: left;
-  position: absolute;
-  top: 6em;
-  right: 2.5em;
-}
 
 .searchButton:hover {
   background-color: #F37800;
