@@ -38,7 +38,7 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
         console.log('json', json);
         const items = json.data.viewer.searchResult.items;
         console.log(!items || !items.length);
-        if (attempt > 9) {
+        if (attempt > 15) {
           return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts
         } else if ((!items || !items.length || !packageOffersReturned(items))) {
           setTimeout(function () {
