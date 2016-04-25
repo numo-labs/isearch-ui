@@ -18,7 +18,11 @@ import { expect } from 'chai';
 import reducer, { initialState } from '../../src/reducers/search';
 import mockResults from '../../src/utils/mock-search-results.json';
 import { mockTiles } from '../../src/reducers/utils/mockData.js';
-import { shuffleMockedTilesIntoResultSet } from '../../src/reducers/utils/helpers.js';
+import {
+  shuffleMockedTilesIntoResultSet,
+  getPackages,
+  getTiles
+} from '../../src/reducers/utils/helpers.js';
 
 const mockItems = mockResults.items;
 
@@ -88,9 +92,13 @@ describe('Search Reducer', () => {
       expect(state).to.deep.equal(expectedState);
       done();
     });
-    it(`UPDATE_DISPLAYED_ITEMS -> adds action.items and state.tiles to
-        displayedItems`, (done) => {
-      const shuffledItems = shuffleMockedTilesIntoResultSet(mockItems, mockTiles);
+    it(`UPDATE_DISPLAYED_ITEMS -> adds action.items to
+        displayedItems first sorting by tiles and packages (does not use
+        state.tiles any more becuase the tiles are added back when new results
+        returned from graphql)`, (done) => {
+      const packages = getPackages(mockItems); // remove all articles and filter tiles
+      const tiles = getTiles(mockItems);
+      const shuffledItems = shuffleMockedTilesIntoResultSet(packages, tiles);
       const action = {
         type: UPDATE_DISPLAYED_ITEMS,
         items: mockItems,
