@@ -68,10 +68,10 @@
   display: inline-block;
   border-radius: 500px;
   color: #ffffff;
-  font-size: 1.25em;
-  padding: 0.2em;
-  padding-left: 2em;
-  padding-right: 2em;
+  font-size: 1.1em;
+  padding: 0.5em;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
   margin: 0 auto;
   margin-top: 3em;
   margin-bottom: 3em;
@@ -85,54 +85,10 @@
   height: 100em;
 }
 
-/*.datePicker {
-  width: 46%;
-  float: left;
-  margin-right: 0.9em;
-  display: inline-block;
-  border: none;
-  outline-width: 0;
-  outline: none !important;
-  margin-top: 1em;
-  font-family: SourceSansLight;
+.contentHeader {
+  margin-top: 2em;
+  position: relative;
 }
-
-.datePickerInput {
-  width: 100%;
-  color: black;
-  padding-bottom: 0.15em;
-  padding-top: 0.15em;
-}
-
-.day {
-  font-size: 13px;
-  cursor: pointer;
-  padding: 7px 9px 6px;
-  border: solid 1px #eee;
-  color: #4F4F4F;
-}
-
-.dayActive {
-  background-color: #6DB4A9;
-  color: #ffffff;
-}
-
-.dayOtherMonth {
-  color: #ccc;
-}
-
-.departure {
-  float: left;
-  padding-right: 2.5em;
-  padding-left: 0.5em;
-  border-right: 1px solid;
-}
-
-.departDate {
-  width: 46%;
-  float: left;
-  margin-right: 0.9em;
-}*/
 
 .departFrom {
   margin: 0 auto;
@@ -145,7 +101,7 @@
 }
 
 .departurePaxmix {
-  width: 96.5%;
+  width: 96.4%;
   margin-top: 0.3em;
   margin-right: 0;
 }
@@ -202,6 +158,14 @@
   color: black;
 }
 
+.inspirationTitle {
+  display: none;
+}
+
+.logoHeart {
+  display: none;
+}
+
 .returnIcon {
   width: 1.8em;
   padding-right: 0;
@@ -244,6 +208,9 @@ h1 {
   width: 100%;
 }
 
+.spiesTitle {
+  display: none;
+}
 @media (min-width: 490px) {
   .search {
     padding-left: 3em;
@@ -259,13 +226,40 @@ h1 {
 }
 
 @media (min-width: 750px) {
+  .contentHeader {
+    margin-bottom: 2.5em;
+  }
   .exitButton {
     border-radius: 100%;
     border: 1px solid #ffffff;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    right: 0;
+    padding-left: 0.45em;
+    padding-right: 0.45em;
+    right: -0.5em;
     margin-top: 2em;
+    bottom: 20em;
+  }
+  .spiesTitle {
+    font-family: SourceSansBold;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 2.8em;
+    left: 3em;
+    height: 0.5em;
+  }
+  .logoHeart {
+    width: 4em;
+    display: inline-block;
+    left: 4em;
+    padding-right: 0.2em;
+    padding-bottom: 1.5em;
+  }
+  .inspirationTitle {
+    color: #ffffff;
+    font-size: 1.3em;
+    position: absolute;
+    left: 7.6em;
+    bottom: 0.1em;
+    display: inline-block;
   }
 }
 
