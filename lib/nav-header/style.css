@@ -33,8 +33,9 @@
   color: #fff;
   height: 100%;
   line-height: 3.5em;
-  padding: 0 1.5em;
+  padding: 0.4em 1.5em;
   cursor: pointer;
+
 }
 
 .navBarContainer .share {
