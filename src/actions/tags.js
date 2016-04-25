@@ -69,10 +69,25 @@ export const onYesFilter = (displayName, id) => (dispatch) => {
 export const onFilterClick = (displayName) => { return {type: FILTER_ON_CLICK, displayName}; };
 
 /**
-* Action to add a tag from a filter
+* Action to add a tag either fron the search bar or a filterString
+* If the tag already exists, it is not added
+* If it doesn't exist, it is added and the results are filtered
 */
 
 export const addSingleTag = (displayName, id, filterString) => {
+  return (dispatch, getState) => {
+    const { search: { tags } } = getState();
+    const tagExists = tags.filter(tag => tag.displayName === displayName).length > 0;
+    if (tagExists) {
+      return;
+    } else {
+      dispatch(addTag(displayName, id, filterString));
+      dispatch(filterResults());
+    }
+  };
+};
+
+export const addTag = (displayName, id, filterString) => {
   return {
     type: TAG_ADD_SINGLE_TAG,
     tag: {

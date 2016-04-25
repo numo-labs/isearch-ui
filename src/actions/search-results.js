@@ -140,7 +140,6 @@ export function updateDisplayedItems (results) {
 export function filterResults () {
   return (dispatch, getState) => {
     const { search: { tags, items } } = getState();
-    console.log('state', getState().search.items);
     const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
     const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
     if (items.length > 0) {
