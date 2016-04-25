@@ -37,25 +37,6 @@
   text-align: center;
 }
 
-.inputBar {
-  font-family: SourceSansLight;
-  height: 3em;
-  bottom: 0;
-  margin-top: 1.3em;
-  border: none;
-  outline-width: 0;
-  outline: none !important;
-  padding-left: 0.5em;
-  float: left;
-  margin-right: 1em;
-  width: 75%;
-}
-
-@media (min-width: 450px) {
-  .inputBar {
-    width: 31em;
-  }
-}
 
 .containerInput {
   top: 3em;

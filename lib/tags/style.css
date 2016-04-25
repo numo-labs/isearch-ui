@@ -11,7 +11,7 @@
 .inputBar {
   font-family: SourceSansLight;
   height: 3em;
-  width: 21em;
+  width: 16em;
   bottom: 0;
   margin-top: 1.5em;
   border: none;
@@ -53,12 +53,6 @@
 .searchButton:active {
   background-color: #F39100;
 }
-
-/*@media (min-width: 450px) {
-  .inputBar {
-    width: 31em;
-  }
-}*/
 
 .inputContainer {
   top: 3em;
