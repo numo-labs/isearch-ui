@@ -171,6 +171,7 @@ export function startSearch () {
   return (dispatch, getState) => {
     const { search: { tags } } = getState();
     dispatch(busySearching());
+    console.log('tags', tags);
     const query = formatQuery(tags);
     console.log('query', query);
     return graphqlService
