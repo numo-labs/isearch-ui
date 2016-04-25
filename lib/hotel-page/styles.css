@@ -67,6 +67,8 @@
 .descriptionWrapper {
   font-family: SourceSansRegular;
   margin-top: 0.3em;
+  padding-bottom: 5em;
+  padding-top: 2em;
 }
 
 .factContainer {
