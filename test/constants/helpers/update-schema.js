@@ -1,4 +1,4 @@
-import { introspectionQuery } from './introspectionQuery.js';
+import { introspectionQuery } from 'graphql/utilities';
 import request from 'request';
 const graphqlApiURL = 'https://f0uih51vu0.execute-api.eu-west-1.amazonaws.com/ci/graphql';
 request({
