@@ -98,7 +98,7 @@ describe('Search Reducer', () => {
         returned from graphql)`, (done) => {
       const packages = getPackages(mockItems); // remove all articles and filter tiles
       const tiles = getTiles(mockItems);
-      const shuffledItems = shuffleMockedTilesIntoResultSet(packages, tiles);
+      const shuffledItems = shuffleMockedTilesIntoResultSet(packages, tiles.concat(mockTiles));
       const action = {
         type: UPDATE_DISPLAYED_ITEMS,
         items: mockItems,
