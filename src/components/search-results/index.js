@@ -85,30 +85,32 @@ class SearchResults extends Component {
                   </div>
                 </VisbilitySensor>
               );
-            } else if (item.type === 'filter') {
-              return (
-                <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem'>
-                    <FilterTile
-                      filterVisible={filterVisibleState[item.displayName]}
-                      onYesFilter={onYesFilter}
-                      onNoFilter={onFilterClick}
-                      showAddMessage={showAddMessage}
-                      description={item}
-                      color={item.color}
-                    />
-                  </div>
-                </VisbilitySensor>
-
-              );
             } else if (item.type === 'tile') {
-              return (
-                <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem'>
-                    <ArticleTile {...item} viewArticle={viewArticle}/>
-                  </div>
-                </VisbilitySensor>
-              );
+              if (item.tile.type === 'filter') {
+                return (
+                  <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                    <div key={index} className='gridItem'>
+                      <FilterTile
+                        filterVisible={filterVisibleState[item.tile.displayName]}
+                        onYesFilter={onYesFilter}
+                        onNoFilter={onFilterClick}
+                        showAddMessage={showAddMessage}
+                        description={item.tile}
+                        color={item.tile.color}
+                      />
+                    </div>
+                  </VisbilitySensor>
+
+                );
+              } else if (item.tile.type === 'article') {
+                return (
+                  <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                    <div key={index} className='gridItem'>
+                      <ArticleTile {...item} viewArticle={viewArticle}/>
+                    </div>
+                  </VisbilitySensor>
+                );
+              }
             }
           })
         }

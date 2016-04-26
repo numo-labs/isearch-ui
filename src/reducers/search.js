@@ -109,8 +109,8 @@ export default function search (state = initialState, action) {
     case TILES_ADD_TILES:
       const tileArray = action.tileArray === undefined ? mockTiles : action.tileArray;
       const filterVisibleState = tileArray.reduce((obj, tile) => {
-        if (tile.type === 'filter') {
-          obj[tile.displayName] = true;
+        if (tile.tile.type === 'filter') {
+          obj[tile.tile.displayName] = true;
         }
         return obj;
       }, {});

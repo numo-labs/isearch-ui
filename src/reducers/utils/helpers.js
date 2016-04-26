@@ -27,11 +27,3 @@ export function getTiles (arr) {
 export function getPackages (arr) {
   return arr.filter(item => item.type === 'packageOffer');
 }
-
-export function getUniquePackages (currentItems, newItems) {
-  return _.uniqBy(_.union(newItems, currentItems), (a) => a.packageOffer.provider.reference);
-}
-
-export function getUniqueTiles (currentItems, newItems) {
-  return _.uniqBy(_.union(newItems, currentItems), (a) => a.tile.id);
-}
