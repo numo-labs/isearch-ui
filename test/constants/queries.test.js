@@ -3,7 +3,7 @@ import { validate } from 'graphql/validation';
 import { parse } from 'graphql/language';
 import { buildClientSchema } from 'graphql/utilities';
 import * as queries from '../../src/constants/queries';
-// import * as mutations from '../../src/constants/mutations';
+import * as mutations from '../../src/constants/mutations';
 import data from './helpers/schema.json';
 const clientSchema = buildClientSchema(data.data);
 
@@ -18,8 +18,19 @@ describe('GraphQL constants', (done) => {
     queryKeys.forEach((key) => {
       const query = queries[key];
       // if (query === queries) return;
-      it('validates against GraphQL schema', (done) => {
+      it('validates query against GraphQL schema', (done) => {
         expectValid(clientSchema, query);
+        done();
+      });
+    });
+  });
+  describe('mutations', (done) => {
+    const mutationKeys = Object.keys(mutations);
+    mutationKeys.forEach((key) => {
+      const mutation = mutations[key];
+      // if (query === queries) return;
+      it('validates mutation against GraphQL schema', (done) => {
+        expectValid(clientSchema, mutation);
         done();
       });
     });
