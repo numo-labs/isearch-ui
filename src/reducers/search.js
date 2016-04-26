@@ -20,7 +20,7 @@ import {
 
 import { mockTiles } from './utils/mockData.js';
 import {
-  shuffleMockedTilesIntoResultSet,
+  shuffleTilesIntoResults,
   getPackages,
   getTiles
 } from './utils/helpers.js';
@@ -48,7 +48,7 @@ export default function search (state = initialState, action) {
     case RECEIVE_SEARCH_RESULT:
       const newPackages = getPackages(action.items);
       const newTiles = getTiles(action.items);
-      const displayedItems = shuffleMockedTilesIntoResultSet(newPackages, newTiles.concat(state.tiles)); // add filters back in
+      const displayedItems = shuffleTilesIntoResults(newPackages, newTiles.concat(state.tiles)); // add filters back in
       const items = _.uniqBy(_.union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;

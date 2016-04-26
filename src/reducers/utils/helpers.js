@@ -7,9 +7,7 @@ Array.prototype.insert = function (index, element) {
 };
 /* eslint-enable no-extend-native */
 
-import _ from 'lodash';
-
-export function shuffleMockedTilesIntoResultSet (items, tiles) {
+export function shuffleTilesIntoResults (items, tiles) {
   // if there are more tiles than packages, shuffle packages into tiles and vice versa
   var base = items.length > tiles.length ? items : tiles;
   var itemsToInsert = items.length > tiles.length ? tiles : items;
