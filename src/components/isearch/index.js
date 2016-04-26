@@ -73,7 +73,20 @@ class ISearch extends Component {
       error,
       loading,
       hotelPage,
-      hotelInView
+      hotelInView,
+      numberOfChildren,
+      childAge1,
+      childAge2,
+      childAge3,
+      childAge4,
+      departureAirport,
+      duration,
+      departureDate,
+      setNumberOfChildren,
+      setNumberOfAdults,
+      setChildAge,
+      setDepartureAirport,
+      setDuration
     } = this.props;
     console.log('HOTEL IN VIEW --->', hotelInView);
 
@@ -95,12 +108,19 @@ class ISearch extends Component {
       return (
         <section>
           <SearchSummary
-            city='Bodrum'
-            country='Turkey'
-            durationInWeeks={2}
-            paxMix='2 adults, 2 children'
-            departureDate='Sun 13 jul 2016'
-            returnDate='Tue 15 jul 2016'
+            numberOfChildren={numberOfChildren}
+            setChildAge={setChildAge}
+            childAge1={childAge1}
+            childAge2={childAge2}
+            childAge3={childAge3}
+            childAge4={childAge4}
+            departureAirport={departureAirport}
+            duration={duration}
+            departureDate={departureDate}
+            setNumberOfChildren={setNumberOfChildren}
+            setNumberOfAdults={setNumberOfAdults}
+            setDepartureAirport={setDepartureAirport}
+            setDuration={setDuration}
           />
           <Header />
           <Tags
@@ -165,7 +185,22 @@ ISearch.propTypes = {
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
   setHotelPage: PropTypes.func,
-  hotelInView: PropTypes.object
+  hotelInView: PropTypes.object,
+
+  // travel info
+  setNumberOfChildren: PropTypes.func,
+  setNumberOfAdults: PropTypes.func,
+  setDepartureAirport: PropTypes.func,
+  setDuration: PropTypes.func,
+  numberOfChildren: PropTypes.string,
+  childAge1: PropTypes.string,
+  childAge2: PropTypes.string,
+  childAge3: PropTypes.string,
+  childAge4: PropTypes.string,
+  departureAirport: PropTypes.string,
+  duration: PropTypes.string,
+  departureDate: PropTypes.string,
+  setChildAge: PropTypes.func
 
   // showAddMessage: PropTypes.func,
   // hideAddMessage: PropTypes.func,

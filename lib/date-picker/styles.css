@@ -32,7 +32,7 @@
 .datePickerContainer {
   font-family: SourceSansRegular;
   color: black;
-  width: 10em;
+  width: 9.1em;
   float: left;
   background-color: #ffffff;
   margin-top: 0.3em;
@@ -50,7 +50,7 @@
   padding-top: 1em;
   padding-bottom: 0.8em;
   padding-left: 0.75em;
-  width: 10em;
+  width: 9.1em;
   border-top: #ffffff;
   border-left: #ffffff;
   border-bottom: #ffffff;
@@ -77,6 +77,6 @@
 @media (min-width: 650px) {
   .datePickerContainer {
     height: 3.55em;
-    width: 12.95em;
+    width: 11.7em;
   }
 }

@@ -43,7 +43,16 @@ export const initialState = {
   error: '',
   autocompleteError: '',
   autocompleteOptions: [],
-  inAutoCompleteSearch: false // use to show loading spinner
+  inAutoCompleteSearch: false, // use to show loading spinner,
+  numberOfChildren: 2,
+  childAge1: '',
+  childAge2: '',
+  childAge3: '',
+  childAge4: '',
+  departureAirport: '',
+  duration: '',
+  departureDate: '',
+  passengerBirthdays: []
 };
 
 export default function search (state = initialState, action) {
