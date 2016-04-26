@@ -3,7 +3,6 @@ import {
   BUSY_SEARCHING,
   // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
-  UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
   TAG_ADD_SINGLE_TAG,
   FILTER_ON_CLICK,
@@ -11,20 +10,17 @@ import {
   TILES_ADD_TILES,
   SET_AUTOCOMPLETE_ERROR,
   SET_AUTOCOMPLETE_OPTIONS,
-  SET_AUTOCOMPLETE_IN_SEARCH
+  SET_AUTOCOMPLETE_IN_SEARCH,
+  CLEAR_SEARCH_STRING
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
 import reducer, { initialState } from '../../src/reducers/search';
 import mockResults from '../../src/utils/mock-search-results.json';
 import { mockTiles } from '../../src/reducers/utils/mockData.js';
-import {
-  shuffleMockedTilesIntoResultSet,
-  getPackages,
-  getTiles
-} from '../../src/reducers/utils/helpers.js';
+import { shuffleTilesIntoResults } from '../../src/reducers/utils/helpers.js';
 
-const mockItems = mockResults.items;
+const mockItems = [mockResults.items[0]]; // an array with one packageOffer
 
 const initialStateWithTiles = {
   ...initialState,
@@ -59,7 +55,7 @@ describe('Search Reducer', () => {
         initialSearch: true
       };
       const state = reducer(initialStateWithTiles, action);
-      const shuffledItems = shuffleMockedTilesIntoResultSet(mockItems, mockTiles);
+      const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
       const expectedState = {
         ...initialStateWithTiles,
         items: mockItems,
@@ -71,7 +67,7 @@ describe('Search Reducer', () => {
     });
     it(`RECEIVE_SEARCH_RESULT:initialSearch = false -> adds action.items to items
         and displayedItems and removes duplicates`, (done) => {
-      const shuffledItems = shuffleMockedTilesIntoResultSet(mockItems, mockTiles);
+      const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
       const initialStateWithItems = {
         ...initialStateWithTiles,
         items: mockItems,
@@ -88,26 +84,6 @@ describe('Search Reducer', () => {
         items: mockItems,
         displayedItems: shuffledItems,
         loading: false
-      };
-      expect(state).to.deep.equal(expectedState);
-      done();
-    });
-    it(`UPDATE_DISPLAYED_ITEMS -> adds action.items to
-        displayedItems first sorting by tiles and packages (does not use
-        state.tiles any more becuase the tiles are added back when new results
-        returned from graphql)`, (done) => {
-      const packages = getPackages(mockItems); // remove all articles and filter tiles
-      const tiles = getTiles(mockItems);
-      const shuffledItems = shuffleMockedTilesIntoResultSet(packages, tiles.concat(mockTiles));
-      const action = {
-        type: UPDATE_DISPLAYED_ITEMS,
-        items: mockItems,
-        initialSearch: true
-      };
-      const state = reducer(initialStateWithTiles, action);
-      const expectedState = {
-        ...initialStateWithTiles,
-        displayedItems: shuffledItems
       };
       expect(state).to.deep.equal(expectedState);
       done();
@@ -140,6 +116,16 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         searchString: 'hello'
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it('CLEAR_SEARCH_STRING -> sets the searchString to empty in the state', (done) => {
+      const action = {type: CLEAR_SEARCH_STRING};
+      const state = reducer(undefined, action);
+      const expectedState = {
+        ...initialState,
+        searchString: ''
       };
       expect(state).to.deep.equal(expectedState);
       done();
