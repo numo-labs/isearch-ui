@@ -7,14 +7,14 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm run lint && npm run coverage",
+    "test": "npm run lint && npm run generate-graphql-schema && npm run coverage",
     "dev:build": "webpack --config ./webpack.config.js",
     "dev:serve": "webpack-dev-server --config ./webpack.config.js",
     "lint": "semistandard",
     "lib:test": "mocha ./lib/**/*.test.js --compilers js:babel-register",
-    "src:test": "generate-graphql-schema mocha ./test/constants/queries.test.js --compilers js:babel-register",
+    "src:test": "npm run generate-graphql-schema && mocha ./test/constants/queries.test.js --compilers js:babel-register",
     "nocov": "npm run lib:test && npm run src:test",
-    "coverage": "generate-graphql-schema ./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js ./lib/**/*.test.js --report lcov -- -R spec",
+    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js ./lib/**/*.test.js --report lcov -- -R spec",
     "clean": "rm -rf public && mkdir -p public/",
     "build": "npm run clean && ./node_modules/.bin/webpack --config ./webpack.production.config.js",
     "deploy": "gulp deploy",
