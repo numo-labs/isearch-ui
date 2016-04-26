@@ -13,7 +13,7 @@ export function formatQuery (tags) {
   return tags.reduce((q, tag) => {
     const type = tag.id.split(':')[0];
     const field = type === 'geo' ? 'geography' : type;
-    const value = q[type] || {};
+    const value = q[field] || {};
     const updatedQuery = {
       ...q,
       [field]: [

@@ -120,7 +120,7 @@ describe('actions', function () {
         })
         .catch(done);
     });
-    it('attempt > 9 -> should dispatch a search error', function (done) {
+    it('attempt > 15 -> should dispatch a search error', function (done) {
       simple.mock(graphqlService, 'query').resolveWith(json);
       const expectedActions = [
         {
@@ -129,7 +129,7 @@ describe('actions', function () {
         }
       ];
       const store = mockStore(initialState);
-      store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 10))
+      store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 16))
         .then(() => {
           console.log('actions', store.getActions());
           expect(store.getActions()).to.deep.equal(expectedActions);
