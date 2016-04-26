@@ -266,6 +266,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   }
   .descriptionWrapper {
     width: 75%;
+    margin-bottom: 5em;
   }
   .factHolder {
     margin: 0;
