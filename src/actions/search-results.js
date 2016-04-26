@@ -36,9 +36,8 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
     return graphqlService
       .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
       .then(json => {
-        console.log('json', json);
+        // console.log('json', json);
         const items = json.data.viewer.searchResult.items;
-        console.log(!items || !items.length);
         if (attempt > 15) {
           return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts
         } else if ((!items || !items.length || !packageOffersReturned(items))) {
@@ -131,38 +130,6 @@ export function updateDisplayedItems (results) {
 }
 
 /**
-* Action that is called when the 'yes' button on a filter is clicked
-* 1. get all the geo and amenity tags
-* 2. if search results already exist, filter the existing results and update
-* the displayedItems
-* 3. launch a new search to get more items
-*/
-
-export function filterResults () {
-  return (dispatch, getState) => {
-    const { search: { tags, items } } = getState();
-    const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
-    const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
-    if (items.length > 0) {
-      const results = items.filter(item => {
-        if (item.packageOffer) {
-          return (
-            // geoTags.some(tag => item.packageOffer.hotel.place.country === tag.displayName) && // e.g. either spain or greece
-            amenityTags.every(tag => item.packageOffer.amenities[tag.id.split(':')[1]]) // and with wifi and kids friendly
-          );
-        } else {
-          return true;
-        }
-      });
-      dispatch(updateDisplayedItems(results));
-    }
-    if (geoTags.length > 0) {
-      dispatch(startSearch());
-    }
-  };
-}
-
-/**
 * Action to start the search
 * 1. format the query based on the tags
 * 2. launch a graphql mutation to return a searchBucketId
@@ -171,17 +138,17 @@ export function filterResults () {
 export function startSearch () {
   return (dispatch, getState) => {
     const { search: { tags } } = getState();
-    dispatch(busySearching());
-    console.log('tags', tags);
-    const query = formatQuery(tags);
-    console.log('query', query);
-    return graphqlService
-      .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
-      .then(json => {
-        const searchResultId = json.data.viewer.searchResultId.id;
-        dispatch(saveSearchResultId(searchResultId));
-        dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
-      });
+    if (tags.length > 0) {
+      dispatch(busySearching());
+      const query = formatQuery(tags);
+      return graphqlService
+        .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
+        .then(json => {
+          const searchResultId = json.data.viewer.searchResultId.id;
+          dispatch(saveSearchResultId(searchResultId));
+          dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
+        });
+    }
   };
 }
 

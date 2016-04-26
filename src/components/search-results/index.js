@@ -16,7 +16,7 @@ const masonryOptions = {
 class SearchResults extends Component {
   handleVisibility (isVisible, item) {
     if (dataLayer && isVisible && item.type === 'packageOffer') {
-      console.log('datalayer: ', item.packageOffer.provider.reference);
+      // console.log('datalayer: ', item.packageOffer.provider.reference);
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -86,7 +86,6 @@ class SearchResults extends Component {
                 </VisbilitySensor>
               );
             } else if (item.type === 'filter') {
-              console.log('itemVisible', filterVisibleState[item.displayName]);
               return (
                 <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                   <div key={index} className='gridItem'>

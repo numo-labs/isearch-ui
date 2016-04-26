@@ -49,13 +49,9 @@ export const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const currentPackages = getPackages(state.displayedItems); // remove all articles and filter tiles
-      const currentTiles = getTiles(state.displayedItems);
       const newPackages = getPackages(action.items);
       const newTiles = getTiles(action.items);
-      const mergedPackageItems = getUniquePackages(newPackages, currentPackages); // check for duplicates
-      const mergedTileItems = getUniqueTiles(newTiles, currentTiles);
-      const displayedItems = shuffleMockedTilesIntoResultSet(mergedPackageItems, mergedTileItems.concat(state.tiles)); // add filters back in
+      const displayedItems = shuffleMockedTilesIntoResultSet(newPackages, newTiles.concat(state.tiles)); // add filters back in
       const items = _.uniqBy(_.union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
@@ -69,14 +65,6 @@ export default function search (state = initialState, action) {
         items,
         loading: false,
         error: ''
-      };
-    case UPDATE_DISPLAYED_ITEMS:
-      const packages = getPackages(action.items); // remove all articles and filter tiles
-      const tiles = getTiles(action.items);
-      const updatedTiles = shuffleMockedTilesIntoResultSet(packages, tiles.concat(state.tiles)); // add the remaining tiles back in!
-      return {
-        ...state,
-        displayedItems: updatedTiles
       };
     case BUSY_SEARCHING:
       return {
