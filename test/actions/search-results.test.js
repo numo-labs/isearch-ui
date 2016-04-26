@@ -3,8 +3,7 @@ import {
   SAVE_SEARCH_RESULT_ID,
   RECEIVE_SEARCH_RESULT,
   // TILES_ADD_TILES,
-  SEARCH_ERROR,
-  UPDATE_DISPLAYED_ITEMS
+  SEARCH_ERROR
 } from '../../src/constants/actionTypes';
 
 import { MUTATION_START_SEARCH } from '../../src/constants/mutations.js';
@@ -21,7 +20,7 @@ import * as graphqlService from '../../src/services/graphql';
 // mock redux store
 import configureMockStore from './test-helpers';
 const mockStore = configureMockStore([thunk]);
-const initialState = {search: { searchString: 'h', tags: ['geo:geonames:13456'], displayedItems: [] }};
+const initialState = {search: { searchString: 'h', tags: [{id: 'geo:geonames:13456'}], displayedItems: [] }};
 
 describe('actions', function () {
   afterEach(function (done) {

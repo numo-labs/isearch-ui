@@ -9,7 +9,6 @@ import {
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
   SET_SEARCH_STRING,
-  UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
   SET_AUTOCOMPLETE_ERROR,
   SET_AUTOCOMPLETE_OPTIONS,
@@ -22,8 +21,6 @@ import {
 import { mockTiles } from './utils/mockData.js';
 import {
   shuffleMockedTilesIntoResultSet,
-  getUniqueTiles,
-  getUniquePackages,
   getPackages,
   getTiles
 } from './utils/helpers.js';
