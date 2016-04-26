@@ -73,7 +73,7 @@ export default function search (state = initialState, action) {
     case UPDATE_DISPLAYED_ITEMS:
       const packages = getPackages(action.items); // remove all articles and filter tiles
       const tiles = getTiles(action.items);
-      const updatedTiles = shuffleMockedTilesIntoResultSet(packages, tiles); // add the remaining tiles back in!
+      const updatedTiles = shuffleMockedTilesIntoResultSet(packages, tiles.concat(state.tiles)); // add the remaining tiles back in!
       return {
         ...state,
         displayedItems: updatedTiles

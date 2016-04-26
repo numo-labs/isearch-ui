@@ -1,6 +1,6 @@
 {
   "name": "isearch-ui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
