@@ -75,6 +75,7 @@ class ISearch extends Component {
       hotelPage,
       hotelInView,
       numberOfChildren,
+      numberOfAdults,
       childAge1,
       childAge2,
       childAge3,
@@ -109,6 +110,7 @@ class ISearch extends Component {
         <section>
           <SearchSummary
             numberOfChildren={numberOfChildren}
+            numberOfAdults={numberOfAdults}
             setChildAge={setChildAge}
             childAge1={childAge1}
             childAge2={childAge2}
@@ -193,6 +195,7 @@ ISearch.propTypes = {
   setDepartureAirport: PropTypes.func,
   setDuration: PropTypes.func,
   numberOfChildren: PropTypes.string,
+  numberOfAdults: PropTypes.string,
   childAge1: PropTypes.string,
   childAge2: PropTypes.string,
   childAge3: PropTypes.string,
