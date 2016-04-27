@@ -93,7 +93,8 @@ class ISearch extends Component {
       setNumberOfChildrenTitle,
       numberOfChildrenTitle,
       numberOfAdultsTitle,
-      durationTitle
+      durationTitle,
+      setDepartureDate
     } = this.props;
     console.log('HOTEL IN VIEW --->', hotelInView);
 
@@ -135,6 +136,7 @@ class ISearch extends Component {
             numberOfAdultsTitle={numberOfAdultsTitle}
             numberOfChildrenTitle={numberOfChildrenTitle}
             durationTitle={durationTitle}
+            setDepartureDate={setDepartureDate}
           />
           <Header />
           <Tags
@@ -221,7 +223,8 @@ ISearch.propTypes = {
   setDurationTitle: PropTypes.func,
   numberOfAdultsTitle: PropTypes.string,
   numberOfChildrenTitle: PropTypes.string,
-  durationTitle: PropTypes.string
+  durationTitle: PropTypes.string,
+  setDepartureDate: PropTypes.func
 
   // showAddMessage: PropTypes.func,
   // hideAddMessage: PropTypes.func,

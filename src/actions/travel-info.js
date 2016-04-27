@@ -13,5 +13,14 @@ export const setNumberOfAdults = (numberOfAdults) => { return {type: SET_NUMBER_
 export const setNumberOfChildren = (numberOfChildren) => { return {type: SET_NUMBER_OF_CHILDREN, numberOfChildren}; };
 export const setDuration = (duration) => { return {type: SET_DURATION, duration}; };
 export const setDepartureAirport = (departureAirport) => { return {type: SET_DEPARTURE_AIRPORT, departureAirport}; };
-export const setDepartureDate = (departureDate) => { return {type: SET_DEPARTURE_DATE, departureDate}; };
+export const setDepartureDate = (departureDate) => {
+  const month = departureDate.split('/')[0];
+  const day = departureDate.split('/')[1];
+  const year = departureDate.split('/')[2];
+  console.log(month, day, year);
+  return {
+    type: SET_DEPARTURE_DATE,
+    departureDate
+  };
+};
 export const setPassengerBirthdays = (passengerBirthdays) => { return {type: SET_PASSENGER_BIRTHDAYS, passengerBirthdays}; };
