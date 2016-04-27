@@ -87,7 +87,13 @@ class ISearch extends Component {
       setNumberOfAdults,
       setChildAge,
       setDepartureAirport,
-      setDuration
+      setDuration,
+      setDurationTitle,
+      setNumberOfAdultsTitle,
+      setNumberOfChildrenTitle,
+      numberOfChildrenTitle,
+      numberOfAdultsTitle,
+      durationTitle
     } = this.props;
     console.log('HOTEL IN VIEW --->', hotelInView);
 
@@ -123,6 +129,12 @@ class ISearch extends Component {
             setNumberOfAdults={setNumberOfAdults}
             setDepartureAirport={setDepartureAirport}
             setDuration={setDuration}
+            setDurationTitle={setDurationTitle}
+            setNumberOfAdultsTitle={setNumberOfAdultsTitle}
+            setNumberOfChildrenTitle={setNumberOfChildrenTitle}
+            numberOfAdultsTitle={numberOfAdultsTitle}
+            numberOfChildrenTitle={numberOfChildrenTitle}
+            durationTitle={durationTitle}
           />
           <Header />
           <Tags
@@ -203,7 +215,13 @@ ISearch.propTypes = {
   departureAirport: PropTypes.string,
   duration: PropTypes.string,
   departureDate: PropTypes.string,
-  setChildAge: PropTypes.func
+  setChildAge: PropTypes.func,
+  setNumberOfAdultsTitle: PropTypes.func,
+  setNumberOfChildrenTitle: PropTypes.func,
+  setDurationTitle: PropTypes.func,
+  numberOfAdultsTitle: PropTypes.string,
+  numberOfChildrenTitle: PropTypes.string,
+  durationTitle: PropTypes.string
 
   // showAddMessage: PropTypes.func,
   // hideAddMessage: PropTypes.func,

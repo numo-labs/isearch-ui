@@ -10,13 +10,17 @@ import {
   SAVE_SEARCH_RESULT_ID,
   UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
-  VIEW_SEARCH
+  VIEW_SEARCH,
+  SET_NUMBER_OF_ADULTS_TITLE,
+  SET_NUMBER_OF_CHILDREN_TITLE,
+  SET_DURATION_TITLE
 } from '../constants/actionTypes';
 
 // actions
 import * as graphqlService from '../services/graphql';
 import { addTiles } from './tags.js';
 import { formatQuery } from './helpers.js';
+import _ from 'lodash';
 
 /**
 * Gets the id of the searchBucket and initiates a graphql query to retrieve
@@ -170,14 +174,52 @@ export function filterResults () {
 
 export function startSearch () {
   return (dispatch, getState) => {
-    const { search: { tags } } = getState();
+    const {
+       search: {
+        tags
+        },
+       travelInfo: {
+        numberOfChildren,
+        numberOfAdults,
+        childAge1,
+        childAge2,
+        childAge3,
+        childAge4
+      }
+    } = getState();
+    const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
+    const slicedChildAgeArray = childAgeArray.slice(0, Number(numberOfChildren));
+    const childPassengers = slicedChildAgeArray.map(slicedChildAge => {
+      const date = new Date();
+      const year = date.getFullYear() - Number(slicedChildAge.split(' ')[0]);
+      const month = date.getMonth();
+      const day = date.getDate();
+      return (
+        {
+          birthday: `${year}-${month}-${day}`
+        }
+      );
+    });
+    const adultPassengers = _.times(numberOfAdults, function () {
+      const date = new Date();
+      const year = date.getFullYear() - 18;
+      const month = date.getMonth();
+      const day = date.getDate();
+      return (
+        {
+          birthday: `${year}-${month}-${day}`
+        }
+      );
+    });
+    const combinedPassengers = [...childPassengers, ...adultPassengers];
     dispatch(busySearching());
-    console.log('tags', tags);
-    const query = formatQuery(tags);
-    console.log('query', query);
+    const formattedTags = formatQuery(tags);
+    const query = {passengers: combinedPassengers, ...formattedTags};
+    console.log('query', JSON.stringify(query));
     return graphqlService
       .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
       .then(json => {
+        console.log('json --->', json);
         const searchResultId = json.data.viewer.searchResultId.id;
         dispatch(saveSearchResultId(searchResultId));
         dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
@@ -186,3 +228,7 @@ export function startSearch () {
 }
 
 export const backToSearch = () => { return {type: VIEW_SEARCH}; };
+
+export const setNumberOfAdultsTitle = (numberOfAdultsTitle) => { return {type: SET_NUMBER_OF_ADULTS_TITLE, numberOfAdultsTitle}; };
+export const setNumberOfChildrenTitle = (numberOfChildrenTitle) => { return {type: SET_NUMBER_OF_CHILDREN_TITLE, numberOfChildrenTitle}; };
+export const setDurationTitle = (durationTitle) => { return {type: SET_DURATION_TITLE, durationTitle}; };

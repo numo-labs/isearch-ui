@@ -14,7 +14,10 @@ import {
   SET_AUTOCOMPLETE_ERROR,
   SET_AUTOCOMPLETE_OPTIONS,
   SET_AUTOCOMPLETE_IN_SEARCH,
-  CLEAR_SEARCH_STRING
+  CLEAR_SEARCH_STRING,
+  SET_NUMBER_OF_ADULTS_TITLE,
+  SET_NUMBER_OF_CHILDREN_TITLE,
+  SET_DURATION_TITLE
   // SHOW_ADD_MESSAGE,
   // HIDE_ADD_MESSAGE,
 } from '../constants/actionTypes';
@@ -52,7 +55,10 @@ export const initialState = {
   departureAirport: '',
   duration: '',
   departureDate: '',
-  passengerBirthdays: []
+  passengerBirthdays: [],
+  numberOfChildrenTitle: '2',
+  numberOfAdultsTitle: '2',
+  durationTitle: '2 weeks',
 };
 
 export default function search (state = initialState, action) {
@@ -169,6 +175,21 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         inAutoCompleteSearch: true
+      };
+    case SET_NUMBER_OF_ADULTS_TITLE:
+      return {
+        ...state,
+        numberOfAdultsTitle: action.numberOfAdultsTitle
+      };
+    case SET_NUMBER_OF_CHILDREN_TITLE:
+      return {
+        ...state,
+        numberOfChildrenTitle: action.numberOfChildrenTitle
+      };
+    case SET_DURATION_TITLE:
+      return {
+        ...state,
+        durationTitle: action.durationTitle
       };
     // case SHOW_ADD_MESSAGE:
     //   return ({

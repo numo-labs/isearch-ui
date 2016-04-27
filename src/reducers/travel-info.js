@@ -11,13 +11,14 @@ import {
 } from '../constants/actionTypes';
 
 export const initialState = {
-  numberOfChildren: '',
-  childAge1: '',
-  childAge2: '',
-  childAge3: '',
-  childAge4: '',
+  numberOfChildren: '2',
+  numberOfAdults: '2',
+  childAge1: '0 years',
+  childAge2: '0 years',
+  childAge3: '0 years',
+  childAge4: '0 years',
   departureAirport: '',
-  duration: '',
+  duration: '2 weeks',
   departureDate: '',
   passengerBirthdays: []
 };
