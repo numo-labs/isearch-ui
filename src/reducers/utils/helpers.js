@@ -7,10 +7,21 @@ Array.prototype.insert = function (index, element) {
 };
 /* eslint-enable no-extend-native */
 
-export function shuffleMockedTilesIntoResultSet (items, tiles) {
-  var spacing = Math.floor((items.length + tiles.length) / tiles.length);
-  return tiles.reduce((result, tile, index) => {
+export function shuffleTilesIntoResults (items, tiles) {
+  // if there are more tiles than packages, shuffle packages into tiles and vice versa
+  var base = items.length > tiles.length ? items : tiles;
+  var itemsToInsert = items.length > tiles.length ? tiles : items;
+  var spacing = Math.floor((base.length + itemsToInsert.length) / itemsToInsert.length);
+  return itemsToInsert.reduce((result, item, index) => {
     var position = (index + 1) * spacing;
-    return result.insert(position, tile);
-  }, items);
+    return result.insert(position, item);
+  }, base);
+}
+
+export function getTiles (arr) {
+  return arr.filter(item => item.type === 'tile');
+}
+
+export function getPackages (arr) {
+  return arr.filter(item => item.type === 'packageOffer');
 }

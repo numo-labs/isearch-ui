@@ -25,8 +25,8 @@ class ISearch extends Component {
    */
 
    fetchQueryResults () {
-     this.props.fetchQuerySearchResults('629ada50-086a-11e6-ad17-81b275e91113', 1, 20, 1);
-     this.props.addSingleTag('Greece', 'geo:geonames.390903');
+     this.props.fetchQuerySearchResults('8aeb3560-0b92-11e6-9605-eb677966096c', 1, 20, 1);
+     this.props.addSingleTag('Canary Islands', 'geo:geonames.2593110');
    }
 
   renderResults () {
@@ -75,7 +75,6 @@ class ISearch extends Component {
       hotelPage,
       hotelInView
     } = this.props;
-    console.log('HOTEL IN VIEW --->', hotelInView);
 
     if (hotelPage) {
       return (

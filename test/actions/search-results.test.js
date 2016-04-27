@@ -3,8 +3,7 @@ import {
   SAVE_SEARCH_RESULT_ID,
   RECEIVE_SEARCH_RESULT,
   // TILES_ADD_TILES,
-  SEARCH_ERROR,
-  UPDATE_DISPLAYED_ITEMS
+  SEARCH_ERROR
 } from '../../src/constants/actionTypes';
 
 import { MUTATION_START_SEARCH } from '../../src/constants/mutations.js';
@@ -21,7 +20,7 @@ import * as graphqlService from '../../src/services/graphql';
 // mock redux store
 import configureMockStore from './test-helpers';
 const mockStore = configureMockStore([thunk]);
-const initialState = {search: { searchString: 'h', tags: [], displayedItems: [] }};
+const initialState = {search: { searchString: 'h', tags: [{id: 'geo:geonames:13456'}], displayedItems: [] }};
 
 describe('actions', function () {
   afterEach(function (done) {
@@ -29,7 +28,7 @@ describe('actions', function () {
     done();
   });
   describe('startSearch', function () {
-    it('should dispatch an action to set loading to true and an action fetchQuerySearchResults', function (done) {
+    it('should dispatch an action to set loading to true and an action fetchQuerySearchResults if there are tags', function (done) {
       this.timeout(10100);
       const json = {
         data: {
@@ -120,7 +119,7 @@ describe('actions', function () {
         })
         .catch(done);
     });
-    it('attempt > 9 -> should dispatch a search error', function (done) {
+    it('attempt > 15 -> should dispatch a search error', function (done) {
       simple.mock(graphqlService, 'query').resolveWith(json);
       const expectedActions = [
         {
@@ -129,7 +128,7 @@ describe('actions', function () {
         }
       ];
       const store = mockStore(initialState);
-      store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 10))
+      store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 16))
         .then(() => {
           console.log('actions', store.getActions());
           expect(store.getActions()).to.deep.equal(expectedActions);
@@ -156,55 +155,6 @@ describe('actions', function () {
           }, 10000);
         })
        .catch(done);
-    });
-  });
-  describe('filterResults', () => {
-    it('filters the items array for the results that match the selected amenity tags', (done) => {
-      const expectedActions = [
-        {
-          type: UPDATE_DISPLAYED_ITEMS,
-          items: [
-            {
-              packageOffer: {
-                amenities: {
-                  wifi: true
-                }
-              }
-            }
-          ]
-        }
-      ];
-      const stateWithTags = {
-        ...initialState,
-        search: {
-          ...initialState.search,
-          tags: [
-            {
-              id: 'amenity:wifi'
-            }
-          ],
-          items: [
-            {
-              packageOffer: {
-                amenities: {
-                  wifi: true
-                }
-              }
-            },
-            {
-              packageOffer: {
-                amenities: {
-                  wifi: false
-                }
-              }
-            }
-          ]
-        }
-      };
-      const store = mockStore(stateWithTags);
-      store.dispatch(actions.filterResults());
-      expect(store.getActions()).to.deep.equal(expectedActions);
-      done();
     });
   });
 });

@@ -16,7 +16,7 @@ const masonryOptions = {
 class SearchResults extends Component {
   handleVisibility (isVisible, item) {
     if (dataLayer && isVisible && item.type === 'packageOffer') {
-      console.log('datalayer: ', item.packageOffer.provider.reference);
+      // console.log('datalayer: ', item.packageOffer.provider.reference);
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -85,32 +85,32 @@ class SearchResults extends Component {
                   </div>
                 </VisbilitySensor>
               );
-            } else if (item.type === 'filter') {
-              console.log('itemVisible', filterVisibleState[item.displayName]);
-              return (
-                <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem'>
-                    <FilterTile
-                      filterVisible={filterVisibleState[item.displayName]}
-                      onYesFilter={onYesFilter}
-                      onNoFilter={onFilterClick}
-                      showAddMessage={showAddMessage}
-                      description={item}
-                      color={item.color}
-                    />
-                  </div>
-                </VisbilitySensor>
-
-              );
             } else if (item.type === 'tile') {
-              console.log('tile', item);
-              return (
-                <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem'>
-                    <ArticleTile {...item} viewArticle={viewArticle}/>
-                  </div>
-                </VisbilitySensor>
-              );
+              if (item.tile.type === 'filter') {
+                return (
+                  <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                    <div key={index} className='gridItem'>
+                      <FilterTile
+                        filterVisible={filterVisibleState[item.tile.displayName]}
+                        onYesFilter={onYesFilter}
+                        onNoFilter={onFilterClick}
+                        showAddMessage={showAddMessage}
+                        description={item.tile}
+                        color={item.tile.color}
+                      />
+                    </div>
+                  </VisbilitySensor>
+
+                );
+              } else if (item.tile.type === 'article') {
+                return (
+                  <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                    <div key={index} className='gridItem'>
+                      <ArticleTile {...item} viewArticle={viewArticle}/>
+                    </div>
+                  </VisbilitySensor>
+                );
+              }
             }
           })
         }

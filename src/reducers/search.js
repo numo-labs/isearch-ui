@@ -9,7 +9,6 @@ import {
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
   SET_SEARCH_STRING,
-  UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
   SET_AUTOCOMPLETE_ERROR,
   SET_AUTOCOMPLETE_OPTIONS,
@@ -20,7 +19,11 @@ import {
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
-import { shuffleMockedTilesIntoResultSet } from './utils/helpers.js';
+import {
+  shuffleTilesIntoResults,
+  getPackages,
+  getTiles
+} from './utils/helpers.js';
 import _ from 'lodash';
 
 export const initialState = {
@@ -43,13 +46,9 @@ export const initialState = {
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const currentPackages = state.displayedItems.filter(item => item.type === 'packageOffer'); // remove all articles and filter tiles
-      const currentTiles = state.displayedItems.filter(item => item.type === 'tile');
-      const newPackages = action.items.filter(item => item.type === 'packageOffer');
-      const newTiles = action.items.filter(item => item.type === 'tile');
-      const mergedPackageItems = _.uniqBy(_.union(newPackages, currentPackages), (a) => a.packageOffer.provider.reference); // check for duplicates
-      const mergedTileItems = _.uniqBy(_.union(newTiles, currentTiles), (a) => a.tile.id);
-      const displayedItems = shuffleMockedTilesIntoResultSet(mergedPackageItems, mergedTileItems.concat(state.tiles)); // add filters back in
+      const newPackages = getPackages(action.items);
+      const newTiles = getTiles(action.items);
+      const displayedItems = shuffleTilesIntoResults(newPackages, newTiles.concat(state.tiles)); // add filters back in
       const items = _.uniqBy(_.union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
@@ -63,12 +62,6 @@ export default function search (state = initialState, action) {
         items,
         loading: false,
         error: ''
-      };
-    case UPDATE_DISPLAYED_ITEMS:
-      const updatedTiles = shuffleMockedTilesIntoResultSet(action.items, state.tiles); // add the remaining tiles back in!
-      return {
-        ...state,
-        displayedItems: updatedTiles
       };
     case BUSY_SEARCHING:
       return {
@@ -116,8 +109,8 @@ export default function search (state = initialState, action) {
     case TILES_ADD_TILES:
       const tileArray = action.tileArray === undefined ? mockTiles : action.tileArray;
       const filterVisibleState = tileArray.reduce((obj, tile) => {
-        if (tile.type === 'filter') {
-          obj[tile.displayName] = true;
+        if (tile.tile.type === 'filter') {
+          obj[tile.tile.displayName] = true;
         }
         return obj;
       }, {});
