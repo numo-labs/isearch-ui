@@ -11,8 +11,8 @@
   position: absolute;
   top: 50%;
   cursor: pointer;
-  margin: 1em;
-  margin-top: -25px;
+  margin: 0.5em;
+  margin-top: -22px;
 }
 
 .right-arrow {
@@ -26,5 +26,6 @@
     height: 30px;
     width: 30px;
     border-radius: 30px;
+    margin-top: -15px;
   }
 }
