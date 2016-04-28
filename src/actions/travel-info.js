@@ -30,7 +30,6 @@ export const setDuration = (duration) => { return {type: SET_DURATION, duration}
 export const setDepartureAirport = (departureAirport) => { return {type: SET_DEPARTURE_AIRPORT, departureAirport}; };
 export const setDepartureDate = (day, month, year) => {
   const formattedMonth = monthList[month];
-  console.log(`${year}-${formattedMonth}-${day}`);
   return {
     type: SET_DEPARTURE_DATE,
     departureDate: `${year}-${formattedMonth}-${day}`
