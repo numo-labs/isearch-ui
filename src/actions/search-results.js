@@ -194,6 +194,21 @@ function combinePassengersForQuery (childAgeArray, numberOfChildren, numberOfAdu
   return combinedPassengers;
 }
 
+// function that builds the travel period for the query
+function constructTravelPeriodQuery (departureDate, duration) {
+  const nights = (Number(duration.split(' ')[0]) * 7);
+  const travelPeriod = {
+    departureBetween: [departureDate],
+    nights: [nights]
+  };
+  return travelPeriod;
+}
+
+function constructDepartureAirportQuery (departureAirport) {
+  const departureAirports = [departureAirport];
+  return departureAirports;
+}
+
 /**
 * Action to start the search
 * 1. format the query based on the tags
@@ -242,6 +257,7 @@ export function startSearch () {
     const combinedPassengers = [...childPassengers, ...adultPassengers];
     dispatch(busySearching());
     const formattedTags = formatQuery(tags);
+    // const combinedPassengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
     // const query = {passengers: combinedPassengers, ...formattedTags};
     const query = formattedTags;
     console.log('query', JSON.stringify(query));
