@@ -166,6 +166,34 @@ export function filterResults () {
   };
 }
 
+function combinePassengersForQuery (childAgeArray, numberOfChildren, numberOfAdults) {
+  const slicedChildAgeArray = childAgeArray.slice(0, Number(numberOfChildren));
+  const childPassengers = slicedChildAgeArray.map(slicedChildAge => {
+    const date = new Date();
+    const year = date.getFullYear() - Number(slicedChildAge.split(' ')[0]);
+    const month = date.getMonth();
+    const day = date.getDate();
+    return (
+      {
+        birthday: `${year}-${month}-${day}`
+      }
+    );
+  });
+  const adultPassengers = _.times(numberOfAdults, function () {
+    const date = new Date();
+    const year = date.getFullYear() - 18;
+    const month = date.getMonth();
+    const day = date.getDate();
+    return (
+      {
+        birthday: `${year}-${month}-${day}`
+      }
+    );
+  });
+  const combinedPassengers = [...childPassengers, ...adultPassengers];
+  return combinedPassengers;
+}
+
 /**
 * Action to start the search
 * 1. format the query based on the tags
@@ -214,7 +242,8 @@ export function startSearch () {
     const combinedPassengers = [...childPassengers, ...adultPassengers];
     dispatch(busySearching());
     const formattedTags = formatQuery(tags);
-    const query = {passengers: combinedPassengers, ...formattedTags};
+    // const query = {passengers: combinedPassengers, ...formattedTags};
+    const query = formattedTags;
     console.log('query', JSON.stringify(query));
     return graphqlService
       .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
