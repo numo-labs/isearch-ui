@@ -226,7 +226,9 @@ export function startSearch () {
         childAge1,
         childAge2,
         childAge3,
-        childAge4
+        childAge4,
+        departureDate,
+        duration
       }
     } = getState();
     const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
@@ -254,6 +256,7 @@ export function startSearch () {
       );
     });
     const combinedPassengers = [...childPassengers, ...adultPassengers];
+    console.log('_________------_________', constructTravelPeriodQuery(departureDate, duration));
     dispatch(busySearching());
     const formattedTags = formatQuery(tags);
     // const combinedPassengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
