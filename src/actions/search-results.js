@@ -234,41 +234,41 @@ export function startSearch () {
         duration
       }
     } = getState();
-    const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
-    const slicedChildAgeArray = childAgeArray.slice(0, Number(numberOfChildren));
-    const childPassengers = slicedChildAgeArray.map(slicedChildAge => {
-      const date = new Date();
-      const year = date.getFullYear() - Number(slicedChildAge.split(' ')[0]);
-      const month = date.getMonth();
-      const day = date.getDate();
-      return (
-        {
-          birthday: `${year}-${month}-${day}`
-        }
-      );
-    });
-    const adultPassengers = _.times(numberOfAdults, function () {
-      const date = new Date();
-      const year = date.getFullYear() - 18;
-      let month = date.getMonth().toString();
-      if (month.length < 2) {
-        month = '0' + month;
-      }
-      const day = date.getDate();
-      return (
-        {
-          birthday: `${year}-${month}-${day}`
-        }
-      );
-    });
-    const combinedPassengers = [...childPassengers, ...adultPassengers];
+    // const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
+    // const slicedChildAgeArray = childAgeArray.slice(0, Number(numberOfChildren));
+    // const childPassengers = slicedChildAgeArray.map(slicedChildAge => {
+    //   const date = new Date();
+    //   const year = date.getFullYear() - Number(slicedChildAge.split(' ')[0]);
+    //   const month = date.getMonth();
+    //   const day = date.getDate();
+    //   return (
+    //     {
+    //       birthday: `${year}-${month}-${day}`
+    //     }
+    //   );
+    // });
+    // const adultPassengers = _.times(numberOfAdults, function () {
+    //   const date = new Date();
+    //   const year = date.getFullYear() - 18;
+    //   let month = date.getMonth().toString();
+    //   if (month.length < 2) {
+    //     month = '0' + month;
+    //   }
+    //   const day = date.getDate();
+    //   return (
+    //     {
+    //       birthday: `${year}-${month}-${day}`
+    //     }
+    //   );
+    // });
+    // const combinedPassengers = [...childPassengers, ...adultPassengers];
     dispatch(busySearching());
     const formattedTags = formatQuery(tags);
-    // const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
-    // const departureAirports = constructDepartureAirportQuery(departureAirport);
-    // const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
-    // const query = {passengers: combinedPassengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
-    const query = formattedTags;
+    const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
+    const departureAirports = constructDepartureAirportQuery(departureAirport);
+    const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
+    const query = {passengers: passengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
+    //const query = formattedTags;
     console.log('query', JSON.stringify(query));
     return graphqlService
       .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
