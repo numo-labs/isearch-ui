@@ -10,6 +10,19 @@ import {
   SET_PASSENGER_BIRTHDAYS
 } from '../constants/actionTypes';
 
+function constructDefaultDepartureDate () {
+  const defaultYear = new Date().toString().split(' ')[3];
+  let defaultMonth = new Date().toString().split(' ')[1];
+  const defaultDay = new Date().toString().split(' ')[2];
+  if (defaultMonth.length < 2) {
+    defaultMonth = '0' + defaultMonth;
+  }
+  const defaultDepartureDate = `${defaultYear}-${defaultMonth}-${defaultDay}`;
+  return defaultDepartureDate;
+}
+
+const defaultDepartureDate = constructDefaultBirthday();
+
 export const initialState = {
   numberOfChildren: '2',
   numberOfAdults: '2',
@@ -17,9 +30,9 @@ export const initialState = {
   childAge2: '0 years',
   childAge3: '0 years',
   childAge4: '0 years',
-  departureAirport: '',
+  departureAirport: 'Copenhagen - CPH',
   duration: '2 weeks',
-  departureDate: '',
+  departureDate: defaultDepartureDate,
   passengerBirthdays: []
 };
 

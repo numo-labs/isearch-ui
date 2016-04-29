@@ -203,9 +203,12 @@ function constructTravelPeriodQuery (departureDate, duration) {
   return travelPeriod;
 }
 
+// function that builds the departure airport query
 function constructDepartureAirportQuery (departureAirport) {
-  const departureAirports = [departureAirport];
-  return departureAirports;
+  const airportCode = departureAirport.split(' ')[2];
+  const departureAirportMapped = `airport:master.${airportCode}`;
+  const airport = [departureAirportMapped];
+  return airport;
 }
 
 /**
@@ -247,7 +250,10 @@ export function startSearch () {
     const adultPassengers = _.times(numberOfAdults, function () {
       const date = new Date();
       const year = date.getFullYear() - 18;
-      const month = date.getMonth();
+      let month = date.getMonth().toString();
+      if (month.length < 2) {
+        month = '0' + month;
+      }
       const day = date.getDate();
       return (
         {
@@ -256,11 +262,12 @@ export function startSearch () {
       );
     });
     const combinedPassengers = [...childPassengers, ...adultPassengers];
-    console.log('_________------_________', constructTravelPeriodQuery(departureDate, duration));
     dispatch(busySearching());
     const formattedTags = formatQuery(tags);
-    // const combinedPassengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
+    // const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
     // const query = {passengers: combinedPassengers, ...formattedTags};
+    // const departureAirports = constructDepartureAirportQuery(departureAirport);
+    // const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
     const query = formattedTags;
     console.log('query', JSON.stringify(query));
     return graphqlService
