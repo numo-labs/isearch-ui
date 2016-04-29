@@ -10,10 +10,26 @@ import {
   SET_PASSENGER_BIRTHDAYS
 } from '../constants/actionTypes';
 
+const monthList = {
+  Jan: '1',
+  Feb: '2',
+  Mar: '3',
+  Apr: '4',
+  May: '5',
+  Jun: '6',
+  Jul: '7',
+  Aug: '8',
+  Sep: '9',
+  Oct: '10',
+  Nov: '11',
+  Dec: '12'
+};
+
 function constructDefaultDepartureDate () {
   const defaultYear = new Date().toString().split(' ')[3];
-  let defaultMonth = new Date().toString().split(' ')[1];
+  const month = new Date().toString().split(' ')[1];
   const defaultDay = new Date().toString().split(' ')[2];
+  let defaultMonth = monthList[month];
   if (defaultMonth.length < 2) {
     defaultMonth = '0' + defaultMonth;
   }

@@ -265,9 +265,9 @@ export function startSearch () {
     dispatch(busySearching());
     const formattedTags = formatQuery(tags);
     // const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
-    // const query = {passengers: combinedPassengers, ...formattedTags};
     // const departureAirports = constructDepartureAirportQuery(departureAirport);
     // const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
+    // const query = {passengers: combinedPassengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
     const query = formattedTags;
     console.log('query', JSON.stringify(query));
     return graphqlService
