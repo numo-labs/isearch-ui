@@ -14,7 +14,8 @@ const defaultProps = {
   filterVisibleState: {},
   fetchQuerySearchResults: () => {},
   removeTag: () => {},
-  addSingleTag: () => {}
+  addSingleTag: () => {},
+  addTag: () => {}
 };
 
 const articleViewProps = {

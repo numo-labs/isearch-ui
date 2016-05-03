@@ -23,11 +23,15 @@ const mockStore = configureMockStore([thunk]);
 const initialState = {
   search: {
     searchString: 'h',
-    tags: [],
+    tags: [
+      {id: 'geo:geonames:12345', displayName: 'spain'},
+      {id: 'amenity:wifi', displayName: 'wifi'},
+      {id: 'amenity:pool', displayName: 'pool'}
+    ],
     displayedItems: []
   },
   travelInfo: {
-    numberOfChildren: 0,
+    numberOfChildren: '0',
     childAge1: '',
     childAge2: '',
     childAge3: '',
