@@ -21,7 +21,27 @@ import * as graphqlService from '../../src/services/graphql';
 // mock redux store
 import configureMockStore from './test-helpers';
 const mockStore = configureMockStore([thunk]);
-const initialState = {search: { searchString: 'h', tags: [], displayedItems: [] }};
+const initialState = {
+  search: {
+    searchString: 'h',
+    tags: [],
+    displayedItems: []
+  },
+  travelInfo: {
+    numberOfChildren: 0,
+    childAge1: '',
+    childAge2: '',
+    childAge3: '',
+    childAge4: '',
+    departureAirport: '',
+    duration: '',
+    departureDate: '',
+    passengerBirthdays: [],
+    numberOfChildrenTitle: '2',
+    numberOfAdultsTitle: '2',
+    durationTitle: '2 weeks'
+  }
+};
 
 describe('actions', function () {
   afterEach(function (done) {
