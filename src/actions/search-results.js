@@ -40,8 +40,8 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
     return graphqlService
       .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
       .then(json => {
+        // console.log('json', json);
         const items = json.data.viewer.searchResult.items;
-        console.log(!items || !items.length);
         if (attempt > 15) {
           return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts
         } else if ((!items || !items.length || !packageOffersReturned(items))) {
@@ -134,6 +134,7 @@ export function updateDisplayedItems (results) {
 }
 
 /**
+<<<<<<< HEAD
 * Action that is called when the 'yes' button on a filter is clicked
 * 1. get all the geo and amenity tags
 * 2. if search results already exist, filter the existing results and update
@@ -212,6 +213,8 @@ function constructDepartureAirportQuery (departureAirport) {
 }
 
 /**
+=======
+>>>>>>> master
 * Action to start the search
 * 1. format the query based on the tags
 * 2. launch a graphql mutation to return a searchBucketId
@@ -236,21 +239,23 @@ export function startSearch () {
       }
     } = getState();
     const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
-    dispatch(busySearching());
-    const formattedTags = formatQuery(tags);
-    const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
-    const departureAirports = constructDepartureAirportQuery(departureAirport);
-    const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
-    const query = {passengers: passengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
-    // const query = formattedTags;
-    console.log('query', JSON.stringify(query));
-    return graphqlService
-      .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
-      .then(json => {
-        const searchResultId = json.data.viewer.searchResultId.id;
-        dispatch(saveSearchResultId(searchResultId));
-        dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
-      });
+    if (tags.length > 0) {
+      dispatch(busySearching());
+      const formattedTags = formatQuery(tags);
+      const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
+      const departureAirports = constructDepartureAirportQuery(departureAirport);
+      const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
+      const query = {passengers: passengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
+      // const query = formattedTags;
+      console.log('query', JSON.stringify(query));
+      return graphqlService
+        .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
+        .then(json => {
+          const searchResultId = json.data.viewer.searchResultId.id;
+          dispatch(saveSearchResultId(searchResultId));
+          dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
+        });
+    }
   };
 }
 

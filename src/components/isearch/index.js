@@ -26,7 +26,7 @@ class ISearch extends Component {
 
    fetchQueryResults () {
      this.props.fetchQuerySearchResults('8aeb3560-0b92-11e6-9605-eb677966096c', 1, 20, 1);
-     this.props.addSingleTag('Canary Islands', 'geo:geonames.2593110');
+     this.props.addTag('Canary Islands', 'geo:geonames.2593110');
    }
 
   renderResults () {
@@ -96,7 +96,6 @@ class ISearch extends Component {
       durationTitle,
       setDepartureDate
     } = this.props;
-    console.log('HOTEL IN VIEW --->', hotelInView);
 
     if (hotelPage) {
       return (
@@ -198,6 +197,7 @@ ISearch.propTypes = {
 
   // tags
   tags: PropTypes.array,
+  addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
   setHotelPage: PropTypes.func,

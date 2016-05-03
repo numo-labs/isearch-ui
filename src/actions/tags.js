@@ -6,7 +6,7 @@ import {
   TAG_ADD_SINGLE_TAG,
   CLEAR_SEARCH_STRING
 } from '../constants/actionTypes';
-import { filterResults } from './search-results.js';
+import { startSearch } from './search-results.js';
 
 /**
 * TEMP FUNCTIONS TO ADD MOCK TAGS
@@ -37,7 +37,7 @@ export function addTiles (tileArray) {
 export function removeTag (displayName) {
   return (dispatch, getState) => {
     dispatch(deleteTag(displayName));
-    return dispatch(filterResults());
+    return dispatch(startSearch());
   };
 }
 
@@ -53,13 +53,13 @@ export function deleteTag (displayName) {
 }
 
 /**
-* Action to add a tag from a filter and filter the results
+* Action to add a tag from a filter and launch a new search
 */
 
 export const onYesFilter = (displayName, id) => (dispatch) => {
   dispatch(addSingleTag(displayName, id));
   dispatch(onFilterClick(displayName));
-  return dispatch(filterResults());
+  return dispatch(startSearch());
 };
 
 /**
@@ -71,7 +71,7 @@ export const onFilterClick = (displayName) => { return {type: FILTER_ON_CLICK, d
 /**
 * Action to add a tag either fron the search bar or a filterString
 * If the tag already exists, it is not added
-* If it doesn't exist, it is added and the results are filtered
+* If it doesn't exist, it is added and a new search is started
 */
 
 export const addSingleTag = (displayName, id) => {
@@ -82,7 +82,7 @@ export const addSingleTag = (displayName, id) => {
       return;
     } else {
       dispatch(addTag(displayName, id));
-      dispatch(filterResults());
+      dispatch(startSearch());
     }
   };
 };

@@ -140,6 +140,11 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
             id,
             name,
             url,
+            type,
+            tags {
+              label,
+              value
+            }
             sections {
               title,
               image,
