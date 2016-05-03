@@ -170,8 +170,8 @@ function combinePassengersForQuery (childAgeArray, numberOfChildren, numberOfAdu
   const childPassengers = slicedChildAgeArray.map(slicedChildAge => {
     const date = new Date();
     const year = date.getFullYear() - Number(slicedChildAge.split(' ')[0]);
-    const month = date.getMonth();
-    const day = date.getDate();
+    const month = ('0' + date.getMonth()).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
     return (
       {
         birthday: `${year}-${month}-${day}`
@@ -180,9 +180,9 @@ function combinePassengersForQuery (childAgeArray, numberOfChildren, numberOfAdu
   });
   const adultPassengers = _.times(numberOfAdults, function () {
     const date = new Date();
-    const year = date.getFullYear() - 18;
-    const month = date.getMonth();
-    const day = date.getDate();
+    const year = date.getFullYear() - 20;
+    const month = ('0' + date.getMonth()).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
     return (
       {
         birthday: `${year}-${month}-${day}`
@@ -231,37 +231,11 @@ export function startSearch () {
         childAge3,
         childAge4,
         departureDate,
-        duration
+        duration,
+        departureAirport
       }
     } = getState();
-    // const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
-    // const slicedChildAgeArray = childAgeArray.slice(0, Number(numberOfChildren));
-    // const childPassengers = slicedChildAgeArray.map(slicedChildAge => {
-    //   const date = new Date();
-    //   const year = date.getFullYear() - Number(slicedChildAge.split(' ')[0]);
-    //   const month = date.getMonth();
-    //   const day = date.getDate();
-    //   return (
-    //     {
-    //       birthday: `${year}-${month}-${day}`
-    //     }
-    //   );
-    // });
-    // const adultPassengers = _.times(numberOfAdults, function () {
-    //   const date = new Date();
-    //   const year = date.getFullYear() - 18;
-    //   let month = date.getMonth().toString();
-    //   if (month.length < 2) {
-    //     month = '0' + month;
-    //   }
-    //   const day = date.getDate();
-    //   return (
-    //     {
-    //       birthday: `${year}-${month}-${day}`
-    //     }
-    //   );
-    // });
-    // const combinedPassengers = [...childPassengers, ...adultPassengers];
+    const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
     dispatch(busySearching());
     const formattedTags = formatQuery(tags);
     const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);

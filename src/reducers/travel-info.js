@@ -37,13 +37,13 @@ function constructDefaultDepartureDate () {
   return defaultDepartureDate;
 }
 
-const defaultDepartureDate = constructDefaultBirthday();
+const defaultDepartureDate = constructDefaultDepartureDate();
 
 export const initialState = {
   numberOfChildren: '2',
   numberOfAdults: '2',
-  childAge1: '0 years',
-  childAge2: '0 years',
+  childAge1: '2 years',
+  childAge2: '4 years',
   childAge3: '0 years',
   childAge4: '0 years',
   departureAirport: 'Copenhagen - CPH',
