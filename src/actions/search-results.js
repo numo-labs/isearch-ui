@@ -213,8 +213,6 @@ function constructDepartureAirportQuery (departureAirport) {
 }
 
 /**
-=======
->>>>>>> master
 * Action to start the search
 * 1. format the query based on the tags
 * 2. launch a graphql mutation to return a searchBucketId
