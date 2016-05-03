@@ -11,7 +11,6 @@ describe('Helpers', () => {
   ];
   it('formatQuery: returns an object with geography and amenity keys', (done) => {
     const res = formatQuery(tags);
-    console.log(Object.keys(res));
     expect(Object.keys(res)).to.deep.equal(['geography', 'amenity']);
     expect(res.geography).to.deep.equal(['geo:geonames:12345']);
     expect(res.amenity).to.deep.equal(['amenity:wifi', 'amenity:pool']);
