@@ -136,6 +136,7 @@ class ISearch extends Component {
             numberOfChildrenTitle={numberOfChildrenTitle}
             durationTitle={durationTitle}
             setDepartureDate={setDepartureDate}
+            startSearch={startSearch}
           />
           <Header />
           <Tags
