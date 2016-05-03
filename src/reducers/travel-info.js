@@ -6,8 +6,7 @@ import {
   SET_NUMBER_OF_CHILDREN,
   SET_DURATION,
   SET_DEPARTURE_DATE,
-  SET_DEPARTURE_AIRPORT,
-  SET_PASSENGER_BIRTHDAYS
+  SET_DEPARTURE_AIRPORT
 } from '../constants/actionTypes';
 
 const monthList = {

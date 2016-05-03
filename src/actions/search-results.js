@@ -242,7 +242,7 @@ export function startSearch () {
     const departureAirports = constructDepartureAirportQuery(departureAirport);
     const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
     const query = {passengers: passengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
-    //const query = formattedTags;
+    // const query = formattedTags;
     console.log('query', JSON.stringify(query));
     return graphqlService
       .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
