@@ -44,7 +44,7 @@ export const initialState = {
   autocompleteError: '',
   autocompleteOptions: [],
   inAutoCompleteSearch: false, // use to show loading spinner,
-  numberOfChildren: 2,
+  numberOfChildren: 0,
   childAge1: '',
   childAge2: '',
   childAge3: '',
@@ -53,7 +53,7 @@ export const initialState = {
   duration: '',
   departureDate: '',
   passengerBirthdays: [],
-  numberOfChildrenTitle: '2',
+  numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
   durationTitle: '2 weeks'
 };

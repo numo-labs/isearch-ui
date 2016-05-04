@@ -8,6 +8,11 @@
   src: url('../../fonts/SourceSansPro-SemiBold.otf');
 }
 
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
 
 .type {
   position: absolute;
@@ -43,17 +48,18 @@ h5 {
 
 .text {
   bottom: 2em;
+  color: #595959;
   position: absolute;;
   line-height: 0.5em;
   padding: 0.4em;
-  background-color: #ffffff;
-  opacity: 0.8;
+  background-color: rgba(255,255,255,0.7);
   width: 100%;
 }
 
-h1 {
+.text h2 {
   font-family: SourceSansSemiBold;
-  font-size: 2.1em;
+  font-size: 2.4rem;
+  margin-top: 10px;
 }
 
 .articleFullPageContainer {
@@ -92,9 +98,12 @@ h1 {
 
 .articleFullPageContainer .articleText {
   padding: 0 1.5em;
-  color: #666;
+  color: #595959;
   width: 100%;
+  font-size: 1.6rem;
   text-align: left;
+  font-family: SourceSansRegular;
+  font-weight: 300;
 }
 
 .articleFullPageContainer .tagSection {

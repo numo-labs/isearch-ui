@@ -313,6 +313,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50%;
+  margin-top: 3.6em;
 }
 
 .slick-slider .sliderImage img {

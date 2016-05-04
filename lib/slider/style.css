@@ -1,3 +1,21 @@
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+.currentSlide {
+  padding-left: 0.3em;
+}
+
 .slider {
   position: relative;
 }
@@ -16,6 +34,7 @@
   background: -o-linear-gradient(bottom right,rgba(0,0,0,0), rgba(255,255,255,1)); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(bottom right,rgba(0,0,0,0), rgba(255,255,255,1)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to bottom right, rgba(0,0,0,0), rgba(255,255,255,1)); /* Standard syntax */
+  font-family: SourceSansLight
 }
 
 .sliderCounter:before {

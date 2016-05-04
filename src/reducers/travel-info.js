@@ -39,7 +39,7 @@ function constructDefaultDepartureDate () {
 const defaultDepartureDate = constructDefaultDepartureDate();
 
 export const initialState = {
-  numberOfChildren: '2',
+  numberOfChildren: '0',
   numberOfAdults: '2',
   childAge1: '2 years',
   childAge2: '4 years',
