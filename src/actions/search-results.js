@@ -197,8 +197,14 @@ function combinePassengersForQuery (childAgeArray, numberOfChildren, numberOfAdu
 // function that builds the travel period for the query
 function constructTravelPeriodQuery (departureDate, duration) {
   const nights = (Number(duration.split(' ')[0]) * 7);
+  console.log(departureDate.split('-'));
+  const year = departureDate.split('-')[0];
+  const paddedMonth = ('0' + departureDate.split('-')[1]).slice(-2);
+  const day = departureDate.split('-')[2];
+  const formattedDate = `${year}-${paddedMonth}-${day}`;
+  console.log(formattedDate);
   const travelPeriod = {
-    departureBetween: [departureDate],
+    departureBetween: [formattedDate],
     nights: [nights]
   };
   return travelPeriod;
@@ -249,6 +255,7 @@ export function startSearch () {
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
         .then(json => {
+          console.log('json', json);
           const searchResultId = json.data.viewer.searchResultId.id;
           dispatch(saveSearchResultId(searchResultId));
           dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
