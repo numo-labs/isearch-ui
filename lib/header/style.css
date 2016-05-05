@@ -25,9 +25,11 @@
 
 .headerBarWrapper {
   background-image: url('https://cloud.githubusercontent.com/assets/12450298/14560385/62833d9a-0307-11e6-8a23-a0d1793d4e72.jpg');
-  background-size: 100%;
+  background-size: cover;
   text-align: center;
-  height: 15em;
+  background-position: 50% 100%;
+  height: 88vh;
+  background-repeat: no-repeat;
 }
 
 .headerContent {
@@ -106,3 +108,10 @@
 .searchButton:active {
   background-color: #F39100;
 }
+
+/*@media (min-width: 1220px) {
+  .headerBarWrapper {
+    background-position: center;
+    height: 92vh
+  }
+}*/

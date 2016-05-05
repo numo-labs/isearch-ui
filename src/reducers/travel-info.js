@@ -41,12 +41,12 @@ const defaultDepartureDate = constructDefaultDepartureDate();
 export const initialState = {
   numberOfChildren: '0',
   numberOfAdults: '2',
-  childAge1: '2 years',
-  childAge2: '4 years',
-  childAge3: '0 years',
-  childAge4: '0 years',
+  childAge1: '2 Barns alder',
+  childAge2: '4 Barns alder',
+  childAge3: '0 Barns alder',
+  childAge4: '0 Barns alder',
   departureAirport: 'Copenhagen - CPH',
-  duration: '2 weeks',
+  duration: '2 uger',
   departureDate: defaultDepartureDate,
   passengerBirthdays: []
 };

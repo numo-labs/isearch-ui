@@ -13,6 +13,10 @@
   src: url('../../fonts/SourceSansPro-Regular.otf');
 }
 
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
 
 .type {
   position: absolute;
@@ -56,8 +60,14 @@ h5 {
   width: 100%;
 }
 
-.text h2 {
+
+h1 {
   font-family: SourceSansSemiBold;
+  font-size: 2.1em;
+}
+
+.text h2 {
+  font-family: ThomasHeadlineBold;
   font-size: 2.4rem;
   margin-top: 10px;
 }

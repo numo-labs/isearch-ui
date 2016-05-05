@@ -17,6 +17,9 @@
   color: #ffffff;
   padding: 0.3em;
   padding-left: 0.8em;
+  position: fixed;
+  width: 100%;
+  z-index: 20000;
 }
 
 .blueContainerActive {
@@ -44,17 +47,29 @@
 
 .changeButton {
   border-radius: 600px;
-  border: 1px solid #ffffff;
+  border: 1px solid #F39100;
+  background-color: #F39100;
   display: inline-block;
-  padding: 0.2em;
-  padding-left: 1em;
-  padding-right: 1em;
-  font-size: 1.2em;
-  position: absolute;
-  right: 0;
-  margin-top: 0.3em;
+  padding: 0.3em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  margin-top: 0.4em;
   margin-right: 0.5em;
   cursor: pointer;
+  position: absolute;
+}
+
+.changeButtonChanged {
+  border-radius: 600px;
+  border: 1px solid #ffffff;
+  display: inline-block;
+  padding: 0.3em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  margin-top: 0.4em;
+  margin-right: 0.5em;
+  cursor: pointer;
+  position: absolute;
 }
 
 .changeInputActive {
@@ -146,6 +161,13 @@
   line-height: 0.8em;
 }
 
+.goingPlaces {
+  width: 2em;
+  float: right;
+  margin-top: 0.4em;
+  margin-right: 0.5em;
+}
+
 .headerInactive {
   display: none;
 }
@@ -224,6 +246,22 @@ h1 {
 .spiesTitle {
   display: none;
 }
+
+.tagViewActive {
+  width: 100%;
+  margin-top: 5em;
+  text-align: center;
+  position: relative;
+}
+
+.tagViewInactive {
+  width: 100%;
+  margin-top: 3em;
+  display: none;
+  background-color: #6DB4A9;
+  height: 100em;
+}
+
 @media (min-width: 490px) {
   .search {
     padding-left: 3em;
@@ -244,12 +282,11 @@ h1 {
   }
   .exitButton {
     border-radius: 100%;
-    border: 1px solid #ffffff;
-    padding-left: 0.45em;
-    padding-right: 0.45em;
     right: -0.5em;
     margin-top: 2em;
+    bottom: 20em;
     top: -3em;
+    font-size: 1.4em;
   }
   .spiesTitle {
     font-family: SourceSansBold;
@@ -297,4 +334,6 @@ h1 {
 
 .weeksPaxMix {
   display: inline-block;
+  margin-left: 2.5em;
+  line-height: 1.3em;
 }

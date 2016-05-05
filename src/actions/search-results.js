@@ -134,7 +134,6 @@ export function updateDisplayedItems (results) {
 }
 
 /**
-<<<<<<< HEAD
 * Action that is called when the 'yes' button on a filter is clicked
 * 1. get all the geo and amenity tags
 * 2. if search results already exist, filter the existing results and update
