@@ -1,10 +1,13 @@
 export const QUERY_AUTOCOMPLETE_INPUT = `
-query autocomplete($input: String, $suggestor: SuggesterEnum, $size: Int) {
+query autocomplete($input: String, $size: Int) {
   viewer {
-    autocomplete(text: $input, suggester: $suggestor, size: $size) {
+    autocomplete(text: $input, size: $size) {
       items {
-        suggestion,
-        id
+        name,
+        tagid,
+        label,
+        boost,
+        active
       }
     }
   }
