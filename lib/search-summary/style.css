@@ -247,6 +247,16 @@ h1 {
   display: none;
 }
 
+.tagExitButton {
+  font-family: SourceSansLight;
+  position: absolute;
+  top: -4.5em;
+  right: 0.5em;
+  cursor: pointer;
+  color: #ffffff;
+  width: 2em;
+}
+
 .tagViewActive {
   width: 100%;
   margin-top: 5em;
@@ -281,6 +291,13 @@ h1 {
     margin-bottom: 2.5em;
   }
   .exitButton {
+    border-radius: 100%;
+    margin-top: 2em;
+    bottom: 20em;
+    top: -3em;
+    font-size: 1.4em;
+  }
+  .tagExitButton {
     border-radius: 100%;
     right: 10em;
     margin-top: 2em;
