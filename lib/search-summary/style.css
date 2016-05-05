@@ -150,7 +150,7 @@
   font-family: SourceSansLight;
   position: absolute;
   top: -7em;
-  right: -2em;
+  right: 0;
   cursor: pointer;
   color: #ffffff;
   width: 2em;
@@ -282,7 +282,7 @@ h1 {
   }
   .exitButton {
     border-radius: 100%;
-    right: -0.5em;
+    right: 10em;
     margin-top: 2em;
     bottom: 20em;
     top: -3em;
