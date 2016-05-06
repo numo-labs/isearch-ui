@@ -98,11 +98,11 @@
     }
       .packageTitle {
         font-family: ThomasHeadlineBold;
-        font-size: 1.2em;
+        font-size: 1.8rem;
       }
       .packageSubtitle {
         font-family: SourceSansLight;
-        font-size: 1em;
+        font-size: 1.6rem;
         color: #939393;
       }
       .heartsContainer {
@@ -150,13 +150,13 @@
         .date {
          display: inline-block;
          font-family: SourceSansLight;
-         font-size: 0.9em;
+         font-size: 1.4rem;
          color: #7e7e7e;
          line-height: 1.5em;
         }
         .nights {
           font-family: SourceSansLight;
-          font-size: 0.9em;
+          font-size: 1.4rem;
           color: #7e7e7e;
           display: inline-block;
         }
@@ -165,6 +165,6 @@
          position: absolute;
          right: 20px;
          font-size: 1.5em;
-         color:  #DA3A68;
+         color:  #DC3763;
          font-family: SourceSansSemiBold;
         }

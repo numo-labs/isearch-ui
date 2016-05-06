@@ -13,6 +13,11 @@
   src: url('../../fonts/SourceSansPro-Light.otf');
 }
 
+@font-face {
+  font-family: TCScript;
+  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
+}
+
 .headerBarContainer {
   text-align: center;
   padding: 1em;
@@ -25,9 +30,12 @@
 
 .headerBarWrapper {
   background-image: url('https://cloud.githubusercontent.com/assets/12450298/14560385/62833d9a-0307-11e6-8a23-a0d1793d4e72.jpg');
-  background-size: 100%;
+  background-size: cover;
   text-align: center;
-  height: 15em;
+  background-position: 50% 100%;
+  height: 88vh;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
 .headerContent {
@@ -90,12 +98,13 @@
 }
 
 .spies {
-  font-family: SourceSansBold;
+  font-family: TCScript;
   display: inline-block;
   color: #ffffff;
   font-size: 2.8em;
   left: 3em;
   height: 0.5em;
+  margin-top: 4.5em;
 }
 
 
@@ -105,4 +114,20 @@
 
 .searchButton:active {
   background-color: #F39100;
+}
+
+.sloganContainer {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 750px) {
+  .spies {
+    margin-top: 5em;
+    font-size: 5em;
+  }
+  .headerBarWrapper {
+    height: 92vh;
+  }
 }

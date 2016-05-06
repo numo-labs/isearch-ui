@@ -13,7 +13,10 @@ import {
   SET_AUTOCOMPLETE_ERROR,
   SET_AUTOCOMPLETE_OPTIONS,
   SET_AUTOCOMPLETE_IN_SEARCH,
-  CLEAR_SEARCH_STRING
+  CLEAR_SEARCH_STRING,
+  SET_NUMBER_OF_ADULTS_TITLE,
+  SET_NUMBER_OF_CHILDREN_TITLE,
+  SET_DURATION_TITLE
   // SHOW_ADD_MESSAGE,
   // HIDE_ADD_MESSAGE,
 } from '../constants/actionTypes';
@@ -40,7 +43,19 @@ export const initialState = {
   error: '',
   autocompleteError: '',
   autocompleteOptions: [],
-  inAutoCompleteSearch: false // use to show loading spinner
+  inAutoCompleteSearch: false, // use to show loading spinner
+  numberOfChildren: 0,
+  childAge1: '',
+  childAge2: '',
+  childAge3: '',
+  childAge4: '',
+  departureAirport: '',
+  duration: '',
+  departureDate: '',
+  passengerBirthdays: [],
+  numberOfChildrenTitle: '0',
+  numberOfAdultsTitle: '2',
+  durationTitle: '2 uger'
 };
 
 export default function search (state = initialState, action) {
@@ -145,6 +160,21 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         inAutoCompleteSearch: true
+      };
+    case SET_NUMBER_OF_ADULTS_TITLE:
+      return {
+        ...state,
+        numberOfAdultsTitle: action.numberOfAdultsTitle
+      };
+    case SET_NUMBER_OF_CHILDREN_TITLE:
+      return {
+        ...state,
+        numberOfChildrenTitle: action.numberOfChildrenTitle
+      };
+    case SET_DURATION_TITLE:
+      return {
+        ...state,
+        durationTitle: action.durationTitle
       };
     // case SHOW_ADD_MESSAGE:
     //   return ({

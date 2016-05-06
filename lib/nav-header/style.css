@@ -9,6 +9,8 @@
   min-height: 50px;
   line-height: 100%;
   background-color: #6DB4A9;
+  position: fixed;
+  z-index: 1000;
 }
 .navBarLayout {
   width: 100%;

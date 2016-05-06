@@ -5,13 +5,15 @@ import * as AutocompleteActions from '../actions/autocomplete';
 import * as SearchActions from '../actions/search-results';
 import * as HotelActions from '../actions/hotel';
 import * as ArticleActions from '../actions/article';
+import * as TravelInfoActions from '../actions/travel-info';
 
 const Actions = {
   ...TagActions,
   ...SearchActions,
   ...AutocompleteActions,
   ...ArticleActions,
-  ...HotelActions
+  ...HotelActions,
+  ...TravelInfoActions
 };
 
 function mapStateToProps (state) {
@@ -26,7 +28,21 @@ function mapStateToProps (state) {
       error,
       autocompleteError,
       autocompleteOptions,
-      inAutoCompleteSearch
+      inAutoCompleteSearch,
+      numberOfAdultsTitle,
+      numberOfChildrenTitle,
+      durationTitle
+    },
+    travelInfo: {
+      numberOfChildren,
+      numberOfAdults,
+      childAge1,
+      childAge2,
+      childAge3,
+      childAge4,
+      departureAirport,
+      duration,
+      departureDate
     },
     hotel: {
       hotelPage,
@@ -51,7 +67,19 @@ function mapStateToProps (state) {
     autocompleteError,
     autocompleteOptions,
     inAutoCompleteSearch,
-    hotelInView
+    hotelInView,
+    numberOfChildren,
+    numberOfAdults,
+    childAge1,
+    childAge2,
+    childAge3,
+    childAge4,
+    departureAirport,
+    duration,
+    departureDate,
+    numberOfAdultsTitle,
+    numberOfChildrenTitle,
+    durationTitle
   };
 }
 

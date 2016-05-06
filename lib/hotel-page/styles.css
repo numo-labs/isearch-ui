@@ -21,7 +21,7 @@
 .amenity {
   display: inline-block;
   padding-left: 0.3em;
-  font-size: 0.9em;
+  font-size: 1.6rem;
 }
 
 .amenityBlock {
@@ -70,13 +70,13 @@
 }
 
 .factContainer {
-  font-size: 0.9em;
+  font-size: 1.6rem;
 }
 
 .factHeading {
-  font-family: SourceSansRegular;
+  font-family: ThomasHeadlineBold;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1.8rem;
   margin-bottom: 0.5em;
 }
 
@@ -204,6 +204,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .ppp {
@@ -214,7 +215,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 .titlePackage {
   font-family: ThomasHeadlineBold;
-  font-size: 1.5em;
+  font-size: 2.2rem;
   color: #1F1F1F;
   margin-left: 1em;
   position: relative;
@@ -260,9 +261,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
     display: inline-block;
     position: absolute;
     right: 1em;
-    top: 3em;
-    width: 25%;
-    background-color: #ffffff;
+    top: 1em;
+    width: 33%;
+    background-color: rgba(233,229,224,0.7);
   }
   .descriptionWrapper {
     width: 75%;
@@ -294,9 +295,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   }
   .hotelPackageImage {
     margin-bottom: 3em;
+    height: 500px;
+  }
+  .subtitlePackage {
+    font-family: SourceSansLight;
+    font-size: 2rem;
+    color: #939393;
+    margin-left: 1em;
   }
   .textVisible {
     margin-right: 2em;
+  }
+  .titleHeartContainer {
+    width: 66%;
+  }
+  .titlePackage {
+    font-family: ThomasHeadlineBold;
+    font-size: 3.2rem;
+    color: #1F1F1F;
+    margin-left: 0.6em;
+    position: relative;
+    line-height: 0.9em;
   }
 }
 
@@ -312,6 +331,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50%;
+  margin-top: 3.6em;
 }
 
 .slick-slider .sliderImage img {

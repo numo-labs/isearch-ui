@@ -26,7 +26,7 @@ class ISearch extends Component {
 
    fetchQueryResults () {
      this.props.fetchQuerySearchResults('8aeb3560-0b92-11e6-9605-eb677966096c', 1, 20, 1);
-     this.props.addSingleTag('Canary Islands', 'geo:geonames.2593110');
+     this.props.addTag('Canary Islands', 'geo:geonames.2593110');
    }
 
   renderResults () {
@@ -73,7 +73,28 @@ class ISearch extends Component {
       error,
       loading,
       hotelPage,
-      hotelInView
+      hotelInView,
+      numberOfChildren,
+      numberOfAdults,
+      childAge1,
+      childAge2,
+      childAge3,
+      childAge4,
+      departureAirport,
+      duration,
+      departureDate,
+      setNumberOfChildren,
+      setNumberOfAdults,
+      setChildAge,
+      setDepartureAirport,
+      setDuration,
+      setDurationTitle,
+      setNumberOfAdultsTitle,
+      setNumberOfChildrenTitle,
+      numberOfChildrenTitle,
+      numberOfAdultsTitle,
+      durationTitle,
+      setDepartureDate
     } = this.props;
 
     if (hotelPage) {
@@ -94,12 +115,28 @@ class ISearch extends Component {
       return (
         <section>
           <SearchSummary
-            city='Bodrum'
-            country='Turkey'
-            durationInWeeks={2}
-            paxMix='2 adults, 2 children'
-            departureDate='Sun 13 jul 2016'
-            returnDate='Tue 15 jul 2016'
+            numberOfChildren={numberOfChildren}
+            numberOfAdults={numberOfAdults}
+            setChildAge={setChildAge}
+            childAge1={childAge1}
+            childAge2={childAge2}
+            childAge3={childAge3}
+            childAge4={childAge4}
+            departureAirport={departureAirport}
+            duration={duration}
+            departureDate={departureDate}
+            setNumberOfChildren={setNumberOfChildren}
+            setNumberOfAdults={setNumberOfAdults}
+            setDepartureAirport={setDepartureAirport}
+            setDuration={setDuration}
+            setDurationTitle={setDurationTitle}
+            setNumberOfAdultsTitle={setNumberOfAdultsTitle}
+            setNumberOfChildrenTitle={setNumberOfChildrenTitle}
+            numberOfAdultsTitle={numberOfAdultsTitle}
+            numberOfChildrenTitle={numberOfChildrenTitle}
+            durationTitle={durationTitle}
+            setDepartureDate={setDepartureDate}
+            startSearch={startSearch}
           />
           <Header />
           <Tags
@@ -161,10 +198,34 @@ ISearch.propTypes = {
 
   // tags
   tags: PropTypes.array,
+  addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
   setHotelPage: PropTypes.func,
-  hotelInView: PropTypes.object
+  hotelInView: PropTypes.object,
+
+  // travel info
+  setNumberOfChildren: PropTypes.func,
+  setNumberOfAdults: PropTypes.func,
+  setDepartureAirport: PropTypes.func,
+  setDuration: PropTypes.func,
+  numberOfChildren: PropTypes.string,
+  numberOfAdults: PropTypes.string,
+  childAge1: PropTypes.string,
+  childAge2: PropTypes.string,
+  childAge3: PropTypes.string,
+  childAge4: PropTypes.string,
+  departureAirport: PropTypes.string,
+  duration: PropTypes.string,
+  departureDate: PropTypes.string,
+  setChildAge: PropTypes.func,
+  setNumberOfAdultsTitle: PropTypes.func,
+  setNumberOfChildrenTitle: PropTypes.func,
+  setDurationTitle: PropTypes.func,
+  numberOfAdultsTitle: PropTypes.string,
+  numberOfChildrenTitle: PropTypes.string,
+  durationTitle: PropTypes.string,
+  setDepartureDate: PropTypes.func
 
   // showAddMessage: PropTypes.func,
   // hideAddMessage: PropTypes.func,

@@ -11,7 +11,23 @@ import * as actions from '../../src/actions/tags';
 import thunk from 'redux-thunk';
 import configureMockStore from './test-helpers';
 const mockStore = configureMockStore([thunk]);
-const initialState = {search: {tags: [], items: []}};
+const initialState = {
+  search: {
+    tags: [],
+    items: []
+  },
+  travelInfo: {
+    numberOfChildren: '0',
+    numberOfAdults: '2',
+    childAge1: '0 years',
+    childAge2: '0 years',
+    childAge3: '0 years',
+    childAge4: '0 years',
+    departureDate: '2020-04-04',
+    duration: '2 weeks',
+    departureAirport: 'Copenhagen - CPH'
+  }
+};
 
 describe('actions', () => {
   describe('tags', () => {

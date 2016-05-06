@@ -11,13 +11,13 @@
 .downArrow {
   position: absolute;
   width: 0.8em;
-  right: 0.4em;
+  right: 0.8em;
   top: 2em;
 }
 
 .drop {
   font-family: SourceSansRegular;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   text-align: left;
   height: 50px;
   padding: 15px 0 0 11px;
