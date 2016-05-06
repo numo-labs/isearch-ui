@@ -8,10 +8,10 @@ export default class ISearchRouter extends Component {
     return (
       <Router history={hashHistory}>
         <Route path='/' component={ISearch}/>
-        <Route path='article/:id' component={ArticleFullPage}/>
+        <Route path='search/:bucketId' component={ISearch}/>
+        <Route path='article/:bucketId/:itemId' component={ArticleFullPage}/>
+        <Route path='hotel/:bucketId/:itemId' component={ArticleFullPage}/>
       </Router>
     );
   }
 }
-
-  // <Route path='article/:id' component={ArticleFullPage}/>

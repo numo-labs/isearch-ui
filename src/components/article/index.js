@@ -4,6 +4,15 @@ import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
 
 export default class ArticleFullPage extends Component {
+  constructor () {
+    super();
+    this.getArticleData().bind(this);
+  }
+
+  getArticleData () {
+    this.props.getArticle(this.props.params.bucketId, this.props.params.itemId);
+  }
+
   render () {
     const { articleContent, backToSearch } = this.props;
 
