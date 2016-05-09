@@ -43,6 +43,22 @@ h5 {
   cursor: pointer;
 }
 
+.articleContentContainer {
+  background-color: #ffffff;
+  position: relative;
+  padding-top: 1em;
+}
+
+@media (min-width: 750px) {
+  .articleContentContainer {
+    width: 750px;
+    position: absolute;
+    top: 21em;
+    left: 50%;
+    margin-left: -375px;
+  }
+}
+
 .articleImage {
   display: inline-block;
   height: 20em;
@@ -76,15 +92,16 @@ h1 {
   text-align: center;
   font-family: SourceSansLight;
   display: inline-block;
-  background-color: #fff;
   width: 100%;
 }
 
 .articleFullPageContainer .articleHeader {
-  width: 100%;
   height: 400px;
+  position: relative;
+  width: 100%;
   background-size: cover;
-  background-position: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .articleFullPageContainer .articleSection {
