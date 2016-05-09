@@ -46,7 +46,7 @@ h5 {
 .articleContentContainer {
   background-color: #ffffff;
   position: relative;
-  padding-top: 1em;
+  padding: 2em;
 }
 
 @media (min-width: 750px) {
@@ -56,6 +56,7 @@ h5 {
     top: 21em;
     left: 50%;
     margin-left: -375px;
+    padding: 2em;
   }
 }
 
