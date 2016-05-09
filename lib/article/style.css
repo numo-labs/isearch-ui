@@ -43,6 +43,23 @@ h5 {
   cursor: pointer;
 }
 
+.articleContentContainer {
+  background-color: #ffffff;
+  position: relative;
+  padding: 2em;
+}
+
+@media (min-width: 750px) {
+  .articleContentContainer {
+    width: 750px;
+    position: absolute;
+    top: 21em;
+    left: 50%;
+    margin-left: -375px;
+    padding: 2em;
+  }
+}
+
 .articleImage {
   display: inline-block;
   height: 20em;
@@ -76,15 +93,33 @@ h1 {
   text-align: center;
   font-family: SourceSansLight;
   display: inline-block;
-  background-color: #fff;
   width: 100%;
 }
 
-.articleFullPageContainer .articleHeader {
-  width: 100%;
+.articleFullPageContainer .articleHeaderImage {
   height: 400px;
+  position: relative;
+  width: 100%;
   background-size: cover;
-  background-position: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.articleHeader {
+  font-family: ThomasHeadlineBold;
+  font-size: 3.2rem;
+  margin-bottom: 1em;
+}
+
+.articleIntroText {
+  font-family: SourceSansSemiBold;
+  font-size: 1.8rem;
+}
+
+.articleSectionHeading {
+  font-family: SourceSansRegular;
+  font-size: 2.4rem;
+  margin: 1em auto;
 }
 
 .articleFullPageContainer .articleSection {

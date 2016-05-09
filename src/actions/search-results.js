@@ -40,7 +40,7 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
     return graphqlService
       .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
       .then(json => {
-        // console.log('json', json);
+        console.log('json', json);
         const items = json.data.viewer.searchResult.items;
         if (attempt > 15) {
           return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts

@@ -4,7 +4,7 @@ import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import HotelPage from '../../../lib/hotel-page';
-import LoadingSpinner from '../../../lib/spinner4';
+import LoadingSpinner from '../../../lib/spinner';
 import { ArticleFullPage } from '../../../lib/article';
 import './style.css';
 
@@ -37,7 +37,9 @@ class ISearch extends Component {
       filterVisibleState,
       viewHotel,
       viewArticle,
-      setHotelPage
+      setHotelPage,
+      numberOfChildrenTitle,
+      numberOfAdultsTitle
     } = this.props;
 
     return (
@@ -50,6 +52,7 @@ class ISearch extends Component {
         viewArticle={viewArticle}
         viewHotel={viewHotel}
         setHotelPage={setHotelPage}
+        totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
       />
     );
   }

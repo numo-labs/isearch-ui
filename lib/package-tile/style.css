@@ -30,49 +30,6 @@
     background-size: 375px 200px;
     background-repeat: no-repeat;
   }
-
-  @media (max-width: 1240px) {
-    .packageImage {
-      background-size: 305px 200px;
-    }
-  }
-
-  @media (max-width: 1000px) {
-    .packageImage {
-      background-size: 305px 200px;
-    }
-  }
-
-  @media (max-width: 810px) {
-    .packageImage {
-      background-size: 290px 200px;
-    }
-  }
-
-  @media (max-width: 635px) {
-    .packageImage {
-      background-size: 240px 200px;
-    }
-  }
-
-  @media (max-width: 525px) {
-    .packageImage {
-      background-size: 400px 200px;
-    }
-  }
-
-  @media (max-width: 420px) {
-    .packageImage {
-      background-size: 375px 200px;
-    }
-  }
-
-  @media (max-width: 380px) {
-    .packageImage {
-      background-size: 375px 200px;
-    }
-  }
-
     .mintBar {
       background-color: rgba(109,180,169, 0.7);
       position: absolute;
@@ -132,6 +89,7 @@
     }
       .descriptionRow {
         width: 100%;
+        line-height: 1.5em;
       }
         .packageDetailsText {
          display: inline-block;
@@ -150,13 +108,13 @@
         .date {
          display: inline-block;
          font-family: SourceSansLight;
-         font-size: 1.4rem;
+         font-size: 1.1em;
          color: #7e7e7e;
          line-height: 1.5em;
         }
         .nights {
           font-family: SourceSansLight;
-          font-size: 1.4rem;
+          font-size: 1.1em;
           color: #7e7e7e;
           display: inline-block;
         }
@@ -167,4 +125,13 @@
          font-size: 1.5em;
          color:  #DC3763;
          font-family: SourceSansSemiBold;
+        }
+        .discountPrice {
+          text-decoration: line-through;
+          display: inline-block;
+          position: absolute;
+          right: 20px;
+          font-size: 1.1em;
+          color: #7e7e7e;
+          font-family: SourceSansLight;
         }
