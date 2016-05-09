@@ -1,3 +1,8 @@
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
 .articleFooter .bookLink {
   border-radius: 2em;
   color: #fff;
@@ -6,6 +11,7 @@
   font-weight: bold;
   text-decoration: none;
   line-height: 20vh;
+  font-family: ThomasHeadlineBold;
 }
 
 .articleFooter .bookLink:hover {
