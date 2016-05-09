@@ -61,7 +61,8 @@ class SearchResults extends Component {
       showAddMessage,
       viewArticle,
       viewHotel,
-      setHotelPage
+      setHotelPage,
+      totalPassengers
     } = this.props;
     return (
       <Masonry
@@ -81,6 +82,7 @@ class SearchResults extends Component {
                       packageOffer={item.packageOffer}
                       viewHotel={viewHotel}
                       setHotelPage={setHotelPage}
+                      totalPassengers={totalPassengers}
                     />
                   </div>
                 </VisbilitySensor>
@@ -128,7 +130,8 @@ SearchResults.propTypes = {
   viewHotel: PropTypes.func,
   viewArticle: PropTypes.func,
   setHotelPage: PropTypes.func,
-  hotelInView: PropTypes.func
+  hotelInView: PropTypes.func,
+  totalPassengers: PropTypes.number
 };
 
 export default SearchResults;

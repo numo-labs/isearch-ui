@@ -89,6 +89,7 @@
     }
       .descriptionRow {
         width: 100%;
+        line-height: 1.5em;
       }
         .packageDetailsText {
          display: inline-block;
@@ -107,13 +108,13 @@
         .date {
          display: inline-block;
          font-family: SourceSansLight;
-         font-size: 1.4rem;
+         font-size: 1.1em;
          color: #7e7e7e;
          line-height: 1.5em;
         }
         .nights {
           font-family: SourceSansLight;
-          font-size: 1.4rem;
+          font-size: 1.1em;
           color: #7e7e7e;
           display: inline-block;
         }
@@ -124,4 +125,13 @@
          font-size: 1.5em;
          color:  #DC3763;
          font-family: SourceSansSemiBold;
+        }
+        .discountPrice {
+          text-decoration: line-through;
+          display: inline-block;
+          position: absolute;
+          right: 20px;
+          font-size: 1.1em;
+          color: #7e7e7e;
+          font-family: SourceSansLight;
         }

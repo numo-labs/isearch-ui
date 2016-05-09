@@ -37,7 +37,9 @@ class ISearch extends Component {
       filterVisibleState,
       viewHotel,
       viewArticle,
-      setHotelPage
+      setHotelPage,
+      numberOfChildrenTitle,
+      numberOfAdultsTitle
     } = this.props;
 
     return (
@@ -50,6 +52,7 @@ class ISearch extends Component {
         viewArticle={viewArticle}
         viewHotel={viewHotel}
         setHotelPage={setHotelPage}
+        totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
       />
     );
   }
