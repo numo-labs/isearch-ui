@@ -18,6 +18,11 @@
   src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
 
+.hotelInfoLink {
+  color: #7e7e7e;
+  font-size: 1em;
+}
+
 .amenity {
   display: inline-block;
   padding-left: 0.3em;
@@ -277,11 +282,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   }
   .infoContainer {
     width: 750px;
-    margin: 0 auto;
-    margin-top: 2em;
-    padding-left: 1em;
-    padding-right: 1em;
-    margin-top: 1em;
+    position: absolute;
+    top: 27em;
+    left: 50%;
+    margin-left: -375px;
   }
   .infoContentContainer {
     padding-top: 1em;
