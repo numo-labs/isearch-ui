@@ -108,7 +108,8 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
             price {
               total,
               perPerson,
-              currency
+              currency,
+              discountPrice
             },
             provider {
               id,
