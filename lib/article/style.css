@@ -95,13 +95,34 @@ h1 {
   width: 100%;
 }
 
-.articleFullPageContainer .articleHeader {
+.articleFullPageContainer .articleHeaderImage {
   height: 400px;
   position: relative;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+.articleHeader {
+  font-family: ThomasHeadlineBold;
+  font-size: 3.2rem;
+  margin-bottom: 1em;
+}
+
+.articleIntroText {
+  font-family: SourceSansSemiBold;
+  font-size: 1.8rem;
+}
+
+.articleSectionHeading {
+  font-family: SourceSansRegular;
+  font-size: 2.4rem;
+  margin: 1em auto;
+}
+
+.bookLink {
+  font-family: ThomasHeadlineBold;
 }
 
 .articleFullPageContainer .articleSection {
