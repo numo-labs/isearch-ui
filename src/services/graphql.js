@@ -1,7 +1,7 @@
 'use strict';
 
 import fetch from 'isomorphic-fetch';
-
+import uuid from 'uuid';
 /**
 * Express-graphql accepts request with the parameters
 * @{query} - A valid GraphQL query or mutation
@@ -14,7 +14,8 @@ export function query (query, variables) {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'trace-request-id': uuid.v4()
     },
     body: JSON.stringify({ 'query': query, 'variables': JSON.stringify(variables) })
   })
