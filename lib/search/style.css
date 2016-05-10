@@ -1,4 +1,3 @@
-
 .searchBarContainer {
   margin: 0 auto;
   text-align: center;
@@ -16,7 +15,7 @@
 
 .inputBar {
   font-family: SourceSansLight;
-  height: 4em;
+  /*height: 1em;*/
   width: 30em;
   margin-top: 1.5em;
   border: none;
@@ -28,7 +27,7 @@
   margin-bottom: 0.1em;
 }
 
-input .form-control {
+.form-control {
   width: 100%;
 }
 
@@ -118,12 +117,12 @@ input .form-control {
   }
 }
 
-@media (max-width: 374px) {
+@media (max-width: 376px) {
   .inputBar {
     width: 18em;
   }
   .input-results {
-    width: 17.5em;
+    width: 17.6em;
   }
 }
 
