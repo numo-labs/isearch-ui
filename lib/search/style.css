@@ -1,0 +1,137 @@
+
+.searchBarContainer {
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.cross {
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: lighter;
+  display: inline;
+  padding-left: 1.5em;
+  padding-right: 0.2em;
+}
+
+.inputBar {
+  font-family: SourceSansLight;
+  height: 4em;
+  width: 30em;
+  margin-top: 1.5em;
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+  padding-left: 0.5em;
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 0.1em;
+}
+
+input .form-control {
+  width: 100%;
+}
+
+.input-results {
+  z-index: 9999;
+  position: absolute;
+  margin: 0;
+  width: 29.5em;
+}
+
+.searchButton {
+  font-family: SourceSansLight;
+  background-color: #F39100;
+  display: inline-block;
+  border-radius: 100%;
+  color: #ffffff;
+  font-size: 1.25em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  margin-top: 1.15em;
+}
+
+.searchButton:hover {
+  background-color: #F37800;
+}
+
+.searchButton:active {
+  background-color: #F39100;
+}
+
+.inputContainer {
+  top: 3em;
+  display: inline-block;
+}
+
+.input:focus {
+  outline: none !important;
+  outline-width: 0;
+}
+
+/* removes placeholder text when input is clicked */
+.inputBar:focus::-webkit-input-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+}
+.inputBar:focus:-moz-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+} /* Firefox 18- */
+.inputBar:focus::-moz-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+  } /* Firefox 19+ */
+.inputBar:focus:-ms-input-placeholder {
+  color:transparent;
+  outline:none !important;
+  outline-width: 0;
+} /* oldIE ;) */
+
+.list-group-item a:hover {
+  text-decoration: none;
+}
+
+.list-group-item a {
+  color: black;
+}
+
+.list-group-item:hover {
+  background-color: #F39100;
+}
+
+.list-group-item.active, .list-group-item.active:hover {
+  background-color: #F39100;
+  border-color: #F39100;
+}
+
+@media (max-width: 485px) {
+  .inputBar {
+    width: 23em;
+  }
+  .input-results {
+    width: 22.5em;
+  }
+}
+
+@media (max-width: 374px) {
+  .inputBar {
+    width: 18em;
+  }
+  .input-results {
+    width: 17.5em;
+  }
+}
+
+@media (max-width: 305px) {
+  .inputBar {
+    width: 15em;
+  }
+  .input-results {
+    width: 14.5em;
+  }
+}
