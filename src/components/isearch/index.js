@@ -112,6 +112,7 @@ class ISearch extends Component {
       return (
         <ArticleFullPage
           articleContent={articleContent}
+          onAddArticleTag={addSingleTag}
           backToSearch={backToSearch}
         />
       );
@@ -196,6 +197,7 @@ ISearch.propTypes = {
   startSearch: PropTypes.func,
   viewArticle: PropTypes.func,
   backToSearch: PropTypes.func,
+  onAddArticleTag: PropTypes.func,
   articlePage: PropTypes.bool,
   articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,
