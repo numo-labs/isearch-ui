@@ -6,7 +6,7 @@ import {
   TAG_ADD_SINGLE_TAG,
   CLEAR_SEARCH_STRING
 } from '../constants/actionTypes';
-import { filterResults } from './search-results.js';
+import { startSearch } from './search-results.js';
 
 /**
 * TEMP FUNCTIONS TO ADD MOCK TAGS
@@ -37,7 +37,7 @@ export function addTiles (tileArray) {
 export function removeTag (displayName) {
   return (dispatch, getState) => {
     dispatch(deleteTag(displayName));
-    return dispatch(filterResults());
+    return dispatch(startSearch());
   };
 }
 
@@ -53,13 +53,13 @@ export function deleteTag (displayName) {
 }
 
 /**
-* Action to add a tag from a filter and filter the results
+* Action to add a tag from a filter and launch a new search
 */
 
 export const onYesFilter = (displayName, id) => (dispatch) => {
   dispatch(addSingleTag(displayName, id));
   dispatch(onFilterClick(displayName));
-  return dispatch(filterResults());
+  return dispatch(startSearch());
 };
 
 /**
@@ -69,17 +69,31 @@ export const onYesFilter = (displayName, id) => (dispatch) => {
 export const onFilterClick = (displayName) => { return {type: FILTER_ON_CLICK, displayName}; };
 
 /**
-* Action to add a tag from a filter
+* Action to add a tag either fron the search bar or a filterString
+* If the tag already exists, it is not added
+* If it doesn't exist, it is added and a new search is started
 */
 
-export const addSingleTag = (displayName, id, filterString) => {
+export const addSingleTag = (displayName, id) => {
+  return (dispatch, getState) => {
+    const { search: { tags } } = getState();
+    const tagExists = tags.filter(tag => tag.displayName === displayName).length > 0;
+    if (tagExists) {
+      return;
+    } else {
+      dispatch(addTag(displayName, id));
+      dispatch(startSearch());
+    }
+  };
+};
+
+export const addTag = (displayName, id) => {
   return {
     type: TAG_ADD_SINGLE_TAG,
     tag: {
       displayName,
       colour: '#8EB8C4',
-      id, // geo tags will just have 'geo' and amenity tags will have the full tag id e.g. amenity:wifi
-      filterString // only for amenity tags e.g. outdoorpool - this will be used for filtering on the front end
+      id // geo tags will just have 'geo' and amenity tags will have the full tag id e.g. amenity:wifi
     }
   };
 };

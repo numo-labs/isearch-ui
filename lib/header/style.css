@@ -13,6 +13,11 @@
   src: url('../../fonts/SourceSansPro-Light.otf');
 }
 
+@font-face {
+  font-family: TCScript;
+  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
+}
+
 .headerBarContainer {
   text-align: center;
   padding: 1em;
@@ -25,8 +30,12 @@
 
 .headerBarWrapper {
   background-image: url('https://cloud.githubusercontent.com/assets/12450298/14560385/62833d9a-0307-11e6-8a23-a0d1793d4e72.jpg');
-  background-size: 100%;
+  background-size: cover;
   text-align: center;
+  background-position: 50% 100%;
+  height: 88vh;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
 .headerContent {
@@ -36,30 +45,13 @@
   text-align: center;
 }
 
-.inputBar {
-  font-family: SourceSansLight;
-  height: 3em;
-  width: 21em;
-  bottom: 0;
-  margin-top: 1.3em;
-  border: none;
-  outline-width: 0;
-  outline: none !important;
-  padding-left: 0.5em;
-  float: left;
-  margin-right: 1em;
-}
 
-@media (min-width: 450px) {
-  .inputBar {
-    width: 31em;
-  }
-}
-
-.inputContainer {
+.containerInput {
   top: 3em;
   display: inline-block;
   margin-right: 2em;
+  width: 100%;
+  padding-left: 1.1em;
 }
 
 .input:focus {
@@ -106,30 +98,15 @@
 }
 
 .spies {
-  font-family: SourceSansBold;
+  font-family: TCScript;
   display: inline-block;
   color: #ffffff;
   font-size: 2.8em;
   left: 3em;
   height: 0.5em;
+  margin-top: 4.5em;
 }
 
-.searchButton {
-  font-family: SourceSansLight;
-  background-color: #F39100;
-  display: inline-block;
-  border-radius: 100%;
-  color: #ffffff;
-  font-size: 1.25em;
-  padding-top: 0.3em;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-  padding-bottom: 0.25em;
-  margin-top: 1em;
-  float: left;
-  position: absolute;
-  top: 6em;
-}
 
 .searchButton:hover {
   background-color: #F37800;
@@ -137,4 +114,20 @@
 
 .searchButton:active {
   background-color: #F39100;
+}
+
+.sloganContainer {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 750px) {
+  .spies {
+    margin-top: 5em;
+    font-size: 5em;
+  }
+  .headerBarWrapper {
+    height: 92vh;
+  }
 }

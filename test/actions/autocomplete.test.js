@@ -33,8 +33,11 @@ describe('Autocomplete actions', () => {
         viewer: {
           autocomplete: {
             items: [{
-              id: 'id',
-              suggestion: 'suggestion'
+              'name': 'Spanien',
+              'tagid': 'geo:geonames.2510769',
+              'label': 'Spanien',
+              'boost': 1,
+              'active': true
             }]
           }
         }
@@ -45,8 +48,11 @@ describe('Autocomplete actions', () => {
       {
         type: SET_AUTOCOMPLETE_OPTIONS,
         items: [{
-          id: 'id',
-          suggestion: 'suggestion'
+          'name': 'Spanien',
+          'tagid': 'geo:geonames.2510769',
+          'label': 'Spanien',
+          'boost': 1,
+          'active': true
         }]
       }
     ];
@@ -97,8 +103,11 @@ describe('Autocomplete actions', () => {
   });
   it('setAutocompleteOptions: dispatches an action with items', function (done) {
     const items = [{
-      id: '12345',
-      suggestion: 'Spain'
+      'name': 'Spanien',
+      'tagid': 'geo:geonames.2510769',
+      'label': 'Spanien',
+      'boost': 1,
+      'active': true
     }];
     const expectedAction = {
       type: SET_AUTOCOMPLETE_OPTIONS,

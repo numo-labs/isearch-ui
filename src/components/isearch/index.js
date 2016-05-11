@@ -3,7 +3,8 @@ import Header from '../../../lib/header/';
 import SearchSummary from '../../../lib/search-summary/';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
-import LoadingSpinner from '../../../lib/spinner4';
+import HotelPage from '../../../lib/hotel-page';
+import LoadingSpinner from '../../../lib/spinner';
 import { ArticleFullPage } from '../../../lib/article';
 import './style.css';
 
@@ -24,8 +25,8 @@ class ISearch extends Component {
    */
 
    fetchQueryResults () {
-     this.props.fetchQuerySearchResults('629ada50-086a-11e6-ad17-81b275e91113', 1, 20, 1);
-     this.props.addSingleTag('Greece', 'geo:geonames.390903');
+     this.props.fetchQuerySearchResults('8aeb3560-0b92-11e6-9605-eb677966096c', 1, 20, 1);
+     this.props.addTag('Canary Islands', 'geo:geonames.2593110');
    }
 
   renderResults () {
@@ -34,7 +35,11 @@ class ISearch extends Component {
       onYesFilter,
       onFilterClick,
       filterVisibleState,
-      viewArticle
+      viewHotel,
+      viewArticle,
+      setHotelPage,
+      numberOfChildrenTitle,
+      numberOfAdultsTitle
     } = this.props;
 
     return (
@@ -45,6 +50,9 @@ class ISearch extends Component {
         filterVisibleState={filterVisibleState}
         // showAddMessage={showAddMessage}
         viewArticle={viewArticle}
+        viewHotel={viewHotel}
+        setHotelPage={setHotelPage}
+        totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
       />
     );
   }
@@ -66,19 +74,72 @@ class ISearch extends Component {
       articlePage,
       articleContent,
       error,
-      loading
+      loading,
+      hotelPage,
+      hotelInView,
+      numberOfChildren,
+      numberOfAdults,
+      childAge1,
+      childAge2,
+      childAge3,
+      childAge4,
+      departureAirport,
+      duration,
+      departureDate,
+      setNumberOfChildren,
+      setNumberOfAdults,
+      setChildAge,
+      setDepartureAirport,
+      setDuration,
+      setDurationTitle,
+      setNumberOfAdultsTitle,
+      setNumberOfChildrenTitle,
+      numberOfChildrenTitle,
+      numberOfAdultsTitle,
+      durationTitle,
+      setDepartureDate
     } = this.props;
 
-    if (!articlePage) {
+    if (hotelPage) {
+      return (
+        <HotelPage
+          backToSearch={backToSearch}
+          packageOffer={hotelInView}
+        />
+      );
+    } else if (articlePage) {
+      return (
+        <ArticleFullPage
+          articleContent={articleContent}
+          backToSearch={backToSearch}
+        />
+      );
+    } else {
       return (
         <section>
           <SearchSummary
-            city='Bodrum'
-            country='Turkey'
-            durationInWeeks={2}
-            paxMix='2 adults, 2 children'
-            departureDate='Sun 13 jul 2016'
-            returnDate='Tue 15 jul 2016'
+            numberOfChildren={numberOfChildren}
+            numberOfAdults={numberOfAdults}
+            setChildAge={setChildAge}
+            childAge1={childAge1}
+            childAge2={childAge2}
+            childAge3={childAge3}
+            childAge4={childAge4}
+            departureAirport={departureAirport}
+            duration={duration}
+            departureDate={departureDate}
+            setNumberOfChildren={setNumberOfChildren}
+            setNumberOfAdults={setNumberOfAdults}
+            setDepartureAirport={setDepartureAirport}
+            setDuration={setDuration}
+            setDurationTitle={setDurationTitle}
+            setNumberOfAdultsTitle={setNumberOfAdultsTitle}
+            setNumberOfChildrenTitle={setNumberOfChildrenTitle}
+            numberOfAdultsTitle={numberOfAdultsTitle}
+            numberOfChildrenTitle={numberOfChildrenTitle}
+            durationTitle={durationTitle}
+            setDepartureDate={setDepartureDate}
+            startSearch={startSearch}
           />
           <Header />
           <Tags
@@ -101,14 +162,7 @@ class ISearch extends Component {
           }
           { error && <div className='errorMessage'>{error}</div> }
           { this.renderResults() }
-          </section>
-        );
-    } else {
-      return (
-        <ArticleFullPage
-          articleContent={articleContent}
-          backToSearch={backToSearch}
-        />
+        </section>
       );
     }
   }
@@ -142,11 +196,39 @@ ISearch.propTypes = {
   articlePage: PropTypes.bool,
   articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,
+  hotelPage: PropTypes.bool,
+  viewHotel: PropTypes.func,
 
   // tags
   tags: PropTypes.array,
+  addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
-  removeTag: PropTypes.func
+  removeTag: PropTypes.func,
+  setHotelPage: PropTypes.func,
+  hotelInView: PropTypes.object,
+
+  // travel info
+  setNumberOfChildren: PropTypes.func,
+  setNumberOfAdults: PropTypes.func,
+  setDepartureAirport: PropTypes.func,
+  setDuration: PropTypes.func,
+  numberOfChildren: PropTypes.string,
+  numberOfAdults: PropTypes.string,
+  childAge1: PropTypes.string,
+  childAge2: PropTypes.string,
+  childAge3: PropTypes.string,
+  childAge4: PropTypes.string,
+  departureAirport: PropTypes.string,
+  duration: PropTypes.string,
+  departureDate: PropTypes.string,
+  setChildAge: PropTypes.func,
+  setNumberOfAdultsTitle: PropTypes.func,
+  setNumberOfChildrenTitle: PropTypes.func,
+  setDurationTitle: PropTypes.func,
+  numberOfAdultsTitle: PropTypes.string,
+  numberOfChildrenTitle: PropTypes.string,
+  durationTitle: PropTypes.string,
+  setDepartureDate: PropTypes.func
 
   // showAddMessage: PropTypes.func,
   // hideAddMessage: PropTypes.func,

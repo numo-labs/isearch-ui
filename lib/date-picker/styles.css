@@ -1,0 +1,82 @@
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+.calendar__day {
+    font-size: 13px;
+    cursor: pointer;
+    padding: 7px 9px 6px;
+    border: solid 1px #eee;
+    color: black;
+}
+
+.calendar thead td {
+  padding: 10px 0;
+  color: #4F4F4F;
+}
+
+.dateLabel {
+  width: 100%;
+  color: black;
+  opacity: 0.4;
+  display: inline-block;
+  /*position: absolute;
+  left: 1em;*/
+  text-align: left;
+  padding-left: 1em;
+  font-size: 0.75em;
+  /*bottom: 2.8em;*/
+}
+
+.datePickerContainer {
+  font-family: SourceSansRegular;
+  color: black;
+  width: 9.1em;
+  float: left;
+  background-color: #ffffff;
+  margin-top: 0.3em;
+  text-align: left;
+}
+
+/*.datePicker {
+  height: 2em;
+  width: 100%;
+  text-align: left;
+}*/
+
+.datePickerContainer input {
+  height: 2.1em;
+  padding-top: 1em;
+  padding-bottom: 0.8em;
+  padding-left: 0.75em;
+  width: 9.1em;
+  border-top: #ffffff;
+  border-left: #ffffff;
+  border-bottom: #ffffff;
+  border-right: #ffffff;
+}
+
+.day {
+  font-size: 13px;
+  cursor: pointer;
+  padding: 7px 9px 6px;
+  border: solid 1px #eee;
+  color: #4F4F4F;
+}
+
+.dayActive {
+  background-color: #6DB4A9;
+  color: #ffffff;
+}
+
+.dayOtherMonth {
+  color: #ccc;
+}
+
+@media (min-width: 650px) {
+  .datePickerContainer {
+    height: 3.55em;
+    width: 11.7em;
+  }
+}

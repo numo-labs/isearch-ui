@@ -9,13 +9,18 @@ import {
   SET_SEARCH_STRING,
   SAVE_SEARCH_RESULT_ID,
   UPDATE_DISPLAYED_ITEMS,
-  SEARCH_ERROR
+  SEARCH_ERROR,
+  VIEW_SEARCH,
+  SET_NUMBER_OF_ADULTS_TITLE,
+  SET_NUMBER_OF_CHILDREN_TITLE,
+  SET_DURATION_TITLE
 } from '../constants/actionTypes';
 
 // actions
 import * as graphqlService from '../services/graphql';
 import { addTiles } from './tags.js';
 import { formatQuery } from './helpers.js';
+import _ from 'lodash';
 
 /**
 * Gets the id of the searchBucket and initiates a graphql query to retrieve
@@ -37,8 +42,7 @@ export function fetchQuerySearchResults (id, page, size, attempt) {
       .then(json => {
         console.log('json', json);
         const items = json.data.viewer.searchResult.items;
-        console.log(!items || !items.length);
-        if (attempt > 9) {
+        if (attempt > 15) {
           return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts
         } else if ((!items || !items.length || !packageOffersReturned(items))) {
           setTimeout(function () {
@@ -140,7 +144,6 @@ export function updateDisplayedItems (results) {
 export function filterResults () {
   return (dispatch, getState) => {
     const { search: { tags, items } } = getState();
-    console.log('state', getState().search.items);
     const geoTags = tags.filter(tag => tag.id.indexOf('geo') > -1);
     const amenityTags = tags.filter(tag => tag.id.indexOf('amenity') > -1);
     if (items.length > 0) {
@@ -162,29 +165,96 @@ export function filterResults () {
   };
 }
 
+function combinePassengersForQuery (childAgeArray, numberOfChildren, numberOfAdults) {
+  const slicedChildAgeArray = childAgeArray.slice(0, Number(numberOfChildren));
+  const childPassengers = slicedChildAgeArray.map(slicedChildAge => {
+    const date = new Date();
+    const year = date.getFullYear() - Number(slicedChildAge.split(' ')[0]);
+    const month = ('0' + date.getMonth()).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return (
+      {
+        birthday: `${year}-${month}-${day}`
+      }
+    );
+  });
+  const adultPassengers = _.times(numberOfAdults, function () {
+    const date = new Date();
+    const year = date.getFullYear() - 20;
+    const month = ('0' + date.getMonth()).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return (
+      {
+        birthday: `${year}-${month}-${day}`
+      }
+    );
+  });
+  const combinedPassengers = [...childPassengers, ...adultPassengers];
+  return combinedPassengers;
+}
+
+// function that builds the travel period for the query
+function constructTravelPeriodQuery (departureDate, duration) {
+  const nights = (Number(duration.split(' ')[0]) * 7);
+  console.log(departureDate.split('-'));
+  const year = departureDate.split('-')[0];
+  const paddedMonth = ('0' + departureDate.split('-')[1]).slice(-2);
+  const day = departureDate.split('-')[2];
+  const formattedDate = `${year}-${paddedMonth}-${day}`;
+  console.log(formattedDate);
+  const travelPeriod = {
+    departureBetween: [formattedDate],
+    nights: [nights]
+  };
+  return travelPeriod;
+}
+
+// function that builds the departure airport query
+function constructDepartureAirportQuery (departureAirport) {
+  const airportCode = departureAirport.split(' ')[2];
+  const departureAirportMapped = `airport:master.${airportCode}`;
+  const airport = [departureAirportMapped];
+  return airport;
+}
+
 /**
 * Action to start the search
-* 1. check if the searchString is already a tag. If so then return without
-*    dispatching an action
-* 2. check if this is the first search - if it is, then call the busySearching
-*    action to show the loading spinner
-* 4. format the query based on the tags
-* 5. launch a graphql mutation to return a searchBucketId
+* 1. format the query based on the tags
+* 2. launch a graphql mutation to return a searchBucketId
 */
 
 export function startSearch () {
   return (dispatch, getState) => {
-    const { search: { searchString, tags } } = getState();
-    const tagExists = tags.filter(tag => tags.displayName === searchString).length > 0;
-    if (tagExists) {
-      return;
-    } else {
+    const {
+       search: {
+        tags
+        },
+       travelInfo: {
+        numberOfChildren,
+        numberOfAdults,
+        childAge1,
+        childAge2,
+        childAge3,
+        childAge4,
+        departureDate,
+        duration,
+        departureAirport
+      }
+    } = getState();
+    const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
+    if (tags.length > 0) {
       dispatch(busySearching());
-      const query = formatQuery(tags);
-      console.log('query', query);
+      const formattedTags = formatQuery(tags);
+      const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
+      const departureAirports = constructDepartureAirportQuery(departureAirport);
+      const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
+      const query = {passengers: passengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
+      // const query = formattedTags;
+      console.log('query', JSON.stringify(query));
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
         .then(json => {
+          console.log('json', json);
           const searchResultId = json.data.viewer.searchResultId.id;
           dispatch(saveSearchResultId(searchResultId));
           dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
@@ -192,3 +262,9 @@ export function startSearch () {
     }
   };
 }
+
+export const backToSearch = () => { return {type: VIEW_SEARCH}; };
+
+export const setNumberOfAdultsTitle = (numberOfAdultsTitle) => { return {type: SET_NUMBER_OF_ADULTS_TITLE, numberOfAdultsTitle}; };
+export const setNumberOfChildrenTitle = (numberOfChildrenTitle) => { return {type: SET_NUMBER_OF_CHILDREN_TITLE, numberOfChildrenTitle}; };
+export const setDurationTitle = (durationTitle) => { return {type: SET_DURATION_TITLE, durationTitle}; };

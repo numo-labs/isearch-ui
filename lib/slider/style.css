@@ -1,0 +1,55 @@
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+.currentSlide {
+  padding-left: 0.3em;
+}
+
+.slider {
+  position: relative;
+}
+
+.sliderCounter {
+  padding: 0.5em;
+  padding-left: 2em;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 1em;
+  margin-bottom: 0;
+  color: #444;
+  background: rgba(255,255,255,0.5); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(bottom right, rgba(0,0,0,0), rgba(255,255,255,1)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right,rgba(0,0,0,0), rgba(255,255,255,1)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right,rgba(0,0,0,0), rgba(255,255,255,1)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, rgba(0,0,0,0), rgba(255,255,255,1)); /* Standard syntax */
+  font-family: SourceSansLight
+}
+
+.sliderCounter:before {
+  content: '.';
+  font-size: 0;
+  width: 20px;
+  height: 20px;
+  background: url('https://cloud.githubusercontent.com/assets/8338963/14849708/d07a1816-0c74-11e6-9f22-2907343f6849.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  left: 5px;
+}
+@media (max-width: 750px) {
+  .sliderCounter {
+    margin-right: 0;
+  }
+}

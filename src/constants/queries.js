@@ -1,10 +1,13 @@
 export const QUERY_AUTOCOMPLETE_INPUT = `
-query autocomplete($input: String, $suggestor: SuggesterEnum, $size: Int) {
+query autocomplete($input: String, $size: Int) {
   viewer {
-    autocomplete(text: $input, suggester: $suggestor, size: $size) {
+    autocomplete(text: $input, size: $size) {
       items {
-        suggestion,
-        id
+        name,
+        tagid,
+        label,
+        boost,
+        active
       }
     }
   }
@@ -52,7 +55,9 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
                 name,
                 country,
                 region
-              }
+              },
+              description,
+              tripUrl
             },
             flights {
               outbound {
@@ -103,7 +108,8 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
             price {
               total,
               perPerson,
-              currency
+              currency,
+              discountPrice
             },
             provider {
               id,
@@ -138,6 +144,11 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
             id,
             name,
             url,
+            type,
+            tags {
+              label,
+              value
+            }
             sections {
               title,
               image,

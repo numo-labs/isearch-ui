@@ -5,15 +5,15 @@ import SearchResults from '../../src/components/search-results';
 import mockTiles from '../../src/utils/mock-search-results';
 
 describe('Component', function () {
-  const wrapper = shallow(<SearchResults items={mockTiles.items}/>);
+  const wrapper = shallow(<SearchResults items={mockTiles.items} filterVisibleState={{'Wifi': true}}/>);
   const children = wrapper.children().nodes;
   describe('<SearchResults />', function () {
     it('should render our SearchResults component', function (done) {
-      expect(children).to.have.length(1);
+      expect(children).to.have.length(3);
       done();
     });
     it('should render 3 elements with the class .gridItem', function (done) {
-      expect(wrapper.find('.gridItem').length).to.equal(1);
+      expect(wrapper.find('.gridItem').length).to.equal(3);
       done();
     });
   });

@@ -16,7 +16,7 @@ const masonryOptions = {
 class SearchResults extends Component {
   handleVisibility (isVisible, item) {
     if (dataLayer && isVisible && item.type === 'packageOffer') {
-      console.log('datalayer: ', item.packageOffer.provider.reference);
+      // console.log('datalayer: ', item.packageOffer.provider.reference);
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -59,7 +59,10 @@ class SearchResults extends Component {
       onYesFilter,
       onFilterClick,
       showAddMessage,
-      viewArticle
+      viewArticle,
+      viewHotel,
+      setHotelPage,
+      totalPassengers
     } = this.props;
     return (
       <Masonry
@@ -77,36 +80,39 @@ class SearchResults extends Component {
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
+                      viewHotel={viewHotel}
+                      setHotelPage={setHotelPage}
+                      totalPassengers={totalPassengers}
                     />
                   </div>
                 </VisbilitySensor>
-              );
-            } else if (item.type === 'filter') {
-              console.log('itemVisible', filterVisibleState[item.displayName]);
-              return (
-                <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem'>
-                    <FilterTile
-                      filterVisible={filterVisibleState[item.displayName]}
-                      onYesFilter={onYesFilter}
-                      onNoFilter={onFilterClick}
-                      showAddMessage={showAddMessage}
-                      description={item}
-                      color={item.color}
-                    />
-                  </div>
-                </VisbilitySensor>
-
               );
             } else if (item.type === 'tile') {
-              console.log('tile', item);
-              return (
-                <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem'>
-                    <ArticleTile {...item} viewArticle={viewArticle}/>
-                  </div>
-                </VisbilitySensor>
-              );
+              if (item.tile.type === 'filter') {
+                return (
+                  <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                    <div key={index} className='gridItem'>
+                      <FilterTile
+                        filterVisible={filterVisibleState[item.tile.displayName]}
+                        onYesFilter={onYesFilter}
+                        onNoFilter={onFilterClick}
+                        showAddMessage={showAddMessage}
+                        description={item.tile}
+                        color={item.tile.color}
+                      />
+                    </div>
+                  </VisbilitySensor>
+
+                );
+              } else if (item.tile.type === 'article') {
+                return (
+                  <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                    <div key={index} className='gridItem'>
+                      <ArticleTile {...item} viewArticle={viewArticle}/>
+                    </div>
+                  </VisbilitySensor>
+                );
+              }
             }
           })
         }
@@ -121,7 +127,11 @@ SearchResults.propTypes = {
   showAddMessage: PropTypes.func,
   items: PropTypes.array,
   filterVisibleState: PropTypes.object,
-  viewArticle: PropTypes.func
+  viewHotel: PropTypes.func,
+  viewArticle: PropTypes.func,
+  setHotelPage: PropTypes.func,
+  hotelInView: PropTypes.func,
+  totalPassengers: PropTypes.number
 };
 
 export default SearchResults;

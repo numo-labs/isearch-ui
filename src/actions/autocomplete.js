@@ -21,8 +21,7 @@ export function getAutocompleteOptions () {
       dispatch(setAutocompleteInSearch());
       const variables = {
         input: searchString,
-        suggester: 'DISPLAYNAME',
-        size: 250
+        size: 100
       };
       graphqlService
         .query(QUERY_AUTOCOMPLETE_INPUT, variables)

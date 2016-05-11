@@ -9,11 +9,10 @@
 *  }
 */
 export function formatQuery (tags) {
-  const query = {passengers: [{birthday: '1986-07-14'}]};
   return tags.reduce((q, tag) => {
     const type = tag.id.split(':')[0];
     const field = type === 'geo' ? 'geography' : type;
-    const value = q[type] || {};
+    const value = q[field] || {};
     const updatedQuery = {
       ...q,
       [field]: [
@@ -22,5 +21,5 @@ export function formatQuery (tags) {
       ]
     };
     return updatedQuery;
-  }, query);
+  }, {});
 }

@@ -8,6 +8,15 @@
   src: url('../../fonts/SourceSansPro-SemiBold.otf');
 }
 
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
 
 .type {
   position: absolute;
@@ -34,6 +43,23 @@ h5 {
   cursor: pointer;
 }
 
+.articleContentContainer {
+  background-color: #ffffff;
+  position: relative;
+  padding: 2em;
+}
+
+@media (min-width: 750px) {
+  .articleContentContainer {
+    width: 750px;
+    position: absolute;
+    top: 21em;
+    left: 50%;
+    margin-left: -375px;
+    padding: 2em;
+  }
+}
+
 .articleImage {
   display: inline-block;
   height: 20em;
@@ -43,32 +69,57 @@ h5 {
 
 .text {
   bottom: 2em;
+  color: #595959;
   position: absolute;;
   line-height: 0.5em;
   padding: 0.4em;
-  background-color: #ffffff;
-  opacity: 0.8;
+  background-color: rgba(255,255,255,0.7);
   width: 100%;
 }
+
 
 h1 {
   font-family: SourceSansSemiBold;
   font-size: 2.1em;
 }
 
+.text h2 {
+  font-family: ThomasHeadlineBold;
+  font-size: 2.4rem;
+  margin-top: 10px;
+}
+
 .articleFullPageContainer {
   text-align: center;
   font-family: SourceSansLight;
   display: inline-block;
-  background-color: #fff;
   width: 100%;
 }
 
-.articleFullPageContainer .articleHeader {
-  width: 100%;
+.articleFullPageContainer .articleHeaderImage {
   height: 400px;
+  position: relative;
+  width: 100%;
   background-size: cover;
-  background-position: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.articleHeader {
+  font-family: ThomasHeadlineBold;
+  font-size: 3.2rem;
+  margin-bottom: 1em;
+}
+
+.articleIntroText {
+  font-family: SourceSansSemiBold;
+  font-size: 1.8rem;
+}
+
+.articleSectionHeading {
+  font-family: SourceSansRegular;
+  font-size: 2.4rem;
+  margin: 1em auto;
 }
 
 .articleFullPageContainer .articleSection {
@@ -92,9 +143,12 @@ h1 {
 
 .articleFullPageContainer .articleText {
   padding: 0 1.5em;
-  color: #666;
+  color: #595959;
   width: 100%;
+  font-size: 1.6rem;
   text-align: left;
+  font-family: SourceSansRegular;
+  font-weight: 300;
 }
 
 .articleFullPageContainer .tagSection {
