@@ -1,8 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
 
-// container
-// import ISearch from './isearch';
 import ISearchRouter from '../routes';
 
 export default class Root extends Component {

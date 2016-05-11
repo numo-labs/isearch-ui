@@ -3,10 +3,14 @@ import ArticleFooter from '../../../lib/article/article-footer.js';
 import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
 
-export default class ArticleFullPage extends Component {
+class ArticleFullPage extends Component {
   constructor () {
     super();
-    this.getArticleData().bind(this);
+    this.getArticleData = this.getArticleData.bind(this);
+  }
+
+  componentWillMount () {
+    this.getArticleData();
   }
 
   getArticleData () {
@@ -15,7 +19,10 @@ export default class ArticleFullPage extends Component {
 
   render () {
     const { articleContent, backToSearch } = this.props;
-
+    if (!articleContent.title) {
+      window.location.hash = '/';
+      return (<section/>);
+    }
     const tagColours = {
       amenities: 'rgba(12,125,125,0.6)',
       geo: 'rgba(12,125,12,0.6)'
@@ -66,5 +73,8 @@ export default class ArticleFullPage extends Component {
 
 ArticleFullPage.propTypes = {
   articleContent: PropTypes.object,
-  backToSearch: PropTypes.func
+  backToSearch: PropTypes.func,
+  getArticle: PropTypes.func
 };
+
+export default ArticleFullPage;

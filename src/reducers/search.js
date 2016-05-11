@@ -16,7 +16,8 @@ import {
   CLEAR_SEARCH_STRING,
   SET_NUMBER_OF_ADULTS_TITLE,
   SET_NUMBER_OF_CHILDREN_TITLE,
-  SET_DURATION_TITLE
+  SET_DURATION_TITLE,
+  SAVE_SEARCH_RESULT_ID
   // SHOW_ADD_MESSAGE,
   // HIDE_ADD_MESSAGE,
 } from '../constants/actionTypes';
@@ -55,7 +56,8 @@ export const initialState = {
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
-  durationTitle: '2 uger'
+  durationTitle: '2 uger',
+  bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
 };
 
 export default function search (state = initialState, action) {
@@ -175,6 +177,11 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         durationTitle: action.durationTitle
+      };
+    case SAVE_SEARCH_RESULT_ID:
+      return {
+        ...state,
+        bucketId: action.id
       };
     // case SHOW_ADD_MESSAGE:
     //   return ({

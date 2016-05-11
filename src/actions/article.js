@@ -16,10 +16,10 @@ export const viewArticle = (content) => { return { type: VIEW_ARTICLE, content }
 export const backToSearch = () => { return { type: VIEW_SEARCH }; };
 
 
-export function getArticle (bucketId, itemId) {
-  return (dispatch, getState) => {
+export const getArticle = (bucketId, itemId) => {
+  return (dispatch) => {
     return graphqlService.query(QUERY_FETCH_BUCKET_ITEM, {'id': bucketId, 'itemId': itemId})
       .then((data) => { console.log(data); dispatch(viewArticle(data)); })
       .catch((err) => console.log(err));
   };
-};
+}

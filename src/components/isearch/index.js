@@ -5,7 +5,7 @@ import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import HotelPage from '../../../lib/hotel-page';
 import LoadingSpinner from '../../../lib/spinner';
-import { ArticleFullPage } from '../../../lib/article';
+// import { ArticleFullPage } from '../../../lib/article';
 import './style.css';
 
 class ISearch extends Component {
@@ -39,7 +39,8 @@ class ISearch extends Component {
       viewArticle,
       setHotelPage,
       numberOfChildrenTitle,
-      numberOfAdultsTitle
+      numberOfAdultsTitle,
+      bucketId
     } = this.props;
 
     return (
@@ -53,6 +54,7 @@ class ISearch extends Component {
         viewHotel={viewHotel}
         setHotelPage={setHotelPage}
         totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
+        bucketId={bucketId}
       />
     );
   }
@@ -107,13 +109,14 @@ class ISearch extends Component {
           packageOffer={hotelInView}
         />
       );
-    } else if (articlePage) {
-      return (
-        <ArticleFullPage
-          articleContent={articleContent}
-          backToSearch={backToSearch}
-        />
-      );
+    // } else if (articlePage) {
+    //   return (
+    //     <ArticleFullPage
+    //       articleContent={articleContent}
+    //       backToSearch={backToSearch}
+    //       getArticle={getArticle}
+    //     />
+    //   );
     } else {
       return (
         <section>
@@ -171,7 +174,7 @@ class ISearch extends Component {
 ISearch.propTypes = {
   // for random initial results
   fetchQuerySearchResults: PropTypes.func,
-
+  getArticle: PropTypes.func,
   // results
   loading: PropTypes.bool,
   error: PropTypes.string,

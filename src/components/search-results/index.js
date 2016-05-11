@@ -62,7 +62,8 @@ class SearchResults extends Component {
       viewArticle,
       viewHotel,
       setHotelPage,
-      totalPassengers
+      totalPassengers,
+      bucketId
     } = this.props;
     return (
       <Masonry
@@ -108,7 +109,7 @@ class SearchResults extends Component {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                     <div key={index} className='gridItem'>
-                      <ArticleTile {...item} viewArticle={viewArticle}/>
+                      <ArticleTile {...item} bucketId={bucketId} viewArticle={viewArticle}/>
                     </div>
                   </VisbilitySensor>
                 );

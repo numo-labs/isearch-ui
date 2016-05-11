@@ -31,7 +31,8 @@ function mapStateToProps (state) {
       inAutoCompleteSearch,
       numberOfAdultsTitle,
       numberOfChildrenTitle,
-      durationTitle
+      durationTitle,
+      bucketId
     },
     travelInfo: {
       numberOfChildren,
@@ -79,7 +80,8 @@ function mapStateToProps (state) {
     departureDate,
     numberOfAdultsTitle,
     numberOfChildrenTitle,
-    durationTitle
+    durationTitle,
+    bucketId
   };
 }
 

@@ -1,11 +1,9 @@
 import { connect } from 'react-redux';
 import ArticleFullPage from '../components/article/';
 
-import * as TagActions from '../actions/tags';
 import * as ArticleActions from '../actions/article';
 
 const Actions = {
-  ...TagActions,
   ...ArticleActions
 };
 
