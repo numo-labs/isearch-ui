@@ -33,7 +33,7 @@ describe('Component', function () {
     const children = wrapper.children().nodes;
 
     it('should render the ISearch container', function (done) {
-      expect(children).to.have.length(4);
+      expect(children).to.have.length(5);
       done();
     });
     it('should render the <SearchSummary /> as the first child', function (done) {
@@ -49,13 +49,13 @@ describe('Component', function () {
       done();
     });
     it('should render the <TagContainer /> as the third child', function (done) {
-      const thirdChild = children[2].type;
+      const thirdChild = children[3].type;
       const tags = wrapper.find('TagContainer').node.type;
       expect(thirdChild).to.deep.equal(tags);
       done();
     });
     it('should render the <SearchResults /> as the fourth child if the loading and error props are false', function (done) {
-      const fourthChild = children[3].type;
+      const fourthChild = children[4].type;
       const searchResults = wrapper.find('SearchResults').node.type;
       expect(fourthChild).to.deep.equal(searchResults);
       done();
@@ -63,7 +63,7 @@ describe('Component', function () {
     it('should render the <LoadingSpinner /> as the fourth child if the loading prop is true', function (done) {
       wrapper.setProps({loading: true});
       const children = wrapper.children().nodes;
-      const fourthChild = children[3].type;
+      const fourthChild = children[4].type;
       expect(fourthChild).to.deep.equal('div');
       done();
     });
