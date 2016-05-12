@@ -84,6 +84,8 @@ class SearchResults extends Component {
                       viewHotel={viewHotel}
                       setHotelPage={setHotelPage}
                       totalPassengers={totalPassengers}
+                      bucketId={bucketId}
+                      itemId={item.id}
                     />
                   </div>
                 </VisbilitySensor>
