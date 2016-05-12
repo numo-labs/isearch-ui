@@ -12,7 +12,7 @@
   src: url('../../fonts/SourceSansPro-Regular.otf');
 }
 
-.blueContainerActive {
+.blueContainer {
   background-color: #6DB4A9;
   color: #ffffff;
   padding: 0.3em;
@@ -23,31 +23,16 @@
 }
 
 .calendar__day {
-    font-size: 13px;
-    cursor: pointer;
-    padding: 7px 9px 6px;
-    border: solid 1px #eee;
-    color: black;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 7px 9px 6px;
+  border: solid 1px #eee;
+  color: black;
 }
 
 .calendar thead td {
   padding: 10px 0;
   color: #4F4F4F;
-}
-
-.changeButtonChanged {
-  border-radius: 600px;
-  border: 1px solid #ffffff;
-  display: inline-block;
-  padding: 0.3em;
-  cursor: pointer;
-}
-
-.changeInputActive {
-  width: 100%;
-  margin-top: 5em;
-  text-align: center;
-  position: relative;
 }
 
 .changeInputButton {
@@ -74,14 +59,6 @@
   width: 100%;
   text-align: center;
   display: inline-block;
-}
-
-.changeInputInactive {
-  width: 100%;
-  margin-top: 3em;
-  display: none;
-  background-color: #6DB4A9;
-  height: 100em;
 }
 
 .contentHeader {
@@ -140,10 +117,6 @@
   cursor: pointer;
 }
 
-.headerInactive {
-  display: none;
-}
-
 .icon {
   width: 2em;
   float: left;
@@ -163,14 +136,6 @@
   font-family: SourceSansLight;
   height: 2em;
   color: black;
-}
-
-.inspirationTitle {
-  display: none;
-}
-
-.logoHeart {
-  display: none;
 }
 
 .returnIcon {
@@ -215,10 +180,6 @@ h1 {
   width: 100%;
 }
 
-.spiesTitle {
-  display: none;
-}
-
 .tagExitButton {
   font-family: SourceSansLight;
   position: absolute;
@@ -236,12 +197,14 @@ h1 {
   position: relative;
 }
 
-.tagViewInactive {
-  width: 100%;
-  margin-top: 3em;
-  display: none;
-  background-color: #6DB4A9;
-  height: 100em;
+.vacationLength {
+  width: 46%;
+}
+
+.inspirationTitle,
+.spiesTitle,
+.logoHeart {
+    display: none;
 }
 
 @media (min-width: 490px) {
@@ -253,7 +216,7 @@ h1 {
   .search {
     padding-left: 5em;
   }
-  .changeInputActive {
+  .changeDetailsContainer {
     width: 25em;
   }
 }
@@ -303,14 +266,7 @@ h1 {
 }
 
 @media (min-width: 1700px) {
-  .blueContainer {
-
-  }
   .search {
     padding-left: 13em;
   }
-}
-
-.vacationLength {
-  width: 46%;
 }

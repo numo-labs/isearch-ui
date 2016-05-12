@@ -4,7 +4,7 @@
 
 .weeksPaxMixContainer {
   display: inline-block;
-  width: 10%
+  width: 20%
 }
 
 .weeksPaxMix {
@@ -26,7 +26,7 @@
   display: inline-block;
 }
 
-.blueContainer {
+.searchSummaryHeaderContainer {
   background-color: #6DB4A9;
   color: #ffffff;
   padding: 0.3em;
@@ -40,7 +40,7 @@
 .searchSummaryHeaderLogoContainer {
   display: inline-block;
   margin: 0 auto;
-  width: 80%;
+  width: 60%;
   text-align: center;
 }
 
@@ -56,4 +56,47 @@
   display: inline-block;
   color: #ffffff;
   font-size: 2em;
+}
+
+@media (max-width: 479px) {
+  .searchSummaryHeaderLogoContainer {
+    width: 40%
+  }
+  .weeksPaxMixContainer {
+    width: 30%;
+  }
+}
+
+@media (max-width: 380px) {
+  .spiesHeaderTitle {
+    font-size: 1.8em;
+  }
+  .weeksPaxMixContainer {
+    width: 30%;
+  }
+  .weeksPaxMix {
+    margin-left: 0.3em;
+  }
+  .weeks, .paxMix {
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 320px) {
+  .spiesHeaderTitle {
+    font-size: 1.5em;
+  }
+  .searchSummaryHeaderLogoContainer .spiesLogo {
+    width: 1.5em;
+    margin-right: 0.1em;
+  }
+  .weeksPaxMixContainer {
+    width: 30%;
+  }
+  .weeksPaxMix {
+    margin-left: 0.3em;
+  }
+  .weeks, .paxMix {
+    font-size: 0.9em;
+  }
 }
