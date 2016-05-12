@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Header from '../../../lib/header/';
-import SearchSummary from '../../../lib/search-summary/';
+import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import HotelPage from '../../../lib/hotel-page';
@@ -13,22 +13,19 @@ class ISearch extends Component {
 
   constructor () {
     super();
-    this.fetchQueryResults = this.fetchQueryResults.bind(this);
+    this.state = {
+      scrollY: 0
+    };
+    this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
   }
-
   componentWillMount () {
-    this.fetchQueryResults();
+    this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
   }
-
-  /**
-   * For testing and building purposes we pass through a list of fixed tags.
-   * TODO: Replace this with the proper solution!
-   */
-
-   fetchQueryResults () {
-     this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
-   }
-
+  scrollToSavedPosition () {
+    if (this.state.scrollY > 0) {
+      window.scrollTo(0, this.state.scrollY);
+    }
+  }
   renderResults () {
     const {
       displayedItems,
@@ -41,7 +38,6 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle
     } = this.props;
-
     return (
       <SearchResults
         items={displayedItems}
@@ -49,14 +45,29 @@ class ISearch extends Component {
         onFilterClick={onFilterClick}
         filterVisibleState={filterVisibleState}
         // showAddMessage={showAddMessage}
-        viewArticle={viewArticle}
-        viewHotel={viewHotel}
+        viewArticle={(article) => {
+          this.setState({scrollY: window.scrollY});
+          window.scrollTo(0, 0);
+          viewArticle(article);
+        }}
+        viewHotel={(hotel) => {
+          this.setState({scrollY: window.scrollY});
+          viewHotel(hotel);
+        }}
         setHotelPage={setHotelPage}
         totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
       />
     );
   }
 
+  componentDidUpdate (prevProps) {
+    const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
+    const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
+    if (pageChanged && searchPage) {
+      console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
+      this.scrollToSavedPosition();
+    }
+  }
   render () {
     const {
       tags,
@@ -113,6 +124,12 @@ class ISearch extends Component {
           articleContent={articleContent}
           onAddArticleTag={addSingleTag}
           backToSearch={backToSearch}
+          handleOnAddTagClick={() => {
+            this.setState({scrollY: 800});
+            console.log('article', articleContent);
+            this.props.addSingleTag(articleContent.name, articleContent.id);
+            this.props.backToSearch();
+          }}
         />
       );
     } else {

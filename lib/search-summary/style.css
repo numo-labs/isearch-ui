@@ -16,16 +16,6 @@
   background-color: #6DB4A9;
   color: #ffffff;
   padding: 0.3em;
-  padding-left: 0.8em;
-  position: fixed;
-  width: 100%;
-  z-index: 20000;
-}
-
-.blueContainerActive {
-  background-color: #6DB4A9;
-  color: #ffffff;
-  padding: 0.3em;
   position: fixed;
   z-index: 30;
   height: 100em;
@@ -33,50 +23,16 @@
 }
 
 .calendar__day {
-    font-size: 13px;
-    cursor: pointer;
-    padding: 7px 9px 6px;
-    border: solid 1px #eee;
-    color: black;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 7px 9px 6px;
+  border: solid 1px #eee;
+  color: black;
 }
 
 .calendar thead td {
   padding: 10px 0;
   color: #4F4F4F;
-}
-
-.changeButton {
-  border-radius: 600px;
-  border: 1px solid #F39100;
-  background-color: #F39100;
-  display: inline-block;
-  padding: 0.3em;
-  padding-left: 0.8em;
-  padding-right: 0.8em;
-  margin-top: 0.4em;
-  margin-right: 0.5em;
-  cursor: pointer;
-  position: absolute;
-}
-
-.changeButtonChanged {
-  border-radius: 600px;
-  border: 1px solid #ffffff;
-  display: inline-block;
-  padding: 0.3em;
-  padding-left: 0.8em;
-  padding-right: 0.8em;
-  margin-top: 0.4em;
-  margin-right: 0.5em;
-  cursor: pointer;
-  position: absolute;
-}
-
-.changeInputActive {
-  width: 100%;
-  margin-top: 5em;
-  text-align: center;
-  position: relative;
 }
 
 .changeInputButton {
@@ -103,14 +59,6 @@
   width: 100%;
   text-align: center;
   display: inline-block;
-}
-
-.changeInputInactive {
-  width: 100%;
-  margin-top: 3em;
-  display: none;
-  background-color: #6DB4A9;
-  height: 100em;
 }
 
 .contentHeader {
@@ -166,10 +114,7 @@
   float: right;
   margin-top: 0.4em;
   margin-right: 0.5em;
-}
-
-.headerInactive {
-  display: none;
+  cursor: pointer;
 }
 
 .icon {
@@ -191,14 +136,6 @@
   font-family: SourceSansLight;
   height: 2em;
   color: black;
-}
-
-.inspirationTitle {
-  display: none;
-}
-
-.logoHeart {
-  display: none;
 }
 
 .returnIcon {
@@ -243,10 +180,6 @@ h1 {
   width: 100%;
 }
 
-.spiesTitle {
-  display: none;
-}
-
 .tagExitButton {
   font-family: SourceSansLight;
   position: absolute;
@@ -264,12 +197,14 @@ h1 {
   position: relative;
 }
 
-.tagViewInactive {
-  width: 100%;
-  margin-top: 3em;
-  display: none;
-  background-color: #6DB4A9;
-  height: 100em;
+.vacationLength {
+  width: 46%;
+}
+
+.inspirationTitle,
+.spiesTitle,
+.logoHeart {
+    display: none;
 }
 
 @media (min-width: 490px) {
@@ -281,7 +216,7 @@ h1 {
   .search {
     padding-left: 5em;
   }
-  .changeInputActive {
+  .changeDetailsContainer {
     width: 25em;
   }
 }
@@ -331,25 +266,7 @@ h1 {
 }
 
 @media (min-width: 1700px) {
-  .blueContainer {
-
-  }
   .search {
     padding-left: 13em;
   }
-}
-
-.vacationLength {
-  width: 46%;
-}
-
-.weeks {
-  padding-right: 0.7em;
-  padding-bottom: 0.2em;
-}
-
-.weeksPaxMix {
-  display: inline-block;
-  margin-left: 2.5em;
-  line-height: 1.3em;
 }

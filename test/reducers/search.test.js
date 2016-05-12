@@ -89,7 +89,7 @@ describe('Search Reducer', () => {
       done();
     });
     it('BUSY_SEARCHING -> sets loading to true', (done) => {
-      const action = {type: BUSY_SEARCHING};
+      const action = {type: BUSY_SEARCHING, isBusy: true};
       const state = reducer(undefined, action);
       const expectedState = {
         ...initialState,

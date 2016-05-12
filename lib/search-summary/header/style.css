@@ -1,0 +1,102 @@
+.weeks {
+  padding-bottom: 0.2em;
+}
+
+.weeksPaxMixContainer {
+  display: inline-block;
+  width: 20%
+}
+
+.weeksPaxMix {
+  display: inline-block;
+  margin-left: 1em;
+  line-height: 1.3em;
+}
+
+.changeButton {
+  border-radius: 2em;
+  background-color: #F39100;
+  display: inline-block;
+  height: 2em;
+  width: 2em;
+  cursor: pointer;
+  background-image: url('../assets/pencil.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+}
+
+.searchSummaryHeaderContainer {
+  background-color: #6DB4A9;
+  color: #ffffff;
+  padding: 0.3em;
+  padding-left: 0.8em;
+  position: fixed;
+  width: 100%;
+  z-index: 20000;
+  height: 4em;
+}
+
+.searchSummaryHeaderLogoContainer {
+  display: inline-block;
+  margin: 0 auto;
+  width: 60%;
+  text-align: center;
+}
+
+.searchSummaryHeaderLogoContainer .spiesLogo {
+  display: inline-block;
+  width: 2em;
+  margin-right: 0.3em;
+  vertical-align: baseline;
+}
+
+.spiesHeaderTitle {
+  font-family: SourceSansBold;
+  display: inline-block;
+  color: #ffffff;
+  font-size: 2em;
+}
+
+@media (max-width: 479px) {
+  .searchSummaryHeaderLogoContainer {
+    width: 40%
+  }
+  .weeksPaxMixContainer {
+    width: 30%;
+  }
+}
+
+@media (max-width: 380px) {
+  .spiesHeaderTitle {
+    font-size: 1.8em;
+  }
+  .weeksPaxMixContainer {
+    width: 30%;
+  }
+  .weeksPaxMix {
+    margin-left: 0.3em;
+  }
+  .weeks, .paxMix {
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 320px) {
+  .spiesHeaderTitle {
+    font-size: 1.5em;
+  }
+  .searchSummaryHeaderLogoContainer .spiesLogo {
+    width: 1.5em;
+    margin-right: 0.1em;
+  }
+  .weeksPaxMixContainer {
+    width: 30%;
+  }
+  .weeksPaxMix {
+    margin-left: 0.3em;
+  }
+  .weeks, .paxMix {
+    font-size: 0.9em;
+  }
+}
