@@ -64,7 +64,7 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
                 dispatch(fetchQuerySearchResults(id, page, size, ++attempt, tilesHaveBeenAdded));
               }, 1000);
             }
-          } else if (attempt <= 10) {
+          } else if (attempt <= 15) {
             // Try again bro
             setTimeout(function () {
               console.log('Retrying', attempt);
