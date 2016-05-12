@@ -12,16 +12,6 @@
   src: url('../../fonts/SourceSansPro-Regular.otf');
 }
 
-.blueContainer {
-  background-color: #6DB4A9;
-  color: #ffffff;
-  padding: 0.3em;
-  padding-left: 0.8em;
-  position: fixed;
-  width: 100%;
-  z-index: 20000;
-}
-
 .blueContainerActive {
   background-color: #6DB4A9;
   color: #ffffff;
@@ -45,31 +35,12 @@
   color: #4F4F4F;
 }
 
-.changeButton {
-  border-radius: 600px;
-  border: 1px solid #F39100;
-  background-color: #F39100;
-  display: inline-block;
-  padding: 0.3em;
-  padding-left: 0.8em;
-  padding-right: 0.8em;
-  margin-top: 0.4em;
-  margin-right: 0.5em;
-  cursor: pointer;
-  position: absolute;
-}
-
 .changeButtonChanged {
   border-radius: 600px;
   border: 1px solid #ffffff;
   display: inline-block;
   padding: 0.3em;
-  padding-left: 0.8em;
-  padding-right: 0.8em;
-  margin-top: 0.4em;
-  margin-right: 0.5em;
   cursor: pointer;
-  position: absolute;
 }
 
 .changeInputActive {
@@ -341,15 +312,4 @@ h1 {
 
 .vacationLength {
   width: 46%;
-}
-
-.weeks {
-  padding-right: 0.7em;
-  padding-bottom: 0.2em;
-}
-
-.weeksPaxMix {
-  display: inline-block;
-  margin-left: 2.5em;
-  line-height: 1.3em;
 }

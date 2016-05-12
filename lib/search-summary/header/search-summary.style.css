@@ -1,0 +1,33 @@
+.weeks {
+  padding-right: 0.7em;
+  padding-bottom: 0.2em;
+}
+
+.weeksPaxMix {
+  display: inline-block;
+  margin-left: 1em;
+  line-height: 1.3em;
+}
+
+.changeButton {
+  border-radius: 2em;
+  background-color: #F39100;
+  display: inline-block;
+  height: 2em;
+  width: 2em;
+  cursor: pointer;
+  background-image: url('../assets/pencil.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.blueContainer {
+  background-color: #6DB4A9;
+  color: #ffffff;
+  padding: 0.3em;
+  padding-left: 0.8em;
+  position: fixed;
+  width: 100%;
+  z-index: 20000;
+  height: 4em;
+}
