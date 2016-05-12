@@ -74,27 +74,28 @@ export const onFilterClick = (displayName) => { return {type: FILTER_ON_CLICK, d
 * If it doesn't exist, it is added and a new search is started
 */
 
-export const addSingleTag = (displayName, id) => {
+export const addSingleTag = (displayName, id, isInitialTag) => {
   return (dispatch, getState) => {
     const { search: { tags } } = getState();
     const tagExists = tags.filter(tag => tag.displayName === displayName).length > 0;
     if (tagExists) {
       return;
     } else {
-      dispatch(addTag(displayName, id));
+      dispatch(addTag(displayName, id, isInitialTag || false));
       dispatch(startSearch());
     }
   };
 };
 
-export const addTag = (displayName, id) => {
+export const addTag = (displayName, id, isInitialTag) => {
   return {
     type: TAG_ADD_SINGLE_TAG,
     tag: {
       displayName,
       colour: '#8EB8C4',
       id // geo tags will just have 'geo' and amenity tags will have the full tag id e.g. amenity:wifi
-    }
+    },
+    isInitialTag
   };
 };
 
