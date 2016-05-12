@@ -64,6 +64,7 @@ class ISearch extends Component {
     const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
     const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
     if (pageChanged && searchPage) {
+      console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
       this.scrollToSavedPosition();
     }
   }
@@ -123,6 +124,12 @@ class ISearch extends Component {
           articleContent={articleContent}
           onAddArticleTag={addSingleTag}
           backToSearch={backToSearch}
+          handleOnAddTagClick={() => {
+            this.setState({scrollY: 800});
+            console.log('article', articleContent);
+            this.props.addSingleTag(articleContent.name, articleContent.id);
+            this.props.backToSearch();
+          }}
         />
       );
     } else {
