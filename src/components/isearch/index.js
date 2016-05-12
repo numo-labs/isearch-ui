@@ -13,22 +13,29 @@ class ISearch extends Component {
 
   constructor () {
     super();
-    this.fetchQueryResults = this.fetchQueryResults.bind(this);
+    this.state = {
+      scrollY: 0
+    };
+    this.handleScroll = this.handleScroll.bind(this);
+    this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
   }
-
   componentWillMount () {
-    this.fetchQueryResults();
+    this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
   }
-
-  /**
-   * For testing and building purposes we pass through a list of fixed tags.
-   * TODO: Replace this with the proper solution!
-   */
-
-   fetchQueryResults () {
-     this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
-   }
-
+  handleScroll () {
+    this.setState({scrollY: window.scrollY});
+  }
+  componentDidMount () {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+  scrollToSavedPosition () {
+    if (this.state.prevScrollY > 0) {
+      window.scrollTo(0, this.state.prevScrollY);
+    }
+  }
   renderResults () {
     const {
       displayedItems,
@@ -41,7 +48,6 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle
     } = this.props;
-
     return (
       <SearchResults
         items={displayedItems}
@@ -57,6 +63,20 @@ class ISearch extends Component {
     );
   }
 
+  componentWillReceiveProps (nextProps) {
+    const pageChangedToHotelOrArticle = (!this.props.hotelPage && !this.props.articlePage) && (nextProps.hotelPage || nextProps.articlePage);
+    if (pageChangedToHotelOrArticle) {
+      this.setState({prevScrollY: this.state.scrollY}); // save previous scroll position
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
+    const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
+    if (pageChanged && searchPage) {
+      this.scrollToSavedPosition();
+    }
+  }
   render () {
     const {
       tags,
