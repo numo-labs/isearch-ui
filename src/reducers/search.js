@@ -55,7 +55,7 @@ export const initialState = {
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
-  durationTitle: '2 uger'
+  durationTitle: '1 uger'
 };
 
 export default function search (state = initialState, action) {

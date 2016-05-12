@@ -1,5 +1,5 @@
 'use strict';
-
+import moment from 'moment';
 import {
   SET_CHILD_AGE,
   SET_NUMBER_OF_ADULTS,
@@ -9,35 +9,6 @@ import {
   SET_DEPARTURE_AIRPORT
 } from '../constants/actionTypes';
 
-const monthList = {
-  Jan: '1',
-  Feb: '2',
-  Mar: '3',
-  Apr: '4',
-  May: '5',
-  Jun: '6',
-  Jul: '7',
-  Aug: '8',
-  Sep: '9',
-  Oct: '10',
-  Nov: '11',
-  Dec: '12'
-};
-
-function constructDefaultDepartureDate () {
-  const defaultYear = new Date().toString().split(' ')[3];
-  const month = new Date().toString().split(' ')[1];
-  const defaultDay = new Date().toString().split(' ')[2];
-  let defaultMonth = monthList[month];
-  if (defaultMonth.length < 2) {
-    defaultMonth = '0' + defaultMonth;
-  }
-  const defaultDepartureDate = `${defaultYear}-${defaultMonth}-${defaultDay}`;
-  return defaultDepartureDate;
-}
-
-const defaultDepartureDate = constructDefaultDepartureDate();
-
 export const initialState = {
   numberOfChildren: '0',
   numberOfAdults: '2',
@@ -46,8 +17,8 @@ export const initialState = {
   childAge3: '0 Barns alder',
   childAge4: '0 Barns alder',
   departureAirport: 'Copenhagen - CPH',
-  duration: '2 uger',
-  departureDate: defaultDepartureDate,
+  duration: '1 uge',
+  departureDate: moment().add(14, 'days').format('YYYY-MM-DD'),
   passengerBirthdays: []
 };
 
