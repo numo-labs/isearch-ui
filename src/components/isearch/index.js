@@ -16,24 +16,14 @@ class ISearch extends Component {
     this.state = {
       scrollY: 0
     };
-    this.handleScroll = this.handleScroll.bind(this);
     this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
   }
   componentWillMount () {
     this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
   }
-  handleScroll () {
-    this.setState({scrollY: window.scrollY});
-  }
-  componentDidMount () {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-  componentWillUnmount () {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
   scrollToSavedPosition () {
-    if (this.state.prevScrollY > 0) {
-      window.scrollTo(0, this.state.prevScrollY);
+    if (this.state.scrollY > 0) {
+      window.scrollTo(0, this.state.scrollY);
     }
   }
   renderResults () {
@@ -55,25 +45,26 @@ class ISearch extends Component {
         onFilterClick={onFilterClick}
         filterVisibleState={filterVisibleState}
         // showAddMessage={showAddMessage}
-        viewArticle={viewArticle}
-        viewHotel={viewHotel}
+        viewArticle={(article) => {
+          this.setState({scrollY: window.scrollY});
+          window.scrollTo(0, 0);
+          viewArticle(article);
+        }}
+        viewHotel={(hotel) => {
+          this.setState({scrollY: window.scrollY});
+          viewHotel(hotel);
+        }}
         setHotelPage={setHotelPage}
         totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
       />
     );
   }
 
-  componentWillReceiveProps (nextProps) {
-    const pageChangedToHotelOrArticle = (!this.props.hotelPage && !this.props.articlePage) && (nextProps.hotelPage || nextProps.articlePage);
-    if (pageChangedToHotelOrArticle) {
-      this.setState({prevScrollY: this.state.scrollY}); // save previous scroll position
-    }
-  }
-
   componentDidUpdate (prevProps) {
     const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
     const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
     if (pageChanged && searchPage) {
+      console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
       this.scrollToSavedPosition();
     }
   }
@@ -133,6 +124,12 @@ class ISearch extends Component {
           articleContent={articleContent}
           onAddArticleTag={addSingleTag}
           backToSearch={backToSearch}
+          handleOnAddTagClick={() => {
+            this.setState({scrollY: 800});
+            console.log('article', articleContent);
+            this.props.addSingleTag(articleContent.name, articleContent.id);
+            this.props.backToSearch();
+          }}
         />
       );
     } else {
