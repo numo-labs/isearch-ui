@@ -364,14 +364,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   right: 25px;
 }
 
-.descriptionSlider {
+.hotelImagesContainer {
   width: 100%;
   padding: 0 1em;
   margin-bottom: 4em;
+  text-align: center;
+}
+
+.hotelImagesContainer img {
+  max-width: 100%;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 750px) {
-  .descriptionSlider,
+  .hotelImagesContainer,
   .hotelPackageImage {
     display: none;
   }
