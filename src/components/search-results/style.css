@@ -26,3 +26,17 @@
 	0% { }
 	100% { -webkit-transform: translateY(0); transform: translateY(0); opacity: 1; }
 }
+
+@media (max-width: 380px) {
+ .gridItem {
+   margin-bottom: 14px;
+   width: 360px;
+ }
+}
+
+@media (max-width: 325px) {
+ .gridItem {
+   margin-bottom: 14px;
+   width: 305px;
+ }
+}

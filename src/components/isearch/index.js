@@ -6,6 +6,7 @@ import SearchResults from '../search-results';
 import HotelPage from '../../../lib/hotel-page';
 import LoadingSpinner from '../../../lib/spinner';
 import { ArticleFullPage } from '../../../lib/article';
+import SearchBar from '../../../lib/search';
 import './style.css';
 
 class ISearch extends Component {
@@ -26,7 +27,7 @@ class ISearch extends Component {
 
    fetchQueryResults () {
      this.props.fetchQuerySearchResults('8aeb3560-0b92-11e6-9605-eb677966096c', 1, 20, 1);
-     this.props.addTag('Canary Islands', 'geo:geonames.2593110');
+     this.props.addSingleTag('Palma', 'geo:geonames.6533961');
    }
 
   renderResults () {
@@ -111,6 +112,7 @@ class ISearch extends Component {
       return (
         <ArticleFullPage
           articleContent={articleContent}
+          onAddArticleTag={addSingleTag}
           backToSearch={backToSearch}
         />
       );
@@ -142,9 +144,7 @@ class ISearch extends Component {
             startSearch={startSearch}
           />
           <Header />
-          <Tags
-            tags={tags}
-            removeTag={removeTag}
+          <SearchBar
             addSingleTag={addSingleTag}
             startSearch={startSearch}
             setSearchString={setSearchString}
@@ -154,6 +154,10 @@ class ISearch extends Component {
             getAutocompleteOptions={getAutocompleteOptions}
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
+          />
+          <Tags
+            tags={tags}
+            removeTag={removeTag}
           />
           { loading &&
             <div className='spinnerContainer'>
@@ -193,6 +197,7 @@ ISearch.propTypes = {
   startSearch: PropTypes.func,
   viewArticle: PropTypes.func,
   backToSearch: PropTypes.func,
+  onAddArticleTag: PropTypes.func,
   articlePage: PropTypes.bool,
   articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,
