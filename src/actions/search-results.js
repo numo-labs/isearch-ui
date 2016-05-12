@@ -18,7 +18,6 @@ import {
 
 // actions
 import * as graphqlService from '../services/graphql';
-import { addTiles } from './tags.js';
 import { formatQuery } from './helpers.js';
 import _ from 'lodash';
 
@@ -33,29 +32,47 @@ import _ from 'lodash';
 * Polls graphql 10 times before returning an error
 */
 
-export function fetchQuerySearchResults (id, page, size, attempt) {
+export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlready = false) {
   const fetchQuerySearchResults_anonymousFn = (dispatch, getState) => {
-    const { search: { displayedItems } } = getState();
-    const initialSearch = displayedItems.length === 0;
-    return graphqlService
-      .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
-      .then(json => {
-        console.log('json', json);
-        const items = json.data.viewer.searchResult.items;
-        if (attempt > 15) {
-          return dispatch(searchError('Something went wrong and no results were found'));  // stop polling after 10 attempts
-        } else if ((!items || !items.length || !packageOffersReturned(items))) {
-          setTimeout(function () {
-            console.log('Retrying', attempt);
-            dispatch(fetchQuerySearchResults(id, page, size, ++attempt));
-          }, 1000);
-        } else {
-          if (initialSearch) {
-            dispatch(addTiles()); // add filters if it is the initial search
+    const { search: { displayedItems, bucketId } } = getState();
+    if (bucketId === id) {
+      const initialSearch = displayedItems.length === 0;
+      return graphqlService
+        .query(QUERY_FETCH_SEARCH_RESULT, {'id': id, 'page': page, 'size': size})
+        .then(json => {
+          const items = json.data.viewer.searchResult.items;
+          let tilesHaveBeenAdded = addedTilesAlready;
+          // Are there items already?
+          if (items && items.length) {
+            const arePackagesAvailable = packageOffersReturned(items);
+            if (attempt <= 3 && arePackagesAvailable) {
+              dispatch(receiveSearchResult(items, initialSearch));
+            } else if (attempt >= 3 && !arePackagesAvailable && !tilesHaveBeenAdded) {
+              dispatch(receiveSearchResult(items, initialSearch));
+              tilesHaveBeenAdded = true;
+            } else if (attempt > 3 && arePackagesAvailable) {
+              dispatch(receiveSearchResult(items, initialSearch, true));
+            }
+
+            if (attempt < 15 && !arePackagesAvailable) {
+              setTimeout(function () {
+                console.log('Retrying', attempt);
+                dispatch(fetchQuerySearchResults(id, page, size, ++attempt, tilesHaveBeenAdded));
+              }, 1000);
+            }
+          } else if (attempt <= 10) {
+            // Try again bro
+            setTimeout(function () {
+              console.log('Retrying', attempt);
+              dispatch(fetchQuerySearchResults(id, page, size, ++attempt));
+            }, 1000);
+          } else {
+            dispatch(busySearching(true));
           }
-          dispatch(receiveSearchResult(items, initialSearch));
-        }
-      });
+        });
+    } else {
+      console.log('Stopped searching for ' + bucketId + ' because a new search started for ' + id);
+    }
   };
   return fetchQuerySearchResults_anonymousFn; // needed for testing polling
 }
@@ -81,11 +98,12 @@ export function searchError (error) {
 * Receives the items and adds them to the items store as well as merging them
 * with the currently displayedItems
 */
-export function receiveSearchResult (items, initialSearch) {
+export function receiveSearchResult (items, initialSearch, append) {
   return {
     type: RECEIVE_SEARCH_RESULT,
     items,
-    initialSearch
+    initialSearch,
+    append: append || false
   };
 }
 
@@ -104,9 +122,10 @@ export function setSearchString (searchString) {
 * Sets the loading state to true to show a loading spinner
 */
 
-export function busySearching () {
+export function busySearching (isBusy) {
   return {
-    type: BUSY_SEARCHING
+    type: BUSY_SEARCHING,
+    isBusy
   };
 }
 
@@ -243,13 +262,12 @@ export function startSearch () {
     } = getState();
     const childAgeArray = [childAge1, childAge2, childAge3, childAge4];
     if (tags.length > 0) {
-      dispatch(busySearching());
+      dispatch(busySearching(true));
       const formattedTags = formatQuery(tags);
       const passengers = combinePassengersForQuery(childAgeArray, numberOfChildren, numberOfAdults);
       const departureAirports = constructDepartureAirportQuery(departureAirport);
       const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
       const query = {passengers: passengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
-      // const query = formattedTags;
       console.log('query', JSON.stringify(query));
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
@@ -257,7 +275,7 @@ export function startSearch () {
           console.log('json', json);
           const searchResultId = json.data.viewer.searchResultId.id;
           dispatch(saveSearchResultId(searchResultId));
-          dispatch(fetchQuerySearchResults(searchResultId, 1, 100, 1));
+          dispatch(fetchQuerySearchResults(searchResultId, 0, 1000, 1));
         });
     }
   };
