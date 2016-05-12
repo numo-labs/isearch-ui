@@ -55,7 +55,8 @@ export const initialState = {
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
-  durationTitle: '2 uger'
+  durationTitle: '1 uger',
+  isInitialTag: false
 };
 
 export default function search (state = initialState, action) {
@@ -99,9 +100,13 @@ export default function search (state = initialState, action) {
     //     tags: action.tags
     //   };
     case TAG_ADD_SINGLE_TAG:
+      if (state.isInitialTag) {
+        return {...state, tags: [action.tag], isInitialTag: false};
+      }
       return {
         ...state,
-        tags: _.uniqBy([...state.tags, action.tag], 'displayName')
+        tags: _.uniqBy([...state.tags, action.tag], 'displayName'),
+        isInitialTag: action.isInitialTag
       };
     case TAG_REMOVE_TAG:
       const newTags = state.tags.filter(tag => {

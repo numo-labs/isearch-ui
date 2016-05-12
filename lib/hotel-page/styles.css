@@ -24,13 +24,9 @@
 }
 
 .amenity {
-  display: inline-block;
+  display: block;
   padding-left: 0.3em;
   font-size: 1.6rem;
-}
-
-.amenityBlock {
-  text-align: left;
 }
 
 .amenityContainer {
@@ -38,12 +34,12 @@
   margin-left: 1em;
   margin-right: 3em;
   text-align: left;
-  padding-left: 0.6em;
+  padding-left: 0.2em;
 }
 
 .amenityWrapper {
   font-family: SourceSansRegular;
-  margin-top: 0.8em;
+  margin-bottom: 0.8em;
   display: inline-block;
   text-align: center;
 }
@@ -101,7 +97,6 @@
 
 .factWrapper {
   font-family: SourceSansRegular;
-  margin-bottom: 2em;
 }
 
 .gradientOut {
@@ -247,6 +242,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 .textVisible {
   padding: 1.5em;
+  font-size: 1.6rem;
 }
 
 .textWrapper {
@@ -259,14 +255,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 }
 
 @media (min-width: 750px) {
-  .amenityWrapper {
-    width: 25%;
-    position: absolute;
-    right: 0;
-    top: 13em;
-    text-align: left;
-    display: inline-block;
-  }
   .bookButtonContainer {
     display: inline-block;
     position: absolute;
@@ -283,14 +271,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
     text-align: center;
   }
   .descriptionWrapper {
-    width: 75%;
+    width: 66%;
     margin-bottom: 5em;
     margin-top: 2.05em;
   }
   .factHolder {
     margin: 0;
     margin-left: 1.5em;
-    width: 50%;
+    width: 40%;
   }
   .infoContainer {
     width: 750px;

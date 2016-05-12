@@ -71,7 +71,8 @@ describe('actions', () => {
           displayName: 'test',
           colour: '#8EB8C4',
           id: 'test'
-        }
+        },
+        isInitialTag: false
       };
       store.dispatch(actions.addSingleTag('test', 'test'));
       expect(store.getActions()).to.deep.equal([expectedAction]);
