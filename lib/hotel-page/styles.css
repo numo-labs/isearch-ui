@@ -74,16 +74,22 @@
   font-size: 1.6rem;
 }
 
-.factHeading {
+.factHeading,
+.imagesHeading{
   font-family: ThomasHeadlineBold;
   font-weight: bold;
   font-size: 1.8rem;
   margin-bottom: 0.5em;
 }
 
+.imagesHeading {
+  text-align: left;
+  padding-left: 0.3em;
+}
+
 .factHolder {
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 3em auto;
 }
 
 .factTitles {
