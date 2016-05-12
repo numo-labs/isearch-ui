@@ -14,7 +14,7 @@ class ISearch extends Component {
   constructor () {
     super();
     this.state = {
-      scrollY: window.scrollY
+      scrollY: 0
     };
     this.handleScroll = this.handleScroll.bind(this);
     this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
