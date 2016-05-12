@@ -16,7 +16,8 @@ import {
   CLEAR_SEARCH_STRING,
   SET_NUMBER_OF_ADULTS_TITLE,
   SET_NUMBER_OF_CHILDREN_TITLE,
-  SET_DURATION_TITLE
+  SET_DURATION_TITLE,
+  SAVE_SEARCH_RESULT_ID
   // SHOW_ADD_MESSAGE,
   // HIDE_ADD_MESSAGE,
 } from '../constants/actionTypes';
@@ -30,6 +31,7 @@ import {
 import _ from 'lodash';
 
 export const initialState = {
+  bucketId: '',
   displayedItems: [],
   items: [],
   bucketCount: 0,
@@ -59,12 +61,17 @@ export const initialState = {
   isInitialTag: false
 };
 
+function scrambleSearchItems (items, state, append) {
+  const packages = getPackages(items);
+  const tiles = getTiles(items);
+  return shuffleTilesIntoResults(packages, append ? state.tiles : tiles.concat(state.tiles)); // add filters back in
+}
+
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const newPackages = getPackages(action.items);
-      const newTiles = getTiles(action.items);
-      const displayedItems = shuffleTilesIntoResults(newPackages, newTiles.concat(state.tiles)); // add filters back in
+      const scrambled = scrambleSearchItems(action.items, state, action.append);
+      const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
       const items = _.uniqBy(_.union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
@@ -82,7 +89,7 @@ export default function search (state = initialState, action) {
     case BUSY_SEARCHING:
       return {
         ...state,
-        loading: true
+        loading: action.isBusy
       };
     case SEARCH_ERROR:
       return {
@@ -180,6 +187,11 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         durationTitle: action.durationTitle
+      };
+    case SAVE_SEARCH_RESULT_ID:
+      return {
+        ...state,
+        bucketId: action.id
       };
     // case SHOW_ADD_MESSAGE:
     //   return ({
