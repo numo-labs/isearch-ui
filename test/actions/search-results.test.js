@@ -1,9 +1,9 @@
 import {
   BUSY_SEARCHING,
   SAVE_SEARCH_RESULT_ID,
-  RECEIVE_SEARCH_RESULT,
+  RECEIVE_SEARCH_RESULT
   // TILES_ADD_TILES,
-  //SEARCH_ERROR
+  // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
 
 import { MUTATION_START_SEARCH } from '../../src/constants/mutations.js';
