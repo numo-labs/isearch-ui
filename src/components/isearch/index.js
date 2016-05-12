@@ -26,8 +26,7 @@ class ISearch extends Component {
    */
 
    fetchQueryResults () {
-     this.props.fetchQuerySearchResults('8aeb3560-0b92-11e6-9605-eb677966096c', 1, 20, 1);
-     this.props.addSingleTag('Palma', 'geo:geonames.6533961');
+     this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
    }
 
   renderResults () {

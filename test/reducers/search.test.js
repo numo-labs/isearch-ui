@@ -138,11 +138,12 @@ describe('Search Reducer', () => {
         ...initialState,
         tags: [{ displayName: 'hello' }]
       };
-      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'world'}};
+      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'world'}, isInitialTag: false};
       const state = reducer(initialStateWithTags, action);
       const expectedState = {
         ...initialState,
-        tags: [{ displayName: 'hello' }, {displayName: 'world'}]
+        tags: [{ displayName: 'hello' }, {displayName: 'world'}],
+        isInitialTag: false
       };
       expect(state).to.deep.equal(expectedState);
       done();
@@ -152,11 +153,12 @@ describe('Search Reducer', () => {
         ...initialState,
         tags: [{ displayName: 'hello' }]
       };
-      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'hello'}};
+      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'hello'}, isInitialTag: false};
       const state = reducer(initialStateWithTags, action);
       const expectedState = {
         ...initialState,
-        tags: [{ displayName: 'hello' }]
+        tags: [{ displayName: 'hello' }],
+        isInitialTag: false
       };
       expect(state).to.deep.equal(expectedState);
       done();
