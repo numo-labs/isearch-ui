@@ -71,7 +71,7 @@ class ISearch extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const pageChanged = prevProps.hotelPage !== this.props.hotelPage && prevProps.articlePage !== !this.props.articlePage;
+    const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
     const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
     if (pageChanged && searchPage) {
       this.scrollToSavedPosition();
