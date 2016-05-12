@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Header from '../../../lib/header/';
-import SearchSummary from '../../../lib/search-summary/index1.js';
+import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import HotelPage from '../../../lib/hotel-page';

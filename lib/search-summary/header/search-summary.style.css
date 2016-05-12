@@ -1,6 +1,10 @@
 .weeks {
-  padding-right: 0.7em;
   padding-bottom: 0.2em;
+}
+
+.weeksPaxMixContainer {
+  display: inline-block;
+  width: 10%
 }
 
 .weeksPaxMix {
@@ -19,6 +23,7 @@
   background-image: url('../assets/pencil.png');
   background-repeat: no-repeat;
   background-position: center;
+  display: inline-block;
 }
 
 .blueContainer {
@@ -30,4 +35,25 @@
   width: 100%;
   z-index: 20000;
   height: 4em;
+}
+
+.searchSummaryHeaderLogoContainer {
+  display: inline-block;
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+}
+
+.searchSummaryHeaderLogoContainer .spiesLogo {
+  display: inline-block;
+  width: 2em;
+  margin-right: 0.3em;
+  vertical-align: baseline;
+}
+
+.spiesHeaderTitle {
+  font-family: SourceSansBold;
+  display: inline-block;
+  color: #ffffff;
+  font-size: 2em;
 }
