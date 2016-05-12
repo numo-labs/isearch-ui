@@ -74,16 +74,22 @@
   font-size: 1.6rem;
 }
 
-.factHeading {
+.factHeading,
+.imagesHeading{
   font-family: ThomasHeadlineBold;
   font-weight: bold;
   font-size: 1.8rem;
   margin-bottom: 0.5em;
 }
 
+.imagesHeading {
+  text-align: left;
+  padding-left: 0.3em;
+}
+
 .factHolder {
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 3em auto;
 }
 
 .factTitles {
@@ -352,14 +358,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   right: 25px;
 }
 
-.descriptionSlider {
+.hotelImagesContainer {
   width: 100%;
   padding: 0 1em;
   margin-bottom: 4em;
+  text-align: center;
+}
+
+.hotelImagesContainer img {
+  max-width: 100%;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 750px) {
-  .descriptionSlider,
+  .hotelImagesContainer,
   .hotelPackageImage {
     display: none;
   }
