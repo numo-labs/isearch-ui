@@ -89,9 +89,7 @@ describe('actions', function () {
       data: {
         viewer: {
           searchResult: {
-            items: [{
-              type: 'packageOffer'
-            }]
+            items: [{type: 'packageOffer'}, {type: 'tile'}]
           }
         }
       }
@@ -124,9 +122,7 @@ describe('actions', function () {
       const expectedActions = [
         {
           type: RECEIVE_SEARCH_RESULT,
-          items: [{
-            type: 'packageOffer'
-          }],
+          items: [{type: 'packageOffer'}, {type: 'tile'}],
           initialSearch: false,
           append: false
         }

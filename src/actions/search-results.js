@@ -45,22 +45,26 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
           // Are there items already?
           if (items && items.length) {
             const arePackagesAvailable = packageOffersReturned(items);
-            if (attempt <= 3 && arePackagesAvailable) {
+            const areTilesAvailable = tilesReturned(items);
+            let finished = false;
+            if (attempt <= 2 && arePackagesAvailable && areTilesAvailable) {
               dispatch(receiveSearchResult(items, initialSearch));
-            } else if (attempt >= 3 && !arePackagesAvailable && !tilesHaveBeenAdded) {
+              finished = true;
+            } else if (attempt >= 2 && !arePackagesAvailable && !tilesHaveBeenAdded) {
               dispatch(receiveSearchResult(items, initialSearch));
               tilesHaveBeenAdded = true;
-            } else if (attempt > 3 && arePackagesAvailable) {
+            } else if (attempt > 2 && arePackagesAvailable) {
               dispatch(receiveSearchResult(items, initialSearch, true));
+              finished = true;
             }
 
-            if (attempt < 15 && !arePackagesAvailable) {
+            if (attempt < 15 && !finished) {
               setTimeout(function () {
                 console.log('Retrying', attempt);
                 dispatch(fetchQuerySearchResults(id, page, size, ++attempt, tilesHaveBeenAdded));
               }, 1000);
             }
-          } else if (attempt <= 10) {
+          } else if (attempt <= 15) {
             // Try again bro
             setTimeout(function () {
               console.log('Retrying', attempt);
@@ -80,6 +84,12 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
 function packageOffersReturned (items) {
   return items.some(function (item) {
     if (item.type === 'packageOffer') return true;
+  });
+}
+
+function tilesReturned (items) {
+  return items.some(function (item) {
+    if (item.type === 'tile') return true;
   });
 }
 
