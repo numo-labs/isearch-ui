@@ -1,6 +1,10 @@
+// Mocking window and document object:
+require('../dom-mock.js')('<html><body></body></html>');
+
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import jsdom from 'mocha-jsdom';
 
 import ISearch from '../../src/components/isearch/';
 
@@ -28,12 +32,13 @@ const articleViewProps = {
 };
 
 describe('Component', function () {
+  jsdom({ skipWindowCheck: true });
   describe('<ISearch /> Search view', function () {
     const wrapper = shallow(<ISearch {...defaultProps} />);
     const children = wrapper.children().nodes;
 
     it('should render the ISearch container', function (done) {
-      expect(children).to.have.length(5);
+      expect(children).to.have.length(4);
       done();
     });
     it('should render the <SearchSummary /> as the first child', function (done) {
@@ -49,13 +54,13 @@ describe('Component', function () {
       done();
     });
     it('should render the <TagContainer /> as the third child', function (done) {
-      const thirdChild = children[3].type;
+      const thirdChild = children[2].type;
       const tags = wrapper.find('TagContainer').node.type;
       expect(thirdChild).to.deep.equal(tags);
       done();
     });
     it('should render the <SearchResults /> as the fourth child if the loading and error props are false', function (done) {
-      const fourthChild = children[4].type;
+      const fourthChild = children[3].type;
       const searchResults = wrapper.find('SearchResults').node.type;
       expect(fourthChild).to.deep.equal(searchResults);
       done();
@@ -63,7 +68,7 @@ describe('Component', function () {
     it('should render the <LoadingSpinner /> as the fourth child if the loading prop is true', function (done) {
       wrapper.setProps({loading: true});
       const children = wrapper.children().nodes;
-      const fourthChild = children[4].type;
+      const fourthChild = children[3].type;
       expect(fourthChild).to.deep.equal('div');
       done();
     });
@@ -71,6 +76,15 @@ describe('Component', function () {
       wrapper.setProps({loading: false, error: 'error'});
       const error = wrapper.find('.errorMessage');
       expect(error).to.have.length(1);
+      done();
+    });
+    it('should render the <SearchBar /> as the third child if window.innerWidth is less than 553', function (done) {
+      global.window.innerWidth = 550;
+      const wrapper = shallow(<ISearch {...defaultProps} />);
+      const children = wrapper.children().nodes;
+      const thirdChild = children[2].type;
+      const searchBar = wrapper.find('SearchBarContainer').node.type;
+      expect(thirdChild).to.deep.equal(searchBar);
       done();
     });
   });
