@@ -15,6 +15,7 @@ import {
   SET_NUMBER_OF_CHILDREN_TITLE,
   SET_DURATION_TITLE
 } from '../constants/actionTypes';
+import { addTiles } from './tags.js';
 
 // actions
 import * as graphqlService from '../services/graphql';
@@ -47,13 +48,16 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
             const arePackagesAvailable = packageOffersReturned(items);
             const areTilesAvailable = tilesReturned(items);
             let finished = false;
-            if (attempt <= 2 && arePackagesAvailable && areTilesAvailable) {
+            if (attempt <= 5 && arePackagesAvailable && areTilesAvailable) {
+              if (initialSearch) { dispatch(addTiles()); }
               dispatch(receiveSearchResult(items, initialSearch));
               finished = true;
-            } else if (attempt >= 2 && !arePackagesAvailable && !tilesHaveBeenAdded) {
+            } else if (attempt >= 5 && !arePackagesAvailable && !tilesHaveBeenAdded) {
+              if (initialSearch) { dispatch(addTiles()); }
               dispatch(receiveSearchResult(items, initialSearch));
               tilesHaveBeenAdded = true;
-            } else if (attempt > 2 && arePackagesAvailable) {
+            } else if (attempt > 5 && arePackagesAvailable) {
+              if (initialSearch) { dispatch(addTiles()); }
               dispatch(receiveSearchResult(items, initialSearch, true));
               finished = true;
             }
