@@ -18,6 +18,19 @@
   src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
 }
 
+.spies {
+  font-family: TCScript;
+  display: inline-block;
+  color: #ffffff;
+  font-size: 5em;
+  margin: 0 auto;
+  height: 0.5em;
+}
+
+.headerIcon {
+  display: inline-block;
+}
+
 .headerBarContainer {
   text-align: center;
   padding: 1em;
@@ -33,14 +46,14 @@
   background-size: cover;
   text-align: center;
   background-position: 50% 100%;
-  height: 88vh;
+  height: 92vh;
   background-repeat: no-repeat;
   position: relative;
 }
 
 .headerContent {
   display: inline-block;
-  margin-top: 8em;
+  margin-top: 30em;
   position: relative;
   text-align: center;
 }
@@ -101,20 +114,6 @@
   padding-bottom: 1.5em;
 }
 
-.spies {
-  font-family: TCScript;
-  display: inline-block;
-  color: #ffffff;
-  font-size: 2.8em;
-  left: 3em;
-  height: 0.5em;
-  margin-top: 4.5em;
-}
-
-.headerIcon {
-  visibility: hidden;
-}
-
 .searchButton:hover {
   background-color: #F37800;
 }
@@ -129,15 +128,32 @@
   margin: 0 auto;
 }
 
-@media (min-width: 750px) {
+@media (max-width: 750px) {
   .spies {
-    margin-top: 5em;
-    font-size: 5em;
+    font-size: 3.5em;
   }
   .headerIcon {
-    visibility: visible;
+    display: none;
   }
   .headerBarWrapper {
-    height: 92vh;
+    height: 88vh;
+  }
+}
+
+@media (max-width: 450px) {
+  .spies {
+    font-size: 3em;
+  }
+  .headerBarWrapper {
+    height: 46vh;
+  }
+  .headerContent {
+    margin-top: 12em;
+  }
+}
+
+@media (max-width: 375px) {
+  .headerBarWrapper {
+    height: 46vh;
   }
 }
