@@ -148,12 +148,18 @@
     height: 46vh;
   }
   .headerContent {
-    margin-top: 12em;
+    margin-top: 8em;
   }
 }
 
 @media (max-width: 375px) {
   .headerBarWrapper {
     height: 46vh;
+  }
+}
+
+@media (max-width: 320px) {
+  .spies {
+    font-size: 2.5em;
   }
 }
