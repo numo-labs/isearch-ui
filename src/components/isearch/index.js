@@ -137,7 +137,6 @@ class ISearch extends Component {
           backToSearch={backToSearch}
           handleOnAddTagClick={() => {
             this.setState({scrollY: 800});
-            console.log('article', articleContent);
             this.props.addSingleTag(articleContent.name, articleContent.id);
             this.props.backToSearch();
           }}
@@ -183,7 +182,6 @@ class ISearch extends Component {
                 getAutocompleteOptions={getAutocompleteOptions}
                 inAutoCompleteSearch={inAutoCompleteSearch}
                 clearSearchString={clearSearchString}
-                searchBar={true}
               />
             ]
             : <Header
@@ -196,7 +194,7 @@ class ISearch extends Component {
                 getAutocompleteOptions={getAutocompleteOptions}
                 inAutoCompleteSearch={inAutoCompleteSearch}
                 clearSearchString={clearSearchString}
-                searchBar={true}
+                searchBar
               />
           }
           <Tags
