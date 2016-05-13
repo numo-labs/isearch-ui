@@ -45,6 +45,10 @@
   text-align: center;
 }
 
+.headerContent img {
+  vertical-align: baseline;
+  margin-right: 1em;
+}
 
 .containerInput {
   top: 3em;
@@ -107,6 +111,9 @@
   margin-top: 4.5em;
 }
 
+.headerIcon {
+  visibility: hidden;
+}
 
 .searchButton:hover {
   background-color: #F37800;
@@ -126,6 +133,9 @@
   .spies {
     margin-top: 5em;
     font-size: 5em;
+  }
+  .headerIcon {
+    visibility: visible;
   }
   .headerBarWrapper {
     height: 92vh;
