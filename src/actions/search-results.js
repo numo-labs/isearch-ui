@@ -48,15 +48,15 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
             const arePackagesAvailable = packageOffersReturned(items);
             const areTilesAvailable = tilesReturned(items);
             let finished = false;
-            if (attempt <= 3 && arePackagesAvailable && areTilesAvailable) {
+            if (attempt <= 5 && arePackagesAvailable && areTilesAvailable) {
               if (initialSearch) { dispatch(addTiles()); }
               dispatch(receiveSearchResult(items, initialSearch));
               finished = true;
-            } else if (attempt >= 3 && !arePackagesAvailable && !tilesHaveBeenAdded) {
+            } else if (attempt >= 5 && !arePackagesAvailable && !tilesHaveBeenAdded) {
               if (initialSearch) { dispatch(addTiles()); }
               dispatch(receiveSearchResult(items, initialSearch));
               tilesHaveBeenAdded = true;
-            } else if (attempt > 3 && arePackagesAvailable) {
+            } else if (attempt > 5 && arePackagesAvailable) {
               if (initialSearch) { dispatch(addTiles()); }
               dispatch(receiveSearchResult(items, initialSearch, true));
               finished = true;
