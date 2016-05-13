@@ -14,17 +14,27 @@ class ISearch extends Component {
   constructor () {
     super();
     this.state = {
-      scrollY: 0
+      scrollY: 0,
+      screenWidth: window.innerWidth
     };
     this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
+    this.handleResize = this.handleResize.bind(this);
   }
   componentWillMount () {
     this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
+    window.addEventListener('resize', this.handleResize);
   }
   scrollToSavedPosition () {
     if (this.state.scrollY > 0) {
       window.scrollTo(0, this.state.scrollY);
     }
+  }
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize () {
+    this.setState({screenWidth: window.innerWidth});
   }
   renderResults () {
     const {
@@ -69,6 +79,7 @@ class ISearch extends Component {
     }
   }
   render () {
+    console.log('SCREEN WIDHT', window.innerWidth, this.state.screenWidth);
     const {
       tags,
       removeTag,
@@ -159,18 +170,35 @@ class ISearch extends Component {
             setDepartureDate={setDepartureDate}
             startSearch={startSearch}
           />
-          <Header />
-          <SearchBar
-            addSingleTag={addSingleTag}
-            startSearch={startSearch}
-            setSearchString={setSearchString}
-            autocompleteError={autocompleteError}
-            autocompleteOptions={autocompleteOptions}
-            searchString={searchString}
-            getAutocompleteOptions={getAutocompleteOptions}
-            inAutoCompleteSearch={inAutoCompleteSearch}
-            clearSearchString={clearSearchString}
-          />
+          {
+            this.state.screenWidth < 553 ? [
+              <Header searchBar={false}/>,
+              <SearchBar
+                addSingleTag={addSingleTag}
+                startSearch={startSearch}
+                setSearchString={setSearchString}
+                autocompleteError={autocompleteError}
+                autocompleteOptions={autocompleteOptions}
+                searchString={searchString}
+                getAutocompleteOptions={getAutocompleteOptions}
+                inAutoCompleteSearch={inAutoCompleteSearch}
+                clearSearchString={clearSearchString}
+                searchBar={true}
+              />
+            ]
+            : <Header
+                addSingleTag={addSingleTag}
+                startSearch={startSearch}
+                setSearchString={setSearchString}
+                autocompleteError={autocompleteError}
+                autocompleteOptions={autocompleteOptions}
+                searchString={searchString}
+                getAutocompleteOptions={getAutocompleteOptions}
+                inAutoCompleteSearch={inAutoCompleteSearch}
+                clearSearchString={clearSearchString}
+                searchBar={true}
+              />
+          }
           <Tags
             tags={tags}
             removeTag={removeTag}
