@@ -99,7 +99,7 @@
   },
   "pre-commit": [
     "lint",
-    "coverage"
+    "test"
   ],
   "semistandard": {
     "globals": [
