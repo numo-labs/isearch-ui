@@ -1,3 +1,4 @@
+import _ from 'lodash';
 /*eslint-disable no-extend-native */
 // linting throws error: Array prototype is read only, properties should not be added.
 Array.prototype.insert = function (index, element) {
@@ -9,8 +10,8 @@ Array.prototype.insert = function (index, element) {
 
 export function shuffleTilesIntoResults (items, tiles) {
   // if there are more tiles than packages, shuffle packages into tiles and vice versa
-  var base = items.length > tiles.length ? items : tiles;
-  var itemsToInsert = items.length > tiles.length ? tiles : items;
+  var base = items.length > tiles.length ? items : _.shuffle(tiles);
+  var itemsToInsert = items.length > tiles.length ? _.shuffle(tiles) : items;
   var spacing = Math.floor((base.length + itemsToInsert.length) / itemsToInsert.length);
   return itemsToInsert.reduce((result, item, index) => {
     var position = (index + 1) * spacing;
