@@ -47,13 +47,13 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
             const arePackagesAvailable = packageOffersReturned(items);
             const areTilesAvailable = tilesReturned(items);
             let finished = false;
-            if (attempt <= 2 && arePackagesAvailable && areTilesAvailable) {
+            if (attempt <= 3 && arePackagesAvailable && areTilesAvailable) {
               dispatch(receiveSearchResult(items, initialSearch));
               finished = true;
-            } else if (attempt >= 2 && !arePackagesAvailable && !tilesHaveBeenAdded) {
+            } else if (attempt >= 3 && !arePackagesAvailable && !tilesHaveBeenAdded) {
               dispatch(receiveSearchResult(items, initialSearch));
               tilesHaveBeenAdded = true;
-            } else if (attempt > 2 && arePackagesAvailable) {
+            } else if (attempt > 3 && arePackagesAvailable) {
               dispatch(receiveSearchResult(items, initialSearch, true));
               finished = true;
             }
