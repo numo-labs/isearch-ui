@@ -152,11 +152,21 @@
                     "ofType": null
                   },
                   "defaultValue": null
+                },
+                {
+                  "name": "itemType",
+                  "description": "'article' or 'package' item type",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Bucket",
+                "kind": "UNION",
+                "name": "SearchResultItem",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1905,74 +1915,6 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
-          "name": "Bucket",
-          "description": "Search result schema (Stable)",
-          "fields": [
-            {
-              "name": "item",
-              "description": null,
-              "args": [
-                {
-                  "name": "id",
-                  "description": "Search result id (DynamoDB search bucket unique id)",
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "Item",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
-          "name": "Item",
-          "description": null,
-          "fields": [
-            {
-              "name": "content",
-              "description": null,
-              "args": [
-                {
-                  "name": "itemId",
-                  "description": "Id of the item to retrieve",
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "UNION",
-                "name": "SearchResultItem",
                 "ofType": null
               },
               "isDeprecated": false,

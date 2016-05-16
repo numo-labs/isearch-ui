@@ -163,11 +163,9 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
 `;
 
 export const QUERY_FETCH_BUCKET_ITEM = `
-query itemSearch($id: String, $itemId: String) {
+query itemSearch($id: String, $itemId: String, $itemType: String) {
   viewer {
-    searchItem (id: $id, itemId: $itemId) {
-      item(id: $itemId) {
-        content (itemId: $itemId) {
+    searchItem (id: $id, itemId: $itemId, itemType: $itemType) {
         ...on packageOfferItem {
           id,
           type,
@@ -288,9 +286,8 @@ query itemSearch($id: String, $itemId: String) {
             },
           }
         }
-      }
+      
     }
   }
-}
 }
 `;

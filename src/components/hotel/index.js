@@ -99,10 +99,6 @@ class HotelPage extends Component {
 
   render () {
     const { packageOffer, backToSearch } = this.props;
-    if (!packageOffer || !packageOffer.hotel) {
-      window.location.hash = '/';
-      return (<section/>);
-    }
     const hotelImages = packageOffer.hotel.images.large.map(i => i.uri);
     const amenitiesOne = this.retrieveAmenities().slice(0, 3);
     const amenitiesTwo = this.retrieveAmenities().slice(3, 6);
