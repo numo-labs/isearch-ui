@@ -31,6 +31,7 @@ import {
 import _ from 'lodash';
 
 export const initialState = {
+  bucketId: '',
   displayedItems: [],
   items: [],
   bucketCount: 0,
@@ -56,16 +57,23 @@ export const initialState = {
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
-  durationTitle: '2 uger',
-  bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
+  // durationTitle: '2 uger',
+  // bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
+  durationTitle: '1 uger',
+  isInitialTag: false
 };
+
+function scrambleSearchItems (items, state, append) {
+  const packages = getPackages(items);
+  const tiles = getTiles(items);
+  return shuffleTilesIntoResults(packages, append ? state.tiles : tiles.concat(state.tiles)); // add filters back in
+}
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const newPackages = getPackages(action.items);
-      const newTiles = getTiles(action.items);
-      const displayedItems = shuffleTilesIntoResults(newPackages, newTiles.concat(state.tiles)); // add filters back in
+      const scrambled = scrambleSearchItems(action.items, state, action.append);
+      const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
       const items = _.uniqBy(_.union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
@@ -83,7 +91,7 @@ export default function search (state = initialState, action) {
     case BUSY_SEARCHING:
       return {
         ...state,
-        loading: true
+        loading: action.isBusy
       };
     case SEARCH_ERROR:
       return {
@@ -101,9 +109,13 @@ export default function search (state = initialState, action) {
     //     tags: action.tags
     //   };
     case TAG_ADD_SINGLE_TAG:
+      if (state.isInitialTag) {
+        return {...state, tags: [action.tag], isInitialTag: false};
+      }
       return {
         ...state,
-        tags: _.uniqBy([...state.tags, action.tag], 'displayName')
+        tags: _.uniqBy([...state.tags, action.tag], 'displayName'),
+        isInitialTag: action.isInitialTag
       };
     case TAG_REMOVE_TAG:
       const newTags = state.tags.filter(tag => {

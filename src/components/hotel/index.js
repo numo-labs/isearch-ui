@@ -162,7 +162,7 @@ class HotelPage extends Component {
             </div>
             <div className='bookButtonContainer'>
               <div className='ppp'>ppp <span className='hotelPrice'>
-                {packageOffer.price.perPerson},-
+                {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
               </span></div>
               <a href={packageOffer.provider.deepLink}>
                 <div className='hotelInfoLink'>See full hotel information and book</div>

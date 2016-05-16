@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var pkg = require('./package.json');
+var mime = require('mime-types');
 
 /*
 * config values
@@ -26,11 +27,12 @@ gulp.task('deploy', function () {
       console.log('>>>>>>>>> Bucket folder', bucketfolder);
 
       filesToUpload.forEach(function (filename) {
+        var ContentType = mime.contentType(filename);
         var params = {
           Bucket: bucketName,
           Key: bucketfolder + filename,
           Body: fs.readFileSync(__dirname + '/public/' + filename),
-          ContentType: 'text/html'
+          ContentType
         };
         s3.putObject(params, function (err, data) {
           if (err) console.log('Object upload unsuccessful!', err);

@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Header from '../../../lib/header/';
-import SearchSummary from '../../../lib/search-summary/';
+import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import HotelPage from '../../../lib/hotel-page';
@@ -13,23 +13,29 @@ class ISearch extends Component {
 
   constructor () {
     super();
-    this.fetchQueryResults = this.fetchQueryResults.bind(this);
+    this.state = {
+      scrollY: 0,
+      screenWidth: window.innerWidth
+    };
+    this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
+    this.handleResize = this.handleResize.bind(this);
   }
-
   componentWillMount () {
-    this.fetchQueryResults();
+    this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
+    window.addEventListener('resize', this.handleResize);
+  }
+  scrollToSavedPosition () {
+    if (this.state.scrollY > 0) {
+      window.scrollTo(0, this.state.scrollY);
+    }
+  }
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.handleResize);
   }
 
-  /**
-   * For testing and building purposes we pass through a list of fixed tags.
-   * TODO: Replace this with the proper solution!
-   */
-
-   fetchQueryResults () {
-     this.props.fetchQuerySearchResults('8aeb3560-0b92-11e6-9605-eb677966096c', 1, 20, 1);
-     this.props.addSingleTag('Palma', 'geo:geonames.6533961');
-   }
-
+  handleResize () {
+    this.setState({screenWidth: window.innerWidth});
+  }
   renderResults () {
     const {
       displayedItems,
@@ -43,7 +49,6 @@ class ISearch extends Component {
       numberOfAdultsTitle,
       bucketId
     } = this.props;
-
     return (
       <SearchResults
         items={displayedItems}
@@ -51,8 +56,15 @@ class ISearch extends Component {
         onFilterClick={onFilterClick}
         filterVisibleState={filterVisibleState}
         // showAddMessage={showAddMessage}
-        viewArticle={viewArticle}
-        viewHotel={viewHotel}
+        viewArticle={(article) => {
+          this.setState({scrollY: window.scrollY});
+          window.scrollTo(0, 0);
+          viewArticle(article);
+        }}
+        viewHotel={(hotel) => {
+          this.setState({scrollY: window.scrollY});
+          viewHotel(hotel);
+        }}
         setHotelPage={setHotelPage}
         totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
         bucketId={bucketId}
@@ -60,7 +72,16 @@ class ISearch extends Component {
     );
   }
 
+  componentDidUpdate (prevProps) {
+    const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
+    const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
+    if (pageChanged && searchPage) {
+      console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
+      this.scrollToSavedPosition();
+    }
+  }
   render () {
+    console.log('SCREEN WIDHT', window.innerWidth, this.state.screenWidth);
     const {
       tags,
       removeTag,
@@ -114,8 +135,13 @@ class ISearch extends Component {
     //   return (
     //     <ArticleFullPage
     //       articleContent={articleContent}
+    //       onAddArticleTag={addSingleTag}
     //       backToSearch={backToSearch}
-    //       getArticle={getArticle}
+    //       handleOnAddTagClick={() => {
+    //         this.setState({scrollY: 800});
+    //         this.props.addSingleTag(articleContent.name, articleContent.id);
+    //         this.props.backToSearch();
+    //       }}
     //     />
     //   );
     } else {
@@ -145,18 +171,34 @@ class ISearch extends Component {
             setDepartureDate={setDepartureDate}
             startSearch={startSearch}
           />
-          <Header />
-          <SearchBar
-            addSingleTag={addSingleTag}
-            startSearch={startSearch}
-            setSearchString={setSearchString}
-            autocompleteError={autocompleteError}
-            autocompleteOptions={autocompleteOptions}
-            searchString={searchString}
-            getAutocompleteOptions={getAutocompleteOptions}
-            inAutoCompleteSearch={inAutoCompleteSearch}
-            clearSearchString={clearSearchString}
-          />
+          {
+            this.state.screenWidth < 553 ? [
+              <Header searchBar={false}/>,
+              <SearchBar
+                addSingleTag={addSingleTag}
+                startSearch={startSearch}
+                setSearchString={setSearchString}
+                autocompleteError={autocompleteError}
+                autocompleteOptions={autocompleteOptions}
+                searchString={searchString}
+                getAutocompleteOptions={getAutocompleteOptions}
+                inAutoCompleteSearch={inAutoCompleteSearch}
+                clearSearchString={clearSearchString}
+              />
+            ]
+            : <Header
+                addSingleTag={addSingleTag}
+                startSearch={startSearch}
+                setSearchString={setSearchString}
+                autocompleteError={autocompleteError}
+                autocompleteOptions={autocompleteOptions}
+                searchString={searchString}
+                getAutocompleteOptions={getAutocompleteOptions}
+                inAutoCompleteSearch={inAutoCompleteSearch}
+                clearSearchString={clearSearchString}
+                searchBar
+              />
+          }
           <Tags
             tags={tags}
             removeTag={removeTag}
@@ -199,6 +241,7 @@ ISearch.propTypes = {
   startSearch: PropTypes.func,
   viewArticle: PropTypes.func,
   backToSearch: PropTypes.func,
+  onAddArticleTag: PropTypes.func,
   articlePage: PropTypes.bool,
   articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,

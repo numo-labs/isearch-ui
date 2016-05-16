@@ -56,13 +56,15 @@ describe('Search Reducer', () => {
       };
       const state = reducer(initialStateWithTiles, action);
       const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
-      const expectedState = {
-        ...initialStateWithTiles,
-        items: mockItems,
-        displayedItems: shuffledItems,
-        loading: false
-      };
-      expect(state).to.deep.equal(expectedState);
+      // const expectedState = {
+      //   ...initialStateWithTiles,
+      //   items: mockItems,
+      //   displayedItems: shuffledItems,
+      //   loading: false
+      // };
+      expect(state.items).to.deep.equal(mockItems);
+      expect(state.loading).to.be.false;
+      shuffledItems.forEach(item => expect(state.displayedItems).to.include(shuffledItems[0]));
       done();
     });
     it(`RECEIVE_SEARCH_RESULT:initialSearch = false -> adds action.items to items
@@ -79,17 +81,13 @@ describe('Search Reducer', () => {
         initialSearch: true
       };
       const state = reducer(initialStateWithItems, action);
-      const expectedState = {
-        ...initialStateWithTiles,
-        items: mockItems,
-        displayedItems: shuffledItems,
-        loading: false
-      };
-      expect(state).to.deep.equal(expectedState);
+      expect(state.loading).to.be.false;
+      expect(state.items).to.deep.equal(mockItems);
+      shuffledItems.forEach(item => expect(state.displayedItems).to.include(shuffledItems[0]));
       done();
     });
     it('BUSY_SEARCHING -> sets loading to true', (done) => {
-      const action = {type: BUSY_SEARCHING};
+      const action = {type: BUSY_SEARCHING, isBusy: true};
       const state = reducer(undefined, action);
       const expectedState = {
         ...initialState,
@@ -138,11 +136,12 @@ describe('Search Reducer', () => {
         ...initialState,
         tags: [{ displayName: 'hello' }]
       };
-      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'world'}};
+      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'world'}, isInitialTag: false};
       const state = reducer(initialStateWithTags, action);
       const expectedState = {
         ...initialState,
-        tags: [{ displayName: 'hello' }, {displayName: 'world'}]
+        tags: [{ displayName: 'hello' }, {displayName: 'world'}],
+        isInitialTag: false
       };
       expect(state).to.deep.equal(expectedState);
       done();
@@ -152,11 +151,12 @@ describe('Search Reducer', () => {
         ...initialState,
         tags: [{ displayName: 'hello' }]
       };
-      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'hello'}};
+      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'hello'}, isInitialTag: false};
       const state = reducer(initialStateWithTags, action);
       const expectedState = {
         ...initialState,
-        tags: [{ displayName: 'hello' }]
+        tags: [{ displayName: 'hello' }],
+        isInitialTag: false
       };
       expect(state).to.deep.equal(expectedState);
       done();

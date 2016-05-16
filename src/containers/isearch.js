@@ -51,7 +51,8 @@ function mapStateToProps (state) {
     },
     article: {
       articlePage,
-      articleContent
+      articleContent,
+      onAddArticleTag
     }
   } = state;
   return {
@@ -62,6 +63,7 @@ function mapStateToProps (state) {
     searchString,
     articlePage,
     articleContent,
+    onAddArticleTag,
     loading,
     error,
     hotelPage,

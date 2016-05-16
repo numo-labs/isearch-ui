@@ -1,6 +1,10 @@
+// Mocking window and document object:
+require('../dom-mock.js')('<html><body></body></html>');
+
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import jsdom from 'mocha-jsdom';
 
 import ISearch from '../../src/components/isearch/';
 
@@ -28,6 +32,7 @@ const articleViewProps = {
 };
 
 describe('Component', function () {
+  jsdom({ skipWindowCheck: true });
   describe('<ISearch /> Search view', function () {
     const wrapper = shallow(<ISearch {...defaultProps} />);
     const children = wrapper.children().nodes;
@@ -71,6 +76,15 @@ describe('Component', function () {
       wrapper.setProps({loading: false, error: 'error'});
       const error = wrapper.find('.errorMessage');
       expect(error).to.have.length(1);
+      done();
+    });
+    it('should render the <SearchBar /> as the third child if window.innerWidth is less than 553', function (done) {
+      global.window.innerWidth = 550;
+      const wrapper = shallow(<ISearch {...defaultProps} />);
+      const children = wrapper.children().nodes;
+      const thirdChild = children[2].type;
+      const searchBar = wrapper.find('SearchBarContainer').node.type;
+      expect(thirdChild).to.deep.equal(searchBar);
       done();
     });
   });
