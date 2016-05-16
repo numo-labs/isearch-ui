@@ -18,8 +18,6 @@ import {
   SET_NUMBER_OF_CHILDREN_TITLE,
   SET_DURATION_TITLE,
   SAVE_SEARCH_RESULT_ID
-  // SHOW_ADD_MESSAGE,
-  // HIDE_ADD_MESSAGE,
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -193,16 +191,6 @@ export default function search (state = initialState, action) {
         ...state,
         bucketId: action.id
       };
-    // case SHOW_ADD_MESSAGE:
-    //   return ({
-    //     ...state,
-    //     addMessageVisible: true
-    //   });
-    // case HIDE_ADD_MESSAGE:
-    //   return ({
-    //     ...state,
-    //     addMessageVisible: false
-    //   });
     default:
       return state;
   }

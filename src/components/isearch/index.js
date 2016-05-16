@@ -24,6 +24,9 @@ class ISearch extends Component {
     this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
     window.addEventListener('resize', this.handleResize);
   }
+  handleResize () {
+    this.setState({screenWidth: window.innerWidth});
+  }
   scrollToSavedPosition () {
     if (this.state.scrollY > 0) {
       window.scrollTo(0, this.state.scrollY);
@@ -32,9 +35,13 @@ class ISearch extends Component {
   componentWillUnmount () {
     window.removeEventListener('resize', this.handleResize);
   }
-
-  handleResize () {
-    this.setState({screenWidth: window.innerWidth});
+  componentDidUpdate (prevProps) {
+    const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
+    const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
+    if (pageChanged && searchPage) {
+      console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
+      this.scrollToSavedPosition();
+    }
   }
   renderResults () {
     const {
@@ -54,7 +61,6 @@ class ISearch extends Component {
         onYesFilter={onYesFilter}
         onFilterClick={onFilterClick}
         filterVisibleState={filterVisibleState}
-        // showAddMessage={showAddMessage}
         viewArticle={(article) => {
           this.setState({scrollY: window.scrollY});
           window.scrollTo(0, 0);
@@ -70,22 +76,12 @@ class ISearch extends Component {
     );
   }
 
-  componentDidUpdate (prevProps) {
-    const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
-    const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
-    if (pageChanged && searchPage) {
-      console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
-      this.scrollToSavedPosition();
-    }
-  }
   render () {
-    console.log('SCREEN WIDHT', window.innerWidth, this.state.screenWidth);
     const {
       tags,
       removeTag,
       setSearchString,
       startSearch,
-      autocompleteError,
       autocompleteOptions,
       searchString,
       getAutocompleteOptions,
@@ -176,7 +172,6 @@ class ISearch extends Component {
                 addSingleTag={addSingleTag}
                 startSearch={startSearch}
                 setSearchString={setSearchString}
-                autocompleteError={autocompleteError}
                 autocompleteOptions={autocompleteOptions}
                 searchString={searchString}
                 getAutocompleteOptions={getAutocompleteOptions}
@@ -188,7 +183,6 @@ class ISearch extends Component {
                 addSingleTag={addSingleTag}
                 startSearch={startSearch}
                 setSearchString={setSearchString}
-                autocompleteError={autocompleteError}
                 autocompleteOptions={autocompleteOptions}
                 searchString={searchString}
                 getAutocompleteOptions={getAutocompleteOptions}
@@ -227,7 +221,6 @@ ISearch.propTypes = {
   filterVisibleState: PropTypes.object,
 
   // autocomplete
-  autocompleteError: PropTypes.string,
   autocompleteOptions: PropTypes.array,
   inAutoCompleteSearch: PropTypes.bool,
   getAutocompleteOptions: PropTypes.func,
@@ -237,22 +230,26 @@ ISearch.propTypes = {
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
   startSearch: PropTypes.func,
-  viewArticle: PropTypes.func,
   backToSearch: PropTypes.func,
-  onAddArticleTag: PropTypes.func,
-  articlePage: PropTypes.bool,
-  articleContent: PropTypes.object,
   addSearchStringTag: PropTypes.func,
+
+  // hotel
   hotelPage: PropTypes.bool,
   viewHotel: PropTypes.func,
+  setHotelPage: PropTypes.func,
+  hotelInView: PropTypes.object,
+
+  // article
+  onAddArticleTag: PropTypes.func,
+  viewArticle: PropTypes.func,
+  articlePage: PropTypes.bool,
+  articleContent: PropTypes.object,
 
   // tags
   tags: PropTypes.array,
   addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
-  setHotelPage: PropTypes.func,
-  hotelInView: PropTypes.object,
 
   // travel info
   setNumberOfChildren: PropTypes.func,

@@ -58,7 +58,6 @@ class SearchResults extends Component {
       filterVisibleState,
       onYesFilter,
       onFilterClick,
-      showAddMessage,
       viewArticle,
       viewHotel,
       setHotelPage,
@@ -96,7 +95,6 @@ class SearchResults extends Component {
                         filterVisible={filterVisibleState[item.tile.displayName]}
                         onYesFilter={onYesFilter}
                         onNoFilter={onFilterClick}
-                        showAddMessage={showAddMessage}
                         description={item.tile}
                         color={item.tile.color}
                       />
@@ -124,7 +122,6 @@ class SearchResults extends Component {
 SearchResults.propTypes = {
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
-  showAddMessage: PropTypes.func,
   items: PropTypes.array,
   filterVisibleState: PropTypes.object,
   viewHotel: PropTypes.func,
