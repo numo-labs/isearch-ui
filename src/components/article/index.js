@@ -7,6 +7,9 @@ class ArticleFullPage extends Component {
   constructor () {
     super();
     this.getArticleData = this.getArticleData.bind(this);
+    this.state = {
+      articleContent: {}
+    };
   }
 
   componentWillMount () {
@@ -15,14 +18,11 @@ class ArticleFullPage extends Component {
 
   getArticleData () {
     this.props.getArticle(this.props.params.bucketId, this.props.params.itemId);
+    this.setState({articleContent: this.props.articleContent});
   }
 
   render () {
     const { articleContent, backToSearch } = this.props;
-    if (!articleContent.title) {
-      window.location.hash = '/';
-      return (<section/>);
-    }
     const tagColours = {
       amenities: 'rgba(12,125,125,0.6)',
       geo: 'rgba(12,125,12,0.6)'
@@ -38,36 +38,40 @@ class ArticleFullPage extends Component {
       if (tags && tags.length > 0) {
         tags.map((tag, key) => {
           return (
-            <Tag key={key} displayName={tag.label} colour={tagColours[tagsType]} removeTag={() => {}}/>
+            <Tag key={tagsType + key} displayName={tag.label} colour={tagColours[tagsType]} removeTag={() => {}}/>
           );
         });
       }
     }
-
-    return (
-      <section>
-        <NavHeader backToSearch={backToSearch} />
-        <div className='articleFullPageContainer'>
-          { articleContent.sections.map((section, key) => {
-            return (
-              <section>
-                {key === 0 && section.image ? <div className='articleHeader' style={{backgroundImage: `url(${section.image})`}} /> : null}
-                <div key={key} className='articleSection'>
-                  {key !== 0 && section.image ? <div className='articleImage' style={{backgroundImage: `url(${section.image})`}}> <img src={section.image}/> </div> : null}
-                  {section.title ? (key === 0 ? <h1>{section.title}</h1> : <h2 >{section.title}</h2>) : null}
-                  {section.text ? <p className='articleText'>{section.text}</p> : null}
-                </div>
-              </section>
-            );
-          })}
-          <div className='tagSection'>
-            {renderTags(articleContent.geo, 'geo')}
-            {renderTags(articleContent.amenities, 'amenities')}
+    if (!articleContent.name) {
+      return (<section/>);
+    } else {
+      return (
+        <section>
+          <NavHeader backToSearch={backToSearch}/>
+          <div className='articleFullPageContainer'>
+            { articleContent.sections.map((section, key) => {
+              return (
+                <section>
+                  {key === 0 && section.image ? <div className='articleHeader' style={{backgroundImage: `url(${section.image})`}}/> : null}
+                  <div key={key} className='articleSection'>
+                    {key !== 0 && section.image ? <div className='articleImage' style={{backgroundImage: `url(${section.image})`}}><img
+                        src={section.image}/></div> : null}
+                    {section.title ? (key === 0 ? <h1>{section.title}</h1> : <h2 >{section.title}</h2>) : null}
+                    {section.text ? <p className='articleText'>{section.text}</p> : null}
+                  </div>
+                </section>
+              );
+            })}
+            <div className='tagSection'>
+              {renderTags(articleContent.geo, 'geo')}
+              {renderTags(articleContent.amenities, 'amenities')}
+            </div>
           </div>
-        </div>
-        <ArticleFooter />
-      </section>
-    );
+          <ArticleFooter />
+        </section>
+      );
+    }
   }
 }
 

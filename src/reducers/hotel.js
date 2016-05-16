@@ -9,7 +9,10 @@ const initialState = {
     hotel: {
       id: '',
       name: '',
-      images: [],
+      images: {
+        large: [],
+        small: []
+      },
       starRating: '0',
       place: {
         name: '',
