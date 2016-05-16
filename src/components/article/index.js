@@ -74,7 +74,8 @@ class ArticleFullPage extends Component {
 ArticleFullPage.propTypes = {
   articleContent: PropTypes.object,
   backToSearch: PropTypes.func,
-  getArticle: PropTypes.func
+  getArticle: PropTypes.func,
+  params: PropTypes.object
 };
 
 export default ArticleFullPage;

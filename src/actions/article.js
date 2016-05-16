@@ -15,7 +15,6 @@ export const viewArticle = (content) => { return { type: VIEW_ARTICLE, content }
  */
 export const backToSearch = () => { return { type: VIEW_SEARCH }; };
 
-
 export const getArticle = (bucketId, itemId) => {
   return (dispatch) => {
     return graphqlService.query(QUERY_FETCH_BUCKET_ITEM, {'id': bucketId, 'itemId': itemId, 'itemType': 'article'})

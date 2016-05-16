@@ -134,7 +134,8 @@ SearchResults.propTypes = {
   viewArticle: PropTypes.func,
   setHotelPage: PropTypes.func,
   hotelInView: PropTypes.func,
-  totalPassengers: PropTypes.number
+  totalPassengers: PropTypes.number,
+  bucketId: PropTypes.string
 };
 
 export default SearchResults;

@@ -29,7 +29,6 @@ class HotelPage extends Component {
   getHotelData () {
     this.props.getHotel(this.props.params.bucketId, this.props.params.itemId);
   }
-  
   renderFact (fact) {
     const { packageOffer } = this.props;
     const amenitiesObject = packageOffer.amenities;
@@ -186,7 +185,8 @@ class HotelPage extends Component {
 HotelPage.propTypes = {
   packageOffer: PropTypes.object,
   backToSearch: PropTypes.func,
-  getHotel: PropTypes.func
+  getHotel: PropTypes.func,
+  params: PropTypes.object
 };
 
 export default HotelPage;

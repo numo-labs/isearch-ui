@@ -95,8 +95,8 @@ class ISearch extends Component {
       addSingleTag,
       clearSearchString,
       backToSearch,
-      articlePage,
-      articleContent,
+      // articlePage,
+      // articleContent,
       error,
       loading,
       hotelPage,
@@ -217,6 +217,7 @@ class ISearch extends Component {
 }
 
 ISearch.propTypes = {
+  bucketId: PropTypes.string,
   // for random initial results
   fetchQuerySearchResults: PropTypes.func,
   getArticle: PropTypes.func,
