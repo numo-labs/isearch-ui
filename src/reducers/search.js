@@ -14,9 +14,7 @@ import {
   SET_AUTOCOMPLETE_OPTIONS,
   SET_AUTOCOMPLETE_IN_SEARCH,
   CLEAR_SEARCH_STRING,
-  SET_NUMBER_OF_ADULTS_TITLE,
-  SET_NUMBER_OF_CHILDREN_TITLE,
-  SET_DURATION_TITLE,
+  UPDATE_HEADER_TITLES,
   SAVE_SEARCH_RESULT_ID
 } from '../constants/actionTypes';
 
@@ -171,20 +169,12 @@ export default function search (state = initialState, action) {
         ...state,
         inAutoCompleteSearch: true
       };
-    case SET_NUMBER_OF_ADULTS_TITLE:
+    case UPDATE_HEADER_TITLES:
       return {
         ...state,
-        numberOfAdultsTitle: action.numberOfAdultsTitle
-      };
-    case SET_NUMBER_OF_CHILDREN_TITLE:
-      return {
-        ...state,
-        numberOfChildrenTitle: action.numberOfChildrenTitle
-      };
-    case SET_DURATION_TITLE:
-      return {
-        ...state,
-        durationTitle: action.durationTitle
+        numberOfAdultsTitle: action.numberOfAdults,
+        numberOfChildrenTitle: action.numberOfChildren,
+        durationTitle: action.duration
       };
     case SAVE_SEARCH_RESULT_ID:
       return {

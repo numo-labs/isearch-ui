@@ -5,6 +5,7 @@ import {
   // TILES_ADD_TILES,
   // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
+import moment from 'moment';
 
 import { MUTATION_START_SEARCH } from '../../src/constants/mutations.js';
 
@@ -39,7 +40,7 @@ const initialState = {
     childAge4: '',
     departureAirport: '',
     duration: '',
-    departureDate: '',
+    departureDate: moment(),
     passengerBirthdays: [],
     numberOfChildrenTitle: '2',
     numberOfAdultsTitle: '2',

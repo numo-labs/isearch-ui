@@ -109,9 +109,7 @@ class ISearch extends Component {
       setChildAge,
       setDepartureAirport,
       setDuration,
-      setDurationTitle,
-      setNumberOfAdultsTitle,
-      setNumberOfChildrenTitle,
+      updateHeaderTitles,
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       durationTitle,
@@ -156,9 +154,7 @@ class ISearch extends Component {
             setNumberOfAdults={setNumberOfAdults}
             setDepartureAirport={setDepartureAirport}
             setDuration={setDuration}
-            setDurationTitle={setDurationTitle}
-            setNumberOfAdultsTitle={setNumberOfAdultsTitle}
-            setNumberOfChildrenTitle={setNumberOfChildrenTitle}
+            updateHeaderTitles={updateHeaderTitles}
             numberOfAdultsTitle={numberOfAdultsTitle}
             numberOfChildrenTitle={numberOfChildrenTitle}
             durationTitle={durationTitle}
@@ -266,12 +262,10 @@ ISearch.propTypes = {
   duration: PropTypes.string,
   departureDate: PropTypes.string,
   setChildAge: PropTypes.func,
-  setNumberOfAdultsTitle: PropTypes.func,
-  setNumberOfChildrenTitle: PropTypes.func,
-  setDurationTitle: PropTypes.func,
   numberOfAdultsTitle: PropTypes.string,
   numberOfChildrenTitle: PropTypes.string,
   durationTitle: PropTypes.string,
+  updateHeaderTitles: PropTypes.string,
   setDepartureDate: PropTypes.func
 };
 
