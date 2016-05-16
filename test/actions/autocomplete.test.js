@@ -27,7 +27,7 @@ describe('Autocomplete actions', () => {
     done();
   });
   it(`getAutocompleteOptions launches a graphql autocomplete query when the
-      searchString value is greater than 3 and sets the results`, (done) => {
+      searchString value is greater than 0 and sets the results`, (done) => {
     const json = {
       data: {
         viewer: {
