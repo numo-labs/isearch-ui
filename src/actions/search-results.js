@@ -75,7 +75,7 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
               dispatch(fetchQuerySearchResults(id, page, size, ++attempt));
             }, 1000);
           } else {
-            dispatch(busySearching(true));
+            dispatch(searchError('No Results Found'));
           }
         });
     } else {
