@@ -163,134 +163,130 @@ query searchResultQuery($id: String, $page: Int, $size: Int) {
 `;
 
 export const QUERY_FETCH_BUCKET_ITEM = `
-query itemSearch($id: String, $itemId: String) {
+query itemSearch($id: String, $itemId: String, $itemType: String) {
   viewer {
-    searchItem (id: $id, itemId: $itemId) {
-      item(id: $itemId) {
-        content (itemId: $itemId) {
-        ...on packageOfferItem {
-          id,
-          type,
-          ranking,
-          packageOffer {
-            hotel {
-              id,
-              name,
-              images {
-                large {
-                  type,
-                  displaySequence,
-                  uri,
-                  primary
-                },
-                small {
-                  type,
-                  displaySequence,
-                  uri,
-                  primary
-                }
-              }
-              starRating,
-              place {
-                name,
-                country,
-                region
-              }
-            },
-            flights {
-              outbound {
-                number,
-                departure {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                arrival {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                carrier {
-                  code
-                }
-              },
-              inbound {
-                number,
-                departure {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                arrival {
-                  localDateTime,
-                  airport {
-                    code,
-                    name,
-                    city
-                  }
-                }
-                carrier {
-                  code
-                }
-              }
-            },
-            price {
-              total,
-              perPerson,
-              currency
-            },
-            provider {
-              id,
-              reference,
-              context,
-              deepLink
-            },
-            nights,
-            amenities {
-              outdoorpool,
-              distancetobeach,
-              distancetocenter,
-              bar,
-              childrenpool,
-              elevator,
-              poolbar,
-              restaurant,
-              minimarket,
-              cleaningdaysperweek,
-              wifi,
-              waterslide,
-              lolloandbernie,
-              isadulthotel,
-              allinclusive,
-            }
-          }
-         },
-        ...on tileItem {
-          id,
-          type,
-          tile {
+    searchItem(id: $id, itemId: $itemId, itemType: $itemType) {
+      ...on packageOfferItem {
+        id,
+        type,
+        ranking,
+        packageOffer {
+          hotel {
             id,
             name,
-            url,
-            sections {
-              title,
-              image,
-              text
+            images {
+              large {
+                type,
+                displaySequence,
+                uri,
+                primary
+              },
+              small {
+                type,
+                displaySequence,
+                uri,
+                primary
+              }
+            }
+            starRating,
+            place {
+              name,
+              country,
+              region
+            }
+          },
+          flights {
+            outbound {
+              number,
+              departure {
+                localDateTime,
+                airport {
+                  code,
+                  name,
+                  city
+                }
+              }
+              arrival {
+                localDateTime,
+                airport {
+                  code,
+                  name,
+                  city
+                }
+              }
+              carrier {
+                code
+              }
             },
+            inbound {
+              number,
+              departure {
+                localDateTime,
+                airport {
+                  code,
+                  name,
+                  city
+                }
+              }
+              arrival {
+                localDateTime,
+                airport {
+                  code,
+                  name,
+                  city
+                }
+              }
+              carrier {
+                code
+              }
+            }
+          },
+          price {
+            total,
+            perPerson,
+            currency
+          },
+          provider {
+            id,
+            reference,
+            context,
+            deepLink
+          },
+          nights,
+          amenities {
+            outdoorpool,
+            distancetobeach,
+            distancetocenter,
+            bar,
+            childrenpool,
+            elevator,
+            poolbar,
+            restaurant,
+            minimarket,
+            cleaningdaysperweek,
+            wifi,
+            waterslide,
+            lolloandbernie,
+            isadulthotel,
+            allinclusive,
           }
+        }
+       },
+      ...on tileItem {
+        id,
+        type,
+        tile {
+          id,
+          name,
+          url,
+          sections {
+            title,
+            image,
+            text
+          },
         }
       }
     }
   }
-}
 }
 `;
