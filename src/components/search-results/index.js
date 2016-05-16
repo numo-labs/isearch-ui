@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Masonry from 'react-masonry-component';
-import FilterTile from '../../../lib/filter-tile-yesno';
+import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import { ArticleTile } from '../../../lib/article';
 import VisbilitySensor from 'react-visibility-sensor';

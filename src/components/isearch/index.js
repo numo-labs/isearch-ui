@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from 'react';
-import Header from '../../../lib/header/';
+import Header from '../../../lib/hero-image-header/';
 import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import HotelPage from '../../../lib/hotel-page';
 import LoadingSpinner from '../../../lib/spinner';
 import { ArticleFullPage } from '../../../lib/article';
-import SearchBar from '../../../lib/search';
+import SearchBar from '../../../lib/search-bar';
 import './style.css';
 
 class ISearch extends Component {
@@ -276,9 +276,6 @@ ISearch.propTypes = {
   numberOfChildrenTitle: PropTypes.string,
   durationTitle: PropTypes.string,
   setDepartureDate: PropTypes.func
-
-  // showAddMessage: PropTypes.func,
-  // hideAddMessage: PropTypes.func,
 };
 
 export default ISearch;
