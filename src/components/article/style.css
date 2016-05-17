@@ -1,0 +1,162 @@
+@font-face {
+    font-family: SourceSansLight;
+    src: url('../../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+    font-family: SourceSansSemiBold;
+    src: url('../../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+    font-family: SourceSansRegular;
+    src: url('../../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+    font-family: ThomasHeadlineBold;
+    src: url('../../../fonts/ThomasHeadline-Bold.otf');
+}
+
+h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0.3em;
+    font-size: 0.9em;
+}
+
+.articleContainer {
+    text-align: center;
+    font-family: SourceSansLight;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.articleContentContainer {
+    background-color: #ffffff;
+    position: relative;
+    padding: 2em;
+}
+
+@media (min-width: 750px) {
+    .articleContentContainer {
+        width: 750px;
+        position: absolute;
+        top: 21em;
+        left: 50%;
+        margin-left: -375px;
+        padding: 2em;
+    }
+}
+
+.articleImage {
+    display: inline-block;
+    height: 20em;
+    width: 100%;
+    object-fit: cover;
+}
+
+.text {
+    bottom: 2em;
+    color: #595959;
+    position: absolute;;
+    line-height: 0.5em;
+    padding: 0.4em;
+    background-color: rgba(255,255,255,0.7);
+    width: 100%;
+}
+
+
+h1 {
+    font-family: SourceSansSemiBold;
+    font-size: 2.1em;
+}
+
+.text h2 {
+    font-family: ThomasHeadlineBold;
+    font-size: 2.4rem;
+    margin-top: 10px;
+}
+
+.articleFullPageContainer {
+    text-align: center;
+    font-family: SourceSansLight;
+    display: inline-block;
+    width: 100%;
+}
+
+.articleFullPageContainer .articleHeaderImage {
+    height: 400px;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.articleHeader {
+    font-family: ThomasHeadlineBold;
+    font-size: 3.2rem;
+    margin-bottom: 1em;
+}
+
+.articleIntroText {
+    font-family: SourceSansSemiBold;
+    font-size: 1.8rem;
+}
+
+.articleSectionHeading {
+    font-family: SourceSansRegular;
+    font-size: 2.4rem;
+    margin: 1em auto;
+}
+
+.articleFullPageContainer .articleSection {
+    margin: auto;
+    margin-bottom: 2.5em;
+    max-width: 700px;
+}
+
+.articleFullPageContainer .articleImage {
+    width: auto;
+    max-height: 350px;
+    height: auto;
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
+.articleFullPageContainer .articleImage img {
+    visibility: hidden;
+    max-width: 100%;
+}
+
+.articleFullPageContainer .articleText {
+    padding: 0 1.5em;
+    color: #595959;
+    width: 100%;
+    font-size: 1.6rem;
+    text-align: left;
+    font-family: SourceSansRegular;
+    font-weight: 300;
+}
+
+.articleFullPageContainer .tagSection {
+    width: 100%;
+    text-align: center;
+    padding: 2.5em;
+}
+
+.articleFullPageContainer h1 {
+    text-align: center;
+    font-family: SourceSansSemiBold;
+    font-size: 2.1em;
+    padding: 1.5em;
+}
+
+.articleFullPageContainer h2 {
+    padding: 0 1.5em;
+    font-size: 1em;
+    font-family: SourceSansSemiBold;
+    color: #666;
+    text-align: left;
+}

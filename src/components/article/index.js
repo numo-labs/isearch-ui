@@ -100,7 +100,8 @@ ArticleFullPage.propTypes = {
   articleContent: PropTypes.object,
   backToSearch: PropTypes.func,
   getArticle: PropTypes.func,
-  params: PropTypes.object
+  params: PropTypes.object,
+  handleOnAddTagClick: PropTypes.func
 };
 
 export default ArticleFullPage;
