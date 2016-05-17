@@ -227,9 +227,8 @@ function combinePassengersForQuery (childAgeArray, numberOfChildren, numberOfAdu
 // function that builds the travel period for the query
 function constructTravelPeriodQuery (departureDate, duration) {
   const nights = (Number(duration.split(' ')[0]) * 7);
-  const formattedDate = departureDate.format('YYYY-MM-DD');
   const travelPeriod = {
-    departureBetween: [formattedDate],
+    departureBetween: [departureDate],
     nights: [nights]
   };
   return travelPeriod;

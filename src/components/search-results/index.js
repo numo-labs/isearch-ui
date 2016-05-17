@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Masonry from 'react-masonry-component';
 import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
-import { ArticleTile } from '../../../lib/article';
+import { ArticleTile } from '../../../lib/article-tile';
 import VisbilitySensor from 'react-visibility-sensor';
 import './style.css';
 
@@ -61,7 +61,8 @@ class SearchResults extends Component {
       viewArticle,
       viewHotel,
       setHotelPage,
-      totalPassengers
+      totalPassengers,
+      bucketId
     } = this.props;
     return (
       <Masonry
@@ -82,6 +83,8 @@ class SearchResults extends Component {
                       viewHotel={viewHotel}
                       setHotelPage={setHotelPage}
                       totalPassengers={totalPassengers}
+                      bucketId={bucketId}
+                      itemId={item.id}
                     />
                   </div>
                 </VisbilitySensor>
@@ -106,7 +109,7 @@ class SearchResults extends Component {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                     <div key={index} className='gridItem'>
-                      <ArticleTile {...item} viewArticle={viewArticle}/>
+                      <ArticleTile {...item} bucketId={bucketId} viewArticle={viewArticle}/>
                     </div>
                   </VisbilitySensor>
                 );
@@ -128,7 +131,8 @@ SearchResults.propTypes = {
   viewArticle: PropTypes.func,
   setHotelPage: PropTypes.func,
   hotelInView: PropTypes.func,
-  totalPassengers: PropTypes.number
+  totalPassengers: PropTypes.number,
+  bucketId: PropTypes.string
 };
 
 export default SearchResults;

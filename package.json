@@ -1,6 +1,6 @@
 {
   "name": "isearch-ui",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
@@ -88,6 +88,7 @@
     "react-dom": "^0.14.7",
     "react-masonry-component": "^4.0.0",
     "react-redux": "^4.4.0",
+    "react-router": "^2.3.0",
     "react-scroll": "^1.0.15",
     "react-select": "^0.9.1",
     "react-slick": "^0.12.0",
