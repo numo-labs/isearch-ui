@@ -1,13 +1,14 @@
 // npm
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 // components
 import ISearch from '../containers/isearch.js';
 import ArticleFullPage from '../containers/article.js';
 import HotelPage from '../containers/hotel';
+import App from '../components/app';
 
 // store
 import configureStore from '../store/configure-store.js';
@@ -19,10 +20,12 @@ export default class Root extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <Route path='/' component={ISearch}/>
-          <Route path='search/:bucketId' component={ISearch}/>
-          <Route path='article/:bucketId/:itemId' component={ArticleFullPage}/>
-          <Route path='hotel/:bucketId/:itemId' component={HotelPage}/>
+          <Route path='/' component={App} ignoreScrollBehavior>
+            <IndexRoute component={ISearch}/>
+            <Route path='search/:bucketId' component={ISearch}/>
+            <Route path='article/:bucketId/:itemId' component={ArticleFullPage} scrollToTop/>
+            <Route path='hotel/:bucketId/:itemId' component={HotelPage} scrollToTop/>
+          </Route>
         </Router>
       </Provider>
     );

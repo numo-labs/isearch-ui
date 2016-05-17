@@ -17,7 +17,7 @@ class ISearch extends Component {
       scrollY: 0,
       screenWidth: window.innerWidth
     };
-    this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
+    // this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
   componentWillMount () {
@@ -27,22 +27,22 @@ class ISearch extends Component {
   handleResize () {
     this.setState({screenWidth: window.innerWidth});
   }
-  scrollToSavedPosition () {
-    if (this.state.scrollY > 0) {
-      window.scrollTo(0, this.state.scrollY);
-    }
-  }
+  // scrollToSavedPosition () {
+  //   if (this.state.scrollY > 0) {
+  //     window.scrollTo(0, this.state.scrollY);
+  //   }
+  // }
   componentWillUnmount () {
     window.removeEventListener('resize', this.handleResize);
   }
-  componentDidUpdate (prevProps) {
-    const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
-    const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
-    if (pageChanged && searchPage) {
-      console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
-      this.scrollToSavedPosition();
-    }
-  }
+  // componentDidUpdate (prevProps) {
+  //   const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !== this.props.articlePage);
+  //   const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is search
+  //   if (pageChanged && searchPage) {
+  //     console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
+  //     this.scrollToSavedPosition();
+  //   }
+  // }
   renderResults () {
     const {
       displayedItems,
