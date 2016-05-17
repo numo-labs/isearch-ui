@@ -24,13 +24,8 @@
 }
 
 .amenity {
-  display: inline-block;
-  padding-left: 0.3em;
+  display: block;
   font-size: 1.6rem;
-}
-
-.amenityBlock {
-  text-align: left;
 }
 
 .amenityContainer {
@@ -38,12 +33,12 @@
   margin-left: 1em;
   margin-right: 3em;
   text-align: left;
-  padding-left: 0.6em;
+  padding-left: 0.2em;
 }
 
 .amenityWrapper {
   font-family: SourceSansRegular;
-  margin-top: 0.8em;
+  margin-bottom: 0.8em;
   display: inline-block;
   text-align: center;
 }
@@ -56,10 +51,9 @@
   font-family: SourceSansRegular;
   font-weight: bold;
   font-size: 1.1em;
-  padding: 0.4em;
-  padding-left: 1.3em;
-  padding-right: 1.3em;
+  padding: 0.4em 2.3em;
   margin-top: 0.7em;
+  text-transform: uppercase;
 }
 
 .bookButtonContainer {
@@ -78,16 +72,22 @@
   font-size: 1.6rem;
 }
 
-.factHeading {
+.factHeading,
+.imagesHeading{
   font-family: ThomasHeadlineBold;
   font-weight: bold;
   font-size: 1.8rem;
   margin-bottom: 0.5em;
 }
 
+.imagesHeading {
+  text-align: left;
+  padding-left: 0.3em;
+}
+
 .factHolder {
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 3em auto;
 }
 
 .factTitles {
@@ -101,20 +101,19 @@
 
 .factWrapper {
   font-family: SourceSansRegular;
-  margin-bottom: 2em;
 }
 
 .gradientOut {
-    position:absolute;
-    bottom:0px;
-    left:0px;
-    width:100%;
-    height:50px;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100,1+100,1+102,1+102 */
-background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 102%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  height:50px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100,1+100,1+102,1+102 */
+  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 102%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
 }
 
 .heartRatingContainer {
@@ -165,7 +164,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 }
 
 .bookButtonFooter {
-  visibility: hidden;
+  display: none;
 }
 
 .infoContentContainer {
@@ -223,6 +222,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   font-size: 0.9em;
 }
 
+.titleHeartContainer {
+  min-height: 8em;
+}
+
 .titlePackage {
   font-family: ThomasHeadlineBold;
   font-size: 2.2rem;
@@ -247,10 +250,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 .textVisible {
   padding: 1.5em;
+  font-size: 1.6rem;
 }
 
 .textWrapper {
-  width: 100%;
+  width: 69%;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .tick {
@@ -259,14 +265,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 }
 
 @media (min-width: 750px) {
-  .amenityWrapper {
-    width: 25%;
-    position: absolute;
-    right: 0;
-    top: 13em;
-    text-align: left;
-    display: inline-block;
-  }
   .bookButtonContainer {
     display: inline-block;
     position: absolute;
@@ -277,20 +275,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
     background-color: rgba(233,229,224,0.7);
   }
   .bookButtonFooter {
-    visibility: visible;
-    margin: 2em auto;
-    width: 33%;
     text-align: center;
+    width: 100%;
+    padding: 2em 0;
+    background-color: rgba(233,229,224,0.7);
+    display: block;
   }
   .descriptionWrapper {
-    width: 75%;
+    width: 100%;
     margin-bottom: 5em;
     margin-top: 2.05em;
   }
   .factHolder {
     margin: 0;
-    margin-left: 1.5em;
-    width: 50%;
+    width: 31%;
+    padding-right: 1em;
+    padding-top: 1em;
+    display: inline-block;
   }
   .infoContainer {
     width: 750px;
@@ -364,14 +365,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
   right: 25px;
 }
 
-.descriptionSlider {
+.hotelImagesContainer {
   width: 100%;
   padding: 0 1em;
   margin-bottom: 4em;
+  text-align: center;
+}
+
+.hotelImagesContainer img {
+  max-width: 100%;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 750px) {
-  .descriptionSlider,
+  .hotelImagesContainer,
   .hotelPackageImage {
     display: none;
   }

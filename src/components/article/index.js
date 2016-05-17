@@ -3,6 +3,8 @@ import ArticleFooter from '../../../lib/article/article-footer.js';
 import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
 
+import './style.css';
+
 class ArticleFullPage extends Component {
   constructor () {
     super();
@@ -52,7 +54,7 @@ class ArticleFullPage extends Component {
           <div className='articleFullPageContainer'>
             { articleContent.sections.map((section, key) => {
               return (
-                <section>
+                <section key={key}>
                   {key === 0 && section.image ? <div className='articleHeader' style={{backgroundImage: `url(${section.image})`}}/> : null}
                   <div key={key} className='articleSection'>
                     {key !== 0 && section.image ? <div className='articleImage' style={{backgroundImage: `url(${section.image})`}}><img

@@ -174,6 +174,7 @@ query itemSearch($id: String, $itemId: String, $itemType: String) {
           hotel {
             id,
             name,
+            description,
             images {
               large {
                 type,
