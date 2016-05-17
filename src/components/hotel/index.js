@@ -25,8 +25,7 @@ class HotelPage extends Component {
     this.props.getHotel(this.props.params.bucketId, this.props.params.itemId);
   }
   renderFact (fact) {
-    const { hotelInView } = this.props;
-    const packageOffer = hotelInView.packageOffer;
+    const { packageOffer } = this.props;
     const amenitiesObject = packageOffer.amenities;
     for (var key in amenitiesObject) {
       if (!amenitiesObject.hasOwnProperty(key)) continue;
@@ -42,8 +41,7 @@ class HotelPage extends Component {
     }
   }
   retrieveAmenities () {
-    const { hotelInView } = this.props;
-    const packageOffer = hotelInView.packageOffer;
+    const { packageOffer } = this.props;
     const amenitiesObject = packageOffer.amenities;
     const amenitiesArray = [];
     for (var key in amenitiesObject) {
@@ -103,8 +101,7 @@ class HotelPage extends Component {
     });
   }
   renderHotelPage () {
-    const { hotelInView, backToSearch } = this.props;
-    const packageOffer = hotelInView.packageOffer;
+    const { packageOffer, backToSearch } = this.props;
     const hotelImages = packageOffer.hotel.images.large.map(i => i.uri);
     const roundedStarRating = Math.floor(packageOffer.hotel.starRating);
     const image = hotelImages[0];
@@ -169,9 +166,8 @@ class HotelPage extends Component {
   }
 
   render () {
-    console.log('props', this.props);
-    const { hotelInView: packageOffer } = this.props;
-    if (packageOffer.id) {
+    const { packageOffer } = this.props;
+    if (packageOffer.hotel.description) {
       return (
         <div className='hotelPageContainer'>
           {this.renderHotelPage()}
@@ -184,11 +180,10 @@ class HotelPage extends Component {
 }
 
 HotelPage.propTypes = {
-  packageOffer: PropTypes.object,
   backToSearch: PropTypes.func,
   getHotel: PropTypes.func,
   params: PropTypes.object,
-  hotelInView: PropTypes.object
+  packageOffer: PropTypes.object
 };
 
 export default HotelPage;

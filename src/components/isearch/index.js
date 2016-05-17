@@ -3,7 +3,7 @@ import Header from '../../../lib/header/';
 import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
-import HotelPage from '../../../lib/hotel-page';
+import HotelPage from '../hotel';
 import LoadingSpinner from '../../../lib/spinner';
 // import { ArticleFullPage } from '../../../lib/article';
 import SearchBar from '../../../lib/search';

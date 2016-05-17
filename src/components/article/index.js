@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import ArticleFooter from '../../../lib/article/article-footer.js';
+import ArticleFooter from '../../../lib/article-tile/article-footer.js';
 import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
 

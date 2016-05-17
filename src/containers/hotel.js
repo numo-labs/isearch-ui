@@ -10,15 +10,12 @@ const Actions = {
 function mapStateToProps (state) {
   const {
     hotel: {
-      hotelPage,
       hotelInView
     }
   } = state;
   return {
-    hotelPage,
-    hotelInView
+    packageOffer: hotelInView
   };
 }
 
 export default connect(mapStateToProps, Actions)(HotelPage);
-
