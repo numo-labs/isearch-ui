@@ -57,6 +57,8 @@ export const initialState = {
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
+  // durationTitle: '2 uger',
+  // bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
   durationTitle: '1 uger',
   isInitialTag: false
 };

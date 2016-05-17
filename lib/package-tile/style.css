@@ -17,6 +17,11 @@
   font-family: ThomasHeadlineBold;
   src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
+.routerLink,
+.routerLink:hover {
+  color: initial;
+  text-decoration: initial;
+}
 
 .packageContainer {
   width: 100%;

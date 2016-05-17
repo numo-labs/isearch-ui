@@ -22,15 +22,6 @@ const defaultProps = {
   addTag: () => {}
 };
 
-const articleViewProps = {
-  fetchQuerySearchResults: () => {},
-  articlePage: true,
-  tile: {
-    sections: []
-  },
-  backToSearch: () => {}
-};
-
 describe('Component', function () {
   jsdom({ skipWindowCheck: true });
   describe('<ISearch /> Search view', function () {
@@ -85,13 +76,6 @@ describe('Component', function () {
       const thirdChild = children[2].type;
       const searchBar = wrapper.find('SearchBarContainer').node.type;
       expect(thirdChild).to.deep.equal(searchBar);
-      done();
-    });
-  });
-  describe('<ISearch /> Search view', function () {
-    const wrapper = shallow(<ISearch {...defaultProps} {...articleViewProps} />);
-    it('should display ArticleFullPage if there are article data', function (done) {
-      expect(wrapper.find('ArticleFullPage')).to.have.length(1);
       done();
     });
   });

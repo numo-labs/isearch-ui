@@ -1,21 +1,21 @@
 @font-face {
   font-family: SourceSansSemiBold;
-  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+  src: url('../../../fonts/SourceSansPro-SemiBold.otf');
 }
 
 @font-face {
   font-family: SourceSansRegular;
-  src: url('../../fonts/SourceSansPro-Regular.otf');
+  src: url('../../../fonts/SourceSansPro-Regular.otf');
 }
 
 @font-face {
   font-family: SourceSansLight;
-  src: url('../../fonts/SourceSansPro-Light.otf');
+  src: url('../../../fonts/SourceSansPro-Light.otf');
 }
 
 @font-face {
   font-family: ThomasHeadlineBold;
-  src: url('../../fonts/ThomasHeadline-Bold.otf');
+  src: url('../../../fonts/ThomasHeadline-Bold.otf');
 }
 
 .hotelInfoLink {
@@ -25,7 +25,6 @@
 
 .amenity {
   display: block;
-  padding-left: 0.3em;
   font-size: 1.6rem;
 }
 
@@ -105,16 +104,16 @@
 }
 
 .gradientOut {
-    position:absolute;
-    bottom:0px;
-    left:0px;
-    width:100%;
-    height:50px;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100,1+100,1+102,1+102 */
-background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 102%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  height:50px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100,1+100,1+102,1+102 */
+  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 102%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 102%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
 }
 
 .heartRatingContainer {

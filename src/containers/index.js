@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
 
-// container
-import ISearch from './isearch';
+import ISearchRouter from '../routes';
 
 export default class Root extends Component {
 
@@ -10,7 +9,7 @@ export default class Root extends Component {
     const { store } = this.props;
     return (
       <Provider store={store}>
-        <ISearch />
+        <ISearchRouter />
       </Provider>
     );
   }

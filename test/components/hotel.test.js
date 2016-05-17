@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import HotelPage from '../';
+import HotelPage from '../../src/components/hotel';
 
 const props = {
   packageOffer: {
@@ -20,6 +20,7 @@ const props = {
         ]
       },
       name: 'Sun Wing',
+      description: 'hotel description',
       place: {
         country: '',
         region: '',
@@ -62,7 +63,12 @@ const props = {
       waterslide: false,
       wifi: true
     }
-  }
+  },
+  params: {
+    bucketId: '12345',
+    itemId: '1234556'
+  },
+  getHotel: () => {}
 };
 
 describe('Component', function () {
