@@ -14,6 +14,10 @@ class ArticleFullPage extends Component {
     };
   }
 
+  handleOnAddTagClick () {
+    this.props.handleOnAddTagClick();
+  }
+
   componentWillMount () {
     this.getArticleData();
   }
@@ -45,14 +49,25 @@ class ArticleFullPage extends Component {
         });
       }
     }
+
     if (!articleContent.name) {
       return (<section/>);
     } else {
+      const introSection = articleContent.sections[0];
+      const content = articleContent.sections.slice(1);
       return (
         <section>
           <NavHeader backToSearch={backToSearch}/>
           <div className='articleFullPageContainer'>
-            { articleContent.sections.map((section, key) => {
+            <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
+            <div className='articleContentContainer'>
+              <section>
+                <div className='articleSection'>
+                  <div className='articleHeader'>{introSection.title}</div>
+                  {introSection.text ? <p className='articleIntroText'>{introSection.text}</p> : null}
+                </div>
+              </section>
+            { content.map((section, key) => {
               return (
                 <section key={key}>
                   {key === 0 && section.image ? <div className='articleHeader' style={{backgroundImage: `url(${section.image})`}}/> : null}
@@ -65,12 +80,16 @@ class ArticleFullPage extends Component {
                 </section>
               );
             })}
-            <div className='tagSection'>
-              {renderTags(articleContent.geo, 'geo')}
-              {renderTags(articleContent.amenities, 'amenities')}
+              {
+                (articleContent.geo || articleContent.amenities) &&
+                <div className='tagSection'>
+                  {renderTags(articleContent.geo, 'geo')}
+                  {renderTags(articleContent.amenities, 'amenities')}
+                </div>
+              }
+          <ArticleFooter onAddTagClick={this.handleOnAddTagClick.bind(this)} />
             </div>
           </div>
-          <ArticleFooter />
         </section>
       );
     }
