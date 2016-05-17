@@ -1,18 +1,18 @@
 'use strict';
 
-import { VIEW_ARTICLE, VIEW_SEARCH } from '../constants/actionTypes';
+import { VIEW_ARTICLE } from '../constants/actionTypes';
 
 const initialState = {
-  articlePage: false,
   articleContent: {}
 };
 
 export default function article (state = initialState, action) {
   switch (action.type) {
     case VIEW_ARTICLE:
-      return {...state, articlePage: true, articleContent: action.content};
-    case VIEW_SEARCH:
-      return initialState;
+      return {
+        ...state,
+        articleContent: action.content
+      };
     default:
       return state;
   }

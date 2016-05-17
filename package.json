@@ -89,6 +89,7 @@
     "react-masonry-component": "^4.0.0",
     "react-redux": "^4.4.0",
     "react-router": "^2.3.0",
+    "react-router-redux": "^4.0.4",
     "react-scroll": "^1.0.15",
     "react-select": "^0.9.1",
     "react-slick": "^0.12.0",
