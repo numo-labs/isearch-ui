@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import configureStore from './store/configure-store.js';
-import Root from './containers/index.js';
+import Router from './containers/router.js';
 
 require('./normalise.css');
 
-const store = configureStore();
 const rootElement = document.getElementById('container');
 
 ReactDOM.render(
-  <Root store={store} />,
+  <Router />,
   rootElement
 );

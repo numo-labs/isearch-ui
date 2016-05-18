@@ -28,7 +28,7 @@ class ArticleFullPage extends Component {
   }
 
   render () {
-    const { articleContent, backToSearch } = this.props;
+    const { articleContent, goBack } = this.props;
     const tagColours = {
       amenities: 'rgba(12,125,125,0.6)',
       geo: 'rgba(12,125,12,0.6)'
@@ -57,7 +57,7 @@ class ArticleFullPage extends Component {
       const content = articleContent.sections.slice(1);
       return (
         <section>
-          <NavHeader backToSearch={backToSearch}/>
+          <NavHeader backToSearch={goBack}/>
           <div className='articleFullPageContainer'>
             <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
             <div className='articleContentContainer'>
@@ -98,7 +98,7 @@ class ArticleFullPage extends Component {
 
 ArticleFullPage.propTypes = {
   articleContent: PropTypes.object,
-  backToSearch: PropTypes.func,
+  goBack: PropTypes.func,
   getArticle: PropTypes.func,
   params: PropTypes.object,
   handleOnAddTagClick: PropTypes.func

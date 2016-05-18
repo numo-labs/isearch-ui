@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Masonry from 'react-masonry-component';
-import FilterTile from '../../../lib/filter-tile-yesno';
+import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import { ArticleTile } from '../../../lib/article-tile';
 import VisbilitySensor from 'react-visibility-sensor';
@@ -57,7 +57,6 @@ class SearchResults extends Component {
       filterVisibleState,
       onYesFilter,
       onFilterClick,
-      showAddMessage,
       totalPassengers,
       bucketId
     } = this.props;
@@ -93,7 +92,6 @@ class SearchResults extends Component {
                         filterVisible={filterVisibleState[item.tile.displayName]}
                         onYesFilter={onYesFilter}
                         onNoFilter={onFilterClick}
-                        showAddMessage={showAddMessage}
                         description={item.tile}
                         color={item.tile.color}
                       />
@@ -121,7 +119,6 @@ class SearchResults extends Component {
 SearchResults.propTypes = {
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
-  showAddMessage: PropTypes.func,
   items: PropTypes.array,
   filterVisibleState: PropTypes.object,
   setHotelPage: PropTypes.func,

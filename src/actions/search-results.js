@@ -11,9 +11,7 @@ import {
   UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
   VIEW_SEARCH,
-  SET_NUMBER_OF_ADULTS_TITLE,
-  SET_NUMBER_OF_CHILDREN_TITLE,
-  SET_DURATION_TITLE
+  UPDATE_HEADER_TITLES
 } from '../constants/actionTypes';
 import { addTiles } from './tags.js';
 
@@ -75,7 +73,7 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
               dispatch(fetchQuerySearchResults(id, page, size, ++attempt));
             }, 1000);
           } else {
-            dispatch(busySearching(true));
+            dispatch(searchError('No Results Found'));
           }
         });
     } else {
@@ -229,14 +227,8 @@ function combinePassengersForQuery (childAgeArray, numberOfChildren, numberOfAdu
 // function that builds the travel period for the query
 function constructTravelPeriodQuery (departureDate, duration) {
   const nights = (Number(duration.split(' ')[0]) * 7);
-  console.log(departureDate.split('-'));
-  const year = departureDate.split('-')[0];
-  const paddedMonth = ('0' + departureDate.split('-')[1]).slice(-2);
-  const day = departureDate.split('-')[2];
-  const formattedDate = `${year}-${paddedMonth}-${day}`;
-  console.log(formattedDate);
   const travelPeriod = {
-    departureBetween: [formattedDate],
+    departureBetween: [departureDate],
     nights: [nights]
   };
   return travelPeriod;
@@ -286,17 +278,30 @@ export function startSearch () {
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
         .then(json => {
-          console.log('json', json);
+          console.log('search response json', json);
           const searchResultId = json.data.viewer.searchResultId.id;
-          dispatch(saveSearchResultId(searchResultId));
-          dispatch(fetchQuerySearchResults(searchResultId, 0, 1000, 1));
+          if (searchResultId) {
+            dispatch(saveSearchResultId(searchResultId));
+            dispatch(fetchQuerySearchResults(searchResultId, 0, 1000, 1));
+          } else {
+            return;
+          }
         });
     }
   };
 }
-
 export const backToSearch = () => { return {type: VIEW_SEARCH}; };
+export const updateHeaderTitles = () => {
+  return (dispatch, getState) => {
+    const {
+      search: {
+        numberOfAdults,
+        numberOfChildren,
+        duration
+      }
+    } = getState();
+    dispatch(updateTitles(numberOfAdults, numberOfChildren, duration));
+  };
+};
 
-export const setNumberOfAdultsTitle = (numberOfAdultsTitle) => { return {type: SET_NUMBER_OF_ADULTS_TITLE, numberOfAdultsTitle}; };
-export const setNumberOfChildrenTitle = (numberOfChildrenTitle) => { return {type: SET_NUMBER_OF_CHILDREN_TITLE, numberOfChildrenTitle}; };
-export const setDurationTitle = (durationTitle) => { return {type: SET_DURATION_TITLE, durationTitle}; };
+export const updateTitles = (numberOfAdults, numberOfChildren, duration) => { return { type: UPDATE_HEADER_TITLES, numberOfAdults, numberOfChildren, duration }; };

@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react';
-import Header from '../../../lib/header/';
+import Header from '../../../lib/hero-image-header/';
 import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
-import SearchBar from '../../../lib/search';
+import SearchBar from '../../../lib/search-bar';
 import './style.css';
 
 class ISearch extends Component {
@@ -15,7 +15,7 @@ class ISearch extends Component {
       scrollY: 0,
       screenWidth: window.innerWidth
     };
-    this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
+    // this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
 
@@ -24,20 +24,24 @@ class ISearch extends Component {
     window.addEventListener('resize', this.handleResize);
   }
 
-  scrollToSavedPosition () {
-    if (this.state.scrollY > 0) {
-      window.scrollTo(0, this.state.scrollY);
-    }
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('resize', this.handleResize);
-  }
-
   handleResize () {
     this.setState({ screenWidth: window.innerWidth });
   }
 
+  // scrollToSavedPosition () {
+  //   if (this.state.scrollY > 0) {
+  //     window.scrollTo(0, this.state.scrollY);
+  //   }
+  // }
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  // componentDidUpdate (prevProps) {
+  //   const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !==
+  // this.props.articlePage); const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is
+  // search if (pageChanged && searchPage) { console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
+  // this.scrollToSavedPosition(); } }
   renderResults () {
     const {
       displayedItems,
@@ -62,19 +66,12 @@ class ISearch extends Component {
     );
   }
 
-  // componentDidUpdate (prevProps) {
-  //   const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !==
-  // this.props.articlePage); const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is
-  // search if (pageChanged && searchPage) { console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
-  // this.scrollToSavedPosition(); } }
   render () {
-    console.log('SCREEN WIDHT', window.innerWidth, this.state.screenWidth);
     const {
       tags,
       removeTag,
       setSearchString,
       startSearch,
-      autocompleteError,
       autocompleteOptions,
       searchString,
       getAutocompleteOptions,
@@ -97,9 +94,7 @@ class ISearch extends Component {
       setChildAge,
       setDepartureAirport,
       setDuration,
-      setDurationTitle,
-      setNumberOfAdultsTitle,
-      setNumberOfChildrenTitle,
+      updateHeaderTitles,
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       durationTitle,
@@ -122,9 +117,7 @@ class ISearch extends Component {
           setNumberOfAdults={setNumberOfAdults}
           setDepartureAirport={setDepartureAirport}
           setDuration={setDuration}
-          setDurationTitle={setDurationTitle}
-          setNumberOfAdultsTitle={setNumberOfAdultsTitle}
-          setNumberOfChildrenTitle={setNumberOfChildrenTitle}
+          updateHeaderTitles={updateHeaderTitles}
           numberOfAdultsTitle={numberOfAdultsTitle}
           numberOfChildrenTitle={numberOfChildrenTitle}
           durationTitle={durationTitle}
@@ -138,7 +131,6 @@ class ISearch extends Component {
               addSingleTag={addSingleTag}
               startSearch={startSearch}
               setSearchString={setSearchString}
-              autocompleteError={autocompleteError}
               autocompleteOptions={autocompleteOptions}
               searchString={searchString}
               getAutocompleteOptions={getAutocompleteOptions}
@@ -150,7 +142,6 @@ class ISearch extends Component {
             addSingleTag={addSingleTag}
             startSearch={startSearch}
             setSearchString={setSearchString}
-            autocompleteError={autocompleteError}
             autocompleteOptions={autocompleteOptions}
             searchString={searchString}
             getAutocompleteOptions={getAutocompleteOptions}
@@ -189,7 +180,6 @@ ISearch.propTypes = {
   filterVisibleState: PropTypes.object,
 
   // autocomplete
-  autocompleteError: PropTypes.string,
   autocompleteOptions: PropTypes.array,
   inAutoCompleteSearch: PropTypes.bool,
   getAutocompleteOptions: PropTypes.func,
@@ -199,17 +189,21 @@ ISearch.propTypes = {
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
   startSearch: PropTypes.func,
-  viewArticle: PropTypes.func,
-  onAddArticleTag: PropTypes.func,
   addSearchStringTag: PropTypes.func,
+
+  // hotel
+  setHotelPage: PropTypes.func,
+  hotelInView: PropTypes.object,
+
+  // article
+  onAddArticleTag: PropTypes.func,
+  viewArticle: PropTypes.func,
 
   // tags
   tags: PropTypes.array,
   addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
-  setHotelPage: PropTypes.func,
-  hotelInView: PropTypes.object,
 
   // travel info
   setNumberOfChildren: PropTypes.func,
@@ -226,16 +220,11 @@ ISearch.propTypes = {
   duration: PropTypes.string,
   departureDate: PropTypes.string,
   setChildAge: PropTypes.func,
-  setNumberOfAdultsTitle: PropTypes.func,
-  setNumberOfChildrenTitle: PropTypes.func,
-  setDurationTitle: PropTypes.func,
   numberOfAdultsTitle: PropTypes.string,
   numberOfChildrenTitle: PropTypes.string,
   durationTitle: PropTypes.string,
+  updateHeaderTitles: PropTypes.string,
   setDepartureDate: PropTypes.func
-
-  // showAddMessage: PropTypes.func,
-  // hideAddMessage: PropTypes.func,
 };
 
 export default ISearch;

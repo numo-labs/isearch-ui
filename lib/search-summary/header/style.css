@@ -20,7 +20,7 @@
   height: 2em;
   width: 2em;
   cursor: pointer;
-  background-image: url('../assets/pencil.png');
+  background-image: url('../../../src/assets/pencil.png');
   background-repeat: no-repeat;
   background-position: center;
   display: inline-block;
