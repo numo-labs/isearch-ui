@@ -1,7 +1,23 @@
 # isearch-ui
 The ui for inspirational search!
 
-**NOTE** Currently the `demo` branch is the default branch which is used for Continuous Integration and deployment
+**NOTE**
+
+Every time a new version is deployed to s3 the following code needs to be added to the s3 static permission hosting redirection rules.
+
+```
+<RoutingRule>
+<Condition>
+  <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals >
+  <KeyPrefixEquals>isearch/0.14</KeyPrefixEquals>
+</Condition>
+<Redirect>
+  <ReplaceKeyWith>isearch/0.14/index.html</ReplaceKeyWith>
+</Redirect>
+</RoutingRule>
+```
+
+Replace '0.14' with the name of the new version.
 
 ## Adding a component
 
