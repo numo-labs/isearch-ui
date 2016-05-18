@@ -6,14 +6,15 @@ import * as SearchActions from '../actions/search-results';
 import * as HotelActions from '../actions/hotel';
 import * as ArticleActions from '../actions/article';
 import * as TravelInfoActions from '../actions/travel-info';
-
+import { routerActions } from 'react-router-redux';
 const Actions = {
   ...TagActions,
   ...SearchActions,
   ...AutocompleteActions,
   ...ArticleActions,
   ...HotelActions,
-  ...TravelInfoActions
+  ...TravelInfoActions,
+  ...routerActions
 };
 
 function mapStateToProps (state) {

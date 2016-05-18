@@ -19,7 +19,7 @@ import { addTiles } from './tags.js';
 import * as graphqlService from '../services/graphql';
 import { formatQuery } from './helpers.js';
 import _ from 'lodash';
-
+import { push } from 'react-router-redux';
 /**
 * Gets the id of the searchBucket and initiates a graphql query to retrieve
 * the search results
@@ -282,6 +282,7 @@ export function startSearch () {
           const searchResultId = json.data.viewer.searchResultId.id;
           if (searchResultId) {
             dispatch(saveSearchResultId(searchResultId));
+            dispatch(push(`/search/${searchResultId}`));
             dispatch(fetchQuerySearchResults(searchResultId, 0, 1000, 1));
           } else {
             return;

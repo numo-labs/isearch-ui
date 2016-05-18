@@ -9,7 +9,7 @@
   "scripts": {
     "test": "npm run lint && npm run generate-graphql-schema && npm run coverage",
     "dev:build": "webpack --config ./webpack.config.js",
-    "dev:serve": "webpack-dev-server --config ./webpack.config.js",
+    "dev:serve": "webpack-dev-server --history-api-fallback --config ./webpack.config.js",
     "lint": "semistandard",
     "lib:test": "mocha ./lib/**/*.test.js --compilers js:babel-register",
     "src:test": "npm run generate-graphql-schema && mocha ./test/**/*.test.js --compilers js:babel-register",
@@ -79,6 +79,7 @@
   },
   "dependencies": {
     "file-loader": "^0.8.5",
+    "history": "^2.1.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.11.1",
     "lodash.shuffle": "^4.0.0",

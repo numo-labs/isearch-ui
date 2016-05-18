@@ -1,7 +1,7 @@
 'use strict';
 
 import { SET_HOTEL_PAGE } from '../constants/actionTypes';
-
+import { LOCATION_CHANGE } from 'react-router-redux';
 const initialState = {
   hotelInView: {
     description: '',
@@ -96,6 +96,10 @@ export default function hotel (state = initialState, action) {
       return {
         ...state,
         hotelInView: action.hotel
+      };
+    case LOCATION_CHANGE:
+      return {
+        ...initialState
       };
     default:
       return state;

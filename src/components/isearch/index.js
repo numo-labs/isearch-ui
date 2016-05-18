@@ -12,15 +12,13 @@ class ISearch extends Component {
   constructor () {
     super();
     this.state = {
-      scrollY: 0,
       screenWidth: window.innerWidth
     };
-    // this.scrollToSavedPosition = this.scrollToSavedPosition.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
 
   componentWillMount () {
-    this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
+    this.props.tags.length === 0 && this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
     window.addEventListener('resize', this.handleResize);
   }
 
@@ -28,20 +26,10 @@ class ISearch extends Component {
     this.setState({ screenWidth: window.innerWidth });
   }
 
-  // scrollToSavedPosition () {
-  //   if (this.state.scrollY > 0) {
-  //     window.scrollTo(0, this.state.scrollY);
-  //   }
-  // }
   componentWillUnmount () {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  // componentDidUpdate (prevProps) {
-  //   const pageChanged = (prevProps.hotelPage !== this.props.hotelPage) || (prevProps.articlePage !==
-  // this.props.articlePage); const searchPage = !this.props.hotelPage && !this.props.articlePage; // current page is
-  // search if (pageChanged && searchPage) { console.log('pageChanged', pageChanged, searchPage, this.state.scrollY);
-  // this.scrollToSavedPosition(); } }
   renderResults () {
     const {
       displayedItems,
@@ -51,10 +39,12 @@ class ISearch extends Component {
       setHotelPage,
       numberOfChildrenTitle,
       numberOfAdultsTitle,
-      bucketId
+      bucketId,
+      push: changeRoute
     } = this.props;
     return (
       <SearchResults
+        changeRoute={changeRoute}
         items={displayedItems}
         onYesFilter={onYesFilter}
         onFilterClick={onFilterClick}
@@ -224,7 +214,10 @@ ISearch.propTypes = {
   numberOfChildrenTitle: PropTypes.string,
   durationTitle: PropTypes.string,
   updateHeaderTitles: PropTypes.string,
-  setDepartureDate: PropTypes.func
+  setDepartureDate: PropTypes.func,
+
+  // routing
+  push: PropTypes.func
 };
 
 export default ISearch;

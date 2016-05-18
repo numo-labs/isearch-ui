@@ -58,7 +58,8 @@ class SearchResults extends Component {
       onYesFilter,
       onFilterClick,
       totalPassengers,
-      bucketId
+      bucketId,
+      changeRoute
     } = this.props;
     return (
       <Masonry
@@ -72,7 +73,7 @@ class SearchResults extends Component {
             if (item.type === 'packageOffer') {
               return (
                 <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem'>
+                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${bucketId}/${item.id}`)}>
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
@@ -102,8 +103,8 @@ class SearchResults extends Component {
               } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                    <div key={index} className='gridItem'>
-                      <ArticleTile {...item} bucketId={bucketId} />
+                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${bucketId}/${item.id}`)}>
+                      <ArticleTile {...item} />
                     </div>
                   </VisbilitySensor>
                 );
@@ -122,9 +123,9 @@ SearchResults.propTypes = {
   items: PropTypes.array,
   filterVisibleState: PropTypes.object,
   setHotelPage: PropTypes.func,
-  hotelInView: PropTypes.func,
   totalPassengers: PropTypes.number,
-  bucketId: PropTypes.string
+  bucketId: PropTypes.string,
+  changeRoute: PropTypes.func
 };
 
 export default SearchResults;
