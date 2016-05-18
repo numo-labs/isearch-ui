@@ -55,5 +55,7 @@ module.exports = {
   plugins: [new webpack.HotModuleReplacementPlugin()],
   inline: true,
   progress: true,
-  colors: true
+  colors: true,
+  historyApiFallback: true,
+  contentBase: '.'
 };

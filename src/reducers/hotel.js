@@ -1,9 +1,8 @@
 'use strict';
 
-import { VIEW_HOTEL, VIEW_SEARCH, SET_HOTEL_PAGE } from '../constants/actionTypes';
-
+import { SET_HOTEL_PAGE } from '../constants/actionTypes';
+import { LOCATION_CHANGE } from 'react-router-redux';
 const initialState = {
-  hotelPage: false,
   hotelInView: {
     description: '',
     hotel: {
@@ -93,20 +92,14 @@ const initialState = {
 
 export default function hotel (state = initialState, action) {
   switch (action.type) {
-    case VIEW_HOTEL:
-      return {
-        ...state,
-        hotelPage: true
-      };
-    case VIEW_SEARCH:
-      return {
-        ...state,
-        hotelPage: false
-      };
     case SET_HOTEL_PAGE:
       return {
         ...state,
         hotelInView: action.hotel
+      };
+    case LOCATION_CHANGE:
+      return {
+        ...initialState
       };
     default:
       return state;

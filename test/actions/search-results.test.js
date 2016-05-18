@@ -5,6 +5,7 @@ import {
   // TILES_ADD_TILES,
   // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
+import moment from 'moment';
 
 import { MUTATION_START_SEARCH } from '../../src/constants/mutations.js';
 
@@ -39,7 +40,7 @@ const initialState = {
     childAge4: '',
     departureAirport: '',
     duration: '',
-    departureDate: '',
+    departureDate: moment(),
     passengerBirthdays: [],
     numberOfChildrenTitle: '2',
     numberOfAdultsTitle: '2',
@@ -68,7 +69,16 @@ describe('actions', function () {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
-        { type: SAVE_SEARCH_RESULT_ID, id: 12345 }
+        { type: SAVE_SEARCH_RESULT_ID, id: 12345 },
+        {
+          'payload': {
+            'args': [
+              '/search/12345'
+            ],
+            'method': 'push'
+          },
+          'type': '@@router/CALL_HISTORY_METHOD'
+        }
       ];
       store.dispatch(actions.startSearch());
       graphqlService.query.lastCall.returned

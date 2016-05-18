@@ -1,8 +1,6 @@
 # isearch-ui
 The ui for inspirational search!
 
-**NOTE** Currently the `demo` branch is the default branch which is used for Continuous Integration and deployment
-
 ## Adding a component
 
 The eventual aim is to abstract all the individual components (filter-tile, package-tile) into separate npm modules. Currently the main elements of the project are structured as follows:
@@ -60,6 +58,28 @@ This will build the bundle and put the index.html and bundle.js in to the public
 
 **We will use continuous integration with Codeship so the deployment will be done after code has been merged into the demo branch**
 
+
+## Routing
+
+This project uses 'react-router' and 'react-router-redux' for routing. The possible routes are specified in the file `src/containers/router.js`.
+
+**NOTE**
+
+Every time a new version is deployed to s3 the following code needs to be added to the s3 static permission hosting redirection rules - replace '0.14' with the name of the new version..
+
+```
+<RoutingRule>
+<Condition>
+  <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals >
+  <KeyPrefixEquals>isearch/0.14</KeyPrefixEquals>
+</Condition>
+<Redirect>
+  <ReplaceKeyWith>isearch/0.14/index.html</ReplaceKeyWith>
+</Redirect>
+</RoutingRule>
+```
+
+This is needed in order for s3 to not issue a `404 Not Found` error for changes to the browser URL (which is modified by react-router). The loading of the correct content is handled by the router rather than needing a server to serve the correct content based on url.
 
 ## Setting up the React Webpack Babel Project
 
@@ -163,7 +183,6 @@ Now let's add a linting script to our `package.json` which is simply:
 ```json
 "lint": "semistandard"
 ```
-
 
 ## Testing
 

@@ -3,12 +3,14 @@ import search from './search.js';
 import article from './article.js';
 import hotel from './hotel.js';
 import travelInfo from './travel-info';
+import { routerReducer } from 'react-router-redux';
 
 const rootReducer = combineReducers({
   search,
   hotel,
   article,
-  travelInfo
+  travelInfo,
+  routing: routerReducer
 });
 
 export default rootReducer;
