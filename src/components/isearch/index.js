@@ -18,7 +18,7 @@ class ISearch extends Component {
     this.handleResize = this.handleResize.bind(this);
   }
   componentWillMount () {
-    this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
+    this.props.tags.length === 0 && this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
     window.addEventListener('resize', this.handleResize);
   }
   handleResize () {
