@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-
 // components
 import ISearch from '../containers/isearch.js';
 import ArticleFullPage from '../containers/article.js';
@@ -23,8 +22,8 @@ export default class Root extends Component {
           <Route path='/' component={App} ignoreScrollBehavior>
             <IndexRoute component={ISearch}/>
             <Route path='search/:bucketId' component={ISearch}/>
-            <Route path='article/:bucketId/:itemId' component={ArticleFullPage} scrollToTop/>
-            <Route path='hotel/:bucketId/:itemId' component={HotelPage} scrollToTop/>
+            <Route path='article/:bucketId/:itemId' component={ArticleFullPage} />
+            <Route path='hotel/:bucketId/:itemId' component={HotelPage} />
           </Route>
         </Router>
       </Provider>

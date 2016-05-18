@@ -69,7 +69,16 @@ describe('actions', function () {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
-        { type: SAVE_SEARCH_RESULT_ID, id: 12345 }
+        { type: SAVE_SEARCH_RESULT_ID, id: 12345 },
+        {
+          'payload': {
+            'args': [
+              '/search/12345'
+            ],
+            'method': 'push'
+          },
+          'type': '@@router/CALL_HISTORY_METHOD'
+        }
       ];
       store.dispatch(actions.startSearch());
       graphqlService.query.lastCall.returned
