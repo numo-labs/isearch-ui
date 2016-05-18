@@ -3,7 +3,6 @@ import Header from '../../../lib/hero-image-header/';
 import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
-import HotelPage from '../hotel';
 import LoadingSpinner from '../../../lib/spinner';
 import SearchBar from '../../../lib/search-bar';
 import './style.css';
@@ -17,24 +16,26 @@ class ISearch extends Component {
     };
     this.handleResize = this.handleResize.bind(this);
   }
+
   componentWillMount () {
     this.props.tags.length === 0 && this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
     window.addEventListener('resize', this.handleResize);
   }
+
   handleResize () {
-    this.setState({screenWidth: window.innerWidth});
+    this.setState({ screenWidth: window.innerWidth });
   }
+
   componentWillUnmount () {
     window.removeEventListener('resize', this.handleResize);
   }
+
   renderResults () {
     const {
       displayedItems,
       onYesFilter,
       onFilterClick,
       filterVisibleState,
-      viewHotel,
-      viewArticle,
       setHotelPage,
       numberOfChildrenTitle,
       numberOfAdultsTitle,
@@ -48,15 +49,6 @@ class ISearch extends Component {
         onYesFilter={onYesFilter}
         onFilterClick={onFilterClick}
         filterVisibleState={filterVisibleState}
-        viewArticle={(article) => {
-          this.setState({scrollY: window.scrollY});
-          window.scrollTo(0, 0);
-          viewArticle(article);
-        }}
-        viewHotel={(hotel) => {
-          this.setState({scrollY: window.scrollY});
-          viewHotel(hotel);
-        }}
         setHotelPage={setHotelPage}
         totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
         bucketId={bucketId}
@@ -76,13 +68,8 @@ class ISearch extends Component {
       inAutoCompleteSearch,
       addSingleTag,
       clearSearchString,
-      backToSearch,
-      // articlePage,
-      // articleContent,
       error,
       loading,
-      hotelPage,
-      hotelInView,
       numberOfChildren,
       numberOfAdults,
       childAge1,
@@ -103,92 +90,69 @@ class ISearch extends Component {
       durationTitle,
       setDepartureDate
     } = this.props;
-
-    if (hotelPage) {
-      return (
-        <HotelPage
-          backToSearch={backToSearch}
-          packageOffer={hotelInView}
+    return (
+      <section>
+        <SearchSummary
+          numberOfChildren={numberOfChildren}
+          numberOfAdults={numberOfAdults}
+          setChildAge={setChildAge}
+          childAge1={childAge1}
+          childAge2={childAge2}
+          childAge3={childAge3}
+          childAge4={childAge4}
+          departureAirport={departureAirport}
+          duration={duration}
+          departureDate={departureDate}
+          setNumberOfChildren={setNumberOfChildren}
+          setNumberOfAdults={setNumberOfAdults}
+          setDepartureAirport={setDepartureAirport}
+          setDuration={setDuration}
+          updateHeaderTitles={updateHeaderTitles}
+          numberOfAdultsTitle={numberOfAdultsTitle}
+          numberOfChildrenTitle={numberOfChildrenTitle}
+          durationTitle={durationTitle}
+          setDepartureDate={setDepartureDate}
+          startSearch={startSearch}
         />
-      );
-    // } else if (articlePage) {
-    //   return (
-    //     <ArticleFullPage
-    //       articleContent={articleContent}
-    //       onAddArticleTag={addSingleTag}
-    //       backToSearch={backToSearch}
-    //       handleOnAddTagClick={() => {
-    //         this.setState({scrollY: 800});
-    //         this.props.addSingleTag(articleContent.name, articleContent.id);
-    //         this.props.backToSearch();
-    //       }}
-    //     />
-    //   );
-    } else {
-      return (
-        <section>
-          <SearchSummary
-            numberOfChildren={numberOfChildren}
-            numberOfAdults={numberOfAdults}
-            setChildAge={setChildAge}
-            childAge1={childAge1}
-            childAge2={childAge2}
-            childAge3={childAge3}
-            childAge4={childAge4}
-            departureAirport={departureAirport}
-            duration={duration}
-            departureDate={departureDate}
-            setNumberOfChildren={setNumberOfChildren}
-            setNumberOfAdults={setNumberOfAdults}
-            setDepartureAirport={setDepartureAirport}
-            setDuration={setDuration}
-            updateHeaderTitles={updateHeaderTitles}
-            numberOfAdultsTitle={numberOfAdultsTitle}
-            numberOfChildrenTitle={numberOfChildrenTitle}
-            durationTitle={durationTitle}
-            setDepartureDate={setDepartureDate}
-            startSearch={startSearch}
-          />
-          {
-            this.state.screenWidth < 553 ? [
-              <Header searchBar={false}/>,
-              <SearchBar
-                addSingleTag={addSingleTag}
-                startSearch={startSearch}
-                setSearchString={setSearchString}
-                autocompleteOptions={autocompleteOptions}
-                searchString={searchString}
-                getAutocompleteOptions={getAutocompleteOptions}
-                inAutoCompleteSearch={inAutoCompleteSearch}
-                clearSearchString={clearSearchString}
-              />
-            ]
+        {
+          this.state.screenWidth < 553 ? [
+            <Header searchBar={false}/>,
+            <SearchBar
+              addSingleTag={addSingleTag}
+              startSearch={startSearch}
+              setSearchString={setSearchString}
+              autocompleteOptions={autocompleteOptions}
+              searchString={searchString}
+              getAutocompleteOptions={getAutocompleteOptions}
+              inAutoCompleteSearch={inAutoCompleteSearch}
+              clearSearchString={clearSearchString}
+            />
+          ]
             : <Header
-                addSingleTag={addSingleTag}
-                startSearch={startSearch}
-                setSearchString={setSearchString}
-                autocompleteOptions={autocompleteOptions}
-                searchString={searchString}
-                getAutocompleteOptions={getAutocompleteOptions}
-                inAutoCompleteSearch={inAutoCompleteSearch}
-                clearSearchString={clearSearchString}
-                searchBar
-              />
-          }
-          <Tags
-            tags={tags}
-            removeTag={removeTag}
+            addSingleTag={addSingleTag}
+            startSearch={startSearch}
+            setSearchString={setSearchString}
+            autocompleteOptions={autocompleteOptions}
+            searchString={searchString}
+            getAutocompleteOptions={getAutocompleteOptions}
+            inAutoCompleteSearch={inAutoCompleteSearch}
+            clearSearchString={clearSearchString}
+            searchBar
           />
-          { loading &&
-            <div className='spinnerContainer'>
-              <LoadingSpinner/>
-            </div>
-          }
-          { error && <div className='errorMessage'>{error}</div> }
-          { this.renderResults() }
-        </section>
-      );
-    }
+        }
+        <Tags
+          tags={tags}
+          removeTag={removeTag}
+        />
+        { loading &&
+        <div className='spinnerContainer'>
+          <LoadingSpinner/>
+        </div>
+        }
+        { error && <div className='errorMessage'>{error}</div> }
+        { this.renderResults() }
+      </section>
+    );
   }
 }
 
@@ -215,20 +179,15 @@ ISearch.propTypes = {
   setSearchString: PropTypes.func,
   searchString: PropTypes.string,
   startSearch: PropTypes.func,
-  backToSearch: PropTypes.func,
   addSearchStringTag: PropTypes.func,
 
   // hotel
-  hotelPage: PropTypes.bool,
-  viewHotel: PropTypes.func,
   setHotelPage: PropTypes.func,
   hotelInView: PropTypes.object,
 
   // article
   onAddArticleTag: PropTypes.func,
   viewArticle: PropTypes.func,
-  articlePage: PropTypes.bool,
-  articleContent: PropTypes.object,
 
   // tags
   tags: PropTypes.array,

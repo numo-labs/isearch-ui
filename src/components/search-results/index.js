@@ -16,7 +16,6 @@ const masonryOptions = {
 class SearchResults extends Component {
   handleVisibility (isVisible, item) {
     if (dataLayer && isVisible && item.type === 'packageOffer') {
-      // console.log('datalayer: ', item.packageOffer.provider.reference);
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -58,9 +57,6 @@ class SearchResults extends Component {
       filterVisibleState,
       onYesFilter,
       onFilterClick,
-      viewArticle,
-      viewHotel,
-      setHotelPage,
       totalPassengers,
       bucketId,
       changeRoute
@@ -81,8 +77,6 @@ class SearchResults extends Component {
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
-                      viewHotel={viewHotel}
-                      setHotelPage={setHotelPage}
                       totalPassengers={totalPassengers}
                       bucketId={bucketId}
                       itemId={item.id}
@@ -110,7 +104,7 @@ class SearchResults extends Component {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                     <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${bucketId}/${item.id}`)}>
-                      <ArticleTile {...item} bucketId={bucketId} viewArticle={viewArticle}/>
+                      <ArticleTile {...item} />
                     </div>
                   </VisbilitySensor>
                 );
@@ -128,8 +122,6 @@ SearchResults.propTypes = {
   onFilterClick: PropTypes.func,
   items: PropTypes.array,
   filterVisibleState: PropTypes.object,
-  viewHotel: PropTypes.func,
-  viewArticle: PropTypes.func,
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
   bucketId: PropTypes.string,
