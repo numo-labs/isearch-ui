@@ -12,7 +12,8 @@ import {
   SET_AUTOCOMPLETE_OPTIONS,
   SET_AUTOCOMPLETE_IN_SEARCH,
   CLEAR_SEARCH_STRING,
-  UPDATE_HEADER_TITLES
+  UPDATE_HEADER_TITLES,
+  SAVE_SOCKET_CONNECTION_ID
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
@@ -260,6 +261,18 @@ describe('Search Reducer', () => {
         numberOfAdultsTitle: 2,
         numberOfChildrenTitle: 0,
         durationTitle: '1 uge'
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+  });
+  describe('Web socket connection id save action', () => {
+    it(`SAVE_SOCKET_CONNECTION_ID -> saves action.id as socketConnectionId`, (done) => {
+      const action = { type: SAVE_SOCKET_CONNECTION_ID, id: '12345' };
+      const state = reducer(undefined, action);
+      const expectedState = {
+        ...initialState,
+        socketConnectionId: '12345'
       };
       expect(state).to.deep.equal(expectedState);
       done();

@@ -47,13 +47,14 @@ const initialState = {
   bucketId: '12345'
 };
 
-describe('actions', function () {
+describe('Search Results Actions', () => {
   afterEach(function (done) {
     simple.restore();
     done();
   });
-  describe('startSearch', function () {
-    it('should dispatch an action to set loading to true and an action fetchQuerySearchResults if there are tags', function (done) {
+  describe('search actions', () => {
+    it(`startSearch: should dispatch an action to set loading to true and an
+        action fetchQuerySearchResults if there are tags`, function (done) {
       this.timeout(10100);
       const json = {
         data: {
@@ -89,8 +90,38 @@ describe('actions', function () {
         .catch(done);
     });
   });
-  describe('Web Socket connection actions', function () {
-    it('saveSocketConnectionId: should dispatch the action to save the search result id', function (done) {
+  it(`retrieveSearchResults should return an object with type
+     RECEIVE_SEARCH_RESULT and items, append and initialSearch keys`, done => {
+    const store = mockStore(initialState);
+    const expectedActions = [
+      {
+        type: RECEIVE_SEARCH_RESULT,
+        items: [{}],
+        initialSearch: false,
+        append: false
+      }
+    ];
+    store.dispatch(actions.receiveSearchResult([{}], false, false));
+    expect(store.getActions()).to.deep.equal(expectedActions);
+    done();
+  });
+  it(`retrieveSearchResults should default append to false`, done => {
+    const store = mockStore(initialState);
+    const expectedActions = [
+      {
+        type: RECEIVE_SEARCH_RESULT,
+        items: [{}],
+        initialSearch: false,
+        append: false
+      }
+    ];
+    store.dispatch(actions.receiveSearchResult([{}], false));
+    expect(store.getActions()).to.deep.equal(expectedActions);
+    done();
+  });
+  describe('Web Socket connection actions', () => {
+    it(`saveSocketConnectionId: should dispatch the action to save the
+        search result id`, done => {
       const store = mockStore(initialState);
       const id = '12345';
       const expectedActions = [
@@ -104,7 +135,7 @@ describe('actions', function () {
       done();
     });
     it(`saveSearchResult: should dispatch an action to save the search results
-        if the searchId of the data matches the bucketId`, function (done) {
+        if the searchId of the data matches the bucketId`, done => {
       const result = {
         graphql: {
           id: '12345',
@@ -126,7 +157,7 @@ describe('actions', function () {
       done();
     });
     it(`saveSearchResult: should ignore the data if the searchId of the data
-        does not match the bucketId`, function (done) {
+        does not match the bucketId`, done => {
       const result = {
         graphql: {
           id: '12345',
