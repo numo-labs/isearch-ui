@@ -20,7 +20,7 @@ class ISearch extends Component {
   componentWillMount () {
     // react router calls componentWillMount every time the user navigates back to the search page
     // and we don't want to reload the homepage tag every time
-    this.props.tags.length === 0 && this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
+    // this.props.tags.length === 0 && this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
     window.addEventListener('resize', this.handleResize);
   }
 

@@ -26,10 +26,7 @@ export const SET_AUTOCOMPLETE_IN_SEARCH = 'SET_AUTOCOMPLETE_IN_SEARCH';
 export const SEARCH_ERROR = 'SEARCH_ERROR';
 
 // temp routing
-
 export const VIEW_ARTICLE = 'VIEW_ARTICLE';
-export const VIEW_HOTEL = 'VIEW_HOTEL';
-export const VIEW_SEARCH = 'VIEW_SEARCH';
 
 // hotel page
 export const SET_HOTEL_PAGE = 'SET_HOTEL_PAGE';
@@ -43,3 +40,6 @@ export const SET_DEPARTURE_AIRPORT = 'SET_DEPARTURE_AIRPORT';
 export const SET_DURATION = 'SET_DURATION';
 export const SET_PASSENGER_BIRTHDAYS = 'SET_PASSENGER_BIRTHDAYS';
 export const UPDATE_HEADER_TITLES = 'UPDATE_HEADER_TITLES';
+
+// web sockets
+export const SAVE_SOCKET_CONNECTION_ID = 'SAVE_SOCKET_CONNECTION_ID';

@@ -11,7 +11,8 @@ import {
   UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
   VIEW_SEARCH,
-  UPDATE_HEADER_TITLES
+  UPDATE_HEADER_TITLES,
+  SAVE_SOCKET_CONNECTION_ID
 } from '../constants/actionTypes';
 import { addTiles } from './tags.js';
 
@@ -305,10 +306,17 @@ export const updateHeaderTitles = () => {
   };
 };
 
-export const updateTitles = (numberOfAdults, numberOfChildren, duration) => { return { type: UPDATE_HEADER_TITLES, numberOfAdults, numberOfChildren, duration }; };
+export const updateTitles = (numberOfAdults, numberOfChildren, duration) => {
+  return { type: UPDATE_HEADER_TITLES, numberOfAdults, numberOfChildren, duration };
+};
 
 export const saveSearchResult = (result) => {
   return (dispatch, getState) => {
-    console.log('result', result);
+    const { search: { bucketId } } = getState();
+    if (result.graphql.id === bucketId) { // check data corresponds to the current search
+      return dispatch(receiveSearchResult(result.graphql.items, false, true));
+    }
   };
 };
+
+export const saveSocketConnectionId = id => { return { type: SAVE_SOCKET_CONNECTION_ID, id }; };

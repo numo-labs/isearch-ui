@@ -15,7 +15,8 @@ import {
   SET_AUTOCOMPLETE_IN_SEARCH,
   CLEAR_SEARCH_STRING,
   UPDATE_HEADER_TITLES,
-  SAVE_SEARCH_RESULT_ID
+  SAVE_SEARCH_RESULT_ID,
+  SAVE_SOCKET_CONNECTION_ID
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -56,7 +57,8 @@ export const initialState = {
   // durationTitle: '2 uger',
   // bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
   durationTitle: '1 uger',
-  isInitialTag: false
+  isInitialTag: false,
+  socketConnectionId: ''
 };
 
 function scrambleSearchItems (items, state, append) {
@@ -182,6 +184,11 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         bucketId: action.id
+      };
+    case SAVE_SOCKET_CONNECTION_ID:
+      return {
+        ...state,
+        socketConnectionId: action.id
       };
     default:
       return state;
