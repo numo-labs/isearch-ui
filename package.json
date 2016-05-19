@@ -96,7 +96,7 @@
     "react-slick": "^0.12.0",
     "react-typeahead": "^1.1.9",
     "react-visibility-sensor": "^3.0.0",
-    "redux": "^3.3.1",
+    "redux": "^3.5.2",
     "request": "^2.65.0",
     "uuid": "^2.0.2"
   },
@@ -112,7 +112,7 @@
       "afterEach",
       "before",
       "beforeEach",
-      "Primus"
+      "primus"
     ],
     "parser": "babel-eslint"
   }

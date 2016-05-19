@@ -1,5 +1,6 @@
 // npm
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 // components
@@ -12,7 +13,15 @@ import App from '../components/app';
 import { store } from '../store/configure-store.js';
 const history = syncHistoryWithStore(browserHistory, store);
 
+// web socket service
+import * as websocketService from '../services/websockets.js';
+
 export default class Root extends Component {
+
+  componentDidMount () {
+    websocketService.initialise((actions) => bindActionCreators(actions, store.dispatch));
+  }
+
   render () {
     return (
       <Router history={history}>

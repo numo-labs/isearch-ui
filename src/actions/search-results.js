@@ -306,3 +306,9 @@ export const updateHeaderTitles = () => {
 };
 
 export const updateTitles = (numberOfAdults, numberOfChildren, duration) => { return { type: UPDATE_HEADER_TITLES, numberOfAdults, numberOfChildren, duration }; };
+
+export const saveSearchResult = (result) => {
+  return (dispatch, getState) => {
+    console.log('result', result);
+  };
+};
