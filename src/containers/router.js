@@ -1,7 +1,7 @@
 // npm
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 // components
 import ISearch from '../containers/isearch.js';
@@ -12,13 +12,17 @@ import App from '../components/app';
 // store
 import configureStore from '../store/configure-store.js';
 const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
+
+// for when browserHistory is used history
+// import { history } from '../history/configure-history.js';
+
+const syncedHistory = syncHistoryWithStore(hashHistory, store);
 
 export default class Root extends Component {
   render () {
     return (
       <Provider store={store}>
-        <Router history={history}>
+        <Router history={syncedHistory}>
           <Route path='/' component={App} ignoreScrollBehavior>
             <IndexRoute component={ISearch}/>
             <Route path='search/:bucketId' component={ISearch}/>

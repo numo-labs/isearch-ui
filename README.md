@@ -45,20 +45,6 @@ To move a component out into its own npm module
 * Copy over the contents of the component from the lib folder
 * Create a font folder and copy over the necessary font files
 
-## Deployment to S3
-
-A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.  Currently the bucket folder is set 'isearch/' plus the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be 'isearch/0.1'. You also need to check you have the AWS CLI set up with the correct access keys. Then, in your terminal type:
-
-```js
-npm run deploy
-
-```
-
-This will build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed (to prevent caching by s3)and the index.html file will be built from the template in the src folder ('index.template.html'). The contents of the public folder will then be uploaded to the specified Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
-
-**We will use continuous integration with Codeship so the deployment will be done after code has been merged into the demo branch**
-
-
 ## Routing
 
 This project uses 'react-router' and 'react-router-redux' for routing. The possible routes are specified in the file `src/containers/router.js`.
@@ -80,6 +66,26 @@ Every time a new version is deployed to s3 the following code needs to be added 
 ```
 
 This is needed in order for s3 to not issue a `404 Not Found` error for changes to the browser URL (which is modified by react-router). The loading of the correct content is handled by the router rather than needing a server to serve the correct content based on url.
+
+
+## Deployment to S3
+
+A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.  
+
+**Currently the bucket folder is set 'isearch/' plus the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be 'isearch/0.1'.  
+You also need to update the basename path in config.js with the new version number**
+
+You also need to check you have the AWS CLI set up with the correct access keys. Then, in your terminal type:
+
+```js
+npm run deploy
+
+```
+
+This will build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed (to prevent caching by s3)and the index.html file will be built from the template in the src folder ('index.template.html'). The contents of the public folder will then be uploaded to the specified Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
+
+**We will use continuous integration with Codeship so the deployment will be done after code has been merged into the demo branch**
+
 
 ## Setting up the React Webpack Babel Project
 
