@@ -7,6 +7,7 @@ export function initialise (actionCreatorBinder) {
   } = actionCreatorBinder(SearchResultActions);
 
   primus.on('data', function received (data) {
+    console.log('incoming socket data', data);
     if (data.connection) {
       saveSocketConnectionId(data.connection);
     } else {

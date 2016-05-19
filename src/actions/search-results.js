@@ -10,7 +10,6 @@ import {
   SAVE_SEARCH_RESULT_ID,
   UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
-  VIEW_SEARCH,
   UPDATE_HEADER_TITLES,
   SAVE_SOCKET_CONNECTION_ID
 } from '../constants/actionTypes';
@@ -284,7 +283,8 @@ export function startSearch () {
           if (searchResultId) {
             dispatch(saveSearchResultId(searchResultId));
             dispatch(push(`/search/${searchResultId}`));
-            dispatch(fetchQuerySearchResults(searchResultId, 0, 1000, 1));
+            // no longer need to poll for results!
+            // dispatch(fetchQuerySearchResults(searchResultId, 0, 1000, 1));
           } else {
             return;
           }
@@ -292,7 +292,7 @@ export function startSearch () {
     }
   };
 }
-export const backToSearch = () => { return {type: VIEW_SEARCH}; };
+
 export const updateHeaderTitles = () => {
   return (dispatch, getState) => {
     const {
@@ -313,7 +313,7 @@ export const updateTitles = (numberOfAdults, numberOfChildren, duration) => {
 export const saveSearchResult = (result) => {
   return (dispatch, getState) => {
     const { search: { bucketId } } = getState();
-    if (result.graphql.id === bucketId) { // check data corresponds to the current search
+    if (result.graphql.searchId === bucketId) { // check data corresponds to the current search
       return dispatch(receiveSearchResult(result.graphql.items, false, true));
     }
   };
