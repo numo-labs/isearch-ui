@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from './containers/router.js';
+import App from './containers/app.js';
 
 require('./normalise.css');
 
 const rootElement = document.getElementById('container');
 
 ReactDOM.render(
-  <Router />,
+  <App />,
   rootElement
 );

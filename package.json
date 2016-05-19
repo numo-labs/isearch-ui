@@ -111,7 +111,8 @@
       "dataLayer",
       "afterEach",
       "before",
-      "beforeEach"
+      "beforeEach",
+      "Primus"
     ],
     "parser": "babel-eslint"
   }
