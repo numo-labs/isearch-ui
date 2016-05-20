@@ -10,7 +10,8 @@ import {
   SEARCH_ERROR,
   UPDATE_HEADER_TITLES,
   SAVE_SOCKET_CONNECTION_ID,
-  SAVE_BUCKET_ID
+  SAVE_BUCKET_ID,
+  CLEAR_FEED
 } from '../constants/actionTypes';
 
 import * as graphqlService from '../services/graphql';
@@ -112,6 +113,14 @@ export function saveSocketConnectionId (id) {
 }
 
 /**
+* Clear all the items in the feed
+*/
+
+export function clearFeed () {
+  return { type: CLEAR_FEED };
+}
+
+/**
 * Action to start the search
 * 1. format the query based on the tags
 * 2. launch a graphql mutation to return a searchBucketId
@@ -133,6 +142,7 @@ export function startSearch () {
           if (bucketId) {
             dispatch(saveBucketId(bucketId));
             dispatch(push(`/search/${bucketId}`));
+            dispatch(clearFeed());
           } else {
             return;
           }

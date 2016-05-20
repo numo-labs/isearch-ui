@@ -18,7 +18,8 @@ import {
   SAVE_SEARCH_RESULT_ID,
   SAVE_SOCKET_CONNECTION_ID,
   SET_FINGERPRINT,
-  SAVE_BUCKET_ID
+  SAVE_BUCKET_ID,
+  CLEAR_FEED
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -203,6 +204,11 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         fingerprint: action.fingerprint
+      };
+    case CLEAR_FEED:
+      return {
+        ...state,
+        displayedItems: initialState.displayedItems
       };
     default:
       return state;

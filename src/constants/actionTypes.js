@@ -9,6 +9,7 @@ export const SAVE_SEARCH_RESULT_ID = 'SAVE_SEARCH_RESULT_ID';
 export const SAVE_BUCKET_ID = 'SAVE_BUCKET_ID';
 export const RECEIVE_SEARCH_RESULT = 'RECEIVE_SEARCH_RESULT';
 export const CLEAR_SEARCH_STRING = 'CLEAR_SEARCH_STRING';
+export const CLEAR_FEED = 'CLEAR_FEED';
 
 // tiles and tags
 export const TAG_ADD_SINGLE_TAG = 'TAG_ADD_SINGLE_TAG';

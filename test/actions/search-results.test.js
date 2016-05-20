@@ -3,7 +3,8 @@ import {
   SAVE_SEARCH_RESULT_ID,
   RECEIVE_SEARCH_RESULT,
   SAVE_SOCKET_CONNECTION_ID,
-  SAVE_BUCKET_ID
+  SAVE_BUCKET_ID,
+  CLEAR_FEED
   // TILES_ADD_TILES,
   // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
@@ -83,6 +84,9 @@ describe('Search Results Actions', () => {
             'method': 'push'
           },
           'type': '@@router/CALL_HISTORY_METHOD'
+        },
+        {
+          type: CLEAR_FEED
         }
       ];
       store.dispatch(actions.startSearch());
