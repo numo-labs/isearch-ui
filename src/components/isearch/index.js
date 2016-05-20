@@ -41,7 +41,7 @@ class ISearch extends Component {
       setHotelPage,
       numberOfChildrenTitle,
       numberOfAdultsTitle,
-      bucketId,
+      resultId,
       push: changeRoute
     } = this.props;
     return (
@@ -53,7 +53,7 @@ class ISearch extends Component {
         filterVisibleState={filterVisibleState}
         setHotelPage={setHotelPage}
         totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
-        bucketId={bucketId}
+        resultId={resultId}
       />
     );
   }
@@ -159,7 +159,7 @@ class ISearch extends Component {
 }
 
 ISearch.propTypes = {
-  bucketId: PropTypes.string,
+  resultId: PropTypes.string,
   // for random initial results
   fetchQuerySearchResults: PropTypes.func,
   getArticle: PropTypes.func,

@@ -33,7 +33,7 @@ function mapStateToProps (state) {
       numberOfAdultsTitle,
       numberOfChildrenTitle,
       durationTitle,
-      bucketId
+      resultId
     },
     travelInfo: {
       numberOfChildren,
@@ -84,7 +84,7 @@ function mapStateToProps (state) {
     numberOfAdultsTitle,
     numberOfChildrenTitle,
     durationTitle,
-    bucketId
+    resultId
   };
 }
 

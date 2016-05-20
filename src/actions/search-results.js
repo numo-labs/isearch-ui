@@ -11,7 +11,8 @@ import {
   UPDATE_DISPLAYED_ITEMS,
   SEARCH_ERROR,
   VIEW_SEARCH,
-  UPDATE_HEADER_TITLES
+  UPDATE_HEADER_TITLES,
+  SAVE_BUCKET_ID
 } from '../constants/actionTypes';
 import { addTiles } from './tags.js';
 
@@ -48,14 +49,17 @@ export function fetchQuerySearchResults (id, page, size, attempt, addedTilesAlre
             let finished = false;
             if (attempt <= 5 && arePackagesAvailable && areTilesAvailable) {
               if (initialSearch) { dispatch(addTiles()); }
+              dispatch(updateSearchId(id));
               dispatch(receiveSearchResult(items, initialSearch));
               finished = true;
             } else if (attempt >= 5 && !arePackagesAvailable && !tilesHaveBeenAdded) {
               if (initialSearch) { dispatch(addTiles()); }
+              dispatch(updateSearchId(id));
               dispatch(receiveSearchResult(items, initialSearch));
               tilesHaveBeenAdded = true;
             } else if (attempt > 5 && arePackagesAvailable) {
               if (initialSearch) { dispatch(addTiles()); }
+              dispatch(updateSearchId(id));
               dispatch(receiveSearchResult(items, initialSearch, true));
               finished = true;
             }
@@ -120,6 +124,30 @@ export function receiveSearchResult (items, initialSearch, append) {
 }
 
 /*
+* Function that updates the bucketID if it has changed
+*/
+export function updateSearchId (id) {
+  return (dispatch, getState) => {
+    const { search: { resultId } } = getState();
+    if (id !== resultId) {
+      console.log('saving id');
+      return dispatch(saveSearchResultId(id));
+    }
+  };
+}
+
+/*
+* Saves the searchResultId to update links to articles in the UI
+*/
+
+export function saveSearchResultId (id) {
+  return {
+    type: SAVE_SEARCH_RESULT_ID,
+    id: id
+  };
+}
+
+/*
 * Saves the input search string to state
 */
 
@@ -146,9 +174,9 @@ export function busySearching (isBusy) {
 * results on scroll
 */
 
-export function saveSearchResultId (id) {
+export function saveBucketId (id) {
   return {
-    type: SAVE_SEARCH_RESULT_ID,
+    type: SAVE_BUCKET_ID,
     id: id
   };
 }
@@ -279,11 +307,11 @@ export function startSearch () {
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
         .then(json => {
           console.log('search response json', json);
-          const searchResultId = json.data.viewer.searchResultId.id;
-          if (searchResultId) {
-            dispatch(saveSearchResultId(searchResultId));
-            dispatch(push(`/search/${searchResultId}`));
-            dispatch(fetchQuerySearchResults(searchResultId, 0, 1000, 1));
+          const bucketId = json.data.viewer.searchResultId.id;
+          if (bucketId) {
+            dispatch(saveBucketId(bucketId));
+            dispatch(push(`/search/${bucketId}`));
+            dispatch(fetchQuerySearchResults(bucketId, 0, 1000, 1));
           } else {
             return;
           }

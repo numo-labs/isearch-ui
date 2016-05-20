@@ -14,10 +14,6 @@ class ArticleFullPage extends Component {
     };
   }
 
-  handleOnAddTagClick () {
-    this.props.handleOnAddTagClick();
-  }
-
   componentWillMount () {
     this.getArticleData();
   }
@@ -25,6 +21,12 @@ class ArticleFullPage extends Component {
   getArticleData () {
     this.props.getArticle(this.props.params.bucketId, this.props.params.itemId);
     this.setState({articleContent: this.props.articleContent});
+  }
+
+  onAddTagClick () {
+    const { articleContent, goBack, addSingleTag } = this.props;
+    addSingleTag(articleContent.name, articleContent.id);
+    goBack();
   }
 
   render () {
@@ -87,7 +89,7 @@ class ArticleFullPage extends Component {
                   {renderTags(articleContent.amenities, 'amenities')}
                 </div>
               }
-          <ArticleFooter onAddTagClick={this.handleOnAddTagClick.bind(this)} />
+            <ArticleFooter onAddTagClick={this.onAddTagClick.bind(this)} />
             </div>
           </div>
         </section>
@@ -101,7 +103,7 @@ ArticleFullPage.propTypes = {
   goBack: PropTypes.func,
   getArticle: PropTypes.func,
   params: PropTypes.object,
-  handleOnAddTagClick: PropTypes.func
+  addSingleTag: PropTypes.func
 };
 
 export default ArticleFullPage;
