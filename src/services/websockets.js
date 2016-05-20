@@ -1,5 +1,14 @@
 import * as SearchResultActions from '../actions/search-results.js';
 
+/**
+* Function that initialises a connection with the web socket server and saves
+* the id to the redux store
+* It also initialises the event listeners for data, reconnected and error events
+* transmitted from the web socket channel
+* @param {Function} - actionCreatorBinder - function that takes an action
+* and binds it to dispatch
+*/
+
 export function initialise (actionCreatorBinder) {
   const {
     saveSearchResult,

@@ -43,3 +43,6 @@ export const UPDATE_HEADER_TITLES = 'UPDATE_HEADER_TITLES';
 
 // web sockets
 export const SAVE_SOCKET_CONNECTION_ID = 'SAVE_SOCKET_CONNECTION_ID';
+
+// fingerprint
+export const SET_FINGERPRINT = 'SET_FINGERPRINT';

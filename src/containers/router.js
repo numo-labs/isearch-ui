@@ -17,11 +17,16 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 // web socket service
 import * as websocketService from '../services/websockets.js';
+// client fingerprint service
+import * as fingerprintService from '../services/fingerprint.js';
+
+const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
 
 export default class Root extends Component {
 
   componentDidMount () {
-    websocketService.initialise((actions) => bindActionCreators(actions, store.dispatch));
+    websocketService.initialise(actionCreatorBinder);
+    fingerprintService.initialise(actionCreatorBinder);
   }
 
   render () {

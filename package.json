@@ -112,7 +112,9 @@
       "afterEach",
       "before",
       "beforeEach",
-      "primus"
+      "primus",
+      "window",
+      "localStorage"
     ],
     "parser": "babel-eslint"
   }
