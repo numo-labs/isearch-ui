@@ -6,6 +6,7 @@ export const START_SEARCH = 'START_SEARCH';
 export const BUSY_SEARCHING = 'BUSY_SEARCHING';
 export const SET_SEARCH_STRING = 'SET_SEARCH_STRING';
 export const SAVE_SEARCH_RESULT_ID = 'SAVE_SEARCH_RESULT_ID';
+export const SAVE_BUCKET_ID = 'SAVE_BUCKET_ID';
 export const RECEIVE_SEARCH_RESULT = 'RECEIVE_SEARCH_RESULT';
 export const CLEAR_SEARCH_STRING = 'CLEAR_SEARCH_STRING';
 
@@ -25,11 +26,7 @@ export const SET_AUTOCOMPLETE_IN_SEARCH = 'SET_AUTOCOMPLETE_IN_SEARCH';
 // errors
 export const SEARCH_ERROR = 'SEARCH_ERROR';
 
-// temp routing
-
 export const VIEW_ARTICLE = 'VIEW_ARTICLE';
-export const VIEW_HOTEL = 'VIEW_HOTEL';
-export const VIEW_SEARCH = 'VIEW_SEARCH';
 
 // hotel page
 export const SET_HOTEL_PAGE = 'SET_HOTEL_PAGE';

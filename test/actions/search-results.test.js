@@ -1,7 +1,8 @@
 import {
   BUSY_SEARCHING,
   SAVE_SEARCH_RESULT_ID,
-  RECEIVE_SEARCH_RESULT
+  RECEIVE_SEARCH_RESULT,
+  SAVE_BUCKET_ID
   // TILES_ADD_TILES,
   // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
@@ -30,6 +31,7 @@ const initialState = {
       {id: 'amenity:pool', displayName: 'pool'}
     ],
     bucketId: '1',
+    resultId: '',
     displayedItems: []
   },
   travelInfo: {
@@ -48,7 +50,7 @@ const initialState = {
   }
 };
 
-describe('actions', function () {
+describe.only('actions', function () {
   afterEach(function (done) {
     simple.restore();
     done();
@@ -60,7 +62,7 @@ describe('actions', function () {
         data: {
           viewer: {
             searchResultId: {
-              id: 12345
+              id: '12345'
             }
           }
         }
@@ -69,7 +71,7 @@ describe('actions', function () {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
-        { type: SAVE_SEARCH_RESULT_ID, id: 12345 },
+        { type: SAVE_BUCKET_ID, id: '12345' },
         {
           'payload': {
             'args': [
@@ -128,8 +130,9 @@ describe('actions', function () {
     //     })
     //     .catch(done);
     // });
-    it('existing displayedItems -> should call only the receiveSearchResult action with the items', function (done) {
+    it('existing displayedItems -> should call the receiveSearchResult action with the items and the updateSearchId action with the id', function (done) {
       const expectedActions = [
+        { type: SAVE_SEARCH_RESULT_ID, id: '1' },
         {
           type: RECEIVE_SEARCH_RESULT,
           items: [{type: 'packageOffer'}, {type: 'tile'}],
