@@ -2,7 +2,10 @@ import {
   BUSY_SEARCHING,
   SAVE_SEARCH_RESULT_ID,
   RECEIVE_SEARCH_RESULT,
-  SAVE_SOCKET_CONNECTION_ID
+  SAVE_SOCKET_CONNECTION_ID,
+  SAVE_BUCKET_ID
+  // TILES_ADD_TILES,
+  // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
 import moment from 'moment';
 
@@ -28,6 +31,8 @@ const initialState = {
       {id: 'amenity:wifi', displayName: 'wifi'},
       {id: 'amenity:pool', displayName: 'pool'}
     ],
+    bucketId: '1',
+    resultId: '',
     displayedItems: []
   },
   travelInfo: {
@@ -60,7 +65,7 @@ describe('Search Results Actions', () => {
         data: {
           viewer: {
             searchResultId: {
-              id: 12345
+              id: '12345'
             }
           }
         }
@@ -69,7 +74,7 @@ describe('Search Results Actions', () => {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
-        { type: SAVE_SEARCH_RESULT_ID, id: 12345 },
+        { type: SAVE_BUCKET_ID, id: '12345' },
         {
           'payload': {
             'args': [
@@ -168,6 +173,51 @@ describe('Search Results Actions', () => {
       const dispatch = simple.mock();
       const state = simple.mock().returnWith({ search: { bucketId: '12345' } });
       actions.saveSearchResult(result)(dispatch, state);
+      expect(dispatch.callCount).to.equal(0);
+      done();
+    });
+  });
+  describe('save Id actions', function () {
+    it('saveBucketId: saves the search bucketId to the state as bucketId', function (done) {
+      const store = mockStore(initialState);
+      const expectedActions = [
+        {
+          type: SAVE_BUCKET_ID,
+          id: '1'
+        }
+      ];
+      store.dispatch(actions.saveBucketId('1'));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it('saveSearchResultId: saves the searchResultId to the state as resultId', function (done) {
+      const store = mockStore(initialState);
+      const expectedActions = [
+        {
+          type: SAVE_SEARCH_RESULT_ID,
+          id: '10'
+        }
+      ];
+      store.dispatch(actions.saveSearchResultId('10'));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it('updateSearchId: calls the saveSearchResultId function only if the id is different from the current bucketId', function (done) {
+      const dispatch = simple.mock();
+      const store = simple.mock().returnWith(initialState);
+      const expectedAction = {
+        type: SAVE_SEARCH_RESULT_ID,
+        id: '1'
+      };
+      actions.updateSearchId('1')(dispatch, store);
+      expect(dispatch.callCount).to.equal(1);
+      expect(dispatch.lastCall.arg).to.deep.equal(expectedAction);
+      done();
+    });
+    it('updateSearchId: does not call the saveSearchResultId if the id is the same', function (done) {
+      const dispatch = simple.mock();
+      const store = simple.mock().returnWith(initialState);
+      actions.updateSearchId('')(dispatch, store);
       expect(dispatch.callCount).to.equal(0);
       done();
     });

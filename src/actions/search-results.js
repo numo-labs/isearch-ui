@@ -9,12 +9,12 @@ import {
   SAVE_SEARCH_RESULT_ID,
   SEARCH_ERROR,
   UPDATE_HEADER_TITLES,
-  SAVE_SOCKET_CONNECTION_ID
+  SAVE_SOCKET_CONNECTION_ID,
+  SAVE_BUCKET_ID
 } from '../constants/actionTypes';
 
 import * as graphqlService from '../services/graphql';
 import { formatQuery } from './helpers.js';
-
 // routing actionCreator
 import { push } from 'react-router-redux';
 
@@ -39,6 +39,30 @@ export function receiveSearchResult (items, initialSearch, append) {
     items,
     initialSearch,
     append: append || false
+  };
+}
+
+/*
+* Function that updates the bucketID if it has changed
+*/
+export function updateSearchId (id) {
+  return (dispatch, getState) => {
+    const { search: { resultId } } = getState();
+    if (id !== resultId) {
+      console.log('saving id');
+      return dispatch(saveSearchResultId(id));
+    }
+  };
+}
+
+/*
+* Saves the searchResultId to update links to articles in the UI
+*/
+
+export function saveSearchResultId (id) {
+  return {
+    type: SAVE_SEARCH_RESULT_ID,
+    id: id
   };
 }
 
@@ -69,9 +93,9 @@ export function busySearching (isBusy) {
 * results on scroll
 */
 
-export function saveSearchResultId (id) {
+export function saveBucketId (id) {
   return {
-    type: SAVE_SEARCH_RESULT_ID,
+    type: SAVE_BUCKET_ID,
     id: id
   };
 }
@@ -104,12 +128,11 @@ export function startSearch () {
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query), clientId, connectionId})
         .then(json => {
-          const searchResultId = json.data.viewer.searchResultId.id;
-          if (searchResultId) {
-            dispatch(saveSearchResultId(searchResultId));
-            dispatch(push(`/search/${searchResultId}`));
-            // no longer need to poll for results!
-            // dispatch(fetchQuerySearchResults(searchResultId, 0, 1000, 1));
+          console.log('search response json', json);
+          const bucketId = json.data.viewer.searchResultId.id;
+          if (bucketId) {
+            dispatch(saveBucketId(bucketId));
+            dispatch(push(`/search/${bucketId}`));
           } else {
             return;
           }

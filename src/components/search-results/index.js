@@ -58,7 +58,7 @@ class SearchResults extends Component {
       onYesFilter,
       onFilterClick,
       totalPassengers,
-      bucketId,
+      resultId,
       changeRoute
     } = this.props;
     return (
@@ -73,12 +73,11 @@ class SearchResults extends Component {
             if (item.type === 'packageOffer') {
               return (
                 <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${bucketId}/${item.id}`)}>
+                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${resultId}/${item.id}`)}>
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
                       totalPassengers={totalPassengers}
-                      bucketId={bucketId}
                       itemId={item.id}
                     />
                   </div>
@@ -103,7 +102,7 @@ class SearchResults extends Component {
               } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${bucketId}/${item.id}`)}>
+                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${resultId}/${item.id}`)}>
                       <ArticleTile {...item} />
                     </div>
                   </VisbilitySensor>
@@ -124,7 +123,7 @@ SearchResults.propTypes = {
   filterVisibleState: PropTypes.object,
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
-  bucketId: PropTypes.string,
+  resultId: PropTypes.string,
   changeRoute: PropTypes.func
 };
 

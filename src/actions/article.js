@@ -1,4 +1,4 @@
-import { VIEW_ARTICLE, VIEW_SEARCH } from '../constants/actionTypes';
+import { VIEW_ARTICLE } from '../constants/actionTypes';
 import * as graphqlService from '../services/graphql';
 import { QUERY_FETCH_BUCKET_ITEM } from '../constants/queries';
 
@@ -8,12 +8,6 @@ import { QUERY_FETCH_BUCKET_ITEM } from '../constants/queries';
  * @return {object}           action data
  */
 export const viewArticle = (content) => { return { type: VIEW_ARTICLE, content }; };
-
-/**
- * Action to return to search page
- * @return {object}           action data
- */
-export const backToSearch = () => { return { type: VIEW_SEARCH }; };
 
 export const getArticle = (bucketId, itemId) => {
   return (dispatch) => {

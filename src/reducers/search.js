@@ -17,7 +17,8 @@ import {
   UPDATE_HEADER_TITLES,
   SAVE_SEARCH_RESULT_ID,
   SAVE_SOCKET_CONNECTION_ID,
-  SET_FINGERPRINT
+  SET_FINGERPRINT,
+  SAVE_BUCKET_ID
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -31,6 +32,7 @@ import _ from 'lodash';
 export const initialState = {
   fingerprint: '',
   bucketId: '',
+  resultId: '',
   displayedItems: [],
   items: [],
   bucketCount: 0,
@@ -183,6 +185,11 @@ export default function search (state = initialState, action) {
         durationTitle: action.duration
       };
     case SAVE_SEARCH_RESULT_ID:
+      return {
+        ...state,
+        resultId: action.id
+      };
+    case SAVE_BUCKET_ID:
       return {
         ...state,
         bucketId: action.id
