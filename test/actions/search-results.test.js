@@ -50,7 +50,7 @@ const initialState = {
   }
 };
 
-describe.only('actions', function () {
+describe('actions', function () {
   afterEach(function (done) {
     simple.restore();
     done();
@@ -194,6 +194,51 @@ describe.only('actions', function () {
           }, 10000);
         })
        .catch(done);
+    });
+  });
+  describe('save Id actions', function () {
+    it('saveBucketId: saves the search bucketId to the state as bucketId', function (done) {
+      const store = mockStore(initialState);
+      const expectedActions = [
+        {
+          type: SAVE_BUCKET_ID,
+          id: '1'
+        }
+      ];
+      store.dispatch(actions.saveBucketId('1'));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it('saveSearchResultId: saves the searchResultId to the state as resultId', function (done) {
+      const store = mockStore(initialState);
+      const expectedActions = [
+        {
+          type: SAVE_SEARCH_RESULT_ID,
+          id: '10'
+        }
+      ];
+      store.dispatch(actions.saveSearchResultId('10'));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it('updateSearchId: calls the saveSearchResultId function only if the id is different from the current bucketId', function (done) {
+      const dispatch = simple.mock();
+      const store = simple.mock().returnWith(initialState);
+      const expectedAction = {
+        type: SAVE_SEARCH_RESULT_ID,
+        id: '1'
+      };
+      actions.updateSearchId('1')(dispatch, store);
+      expect(dispatch.callCount).to.equal(1);
+      expect(dispatch.lastCall.arg).to.deep.equal(expectedAction);
+      done();
+    });
+    it('updateSearchId: does not call the saveSearchResultId if the id is the same', function (done) {
+      const dispatch = simple.mock();
+      const store = simple.mock().returnWith(initialState);
+      actions.updateSearchId('')(dispatch, store);
+      expect(dispatch.callCount).to.equal(0);
+      done();
     });
   });
 });
