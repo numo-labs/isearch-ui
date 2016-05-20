@@ -96,13 +96,13 @@ export function saveSocketConnectionId (id) {
 export function startSearch () {
   return (dispatch, getState) => {
     const store = getState();
-    const { search: { tags } } = store;
+    const { search: { tags, fingerprint: clientId, socketConnectionId: connectionId } } = store;
     if (tags.length > 0) {
       dispatch(busySearching(true));
       const query = formatQuery(store);
       console.log('query', JSON.stringify(query));
       return graphqlService
-        .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query)})
+        .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query), clientId, connectionId})
         .then(json => {
           const searchResultId = json.data.viewer.searchResultId.id;
           if (searchResultId) {
