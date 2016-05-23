@@ -5,6 +5,7 @@
 
 .articleFooter {
   background-color: #E9E5E0;
+  max-height: 130px;
 }
 
 .articleFooter .tagLabel {
