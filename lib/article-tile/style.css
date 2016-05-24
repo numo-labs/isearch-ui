@@ -1,39 +1,94 @@
 @font-face {
-  font-family: SourceSansLight;
-  src: url('../../fonts/SourceSansPro-Light.otf');
+    font-family: SourceSansLight;
+    src: url('../../fonts/SourceSansPro-Light.otf');
 }
 
 @font-face {
-  font-family: ThomasHeadlineBold;
-  src: url('../../fonts/ThomasHeadline-Bold.otf');
+    font-family: ThomasHeadlineBold;
+    src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
+@font-face {
+    font-family: TCScript;
+    src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
 }
 
 .articleContainer {
-  text-align: center;
-  font-family: SourceSansLight;
-  display: inline-block;
-  cursor: pointer;
+    text-align: center;
+    font-family: SourceSansLight;
+    display: inline-block;
+    cursor: pointer;
 }
 
 .articleImage {
-  display: inline-block;
-  height: 20em;
-  width: 100%;
-  object-fit: cover;
+    display: inline-block;
+    height: 20em;
+    width: 100%;
+    object-fit: cover;
 }
 
 .text {
-  bottom: 2em;
-  color: #595959;
-  position: absolute;;
-  line-height: 0.5em;
-  padding: 0.4em;
-  background-color: rgba(255,255,255,0.7);
-  width: 100%;
+    bottom: 2em;
+    color: #595959;
+    position: absolute;;
+    line-height: 0.5em;
+    padding: 0.4em;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 100%;
 }
 
 .text h2 {
-  font-family: ThomasHeadlineBold;
-  font-size: 2.4rem;
-  margin-top: 10px;
+    font-family: ThomasHeadlineBold;
+    font-size: 2.4rem;
+    margin-top: 10px;
+}
+
+.text h3 {
+    display: none;
+    text-transform: uppercase;
+    font-family: TCScript, sans-serif;
+    color: #eed3d7;
+}
+
+.articleContainer.visited .text {
+    height: 100%;
+    bottom: 0;
+    padding-top: 3em;
+}
+
+.articleContainer.visited .text h3 {
+    display: block;
+}
+
+.articleContainer.visited .tagField {
+    position: absolute;
+    bottom: 2em;
+    width: 100%;
+}
+
+.articleContainer.visited .addTagButton {
+    cursor: pointer;
+    background-color: #F39100;
+    display: inline-block;
+    border-radius: 100%;
+    color: #ffffff;
+    font-size: 1.25em;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    margin-top: 2.6em;
+    vertical-align: sub;
+}
+
+.articleContainer.visited .addTagButton:hover {
+    background-color: #F37800;
+}
+
+.articleContainer.visited .tagLabel {
+    font-family: ThomasHeadlineBold;
+    display: inline-block;
+    padding: 10px 25px;
+    background: white;
+    margin-right: 10px;
+    color: #666;
 }
