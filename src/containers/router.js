@@ -28,7 +28,7 @@ const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatc
 
 export default class Root extends Component {
 
-  componentDidMount () {
+  componentWillMount () {
     websocketService.initialise(actionCreatorBinder);
     fingerprintService.initialise(actionCreatorBinder);
   }

@@ -3,8 +3,7 @@ import {
   SAVE_SEARCH_RESULT_ID,
   RECEIVE_SEARCH_RESULT,
   SAVE_SOCKET_CONNECTION_ID,
-  SAVE_BUCKET_ID,
-  CLEAR_FEED
+  SAVE_BUCKET_ID
   // TILES_ADD_TILES,
   // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
@@ -33,7 +32,7 @@ const initialState = {
       {id: 'amenity:pool', displayName: 'pool'}
     ],
     bucketId: '1',
-    resultId: '',
+    resultId: '1',
     displayedItems: []
   },
   travelInfo: {
@@ -75,7 +74,7 @@ describe('Search Results Actions', () => {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
-        { type: SAVE_BUCKET_ID, id: '12345' },
+        { type: SAVE_SEARCH_RESULT_ID, id: '12345' },
         {
           'payload': {
             'args': [
@@ -84,9 +83,6 @@ describe('Search Results Actions', () => {
             'method': 'push'
           },
           'type': '@@router/CALL_HISTORY_METHOD'
-        },
-        {
-          type: CLEAR_FEED
         }
       ];
       store.dispatch(actions.startSearch());
@@ -143,7 +139,7 @@ describe('Search Results Actions', () => {
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });
-    it(`saveSearchResult: should dispatch an action to save the search results
+    it(`saveSearchResult: should dispatch an action resultId save the search results
         if the searchId of the data matches the bucketId`, done => {
       const result = {
         graphql: {
@@ -157,16 +153,16 @@ describe('Search Results Actions', () => {
         type: RECEIVE_SEARCH_RESULT,
         items: [ {} ],
         initialSearch: false,
-        append: true
+        append: false
       };
       const dispatch = simple.mock();
-      const state = simple.mock().returnWith({ search: { bucketId: '34567' } });
+      const state = simple.mock().returnWith({ search: { resultId: '34567' } });
       actions.saveSearchResult(result)(dispatch, state);
       expect(dispatch.lastCall.arg).to.deep.equal(expectedAction);
       done();
     });
     it(`saveSearchResult: should ignore the data if the searchId of the data
-        does not match the bucketId`, done => {
+        does not match the resultId`, done => {
       const result = {
         graphql: {
           id: '12345',
@@ -175,7 +171,7 @@ describe('Search Results Actions', () => {
         }
       };
       const dispatch = simple.mock();
-      const state = simple.mock().returnWith({ search: { bucketId: '12345' } });
+      const state = simple.mock().returnWith({ search: { resultId: '12345' } });
       actions.saveSearchResult(result)(dispatch, state);
       expect(dispatch.callCount).to.equal(0);
       done();
@@ -204,25 +200,6 @@ describe('Search Results Actions', () => {
       ];
       store.dispatch(actions.saveSearchResultId('10'));
       expect(store.getActions()).to.deep.equal(expectedActions);
-      done();
-    });
-    it('updateSearchId: calls the saveSearchResultId function only if the id is different from the current bucketId', function (done) {
-      const dispatch = simple.mock();
-      const store = simple.mock().returnWith(initialState);
-      const expectedAction = {
-        type: SAVE_SEARCH_RESULT_ID,
-        id: '1'
-      };
-      actions.updateSearchId('1')(dispatch, store);
-      expect(dispatch.callCount).to.equal(1);
-      expect(dispatch.lastCall.arg).to.deep.equal(expectedAction);
-      done();
-    });
-    it('updateSearchId: does not call the saveSearchResultId if the id is the same', function (done) {
-      const dispatch = simple.mock();
-      const store = simple.mock().returnWith(initialState);
-      actions.updateSearchId('')(dispatch, store);
-      expect(dispatch.callCount).to.equal(0);
       done();
     });
   });

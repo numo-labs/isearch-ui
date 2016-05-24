@@ -44,19 +44,6 @@ export function receiveSearchResult (items, initialSearch, append) {
 }
 
 /*
-* Function that updates the bucketID if it has changed
-*/
-export function updateSearchId (id) {
-  return (dispatch, getState) => {
-    const { search: { resultId } } = getState();
-    if (id !== resultId) {
-      console.log('saving id');
-      return dispatch(saveSearchResultId(id));
-    }
-  };
-}
-
-/*
 * Saves the searchResultId to update links to articles in the UI
 */
 
@@ -140,11 +127,11 @@ export function startSearch () {
           console.log('search response json', json);
           const bucketId = json.data.viewer.searchResultId.id;
           if (bucketId) {
-            dispatch(saveBucketId(bucketId));
+            dispatch(saveSearchResultId(bucketId));
             dispatch(push(`/search/${bucketId}`));
-            dispatch(clearFeed());
+            // dispatch(clearFeed());
           } else {
-            return;
+            return dispatch(searchError('No results found'));
           }
         });
     }
@@ -157,9 +144,9 @@ export function startSearch () {
 
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
-    const { search: { bucketId } } = getState();
-    if (result.graphql.searchId === bucketId) { // check data corresponds to the current search
-      return dispatch(receiveSearchResult(result.graphql.items, false, true));
+    const { search: { resultId } } = getState();
+    if (result.graphql.searchId === resultId) { // check data corresponds to the current search
+      return dispatch(receiveSearchResult(result.graphql.items, false, false));
     }
   };
 }

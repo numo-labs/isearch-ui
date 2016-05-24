@@ -1,5 +1,5 @@
 import * as SearchResultActions from '../actions/search-results.js';
-
+import * as TagActions from '../actions/tags.js';
 /**
 * Function that initialises a connection with the web socket server and saves
 * the id to the redux store
@@ -12,13 +12,17 @@ import * as SearchResultActions from '../actions/search-results.js';
 export function initialise (actionCreatorBinder) {
   const {
     saveSearchResult,
-    saveSocketConnectionId
-  } = actionCreatorBinder(SearchResultActions);
+    saveSocketConnectionId,
+    addSingleTag
+  } = actionCreatorBinder({...SearchResultActions, ...TagActions});
 
   primus.on('data', function received (data) {
     console.log('incoming socket data', data);
     if (data.connection) {
       saveSocketConnectionId(data.connection);
+      // only launch the home page query after the socket connection has been
+      // initialised
+      addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
     } else {
       saveSearchResult(data);
     }

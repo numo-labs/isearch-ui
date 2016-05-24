@@ -61,6 +61,7 @@ class SearchResults extends Component {
       resultId,
       changeRoute
     } = this.props;
+    console.log('resultid', resultId);
     return (
       <Masonry
         elementType={'div'}
