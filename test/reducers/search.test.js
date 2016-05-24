@@ -13,7 +13,10 @@ import {
   SET_AUTOCOMPLETE_IN_SEARCH,
   CLEAR_SEARCH_STRING,
   UPDATE_HEADER_TITLES,
-  SAVE_SOCKET_CONNECTION_ID
+  SAVE_SOCKET_CONNECTION_ID,
+  SET_FINGERPRINT,
+  SAVE_SEARCH_RESULT_ID,
+  SAVE_BUCKET_ID
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
@@ -33,6 +36,16 @@ describe('Search Reducer', () => {
   it('should return the initial state', (done) => {
     const state = reducer(undefined, {});
     expect(state).to.deep.equal(initialState);
+    done();
+  });
+  it('SET_FINGERPRINT: should save the fingerprint', done => {
+    const action = {type: SET_FINGERPRINT, fingerprint: '123456789012345'};
+    const state = reducer(undefined, action);
+    const expectedState = {
+      ...initialState,
+      fingerprint: action.fingerprint
+    };
+    expect(state).to.deep.equal(expectedState);
     done();
   });
   describe('Search actions', () => {
@@ -126,6 +139,26 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         searchString: ''
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it('SAVE_SEARCH_RESULT_ID -> saves the search result id', (done) => {
+      const action = {type: SAVE_SEARCH_RESULT_ID, id: '12345'};
+      const state = reducer(undefined, action);
+      const expectedState = {
+        ...initialState,
+        resultId: '12345'
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it('SAVE_BUCKET_ID -> saves the buckeId', (done) => {
+      const action = {type: SAVE_BUCKET_ID, id: '12345'};
+      const state = reducer(undefined, action);
+      const expectedState = {
+        ...initialState,
+        bucketId: '12345'
       };
       expect(state).to.deep.equal(expectedState);
       done();
@@ -254,13 +287,16 @@ describe('Search Reducer', () => {
   describe('Header Title update action', () => {
     it(`UPDATE_HEADER_TITLES -> updates the adult, child and duration title
         states`, (done) => {
-      const action = { type: UPDATE_HEADER_TITLES, numberOfAdults: 2, numberOfChildren: 0, duration: '1 uge' };
+      const action = { type: UPDATE_HEADER_TITLES };
       const state = reducer(undefined, action);
       const expectedState = {
         ...initialState,
         numberOfAdultsTitle: 2,
         numberOfChildrenTitle: 0,
-        durationTitle: '1 uge'
+        durationTitle: '1 uge',
+        numberOfAdults: 2,
+        numberOfChildren: 0,
+        duration: '1 uge'
       };
       expect(state).to.deep.equal(expectedState);
       done();

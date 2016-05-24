@@ -151,28 +151,6 @@ export function saveSearchResult (result) {
   };
 }
 
-/*
-* Updates the titles shown in the search page header
-*/
-
 export function updateHeaderTitles () {
-  return (dispatch, getState) => {
-    const {
-      search: {
-        numberOfAdults,
-        numberOfChildren,
-        duration
-      }
-    } = getState();
-    dispatch(updateTitles(numberOfAdults, numberOfChildren, duration));
-  };
-}
-
-export function updateTitles (numberOfAdults, numberOfChildren, duration) {
-  return {
-    type: UPDATE_HEADER_TITLES,
-    numberOfAdults,
-    numberOfChildren,
-    duration
-  };
+  return { type: UPDATE_HEADER_TITLES };
 }

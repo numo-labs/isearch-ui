@@ -3,9 +3,10 @@ import {
   SAVE_SEARCH_RESULT_ID,
   RECEIVE_SEARCH_RESULT,
   SAVE_SOCKET_CONNECTION_ID,
-  SAVE_BUCKET_ID
+  SAVE_BUCKET_ID,
+  SEARCH_ERROR,
+  UPDATE_HEADER_TITLES
   // TILES_ADD_TILES,
-  // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
 import moment from 'moment';
 
@@ -94,6 +95,33 @@ describe('Search Results Actions', () => {
         })
         .catch(done);
     });
+    it(`startSearch: should dispatch an action to set the search error if no search id
+      is returned`, function (done) {
+      this.timeout(10100);
+      const json = {
+        data: {
+          viewer: {
+            searchResultId: {
+              id: null
+            }
+          }
+        }
+      };
+      simple.mock(graphqlService, 'query').resolveWith(json);
+      const store = mockStore(initialState);
+      const expectedActions = [
+        { type: BUSY_SEARCHING, isBusy: true },
+        { type: SEARCH_ERROR, error: 'No results found' }
+      ];
+      store.dispatch(actions.startSearch());
+      graphqlService.query.lastCall.returned
+        .then(() => {
+          expect(store.getActions()).to.deep.equal(expectedActions);
+          expect(graphqlService.query.calls[0].args[0]).to.equal(MUTATION_START_SEARCH);
+          done();
+        })
+        .catch(done);
+    });
   });
   it(`retrieveSearchResults should return an object with type
      RECEIVE_SEARCH_RESULT and items, append and initialSearch keys`, done => {
@@ -103,10 +131,10 @@ describe('Search Results Actions', () => {
         type: RECEIVE_SEARCH_RESULT,
         items: [{}],
         initialSearch: false,
-        append: false
+        append: true
       }
     ];
-    store.dispatch(actions.receiveSearchResult([{}], false, false));
+    store.dispatch(actions.receiveSearchResult([{}], false, true));
     expect(store.getActions()).to.deep.equal(expectedActions);
     done();
   });
@@ -199,6 +227,17 @@ describe('Search Results Actions', () => {
         }
       ];
       store.dispatch(actions.saveSearchResultId('10'));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+  });
+  describe('header title update actions', function () {
+    it('updateHeaderTitles: returns an object with type UPDATE_HEADER_TITLES', function (done) {
+      const store = mockStore(initialState);
+      const expectedActions = [
+        { type: UPDATE_HEADER_TITLES }
+      ];
+      store.dispatch(actions.updateHeaderTitles());
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });

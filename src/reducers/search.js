@@ -42,19 +42,19 @@ export const initialState = {
   tags: [],
   filterVisibleState: {},
   tiles: [],
-  addMessageVisible: false,
   searchString: '',
   error: '',
   autocompleteError: '',
   autocompleteOptions: [],
   inAutoCompleteSearch: false, // use to show loading spinner
   numberOfChildren: 0,
+  numberOfAdults: 2,
   childAge1: '',
   childAge2: '',
   childAge3: '',
   childAge4: '',
   departureAirport: '',
-  duration: '',
+  duration: '1 uge',
   departureDate: '',
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
@@ -181,9 +181,9 @@ export default function search (state = initialState, action) {
     case UPDATE_HEADER_TITLES:
       return {
         ...state,
-        numberOfAdultsTitle: action.numberOfAdults,
-        numberOfChildrenTitle: action.numberOfChildren,
-        durationTitle: action.duration
+        numberOfAdultsTitle: state.numberOfAdults,
+        numberOfChildrenTitle: state.numberOfChildren,
+        durationTitle: state.duration
       };
     case SAVE_SEARCH_RESULT_ID:
       return {
