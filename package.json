@@ -78,6 +78,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "engine.io-client": "^1.6.9",
     "file-loader": "^0.8.5",
     "history": "^2.1.1",
     "isomorphic-fetch": "^2.2.1",
@@ -105,6 +106,9 @@
     "nocov"
   ],
   "semistandard": {
+    "ignore": [
+      "/test/services/primus.js"
+    ],
     "globals": [
       "describe",
       "it",

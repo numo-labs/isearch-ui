@@ -23,8 +23,11 @@ export function initialise (actionCreatorBinder) {
       // only launch the home page query after the socket connection has been
       // initialised
       addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
-    } else {
+    } else if (data.graphql) {
+      console.log('saving data');
       saveSearchResult(data);
+    } else {
+      return;
     }
   });
 
