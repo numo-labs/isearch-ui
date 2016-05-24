@@ -1,5 +1,7 @@
 import * as SearchResultActions from '../actions/search-results.js';
 import * as TagActions from '../actions/tags.js';
+import Primus from '../../src/services/primus.js';
+const socketUrl = 'http://eb-ci.wmm63vqska.eu-west-1.elasticbeanstalk.com';
 /**
 * Function that initialises a connection with the web socket server and saves
 * the id to the redux store
@@ -15,7 +17,7 @@ export function initialise (actionCreatorBinder) {
     saveSocketConnectionId,
     addSingleTag
   } = actionCreatorBinder({...SearchResultActions, ...TagActions});
-
+  const primus = new Primus(socketUrl);
   primus.on('data', function received (data) {
     console.log('incoming socket data', data);
     if (data.connection) {
@@ -24,7 +26,6 @@ export function initialise (actionCreatorBinder) {
       // initialised
       addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
     } else if (data.graphql) {
-      console.log('saving data');
       saveSearchResult(data);
     } else {
       return;

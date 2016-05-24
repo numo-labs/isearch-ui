@@ -107,7 +107,7 @@
   ],
   "semistandard": {
     "ignore": [
-      "/test/services/primus.js"
+      "/src/services/primus.js"
     ],
     "globals": [
       "describe",

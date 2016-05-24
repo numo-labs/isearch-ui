@@ -61,7 +61,6 @@ class SearchResults extends Component {
       resultId,
       changeRoute
     } = this.props;
-    console.log('resultid', resultId);
     return (
       <Masonry
         elementType={'div'}
@@ -71,15 +70,15 @@ class SearchResults extends Component {
       >
         {
           items.map((item, index) => {
-            if (item.type === 'packageOffer') {
+            if (item.packageOffer) {
               return (
                 <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${resultId}/${item.id}`)}>
+                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${resultId}/`)}>
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
                       totalPassengers={totalPassengers}
-                      itemId={item.id}
+                      itemId={item.packageOffer.id}
                     />
                   </div>
                 </VisbilitySensor>

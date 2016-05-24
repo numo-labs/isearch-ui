@@ -5,7 +5,8 @@ import {
   SAVE_SOCKET_CONNECTION_ID,
   SAVE_BUCKET_ID,
   SEARCH_ERROR,
-  UPDATE_HEADER_TITLES
+  UPDATE_HEADER_TITLES,
+  CLEAR_FEED
   // TILES_ADD_TILES,
 } from '../../src/constants/actionTypes';
 import moment from 'moment';
@@ -84,6 +85,9 @@ describe('Search Results Actions', () => {
             'method': 'push'
           },
           'type': '@@router/CALL_HISTORY_METHOD'
+        },
+        {
+          type: CLEAR_FEED
         }
       ];
       store.dispatch(actions.startSearch());

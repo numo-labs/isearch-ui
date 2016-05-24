@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import thunk from 'redux-thunk';
 import { bindActionCreators } from 'redux';
 import { TAG_ADD_SINGLE_TAG, SAVE_SOCKET_CONNECTION_ID, RECEIVE_SEARCH_RESULT } from '../../src/constants/actionTypes';
-import Primus from './primus.js';
+import Primus from '../../src/services/primus.js';
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
@@ -20,6 +20,9 @@ describe('Web Socket Service', () => {
     let expectedActions = [];
     primus.on('data', data => {
       if (counter === 0) {
+        postDataToClient(data.connection);
+      }
+      if (data.connection) {
         expectedActions = [
           {
             type: SAVE_SOCKET_CONNECTION_ID,
@@ -36,7 +39,6 @@ describe('Web Socket Service', () => {
           }
         ];
         expect(store.getActions()).to.deep.equal(expectedActions);
-        postDataToClient(data.connection);
       }
       ++counter;
       if (counter === 3) {

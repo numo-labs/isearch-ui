@@ -129,7 +129,7 @@ export function startSearch () {
           if (bucketId) {
             dispatch(saveSearchResultId(bucketId));
             dispatch(push(`/search/${bucketId}`));
-            // dispatch(clearFeed());
+            dispatch(clearFeed());
           } else {
             return dispatch(searchError('No results found'));
           }

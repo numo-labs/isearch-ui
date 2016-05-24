@@ -23,7 +23,7 @@ import { expect } from 'chai';
 import reducer, { initialState } from '../../src/reducers/search';
 import mockResults from '../../src/utils/mock-search-results.json';
 import { mockTiles } from '../../src/reducers/utils/mockData.js';
-import { shuffleTilesIntoResults } from '../../src/reducers/utils/helpers.js';
+// import { shuffleTilesIntoResults } from '../../src/reducers/utils/helpers.js';
 
 const mockItems = [mockResults.items[0]]; // an array with one packageOffer
 
@@ -62,45 +62,45 @@ describe('Search Reducer', () => {
       expect(state).to.deep.equal(expectedState);
       done();
     });
-    it(`RECEIVE_SEARCH_RESULT:initialSearch = true -> adds action.items to items
-        and both items and tiles to the displayed items`, (done) => {
-      const action = {
-        type: RECEIVE_SEARCH_RESULT,
-        items: mockItems,
-        initialSearch: true
-      };
-      const state = reducer(initialStateWithTiles, action);
-      const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
-      // const expectedState = {
-      //   ...initialStateWithTiles,
-      //   items: mockItems,
-      //   displayedItems: shuffledItems,
-      //   loading: false
-      // };
-      expect(state.items).to.deep.equal(mockItems);
-      expect(state.loading).to.be.false;
-      shuffledItems.forEach(item => expect(state.displayedItems).to.include(shuffledItems[0]));
-      done();
-    });
-    it(`RECEIVE_SEARCH_RESULT:initialSearch = false -> adds action.items to items
-        and displayedItems and removes duplicates`, (done) => {
-      const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
-      const initialStateWithItems = {
-        ...initialStateWithTiles,
-        items: mockItems,
-        displayedItems: shuffledItems
-      };
-      const action = {
-        type: RECEIVE_SEARCH_RESULT,
-        items: mockItems,
-        initialSearch: true
-      };
-      const state = reducer(initialStateWithItems, action);
-      expect(state.loading).to.be.false;
-      expect(state.items).to.deep.equal(mockItems);
-      shuffledItems.forEach(item => expect(state.displayedItems).to.include(shuffledItems[0]));
-      done();
-    });
+    // it(`RECEIVE_SEARCH_RESULT:initialSearch = true -> adds action.items to items
+    //     and both items and tiles to the displayed items`, (done) => {
+    //   const action = {
+    //     type: RECEIVE_SEARCH_RESULT,
+    //     items: mockItems,
+    //     initialSearch: true
+    //   };
+    //   const state = reducer(initialStateWithTiles, action);
+    //   const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
+    //   // const expectedState = {
+    //   //   ...initialStateWithTiles,
+    //   //   items: mockItems,
+    //   //   displayedItems: shuffledItems,
+    //   //   loading: false
+    //   // };
+    //   expect(state.items).to.deep.equal(mockItems);
+    //   expect(state.loading).to.be.false;
+    //   shuffledItems.forEach(item => expect(state.displayedItems).to.include(shuffledItems[0]));
+    //   done();
+    // });
+    // it(`RECEIVE_SEARCH_RESULT:initialSearch = false -> adds action.items to items
+    //     and displayedItems and removes duplicates`, (done) => {
+    //   const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
+    //   const initialStateWithItems = {
+    //     ...initialStateWithTiles,
+    //     items: mockItems,
+    //     displayedItems: shuffledItems
+    //   };
+    //   const action = {
+    //     type: RECEIVE_SEARCH_RESULT,
+    //     items: mockItems,
+    //     initialSearch: true
+    //   };
+    //   const state = reducer(initialStateWithItems, action);
+    //   expect(state.loading).to.be.false;
+    //   expect(state.items).to.deep.equal(mockItems);
+    //   shuffledItems.forEach(item => expect(state.displayedItems).to.include(shuffledItems[0]));
+    //   done();
+    // });
     it('BUSY_SEARCHING -> sets loading to true', (done) => {
       const action = {type: BUSY_SEARCHING, isBusy: true};
       const state = reducer(undefined, action);

@@ -18,16 +18,16 @@ import {
   SAVE_SEARCH_RESULT_ID,
   SAVE_SOCKET_CONNECTION_ID,
   SET_FINGERPRINT,
-  SAVE_BUCKET_ID
-  // CLEAR_FEED
+  SAVE_BUCKET_ID,
+  CLEAR_FEED
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
-import {
-  shuffleTilesIntoResults,
-  getPackages,
-  getTiles
-} from './utils/helpers.js';
+// import {
+//   shuffleTilesIntoResults,
+//   getPackages,
+//   getTiles
+// } from './utils/helpers.js';
 import _ from 'lodash';
 
 export const initialState = {
@@ -66,17 +66,17 @@ export const initialState = {
   socketConnectionId: ''
 };
 
-function scrambleSearchItems (items, state, append) {
-  const packages = getPackages(items);
-  const tiles = getTiles(items);
-  return shuffleTilesIntoResults(packages, append ? state.tiles : tiles.concat(state.tiles)); // add filters back in
-}
+// function scrambleSearchItems (items, state, append) {
+//   const packages = getPackages(items);
+//   const tiles = getTiles(items);
+//   return shuffleTilesIntoResults(packages, append ? state.tiles : tiles.concat(state.tiles)); // add filters back in
+// }
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const scrambled = scrambleSearchItems(action.items, state, action.append);
-      const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
+      // const scrambled = scrambleSearchItems(action.items, state, action.append);
+      // const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
       const items = _.uniqBy(_.union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
@@ -86,7 +86,7 @@ export default function search (state = initialState, action) {
       });
       return {
         ...state,
-        displayedItems,
+        displayedItems: items,
         items,
         loading: false,
         error: ''
@@ -205,11 +205,12 @@ export default function search (state = initialState, action) {
         ...state,
         fingerprint: action.fingerprint
       };
-    // case CLEAR_FEED:
-    //   return {
-    //     ...state,
-    //     displayedItems: initialState.displayedItems
-    //   };
+    case CLEAR_FEED:
+      return {
+        ...state,
+        displayedItems: [],
+        items: []
+      };
     default:
       return state;
   }
