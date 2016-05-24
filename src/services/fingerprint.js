@@ -14,7 +14,7 @@ export function initialise (actionCreatorBinder) {
     console.log('existing fingerprint', existingFingerprint);
     setFingerprint(existingFingerprint);
   } else {
-    const fingerprint = create();
+    const fingerprint = createFingerprint();
     localStorage.setItem('fingerprint', fingerprint);
     setFingerprint(fingerprint);
   }
@@ -24,7 +24,7 @@ export function initialise (actionCreatorBinder) {
 * Function that generates a unique id based on window properties
 */
 
-export function create () {
+export function createFingerprint () {
   const nav = window.navigator;
   const screen = window.screen;
   let guid = nav.mimeTypes.length;
