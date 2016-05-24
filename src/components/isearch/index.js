@@ -215,7 +215,7 @@ ISearch.propTypes = {
   numberOfAdultsTitle: PropTypes.string,
   numberOfChildrenTitle: PropTypes.string,
   durationTitle: PropTypes.string,
-  updateHeaderTitles: PropTypes.string,
+  updateHeaderTitles: PropTypes.func,
   setDepartureDate: PropTypes.func,
 
   // routing
