@@ -156,8 +156,8 @@ class HotelPage extends Component {
           </div>
           <div className='bookButtonFooter'>
             <a href={packageOffer.provider.deepLink}>
-              <div className='hotelInfoLink'>See full hotel information and book</div>
-              <div className='bookButton'>See Price and Book</div>
+              <div className='hotelInfoLink'>Se fuld information hotel og bog</div>
+              <div className='bookButton'>SEE PRIS OCH BOKA</div>
             </a>
           </div>
         </div>
