@@ -10,7 +10,7 @@ const mockStore = configureMockStore([thunk]);
 const request = require('request');
 const socketUrl = 'http://eb-ci.wmm63vqska.eu-west-1.elasticbeanstalk.com';
 
-describe.only('Web Socket Service', () => {
+describe('Web Socket Service', () => {
   it('initialise - if there is a connection id in the data, calls the saveSocketConnectionId and addSingleTag actions', done => {
     global.primus = new Primus(socketUrl);
     const store = mockStore({search: { tags: [], resultId: '1234' }});
