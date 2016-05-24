@@ -26,6 +26,7 @@ const defaultProps = {
 
 describe('Component', function () {
   describe('<ArticleFullPage /> Article view', function () {
+    global.dataLayer = [];
     const wrapper = shallow(<ArticleFullPage {...defaultProps} />);
     const children = wrapper.children().nodes;
     it('should render the ISearch container', function (done) {

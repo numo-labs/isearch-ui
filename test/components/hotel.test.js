@@ -72,6 +72,7 @@ const props = {
 };
 
 describe('Component', function () {
+  global.dataLayer = [];
   const wrapper = shallow(<HotelPage {...props} />);
   const children = wrapper.children().nodes;
   describe('<HotelPage /> Component', function () {

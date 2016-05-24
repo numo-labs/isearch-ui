@@ -21,6 +21,23 @@ class HotelPage extends Component {
     this.getHotelData();
   }
 
+  addAnalyticsData () {
+    if (dataLayer) {
+      dataLayer.push({
+        'event': 'productViewed',
+        'ecommerce': {
+          'detail': {
+            'actionField': {'list': 'inspirational search feed'},
+            'products': [{
+              'id': this.props.packageOffer.provider.reference,
+              'brand': 'article_tile'
+            }]
+          }
+        }
+      });
+    }
+  }
+
   getHotelData () {
     this.props.getHotel(this.props.params.bucketId, this.props.params.itemId);
   }
@@ -30,23 +47,24 @@ class HotelPage extends Component {
     for (var key in amenitiesObject) {
       if (!amenitiesObject.hasOwnProperty(key)) continue;
       if (key === fact) {
-        if (amenitiesObject[key] === typeof boolean || amenitiesObject[key] === 'true' || amenitiesObject[key] === 'false') {
+        if (amenitiesObject[ key ] === typeof boolean || amenitiesObject[ key ] === 'true' || amenitiesObject[ key ] === 'false') {
           return '-';
-        } else if (amenitiesObject[key].split(' ')[1] === 'km') {
-          return amenitiesObject[key].split(' ')[0] + 'k';
+        } else if (amenitiesObject[ key ].split(' ')[ 1 ] === 'km') {
+          return amenitiesObject[ key ].split(' ')[ 0 ] + 'k';
         } else {
-          return amenitiesObject[key].split(' ')[0];
+          return amenitiesObject[ key ].split(' ')[ 0 ];
         }
       }
     }
   }
+
   retrieveAmenities () {
     const { packageOffer } = this.props;
     const amenitiesObject = packageOffer.amenities;
     const amenitiesArray = [];
     for (var key in amenitiesObject) {
       if (!amenitiesObject.hasOwnProperty(key)) continue;
-      if (amenitiesObject[key] === true) {
+      if (amenitiesObject[ key ] === true) {
         amenitiesArray.push(key);
       }
     }
@@ -69,6 +87,7 @@ class HotelPage extends Component {
     });
     return amenitiesToRender;
   }
+
   renderFactlist (amenities) {
     return (
       <div className='factHolder'>
@@ -85,7 +104,9 @@ class HotelPage extends Component {
               <div>{this.renderFact('distancetobeach')}m</div>
               <div>{this.renderFact('distancetocenter')}m</div>
               <div>{this.renderFact('outdoorpool')}</div>
-              { amenities.map((a, idx) => { return (<div key={idx}>Ja</div>); }) }
+              { amenities.map((a, idx) => {
+                return (<div key={idx}>Ja</div>);
+              }) }
             </div>
           </div>
         </div>
@@ -100,17 +121,18 @@ class HotelPage extends Component {
       );
     });
   }
+
   renderHotelPage () {
     const { packageOffer, goBack } = this.props;
     const hotelImages = packageOffer.hotel.images.large.map(i => i.uri);
     const roundedStarRating = Math.floor(packageOffer.hotel.starRating);
-    const image = hotelImages[0];
+    const image = hotelImages[ 0 ];
     const country = packageOffer.hotel.place.country + ', ';
     const region = packageOffer.hotel.place.region === null ? '' : packageOffer.hotel.place.region + ', ';
     const name = packageOffer.hotel.place.name;
 
     return ([
-      <NavHeader backToSearch={goBack} />,
+      <NavHeader backToSearch={goBack}/>,
       <div className='hotelPackageImage' style={{backgroundImage: `url(${image})`}}/>,
       <ISearchSlider images={hotelImages} className='headerSlider'/>,
       <div className='infoContainer'>
@@ -168,6 +190,7 @@ class HotelPage extends Component {
   render () {
     const { packageOffer } = this.props;
     if (packageOffer.hotel.description) {
+      this.addAnalyticsData();
       return (
         <div className='hotelPageContainer'>
           {this.renderHotelPage()}
