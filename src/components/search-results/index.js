@@ -51,6 +51,33 @@ class SearchResults extends Component {
     }
     return;
   }
+
+  handleClickEvent (item) {
+    const clickEventObject = {
+      'event': 'productClick',
+      'ecommerce': {
+        'click': {
+          'actionField': {'list': 'inspirational search feed'},
+          'products': []
+        }
+      }
+    };
+    if (dataLayer && item.type === 'packageOffer') {
+      clickEventObject.ecommerce.click.products.push({
+        'id': item.packageOffer.provider.reference,
+        'brand': 'hotel_tile'
+      });
+      dataLayer.push(clickEventObject);
+    } else if (dataLayer && item.type === 'article') {
+      clickEventObject.ecommerce.click.products.push({
+        'id': item.tile.id,
+        'brand': 'article_tile'
+      });
+      dataLayer.push(clickEventObject);
+    }
+    return;
+  }
+
   render () {
     const {
       items,
@@ -73,7 +100,7 @@ class SearchResults extends Component {
             if (item.type === 'packageOffer') {
               return (
                 <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${resultId}/${item.id}`)}>
+                  <div key={index} className='gridItem' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${resultId}/${item.id}`); } }>
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
@@ -102,7 +129,7 @@ class SearchResults extends Component {
               } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${resultId}/${item.id}`)}>
+                    <div key={index} className='gridItem' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${resultId}/${item.id}`); } }>
                       <ArticleTile {...item} />
                     </div>
                   </VisbilitySensor>
