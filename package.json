@@ -102,8 +102,7 @@
     "uuid": "^2.0.2"
   },
   "pre-commit": [
-    "lint",
-    "nocov"
+    "test"
   ],
   "semistandard": {
     "ignore": [
