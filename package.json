@@ -72,6 +72,7 @@
     "semistandard": "^7.0.5",
     "simple-mock": "^0.6.0",
     "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",

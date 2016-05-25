@@ -3,6 +3,7 @@ import {
   BUSY_SEARCHING,
   // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
+  RESET_TAGS,
   SEARCH_ERROR,
   TAG_ADD_SINGLE_TAG,
   FILTER_ON_CLICK,
@@ -172,6 +173,22 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         tags: []
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it('RESET_TAGS -> sets tags array to action.tags', (done) => {
+      const initialStateWithTags = {
+        ...initialState,
+        tags: [{ displayName: 'hello' }],
+        isInitialTag: false
+      };
+      const action = {type: RESET_TAGS, tags: [{displayName: 'test', id: 'id'}]};
+      const state = reducer(initialStateWithTags, action);
+      const expectedState = {
+        ...initialState,
+        tags: [{displayName: 'test', id: 'id'}],
+        isInitialTag: true
       };
       expect(state).to.deep.equal(expectedState);
       done();
