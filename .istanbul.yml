@@ -1,7 +1,7 @@
 instrumentation:
   root: .
   excludes:
-    - /src/services/primus.js
+    - src/services/primus.js
   extensions:
     - .js
-  include-all-sources: true
+  include-all-sources: false
