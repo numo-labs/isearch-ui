@@ -77,7 +77,8 @@ export default function search (state = initialState, action) {
     case RECEIVE_SEARCH_RESULT:
       // const scrambled = scrambleSearchItems(action.items, state, action.append);
       // const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
-      const items = _.uniqBy(_.union(state.items, action.items), (a) => {
+      const items = state.displayedItems.length > 0 ? action.items : action.items.concat(mockTiles); // add in the filters if it is the inital search
+      const itemsToDisplay = _.uniqBy(_.union(state.displayedItems, items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
         } else if (a.tile) {
@@ -86,8 +87,7 @@ export default function search (state = initialState, action) {
       });
       return {
         ...state,
-        displayedItems: items,
-        items,
+        displayedItems: itemsToDisplay,
         loading: false,
         error: ''
       };
@@ -208,8 +208,7 @@ export default function search (state = initialState, action) {
     case CLEAR_FEED:
       return {
         ...state,
-        displayedItems: [],
-        items: []
+        displayedItems: []
       };
     default:
       return state;

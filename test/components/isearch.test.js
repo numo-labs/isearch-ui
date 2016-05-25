@@ -50,10 +50,10 @@ describe('Component', function () {
       expect(thirdChild).to.deep.equal(tags);
       done();
     });
-    it('should render the <SearchResults /> as the fourth child if the loading and error props are false', function (done) {
+    it('should render the <ScrollView /> as the fourth child if the loading and error props are false', function (done) {
       const fourthChild = children[3].type;
-      const searchResults = wrapper.find('SearchResults').node.type;
-      expect(fourthChild).to.deep.equal(searchResults);
+      const scrollView = wrapper.find('ScrollView').node.type;
+      expect(fourthChild).to.deep.equal(scrollView);
       done();
     });
     it('should render the <LoadingSpinner /> as the fourth child if the loading prop is true', function (done) {

@@ -32,7 +32,7 @@ const initialStateWithTiles = {
   tiles: mockTiles
 };
 
-describe('Search Reducer', () => {
+describe.only('Search Reducer', () => {
   it('should return the initial state', (done) => {
     const state = reducer(undefined, {});
     expect(state).to.deep.equal(initialState);
@@ -55,10 +55,10 @@ describe('Search Reducer', () => {
       const state = reducer(undefined, action);
       const expectedState = {
         ...initialState,
-        items: mockItems,
-        displayedItems: mockItems,
+        displayedItems: mockItems.concat(mockTiles),
         loading: false
       };
+      console.log('state', state);
       expect(state).to.deep.equal(expectedState);
       done();
     });

@@ -5,6 +5,7 @@ import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
 import SearchBar from '../../../lib/search-bar';
+import ScrollView from '../../../lib/scroll-view';
 import './style.css';
 
 class ISearch extends Component {
@@ -12,7 +13,9 @@ class ISearch extends Component {
   constructor () {
     super();
     this.state = {
-      screenWidth: window.innerWidth
+      screenWidth: window.innerWidth,
+      feedItems: [],
+      endScroll: false
     };
     this.handleResize = this.handleResize.bind(this);
   }
@@ -29,9 +32,17 @@ class ISearch extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
+  loadItemsIntoFeed (page) {
+    const { displayedItems } = this.props;
+    if (displayedItems.length > page * 5) {
+      this.setState({feedItems: displayedItems.slice(0, page * 5)});
+    } else if (displayedItems.length === 0) {
+      this.setState({feedItems: []});
+    }
+  }
+
   renderResults () {
     const {
-      displayedItems,
       onYesFilter,
       onFilterClick,
       filterVisibleState,
@@ -42,16 +53,18 @@ class ISearch extends Component {
       push: changeRoute
     } = this.props;
     return (
-      <SearchResults
-        changeRoute={changeRoute}
-        items={displayedItems}
-        onYesFilter={onYesFilter}
-        onFilterClick={onFilterClick}
-        filterVisibleState={filterVisibleState}
-        setHotelPage={setHotelPage}
-        totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
-        resultId={resultId}
-      />
+      <ScrollView loadData={this.loadItemsIntoFeed.bind(this)} endScroll={this.state.endScroll}>
+        <SearchResults
+          changeRoute={changeRoute}
+          items={this.state.feedItems}
+          onYesFilter={onYesFilter}
+          onFilterClick={onFilterClick}
+          filterVisibleState={filterVisibleState}
+          setHotelPage={setHotelPage}
+          totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
+          resultId={resultId}
+        />
+      </ScrollView>
     );
   }
 
