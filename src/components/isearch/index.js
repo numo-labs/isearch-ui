@@ -147,7 +147,6 @@ class ISearch extends Component {
           tags={tags}
           removeTag={removeTag}
           resetTags={resetTags}
-          addSingleTag={addSingleTag}
         />
         { loading &&
         <div className='spinnerContainer'>

@@ -128,7 +128,8 @@ export default function search (state = initialState, action) {
     case RESET_TAGS:
       return {
         ...state,
-        tags: []
+        tags: action.tags,
+        isInitialTag: true
       };
     case FILTER_ON_CLICK:
       return {

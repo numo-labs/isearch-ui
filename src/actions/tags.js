@@ -111,6 +111,9 @@ export const clearSearchString = () => {
 * Action to reset all tags to empty
 */
 
-export const resetTags = () => {
-  return { type: RESET_TAGS };
+export const resetTags = (displayName, id) => {
+  return {
+    type: RESET_TAGS,
+    tags: [ { displayName, id } ]
+  };
 };
