@@ -6,6 +6,7 @@ import {
   // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
   TAG_ADD_SINGLE_TAG,
+  RESET_TAGS,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
   SET_SEARCH_STRING,
@@ -123,6 +124,11 @@ export default function search (state = initialState, action) {
         ...state,
         tags: newTags,
         error: ''
+      };
+    case RESET_TAGS:
+      return {
+        ...state,
+        tags: []
       };
     case FILTER_ON_CLICK:
       return {
