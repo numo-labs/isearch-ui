@@ -34,3 +34,21 @@
   display: inline-block;
   width: 100%;
 }
+
+.resetButton {
+  border-radius: 600px;
+  border: 1px solid #F39110;
+  color: #F39110;
+  display: inline-block;
+  font-family: SourceSansBold;
+  font-size: 1.2em;
+  padding: 0.3em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top: 0.7em;
+  margin-bottom: 1.5em;
+  cursor: pointer;
+}
+.resetButton.hidden {
+  display: none;
+}
