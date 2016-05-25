@@ -10,6 +10,7 @@ const socketUrl = 'http://eb-ci.wmm63vqska.eu-west-1.elasticbeanstalk.com';
 * @param {Function} - actionCreatorBinder - function that takes an action
 * and binds it to dispatch
 */
+export const primus = new Primus(socketUrl);
 
 export function initialise (actionCreatorBinder) {
   const {
@@ -17,7 +18,6 @@ export function initialise (actionCreatorBinder) {
     saveSocketConnectionId,
     addSingleTag
   } = actionCreatorBinder({...SearchResultActions, ...TagActions});
-  const primus = new Primus(socketUrl);
   primus.on('data', function received (data) {
     console.log('incoming socket data', data);
     if (data.connection) {
