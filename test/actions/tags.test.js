@@ -3,7 +3,8 @@ import {
   TAG_REMOVE_TAG,
   TILES_ADD_TILES,
   TAG_ADD_SINGLE_TAG,
-  FILTER_ON_CLICK
+  FILTER_ON_CLICK,
+  RESET_TAGS
 } from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/tags';
@@ -86,6 +87,16 @@ describe('actions', () => {
         displayName: 'test'
       };
       expect(actions.onFilterClick('test')).to.deep.equal(expectedAction);
+      done();
+    });
+  });
+  describe('resetTags', () => {
+    it('should create an action to set the tags back to the single tag passed', (done) => {
+      const expectedAction = {
+        type: RESET_TAGS,
+        tags: [ { displayName: 'name', id: 'id' } ]
+      };
+      expect(actions.resetTags('name', 'id')).to.deep.equal(expectedAction);
       done();
     });
   });

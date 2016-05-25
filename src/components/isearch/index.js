@@ -59,6 +59,7 @@ class ISearch extends Component {
     const {
       tags,
       removeTag,
+      resetTags,
       setSearchString,
       startSearch,
       autocompleteOptions,
@@ -142,6 +143,7 @@ class ISearch extends Component {
         <Tags
           tags={tags}
           removeTag={removeTag}
+          resetTags={resetTags}
         />
         { loading &&
         <div className='spinnerContainer'>
@@ -193,6 +195,7 @@ ISearch.propTypes = {
   addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
+  resetTags: PropTypes.func,
 
   // travel info
   setNumberOfChildren: PropTypes.func,

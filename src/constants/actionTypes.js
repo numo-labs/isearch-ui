@@ -18,6 +18,7 @@ export const TAG_REMOVE_TAG = 'TAG_REMOVE_TAG';
 export const TILES_ADD_TILES = 'TILES_ADD_TILES';
 export const REMOVE_TAG = 'REMOVE_TAG';
 export const FILTER_ON_CLICK = 'FILTER_ON_CLICK';
+export const RESET_TAGS = 'RESET_TAGS';
 
 // autocomplete
 export const SET_AUTOCOMPLETE_OPTIONS = 'SET_AUTOCOMPLETE_OPTIONS';
