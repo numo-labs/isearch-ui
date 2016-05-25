@@ -1,4 +1,4 @@
-import { initialise, primus } from '../../src/services/websockets.js';
+import { initialise } from '../../src/services/websockets.js';
 import { expect } from 'chai';
 import thunk from 'redux-thunk';
 import { bindActionCreators } from 'redux';
@@ -13,9 +13,9 @@ describe('Web Socket Service', function () {
   it('initialise - if there is a connection id in the data, calls the saveSocketConnectionId and addSingleTag actions', done => {
     const store = mockStore({search: { tags: [], resultId: '1234' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
-    initialise(actionCreatorBinder);
     let counter = 0;
     let expectedActions = [];
+    const primus = initialise(actionCreatorBinder);
     primus.on('data', data => {
       if (data.connection) {
         postDataToClient(data.connection);
