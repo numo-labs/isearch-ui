@@ -1,0 +1,5 @@
+instrumentation:
+  verbose: true
+  excludes: ["./src/services/primus.js"]
+reporting:
+  dir: "coverage"
