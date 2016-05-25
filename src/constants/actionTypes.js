@@ -9,6 +9,7 @@ export const SAVE_SEARCH_RESULT_ID = 'SAVE_SEARCH_RESULT_ID';
 export const SAVE_BUCKET_ID = 'SAVE_BUCKET_ID';
 export const RECEIVE_SEARCH_RESULT = 'RECEIVE_SEARCH_RESULT';
 export const CLEAR_SEARCH_STRING = 'CLEAR_SEARCH_STRING';
+export const CLEAR_FEED = 'CLEAR_FEED';
 
 // tiles and tags
 export const TAG_ADD_SINGLE_TAG = 'TAG_ADD_SINGLE_TAG';
@@ -26,6 +27,7 @@ export const SET_AUTOCOMPLETE_IN_SEARCH = 'SET_AUTOCOMPLETE_IN_SEARCH';
 // errors
 export const SEARCH_ERROR = 'SEARCH_ERROR';
 
+// temp routing
 export const VIEW_ARTICLE = 'VIEW_ARTICLE';
 
 // hotel page
@@ -40,3 +42,9 @@ export const SET_DEPARTURE_AIRPORT = 'SET_DEPARTURE_AIRPORT';
 export const SET_DURATION = 'SET_DURATION';
 export const SET_PASSENGER_BIRTHDAYS = 'SET_PASSENGER_BIRTHDAYS';
 export const UPDATE_HEADER_TITLES = 'UPDATE_HEADER_TITLES';
+
+// web sockets
+export const SAVE_SOCKET_CONNECTION_ID = 'SAVE_SOCKET_CONNECTION_ID';
+
+// fingerprint
+export const SET_FINGERPRINT = 'SET_FINGERPRINT';
