@@ -1,5 +1,7 @@
 instrumentation:
-  verbose: true
-  excludes: ["./src/services/primus.js"]
-reporting:
-  dir: "coverage"
+  root: .
+  excludes:
+    - /src/services/primus.js
+  extensions:
+    - .js
+  include-all-sources: true
