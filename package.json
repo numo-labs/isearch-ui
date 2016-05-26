@@ -1,6 +1,6 @@
 {
   "name": "isearch-ui",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
@@ -16,7 +16,7 @@
     "nocov": "npm run lib:test && npm run src:test",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js ./lib/**/*.test.js --report lcov -- -R spec",
     "clean": "rm -rf public && mkdir -p public/",
-    "build": "npm run clean && ./node_modules/.bin/webpack --config ./webpack.production.config.js",
+    "build": "npm run clean && ./node_modules/.bin/webpack --optimize-minimize --optimize-occurrence-order --optimize-dedupe --config ./webpack.production.config.js",
     "deploy": "gulp deploy",
     "generate-graphql-schema": "babel-node ./test/constants/helpers/update-schema.js > ./test/constants/helpers/schema.json"
   },
@@ -72,12 +72,14 @@
     "semistandard": "^7.0.5",
     "simple-mock": "^0.6.0",
     "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "engine.io-client": "^1.6.9",
     "file-loader": "^0.8.5",
     "history": "^2.1.1",
     "isomorphic-fetch": "^2.2.1",
@@ -96,22 +98,27 @@
     "react-slick": "^0.12.0",
     "react-typeahead": "^1.1.9",
     "react-visibility-sensor": "^3.0.0",
-    "redux": "^3.3.1",
+    "redux": "^3.5.2",
     "request": "^2.65.0",
     "uuid": "^2.0.2"
   },
   "pre-commit": [
-    "lint",
-    "nocov"
+    "test"
   ],
   "semistandard": {
+    "ignore": [
+      "/src/services/primus.js"
+    ],
     "globals": [
       "describe",
       "it",
       "dataLayer",
       "afterEach",
       "before",
-      "beforeEach"
+      "beforeEach",
+      "primus",
+      "window",
+      "localStorage"
     ],
     "parser": "babel-eslint"
   }

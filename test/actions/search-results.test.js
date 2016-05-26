@@ -2,9 +2,12 @@ import {
   BUSY_SEARCHING,
   SAVE_SEARCH_RESULT_ID,
   RECEIVE_SEARCH_RESULT,
-  SAVE_BUCKET_ID
+  SAVE_SOCKET_CONNECTION_ID,
+  SAVE_BUCKET_ID,
+  SEARCH_ERROR,
+  UPDATE_HEADER_TITLES,
+  CLEAR_FEED
   // TILES_ADD_TILES,
-  // SEARCH_ERROR
 } from '../../src/constants/actionTypes';
 import moment from 'moment';
 
@@ -31,7 +34,7 @@ const initialState = {
       {id: 'amenity:pool', displayName: 'pool'}
     ],
     bucketId: '1',
-    resultId: '',
+    resultId: '1',
     displayedItems: []
   },
   travelInfo: {
@@ -47,16 +50,18 @@ const initialState = {
     numberOfChildrenTitle: '2',
     numberOfAdultsTitle: '2',
     durationTitle: '2 weeks'
-  }
+  },
+  bucketId: '12345'
 };
 
-describe('actions', function () {
+describe('Search Results Actions', () => {
   afterEach(function (done) {
     simple.restore();
     done();
   });
-  describe('startSearch', function () {
-    it('should dispatch an action to set loading to true and an action fetchQuerySearchResults if there are tags', function (done) {
+  describe('search actions', () => {
+    it(`startSearch: should dispatch an action to set loading to true and an
+        action fetchQuerySearchResults if there are tags`, function (done) {
       this.timeout(10100);
       const json = {
         data: {
@@ -71,7 +76,7 @@ describe('actions', function () {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
-        { type: SAVE_BUCKET_ID, id: '12345' },
+        { type: SAVE_SEARCH_RESULT_ID, id: '12345' },
         {
           'payload': {
             'args': [
@@ -80,6 +85,9 @@ describe('actions', function () {
             'method': 'push'
           },
           'type': '@@router/CALL_HISTORY_METHOD'
+        },
+        {
+          type: CLEAR_FEED
         }
       ];
       store.dispatch(actions.startSearch());
@@ -91,109 +99,114 @@ describe('actions', function () {
         })
         .catch(done);
     });
-  });
-  describe('fetchQuerySearchResults', function () {
-    afterEach(function (done) {
-      simple.restore();
-      done();
-    });
-    const json = {
-      data: {
-        viewer: {
-          searchResult: {
-            items: [{type: 'packageOffer'}, {type: 'tile'}]
+    it(`startSearch: should dispatch an action to set the search error if no search id
+      is returned`, function (done) {
+      this.timeout(10100);
+      const json = {
+        data: {
+          viewer: {
+            searchResultId: {
+              id: null
+            }
           }
         }
-      }
-    };
-
-    // Does not happen anymore
-    // it('no displayedItems -> should call the addTiles and receiveSearchResult actions with the items', function (done) {
-    //   const expectedActions = [
-    //     { type: 'TILES_ADD_TILES', tileArray: undefined },
-    //     {
-    //       type: 'RECEIVE_SEARCH_RESULT',
-    //       items: [{
-    //         type: 'packageOffer'
-    //       }],
-    //       initialSearch: true,
-    //       append: true
-    //     }
-    //   ];
-    //   var stub = simple.mock(graphqlService, 'query').resolveWith(json);
-    //   const store = mockStore(initialState);
-    //   store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 0))
-    //     .then(() => {
-    //       expect(store.getActions()).to.deep.equal(expectedActions);
-    //       expect(stub.callCount).to.equal(1);
-    //       done();
-    //     })
-    //     .catch(done);
-    // });
-    it('existing displayedItems -> should call the receiveSearchResult action with the items and the updateSearchId action with the id', function (done) {
-      const expectedActions = [
-        { type: SAVE_SEARCH_RESULT_ID, id: '1' },
-        {
-          type: RECEIVE_SEARCH_RESULT,
-          items: [{type: 'packageOffer'}, {type: 'tile'}],
-          initialSearch: false,
-          append: false
-        }
-      ];
-      var stub = simple.mock(graphqlService, 'query').resolveWith(json);
-      const initialStateWithResults = {
-        ...initialState,
-        search: {
-          ...initialState.search,
-          displayedItems: [{}]
-        }
       };
-      const store = mockStore(initialStateWithResults);
-      store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 0))
+      simple.mock(graphqlService, 'query').resolveWith(json);
+      const store = mockStore(initialState);
+      const expectedActions = [
+        { type: BUSY_SEARCHING, isBusy: true },
+        { type: SEARCH_ERROR, error: 'No results found' }
+      ];
+      store.dispatch(actions.startSearch());
+      graphqlService.query.lastCall.returned
         .then(() => {
           expect(store.getActions()).to.deep.equal(expectedActions);
-          expect(stub.callCount).to.equal(1);
+          expect(graphqlService.query.calls[0].args[0]).to.equal(MUTATION_START_SEARCH);
           done();
         })
         .catch(done);
     });
-    // We are currently not displaying an error anymore
-    // it('attempt > 15 -> should dispatch a search error', function (done) {
-    //   simple.mock(graphqlService, 'query').resolveWith(json);
-    //   const expectedActions = [
-    //     {
-    //       type: SEARCH_ERROR,
-    //       error: 'Something went wrong and no results were found'
-    //     }
-    //   ];
-    //   const store = mockStore(initialState);
-    //   store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 16))
-    //     .then(() => {
-    //       console.log('actions', store.getActions());
-    //       expect(store.getActions()).to.deep.equal(expectedActions);
-    //       done();
-    //     })
-    //     .catch(done);
-    // });
-    it('no items returned from graphql -> should poll for more results', function (done) {
-      this.timeout(10100);
-      const noItems = {data: { viewer: { searchResult: { items: [] } } }};
-      simple.mock(graphqlService, 'query')
-        .resolveWith(noItems);
+  });
+  it(`retrieveSearchResults should return an object with type
+     RECEIVE_SEARCH_RESULT and items, append and initialSearch keys`, done => {
+    const store = mockStore(initialState);
+    const expectedActions = [
+      {
+        type: RECEIVE_SEARCH_RESULT,
+        items: [{}],
+        initialSearch: false,
+        append: true
+      }
+    ];
+    store.dispatch(actions.receiveSearchResult([{}], false, true));
+    expect(store.getActions()).to.deep.equal(expectedActions);
+    done();
+  });
+  it(`retrieveSearchResults should default append to false`, done => {
+    const store = mockStore(initialState);
+    const expectedActions = [
+      {
+        type: RECEIVE_SEARCH_RESULT,
+        items: [{}],
+        initialSearch: false,
+        append: false
+      }
+    ];
+    store.dispatch(actions.receiveSearchResult([{}], false));
+    expect(store.getActions()).to.deep.equal(expectedActions);
+    done();
+  });
+  describe('Web Socket connection actions', () => {
+    it(`saveSocketConnectionId: should dispatch the action to save the
+        search result id`, done => {
       const store = mockStore(initialState);
-      const stub = simple.mock(store, 'dispatch').callOriginal();
-      store.dispatch(actions.fetchQuerySearchResults('1', 1, 2, 1));
+      const id = '12345';
+      const expectedActions = [
+        {
+          type: SAVE_SOCKET_CONNECTION_ID,
+          id
+        }
+      ];
+      store.dispatch(actions.saveSocketConnectionId(id));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it(`saveSearchResult: should dispatch an action resultId save the search results
+        if the searchId of the data matches the bucketId`, done => {
+      const result = {
+        graphql: {
+          id: '12345',
+          searchId: '34567',
+          items: [{}]
+        }
+      };
 
-      graphqlService.query.lastCall.returned
-        .then(json => {
-          expect(json).to.equal(noItems);
-          setTimeout(function () {
-            expect(stub.lastCall.arg.name).to.equal('fetchQuerySearchResults_anonymousFn');
-            expect(graphqlService.query.callCount).to.equal(10); // exits after the 10th attempt (starts at 1)
-            done();
-          }, 10000);
-        })
-       .catch(done);
+      const expectedAction = {
+        type: RECEIVE_SEARCH_RESULT,
+        items: [ {} ],
+        initialSearch: false,
+        append: false
+      };
+      const dispatch = simple.mock();
+      const state = simple.mock().returnWith({ search: { resultId: '34567' } });
+      actions.saveSearchResult(result)(dispatch, state);
+      expect(dispatch.lastCall.arg).to.deep.equal(expectedAction);
+      done();
+    });
+    it(`saveSearchResult: should ignore the data if the searchId of the data
+        does not match the resultId`, done => {
+      const result = {
+        graphql: {
+          id: '12345',
+          searchId: '34567',
+          items: [{}]
+        }
+      };
+      const dispatch = simple.mock();
+      const state = simple.mock().returnWith({ search: { resultId: '12345' } });
+      actions.saveSearchResult(result)(dispatch, state);
+      expect(dispatch.callCount).to.equal(0);
+      done();
     });
   });
   describe('save Id actions', function () {
@@ -221,23 +234,15 @@ describe('actions', function () {
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });
-    it('updateSearchId: calls the saveSearchResultId function only if the id is different from the current bucketId', function (done) {
-      const dispatch = simple.mock();
-      const store = simple.mock().returnWith(initialState);
-      const expectedAction = {
-        type: SAVE_SEARCH_RESULT_ID,
-        id: '1'
-      };
-      actions.updateSearchId('1')(dispatch, store);
-      expect(dispatch.callCount).to.equal(1);
-      expect(dispatch.lastCall.arg).to.deep.equal(expectedAction);
-      done();
-    });
-    it('updateSearchId: does not call the saveSearchResultId if the id is the same', function (done) {
-      const dispatch = simple.mock();
-      const store = simple.mock().returnWith(initialState);
-      actions.updateSearchId('')(dispatch, store);
-      expect(dispatch.callCount).to.equal(0);
+  });
+  describe('header title update actions', function () {
+    it('updateHeaderTitles: returns an object with type UPDATE_HEADER_TITLES', function (done) {
+      const store = mockStore(initialState);
+      const expectedActions = [
+        { type: UPDATE_HEADER_TITLES }
+      ];
+      store.dispatch(actions.updateHeaderTitles());
+      expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });
   });

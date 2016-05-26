@@ -1,5 +1,6 @@
 // npm
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -18,7 +19,24 @@ const store = configureStore();
 
 const syncedHistory = syncHistoryWithStore(hashHistory, store);
 
+// web socket service
+import * as websocketService from '../services/websockets.js';
+// client fingerprint service
+import * as fingerprintService from '../services/fingerprint.js';
+
+const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
+
 export default class Root extends Component {
+
+  componentWillMount () {
+    this.socket = websocketService.initialise(actionCreatorBinder);
+    fingerprintService.initialise(actionCreatorBinder);
+  }
+
+  componentWilUnmount () {
+    if (this.socket) { this.socket.destroy(); }
+  }
+
   render () {
     return (
       <Provider store={store}>
