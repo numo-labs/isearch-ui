@@ -47,7 +47,7 @@
     display: none;
     text-transform: uppercase;
     font-family: TCScript, sans-serif;
-    color: #eed3d7;
+    color: #888;
 }
 
 .articleContainer.visited .text {
@@ -91,4 +91,11 @@
     background: white;
     margin-right: 10px;
     color: #666;
+    border: 1px solid #eee;
+    max-width: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: middle;
+    font-size: 2rem;
 }
