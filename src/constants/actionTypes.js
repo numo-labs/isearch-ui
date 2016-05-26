@@ -19,6 +19,7 @@ export const TILES_ADD_TILES = 'TILES_ADD_TILES';
 export const REMOVE_TAG = 'REMOVE_TAG';
 export const FILTER_ON_CLICK = 'FILTER_ON_CLICK';
 export const RESET_TAGS = 'RESET_TAGS';
+export const TILES_REMOVE_TILE = 'TILES_REMOVE_TILE';
 
 // autocomplete
 export const SET_AUTOCOMPLETE_OPTIONS = 'SET_AUTOCOMPLETE_OPTIONS';
