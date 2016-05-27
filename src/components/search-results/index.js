@@ -58,9 +58,11 @@ class SearchResults extends Component {
       onYesFilter,
       onFilterClick,
       totalPassengers,
-      resultId,
+      // resultId,
       changeRoute
     } = this.props;
+
+    //TODO replace urls to valid ones
     return (
       <Masonry
         elementType={'div'}
@@ -73,7 +75,7 @@ class SearchResults extends Component {
             if (item.packageOffer) {
               return (
                 <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${resultId}/`)}>
+                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${item.url}/q/d`)}>
                     <PackageTile
                       key={item.packageOffer.id}
                       packageOffer={item.packageOffer}
@@ -102,7 +104,7 @@ class SearchResults extends Component {
               } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${resultId}/${item.id}`)}>
+                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${item.url}/q/w`)}>
                       <ArticleTile {...item} />
                     </div>
                   </VisbilitySensor>
@@ -123,7 +125,7 @@ SearchResults.propTypes = {
   filterVisibleState: PropTypes.object,
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
-  resultId: PropTypes.string,
+  // resultId: PropTypes.string,
   changeRoute: PropTypes.func
 };
 

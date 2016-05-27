@@ -43,9 +43,9 @@ export default class Root extends Component {
         <Router history={syncedHistory}>
           <Route path='/' component={App} ignoreScrollBehavior>
             <IndexRoute component={ISearch}/>
-            <Route path='search/:bucketId' component={ISearch}/>
-            <Route path='article/:bucketId/:itemId' component={ArticleFullPage} />
-            <Route path='hotel/:bucketId/:itemId' component={HotelPage} />
+            <Route path='search/:userId/:bucketId' component={ISearch}/>
+            <Route path='article/:userId/:bucketId/:itemId' component={ArticleFullPage} />
+            <Route path='hotel/:userId/:bucketId/:itemId' component={HotelPage} />
           </Route>
         </Router>
       </Provider>

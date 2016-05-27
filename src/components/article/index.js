@@ -19,7 +19,7 @@ class ArticleFullPage extends Component {
   }
 
   getArticleData () {
-    this.props.getArticle(this.props.params.bucketId, this.props.params.itemId);
+    this.props.getArticle(this.props.params.userId, this.props.params.bucketId, this.props.params.itemId);
     this.setState({articleContent: this.props.articleContent});
   }
 

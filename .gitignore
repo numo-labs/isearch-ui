@@ -39,4 +39,5 @@ dist/index.html
 public/
 
 .idea
+.env
 test/constants/helpers/schema.json

@@ -1,0 +1,66 @@
+{
+  "packageOffer": {
+    "hotel": {
+      "starRating": 5,
+      "images": {
+        "small": [
+          {
+            "uri": ""
+          }
+        ],
+        "large": [
+          {
+            "uri": ""
+          }
+        ]
+      },
+      "name": "Sun Wing",
+      "description": "hotel description",
+      "place": {
+        "country": "",
+        "region": "",
+        "name": ""
+      }
+    },
+    "provider": {
+      "context": ""
+    },
+    "nights": 5,
+    "flights": {
+      "outbound": [
+        {
+          "departure": {
+            "localDateTime": ""
+          }
+        }
+      ],
+      "inbound": [
+        {
+          "departure": {
+            "localDateTime": ""
+          }
+        }
+      ]
+    },
+    "price": {
+      "perPerson": ""
+    },
+    "amenities": {
+      "allinclusive": false,
+      "bar": true,
+      "childrenpool": true,
+      "cleaningdaysperweek": "6",
+      "distancetobeach": "300 m",
+      "distancetocenter": "200 m",
+      "elevator": true,
+      "isadulthotel": false,
+      "lolloandbernie": false,
+      "minimarket": false,
+      "outdoorpool": "2 stk.",
+      "poolbar": true,
+      "restaurant": true,
+      "waterslide": false,
+      "wifi": true
+    }
+  }
+}

@@ -128,7 +128,7 @@ export function startSearch () {
           const bucketId = json.data.viewer.searchResultId.id;
           if (bucketId) {
             dispatch(saveSearchResultId(bucketId));
-            dispatch(push(`/search/${bucketId}`));
+            dispatch(push(`/search/${clientId}/${bucketId}`));
             dispatch(clearFeed());
           } else {
             return dispatch(searchError('No results found'));

@@ -118,7 +118,8 @@
       "beforeEach",
       "primus",
       "window",
-      "localStorage"
+      "localStorage",
+      "$"
     ],
     "parser": "babel-eslint"
   }
