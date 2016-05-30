@@ -62,7 +62,7 @@ class SearchResults extends Component {
       changeRoute
     } = this.props;
 
-    //TODO replace urls to valid ones
+    // TODO replace urls to valid ones
     return (
       <Masonry
         elementType={'div'}

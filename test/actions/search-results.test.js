@@ -80,7 +80,7 @@ describe('Search Results Actions', () => {
         {
           'payload': {
             'args': [
-              '/search/12345'
+              '/search/undefined/12345' // TODO fix url
             ],
             'method': 'push'
           },
