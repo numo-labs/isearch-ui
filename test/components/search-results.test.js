@@ -5,7 +5,7 @@ import SearchResults from '../../src/components/search-results';
 import mockTiles from '../../src/utils/mock-search-results';
 
 describe('Component', function () {
-  const wrapper = shallow(<SearchResults items={mockTiles.items} filterVisibleState={{'Wifi': true}}/>);
+  const wrapper = shallow(<SearchResults items={mockTiles.items} filterVisibleState={{'Wifi': true}} viewedArticles={[]}/>);
   const children = wrapper.children().nodes;
   describe('<SearchResults />', function () {
     it('should render our SearchResults component', function (done) {

@@ -39,7 +39,8 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       resultId,
-      push: changeRoute
+      push: changeRoute,
+      viewedArticles
     } = this.props;
     return (
       <SearchResults
@@ -51,6 +52,7 @@ class ISearch extends Component {
         setHotelPage={setHotelPage}
         totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
         resultId={resultId}
+        viewedArticles={viewedArticles}
       />
     );
   }
@@ -219,7 +221,9 @@ ISearch.propTypes = {
   setDepartureDate: PropTypes.func,
 
   // routing
-  push: PropTypes.func
+  push: PropTypes.func,
+
+  viewedArticles: PropTypes.array
 };
 
 export default ISearch;

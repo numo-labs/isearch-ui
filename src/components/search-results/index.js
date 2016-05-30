@@ -59,7 +59,8 @@ class SearchResults extends Component {
       onFilterClick,
       totalPassengers,
       resultId,
-      changeRoute
+      changeRoute,
+      viewedArticles
     } = this.props;
     return (
       <Masonry
@@ -103,7 +104,7 @@ class SearchResults extends Component {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                     <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${resultId}/${item.id}`)}>
-                      <ArticleTile {...item} />
+                      <ArticleTile className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''} {...item} />
                     </div>
                   </VisbilitySensor>
                 );
@@ -124,7 +125,8 @@ SearchResults.propTypes = {
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
   resultId: PropTypes.string,
-  changeRoute: PropTypes.func
+  changeRoute: PropTypes.func,
+  viewedArticles: PropTypes.array
 };
 
 export default SearchResults;

@@ -53,7 +53,8 @@ function mapStateToProps (state) {
     article: {
       articlePage,
       articleContent,
-      onAddArticleTag
+      onAddArticleTag,
+      viewedArticles
     }
   } = state;
   return {
@@ -84,7 +85,8 @@ function mapStateToProps (state) {
     numberOfAdultsTitle,
     numberOfChildrenTitle,
     durationTitle,
-    resultId
+    resultId,
+    viewedArticles
   };
 }
 
