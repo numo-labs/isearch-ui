@@ -159,9 +159,9 @@ class ISearch extends Component {
           resetTags={resetTags}
         />
         { loading &&
-        <div className='spinnerContainer'>
-          <LoadingSpinner/>
-        </div>
+          <div className='spinnerContainer'>
+            <LoadingSpinner/>
+          </div>
         }
         { error && <div className='errorMessage'>{error}</div> }
         { this.renderResults() }
@@ -172,9 +172,6 @@ class ISearch extends Component {
 
 ISearch.propTypes = {
   resultId: PropTypes.string,
-  // for random initial results
-  fetchQuerySearchResults: PropTypes.func,
-  getArticle: PropTypes.func,
   // results
   loading: PropTypes.bool,
   error: PropTypes.string,
