@@ -275,7 +275,9 @@ describe('Search Reducer', () => {
       const state = reducer(initialStateWithItems, action);
       console.log(state);
       const expectedState = {
-        ...initialState
+        ...initialState,
+        displayedItems: [],
+        items: []
       };
       expect(state).to.deep.equal(expectedState);
       done();
