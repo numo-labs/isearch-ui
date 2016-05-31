@@ -67,14 +67,14 @@ export function combinePassengersForQuery (childAgeArray, numberOfChildren, numb
   const childPassengers = slicedChildAgeArray.map(slicedChildAge => {
     const date = new Date();
     const year = date.getFullYear() - Number(slicedChildAge.split(' ')[0]);
-    const month = ('0' + date.getMonth()).slice(-2);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);
     return ({birthday: `${year}-${month}-${day}`});
   });
   const adultPassengers = _.times(numberOfAdults, function () {
     const date = new Date();
     const year = date.getFullYear() - 20;
-    const month = ('0' + date.getMonth()).slice(-2);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);
     return ({birthday: `${year}-${month}-${day}`}
     );
