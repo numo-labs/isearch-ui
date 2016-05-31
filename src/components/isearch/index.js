@@ -32,15 +32,6 @@ class ISearch extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  loadItemsIntoFeed (page) {
-    const { displayedItems } = this.props;
-    if (displayedItems.length > page * 5) {
-      this.setState({feedItems: displayedItems.slice(0, page * 5)});
-    } else if (displayedItems.length === 0) {
-      this.setState({feedItems: []});
-    }
-  }
-
   renderResults () {
     const {
       onYesFilter,
@@ -50,13 +41,15 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       resultId,
-      push: changeRoute
+      push: changeRoute,
+      displayedItems,
+      loadMoreItemsIntoFeed
     } = this.props;
     return (
-      <ScrollView loadData={this.loadItemsIntoFeed.bind(this)} endScroll={this.state.endScroll}>
+      <ScrollView loadData={loadMoreItemsIntoFeed} endScroll={this.state.endScroll}>
         <SearchResults
           changeRoute={changeRoute}
-          items={this.state.feedItems}
+          items={displayedItems}
           onYesFilter={onYesFilter}
           onFilterClick={onFilterClick}
           filterVisibleState={filterVisibleState}

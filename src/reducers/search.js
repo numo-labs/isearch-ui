@@ -20,7 +20,8 @@ import {
   SAVE_SOCKET_CONNECTION_ID,
   SET_FINGERPRINT,
   SAVE_BUCKET_ID,
-  CLEAR_FEED
+  CLEAR_FEED,
+  UPDATE_DISPLAYED_ITEMS
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -79,7 +80,7 @@ export default function search (state = initialState, action) {
       // const scrambled = scrambleSearchItems(action.items, state, action.append);
       // const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
       const items = state.displayedItems.length > 0 ? action.items : action.items.concat(mockTiles); // add in the filters if it is the inital search
-      const itemsToDisplay = _.uniqBy(_.union(state.displayedItems, items), (a) => {
+      const itemsToDisplay = _.uniqBy(_.union(state.items, items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
         } else if (a.tile) {
@@ -88,9 +89,14 @@ export default function search (state = initialState, action) {
       });
       return {
         ...state,
-        displayedItems: itemsToDisplay,
+        items: itemsToDisplay,
         loading: false,
         error: ''
+      };
+    case UPDATE_DISPLAYED_ITEMS:
+      return {
+        ...state,
+        displayedItems: action.items
       };
     case BUSY_SEARCHING:
       return {
@@ -215,7 +221,8 @@ export default function search (state = initialState, action) {
     case CLEAR_FEED:
       return {
         ...state,
-        displayedItems: []
+        displayedItems: [],
+        items: []
       };
     default:
       return state;
