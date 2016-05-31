@@ -172,7 +172,7 @@ ISearch.propTypes = {
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
   filterVisibleState: PropTypes.object,
-
+  loadMoreItemsIntoFeed: PropTypes.func,
   // autocomplete
   autocompleteOptions: PropTypes.array,
   inAutoCompleteSearch: PropTypes.bool,

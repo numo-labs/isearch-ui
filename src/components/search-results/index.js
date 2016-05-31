@@ -4,7 +4,6 @@ import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import { ArticleTile } from '../../../lib/article-tile';
 import VisbilitySensor from 'react-visibility-sensor';
-import InfiniteScrollGridContainer from '../../../lib/scroll-view/gridContainer.js';
 import './style.css';
 
 const masonryOptions = {

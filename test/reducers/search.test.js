@@ -56,7 +56,7 @@ describe.only('Search Reducer', () => {
       const state = reducer(undefined, action);
       const expectedState = {
         ...initialState,
-        displayedItems: mockItems.concat(mockTiles),
+        items: mockItems.concat(mockTiles),
         loading: false
       };
       console.log('state', state);
