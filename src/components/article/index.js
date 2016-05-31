@@ -89,7 +89,7 @@ class ArticleFullPage extends Component {
                   {renderTags(articleContent.amenities, 'amenities')}
                 </div>
               }
-            <ArticleFooter onAddTagClick={this.onAddTagClick.bind(this)} />
+            <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
             </div>
           </div>
         </section>

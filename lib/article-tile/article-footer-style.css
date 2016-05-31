@@ -3,17 +3,34 @@
   src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
 
-.articleFooter .bookLink {
-  border-radius: 2em;
-  color: #fff;
-  background-color: #F39100;
-  padding: 1em 3.5em;
-  font-weight: bold;
-  text-decoration: none;
-  line-height: 20vh;
-  font-family: ThomasHeadlineBold;
+.articleFooter {
+  background-color: #E9E5E0;
+  max-height: 130px;
 }
 
-.articleFooter .bookLink:hover {
+.articleFooter .tagLabel {
+  font-family: ThomasHeadlineBold;
+  display: inline-block;
+  padding: 10px 25px;
+  background: white;
+  margin-right: 10px;
+  color: #666;
+}
+
+.articleFooter .addTagButton {
+  cursor: pointer;
+  background-color: #F39100;
+  display: inline-block;
+  border-radius: 100%;
+  color: #ffffff;
+  font-size: 1.25em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  margin-top: 2.6em;
+  vertical-align: sub;
+}
+
+.articleFooter .addTagButton:hover {
   background-color: #F37800;
 }
