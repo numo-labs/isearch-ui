@@ -109,6 +109,46 @@ export function clearFeed () {
 }
 
 /**
+* Buffer and show tiles in a mixed fashion
+* to be used by saveSearchResult
+*/
+
+export function mixDataInput () {
+  // this fn is used to setup a result store, so that we are instance specific.
+  let bufferedResponse = [];
+  let steps = 0;
+  let highwatermark = 50;
+  const timeToWait = 300; // 300ms
+  const ratios = [
+    1/10, // 1 in 10 articles
+    8/10, // 8 in 10 Packages
+    1/10, // 1 in 10 filters
+  ]
+
+  function getTimeout (fn) {
+    return setTimeout(fn, timeToWait);
+  }
+
+  return function (result) {
+    return function (dispatch) {
+      const items = result.graphql.items;
+      // return first 5 tiles as fast as possible
+      if (steps < 5) {
+        steps++;
+        return dispatch(receiveSearchResult(items, false, false));
+      }
+
+      bufferedResponse = bufferedResponse.concat(items);
+
+      if (bufferedResponse.length > 5) {
+        return dispatch(receiveSearchResult(bufferedResponse.splice(0, 5), false, false));
+        steps++;
+      }
+    }
+  }
+}
+
+/**
 * Action to start the search
 * 1. format the query based on the tags
 * 2. launch a graphql mutation to return a searchBucketId
@@ -143,11 +183,13 @@ export function startSearch () {
 * Saves the results returned from the web socket service
 */
 
+var mixer = mixDataInput();
+
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
     if (result.graphql.searchId === resultId) { // check data corresponds to the current search
-      return dispatch(receiveSearchResult(result.graphql.items, false, false));
+      return dispatch(mixer(result));
     }
   };
 }
