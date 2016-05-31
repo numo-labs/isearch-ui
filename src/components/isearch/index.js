@@ -39,7 +39,8 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       resultId,
-      push: changeRoute
+      push: changeRoute,
+      removeTile
     } = this.props;
     return (
       <SearchResults
@@ -51,6 +52,7 @@ class ISearch extends Component {
         setHotelPage={setHotelPage}
         totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
         resultId={resultId}
+        removeTile={removeTile}
       />
     );
   }
@@ -196,6 +198,9 @@ ISearch.propTypes = {
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
   resetTags: PropTypes.func,
+
+  // tiles
+  removeTile: PropTypes.func,
 
   // travel info
   setNumberOfChildren: PropTypes.func,
