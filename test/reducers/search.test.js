@@ -265,7 +265,7 @@ describe('Search Reducer', () => {
       expect(state).to.deep.equal(expectedState);
       done();
     });
-    it.only('TILES_REMOVE_TILE -> removes a tile from the displayed items', (done) => {
+    it('TILES_REMOVE_TILE -> removes a tile from the displayed items', (done) => {
       const initialStateWithItems = {
         ...initialState,
         displayedItems: [mockItem],
