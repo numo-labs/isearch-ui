@@ -35,6 +35,7 @@ describe('Web Socket Service', function () {
           }
         ];
         expect(store.getActions()).to.deep.equal(expectedActions);
+        done();
       }
       ++counter;
       if (counter === 3) {
