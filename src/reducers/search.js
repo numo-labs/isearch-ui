@@ -228,13 +228,12 @@ export default function search (state = initialState, action) {
         items: []
       };
     case TILES_REMOVE_TILE:
-      const filteredItems = state.items.filter(item => {
+      const filteredItems = state.displayedItems.filter(item => {
         return item.id !== action.id;
       });
       return {
         ...state,
-        displayedItems: filteredItems,
-        items: filteredItems
+        displayedItems: filteredItems
       };
     default:
       return state;

@@ -37,7 +37,7 @@ const initialStateWithTiles = {
   tiles: mockTiles
 };
 
-describe.only('Search Reducer', () => {
+describe('Search Reducer', () => {
   it('should return the initial state', (done) => {
     const state = reducer(undefined, {});
     expect(state).to.deep.equal(initialState);
@@ -284,16 +284,14 @@ describe.only('Search Reducer', () => {
     it('TILES_REMOVE_TILE -> removes a tile from the displayed items', (done) => {
       const initialStateWithItems = {
         ...initialState,
-        displayedItems: [mockItem],
-        items: [mockItem]
+        displayedItems: [mockItem]
       };
       const action = {type: TILES_REMOVE_TILE, id: 'e73e4919e237887f70f6024011502243'};
       const state = reducer(initialStateWithItems, action);
       console.log(state);
       const expectedState = {
         ...initialState,
-        displayedItems: [],
-        items: []
+        displayedItems: []
       };
       expect(state).to.deep.equal(expectedState);
       done();
