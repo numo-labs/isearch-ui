@@ -115,37 +115,42 @@ export function clearFeed () {
 
 export function mixDataInput () {
   // this fn is used to setup a result store, so that we are instance specific.
+  let mixture = [];
   let bufferedResponse = [];
   let steps = 0;
-  let highwatermark = 50;
-  const timeToWait = 300; // 300ms
-  const ratios = [
-    1/10, // 1 in 10 articles
-    8/10, // 8 in 10 Packages
-    1/10, // 1 in 10 filters
-  ]
-
-  function getTimeout (fn) {
-    return setTimeout(fn, timeToWait);
-  }
+  let highwatermark = 10;
 
   return function (result) {
     return function (dispatch) {
       const items = result.graphql.items;
+
       // return first 5 tiles as fast as possible
-      if (steps < 5) {
+      if (steps < 5 && bufferedResponse.length > 5) {
         steps++;
-        return dispatch(receiveSearchResult(items, false, false));
-      }
-
-      bufferedResponse = bufferedResponse.concat(items);
-
-      if (bufferedResponse.length > 5) {
         return dispatch(receiveSearchResult(bufferedResponse.splice(0, 5), false, false));
-        steps++;
       }
-    }
-  }
+
+      items.forEach(item => {
+        if (item.tile) {
+          mixture.push(item);
+        } else if (item.packageOffer) {
+          if (steps % 6 === 0) {
+            bufferedResponse.push(undefined);
+          }
+          bufferedResponse.push(item);
+        }
+        steps++;
+      });
+
+      if (bufferedResponse.length >= highwatermark) {
+        const response = bufferedResponse
+          .map(item => item === undefined ? mixture.shift() : item)
+          .filter(item => item !== undefined);
+        bufferedResponse = [];
+        return dispatch(receiveSearchResult(response, false, false));
+      }
+    };
+  };
 }
 
 /**
