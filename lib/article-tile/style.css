@@ -50,6 +50,14 @@
     color: #888;
 }
 
+.articleContainer .tagField {
+    display: none;
+}
+
+.articleContainer.visited .tagField {
+    display: initial;
+}
+
 .articleContainer.visited .text {
     height: 100%;
     bottom: 0;

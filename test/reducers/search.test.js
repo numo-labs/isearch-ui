@@ -17,13 +17,15 @@ import {
   SAVE_SOCKET_CONNECTION_ID,
   SET_FINGERPRINT,
   SAVE_SEARCH_RESULT_ID,
-  SAVE_BUCKET_ID
+  SAVE_BUCKET_ID,
+  TILES_REMOVE_TILE
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
 import reducer, { initialState } from '../../src/reducers/search';
 import mockResults from '../../src/utils/mock-search-results.json';
 import { mockTiles } from '../../src/reducers/utils/mockData.js';
+import mockItem from '../../src/utils/mock-item.js';
 // import { shuffleTilesIntoResults } from '../../src/reducers/utils/helpers.js';
 
 const mockItems = [mockResults.items[0]]; // an array with one packageOffer
@@ -259,6 +261,23 @@ describe('Search Reducer', () => {
           'Kids': true,
           'All inclusive': true
         }
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it('TILES_REMOVE_TILE -> removes a tile from the displayed items', (done) => {
+      const initialStateWithItems = {
+        ...initialState,
+        displayedItems: [mockItem],
+        items: [mockItem]
+      };
+      const action = {type: TILES_REMOVE_TILE, id: 'e73e4919e237887f70f6024011502243'};
+      const state = reducer(initialStateWithItems, action);
+      console.log(state);
+      const expectedState = {
+        ...initialState,
+        displayedItems: [],
+        items: []
       };
       expect(state).to.deep.equal(expectedState);
       done();

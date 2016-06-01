@@ -9,6 +9,7 @@ import {
   RESET_TAGS,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
+  TILES_REMOVE_TILE,
   SET_SEARCH_STRING,
   SEARCH_ERROR,
   SET_AUTOCOMPLETE_ERROR,
@@ -217,6 +218,15 @@ export default function search (state = initialState, action) {
         ...state,
         displayedItems: [],
         items: []
+      };
+    case TILES_REMOVE_TILE:
+      const filteredItems = state.items.filter(item => {
+        return item.id !== action.id;
+      });
+      return {
+        ...state,
+        displayedItems: filteredItems,
+        items: filteredItems
       };
     default:
       return state;
