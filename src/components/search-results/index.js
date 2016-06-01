@@ -104,7 +104,7 @@ class SearchResults extends Component {
               } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${item.url}/q/w`)}>
+                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${item.url}`)}>
                       <ArticleTile {...item} />
                     </div>
                   </VisbilitySensor>
