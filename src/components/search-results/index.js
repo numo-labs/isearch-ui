@@ -63,7 +63,7 @@ class SearchResults extends Component {
       onYesFilter,
       onFilterClick,
       totalPassengers,
-      resultId,
+      // resultId,
       changeRoute,
       removeTile
     } = this.props;
@@ -78,7 +78,7 @@ class SearchResults extends Component {
                 <div onClick={() => removeTile(item.id)}>
                   <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
                 </div>
-                <div key={index} onClick={() => changeRoute(`/hotel/${resultId}/`)}>
+                <div key={index} onClick={() => changeRoute(`/hotel/${item.url}`)}>
                   <PackageTile
                     key={item.packageOffer.id}
                     packageOffer={item.packageOffer}
@@ -114,7 +114,7 @@ class SearchResults extends Component {
                   <div onClick={() => removeTile(item.id)}>
                     <img className='removeTileButton' src={removeTileButton} alt='cancel' />
                   </div>
-                  <div onClick={() => changeRoute(`/article/${resultId}/${item.id}`)}>
+                  <div onClick={() => changeRoute(`/article/${item.url}/${item.id}`)}>
                     <ArticleTile {...item} />
                   </div>
                 </div>
@@ -147,7 +147,7 @@ SearchResults.propTypes = {
   filterVisibleState: PropTypes.object,
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
-  resultId: PropTypes.string,
+  // resultId: PropTypes.string,
   changeRoute: PropTypes.func,
   removeTile: PropTypes.func
 };
