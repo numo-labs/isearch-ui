@@ -3,6 +3,7 @@ import {
   TAG_REMOVE_TAG,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
+  TILES_REMOVE_TILE,
   TAG_ADD_SINGLE_TAG,
   CLEAR_SEARCH_STRING,
   RESET_TAGS
@@ -115,5 +116,16 @@ export const resetTags = (displayName, id) => {
   return {
     type: RESET_TAGS,
     tags: [ { displayName, id } ]
+  };
+};
+
+/**
+* Action to remove a tile from the displayed items
+*/
+
+export const removeTile = (id) => {
+  return {
+    type: TILES_REMOVE_TILE,
+    id: id
   };
 };

@@ -59,7 +59,8 @@ class SearchResults extends Component {
       onFilterClick,
       totalPassengers,
       // resultId,
-      changeRoute
+      changeRoute,
+      removeTile
     } = this.props;
 
     // TODO replace urls to valid ones
@@ -75,13 +76,21 @@ class SearchResults extends Component {
             if (item.packageOffer) {
               return (
                 <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${item.url}/q/d`)}>
-                    <PackageTile
-                      key={item.packageOffer.id}
-                      packageOffer={item.packageOffer}
-                      totalPassengers={totalPassengers}
-                      itemId={item.packageOffer.id}
-                    />
+
+                  <div className='gridItem'>
+                    <div onClick={() => removeTile(item.id)}>
+                      <img className='removeTileButton' src='../../src/assets/cancel.svg' alt='cancelled' />
+                    </div>
+                    <div key={index} onClick={() => changeRoute(`/hotel/${item.url}`)}>
+                      <PackageTile
+                        key={item.packageOffer.id}
+                        packageOffer={item.packageOffer}
+                        totalPassengers={totalPassengers}
+                        itemId={item.packageOffer.id}
+                        removeTile={removeTile}
+                        item={item}
+                      />
+                    </div>
                   </div>
                 </VisbilitySensor>
               );
@@ -104,8 +113,13 @@ class SearchResults extends Component {
               } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
                 return (
                   <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                    <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${item.url}`)}>
-                      <ArticleTile {...item} />
+                    <div key={index} className='gridItem'>
+                      <div onClick={() => removeTile(item.id)}>
+                        <img className='removeTileButton' src='../../src/assets/cancel.svg' alt='cancel' />
+                      </div>
+                      <div onClick={() => changeRoute(`/article/${item.url}`)}>
+                        <ArticleTile {...item} />
+                      </div>
                     </div>
                   </VisbilitySensor>
                 );
@@ -126,7 +140,8 @@ SearchResults.propTypes = {
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
   // resultId: PropTypes.string,
-  changeRoute: PropTypes.func
+  changeRoute: PropTypes.func,
+  removeTile: PropTypes.func
 };
 
 export default SearchResults;
