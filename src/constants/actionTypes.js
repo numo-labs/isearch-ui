@@ -10,6 +10,7 @@ export const SAVE_BUCKET_ID = 'SAVE_BUCKET_ID';
 export const RECEIVE_SEARCH_RESULT = 'RECEIVE_SEARCH_RESULT';
 export const CLEAR_SEARCH_STRING = 'CLEAR_SEARCH_STRING';
 export const CLEAR_FEED = 'CLEAR_FEED';
+export const UPDATE_DISPLAYED_ITEMS = 'UPDATE_DISPLAYED_ITEMS';
 
 // tiles and tags
 export const TAG_ADD_SINGLE_TAG = 'TAG_ADD_SINGLE_TAG';
@@ -19,6 +20,7 @@ export const TILES_ADD_TILES = 'TILES_ADD_TILES';
 export const REMOVE_TAG = 'REMOVE_TAG';
 export const FILTER_ON_CLICK = 'FILTER_ON_CLICK';
 export const RESET_TAGS = 'RESET_TAGS';
+export const TILES_REMOVE_TILE = 'TILES_REMOVE_TILE';
 
 // autocomplete
 export const SET_AUTOCOMPLETE_OPTIONS = 'SET_AUTOCOMPLETE_OPTIONS';

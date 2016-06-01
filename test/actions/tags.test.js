@@ -4,7 +4,8 @@ import {
   TILES_ADD_TILES,
   TAG_ADD_SINGLE_TAG,
   FILTER_ON_CLICK,
-  RESET_TAGS
+  RESET_TAGS,
+  TILES_REMOVE_TILE
 } from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/tags';
@@ -97,6 +98,16 @@ describe('actions', () => {
         tags: [ { displayName: 'name', id: 'id' } ]
       };
       expect(actions.resetTags('name', 'id')).to.deep.equal(expectedAction);
+      done();
+    });
+  });
+  describe('removeTile', () => {
+    it('should create an action that removes a tile from the list of displayed items', (done) => {
+      const expectedAction = {
+        type: TILES_REMOVE_TILE,
+        id: 'test'
+      };
+      expect(actions.removeTile('test')).to.deep.equal(expectedAction);
       done();
     });
   });
