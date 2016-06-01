@@ -11,7 +11,8 @@ import {
   UPDATE_HEADER_TITLES,
   SAVE_SOCKET_CONNECTION_ID,
   SAVE_BUCKET_ID,
-  CLEAR_FEED
+  CLEAR_FEED,
+  UPDATE_DISPLAYED_ITEMS
 } from '../constants/actionTypes';
 
 import * as graphqlService from '../services/graphql';
@@ -125,11 +126,11 @@ export function startSearch () {
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query), clientId, connectionId})
         .then(json => {
           console.log('search response json', json);
+          dispatch(clearFeed());
           const bucketId = json.data.viewer.searchResultId.id;
           if (bucketId) {
             dispatch(saveSearchResultId(bucketId));
             dispatch(push(`/search/${bucketId}`));
-            dispatch(clearFeed());
           } else {
             return dispatch(searchError('No results found'));
           }
@@ -153,4 +154,22 @@ export function saveSearchResult (result) {
 
 export function updateHeaderTitles () {
   return { type: UPDATE_HEADER_TITLES };
+}
+
+export function updateDisplayedItems (items) {
+  return { type: UPDATE_DISPLAYED_ITEMS, items };
+}
+
+export function loadMoreItemsIntoFeed (page) {
+  return (dispatch, getState) => {
+    const { search: { displayedItems, items } } = getState();
+    if (displayedItems.length < 10 && items.length > 0) {
+      dispatch(updateDisplayedItems(items.slice(0, 10)));
+    }
+    if (items.length > page * 5) {
+      dispatch(updateDisplayedItems(items.slice(0, page * 5)));
+    } else if (items.length === 0) {
+      dispatch(updateDisplayedItems([]));
+    }
+  };
 }
