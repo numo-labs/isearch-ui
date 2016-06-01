@@ -4,10 +4,11 @@ import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import { ArticleTile } from '../../../lib/article-tile';
 import VisbilitySensor from 'react-visibility-sensor';
+const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
 
 const masonryOptions = {
-  transitionDuration: '0.2s',
+  transitionDuration: '0.4s',
   itemSelector: '.gridItem',
   fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
@@ -63,20 +64,28 @@ class SearchResults extends Component {
       onFilterClick,
       totalPassengers,
       resultId,
-      changeRoute
+      changeRoute,
+      removeTile
     } = this.props;
     return (
       items.map((item, index) => {
         if (item.packageOffer) {
           return (
             <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-              <div key={index} className='gridItem' onClick={() => changeRoute(`/hotel/${resultId}/`)}>
-                <PackageTile
-                  key={item.packageOffer.id}
-                  packageOffer={item.packageOffer}
-                  totalPassengers={totalPassengers}
-                  itemId={item.packageOffer.id}
-                />
+              <div className='gridItem'>
+                <div onClick={() => removeTile(item.id)}>
+                  <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
+                </div>
+                <div key={index} onClick={() => changeRoute(`/hotel/${resultId}/`)}>
+                  <PackageTile
+                    key={item.packageOffer.id}
+                    packageOffer={item.packageOffer}
+                    totalPassengers={totalPassengers}
+                    itemId={item.packageOffer.id}
+                    removeTile={removeTile}
+                    item={item}
+                  />
+                </div>
               </div>
             </VisbilitySensor>
           );
@@ -99,8 +108,13 @@ class SearchResults extends Component {
           } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
             return (
               <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                <div key={index} className='gridItem' onClick={() => changeRoute(`/article/${resultId}/${item.id}`)}>
-                  <ArticleTile {...item} />
+                <div key={index} className='gridItem'>
+                  <div onClick={() => removeTile(item.id)}>
+                    <img className='removeTileButton' src={removeTileButton} alt='cancel' />
+                  </div>
+                  <div onClick={() => changeRoute(`/article/${resultId}/${item.id}`)}>
+                    <ArticleTile {...item} />
+                  </div>
                 </div>
               </VisbilitySensor>
             );

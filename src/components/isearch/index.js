@@ -47,7 +47,7 @@ class ISearch extends Component {
       loadMoreItemsIntoFeed
     } = this.props;
     return (
-      <ScrollView loadData={loadMoreItemsIntoFeed} endScroll={this.state.endScroll}>
+      <ScrollView loadingThreshold={400} loadData={loadMoreItemsIntoFeed} endScroll={this.state.endScroll}>
         <SearchResults
           changeRoute={changeRoute}
           items={displayedItems}
@@ -64,6 +64,7 @@ class ISearch extends Component {
   }
 
   render () {
+    console.log('----RENDERING----');
     const {
       tags,
       removeTag,
