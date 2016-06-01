@@ -76,6 +76,7 @@ describe('Search Results Actions', () => {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
+        { type: CLEAR_FEED },
         { type: SAVE_SEARCH_RESULT_ID, id: '12345' },
         {
           'payload': {
@@ -85,9 +86,6 @@ describe('Search Results Actions', () => {
             'method': 'push'
           },
           'type': '@@router/CALL_HISTORY_METHOD'
-        },
-        {
-          type: CLEAR_FEED
         }
       ];
       store.dispatch(actions.startSearch());
@@ -115,6 +113,7 @@ describe('Search Results Actions', () => {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
+        { type: CLEAR_FEED },
         { type: SEARCH_ERROR, error: 'No results found' }
       ];
       store.dispatch(actions.startSearch());

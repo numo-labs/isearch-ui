@@ -37,7 +37,7 @@ const initialStateWithTiles = {
   tiles: mockTiles
 };
 
-describe.only('Search Reducer', () => {
+describe('Search Reducer', () => {
   it('should return the initial state', (done) => {
     const state = reducer(undefined, {});
     expect(state).to.deep.equal(initialState);
