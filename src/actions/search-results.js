@@ -161,7 +161,6 @@ export function updateDisplayedItems (items) {
 }
 
 export function loadMoreItemsIntoFeed (page) {
-  console.log('PAGE>>>', page);
   return (dispatch, getState) => {
     const { search: { displayedItems, items } } = getState();
     if (displayedItems.length < 10 && items.length > 0) {
