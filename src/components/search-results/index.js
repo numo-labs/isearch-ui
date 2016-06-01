@@ -67,6 +67,8 @@ class SearchResults extends Component {
       changeRoute,
       removeTile
     } = this.props;
+
+    // TODO replace urls to valid ones
     return (
       items.map((item, index) => {
         if (item.packageOffer) {
