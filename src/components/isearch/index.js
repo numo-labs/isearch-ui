@@ -42,6 +42,7 @@ class ISearch extends Component {
       numberOfAdultsTitle,
       resultId,
       push: changeRoute,
+      removeTile,
       displayedItems,
       loadMoreItemsIntoFeed
     } = this.props;
@@ -56,6 +57,7 @@ class ISearch extends Component {
           setHotelPage={setHotelPage}
           totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
           resultId={resultId}
+          removeTile={removeTile}
         />
       </ScrollView>
     );
@@ -199,6 +201,9 @@ ISearch.propTypes = {
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
   resetTags: PropTypes.func,
+
+  // tiles
+  removeTile: PropTypes.func,
 
   // travel info
   setNumberOfChildren: PropTypes.func,

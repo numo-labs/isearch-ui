@@ -132,7 +132,8 @@ SearchResults.propTypes = {
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
   resultId: PropTypes.string,
-  changeRoute: PropTypes.func
+  changeRoute: PropTypes.func,
+  removeTile: PropTypes.func
 };
 
 export default SearchResults;
