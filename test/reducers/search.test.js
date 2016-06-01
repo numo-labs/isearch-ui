@@ -18,7 +18,8 @@ import {
   SET_FINGERPRINT,
   SAVE_SEARCH_RESULT_ID,
   SAVE_BUCKET_ID,
-  UPDATE_DISPLAYED_ITEMS
+  UPDATE_DISPLAYED_ITEMS,
+  CLEAR_FEED
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
@@ -93,6 +94,13 @@ describe.only('Search Reducer', () => {
         displayedItems: mockItems
       };
       expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it(`CLEAR_FEED: -> sets the items and displayedItems to empty
+        state`, (done) => {
+      const action = {type: CLEAR_FEED};
+      const state = reducer(undefined, action);
+      expect(state).to.deep.equal(initialState);
       done();
     });
     it('BUSY_SEARCHING -> sets loading to true', (done) => {
@@ -181,6 +189,21 @@ describe.only('Search Reducer', () => {
         tags: [{ displayName: 'hello' }]
       };
       const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'hello'}, isInitialTag: false};
+      const state = reducer(initialStateWithTags, action);
+      const expectedState = {
+        ...initialState,
+        tags: [{ displayName: 'hello' }],
+        isInitialTag: false
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it('TAG_ADD_SINGLE_TAG -> if isInitialTag is true creates a tags array and sets it to the tags state', (done) => {
+      const action = {type: TAG_ADD_SINGLE_TAG, tag: {displayName: 'hello'}};
+      const initialStateWithTags = {
+        ...initialState,
+        isInitialTag: true
+      };
       const state = reducer(initialStateWithTags, action);
       const expectedState = {
         ...initialState,
