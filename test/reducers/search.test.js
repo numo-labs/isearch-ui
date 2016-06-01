@@ -17,7 +17,8 @@ import {
   SAVE_SOCKET_CONNECTION_ID,
   SET_FINGERPRINT,
   SAVE_SEARCH_RESULT_ID,
-  SAVE_BUCKET_ID
+  SAVE_BUCKET_ID,
+  UPDATE_DISPLAYED_ITEMS
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
@@ -50,58 +51,50 @@ describe.only('Search Reducer', () => {
     done();
   });
   describe('Search actions', () => {
-    it(`RECEIVE_SEARCH_RESULT:initialSearch = false -> adds items to the items
-        and displayedItems state`, (done) => {
+    it(`RECEIVE_SEARCH_RESULT:-> adds items from action to the items
+        state and if the number of displayedItems is less than 5 will
+        set it to the first 5 elements of items. Also sets loading to false`, (done) => {
       const action = {type: RECEIVE_SEARCH_RESULT, items: mockItems};
+      const state = reducer(undefined, action);
+      const items = mockItems.concat(mockTiles);
+      const expectedState = {
+        ...initialState,
+        items,
+        displayedItems: items.slice(0, 5),
+        loading: false
+      };
+      expect(state).to.deep.equal(expectedState);
+      expect(state.loading).to.be.false;
+      done();
+    });
+    it(`RECEIVE_SEARCH_RESULT-> sets displayedItems to the existing state if
+      it has length greater than 5`, (done) => {
+      const initialStateWithItems = {
+        ...initialState,
+        items: mockItems,
+        displayedItems: mockItems
+      };
+      const action = {
+        type: RECEIVE_SEARCH_RESULT,
+        items: mockItems
+      };
+      const state = reducer(initialStateWithItems, action);
+      expect(state.loading).to.be.false;
+      expect(state.items).to.deep.equal(mockItems);
+      expect(state.displayedItems).to.deep.equal(mockItems);
+      done();
+    });
+    it(`UPDATE_DISPLAYED_ITEMS: -> adds items from action to the displayedItems
+        state`, (done) => {
+      const action = {type: UPDATE_DISPLAYED_ITEMS, items: mockItems};
       const state = reducer(undefined, action);
       const expectedState = {
         ...initialState,
-        items: mockItems.concat(mockTiles),
-        loading: false
+        displayedItems: mockItems
       };
-      console.log('state', state);
       expect(state).to.deep.equal(expectedState);
       done();
     });
-    // it(`RECEIVE_SEARCH_RESULT:initialSearch = true -> adds action.items to items
-    //     and both items and tiles to the displayed items`, (done) => {
-    //   const action = {
-    //     type: RECEIVE_SEARCH_RESULT,
-    //     items: mockItems,
-    //     initialSearch: true
-    //   };
-    //   const state = reducer(initialStateWithTiles, action);
-    //   const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
-    //   // const expectedState = {
-    //   //   ...initialStateWithTiles,
-    //   //   items: mockItems,
-    //   //   displayedItems: shuffledItems,
-    //   //   loading: false
-    //   // };
-    //   expect(state.items).to.deep.equal(mockItems);
-    //   expect(state.loading).to.be.false;
-    //   shuffledItems.forEach(item => expect(state.displayedItems).to.include(shuffledItems[0]));
-    //   done();
-    // });
-    // it(`RECEIVE_SEARCH_RESULT:initialSearch = false -> adds action.items to items
-    //     and displayedItems and removes duplicates`, (done) => {
-    //   const shuffledItems = shuffleTilesIntoResults(mockItems, mockTiles);
-    //   const initialStateWithItems = {
-    //     ...initialStateWithTiles,
-    //     items: mockItems,
-    //     displayedItems: shuffledItems
-    //   };
-    //   const action = {
-    //     type: RECEIVE_SEARCH_RESULT,
-    //     items: mockItems,
-    //     initialSearch: true
-    //   };
-    //   const state = reducer(initialStateWithItems, action);
-    //   expect(state.loading).to.be.false;
-    //   expect(state.items).to.deep.equal(mockItems);
-    //   shuffledItems.forEach(item => expect(state.displayedItems).to.include(shuffledItems[0]));
-    //   done();
-    // });
     it('BUSY_SEARCHING -> sets loading to true', (done) => {
       const action = {type: BUSY_SEARCHING, isBusy: true};
       const state = reducer(undefined, action);

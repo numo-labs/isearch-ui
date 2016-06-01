@@ -7,6 +7,7 @@ import VisbilitySensor from 'react-visibility-sensor';
 import './style.css';
 
 const masonryOptions = {
+  transitionDuration: '0.2s',
   itemSelector: '.gridItem',
   fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
@@ -108,6 +109,7 @@ class SearchResults extends Component {
       })
     );
   }
+
   render () {
     return (
       <Masonry

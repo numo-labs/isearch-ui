@@ -87,9 +87,11 @@ export default function search (state = initialState, action) {
           return a.tile.id;
         }
       });
+      const display = state.displayedItems.length < 5 ? itemsToDisplay.slice(0, 5) : state.displayedItems;
       return {
         ...state,
         items: itemsToDisplay,
+        displayedItems: display,
         loading: false,
         error: ''
       };
