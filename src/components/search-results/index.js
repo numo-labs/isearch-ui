@@ -114,7 +114,7 @@ class SearchResults extends Component {
                   <div onClick={() => removeTile(item.id)}>
                     <img className='removeTileButton' src={removeTileButton} alt='cancel' />
                   </div>
-                  <div onClick={() => changeRoute(`/article/${item.url}/${item.id}`)}>
+                  <div onClick={() => changeRoute(`/article/${item.url}`)}>
                     <ArticleTile {...item} />
                   </div>
                 </div>
