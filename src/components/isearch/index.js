@@ -90,7 +90,9 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       durationTitle,
-      setDepartureDate
+      setDepartureDate,
+      push: changeRoute,
+      goBack
     } = this.props;
     return (
       <section>
@@ -115,6 +117,8 @@ class ISearch extends Component {
           durationTitle={durationTitle}
           setDepartureDate={setDepartureDate}
           startSearch={startSearch}
+          changeRoute={changeRoute}
+          goBack={goBack}
         />
         {
           this.state.screenWidth < 553 ? [
@@ -224,7 +228,8 @@ ISearch.propTypes = {
   setDepartureDate: PropTypes.func,
 
   // routing
-  push: PropTypes.func
+  push: PropTypes.func,
+  goBack: PropTypes.func
 };
 
 export default ISearch;
