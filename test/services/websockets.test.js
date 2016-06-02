@@ -89,7 +89,7 @@ describe('Web Socket Service', function () {
       let expectedActions = [
         {
           type: RECEIVE_SEARCH_RESULT,
-          items: [{ name: 'test' }],
+          items: [{ name: 'test', packageOffer: {} }],
           initialSearch: false,
           append: false
         }
@@ -101,7 +101,8 @@ describe('Web Socket Service', function () {
       graphql: {
         searchId: 'abc123',
         items: [{
-          name: 'test'
+          name: 'test',
+          packageOffer: {}
         }]
       }
     });

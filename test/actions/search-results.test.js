@@ -180,16 +180,10 @@ describe('Search Results Actions', () => {
         }
       };
 
-      const expectedAction = {
-        type: RECEIVE_SEARCH_RESULT,
-        items: [ {} ],
-        initialSearch: false,
-        append: false
-      };
       const dispatch = simple.mock();
       const state = simple.mock().returnWith({ search: { resultId: '34567' } });
       actions.saveSearchResult(result)(dispatch, state);
-      expect(dispatch.lastCall.arg).to.deep.equal(expectedAction);
+      expect(dispatch.lastCall.arg).to.be.a('function');
       done();
     });
     it(`saveSearchResult: should ignore the data if the searchId of the data

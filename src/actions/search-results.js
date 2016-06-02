@@ -117,18 +117,12 @@ export function mixDataInput () {
   // this fn is used to setup a result store, so that we are instance specific.
   let mixture = [];
   let bufferedResponse = [];
-  let steps = 0;
+  let steps = 1;
   let highwatermark = 10;
 
   return function (result) {
     return function (dispatch) {
       const items = result.graphql.items;
-
-      // return first 5 tiles as fast as possible
-      if (steps < 5 && bufferedResponse.length > 5) {
-        steps++;
-        return dispatch(receiveSearchResult(bufferedResponse.splice(0, 5), false, false));
-      }
 
       items.forEach(item => {
         if (item.tile) {
@@ -138,9 +132,16 @@ export function mixDataInput () {
             bufferedResponse.push(undefined);
           }
           bufferedResponse.push(item);
+        } else {
+          mixture.push(item);
         }
-        steps++;
       });
+
+      // return first 5 tiles as fast as possible
+      if (steps < 5 && bufferedResponse.length > 0) {
+        steps = steps + bufferedResponse.length;
+        return dispatch(receiveSearchResult(bufferedResponse.splice(0, bufferedResponse.length), false, false));
+      }
 
       if (bufferedResponse.length >= highwatermark) {
         const response = bufferedResponse
