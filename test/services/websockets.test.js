@@ -85,7 +85,7 @@ describe('Web Socket Service', function () {
     const store = mockStore({search: { tags: [], resultId: 'abc123' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
     const primus = initialise(actionCreatorBinder);
-    primus.on('data', data => {
+    primus.once('data', data => {
       let expectedActions = [
         {
           type: RECEIVE_SEARCH_RESULT,
@@ -94,8 +94,10 @@ describe('Web Socket Service', function () {
           append: false
         }
       ];
-      expect(store.getActions().slice(-1)).to.deep.equal(expectedActions);
-      done();
+      process.nextTick(() => {
+        expect(store.getActions()).to.deep.equal(expectedActions);
+        done();
+      });
     });
     primus.emit('data', {
       graphql: {
@@ -106,5 +108,69 @@ describe('Web Socket Service', function () {
         }]
       }
     });
+  });
+  it('should interlace packages and tiles.', done => {
+    const store = mockStore({search: { tags: [], resultId: 'abc123' }});
+    const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
+    const primus = initialise(actionCreatorBinder);
+    let count = 0;
+    primus.on('data', data => {
+      if (count++ < 10) {
+        return;
+      }
+      primus.removeAllListeners();
+
+      // Find all of the action types that are tiles or packages.
+      let items = store.getActions().map(
+          i => i.items ? i.items.map(
+            j => j.tile ? 'tile' : 'package'
+          ) : []
+        );
+      // flatten array
+      items = items.reduce((a, b) => a.concat(b), []);
+
+      expect(items).to.deep.equal([
+        'package',
+        'package',
+        'package',
+        'tile',
+        'package',
+        'package',
+        'package',
+        'package',
+        'package',
+        'package',
+        'tile',
+        'package'
+      ]);
+      done();
+    });
+    primus.emit('data', {
+      graphql: {
+        searchId: 'abc123',
+        items: [
+          { name: 'test',
+            tile: {}
+          },
+          { name: 'test',
+            tile: {}
+          },
+          { name: 'test',
+            tile: {}
+          }
+        ]
+      }
+    });
+    for (let i = 0; i < 10; i++) {
+      primus.emit('data', {
+        graphql: {
+          searchId: 'abc123',
+          items: [{
+            name: 'test',
+            packageOffer: {}
+          }]
+        }
+      });
+    }
   });
 });
