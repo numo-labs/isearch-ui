@@ -72,10 +72,18 @@ const props = {
 };
 
 describe('Component', function () {
-  const wrapper = shallow(<HotelPage {...props} />);
-  const children = wrapper.children().nodes;
   describe('<HotelPage /> Component', function () {
     it('should render our HotelPage component', function (done) {
+      const wrapper = shallow(<HotelPage {...props} />);
+      const children = wrapper.children().nodes;
+      expect(children).to.have.length(4);
+      done();
+    });
+    it('should admit a boolean at amenities', function (done) {
+      var props2 = {...props};
+      props2.packageOffer.amenities.distancetobeach = true;
+      const wrapper = shallow(<HotelPage {...props2} />);
+      const children = wrapper.children().nodes;
       expect(children).to.have.length(4);
       done();
     });

@@ -30,7 +30,7 @@ class HotelPage extends Component {
     for (var key in amenitiesObject) {
       if (!amenitiesObject.hasOwnProperty(key)) continue;
       if (key === fact) {
-        if (amenitiesObject[key] === typeof boolean || amenitiesObject[key] === 'true' || amenitiesObject[key] === 'false') {
+        if (typeof amenitiesObject[key] === 'boolean' || amenitiesObject[key] === 'true' || amenitiesObject[key] === 'false') {
           return '-';
         } else if (amenitiesObject[key].split(' ')[1] === 'km') {
           return amenitiesObject[key].split(' ')[0] + 'k';
