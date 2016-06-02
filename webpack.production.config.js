@@ -48,7 +48,8 @@ module.exports = {
       filename: 'index.html',
       inject: 'body',
       template: 'src/index.template.html'
-    })
+    }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /da/)
   ],
   colors: true,
   progress: true
