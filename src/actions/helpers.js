@@ -1,5 +1,4 @@
 'use strict';
-import times from 'lodash.times';
 /*
 * Function to format the query and add keys to the query object based on the tags
 *
@@ -71,14 +70,14 @@ export function combinePassengersForQuery (childAgeArray, numberOfChildren, numb
     const day = ('0' + date.getDate()).slice(-2);
     return ({birthday: `${year}-${month}-${day}`});
   });
-  const adultPassengers = times(numberOfAdults, function () {
+  let adultPassengers = [];
+  for (let i = 0; i < numberOfAdults; i++) {
     const date = new Date();
     const year = date.getFullYear() - 20;
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);
-    return ({birthday: `${year}-${month}-${day}`}
-    );
-  });
+    adultPassengers.push({birthday: `${year}-${month}-${day}`});
+  }
   const combinedPassengers = [...childPassengers, ...adultPassengers];
   return combinedPassengers;
 }
