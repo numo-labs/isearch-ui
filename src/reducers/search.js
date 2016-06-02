@@ -21,7 +21,8 @@ import {
   SAVE_SOCKET_CONNECTION_ID,
   SET_FINGERPRINT,
   SAVE_BUCKET_ID,
-  CLEAR_FEED
+  CLEAR_FEED,
+  UPDATE_DISPLAYED_ITEMS
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
@@ -79,19 +80,26 @@ export default function search (state = initialState, action) {
     case RECEIVE_SEARCH_RESULT:
       // const scrambled = scrambleSearchItems(action.items, state, action.append);
       // const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
-      const items = _.uniqBy(_.union(state.items, action.items), (a) => {
+      const items = state.displayedItems.length > 0 ? action.items : action.items.concat(mockTiles); // add in the filters if it is the inital search
+      const itemsToDisplay = _.uniqBy(_.union(state.items, items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
         } else if (a.tile) {
           return a.tile.id;
         }
       });
+      const display = state.displayedItems.length < 5 ? itemsToDisplay.slice(0, 5) : state.displayedItems;
       return {
         ...state,
-        displayedItems: items,
-        items,
+        items: itemsToDisplay,
+        displayedItems: display,
         loading: false,
         error: ''
+      };
+    case UPDATE_DISPLAYED_ITEMS:
+      return {
+        ...state,
+        displayedItems: action.items
       };
     case BUSY_SEARCHING:
       return {
@@ -220,13 +228,12 @@ export default function search (state = initialState, action) {
         items: []
       };
     case TILES_REMOVE_TILE:
-      const filteredItems = state.items.filter(item => {
+      const filteredItems = state.displayedItems.filter(item => {
         return item.id !== action.id;
       });
       return {
         ...state,
-        displayedItems: filteredItems,
-        items: filteredItems
+        displayedItems: filteredItems
       };
     default:
       return state;

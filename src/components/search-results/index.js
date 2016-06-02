@@ -4,6 +4,7 @@ import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import { ArticleTile } from '../../../lib/article-tile';
 import VisbilitySensor from 'react-visibility-sensor';
+const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
 
 const masonryOptions = {
@@ -14,6 +15,10 @@ const masonryOptions = {
 };
 
 class SearchResults extends Component {
+  constructor () {
+    super();
+    this.mapItems = this.mapItems.bind(this);
+  }
   handleVisibility (isVisible, item) {
     if (dataLayer && isVisible && item.type === 'packageOffer') {
       dataLayer.push({
@@ -51,18 +56,78 @@ class SearchResults extends Component {
     }
     return;
   }
-  render () {
+  mapItems () {
     const {
       items,
       filterVisibleState,
       onYesFilter,
       onFilterClick,
       totalPassengers,
-      resultId,
+      // resultId,
       changeRoute,
       viewedArticles,
       removeTile
     } = this.props;
+
+    // TODO replace urls to valid ones
+    return (
+      items.map((item, index) => {
+        if (item.packageOffer) {
+          return (
+            <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+              <div className='gridItem'>
+                <div onClick={() => removeTile(item.id)}>
+                  <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
+                </div>
+                <div key={index} onClick={() => changeRoute(`/hotel/${item.url}`)}>
+                  <PackageTile
+                    key={item.packageOffer.id}
+                    packageOffer={item.packageOffer}
+                    totalPassengers={totalPassengers}
+                    itemId={item.packageOffer.id}
+                    removeTile={removeTile}
+                    item={item}
+                  />
+                </div>
+              </div>
+            </VisbilitySensor>
+          );
+        } else if (item.type === 'tile') {
+          if (item.tile.type === 'filter') {
+            return (
+              <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                <div key={index} className='gridItem'>
+                  <FilterTile
+                    filterVisible={filterVisibleState[item.tile.displayName]}
+                    onYesFilter={onYesFilter}
+                    onNoFilter={onFilterClick}
+                    description={item.tile}
+                    color={item.tile.color}
+                  />
+                </div>
+              </VisbilitySensor>
+
+            );
+          } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
+            return (
+              <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                <div key={index} className='gridItem'>
+                  <div onClick={() => removeTile(item.id)}>
+                    <img className='removeTileButton' src={removeTileButton} alt='cancel' />
+                  </div>
+                  <div onClick={() => changeRoute(`/article/${item.url}`)}>
+                    <ArticleTile className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''} {...item} />
+                  </div>
+                </div>
+              </VisbilitySensor>
+            );
+          }
+        }
+      })
+    );
+  }
+
+  render () {
     return (
       <Masonry
         elementType={'div'}
@@ -70,61 +135,7 @@ class SearchResults extends Component {
         disableImagesLoaded={false}
         className='grid load-effect'
       >
-        {
-          items.map((item, index) => {
-            if (item.packageOffer) {
-              return (
-                <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                  <div className='gridItem'>
-                    <div onClick={() => removeTile(item.id)}>
-                      <img className='removeTileButton' src='../../src/assets/cancel.svg' alt='cancelled' />
-                    </div>
-                    <div key={index} onClick={() => changeRoute(`/hotel/${resultId}/`)}>
-                      <PackageTile
-                        key={item.packageOffer.id}
-                        packageOffer={item.packageOffer}
-                        totalPassengers={totalPassengers}
-                        itemId={item.packageOffer.id}
-                        removeTile={removeTile}
-                        item={item}
-                      />
-                    </div>
-                  </div>
-                </VisbilitySensor>
-              );
-            } else if (item.type === 'tile') {
-              if (item.tile.type === 'filter') {
-                return (
-                  <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                    <div key={index} className='gridItem'>
-                      <FilterTile
-                        filterVisible={filterVisibleState[item.tile.displayName]}
-                        onYesFilter={onYesFilter}
-                        onNoFilter={onFilterClick}
-                        description={item.tile}
-                        color={item.tile.color}
-                      />
-                    </div>
-                  </VisbilitySensor>
-
-                );
-              } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
-                return (
-                  <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                    <div key={index} className='gridItem'>
-                      <div onClick={() => removeTile(item.id)}>
-                        <img className='removeTileButton' src='../../src/assets/cancel.svg' alt='cancel' />
-                      </div>
-                      <div onClick={() => changeRoute(`/article/${resultId}/${item.id}`)}>
-                        <ArticleTile className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''} {...item} />
-                      </div>
-                    </div>
-                  </VisbilitySensor>
-                );
-              }
-            }
-          })
-        }
+      {this.mapItems()}
       </Masonry>
     );
   }
@@ -137,7 +148,7 @@ SearchResults.propTypes = {
   filterVisibleState: PropTypes.object,
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
-  resultId: PropTypes.string,
+  // resultId: PropTypes.string,
   changeRoute: PropTypes.func,
   viewedArticles: PropTypes.array,
   removeTile: PropTypes.func
