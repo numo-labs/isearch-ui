@@ -143,6 +143,8 @@ export function mixDataInput () {
         return dispatch(receiveSearchResult(bufferedResponse.splice(0, bufferedResponse.length), false, false));
       }
 
+      steps++;
+
       if (bufferedResponse.length >= highwatermark) {
         const response = bufferedResponse
           .map(item => item === undefined ? mixture.shift() : item)
