@@ -21,7 +21,6 @@ describe('Containers', function () {
           <Route path='/' component={App} />
         </Router>
       ), node, function () {
-        console.log('--->', node);
         expect(node.textContent).to.equal('');
         done();
       });
