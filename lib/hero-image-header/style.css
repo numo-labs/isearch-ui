@@ -25,6 +25,7 @@
 .bouncingArrowContainer {
   margin-top: 6em;
   -webkit-animation: bounce 2s infinite ease-in-out;
+  cursor: pointer;
 }
 
 @-webkit-keyframes bounce {
