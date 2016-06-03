@@ -4,7 +4,7 @@ import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import { ArticleTile } from '../../../lib/article-tile';
 import VisbilitySensor from 'react-visibility-sensor';
-import DestinationTile from '../../../lib/destination-tile';
+// import DestinationTile from '../../../lib/destination-tile';
 
 import './style.css';
 
@@ -70,9 +70,6 @@ class SearchResults extends Component {
         disableImagesLoaded={false}
         className='grid load-effect'
       >
-      <div className='gridItem'>
-        <DestinationTile />
-      </div>
         {
           items.map((item, index) => {
             if (item.type === 'packageOffer') {
