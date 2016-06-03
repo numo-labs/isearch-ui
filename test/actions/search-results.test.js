@@ -76,6 +76,7 @@ describe('Search Results Actions', () => {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
+        { type: CLEAR_FEED },
         { type: SAVE_SEARCH_RESULT_ID, id: '12345' },
         {
           'payload': {
@@ -85,9 +86,6 @@ describe('Search Results Actions', () => {
             'method': 'push'
           },
           'type': '@@router/CALL_HISTORY_METHOD'
-        },
-        {
-          type: CLEAR_FEED
         }
       ];
       store.dispatch(actions.startSearch());
@@ -115,6 +113,7 @@ describe('Search Results Actions', () => {
       const store = mockStore(initialState);
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
+        { type: CLEAR_FEED },
         { type: SEARCH_ERROR, error: 'No results found' }
       ];
       store.dispatch(actions.startSearch());
@@ -181,16 +180,10 @@ describe('Search Results Actions', () => {
         }
       };
 
-      const expectedAction = {
-        type: RECEIVE_SEARCH_RESULT,
-        items: [ {} ],
-        initialSearch: false,
-        append: false
-      };
       const dispatch = simple.mock();
       const state = simple.mock().returnWith({ search: { resultId: '34567' } });
       actions.saveSearchResult(result)(dispatch, state);
-      expect(dispatch.lastCall.arg).to.deep.equal(expectedAction);
+      expect(dispatch.lastCall.arg).to.be.a('function');
       done();
     });
     it(`saveSearchResult: should ignore the data if the searchId of the data

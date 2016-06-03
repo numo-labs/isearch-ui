@@ -31,7 +31,7 @@ describe('Component', function () {
           }
         }
       }];
-      wrapper.find('.gridItem').first().simulate('click');
+      wrapper.find('.clickable').first().simulate('click');
       expect(global.dataLayer).to.deep.equal(expectedDataLayer);
       done();
     });

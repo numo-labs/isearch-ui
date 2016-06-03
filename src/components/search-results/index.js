@@ -4,10 +4,11 @@ import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import { ArticleTile } from '../../../lib/article-tile';
 import VisbilitySensor from 'react-visibility-sensor';
+const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
 
 const masonryOptions = {
-  transitionDuration: '0.2s',
+  transitionDuration: '0.4s',
   itemSelector: '.gridItem',
   fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
@@ -101,9 +102,9 @@ class SearchResults extends Component {
             <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
               <div className='gridItem'>
                 <div onClick={() => removeTile(item.id)}>
-                  <img className='removeTileButton' src='../../src/assets/cancel.svg' alt='cancelled' />
+                  <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
                 </div>
-                <div key={index} onClick={() => changeRoute(`/hotel/${item.url}`)}>
+                <div key={index} className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
                   <PackageTile
                     key={item.packageOffer.id}
                     packageOffer={item.packageOffer}
@@ -137,9 +138,9 @@ class SearchResults extends Component {
               <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                 <div key={index} className='gridItem'>
                   <div onClick={() => removeTile(item.id)}>
-                    <img className='removeTileButton' src='../../src/assets/cancel.svg' alt='cancel' />
+                    <img className='removeTileButton' src={removeTileButton} alt='cancel' />
                   </div>
-                  <div onClick={() => changeRoute(`/article/${item.url}`)}>
+                  <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
                     <ArticleTile {...item} />
                   </div>
                 </div>

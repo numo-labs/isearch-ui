@@ -47,7 +47,7 @@ class ISearch extends Component {
       loadMoreItemsIntoFeed
     } = this.props;
     return (
-      <ScrollView loadData={loadMoreItemsIntoFeed} endScroll={this.state.endScroll}>
+      <ScrollView loadingThreshold={400} loadData={loadMoreItemsIntoFeed} endScroll={this.state.endScroll}>
         <SearchResults
           changeRoute={changeRoute}
           items={displayedItems}
@@ -64,6 +64,7 @@ class ISearch extends Component {
   }
 
   render () {
+    console.log('----RENDERING----');
     const {
       tags,
       removeTag,
@@ -96,7 +97,9 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       durationTitle,
-      setDepartureDate
+      setDepartureDate,
+      push: changeRoute,
+      goBack
     } = this.props;
     return (
       <section>
@@ -121,6 +124,8 @@ class ISearch extends Component {
           durationTitle={durationTitle}
           setDepartureDate={setDepartureDate}
           startSearch={startSearch}
+          changeRoute={changeRoute}
+          goBack={goBack}
         />
         {
           this.state.screenWidth < 553 ? [
@@ -227,7 +232,8 @@ ISearch.propTypes = {
   setDepartureDate: PropTypes.func,
 
   // routing
-  push: PropTypes.func
+  push: PropTypes.func,
+  goBack: PropTypes.func
 };
 
 export default ISearch;

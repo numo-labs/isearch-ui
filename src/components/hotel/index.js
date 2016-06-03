@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import StarRating from '../../../lib/star-rating';
 import NavHeader from '../../../lib/nav-header';
-import _ from 'lodash';
+import capitalize from 'lodash.capitalize';
 import './styles.css';
 
 import ISearchSlider from '../../../lib/image-slider';
@@ -49,7 +49,7 @@ class HotelPage extends Component {
     for (var key in amenitiesObject) {
       if (!amenitiesObject.hasOwnProperty(key)) continue;
       if (key === fact) {
-        if (amenitiesObject[ key ] === typeof boolean || amenitiesObject[ key ] === 'true' || amenitiesObject[ key ] === 'false') {
+        if (typeof amenitiesObject[key] !== 'string' || amenitiesObject[key] === 'true' || amenitiesObject[key] === 'false') {
           return '-';
         } else if (amenitiesObject[ key ].split(' ')[ 1 ] === 'km') {
           return amenitiesObject[ key ].split(' ')[ 0 ] + 'k';
@@ -83,7 +83,7 @@ class HotelPage extends Component {
       }
       return (
         <div key={index} className='tickAmenity'>
-          <div className='amenity'>{_.capitalize(amenity)}</div>
+          <div className='amenity'>{capitalize(amenity)}</div>
         </div>
       );
     });
