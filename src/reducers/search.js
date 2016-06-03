@@ -89,7 +89,7 @@ export default function search (state = initialState, action) {
           return a.tile.id;
         }
       });
-      const display = state.displayedItems.length < 5 ? itemsToDisplay.slice(0, 5) : state.displayedItems;
+      const display = state.displayedItems.length < 30 ? itemsToDisplay.slice(0, 30) : state.displayedItems;
       return {
         ...state,
         items: itemsToDisplay,
