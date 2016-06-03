@@ -64,7 +64,7 @@ class ISearch extends Component {
   }
 
   render () {
-    console.log('----RENDERING----');
+    console.log('----RENDERING----', this.props.displayedItems);
     const {
       tags,
       removeTag,

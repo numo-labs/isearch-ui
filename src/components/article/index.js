@@ -46,6 +46,10 @@ class ArticleFullPage extends Component {
     goBack();
   }
 
+  rawMarkup (value) {
+    return { __html: value };
+  }
+
   render () {
     const { articleContent, goBack } = this.props;
     const tagColours = {
@@ -95,7 +99,7 @@ class ArticleFullPage extends Component {
                     {key !== 0 && section.image ? <div className='articleImage' style={{backgroundImage: `url(${section.image})`}}><img
                         src={section.image}/></div> : null}
                     {section.title ? (key === 0 ? <h1>{section.title}</h1> : <h2 >{section.title}</h2>) : null}
-                    {section.text ? <p className='articleText'>{section.text}</p> : null}
+                    {section.text ? <div className='articleText' dangerouslySetInnerHTML={this.rawMarkup(section.text)}/> : null}
                   </div>
                 </section>
               );
