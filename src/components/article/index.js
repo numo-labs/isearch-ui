@@ -5,6 +5,13 @@ import Tag from '../../../lib/tags/tag.js';
 
 import './style.css';
 
+/*
+* This component uses dangerouslySetInnerHTML to render the article text
+* This is because text from the article editor (http://numo-labs-articles.s3-website-eu-west-1.amazonaws.com/)
+* is saved as a html string - React escapes html to prevent XSS attacks unless
+* it is set using dangerouslySetInnerHTML
+*/
+
 class ArticleFullPage extends Component {
   constructor () {
     super();
