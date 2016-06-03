@@ -26,10 +26,19 @@ const defaultProps = {
 
 describe('Component', function () {
   describe('<ArticleFullPage /> Article view', function () {
-    const wrapper = shallow(<ArticleFullPage {...defaultProps} />);
-    const children = wrapper.children().nodes;
     it('should render the ISearch container', function (done) {
+      global.dataLayer = [];
+      const wrapper = shallow(<ArticleFullPage {...defaultProps} />);
+      const children = wrapper.children().nodes;
       expect(children).to.have.length(2);
+      done();
+    });
+    it('should render a empty section if there is no article name', function (done) {
+      global.dataLayer = null;
+      const props = {...defaultProps, articleContent: {}};
+      const wrapper = shallow(<ArticleFullPage {...props} />);
+      const children = wrapper.children().nodes;
+      expect(children).to.have.length(0);
       done();
     });
   });

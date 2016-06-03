@@ -109,6 +109,54 @@ export function clearFeed () {
 }
 
 /**
+* Buffer and show tiles in a mixed fashion
+* to be used by saveSearchResult
+*/
+
+export function mixDataInput () {
+  // this fn is used to setup a result store, so that we are instance specific.
+  let mixture = [];
+  let bufferedResponse = [];
+  let steps = 1;
+  let highwatermark = 10;
+
+  return function (result) {
+    return function (dispatch) {
+      const items = result.graphql.items;
+
+      items.forEach(item => {
+        if (item.tile) {
+          mixture.push(item);
+        } else if (item.packageOffer) {
+          if (steps % 6 === 0) {
+            bufferedResponse.push(undefined);
+          }
+          bufferedResponse.push(item);
+        } else {
+          mixture.push(item);
+        }
+      });
+
+      // return first 5 tiles as fast as possible
+      if (steps < 5 && bufferedResponse.length > 0) {
+        steps = steps + bufferedResponse.length;
+        return dispatch(receiveSearchResult(bufferedResponse.splice(0, bufferedResponse.length), false, false));
+      }
+
+      steps++;
+
+      if (bufferedResponse.length >= highwatermark) {
+        const response = bufferedResponse
+          .map(item => item === undefined ? mixture.shift() : item)
+          .filter(item => item !== undefined);
+        bufferedResponse = [];
+        return dispatch(receiveSearchResult(response, false, false));
+      }
+    };
+  };
+}
+
+/**
 * Action to start the search
 * 1. format the query based on the tags
 * 2. launch a graphql mutation to return a searchBucketId
@@ -143,11 +191,13 @@ export function startSearch () {
 * Saves the results returned from the web socket service
 */
 
+var mixer = mixDataInput();
+
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
     if (result.graphql.searchId === resultId) { // check data corresponds to the current search
-      return dispatch(receiveSearchResult(result.graphql.items, false, false));
+      return dispatch(mixer(result));
     }
   };
 }

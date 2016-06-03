@@ -71,6 +71,7 @@
 .articleContainer.visited .tagField {
     position: absolute;
     bottom: 2em;
+    left: 0;
     width: 100%;
 }
 

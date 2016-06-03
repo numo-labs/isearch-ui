@@ -23,6 +23,23 @@ class ArticleFullPage extends Component {
     this.setState({articleContent: this.props.articleContent});
   }
 
+  addAnalyticsData () {
+    if (dataLayer) {
+      dataLayer.push({
+        'event': 'productViewed',
+        'ecommerce': {
+          'detail': {
+            'actionField': {'list': 'inspirational search feed'},
+            'products': [{
+              'id': this.props.articleContent.sections[0].title,
+              'brand': 'article_tile'
+            }]
+          }
+        }
+      });
+    }
+  }
+
   onAddTagClick () {
     const { articleContent, goBack, addSingleTag } = this.props;
     addSingleTag(articleContent.name, articleContent.id);
@@ -57,6 +74,7 @@ class ArticleFullPage extends Component {
     } else {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
+      this.addAnalyticsData();
       return (
         <section>
           <NavHeader backToSearch={goBack}/>
