@@ -1,3 +1,4 @@
+import storageMock from './localStorage-mock.js';
 module.exports = function (markup) {
   if (typeof document !== 'undefined') return;
 
@@ -8,4 +9,5 @@ module.exports = function (markup) {
   global.navigator = {
     userAgent: 'node.js'
   };
+  global.localStorage = storageMock();
 };

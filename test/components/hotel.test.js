@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import HotelPage from '../../src/components/hotel';
 
-const props = {
+const defaultProps = {
   packageOffer: {
     hotel: {
       starRating: 5,
@@ -72,11 +72,28 @@ const props = {
 };
 
 describe('Component', function () {
-  const wrapper = shallow(<HotelPage {...props} />);
-  const children = wrapper.children().nodes;
   describe('<HotelPage /> Component', function () {
     it('should render our HotelPage component', function (done) {
+      global.dataLayer = [];
+      const wrapper = shallow(<HotelPage {...defaultProps} />);
+      const children = wrapper.children().nodes;
       expect(children).to.have.length(4);
+      done();
+    });
+    it('should admit a boolean at amenities', function (done) {
+      var props2 = {...defaultProps};
+      props2.packageOffer.amenities.distancetobeach = true;
+      const wrapper = shallow(<HotelPage {...props2} />);
+      const children = wrapper.children().nodes;
+      expect(children).to.have.length(4);
+      done();
+    });
+    it('should render a loading spinner if there is no hotel description', function (done) {
+      global.dataLayer = null;
+      const props = { ...defaultProps, packageOffer: { hotel: { description: null } } };
+      const wrapper = shallow(<HotelPage {...props} />);
+      const children = wrapper.children().nodes;
+      expect(children).to.have.length(0);
       done();
     });
   });

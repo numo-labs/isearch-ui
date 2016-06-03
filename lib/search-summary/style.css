@@ -95,12 +95,10 @@
 }
 
 .exitButton {
-  font-family: SourceSansLight;
   position: absolute;
   top: -7em;
   right: 0;
   cursor: pointer;
-  color: #ffffff;
   width: 2em;
 }
 

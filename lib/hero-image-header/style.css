@@ -18,6 +18,21 @@
   src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
 }
 
+.bouncingArrow {
+  width: 3em;
+}
+
+.bouncingArrowContainer {
+  margin-top: 6em;
+  -webkit-animation: bounce 2s infinite ease-in-out;
+}
+
+@-webkit-keyframes bounce {
+	0%, 20%, 60%, 100%  { -webkit-transform: translateY(0); }
+    40%  { -webkit-transform: translateY(10px); }
+    80% { -webkit-transform: translateY(5px); }
+}
+
 .spies {
   font-family: TCScript;
   display: inline-block;
@@ -29,6 +44,8 @@
 
 .headerIcon {
   display: inline-block;
+  vertical-align: baseline;
+  margin-right: 1em;
 }
 
 .headerBarContainer {
@@ -56,11 +73,6 @@
   margin-top: 30em;
   position: relative;
   text-align: center;
-}
-
-.headerContent img {
-  vertical-align: baseline;
-  margin-right: 1em;
 }
 
 .containerInput {
@@ -137,6 +149,12 @@
   }
   .headerBarWrapper {
     height: 88vh;
+  }
+  .bouncingArrowContainer {
+    margin-top: 1em;
+  }
+  .bouncingArrow {
+    width: 1.5em;
   }
 }
 

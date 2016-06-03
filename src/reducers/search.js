@@ -6,8 +6,10 @@ import {
   // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
   TAG_ADD_SINGLE_TAG,
+  RESET_TAGS,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
+  TILES_REMOVE_TILE,
   SET_SEARCH_STRING,
   SEARCH_ERROR,
   SET_AUTOCOMPLETE_ERROR,
@@ -16,18 +18,24 @@ import {
   CLEAR_SEARCH_STRING,
   UPDATE_HEADER_TITLES,
   SAVE_SEARCH_RESULT_ID,
-  SAVE_BUCKET_ID
+  SAVE_SOCKET_CONNECTION_ID,
+  SET_FINGERPRINT,
+  SAVE_BUCKET_ID,
+  CLEAR_FEED,
+  UPDATE_DISPLAYED_ITEMS
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
-import {
-  shuffleTilesIntoResults,
-  getPackages,
-  getTiles
-} from './utils/helpers.js';
-import _ from 'lodash';
+// import {
+//   shuffleTilesIntoResults,
+//   getPackages,
+//   getTiles
+// } from './utils/helpers.js';
+import union from 'lodash.union';
+import uniqBy from 'lodash.uniqby';
 
 export const initialState = {
+  fingerprint: '',
   bucketId: '',
   resultId: '',
   displayedItems: [],
@@ -38,19 +46,19 @@ export const initialState = {
   tags: [],
   filterVisibleState: {},
   tiles: [],
-  addMessageVisible: false,
   searchString: '',
   error: '',
   autocompleteError: '',
   autocompleteOptions: [],
   inAutoCompleteSearch: false, // use to show loading spinner
   numberOfChildren: 0,
+  numberOfAdults: 2,
   childAge1: '',
   childAge2: '',
   childAge3: '',
   childAge4: '',
   departureAirport: '',
-  duration: '',
+  duration: '1 uge',
   departureDate: '',
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
@@ -58,33 +66,41 @@ export const initialState = {
   // durationTitle: '2 uger',
   // bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
   durationTitle: '1 uger',
-  isInitialTag: false
+  isInitialTag: false,
+  socketConnectionId: ''
 };
 
-function scrambleSearchItems (items, state, append) {
-  const packages = getPackages(items);
-  const tiles = getTiles(items);
-  return shuffleTilesIntoResults(packages, append ? state.tiles : tiles.concat(state.tiles)); // add filters back in
-}
+// function scrambleSearchItems (items, state, append) {
+//   const packages = getPackages(items);
+//   const tiles = getTiles(items);
+//   return shuffleTilesIntoResults(packages, append ? state.tiles : tiles.concat(state.tiles)); // add filters back in
+// }
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      const scrambled = scrambleSearchItems(action.items, state, action.append);
-      const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
-      const items = _.uniqBy(_.union(state.items, action.items), (a) => {
+      // const scrambled = scrambleSearchItems(action.items, state, action.append);
+      // const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
+      const items = state.displayedItems.length > 0 ? action.items : action.items.concat(mockTiles); // add in the filters if it is the inital search
+      const itemsToDisplay = uniqBy(union(state.items, items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
         } else if (a.tile) {
           return a.tile.id;
         }
       });
+      const display = state.displayedItems.length < 5 ? itemsToDisplay.slice(0, 5) : state.displayedItems;
       return {
         ...state,
-        displayedItems,
-        items,
+        items: itemsToDisplay,
+        displayedItems: display,
         loading: false,
         error: ''
+      };
+    case UPDATE_DISPLAYED_ITEMS:
+      return {
+        ...state,
+        displayedItems: action.items
       };
     case BUSY_SEARCHING:
       return {
@@ -112,7 +128,7 @@ export default function search (state = initialState, action) {
       }
       return {
         ...state,
-        tags: _.uniqBy([...state.tags, action.tag], 'displayName'),
+        tags: uniqBy([...state.tags, action.tag], 'displayName'),
         isInitialTag: action.isInitialTag
       };
     case TAG_REMOVE_TAG:
@@ -123,6 +139,12 @@ export default function search (state = initialState, action) {
         ...state,
         tags: newTags,
         error: ''
+      };
+    case RESET_TAGS:
+      return {
+        ...state,
+        tags: action.tags,
+        isInitialTag: true
       };
     case FILTER_ON_CLICK:
       return {
@@ -176,9 +198,9 @@ export default function search (state = initialState, action) {
     case UPDATE_HEADER_TITLES:
       return {
         ...state,
-        numberOfAdultsTitle: action.numberOfAdults,
-        numberOfChildrenTitle: action.numberOfChildren,
-        durationTitle: action.duration
+        numberOfAdultsTitle: state.numberOfAdults,
+        numberOfChildrenTitle: state.numberOfChildren,
+        durationTitle: state.duration
       };
     case SAVE_SEARCH_RESULT_ID:
       return {
@@ -189,6 +211,30 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         bucketId: action.id
+      };
+    case SAVE_SOCKET_CONNECTION_ID:
+      return {
+        ...state,
+        socketConnectionId: action.id
+      };
+    case SET_FINGERPRINT:
+      return {
+        ...state,
+        fingerprint: action.fingerprint
+      };
+    case CLEAR_FEED:
+      return {
+        ...state,
+        displayedItems: [],
+        items: []
+      };
+    case TILES_REMOVE_TILE:
+      const filteredItems = state.displayedItems.filter(item => {
+        return item.id !== action.id;
+      });
+      return {
+        ...state,
+        displayedItems: filteredItems
       };
     default:
       return state;

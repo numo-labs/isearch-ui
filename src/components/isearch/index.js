@@ -5,6 +5,7 @@ import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
 import SearchBar from '../../../lib/search-bar';
+import ScrollView from '../../../lib/scroll-view';
 import './style.css';
 
 class ISearch extends Component {
@@ -12,15 +13,14 @@ class ISearch extends Component {
   constructor () {
     super();
     this.state = {
-      screenWidth: window.innerWidth
+      screenWidth: window.innerWidth,
+      feedItems: [],
+      endScroll: false
     };
     this.handleResize = this.handleResize.bind(this);
   }
 
   componentWillMount () {
-    // react router calls componentWillMount every time the user navigates back to the search page
-    // and we don't want to reload the homepage tag every time
-    this.props.tags.length === 0 && this.props.addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
     window.addEventListener('resize', this.handleResize);
   }
 
@@ -34,7 +34,6 @@ class ISearch extends Component {
 
   renderResults () {
     const {
-      displayedItems,
       onYesFilter,
       onFilterClick,
       filterVisibleState,
@@ -42,26 +41,34 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       resultId,
-      push: changeRoute
+      push: changeRoute,
+      removeTile,
+      displayedItems,
+      loadMoreItemsIntoFeed
     } = this.props;
     return (
-      <SearchResults
-        changeRoute={changeRoute}
-        items={displayedItems}
-        onYesFilter={onYesFilter}
-        onFilterClick={onFilterClick}
-        filterVisibleState={filterVisibleState}
-        setHotelPage={setHotelPage}
-        totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
-        resultId={resultId}
-      />
+      <ScrollView loadingThreshold={400} loadData={loadMoreItemsIntoFeed} endScroll={this.state.endScroll}>
+        <SearchResults
+          changeRoute={changeRoute}
+          items={displayedItems}
+          onYesFilter={onYesFilter}
+          onFilterClick={onFilterClick}
+          filterVisibleState={filterVisibleState}
+          setHotelPage={setHotelPage}
+          totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
+          resultId={resultId}
+          removeTile={removeTile}
+        />
+      </ScrollView>
     );
   }
 
   render () {
+    console.log('----RENDERING----');
     const {
       tags,
       removeTag,
+      resetTags,
       setSearchString,
       startSearch,
       autocompleteOptions,
@@ -90,7 +97,9 @@ class ISearch extends Component {
       numberOfChildrenTitle,
       numberOfAdultsTitle,
       durationTitle,
-      setDepartureDate
+      setDepartureDate,
+      push: changeRoute,
+      goBack
     } = this.props;
     return (
       <section>
@@ -115,6 +124,8 @@ class ISearch extends Component {
           durationTitle={durationTitle}
           setDepartureDate={setDepartureDate}
           startSearch={startSearch}
+          changeRoute={changeRoute}
+          goBack={goBack}
         />
         {
           this.state.screenWidth < 553 ? [
@@ -145,11 +156,12 @@ class ISearch extends Component {
         <Tags
           tags={tags}
           removeTag={removeTag}
+          resetTags={resetTags}
         />
         { loading &&
-        <div className='spinnerContainer'>
-          <LoadingSpinner/>
-        </div>
+          <div className='spinnerContainer'>
+            <LoadingSpinner/>
+          </div>
         }
         { error && <div className='errorMessage'>{error}</div> }
         { this.renderResults() }
@@ -160,9 +172,6 @@ class ISearch extends Component {
 
 ISearch.propTypes = {
   resultId: PropTypes.string,
-  // for random initial results
-  fetchQuerySearchResults: PropTypes.func,
-  getArticle: PropTypes.func,
   // results
   loading: PropTypes.bool,
   error: PropTypes.string,
@@ -170,7 +179,7 @@ ISearch.propTypes = {
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
   filterVisibleState: PropTypes.object,
-
+  loadMoreItemsIntoFeed: PropTypes.func,
   // autocomplete
   autocompleteOptions: PropTypes.array,
   inAutoCompleteSearch: PropTypes.bool,
@@ -196,6 +205,10 @@ ISearch.propTypes = {
   addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
   removeTag: PropTypes.func,
+  resetTags: PropTypes.func,
+
+  // tiles
+  removeTile: PropTypes.func,
 
   // travel info
   setNumberOfChildren: PropTypes.func,
@@ -215,11 +228,12 @@ ISearch.propTypes = {
   numberOfAdultsTitle: PropTypes.string,
   numberOfChildrenTitle: PropTypes.string,
   durationTitle: PropTypes.string,
-  updateHeaderTitles: PropTypes.string,
+  updateHeaderTitles: PropTypes.func,
   setDepartureDate: PropTypes.func,
 
   // routing
-  push: PropTypes.func
+  push: PropTypes.func,
+  goBack: PropTypes.func
 };
 
 export default ISearch;

@@ -3,8 +3,10 @@ import {
   TAG_REMOVE_TAG,
   FILTER_ON_CLICK,
   TILES_ADD_TILES,
+  TILES_REMOVE_TILE,
   TAG_ADD_SINGLE_TAG,
-  CLEAR_SEARCH_STRING
+  CLEAR_SEARCH_STRING,
+  RESET_TAGS
 } from '../constants/actionTypes';
 import { startSearch } from './search-results.js';
 
@@ -105,4 +107,25 @@ export const addTag = (displayName, id, isInitialTag) => {
 
 export const clearSearchString = () => {
   return { type: CLEAR_SEARCH_STRING };
+};
+/**
+* Action to reset all tags to empty
+*/
+
+export const resetTags = (displayName, id) => {
+  return {
+    type: RESET_TAGS,
+    tags: [ { displayName, id } ]
+  };
+};
+
+/**
+* Action to remove a tile from the displayed items
+*/
+
+export const removeTile = (id) => {
+  return {
+    type: TILES_REMOVE_TILE,
+    id: id
+  };
 };

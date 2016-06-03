@@ -52,7 +52,10 @@ module.exports = {
     ]
   },
   devServer: {hot: true},
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /da/)
+  ],
   inline: true,
   progress: true,
   colors: true,

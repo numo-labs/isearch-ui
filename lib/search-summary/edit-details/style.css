@@ -4,3 +4,11 @@
   text-align: center;
   position: relative;
 }
+
+.travelInfoExitButton {
+  position: absolute;
+  top: -4em;
+  right: 0;
+  cursor: pointer;
+  width: 2.5em;
+}
