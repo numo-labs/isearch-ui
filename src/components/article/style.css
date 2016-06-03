@@ -80,7 +80,8 @@ h1 {
 
 .articleFullPageContainer {
     text-align: center;
-    font-family: SourceSansLight;
+    /* commenting this out as it prevents the bold/italics etc styling on the article text being applied */
+    /*font-family: SourceSansLight;*/
     display: inline-block;
     width: 100%;
 }
