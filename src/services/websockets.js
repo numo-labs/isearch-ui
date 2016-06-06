@@ -1,7 +1,10 @@
 import * as SearchResultActions from '../actions/search-results.js';
 import * as TagActions from '../actions/tags.js';
 import Primus from '../../src/services/primus.js';
-const socketUrl = 'http://eb-ci.wmm63vqska.eu-west-1.elasticbeanstalk.com?auto_room=false';
+
+// TODO: Switch URL's based on the deployed environment. Maybe by using
+// process.env and the setup within the webpack.config?
+const socketUrl = 'https://ci-socket-server.tcdl.io?auto_room=false';
 /**
 * Function that initialises a connection with the web socket server and saves
 * the id to the redux store
