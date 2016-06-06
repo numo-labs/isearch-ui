@@ -105,6 +105,7 @@ class ISearch extends Component {
       push: changeRoute,
       goBack
     } = this.props;
+    console.log('PROPS', durationTitle);
     return (
       <section>
         <SearchSummary

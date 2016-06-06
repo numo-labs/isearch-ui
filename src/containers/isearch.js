@@ -30,9 +30,6 @@ function mapStateToProps (state) {
       autocompleteError,
       autocompleteOptions,
       inAutoCompleteSearch,
-      numberOfAdultsTitle,
-      numberOfChildrenTitle,
-      durationTitle,
       resultId
     },
     travelInfo: {
@@ -44,7 +41,10 @@ function mapStateToProps (state) {
       childAge4,
       departureAirport,
       duration,
-      departureDate
+      departureDate,
+      numberOfAdultsTitle,
+      numberOfChildrenTitle,
+      durationTitle
     },
     hotel: {
       hotelPage,
@@ -81,10 +81,10 @@ function mapStateToProps (state) {
     departureAirport,
     duration,
     departureDate,
+    resultId,
     numberOfAdultsTitle,
     numberOfChildrenTitle,
-    durationTitle,
-    resultId
+    durationTitle
   };
 }
 

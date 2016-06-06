@@ -14,6 +14,11 @@ import {
 // const closeImage = require('../../../src/assets/close.svg');
 import './style.css';
 export default class EditDetails extends Component {
+  onSearchClick () {
+    this.props.updateHeaderTitles();
+    this.props.startSearch();
+    this.props.goBack();
+  }
   render () {
     const {
       numberOfChildren,
@@ -31,10 +36,8 @@ export default class EditDetails extends Component {
       departureAirport,
       duration,
       departureDate,
-      onSearchClick,
       goBack
     } = this.props;
-    console.log('PROPS________', this.props);
     const childAges = [childAge1, childAge2, childAge3, childAge4].slice(0, Number(numberOfChildren));
     return (
       <div className='blueContainer'>
@@ -109,7 +112,7 @@ export default class EditDetails extends Component {
             );
           })}
           <div className='changeInputButtonContainer'>
-            <div className='changeInputButton' onClick={onSearchClick}>SEARCH</div>
+            <div className='changeInputButton' onClick={this.onSearchClick.bind(this)}>SEARCH</div>
           </div>
         </div>
       </div>
@@ -136,5 +139,6 @@ EditDetails.propTypes = {
   departureAirport: PropTypes.string,
   exitButtonClick: PropTypes.func,
   onSearchClick: PropTypes.func,
-  goBack: PropTypes.func
+  goBack: PropTypes.func,
+  updateHeaderTitles: PropTypes.func
 };

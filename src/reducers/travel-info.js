@@ -6,7 +6,8 @@ import {
   SET_NUMBER_OF_CHILDREN,
   SET_DURATION,
   SET_DEPARTURE_DATE,
-  SET_DEPARTURE_AIRPORT
+  SET_DEPARTURE_AIRPORT,
+  UPDATE_HEADER_TITLES
 } from '../constants/actionTypes';
 
 export const initialState = {
@@ -19,7 +20,10 @@ export const initialState = {
   departureAirport: 'Copenhagen - CPH',
   duration: '1 uge',
   departureDate: moment().add(14, 'days').format('YYYY-MM-DD'),
-  passengerBirthdays: []
+  passengerBirthdays: [],
+  numberOfChildrenTitle: '0',
+  numberOfAdultsTitle: '2',
+  durationTitle: '1 uger'
 };
 
 export default function travelInfo (state = initialState, action) {
@@ -53,6 +57,13 @@ export default function travelInfo (state = initialState, action) {
       return {
         ...state,
         departureAirport: action.departureAirport
+      };
+    case UPDATE_HEADER_TITLES:
+      return {
+        ...state,
+        numberOfAdultsTitle: state.numberOfAdults,
+        numberOfChildrenTitle: state.numberOfChildren,
+        durationTitle: state.duration
       };
     default:
       return state;
