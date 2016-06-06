@@ -4,7 +4,7 @@ import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import { ArticleTile } from '../../../lib/article-tile';
 import VisbilitySensor from 'react-visibility-sensor';
-// import DestinationTile from '../../../lib/destination-tile';
+import DestinationTile from '../../../lib/destination-tile';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
@@ -120,6 +120,7 @@ class SearchResults extends Component {
             </VisbilitySensor>
           );
         } else if (item.type === 'tile') {
+          const contentExists = item.tile.sections && item.tile.sections.length > 0;
           if (item.tile.type === 'filter') {
             return (
               <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
@@ -135,7 +136,7 @@ class SearchResults extends Component {
               </VisbilitySensor>
 
             );
-          } else if (item.tile.type === 'article' && item.tile.sections && item.tile.sections.length > 0) {
+          } else if (item.tile.type === 'article' && contentExists) {
             return (
               <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                 <div key={index} className='gridItem'>
@@ -148,6 +149,21 @@ class SearchResults extends Component {
                 </div>
               </VisbilitySensor>
             );
+          } else if (item.tile.type === 'destination' && contentExists) {
+            return (
+              <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+                <div key={index} className='gridItem'>
+                  <div onClick={() => removeTile(item.id)}>
+                    <img className='removeTileButton' src={removeTileButton} alt='cancel' />
+                  </div>
+                  <div className='clickable'>
+                    <DestinationTile {...item} />
+                  </div>
+                </div>
+              </VisbilitySensor>
+            );
+          } else {
+            return <div/>;
           }
         }
       })
