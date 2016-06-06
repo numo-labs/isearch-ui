@@ -223,7 +223,7 @@
 }
 
 .titleHeartContainer {
-  min-height: 8em;
+  min-height: 7em;
 }
 
 .titlePackage {
@@ -249,12 +249,14 @@
 }
 
 .textVisible {
-  padding: 1.5em;
+  padding-right: 1em;
+  padding-left: 1em;
+  padding-bottom: 1em;
   font-size: 1.6rem;
 }
 
 .textWrapper {
-  width: 69%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
 }
@@ -322,8 +324,13 @@
   }
   .textVisible {
     margin-right: 2em;
+    padding: 1.5em;
+  }
+  .textWrapper {
+    width: 69%;
   }
   .titleHeartContainer {
+    min-height: 8em;
     width: 66%;
   }
   .titlePackage {
