@@ -45,7 +45,8 @@ class ISearch extends Component {
       viewedArticles,
       removeTile,
       displayedItems,
-      loadMoreItemsIntoFeed
+      loadMoreItemsIntoFeed,
+      addSingleTag
     } = this.props;
     return (
       <ScrollView loadingThreshold={400} loadData={loadMoreItemsIntoFeed} endScroll={this.state.endScroll}>
@@ -60,6 +61,7 @@ class ISearch extends Component {
           resultId={resultId}
           removeTile={removeTile}
           viewedArticles={viewedArticles}
+          addSingleTag={addSingleTag}
         />
       </ScrollView>
     );

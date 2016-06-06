@@ -92,7 +92,8 @@ class SearchResults extends Component {
       // resultId,
       changeRoute,
       viewedArticles,
-      removeTile
+      removeTile,
+      addSingleTag
     } = this.props;
 
     // TODO replace urls to valid ones
@@ -142,7 +143,11 @@ class SearchResults extends Component {
                     <img className='removeTileButton' src={removeTileButton} alt='cancel' />
                   </div>
                   <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
-                    <ArticleTile className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''} {...item} />
+                    <ArticleTile
+                      className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
+                      {...item}
+                      onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id); removeTile(item.id); }}
+                    />
                   </div>
                 </div>
               </VisbilitySensor>
@@ -177,7 +182,8 @@ SearchResults.propTypes = {
   // resultId: PropTypes.string,
   changeRoute: PropTypes.func,
   viewedArticles: PropTypes.array,
-  removeTile: PropTypes.func
+  removeTile: PropTypes.func,
+  addSingleTag: PropTypes.func
 };
 
 export default SearchResults;
