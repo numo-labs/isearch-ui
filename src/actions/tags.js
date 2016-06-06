@@ -94,7 +94,6 @@ export const addTag = (displayName, id, isInitialTag) => {
     type: TAG_ADD_SINGLE_TAG,
     tag: {
       displayName,
-      colour: '#8EB8C4',
       id // geo tags will just have 'geo' and amenity tags will have the full tag id e.g. amenity:wifi
     },
     isInitialTag

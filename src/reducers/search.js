@@ -36,7 +36,6 @@ import uniqBy from 'lodash.uniqby';
 export const initialState = {
   defaultTag: {
     displayName: 'Top inspiration',
-    colour: '#8EB8C4',
     id: 'marketing:homepage.dk.spies'
   },
   fingerprint: '',

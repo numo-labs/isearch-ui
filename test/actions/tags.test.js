@@ -71,7 +71,6 @@ describe('actions', () => {
         type: TAG_ADD_SINGLE_TAG,
         tag: {
           displayName: 'test',
-          colour: '#8EB8C4',
           id: 'test'
         },
         isInitialTag: false
