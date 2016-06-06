@@ -5,6 +5,13 @@ import Tag from '../../../lib/tags/tag.js';
 
 import './style.css';
 
+/*
+* This component uses dangerouslySetInnerHTML to render the article text
+* This is because text from the article editor (http://numo-labs-articles.s3-website-eu-west-1.amazonaws.com/)
+* is saved as a html string - React escapes html to prevent XSS attacks unless
+* it is set using dangerouslySetInnerHTML
+*/
+
 class ArticleFullPage extends Component {
   constructor () {
     super();
@@ -46,7 +53,12 @@ class ArticleFullPage extends Component {
     goBack();
   }
 
+  rawMarkup (value) {
+    return { __html: value };
+  }
+
   render () {
+    console.log('RENDERED ARTICLE');
     const { articleContent, goBack } = this.props;
     const tagColours = {
       amenities: 'rgba(12,125,125,0.6)',
@@ -95,7 +107,7 @@ class ArticleFullPage extends Component {
                     {key !== 0 && section.image ? <div className='articleImage' style={{backgroundImage: `url(${section.image})`}}><img
                         src={section.image}/></div> : null}
                     {section.title ? (key === 0 ? <h1>{section.title}</h1> : <h2 >{section.title}</h2>) : null}
-                    {section.text ? <p className='articleText'>{section.text}</p> : null}
+                    {section.text ? <div className='articleText' dangerouslySetInnerHTML={this.rawMarkup(section.text)}/> : null}
                   </div>
                 </section>
               );

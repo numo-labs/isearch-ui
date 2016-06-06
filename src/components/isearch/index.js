@@ -49,7 +49,11 @@ class ISearch extends Component {
       addSingleTag
     } = this.props;
     return (
-      <ScrollView loadingThreshold={400} loadData={loadMoreItemsIntoFeed} endScroll={this.state.endScroll}>
+      <ScrollView
+        loadingThreshold={400}
+        loadData={loadMoreItemsIntoFeed}
+        endScroll={this.state.endScroll}
+      >
         <SearchResults
           changeRoute={changeRoute}
           items={displayedItems}
@@ -103,8 +107,10 @@ class ISearch extends Component {
       durationTitle,
       setDepartureDate,
       push: changeRoute,
-      goBack
+      goBack,
+      displayedItems
     } = this.props;
+    console.log('PROPS', durationTitle);
     return (
       <section>
         <SearchSummary
@@ -133,7 +139,10 @@ class ISearch extends Component {
         />
         {
           this.state.screenWidth < 553 ? [
-            <Header searchBar={false}/>,
+            <Header
+              searchBar={false}
+              displayedItems={displayedItems}
+            />,
             <SearchBar
               addSingleTag={addSingleTag}
               startSearch={startSearch}
@@ -155,6 +164,7 @@ class ISearch extends Component {
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
             searchBar
+            displayedItems={displayedItems}
           />
         }
         <Tags

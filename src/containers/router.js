@@ -9,7 +9,8 @@ import ISearch from '../containers/isearch.js';
 import ArticleFullPage from '../containers/article.js';
 import HotelPage from '../containers/hotel';
 import App from '../components/app';
-import EditDetails from '../../lib/search-summary/edit-details';
+import EditDetails from '../containers/editDetails';
+import TagView from '../containers/tag-view';
 
 // store
 import configureStore from '../store/configure-store.js';
@@ -48,6 +49,7 @@ export default class Root extends Component {
             <Route path='article/:bucketId/:itemId' component={ArticleFullPage} />
             <Route path='hotel/:bucketId/:itemId' component={HotelPage} />
             <Route path='editDetails' component={EditDetails} />
+            <Route path='tagView' component={TagView} />
           </Route>
         </Router>
       </Provider>

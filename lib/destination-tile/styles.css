@@ -1,0 +1,144 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Light.otf');
+}
+
+.contextBanner {
+  background-color: rgba(243,145,0,0.7);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  height: 25px;
+  line-height: 25px;
+  color: #ffffff;
+  font-family: SourceSansRegular;
+  font-size: 1em;
+}
+
+.destHotelContainer {
+  width: 25%;
+  float: left;
+  display: inline-block;
+}
+
+.destHotelFigures {
+  display: inline-block;
+  text-align: center;
+  font-size: 1.9rem;
+  font-family: SourceSansLight;
+  padding-left: 0.1em;
+  line-height: 0.1em;
+}
+
+.destHotelTagContainer {
+  font-size: 0.8rem;
+  line-height: 0.5em;
+}
+
+.destTag {
+  display: inline-block;
+  float: left;
+  margin-left: 0.3em;
+  margin-right: 1.9em;
+}
+
+.destinationContentContainer {
+  color: #6B6B6B;
+  padding: 1em;
+  background-color: #ffffff;
+}
+
+.destinationDescription {
+  line-height: 1.3em;
+  font-size: 1.2rem;
+  padding-right: 0.2em;
+  color: #7A7A7A;
+}
+
+.destinationImage {
+  height: 200px;
+  position: relative;
+  width: inherit;
+  background-size: 375px 200px;
+  background-repeat: no-repeat;
+}
+
+.destinationTitle {
+  font-family: ThomasHeadlineBold;
+  font-size: 1.8rem;
+  display: inline-block;
+  border-bottom: 3px solid black;
+  display: inline-block;
+  float: left;
+}
+
+.destinationTitleContainer {
+  width: 75%;
+  display: inline-block;
+  float: left;
+}
+
+
+.hotelsTag {
+  display: inline-block;
+  float: left;
+}
+
+.mapIcon {
+  width: 1.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.mapIconContainer {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+
+.mapIconText {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-family: ThomasHeadlineBold;
+}
+
+.mapVideoIconContainer {
+  text-align: center;
+  padding-top: 1.2em;
+}
+
+.titleDestHotelContainer {
+  margin-bottom: 2.8em;
+}
+
+.videoIcon {
+  width: 1.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.videoIconContainer {
+  display: inline-block;
+}
+
+.videoIconText {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-family: ThomasHeadlineBold;
+}
