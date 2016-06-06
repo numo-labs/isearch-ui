@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import EditDetails from '../../lib/search-summary/edit-details';
-
+import EditDetails from '../components/edit-details';
 import * as TravelInfoActions from '../actions/travel-info';
+import * as SearchActions from '../actions/search-results';
 import { routerActions } from 'react-router-redux';
-const Actions = {...TravelInfoActions, ...routerActions};
+const Actions = {...TravelInfoActions, ...SearchActions, ...routerActions};
 
 function mapStateToProps (state) {
   const {

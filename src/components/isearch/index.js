@@ -106,6 +106,7 @@ class ISearch extends Component {
       goBack,
       displayedItems
     } = this.props;
+    console.log('PROPS', durationTitle);
     return (
       <section>
         <SearchSummary
