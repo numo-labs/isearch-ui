@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import DropDown from '../../select-drop-down';
-import Calendar from '../../date-picker';
-import '../../react-date-picker/css/index.css';
-import { Link } from 'react-router';
+import DropDown from '../../../lib/select-drop-down';
+import Calendar from '../../../lib/date-picker';
+import '../../../lib/react-date-picker/css/index.css';
 
 import {
   adultOptions,
@@ -31,13 +30,15 @@ export default class EditDetails extends Component {
       departureAirport,
       duration,
       departureDate,
-      onSearchClick
+      onSearchClick,
+      goBack
     } = this.props;
+    console.log('PROPS________', this.props);
     const childAges = [childAge1, childAge2, childAge3, childAge4].slice(0, Number(numberOfChildren));
     return (
       <div className='blueContainer'>
         <div className={'changeDetailsContainer dropDown'}>
-          <Link to='/'>
+          <div onClick={() => goBack()}>
             <div>
               <img
                 src={'../../src/assets/close-white.svg'}
@@ -45,8 +46,7 @@ export default class EditDetails extends Component {
                 className='travelInfoExitButton'
               />
             </div>
-          </Link>
-
+          </div>
           <div className='contentHeader'>
             <img className='logoHeart' src='https://cloud.githubusercontent.com/assets/12450298/13631826/8a5cb062-e5de-11e5-8b73-f2ec9d622d5f.png'/>
             <h1 className='spiesTitle'>SPIES</h1>
