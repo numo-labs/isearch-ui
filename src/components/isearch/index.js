@@ -167,6 +167,7 @@ class ISearch extends Component {
           tags={tags}
           removeTag={removeTag}
           resetTags={resetTags}
+          resetColour={'#F39110'}
         />
         { loading &&
           <div className='spinnerContainer'>
