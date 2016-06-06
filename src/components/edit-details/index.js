@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import DropDown from '../../../lib/select-drop-down';
 import Calendar from '../../../lib/date-picker';
+import { Link } from 'react-router';
 import '../../../lib/react-date-picker/css/index.css';
 
 import {
@@ -38,7 +39,7 @@ export default class EditDetails extends Component {
     return (
       <div className='blueContainer'>
         <div className={'changeDetailsContainer dropDown'}>
-          <div onClick={() => goBack()}>
+          <Link to='/' onClick={() => goBack()}>
             <div>
               <img
                 src={'../../src/assets/close-white.svg'}
@@ -46,7 +47,7 @@ export default class EditDetails extends Component {
                 className='travelInfoExitButton'
               />
             </div>
-          </div>
+          </Link>
           <div className='contentHeader'>
             <img className='logoHeart' src='https://cloud.githubusercontent.com/assets/12450298/13631826/8a5cb062-e5de-11e5-8b73-f2ec9d622d5f.png'/>
             <h1 className='spiesTitle'>SPIES</h1>

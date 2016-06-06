@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 const closeImage = require('../../../src/assets/close.svg');
 
 export default class TagView extends Component {
@@ -7,13 +8,13 @@ export default class TagView extends Component {
     return (
       <div className='blueContainer'>
         <div className={'tagViewActive dropDown'}>
-          <div onClick={() => goBack()}>
+          <Link to='/' onClick={() => goBack()}>
             <img
               src={closeImage}
               alt='exit button'
               className='tagExitButton'
             />
-          </div>
+          </Link>
           <div>replace this text with 'add tags' search bar and group of existing tags</div>
         </div>
       </div>
