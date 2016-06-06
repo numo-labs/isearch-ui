@@ -152,10 +152,10 @@
     height: 88vh;
   }
   .bouncingArrowContainer {
-    margin-top: 1em;
+    display: none;
   }
   .bouncingArrow {
-    width: 1.5em;
+    display: none;
   }
 }
 
