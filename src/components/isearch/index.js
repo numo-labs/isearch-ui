@@ -103,7 +103,8 @@ class ISearch extends Component {
       durationTitle,
       setDepartureDate,
       push: changeRoute,
-      goBack
+      goBack,
+      displayedItems
     } = this.props;
     return (
       <section>
@@ -133,7 +134,10 @@ class ISearch extends Component {
         />
         {
           this.state.screenWidth < 553 ? [
-            <Header searchBar={false}/>,
+            <Header
+              searchBar={false}
+              displayedItems={displayedItems}
+            />,
             <SearchBar
               addSingleTag={addSingleTag}
               startSearch={startSearch}
@@ -155,6 +159,7 @@ class ISearch extends Component {
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
             searchBar
+            displayedItems={displayedItems}
           />
         }
         <Tags
