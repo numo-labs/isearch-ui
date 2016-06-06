@@ -16,7 +16,6 @@ import {
   SET_AUTOCOMPLETE_OPTIONS,
   SET_AUTOCOMPLETE_IN_SEARCH,
   CLEAR_SEARCH_STRING,
-  UPDATE_HEADER_TITLES,
   SAVE_SEARCH_RESULT_ID,
   SAVE_SOCKET_CONNECTION_ID,
   SET_FINGERPRINT,
@@ -35,6 +34,11 @@ import union from 'lodash.union';
 import uniqBy from 'lodash.uniqby';
 
 export const initialState = {
+  defaultTag: {
+    displayName: 'Top inspiration',
+    colour: '#8EB8C4',
+    id: 'marketing:homepage.dk.spies'
+  },
   fingerprint: '',
   bucketId: '',
   resultId: '',
@@ -51,21 +55,11 @@ export const initialState = {
   autocompleteError: '',
   autocompleteOptions: [],
   inAutoCompleteSearch: false, // use to show loading spinner
-  numberOfChildren: 0,
-  numberOfAdults: 2,
-  childAge1: '',
-  childAge2: '',
-  childAge3: '',
-  childAge4: '',
   departureAirport: '',
-  duration: '1 uge',
   departureDate: '',
   passengerBirthdays: [],
-  numberOfChildrenTitle: '0',
-  numberOfAdultsTitle: '2',
   // durationTitle: '2 uger',
   // bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
-  durationTitle: '1 uger',
   isInitialTag: false,
   socketConnectionId: ''
 };
@@ -143,7 +137,7 @@ export default function search (state = initialState, action) {
     case RESET_TAGS:
       return {
         ...state,
-        tags: action.tags,
+        tags: [initialState.defaultTag],
         isInitialTag: true
       };
     case FILTER_ON_CLICK:
@@ -194,13 +188,6 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         inAutoCompleteSearch: true
-      };
-    case UPDATE_HEADER_TITLES:
-      return {
-        ...state,
-        numberOfAdultsTitle: state.numberOfAdults,
-        numberOfChildrenTitle: state.numberOfChildren,
-        durationTitle: state.duration
       };
     case SAVE_SEARCH_RESULT_ID:
       return {

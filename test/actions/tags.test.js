@@ -9,7 +9,7 @@ import {
 } from '../../src/constants/actionTypes';
 import { expect } from 'chai';
 import * as actions from '../../src/actions/tags';
-
+import simple from 'simple-mock';
 import thunk from 'redux-thunk';
 import configureMockStore from './test-helpers';
 const mockStore = configureMockStore([thunk]);
@@ -91,13 +91,20 @@ describe('actions', () => {
       done();
     });
   });
-  describe('resetTags', () => {
+  describe('resetToInitialTag', () => {
     it('should create an action to set the tags back to the single tag passed', (done) => {
       const expectedAction = {
-        type: RESET_TAGS,
-        tags: [ { displayName: 'name', id: 'id' } ]
+        type: RESET_TAGS
       };
-      expect(actions.resetTags('name', 'id')).to.deep.equal(expectedAction);
+      expect(actions.resetToInitialTag()).to.deep.equal(expectedAction);
+      done();
+    });
+  });
+  describe('resetTags', () => {
+    it('should dispatch actions to reset the tags and start a search', (done) => {
+      const dispatch = simple.mock();
+      actions.resetTags()(dispatch);
+      expect(dispatch.callCount).to.equal(2);
       done();
     });
   });

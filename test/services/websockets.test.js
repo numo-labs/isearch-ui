@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import thunk from 'redux-thunk';
 import simple from 'simple-mock';
 import { bindActionCreators } from 'redux';
-import { TAG_ADD_SINGLE_TAG, SAVE_SOCKET_CONNECTION_ID, RECEIVE_SEARCH_RESULT } from '../../src/constants/actionTypes';
+import { RESET_TAGS, SAVE_SOCKET_CONNECTION_ID, RECEIVE_SEARCH_RESULT } from '../../src/constants/actionTypes';
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
@@ -21,13 +21,7 @@ describe('Web Socket Service', function () {
         id: 'abc123'
       },
       {
-        type: TAG_ADD_SINGLE_TAG,
-        tag: {
-          displayName: 'Top inspiration',
-          colour: '#8EB8C4',
-          id: 'marketing:homepage.dk.spies'
-        },
-        isInitialTag: true
+        type: RESET_TAGS
       }
     ];
     expect(store.getActions()).to.deep.equal(expectedActions);
@@ -46,13 +40,7 @@ describe('Web Socket Service', function () {
         id: 'abc123'
       },
       {
-        type: TAG_ADD_SINGLE_TAG,
-        tag: {
-          displayName: 'Top inspiration',
-          colour: '#8EB8C4',
-          id: 'marketing:homepage.dk.spies'
-        },
-        isInitialTag: true
+        type: RESET_TAGS
       }
     ];
     expect(store.getActions()).to.deep.equal(expectedActions);

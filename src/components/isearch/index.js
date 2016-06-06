@@ -42,9 +42,11 @@ class ISearch extends Component {
       numberOfAdultsTitle,
       resultId,
       push: changeRoute,
+      viewedArticles,
       removeTile,
       displayedItems,
-      loadMoreItemsIntoFeed
+      loadMoreItemsIntoFeed,
+      addSingleTag
     } = this.props;
     return (
       <ScrollView
@@ -62,6 +64,8 @@ class ISearch extends Component {
           totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
           resultId={resultId}
           removeTile={removeTile}
+          viewedArticles={viewedArticles}
+          addSingleTag={addSingleTag}
         />
       </ScrollView>
     );
@@ -103,8 +107,10 @@ class ISearch extends Component {
       durationTitle,
       setDepartureDate,
       push: changeRoute,
-      goBack
+      goBack,
+      displayedItems
     } = this.props;
+    console.log('PROPS', durationTitle);
     return (
       <section>
         <SearchSummary
@@ -133,7 +139,10 @@ class ISearch extends Component {
         />
         {
           this.state.screenWidth < 553 ? [
-            <Header searchBar={false}/>,
+            <Header
+              searchBar={false}
+              displayedItems={displayedItems}
+            />,
             <SearchBar
               addSingleTag={addSingleTag}
               startSearch={startSearch}
@@ -155,12 +164,14 @@ class ISearch extends Component {
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
             searchBar
+            displayedItems={displayedItems}
           />
         }
         <Tags
           tags={tags}
           removeTag={removeTag}
           resetTags={resetTags}
+          resetColour={'#F39110'}
         />
         { loading &&
           <div className='spinnerContainer'>
@@ -237,6 +248,8 @@ ISearch.propTypes = {
 
   // routing
   push: PropTypes.func,
+
+  viewedArticles: PropTypes.array,
   goBack: PropTypes.func
 };
 

@@ -25,6 +25,7 @@
 .bouncingArrowContainer {
   margin-top: 6em;
   -webkit-animation: bounce 2s infinite ease-in-out;
+  cursor: pointer;
 }
 
 @-webkit-keyframes bounce {
@@ -151,10 +152,10 @@
     height: 88vh;
   }
   .bouncingArrowContainer {
-    margin-top: 1em;
+    display: none;
   }
   .bouncingArrow {
-    width: 1.5em;
+    display: none;
   }
 }
 

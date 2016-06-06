@@ -1,0 +1,285 @@
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../../fonts/SourceSansPro-SemiBold.otf');
+}
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../../fonts/SourceSansPro-Regular.otf');
+}
+
+.changeDetailsContainer {
+  width: 100%;
+  margin-top: 5em;
+  text-align: center;
+  position: relative;
+}
+
+.travelInfoExitButton {
+  position: absolute;
+  top: -4em;
+  right: 0;
+  cursor: pointer;
+  width: 2.5em;
+}
+
+.blueContainer {
+  background-color: #6DB4A9;
+  color: #ffffff;
+  padding: 0.3em;
+  position: fixed;
+  z-index: 30;
+  height: 100em;
+  width: 100%;
+}
+
+.calendar__day {
+  font-size: 13px;
+  cursor: pointer;
+  padding: 7px 9px 6px;
+  border: solid 1px #eee;
+  color: black;
+}
+
+.calendar thead td {
+  padding: 10px 0;
+  color: #4F4F4F;
+}
+
+.changeInputButton {
+  background-color: #F39100;
+  display: inline-block;
+  border-radius: 500px;
+  color: #ffffff;
+  font-size: 1.9rem;
+  padding: 0.4em;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+  margin: 0 auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.changeInputButton:hover {
+  background-color: #F37800;
+}
+
+.changeInputButtonContainer {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+}
+
+.contentHeader {
+  margin-top: 2em;
+  position: relative;
+}
+
+.departFrom {
+  margin: 0 auto;
+  margin-top: 0.5em;
+  margin-right: 1em;
+  width: 98%;
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+}
+
+.departurePaxmix {
+  width: 96.4%;
+  margin-top: 0.3em;
+  margin-right: 0;
+}
+
+.dropDown {
+  text-align: center;
+  width: 20em;
+  margin: 0 auto;
+  margin-top: 8em;
+}
+
+.dropWrapper {
+  width: 20em;
+  margin: 0 auto;
+}
+
+.exitButton {
+  position: absolute;
+  top: -7em;
+  right: 0;
+  cursor: pointer;
+  width: 2em;
+}
+
+.flights {
+  padding-bottom: 2em;
+  line-height: 0.8em;
+}
+
+.goingPlaces {
+  width: 2em;
+  float: right;
+  margin-top: 0.4em;
+  margin-right: 0.5em;
+  cursor: pointer;
+}
+
+.icon {
+  width: 2em;
+  float: left;
+  padding-right: 0.2em;
+  padding-left: 0.7em;
+  color: #ffffff;
+  top: 0.2em;
+  filter: invert(100%);
+    -webkit-filter: invert(100%);
+}
+
+.input {
+  border: none;
+  outline-width: 0;
+  outline: none !important;
+  margin-top: 1em;
+  font-family: SourceSansLight;
+  height: 2em;
+  color: black;
+}
+
+.returnIcon {
+  width: 1.8em;
+  padding-right: 0;
+  margin-left: 1em;
+  -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+}
+
+h1 {
+  margin-bottom: 0.15em;
+  margin-top: 0;
+  font-size: 1.6em;
+}
+
+.lightText {
+  font-family: SourceSansLight;
+}
+
+.paxMix {
+  font-family: SourceSansLight;
+  display: inline-block;
+}
+
+.return {
+  float: left;
+}
+
+.search {
+  padding-left: 0.5em;
+  padding-top: 1em;
+  font-family: SourceSansRegular;
+}
+
+.searchSummaryContainer {
+  font-family: SourceSansSemiBold;
+  width: 100%;
+}
+
+.tagExitButton {
+  font-family: SourceSansLight;
+  position: absolute;
+  top: -4.5em;
+  right: 0.5em;
+  cursor: pointer;
+  color: #ffffff;
+  width: 2em;
+}
+
+.tagViewActive {
+  width: 100%;
+  margin-top: 5em;
+  text-align: center;
+  position: relative;
+}
+
+.vacationLength {
+  width: 46%;
+}
+
+.inspirationTitle,
+.spiesTitle,
+.logoHeart {
+    display: none;
+}
+
+@media (min-width: 490px) {
+  .search {
+    padding-left: 3em;
+  }
+}
+@media (min-width: 650px) {
+  .search {
+    padding-left: 5em;
+  }
+  .changeDetailsContainer {
+    width: 25em;
+  }
+}
+
+@media (min-width: 750px) {
+  .contentHeader {
+    margin-bottom: 2.5em;
+  }
+  .exitButton {
+    border-radius: 100%;
+    margin-top: 2em;
+    bottom: 20em;
+    top: -3em;
+    font-size: 1.4em;
+  }
+  .tagExitButton {
+    border-radius: 100%;
+    right: 10em;
+    margin-top: 2em;
+    bottom: 20em;
+    top: -3em;
+    font-size: 1.4em;
+  }
+  .spiesTitle {
+    font-family: SourceSansBold;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 2.8em;
+    left: 3em;
+    height: 0.5em;
+  }
+  .logoHeart {
+    width: 4em;
+    display: inline-block;
+    left: 4em;
+    padding-right: 0.2em;
+    padding-bottom: 1.5em;
+  }
+  .inspirationTitle {
+    color: #ffffff;
+    font-size: 1.3em;
+    position: absolute;
+    left: 7.6em;
+    bottom: 0.1em;
+    display: inline-block;
+  }
+}
+
+@media (min-width: 1700px) {
+  .search {
+    padding-left: 13em;
+  }
+}

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import DropDown from '../../select-drop-down';
-import Calendar from '../../date-picker';
-import '../../react-date-picker/css/index.css';
+import DropDown from '../../../lib/select-drop-down';
+import Calendar from '../../../lib/date-picker';
 import { Link } from 'react-router';
+import '../../../lib/react-date-picker/css/index.css';
 
 import {
   adultOptions,
@@ -14,6 +14,11 @@ import {
 // const closeImage = require('../../../src/assets/close.svg');
 import './style.css';
 export default class EditDetails extends Component {
+  onSearchClick () {
+    this.props.updateHeaderTitles();
+    this.props.startSearch();
+    this.props.goBack();
+  }
   render () {
     const {
       numberOfChildren,
@@ -31,13 +36,13 @@ export default class EditDetails extends Component {
       departureAirport,
       duration,
       departureDate,
-      onSearchClick
+      goBack
     } = this.props;
     const childAges = [childAge1, childAge2, childAge3, childAge4].slice(0, Number(numberOfChildren));
     return (
       <div className='blueContainer'>
         <div className={'changeDetailsContainer dropDown'}>
-          <Link to='/'>
+          <Link to='/' onClick={() => goBack()}>
             <div>
               <img
                 src={'../../src/assets/close-white.svg'}
@@ -46,7 +51,6 @@ export default class EditDetails extends Component {
               />
             </div>
           </Link>
-
           <div className='contentHeader'>
             <img className='logoHeart' src='https://cloud.githubusercontent.com/assets/12450298/13631826/8a5cb062-e5de-11e5-8b73-f2ec9d622d5f.png'/>
             <h1 className='spiesTitle'>SPIES</h1>
@@ -108,7 +112,7 @@ export default class EditDetails extends Component {
             );
           })}
           <div className='changeInputButtonContainer'>
-            <div className='changeInputButton' onClick={onSearchClick}>SEARCH</div>
+            <div className='changeInputButton' onClick={this.onSearchClick.bind(this)}>SEARCH</div>
           </div>
         </div>
       </div>
@@ -135,5 +139,6 @@ EditDetails.propTypes = {
   departureAirport: PropTypes.string,
   exitButtonClick: PropTypes.func,
   onSearchClick: PropTypes.func,
-  goBack: PropTypes.func
+  goBack: PropTypes.func,
+  updateHeaderTitles: PropTypes.func
 };

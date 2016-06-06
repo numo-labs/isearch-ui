@@ -112,10 +112,16 @@ export const clearSearchString = () => {
 * Action to reset all tags to empty
 */
 
-export const resetTags = (displayName, id) => {
+export const resetTags = () => {
+  return dispatch => {
+    dispatch(resetToInitialTag());
+    return dispatch(startSearch());
+  };
+};
+
+export const resetToInitialTag = () => {
   return {
-    type: RESET_TAGS,
-    tags: [ { displayName, id } ]
+    type: RESET_TAGS
   };
 };
 

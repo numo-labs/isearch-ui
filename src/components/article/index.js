@@ -58,6 +58,7 @@ class ArticleFullPage extends Component {
   }
 
   render () {
+    console.log('RENDERED ARTICLE');
     const { articleContent, goBack } = this.props;
     const tagColours = {
       amenities: 'rgba(12,125,125,0.6)',

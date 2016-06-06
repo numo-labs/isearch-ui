@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ISearch from '../components/isearch/';
+import TagView from '../components/tag-view';
 import * as TagActions from '../actions/tags';
 import * as AutocompleteActions from '../actions/autocomplete';
 import * as SearchActions from '../actions/search-results';
@@ -30,6 +30,9 @@ function mapStateToProps (state) {
       autocompleteError,
       autocompleteOptions,
       inAutoCompleteSearch,
+      numberOfAdultsTitle,
+      numberOfChildrenTitle,
+      durationTitle,
       resultId
     },
     travelInfo: {
@@ -41,10 +44,7 @@ function mapStateToProps (state) {
       childAge4,
       departureAirport,
       duration,
-      departureDate,
-      numberOfAdultsTitle,
-      numberOfChildrenTitle,
-      durationTitle
+      departureDate
     },
     hotel: {
       hotelPage,
@@ -53,8 +53,7 @@ function mapStateToProps (state) {
     article: {
       articlePage,
       articleContent,
-      onAddArticleTag,
-      viewedArticles
+      onAddArticleTag
     }
   } = state;
   return {
@@ -85,9 +84,8 @@ function mapStateToProps (state) {
     numberOfAdultsTitle,
     numberOfChildrenTitle,
     durationTitle,
-    resultId,
-    viewedArticles
+    resultId
   };
 }
 
-export default connect(mapStateToProps, Actions)(ISearch);
+export default connect(mapStateToProps, Actions)(TagView);
