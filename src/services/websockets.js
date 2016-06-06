@@ -19,7 +19,7 @@ export function initialise (actionCreatorBinder) {
   const {
     saveSearchResult,
     saveSocketConnectionId,
-    addSingleTag
+    resetTags
   } = actionCreatorBinder({...SearchResultActions, ...TagActions});
   primus.on('data', function received (data) {
     console.log('incoming socket data', data);
@@ -35,7 +35,7 @@ export function initialise (actionCreatorBinder) {
       primus.on('reconnected', () => { join(id); });
       // only launch the home page query after the socket connection has been
       // initialised
-      addSingleTag('Top inspiration', 'marketing:homepage.dk.spies', true);
+      resetTags();
     });
   });
 

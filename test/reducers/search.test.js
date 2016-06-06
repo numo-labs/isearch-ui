@@ -237,7 +237,7 @@ describe('Search Reducer', () => {
       const state = reducer(initialStateWithTags, action);
       const expectedState = {
         ...initialState,
-        tags: [{displayName: 'test', id: 'id'}],
+        tags: [initialState.defaultTag],
         isInitialTag: true
       };
       expect(state).to.deep.equal(expectedState);

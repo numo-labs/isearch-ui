@@ -94,7 +94,6 @@ export const addTag = (displayName, id, isInitialTag) => {
     type: TAG_ADD_SINGLE_TAG,
     tag: {
       displayName,
-      colour: '#8EB8C4',
       id // geo tags will just have 'geo' and amenity tags will have the full tag id e.g. amenity:wifi
     },
     isInitialTag
@@ -112,10 +111,16 @@ export const clearSearchString = () => {
 * Action to reset all tags to empty
 */
 
-export const resetTags = (displayName, id) => {
+export const resetTags = () => {
+  return dispatch => {
+    dispatch(resetToInitialTag());
+    return dispatch(startSearch());
+  };
+};
+
+export const resetToInitialTag = () => {
   return {
-    type: RESET_TAGS,
-    tags: [ { displayName, id } ]
+    type: RESET_TAGS
   };
 };
 

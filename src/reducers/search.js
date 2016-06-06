@@ -34,6 +34,10 @@ import union from 'lodash.union';
 import uniqBy from 'lodash.uniqby';
 
 export const initialState = {
+  defaultTag: {
+    displayName: 'Top inspiration',
+    id: 'marketing:homepage.dk.spies'
+  },
   fingerprint: '',
   bucketId: '',
   resultId: '',
@@ -132,7 +136,7 @@ export default function search (state = initialState, action) {
     case RESET_TAGS:
       return {
         ...state,
-        tags: action.tags,
+        tags: [initialState.defaultTag],
         isInitialTag: true
       };
     case FILTER_ON_CLICK:
