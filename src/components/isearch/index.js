@@ -48,7 +48,7 @@ class ISearch extends Component {
     } = this.props;
     return (
       <ScrollView
-        loadingThreshold={400}
+        loadingThreshold={500}
         loadData={loadMoreItemsIntoFeed}
         endScroll={this.state.endScroll}
       >
