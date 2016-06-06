@@ -37,8 +37,8 @@
 
 .resetButton {
   border-radius: 600px;
-  border: 1px solid #F39110;
-  color: #F39110;
+  /*border: 1px solid #F39110;*/
+  /*color: #F39110;*/
   display: inline-block;
   font-family: SourceSansBold;
   font-size: 1.4rem;
