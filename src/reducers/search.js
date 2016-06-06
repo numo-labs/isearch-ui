@@ -31,7 +31,8 @@ import { mockTiles } from './utils/mockData.js';
 //   getPackages,
 //   getTiles
 // } from './utils/helpers.js';
-import _ from 'lodash';
+import union from 'lodash.union';
+import uniqBy from 'lodash.uniqby';
 
 export const initialState = {
   fingerprint: '',
@@ -81,14 +82,14 @@ export default function search (state = initialState, action) {
       // const scrambled = scrambleSearchItems(action.items, state, action.append);
       // const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
       const items = state.displayedItems.length > 0 ? action.items : action.items.concat(mockTiles); // add in the filters if it is the inital search
-      const itemsToDisplay = _.uniqBy(_.union(state.items, items), (a) => {
+      const itemsToDisplay = uniqBy(union(state.items, items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
         } else if (a.tile) {
           return a.tile.id;
         }
       });
-      const display = state.displayedItems.length < 5 ? itemsToDisplay.slice(0, 5) : state.displayedItems;
+      const display = state.displayedItems.length < 30 ? itemsToDisplay.slice(0, 30) : state.displayedItems;
       return {
         ...state,
         items: itemsToDisplay,
@@ -127,7 +128,7 @@ export default function search (state = initialState, action) {
       }
       return {
         ...state,
-        tags: _.uniqBy([...state.tags, action.tag], 'displayName'),
+        tags: uniqBy([...state.tags, action.tag], 'displayName'),
         isInitialTag: action.isInitialTag
       };
     case TAG_REMOVE_TAG:

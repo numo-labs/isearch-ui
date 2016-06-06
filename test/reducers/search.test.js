@@ -28,7 +28,6 @@ import reducer, { initialState } from '../../src/reducers/search';
 import mockResults from '../../src/utils/mock-search-results.json';
 import { mockTiles } from '../../src/reducers/utils/mockData.js';
 import mockItem from '../../src/utils/mock-item.js';
-// import { shuffleTilesIntoResults } from '../../src/reducers/utils/helpers.js';
 
 const mockItems = [mockResults.items[0]]; // an array with one packageOffer
 
