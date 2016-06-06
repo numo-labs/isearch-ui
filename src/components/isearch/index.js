@@ -42,9 +42,11 @@ class ISearch extends Component {
       numberOfAdultsTitle,
       resultId,
       push: changeRoute,
+      viewedArticles,
       removeTile,
       displayedItems,
-      loadMoreItemsIntoFeed
+      loadMoreItemsIntoFeed,
+      addSingleTag
     } = this.props;
     return (
       <ScrollView
@@ -62,6 +64,8 @@ class ISearch extends Component {
           totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
           resultId={resultId}
           removeTile={removeTile}
+          viewedArticles={viewedArticles}
+          addSingleTag={addSingleTag}
         />
       </ScrollView>
     );
@@ -243,6 +247,8 @@ ISearch.propTypes = {
 
   // routing
   push: PropTypes.func,
+
+  viewedArticles: PropTypes.array,
   goBack: PropTypes.func
 };
 

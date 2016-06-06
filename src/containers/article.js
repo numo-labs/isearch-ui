@@ -7,8 +7,8 @@ import { routerActions } from 'react-router-redux';
 const Actions = {...ArticleActions, ...routerActions, addSingleTag};
 
 function mapStateToProps (state) {
-  const { article: { articleContent } } = state;
-  return { articleContent };
+  const { article: { articleContent, viewedArticles } } = state;
+  return { articleContent, viewedArticles };
 }
 
 export default connect(mapStateToProps, Actions)(ArticleFullPage);
