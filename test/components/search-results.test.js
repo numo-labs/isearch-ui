@@ -6,7 +6,7 @@ import mockTiles from '../../src/utils/mock-search-results';
 
 describe('Component', function () {
   global.dataLayer = [];
-  const wrapper = shallow(<SearchResults changeRoute={() => {}} items={mockTiles.items} filterVisibleState={{'Wifi': true}} viewedArticles={[]}/>);
+  const wrapper = shallow(<SearchResults changeRoute={() => {}} items={mockTiles.items} viewedArticles={[]}/>);
   const children = wrapper.children().nodes;
   describe('<SearchResults />', function () {
     it('should render our SearchResults component', function (done) {

@@ -95,9 +95,7 @@ class SearchResults extends Component {
   mapItems () {
     const {
       items,
-      filterVisibleState,
       onYesFilter,
-      onFilterClick,
       totalPassengers,
       // resultId,
       changeRoute,
@@ -131,22 +129,7 @@ class SearchResults extends Component {
           );
         } else if (item.type === 'tile') {
           const contentExists = item.tile.sections && item.tile.sections.length > 0;
-          if (item.tile.type === 'filter') {
-            return (
-              <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                <div key={index} className='gridItem'>
-                  <FilterTile
-                    filterVisible={filterVisibleState[item.tile.displayName]}
-                    onYesFilter={onYesFilter}
-                    onNoFilter={onFilterClick}
-                    description={item.tile}
-                    color={item.tile.color}
-                  />
-                </div>
-              </VisbilitySensor>
-
-            );
-          } else if (item.tile.type === 'article' && contentExists) {
+          if (item.tile.type === 'article' && contentExists) {
             return (
               <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                 <div key={index} className='gridItem'>
@@ -179,6 +162,18 @@ class SearchResults extends Component {
           } else {
             return <div/>;
           }
+        } else if (item.type === 'filter') {
+          return (
+            <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+              <div key={index} className='gridItem'>
+                <FilterTile
+                  onYesFilter={onYesFilter}
+                  onNoFilter={() => removeTile(item.id)}
+                  description={item.filter}
+                />
+              </div>
+            </VisbilitySensor>
+          );
         }
       })
     );
@@ -202,7 +197,6 @@ SearchResults.propTypes = {
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
   items: PropTypes.array,
-  filterVisibleState: PropTypes.object,
   setHotelPage: PropTypes.func,
   totalPassengers: PropTypes.number,
   // resultId: PropTypes.string,
