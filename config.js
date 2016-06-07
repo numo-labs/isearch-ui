@@ -1,1 +1,1 @@
-export const basename = '/isearch/0.15/index.html';
+export const basename = '/isearch/0.16/index.html';
