@@ -143,8 +143,6 @@ export function mixDataInput () {
           tiles.length ? mixture.push(tiles.pop()) : false;
         }
         mixture.push(packages.pop());
-      } else {
-        tiles.length ? mixture.push(tiles.pop()) : false;
       }
     }
   }
@@ -171,10 +169,12 @@ export function mixDataInput () {
       }
 
       timeout = setTimeout(() => {
+        mixture = mixture.concat(tiles);
+        tiles = [];
         const amount = mixture.length;
         const res = stir(amount);
         return dispatch(receiveSearchResult(res, false, false));
-      }, 1500);
+      }, 700);
 
       items.forEach(item => {
         if (isTile(item)) {

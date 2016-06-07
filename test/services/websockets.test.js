@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import thunk from 'redux-thunk';
 import simple from 'simple-mock';
 import { bindActionCreators } from 'redux';
-import { SAVE_SOCKET_CONNECTION_ID, RECEIVE_SEARCH_RESULT } from '../../src/constants/actionTypes';
+import { SAVE_SOCKET_CONNECTION_ID } from '../../src/constants/actionTypes';
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
@@ -103,7 +103,7 @@ describe('Web Socket Service', function () {
       // flatten array
       items = items.reduce((a, b) => a.concat(b), []);
 
-      expect(items).to.contain('tile')
+      expect(items).to.contain('tile');
       done();
     });
     primus.emit('data', {
