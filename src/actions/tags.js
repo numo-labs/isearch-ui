@@ -111,10 +111,10 @@ export const clearSearchString = () => {
 * Action to reset all tags to empty
 */
 
-export const resetTags = () => {
+export const resetTags = (isHome) => {
   return dispatch => {
     dispatch(resetToInitialTag());
-    return dispatch(startSearch());
+    return isHome ? dispatch(startSearch()) : null;
   };
 };
 

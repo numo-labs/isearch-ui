@@ -14,7 +14,7 @@ const socketUrl = 'https://ci-socket-server.tcdl.io?auto_room=false';
 * and binds it to dispatch
 */
 
-export function initialise (actionCreatorBinder) {
+export function initialise (actionCreatorBinder, location) {
   const primus = new Primus(socketUrl);
   const {
     saveSearchResult,
@@ -35,7 +35,8 @@ export function initialise (actionCreatorBinder) {
       primus.on('reconnected', () => { join(id); });
       // only launch the home page query after the socket connection has been
       // initialised
-      resetTags();
+      var isNotHome = location && (location.indexOf('hotel') || location.indexOf('article'));
+      resetTags(!isNotHome);
     });
   });
 
