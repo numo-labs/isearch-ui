@@ -21,6 +21,14 @@ class SearchResults extends Component {
     super();
     this.mapItems = this.mapItems.bind(this);
   }
+
+  shouldComponentUpdate (nextProps) {
+    if (nextProps.items.length === this.props.items.length) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   handleVisibility (isVisible, item) {
     if (dataLayer && isVisible && item.type === 'packageOffer') {
       dataLayer.push({
