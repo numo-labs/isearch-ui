@@ -100,7 +100,9 @@ class SearchResults extends Component {
       items.map((item, index) => {
         return (
           <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-           {this.renderItem(item, index)};
+            <div key={index} className='gridItem'>
+              {this.renderItem(item, index)}
+            </div>
           </VisibilitySensor>
         );
       })
@@ -117,13 +119,19 @@ class SearchResults extends Component {
       addSingleTag
     } = this.props;
 
+    const removeButton = () => {
+      return (
+        <div onClick={() => removeTile(item.id)}>
+          <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
+        </div>
+      );
+    };
+
     if (item.packageOffer) {
       return (
-        <div className='gridItem'>
-          <div onClick={() => removeTile(item.id)}>
-            <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
-          </div>
-          <div key={index} className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
+        <div>
+          {removeButton()}
+          <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
             <PackageTile
               key={item.packageOffer.id}
               packageOffer={item.packageOffer}
@@ -139,10 +147,8 @@ class SearchResults extends Component {
       const contentExists = item.tile.sections && item.tile.sections.length > 0;
       if (item.tile.type === 'article' && contentExists) {
         return (
-          <div key={index} className='gridItem'>
-            <div onClick={() => removeTile(item.id)}>
-              <img className='removeTileButton' src={removeTileButton} alt='cancel' />
-            </div>
+          <div>
+            {removeButton()}
             <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
               <ArticleTile
                 className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
@@ -154,29 +160,24 @@ class SearchResults extends Component {
         );
       } else if (item.tile.type === 'destination' && contentExists) {
         return (
-          <div key={index} className='gridItem'>
-            <div onClick={() => removeTile(item.id)}>
-              <img className='removeTileButton' src={removeTileButton} alt='cancel' />
-            </div>
+          <div>
+            {removeButton()}
             <div className='clickable'>
               <DestinationTile {...item} />
             </div>
           </div>
         );
-      } else {
-        return <div/>;
       }
     } else if (item.type === 'filter') {
       return (
-        <div key={index} className='gridItem'>
-          <FilterTile
-            onYesFilter={onYesFilter}
-            onNoFilter={() => removeTile(item.id)}
-            description={item.filter}
-          />
-        </div>
+        <FilterTile
+          onYesFilter={onYesFilter}
+          onNoFilter={() => removeTile(item.id)}
+          description={item.filter}
+        />
       );
     }
+    return <div/>;
   }
 
   render () {

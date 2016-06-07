@@ -196,6 +196,43 @@
       }
     },
     {
+      "id": "1461583539893",
+      "type": "tile",
+      "ranking": 1,
+      "tile": {
+        "name": "Vandring på Kreta",
+        "id": "tile:article.HyVj2zA",
+        "url": "http://www.spies.dk/sport/vandrerejser-kreta",
+        "type": "destination",
+        "tags": [
+          {
+            "label": "Creta",
+            "value": "hotel:mhid.e5qdaxr"
+          },
+          {
+            "label": "Hiking (dk)",
+            "value": "marketing:NE.hiking"
+          },
+          {
+            "label": "Greece",
+            "value": "geo:geonames.390903"
+          }
+        ],
+        "sections": [
+          {
+            "image": "http://images2.spies.dk/images/SitePageGlobal/training_walking_crete_top.jpg?v=3",
+            "text": "Kretas varierede natur er perfekt til vandreture. Gennem øen løber en bjergkæde med flere høje toppe, som skaber en imponerende kontrast til de mange dalsænkninger og kløfter. En vandretur begynder ofte oppe i højden og slutter ved en dejlig strand, hvor det er muligt at bade og spise frokost med en dejlig udsigt.\n\nKreta er en ø med store højdeforskelle, hvilket yder, at der er mange betagende udsigtspunkter over de ind imellem dramatiske omgivelser. Flere bjergtoppe tårner sig mere end 1500 meter over havet, og enkelte over 2000 meter. Det stiller krav til fysikken, og derfor er det vigtigt, at du vælger en rute, der passer til din form. Øens varme og tørre klima betyder, at selv enkle vandrestier kan blive udfordrende.\n\nGode sko er altid et must, og for mange af ruterne – eksempelvis den, der går gennem Samariakløften – er det tilrådeligt med vandrestøvler. Selv om du er vant til at vandre på egen hånd, anbefaler vi, at du vandrer med en guide. Kontakt din Spies-vært på rejsemålet for mere information.",
+            "title": "Vandring på Kreta"
+          },
+          {
+            "image": "",
+            "text": "* Flotte naturoplevelser.\n* Gode vandrestier af varierende længde og sværhedsgrad.\n* Kuperede og udfordrende ruter for dig, der er vant til at vandre.\n* Erfarne guider med godt lokalkendskab.",
+            "title": "Hvorfor skal du vandre på Kreta?"
+          }
+        ]
+      }
+    },
+    {
       "id": "amenity:wifi",
       "type": "filter",
       "filter": {
