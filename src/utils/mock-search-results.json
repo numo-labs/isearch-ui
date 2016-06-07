@@ -197,6 +197,7 @@
     },
     {
       "type": "tile",
+      "id": "amenity:wifi",
       "tile": {
         "prefix": "Do you need access to",
         "displayName": "Wifi",

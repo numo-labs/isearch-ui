@@ -215,12 +215,15 @@ export default function search (state = initialState, action) {
         items: []
       };
     case TILES_REMOVE_TILE:
-      const filteredItems = state.displayedItems.filter(item => {
+      const iterator = item => {
         return item.id !== action.id;
-      });
+      };
+      const displayed = state.displayedItems.filter(iterator);
+      const backlog = state.items.filter(iterator);
       return {
         ...state,
-        displayedItems: filteredItems
+        displayedItems: displayed,
+        items: backlog
       };
     default:
       return state;
