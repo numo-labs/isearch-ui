@@ -45,7 +45,7 @@ class SearchResults extends Component {
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
-            'id': item.displayName,
+            'id': item.id,
             'brand': 'filter_tile',
             'list': 'inspirational search feed'
           }]
