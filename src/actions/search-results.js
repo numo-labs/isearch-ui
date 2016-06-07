@@ -271,9 +271,11 @@ export function loadMoreItemsIntoFeed (page) {
   return (dispatch, getState) => {
     const { search: { displayedItems, items } } = getState();
     if (displayedItems.length < 10 && items.length > 0) {
-      dispatch(updateDisplayedItems(items.slice(0, 10)));
+      return dispatch(updateDisplayedItems(items.slice(0, 10)));
     } else if (items.length >= page * 5) {
-      dispatch(updateDisplayedItems(items.slice(0, page * 5)));
+      return dispatch(updateDisplayedItems(items.slice(0, page * 5))); // if 5 x page number exists send back 5x
+    } else if (items.length > displayedItems.length) {
+      return dispatch(updateDisplayedItems(items)); // if 5 x page number doesn't exist send all available items
     } else if (displayedItems.length === 0 && items.length === 0) {
       return; // no unecessary re-render if no items returned
     }
