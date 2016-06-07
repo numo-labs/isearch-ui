@@ -6,6 +6,7 @@ import PackageTile from '../../lib/package-tile';
 import ArticleTile from '../../lib/article-tile';
 import DestinationTile from '../../lib/destination-tile';
 import FilterTile from '../../lib/filter-tile';
+import VisibilitySensor from 'react-visibility-sensor';
 import mockTiles from '../../src/utils/mock-search-results';
 
 describe('Component', function () {
@@ -21,6 +22,9 @@ describe('Component', function () {
       expect(wrapper.find('.gridItem').length).to.equal(3);
       expect(wrapper.find('.visited').length).to.equal(0);
       done();
+    });
+    it('should wrap each tile in a VisibilitySensor component', () => {
+      expect(wrapper.find(VisibilitySensor).length).to.equal(3);
     });
     it('should render a PackageTile for items with a type of packageOffer', () => {
       expect(wrapper.find(PackageTile)).to.have.length(1);
