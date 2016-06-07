@@ -92,7 +92,7 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         displayedItems: mockItems,
-        scrollPage: 1
+        scrollPage: 7
       };
       expect(state).to.deep.equal(expectedState);
       done();

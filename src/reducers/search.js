@@ -38,7 +38,7 @@ export const initialState = {
     displayName: 'Top inspiration',
     id: 'marketing:homepage.dk.spies'
   },
-  scrollPage: 0,
+  scrollPage: 6,
   fingerprint: '',
   bucketId: '',
   resultId: '',
