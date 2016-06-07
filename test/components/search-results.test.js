@@ -17,6 +17,7 @@ describe('Component', function () {
     const wrapper = shallow(<SearchResults changeRoute={() => {}} items={mockTiles.items} viewedArticles={[]} removeTile={removeStub} />);
     beforeEach(() => {
       removeStub.reset();
+      global.dataLayer = [];
     });
     it('should render our SearchResults component', function (done) {
       const children = wrapper.children().nodes;
@@ -30,6 +31,21 @@ describe('Component', function () {
     });
     it('should wrap each tile in a VisibilitySensor component', () => {
       expect(wrapper.find(VisibilitySensor).length).to.equal(4);
+    });
+    it('pushes an event to the dataLayer when a tile becomes visible', () => {
+      wrapper.find(VisibilitySensor).first().simulate('change', true);
+      expect(dataLayer.length).to.equal(1);
+      expect(dataLayer[0].event).to.equal('impressionsPushed');
+    });
+    it('sets the impression id to the package reference for package tile impressions', () => {
+      wrapper.find(VisibilitySensor).first().simulate('change', true);
+      expect(dataLayer.length).to.equal(1);
+      expect(dataLayer[0].ecommerce.impressions[0].id).to.equal('A01A37');
+    });
+    it('sets the impression id to the filter id for filter tile impressions', () => {
+      wrapper.find(VisibilitySensor).at(3).simulate('change', true);
+      expect(dataLayer.length).to.equal(1);
+      expect(dataLayer[0].ecommerce.impressions[0].id).to.equal('amenity:wifi');
     });
     it('should render a PackageTile for items with a type of packageOffer', () => {
       expect(wrapper.find(PackageTile)).to.have.length(1);

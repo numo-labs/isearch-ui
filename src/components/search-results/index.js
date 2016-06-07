@@ -30,7 +30,10 @@ class SearchResults extends Component {
     }
   }
   handleVisibility (isVisible, item) {
-    if (dataLayer && isVisible && item.type === 'packageOffer') {
+    if (!dataLayer || !isVisible) {
+      return;
+    }
+    if (item.type === 'packageOffer') {
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -41,7 +44,7 @@ class SearchResults extends Component {
         },
         'event': 'impressionsPushed'
       });
-    } else if (dataLayer && isVisible && item.type === 'filter') {
+    } else if (item.type === 'filter') {
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -52,7 +55,7 @@ class SearchResults extends Component {
         },
         'event': 'impressionsPushed'
       });
-    } else if (dataLayer && isVisible && item.type === 'article') {
+    } else if (item.type === 'article') {
       dataLayer.push({
         'event': 'impressionsPushed',
         'ecommerce': {
