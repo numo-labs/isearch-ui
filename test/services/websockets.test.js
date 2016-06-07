@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import thunk from 'redux-thunk';
 import simple from 'simple-mock';
 import { bindActionCreators } from 'redux';
-import { SAVE_SOCKET_CONNECTION_ID, RECEIVE_SEARCH_RESULT } from '../../src/constants/actionTypes';
+import { SAVE_SOCKET_CONNECTION_ID } from '../../src/constants/actionTypes';
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
@@ -63,21 +63,13 @@ describe('Web Socket Service', function () {
     expect(primus.write.callCount).to.equal(2);
     expect(primus.write.lastCall.args[0]).to.deep.equal({ action: 'join', room: 'abc123' });
   });
-  it('if there are search results in the data, saves the search results', done => {
+  it('if there are search results in the data, saves the search results by buffering', done => {
     const store = mockStore({search: { tags: [], resultId: 'abc123' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
     const primus = initialise(actionCreatorBinder);
     primus.once('data', data => {
-      let expectedActions = [
-        {
-          type: RECEIVE_SEARCH_RESULT,
-          items: [{ name: 'test', packageOffer: {} }],
-          initialSearch: false,
-          append: false
-        }
-      ];
       process.nextTick(() => {
-        expect(store.getActions()).to.deep.equal(expectedActions);
+        expect(store.getActions()).to.deep.equal([]);
         done();
       });
     });
@@ -111,20 +103,7 @@ describe('Web Socket Service', function () {
       // flatten array
       items = items.reduce((a, b) => a.concat(b), []);
 
-      expect(items).to.deep.equal([
-        'package',
-        'package',
-        'package',
-        'tile',
-        'package',
-        'package',
-        'package',
-        'package',
-        'package',
-        'package',
-        'tile',
-        'package'
-      ]);
+      expect(items).to.contain('tile');
       done();
     });
     primus.emit('data', {
