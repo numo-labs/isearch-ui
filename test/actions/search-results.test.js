@@ -194,12 +194,11 @@ describe('Search Results Actions', () => {
       expect(store.getActions()[1]).to.deep.equal(expectedAction2);
       done();
     });
-    it(`loadMoreItemsIntoFeed: if items is empty calls updateDisplayedItems
-      with an empty array'`, done => {
+    it(`loadMoreItemsIntoFeed: if displayedItems and items are both empty
+      arrays then return'`, done => {
       const store = mockStore({search: { displayedItems: [], items: [] }});
-      const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items: []}];
-      store.dispatch(actions.loadMoreItemsIntoFeed(2));
-      expect(store.getActions()).to.deep.equal(expectedActions);
+      store.dispatch(actions.loadMoreItemsIntoFeed(1));
+      expect(store.getActions()).to.deep.equal([]);
       done();
     });
   });

@@ -52,7 +52,7 @@ class ISearch extends Component {
       <ScrollView
         loadingThreshold={500}
         loadData={loadMoreItemsIntoFeed}
-        endScroll={this.state.endScroll}
+        endScroll={displayedItems.length === 0}
       >
         <SearchResults
           changeRoute={changeRoute}
