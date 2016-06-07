@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-component';
 import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import ArticleTile from '../../../lib/article-tile';
-import VisbilitySensor from 'react-visibility-sensor';
+import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
 
 const removeTileButton = require('../../assets/cancel.svg');
@@ -109,7 +109,7 @@ class SearchResults extends Component {
       items.map((item, index) => {
         if (item.packageOffer) {
           return (
-            <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+            <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
               <div className='gridItem'>
                 <div onClick={() => removeTile(item.id)}>
                   <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
@@ -125,13 +125,13 @@ class SearchResults extends Component {
                   />
                 </div>
               </div>
-            </VisbilitySensor>
+            </VisibilitySensor>
           );
         } else if (item.type === 'tile') {
           const contentExists = item.tile.sections && item.tile.sections.length > 0;
           if (item.tile.type === 'article' && contentExists) {
             return (
-              <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+              <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                 <div key={index} className='gridItem'>
                   <div onClick={() => removeTile(item.id)}>
                     <img className='removeTileButton' src={removeTileButton} alt='cancel' />
@@ -144,11 +144,11 @@ class SearchResults extends Component {
                     />
                   </div>
                 </div>
-              </VisbilitySensor>
+              </VisibilitySensor>
             );
           } else if (item.tile.type === 'destination' && contentExists) {
             return (
-              <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+              <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
                 <div key={index} className='gridItem'>
                   <div onClick={() => removeTile(item.id)}>
                     <img className='removeTileButton' src={removeTileButton} alt='cancel' />
@@ -157,14 +157,14 @@ class SearchResults extends Component {
                     <DestinationTile {...item} />
                   </div>
                 </div>
-              </VisbilitySensor>
+              </VisibilitySensor>
             );
           } else {
             return <div/>;
           }
         } else if (item.type === 'filter') {
           return (
-            <VisbilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+            <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
               <div key={index} className='gridItem'>
                 <FilterTile
                   onYesFilter={onYesFilter}
@@ -172,7 +172,7 @@ class SearchResults extends Component {
                   description={item.filter}
                 />
               </div>
-            </VisbilitySensor>
+            </VisibilitySensor>
           );
         }
       })
