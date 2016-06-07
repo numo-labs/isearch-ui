@@ -148,14 +148,18 @@ export function mixDataInput () {
   }
 
   function stir (amount) {
+    // Take all packages out of the mixture
     const pkg = mixture.filter(item => !isTile(item));
+    // take all tiles out of the mixture
     const ts = mixture.filter(item => isTile(item));
     packages = pkg;
     tiles = ts;
+    // mix them up again, if we have packages it is interleaved with tiles.
     shake();
 
+    // Return the amount asked for
     let items = mixture.splice(0, amount);
-    mixture = mixture.filter(item => item);
+    mixture = mixture.filter(item => item); // remove anything falsy
 
     return items;
   }
@@ -164,6 +168,9 @@ export function mixDataInput () {
     return function (dispatch) {
       const items = result.graphql.items;
 
+      // We clear and set a new timeout to ensure that we are always waiting
+      // for 700ms since the last message. If this time expires we flush out
+      // everything to the client.
       if (timeout) {
         clearTimeout(timeout);
       }
@@ -186,6 +193,7 @@ export function mixDataInput () {
 
       shake();
 
+      // Dispatch 5 items to the front-end at the same
       if (steps < 5 && mixture.length >= 5) {
         const amount = 5;
         steps = steps + amount;
@@ -194,6 +202,7 @@ export function mixDataInput () {
 
       steps++;
 
+      // return at least the highwatermark to ensure a nice mixture of tiles.
       if (mixture.length >= highwatermark) {
         const amount = mixture.length;
         const res = stir(amount);
