@@ -217,8 +217,8 @@ export function loadMoreItemsIntoFeed (page) {
       dispatch(updateDisplayedItems(items.slice(0, 10)));
     } else if (items.length >= page * 5) {
       dispatch(updateDisplayedItems(items.slice(0, page * 5)));
-    } else if (items.length === 0) {
-      dispatch(updateDisplayedItems([]));
+    } else if (displayedItems.length === 0 && items.length === 0) {
+      return; // no unecessary re-render if no items returned
     }
   };
 }

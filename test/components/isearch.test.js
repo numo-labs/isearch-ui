@@ -10,7 +10,7 @@ import ISearch from '../../src/components/isearch/';
 
 const defaultProps = {
   tags: [],
-  items: [],
+  displayedItems: [],
   onYesFilter: () => {},
   onFilterClick: () => {},
   showAddMessage: () => {},
