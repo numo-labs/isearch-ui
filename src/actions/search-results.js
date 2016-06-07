@@ -19,6 +19,7 @@ import * as graphqlService from '../services/graphql';
 import { formatQuery } from './helpers.js';
 // routing actionCreator
 import { push } from 'react-router-redux';
+import shuffle from 'shuffle-array';
 
 /*
 * saves the error to the store to display an error message
@@ -108,6 +109,10 @@ export function clearFeed () {
   return { type: CLEAR_FEED };
 }
 
+function isTile (item) {
+  return !item.packageOffer;
+}
+
 /**
 * Buffer and show tiles in a mixed fashion
 * to be used by saveSearchResult
@@ -115,46 +120,94 @@ export function clearFeed () {
 
 export function mixDataInput () {
   // this fn is used to setup a result store, so that we are instance specific.
+  let tiles = [];
+  let packages = [];
+
   let mixture = [];
-  let bufferedResponse = [];
+
   let steps = 1;
-  let highwatermark = 10;
+  let highwatermark = 20;
+
+  let timeout = null;
+
+  function shake () {
+    const total = tiles.length + packages.length;
+    // randomise tiles
+    shuffle(tiles);
+    // sort by rank packages
+
+    // weave tiles and packages to mixture
+    for (let i = 1; i < total + 1; i++) {
+      if (packages.length > 0) {
+        if (i % 6) {
+          tiles.length ? mixture.push(tiles.pop()) : false;
+        }
+        mixture.push(packages.pop());
+      } else {
+        tiles.length ? mixture.push(tiles.pop()) : false;
+      }
+    }
+  }
+
+  function stir (amount) {
+    const pkg = mixture.filter(item => !isTile(item));
+    const ts = mixture.filter(item => isTile(item));
+    packages = pkg;
+    tiles = ts;
+    shake();
+
+    let items = mixture.splice(0, amount);
+    mixture = mixture.filter(item => true);
+
+    return items;
+  }
 
   return function (result) {
     return function (dispatch) {
       const items = result.graphql.items;
 
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+
+      timeout = setTimeout(() => {
+        const amount = mixture.length;
+        const res = stir(amount);
+        return dispatch(receiveSearchResult(res, false, false));
+      }, 1500);
+
       items.forEach(item => {
-        if (item.tile) {
-          mixture.push(item);
-        } else if (item.packageOffer) {
-          if (steps % 6 === 0) {
-            bufferedResponse.push(undefined);
-          }
-          bufferedResponse.push(item);
+        if (isTile(item)) {
+          tiles.push(item);
         } else {
-          mixture.push(item);
+          packages.push(item);
         }
       });
 
-      // return first 5 tiles as fast as possible
-      if (steps < 5 && bufferedResponse.length > 0) {
-        steps = steps + bufferedResponse.length;
-        return dispatch(receiveSearchResult(bufferedResponse.splice(0, bufferedResponse.length), false, false));
+      shake();
+
+      if (steps < 5 && mixture.length >= 5) {
+        const amount = 5;
+        steps = steps + amount;
+        dispatch(receiveSearchResult(stir(amount), false, false));
       }
 
       steps++;
 
-      if (bufferedResponse.length >= highwatermark) {
-        const response = bufferedResponse
-          .map(item => item === undefined ? mixture.shift() : item)
-          .filter(item => item !== undefined);
-        bufferedResponse = [];
-        return dispatch(receiveSearchResult(response, false, false));
+      if (mixture.length >= highwatermark) {
+        const amount = mixture.length;
+        const res = stir(amount);
+        return dispatch(receiveSearchResult(res, false, false));
       }
     };
   };
 }
+
+/*
+* Saves the results returned from the web socket service
+*/
+
+var mixer = mixDataInput();
 
 /**
 * Action to start the search
@@ -164,6 +217,7 @@ export function mixDataInput () {
 
 export function startSearch () {
   return (dispatch, getState) => {
+    mixer = mixDataInput();
     const store = getState();
     const { search: { tags, fingerprint: clientId, socketConnectionId: connectionId } } = store;
     if (tags.length > 0) {
@@ -186,12 +240,6 @@ export function startSearch () {
     }
   };
 }
-
-/*
-* Saves the results returned from the web socket service
-*/
-
-var mixer = mixDataInput();
 
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
