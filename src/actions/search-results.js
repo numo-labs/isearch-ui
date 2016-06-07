@@ -155,7 +155,7 @@ export function mixDataInput () {
     shake();
 
     let items = mixture.splice(0, amount);
-    mixture = mixture.filter(item => true);
+    mixture = mixture.filter(item => item);
 
     return items;
   }
