@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import thunk from 'redux-thunk';
 import simple from 'simple-mock';
 import { bindActionCreators } from 'redux';
-import { RESET_TAGS, SAVE_SOCKET_CONNECTION_ID, RECEIVE_SEARCH_RESULT } from '../../src/constants/actionTypes';
+import { SAVE_SOCKET_CONNECTION_ID, RECEIVE_SEARCH_RESULT } from '../../src/constants/actionTypes';
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
@@ -19,9 +19,6 @@ describe('Web Socket Service', function () {
       {
         type: SAVE_SOCKET_CONNECTION_ID,
         id: 'abc123'
-      },
-      {
-        type: RESET_TAGS
       }
     ];
     expect(store.getActions()).to.deep.equal(expectedActions);
@@ -38,9 +35,6 @@ describe('Web Socket Service', function () {
       {
         type: SAVE_SOCKET_CONNECTION_ID,
         id: 'abc123'
-      },
-      {
-        type: RESET_TAGS
       }
     ];
     expect(store.getActions()).to.deep.equal(expectedActions);

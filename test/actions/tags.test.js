@@ -102,7 +102,7 @@ describe('actions', () => {
   describe('resetTags', () => {
     it('should dispatch actions to reset the tags and start a search', (done) => {
       const dispatch = simple.mock();
-      actions.resetTags(true)(dispatch);
+      actions.resetTags()(dispatch);
       expect(dispatch.callCount).to.equal(2);
       done();
     });
