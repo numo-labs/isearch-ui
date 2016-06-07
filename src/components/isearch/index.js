@@ -46,13 +46,15 @@ class ISearch extends Component {
       removeTile,
       displayedItems,
       loadMoreItemsIntoFeed,
-      addSingleTag
+      addSingleTag,
+      scrollPage
     } = this.props;
     return (
       <ScrollView
         loadingThreshold={500}
         loadData={loadMoreItemsIntoFeed}
         endScroll={displayedItems.length === 0}
+        page={scrollPage}
       >
         <SearchResults
           changeRoute={changeRoute}
@@ -193,7 +195,11 @@ ISearch.propTypes = {
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
   filterVisibleState: PropTypes.object,
+
+  // scroll view
   loadMoreItemsIntoFeed: PropTypes.func,
+  scrollPage: PropTypes.number,
+
   // autocomplete
   autocompleteOptions: PropTypes.array,
   inAutoCompleteSearch: PropTypes.bool,

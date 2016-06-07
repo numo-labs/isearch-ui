@@ -38,6 +38,7 @@ export const initialState = {
     displayName: 'Top inspiration',
     id: 'marketing:homepage.dk.spies'
   },
+  scrollPage: 6,
   fingerprint: '',
   bucketId: '',
   resultId: '',
@@ -93,7 +94,8 @@ export default function search (state = initialState, action) {
     case UPDATE_DISPLAYED_ITEMS:
       return {
         ...state,
-        displayedItems: action.items
+        displayedItems: action.items,
+        scrollPage: state.scrollPage + 1
       };
     case BUSY_SEARCHING:
       return {
