@@ -36,7 +36,7 @@ export function initialise (actionCreatorBinder, location) {
       // only launch the home page query after the socket connection has been
       // initialised
       var isHomePage = (location && location.indexOf('search'));
-      if (isHomePage > 0) resetTags();
+      if (isHomePage && isHomePage > 0) resetTags();
     });
   });
 
