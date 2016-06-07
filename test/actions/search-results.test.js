@@ -6,7 +6,8 @@ import {
   SAVE_BUCKET_ID,
   SEARCH_ERROR,
   UPDATE_HEADER_TITLES,
-  CLEAR_FEED
+  CLEAR_FEED,
+  UPDATE_DISPLAYED_ITEMS
   // TILES_ADD_TILES,
 } from '../../src/constants/actionTypes';
 import moment from 'moment';
@@ -125,35 +126,82 @@ describe('Search Results Actions', () => {
         })
         .catch(done);
     });
+    it(`recieveSearchResults should return an object with type
+       RECEIVE_SEARCH_RESULT and items, append and initialSearch keys`, done => {
+      const store = mockStore(initialState);
+      const expectedActions = [
+        {
+          type: RECEIVE_SEARCH_RESULT,
+          items: [{}],
+          initialSearch: false,
+          append: true
+        }
+      ];
+      store.dispatch(actions.receiveSearchResult([{}], false, true));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it(`recieveSearchResults should default append to false`, done => {
+      const store = mockStore(initialState);
+      const expectedActions = [
+        {
+          type: RECEIVE_SEARCH_RESULT,
+          items: [{}],
+          initialSearch: false,
+          append: false
+        }
+      ];
+      store.dispatch(actions.receiveSearchResult([{}], false));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
   });
-  it(`retrieveSearchResults should return an object with type
-     RECEIVE_SEARCH_RESULT and items, append and initialSearch keys`, done => {
-    const store = mockStore(initialState);
-    const expectedActions = [
-      {
-        type: RECEIVE_SEARCH_RESULT,
-        items: [{}],
-        initialSearch: false,
-        append: true
-      }
-    ];
-    store.dispatch(actions.receiveSearchResult([{}], false, true));
-    expect(store.getActions()).to.deep.equal(expectedActions);
-    done();
-  });
-  it(`retrieveSearchResults should default append to false`, done => {
-    const store = mockStore(initialState);
-    const expectedActions = [
-      {
-        type: RECEIVE_SEARCH_RESULT,
-        items: [{}],
-        initialSearch: false,
-        append: false
-      }
-    ];
-    store.dispatch(actions.receiveSearchResult([{}], false));
-    expect(store.getActions()).to.deep.equal(expectedActions);
-    done();
+  describe('Inifinite Scroll actions', () => {
+    it(`loadMoreItemsIntoFeed: dispatch updateDisplayedItems action
+      with up to 10 items if current 'displayedItems' state is less than 10 and
+      'items' state has items`, done => {
+      const items = [
+        {name: 'one'},
+        {name: 'two'},
+        {name: 'three'}
+      ];
+      const store = mockStore({search: { displayedItems: [], items }});
+      const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items}];
+      store.dispatch(actions.loadMoreItemsIntoFeed(1));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it(`loadMoreItemsIntoFeed: if displayedItems has more than 10 items should dispatch updateDisplayedItems action
+      with a list of items equal to 5 x 'page'`, done => {
+      const items = [
+        {name: 1},
+        {name: 2},
+        {name: 3},
+        {name: 4},
+        {name: 5},
+        {name: 6},
+        {name: 7},
+        {name: 8},
+        {name: 9},
+        {name: 10}
+      ];
+      const store = mockStore({search: { displayedItems: items, items }});
+      const expectedAction1 = {type: UPDATE_DISPLAYED_ITEMS, items};
+      const expectedAction2 = {type: UPDATE_DISPLAYED_ITEMS, items: items.slice(0, 5)};
+      store.dispatch(actions.loadMoreItemsIntoFeed(2));
+      expect(store.getActions()[0]).to.deep.equal(expectedAction1);
+      store.dispatch(actions.loadMoreItemsIntoFeed(1));
+      expect(store.getActions()[1]).to.deep.equal(expectedAction2);
+      done();
+    });
+    it(`loadMoreItemsIntoFeed: if items is empty calls updateDisplayedItems
+      with an empty array'`, done => {
+      const store = mockStore({search: { displayedItems: [], items: [] }});
+      const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items: []}];
+      store.dispatch(actions.loadMoreItemsIntoFeed(2));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
   });
   describe('Web Socket connection actions', () => {
     it(`saveSocketConnectionId: should dispatch the action to save the

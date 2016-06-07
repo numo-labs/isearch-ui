@@ -22,7 +22,7 @@ export function initialise (actionCreatorBinder) {
     resetTags
   } = actionCreatorBinder({...SearchResultActions, ...TagActions});
   primus.on('data', function received (data) {
-    console.log('incoming socket data', data);
+    // console.log('incoming socket data', data);
     if (data.graphql) {
       saveSearchResult(data);
     }
