@@ -35,8 +35,10 @@ export function initialise (actionCreatorBinder, location) {
       primus.on('reconnected', () => { join(id); });
       // only launch the home page query after the socket connection has been
       // initialised
-      var isHomePage = (location && location.indexOf('search'));
-      if (isHomePage && isHomePage > 0) resetTags();
+      var hotelPage = location.indexOf('hotel') > -1;
+      var articlePage = location.indexOf('article') > -1;
+      var isHomePage = (!hotelPage && !articlePage);
+      if (isHomePage) resetTags();
     });
   });
 

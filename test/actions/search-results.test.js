@@ -194,6 +194,23 @@ describe('Search Results Actions', () => {
       expect(store.getActions()[1]).to.deep.equal(expectedAction2);
       done();
     });
+    it(`loadMoreItemsIntoFeed: if the length of items is less than 5 x page number
+      dispatch updateDisplayedItems with all the available items`, done => {
+      const items = [
+        {name: 1},
+        {name: 2},
+        {name: 3},
+        {name: 4},
+        {name: 5},
+        {name: 6},
+        {name: 7}
+      ];
+      const store = mockStore({search: { displayedItems: [], items }});
+      const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items}];
+      store.dispatch(actions.loadMoreItemsIntoFeed(2));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
     it(`loadMoreItemsIntoFeed: if displayedItems and items are both empty
       arrays then return'`, done => {
       const store = mockStore({search: { displayedItems: [], items: [] }});

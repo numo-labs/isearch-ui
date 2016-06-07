@@ -3,16 +3,31 @@ import { expect } from 'chai';
 import thunk from 'redux-thunk';
 import simple from 'simple-mock';
 import { bindActionCreators } from 'redux';
-import { SAVE_SOCKET_CONNECTION_ID } from '../../src/constants/actionTypes';
+import { SAVE_SOCKET_CONNECTION_ID, RESET_TAGS } from '../../src/constants/actionTypes';
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
 
 describe('Web Socket Service', function () {
-  it('calls the saveSocketConnectionId and addSingleTag actions when connection is opened', () => {
+  it('calls the saveSocketConnectionId action when connection is opened', () => {
     const store = mockStore({search: { tags: [], resultId: '1234' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
-    const primus = initialise(actionCreatorBinder);
+    const primus = initialise(actionCreatorBinder, 'search');
+    primus.id = (cb) => { cb('abc123'); };
+    primus.emit('open');
+    let expectedActions = [
+      {
+        type: SAVE_SOCKET_CONNECTION_ID,
+        id: 'abc123'
+      },
+      { type: RESET_TAGS }
+    ];
+    expect(store.getActions()).to.deep.equal(expectedActions);
+  });
+  it('calls the saveSocketConnectionId action when connection is opened but only calls resetTags if on the home page', () => {
+    const store = mockStore({search: { tags: [], resultId: '1234' }});
+    const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
+    const primus = initialise(actionCreatorBinder, 'hotel');
     primus.id = (cb) => { cb('abc123'); };
     primus.emit('open');
     let expectedActions = [
@@ -23,10 +38,10 @@ describe('Web Socket Service', function () {
     ];
     expect(store.getActions()).to.deep.equal(expectedActions);
   });
-  it('only calls the saveSocketConnectionId and addSingleTag actions on first connection', () => {
+  it('only calls the saveSocketConnectionId action on first connection', () => {
     const store = mockStore({search: { tags: [], resultId: '1234' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
-    const primus = initialise(actionCreatorBinder);
+    const primus = initialise(actionCreatorBinder, 'search');
     primus.id = (cb) => { cb('abc123'); };
     primus.emit('open');
     primus.emit('open');
@@ -35,14 +50,15 @@ describe('Web Socket Service', function () {
       {
         type: SAVE_SOCKET_CONNECTION_ID,
         id: 'abc123'
-      }
+      },
+      { type: RESET_TAGS }
     ];
     expect(store.getActions()).to.deep.equal(expectedActions);
   });
   it('subscribes to a primus room on connection', () => {
     const store = mockStore({search: { tags: [], resultId: '1234' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
-    const primus = initialise(actionCreatorBinder);
+    const primus = initialise(actionCreatorBinder, 'search');
     simple.mock(primus, 'write');
     primus.id = (cb) => { cb('abc123'); };
     primus.emit('open');
@@ -52,7 +68,7 @@ describe('Web Socket Service', function () {
   it('subscribes to the original primus room on reconnection', () => {
     const store = mockStore({search: { tags: [], resultId: '1234' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
-    const primus = initialise(actionCreatorBinder);
+    const primus = initialise(actionCreatorBinder, 'search');
     simple.mock(primus, 'write');
     primus.id = (cb) => { cb('abc123'); };
     primus.emit('open');
@@ -66,7 +82,7 @@ describe('Web Socket Service', function () {
   it('if there are search results in the data, saves the search results by buffering', done => {
     const store = mockStore({search: { tags: [], resultId: 'abc123' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
-    const primus = initialise(actionCreatorBinder);
+    const primus = initialise(actionCreatorBinder, 'search');
     primus.once('data', data => {
       process.nextTick(() => {
         expect(store.getActions()).to.deep.equal([]);
@@ -86,7 +102,7 @@ describe('Web Socket Service', function () {
   it('should interlace packages and tiles.', done => {
     const store = mockStore({search: { tags: [], resultId: 'abc123' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
-    const primus = initialise(actionCreatorBinder);
+    const primus = initialise(actionCreatorBinder, 'search');
     let count = 0;
     primus.on('data', data => {
       if (count++ < 10) {
