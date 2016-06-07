@@ -109,6 +109,17 @@ class SearchResults extends Component {
     );
   }
 
+  removeButton (id) {
+    const {
+      removeTile
+    } = this.props;
+    return (
+      <div onClick={() => removeTile(id)}>
+        <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
+      </div>
+    );
+  }
+
   renderItem (item, index) {
     const {
       onYesFilter,
@@ -119,18 +130,10 @@ class SearchResults extends Component {
       addSingleTag
     } = this.props;
 
-    const removeButton = () => {
-      return (
-        <div onClick={() => removeTile(item.id)}>
-          <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
-        </div>
-      );
-    };
-
     if (item.packageOffer) {
       return (
         <div>
-          {removeButton()}
+          {this.removeButton(item.id)}
           <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
             <PackageTile
               key={item.packageOffer.id}
@@ -148,7 +151,7 @@ class SearchResults extends Component {
       if (item.tile.type === 'article' && contentExists) {
         return (
           <div>
-            {removeButton()}
+            {this.removeButton(item.id)}
             <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
               <ArticleTile
                 className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
@@ -161,7 +164,7 @@ class SearchResults extends Component {
       } else if (item.tile.type === 'destination' && contentExists) {
         return (
           <div>
-            {removeButton()}
+            {this.removeButton(item.id)}
             <div className='clickable'>
               <DestinationTile {...item} />
             </div>
