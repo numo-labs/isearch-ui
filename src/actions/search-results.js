@@ -215,8 +215,7 @@ export function loadMoreItemsIntoFeed (page) {
     const { search: { displayedItems, items } } = getState();
     if (displayedItems.length < 10 && items.length > 0) {
       dispatch(updateDisplayedItems(items.slice(0, 10)));
-    }
-    if (items.length > page * 5) {
+    } else if (items.length >= page * 5) {
       dispatch(updateDisplayedItems(items.slice(0, page * 5)));
     } else if (items.length === 0) {
       dispatch(updateDisplayedItems([]));

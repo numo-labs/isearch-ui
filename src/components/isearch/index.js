@@ -72,7 +72,7 @@ class ISearch extends Component {
   }
 
   render () {
-    console.log('----RENDERING----');
+    console.log('----RENDERING GRID----');
     const {
       tags,
       removeTag,
@@ -110,7 +110,6 @@ class ISearch extends Component {
       goBack,
       displayedItems
     } = this.props;
-    console.log('PROPS', durationTitle);
     return (
       <section>
         <SearchSummary
