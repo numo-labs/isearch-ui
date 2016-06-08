@@ -49,7 +49,8 @@ module.exports = {
       inject: 'body',
       template: 'src/index.template.html'
     }),
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /da/)
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /da/),
+    new webpack.optimize.UglifyJsPlugin({ comments: false })
   ],
   colors: true,
   progress: true
