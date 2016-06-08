@@ -298,7 +298,6 @@ export function loadMoreItemsIntoFeed (page) {
     } else if (displayedItems.length === items.length) {  // if items store has been exhausted retrieve from relatedContent store
       const newPage = page - Math.floor(items.length / 5);
       const relatedContent = relatedItems.slice(0, newPage * 5);
-      console.log('newPage', page, newPage);
       return dispatch(updateDisplayedItems(items.concat(relatedContent)));
     }
   };

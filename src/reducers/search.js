@@ -50,7 +50,8 @@ export const initialState = {
   departureDate: '',
   passengerBirthdays: [],
   scrollPage: 6,
-  searchComplete: false // set to false until a message is recieved from the web socket channel
+  searchComplete: false, // set to false until a message is recieved from the web socket channel
+  feedEnd: false
 };
 
 export default function search (state = initialState, action) {
@@ -80,7 +81,8 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         displayedItems: action.items,
-        scrollPage: state.scrollPage + 1
+        scrollPage: state.scrollPage + 1,
+        feedEnd: action.items.length === state.items.length
       };
     case BUSY_SEARCHING:
       return {

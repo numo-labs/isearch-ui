@@ -178,14 +178,15 @@ class SearchResults extends Component {
   render () {
     const {
       items,
-      searchComplete
+      searchComplete,
+      feedEnd
     } = this.props;
     const searchItems = items.filter(item => !item.related);
     const relatedItems = items.filter(item => item.related);
     const formattedSearchItems = this.mapItems(searchItems);
     const formattedRelatedItems = this.mapItems(relatedItems);
     const message = <div className='feed-end-message'> Here are some other places your might be interested in .... </div>;
-    const itemsToDisplay = searchComplete ? formattedSearchItems.concat([message]).concat(formattedRelatedItems) : formattedSearchItems;
+    const itemsToDisplay = (searchComplete && feedEnd) ? formattedSearchItems.concat([message]).concat(formattedRelatedItems) : formattedSearchItems;
     return (
       <Masonry
         elementType={'div'}
@@ -210,7 +211,8 @@ SearchResults.propTypes = {
   viewedArticles: PropTypes.array,
   removeTile: PropTypes.func,
   addSingleTag: PropTypes.func,
-  searchComplete: PropTypes.bool
+  searchComplete: PropTypes.bool,
+  feedEnd: PropTypes.bool
 };
 
 export default SearchResults;
