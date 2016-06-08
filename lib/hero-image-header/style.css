@@ -159,6 +159,12 @@
   }
 }
 
+@media (max-height: 705px) {
+  .headerContent {
+    margin-top: 14em;
+  }
+}
+
 @media (max-width: 450px) {
   .spies {
     font-size: 3em;

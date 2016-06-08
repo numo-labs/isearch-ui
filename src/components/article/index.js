@@ -119,6 +119,7 @@ class ArticleFullPage extends Component {
                   {renderTags(articleContent.amenities, 'amenities')}
                 </div>
               }
+              {this.props.children}
             <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
             </div>
           </div>
@@ -133,7 +134,8 @@ ArticleFullPage.propTypes = {
   goBack: PropTypes.func,
   getArticle: PropTypes.func,
   params: PropTypes.object,
-  addSingleTag: PropTypes.func
+  addSingleTag: PropTypes.func,
+  children: PropTypes.object
 };
 
 export default ArticleFullPage;

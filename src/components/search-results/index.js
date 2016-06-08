@@ -170,7 +170,7 @@ class SearchResults extends Component {
                   <div onClick={() => removeTile(item.id)}>
                     <img className='removeTileButton' src={removeTileButton} alt='cancel' />
                   </div>
-                  <div className='clickable'>
+                  <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
                     <DestinationTile {...item} />
                   </div>
                 </div>
