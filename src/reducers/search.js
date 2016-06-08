@@ -3,7 +3,6 @@
 import {
   RECEIVE_SEARCH_RESULT,
   BUSY_SEARCHING,
-  // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
   TAG_ADD_SINGLE_TAG,
   RESET_TAGS,
@@ -25,11 +24,6 @@ import {
 } from '../constants/actionTypes';
 
 import { mockTiles } from './utils/mockData.js';
-// import {
-//   shuffleTilesIntoResults,
-//   getPackages,
-//   getTiles
-// } from './utils/helpers.js';
 import union from 'lodash.union';
 import uniqBy from 'lodash.uniqby';
 
@@ -58,25 +52,14 @@ export const initialState = {
   departureAirport: '',
   departureDate: '',
   passengerBirthdays: [],
-  // durationTitle: '2 uger',
-  // bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
   isInitialTag: false,
   socketConnectionId: ''
 };
 
-// function scrambleSearchItems (items, state, append) {
-//   const packages = getPackages(items);
-//   const tiles = getTiles(items);
-//   return shuffleTilesIntoResults(packages, append ? state.tiles : tiles.concat(state.tiles)); // add filters back in
-// }
-
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      // const scrambled = scrambleSearchItems(action.items, state, action.append);
-      // const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
-      const items = state.displayedItems.length > 0 ? action.items : action.items.concat(mockTiles); // add in the filters if it is the inital search
-      const itemsToDisplay = uniqBy(union(state.items, items), (a) => {
+      const itemsToDisplay = uniqBy(union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
         } else if (a.tile) {

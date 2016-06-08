@@ -56,7 +56,7 @@ describe('Search Reducer', () => {
         set it to the first 5 elements of items. Also sets loading to false`, (done) => {
       const action = {type: RECEIVE_SEARCH_RESULT, items: mockItems};
       const state = reducer(undefined, action);
-      const items = mockItems.concat(mockTiles);
+      const items = mockItems;
       const expectedState = {
         ...initialState,
         items,
