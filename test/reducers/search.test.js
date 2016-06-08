@@ -16,7 +16,8 @@ import {
   SAVE_BUCKET_ID,
   UPDATE_DISPLAYED_ITEMS,
   CLEAR_FEED,
-  TILES_REMOVE_TILE
+  TILES_REMOVE_TILE,
+  RECEIVE_RELATED_RESULT
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
@@ -83,6 +84,17 @@ describe('Search Reducer', () => {
         ...initialState,
         displayedItems: mockItems,
         scrollPage: 7
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it(`RECEIVE_RELATED_RESULT: -> appends items from action to the relatedItems
+        state`, (done) => {
+      const action = {type: RECEIVE_RELATED_RESULT, items: mockItems};
+      const state = reducer({...initialState, relatedItems: mockItems}, action);
+      const expectedState = {
+        ...initialState,
+        relatedItems: mockItems.concat(mockItems)
       };
       expect(state).to.deep.equal(expectedState);
       done();

@@ -171,7 +171,7 @@ describe('Search Results Actions', () => {
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });
-    it(`loadMoreItemsIntoFeed: if displayedItems has more than 10 items should dispatch updateDisplayedItems action
+    it(`loadMoreItemsIntoFeed: if items has more than '5 x page' items dispatch updateDisplayedItems action
       with a list of items equal to 5 x 'page'`, done => {
       const items = [
         {name: 1},
@@ -208,6 +208,26 @@ describe('Search Results Actions', () => {
       const store = mockStore({search: { displayedItems: [], items }});
       const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items}];
       store.dispatch(actions.loadMoreItemsIntoFeed(2));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it(`loadMoreItemsIntoFeed: if the number of displayedItems equals number of
+      items then get items from the relatedItems store'`, done => {
+      const items = [
+        {name: 1},
+        {name: 2},
+        {name: 3},
+        {name: 4},
+        {name: 5},
+        {name: 6},
+        {name: 7}
+      ];
+      const store = mockStore({search: { displayedItems: items, items, relatedItems: items }});
+      store.dispatch(actions.loadMoreItemsIntoFeed(3));
+      const expectedActions = [{
+        type: UPDATE_DISPLAYED_ITEMS,
+        items: items.concat(items)
+      }];
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });

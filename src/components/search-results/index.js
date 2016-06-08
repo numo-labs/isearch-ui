@@ -11,7 +11,6 @@ import './style.css';
 
 const masonryOptions = {
   transitionDuration: '0.4s',
-  itemSelector: '.gridItem',
   fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
 };
@@ -22,13 +21,6 @@ class SearchResults extends Component {
     this.mapItems = this.mapItems.bind(this);
   }
 
-  shouldComponentUpdate (nextProps) {
-    if (nextProps.items.length === this.props.items.length) {
-      return false;
-    } else {
-      return true;
-    }
-  }
   handleVisibility (isVisible, item) {
     if (!dataLayer || !isVisible) {
       return;
@@ -95,10 +87,7 @@ class SearchResults extends Component {
     return;
   }
 
-  mapItems () {
-    const {
-      items
-    } = this.props;
+  mapItems (items) {
     return (
       items.map((item, index) => {
         return (
@@ -187,6 +176,16 @@ class SearchResults extends Component {
   }
 
   render () {
+    const {
+      items,
+      searchComplete
+    } = this.props;
+    const searchItems = items.filter(item => !item.related);
+    const relatedItems = items.filter(item => item.related);
+    const formattedSearchItems = this.mapItems(searchItems);
+    const formattedRelatedItems = this.mapItems(relatedItems);
+    const message = <div className='feed-end-message'> Here are some other places your might be interested in .... </div>;
+    const itemsToDisplay = searchComplete ? formattedSearchItems.concat([message]).concat(formattedRelatedItems) : formattedSearchItems;
     return (
       <Masonry
         elementType={'div'}
@@ -194,7 +193,7 @@ class SearchResults extends Component {
         disableImagesLoaded={false}
         className='grid load-effect'
       >
-      {this.mapItems()}
+      {itemsToDisplay}
       </Masonry>
     );
   }
@@ -210,7 +209,8 @@ SearchResults.propTypes = {
   changeRoute: PropTypes.func,
   viewedArticles: PropTypes.array,
   removeTile: PropTypes.func,
-  addSingleTag: PropTypes.func
+  addSingleTag: PropTypes.func,
+  searchComplete: PropTypes.bool
 };
 
 export default SearchResults;

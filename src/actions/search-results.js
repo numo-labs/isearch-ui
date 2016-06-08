@@ -12,7 +12,9 @@ import {
   SAVE_SOCKET_CONNECTION_ID,
   SAVE_BUCKET_ID,
   CLEAR_FEED,
-  UPDATE_DISPLAYED_ITEMS
+  UPDATE_DISPLAYED_ITEMS,
+  RECEIVE_RELATED_RESULT,
+  SEARCH_COMPLETE
 } from '../constants/actionTypes';
 
 import * as graphqlService from '../services/graphql';
@@ -43,6 +45,19 @@ export function receiveSearchResult (items, initialSearch, append) {
     initialSearch,
     append: append || false
   };
+}
+
+/*
+* Adds items to the relatedItems store to be shown when there are no more packages
+*/
+
+export function receiveRelatedResult (items) {
+  const relatedItems = items.map(item => { return { ...item, related: true }; });
+  return { type: RECEIVE_RELATED_RESULT, items: relatedItems };
+}
+
+export function setSearchComplete () {
+  return { type: SEARCH_COMPLETE };
 }
 
 /*
@@ -254,7 +269,11 @@ export function saveSearchResult (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
     if (result.graphql.searchId === resultId) { // check data corresponds to the current search
-      return dispatch(mixer(result));
+      if (result.graphql.related) { // if result is from a search for related content, save it separately
+        return dispatch(receiveRelatedResult(result.graphql.items));
+      } else {
+        return dispatch(mixer(result));
+      }
     }
   };
 }
@@ -269,15 +288,18 @@ export function updateDisplayedItems (items) {
 
 export function loadMoreItemsIntoFeed (page) {
   return (dispatch, getState) => {
-    const { search: { displayedItems, items } } = getState();
-    if (displayedItems.length < 10 && items.length > 0) {
-      return dispatch(updateDisplayedItems(items.slice(0, 10)));
+    const { search: { displayedItems, items, relatedItems } } = getState();
+    if (displayedItems.length === 0 && items.length === 0) {
+      return; // no unecessary re-render if no items returned
     } else if (items.length >= page * 5) {
       return dispatch(updateDisplayedItems(items.slice(0, page * 5))); // if 5 x page number exists send back 5 x
     } else if (items.length > displayedItems.length) {
       return dispatch(updateDisplayedItems(items)); // if 5 x page number doesn't exist send all available items
-    } else if (displayedItems.length === 0 && items.length === 0) {
-      return; // no unecessary re-render if no items returned
+    } else if (displayedItems.length === items.length) {  // if items store has been exhausted retrieve from relatedContent store
+      const newPage = page - Math.floor(items.length / 5);
+      const relatedContent = relatedItems.slice(0, newPage * 5);
+      console.log('newPage', page, newPage);
+      return dispatch(updateDisplayedItems(items.concat(relatedContent)));
     }
   };
 }

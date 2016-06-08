@@ -18,7 +18,9 @@ import {
   SET_FINGERPRINT,
   SAVE_BUCKET_ID,
   CLEAR_FEED,
-  UPDATE_DISPLAYED_ITEMS
+  UPDATE_DISPLAYED_ITEMS,
+  RECEIVE_RELATED_RESULT,
+  SEARCH_COMPLETE
 } from '../constants/actionTypes';
 
 import union from 'lodash.union';
@@ -29,17 +31,16 @@ export const initialState = {
     displayName: 'Top inspiration',
     id: 'marketing:homepage.dk.spies'
   },
-  scrollPage: 6,
   fingerprint: '',
+  socketConnectionId: '',
   bucketId: '',
   resultId: '',
   displayedItems: [],
   items: [],
-  bucketCount: 0,
-  status: undefined,
+  relatedItems: [],
   loading: false,
+  isInitialTag: false,
   tags: [],
-  tiles: [],
   searchString: '',
   error: '',
   autocompleteError: '',
@@ -48,8 +49,8 @@ export const initialState = {
   departureAirport: '',
   departureDate: '',
   passengerBirthdays: [],
-  isInitialTag: false,
-  socketConnectionId: ''
+  scrollPage: 6,
+  searchComplete: false // set to false until a message is recieved from the web socket channel
 };
 
 export default function search (state = initialState, action) {
@@ -70,6 +71,11 @@ export default function search (state = initialState, action) {
         loading: false,
         error: ''
       };
+    case RECEIVE_RELATED_RESULT:
+      return {
+        ...state,
+        relatedItems: state.relatedItems.concat(action.items)
+      };
     case UPDATE_DISPLAYED_ITEMS:
       return {
         ...state,
@@ -86,6 +92,11 @@ export default function search (state = initialState, action) {
         ...state,
         loading: false,
         error: action.error
+      };
+    case SEARCH_COMPLETE:
+      return {
+        ...state,
+        searchComplete: true
       };
     // case TAG_ADD_TAGS:
     //   /*
@@ -171,7 +182,9 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         displayedItems: [],
-        items: []
+        items: [],
+        scrollPage: 6,
+        searchComplete: false
       };
     case TILES_REMOVE_TILE:
       const iterator = item => {
