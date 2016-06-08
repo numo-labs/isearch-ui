@@ -30,7 +30,10 @@ class SearchResults extends Component {
     }
   }
   handleVisibility (isVisible, item) {
-    if (dataLayer && isVisible && item.type === 'packageOffer') {
+    if (!dataLayer || !isVisible) {
+      return;
+    }
+    if (item.type === 'packageOffer') {
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -41,7 +44,7 @@ class SearchResults extends Component {
         },
         'event': 'impressionsPushed'
       });
-    } else if (dataLayer && isVisible && item.type === 'filter') {
+    } else if (item.type === 'filter') {
       dataLayer.push({
         'ecommerce': {
           'impressions': [{
@@ -52,7 +55,7 @@ class SearchResults extends Component {
         },
         'event': 'impressionsPushed'
       });
-    } else if (dataLayer && isVisible && item.type === 'article') {
+    } else if (item.type === 'article') {
       dataLayer.push({
         'event': 'impressionsPushed',
         'ecommerce': {
@@ -94,89 +97,93 @@ class SearchResults extends Component {
 
   mapItems () {
     const {
-      items,
+      items
+    } = this.props;
+    return (
+      items.map((item, index) => {
+        return (
+          <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+            <div key={index} className='gridItem'>
+              {this.renderItem(item, index)}
+            </div>
+          </VisibilitySensor>
+        );
+      })
+    );
+  }
+
+  removeButton (id) {
+    const {
+      removeTile
+    } = this.props;
+    return (
+      <div onClick={() => removeTile(id)}>
+        <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
+      </div>
+    );
+  }
+
+  renderItem (item, index) {
+    const {
       onYesFilter,
       totalPassengers,
-      // resultId,
       changeRoute,
       viewedArticles,
       removeTile,
       addSingleTag
     } = this.props;
 
-    // TODO replace urls to valid ones
-    return (
-      items.map((item, index) => {
-        if (item.packageOffer) {
-          return (
-            <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-              <div className='gridItem'>
-                <div onClick={() => removeTile(item.id)}>
-                  <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
-                </div>
-                <div key={index} className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
-                  <PackageTile
-                    key={item.packageOffer.id}
-                    packageOffer={item.packageOffer}
-                    totalPassengers={totalPassengers}
-                    itemId={item.packageOffer.id}
-                    removeTile={removeTile}
-                    item={item}
-                  />
-                </div>
-              </div>
-            </VisibilitySensor>
-          );
-        } else if (item.type === 'tile') {
-          const contentExists = item.tile.sections && item.tile.sections.length > 0;
-          if (item.tile.type === 'article' && contentExists) {
-            return (
-              <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                <div key={index} className='gridItem'>
-                  <div onClick={() => removeTile(item.id)}>
-                    <img className='removeTileButton' src={removeTileButton} alt='cancel' />
-                  </div>
-                  <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
-                    <ArticleTile
-                      className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
-                      {...item}
-                      onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id); removeTile(item.id); }}
-                    />
-                  </div>
-                </div>
-              </VisibilitySensor>
-            );
-          } else if (item.tile.type === 'destination' && contentExists) {
-            return (
-              <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-                <div key={index} className='gridItem'>
-                  <div onClick={() => removeTile(item.id)}>
-                    <img className='removeTileButton' src={removeTileButton} alt='cancel' />
-                  </div>
-                  <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
-                    <DestinationTile {...item} />
-                  </div>
-                </div>
-              </VisibilitySensor>
-            );
-          } else {
-            return <div/>;
-          }
-        } else if (item.type === 'filter') {
-          return (
-            <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-              <div key={index} className='gridItem'>
-                <FilterTile
-                  onYesFilter={onYesFilter}
-                  onNoFilter={() => removeTile(item.id)}
-                  description={item.filter}
-                />
-              </div>
-            </VisibilitySensor>
-          );
-        }
-      })
-    );
+    if (item.packageOffer) {
+      return (
+        <div>
+          {this.removeButton(item.id)}
+          <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
+            <PackageTile
+              key={item.packageOffer.id}
+              packageOffer={item.packageOffer}
+              totalPassengers={totalPassengers}
+              itemId={item.packageOffer.id}
+              removeTile={removeTile}
+              item={item}
+            />
+          </div>
+        </div>
+      );
+    } else if (item.type === 'tile') {
+      const contentExists = item.tile.sections && item.tile.sections.length > 0;
+      if (item.tile.type === 'article' && contentExists) {
+        return (
+          <div>
+            {this.removeButton(item.id)}
+            <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
+              <ArticleTile
+                className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
+                {...item}
+                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id); removeTile(item.id); }}
+              />
+            </div>
+          </div>
+        );
+      } else if (item.tile.type === 'destination' && contentExists) {
+        return (
+          <div>
+            {this.removeButton(item.id)}
+            <div className='clickable'>
+              <DestinationTile {...item} />
+            </div>
+          </div>
+        );
+      }
+    } else if (item.type === 'filter') {
+      return (
+        <FilterTile
+          onYesFilter={onYesFilter}
+          onNoFilter={() => removeTile(item.id)}
+          description={item.filter}
+        />
+      );
+    }
+    return <div/>;
   }
 
   render () {
