@@ -6,8 +6,6 @@ import {
   TAG_REMOVE_TAG,
   TAG_ADD_SINGLE_TAG,
   RESET_TAGS,
-  FILTER_ON_CLICK,
-  TILES_ADD_TILES,
   TILES_REMOVE_TILE,
   SET_SEARCH_STRING,
   SEARCH_ERROR,
@@ -23,7 +21,6 @@ import {
   UPDATE_DISPLAYED_ITEMS
 } from '../constants/actionTypes';
 
-import { mockTiles } from './utils/mockData.js';
 import union from 'lodash.union';
 import uniqBy from 'lodash.uniqby';
 
@@ -42,7 +39,6 @@ export const initialState = {
   status: undefined,
   loading: false,
   tags: [],
-  filterVisibleState: {},
   tiles: [],
   searchString: '',
   error: '',
@@ -62,8 +58,8 @@ export default function search (state = initialState, action) {
       const itemsToDisplay = uniqBy(union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
-        } else if (a.tile) {
-          return a.tile.id;
+        } else {
+          return a.id;
         }
       });
       const display = state.displayedItems.length < 30 ? itemsToDisplay.slice(0, 30) : state.displayedItems;
@@ -123,28 +119,6 @@ export default function search (state = initialState, action) {
         ...state,
         tags: [initialState.defaultTag],
         isInitialTag: true
-      };
-    case FILTER_ON_CLICK:
-      return {
-        ...state,
-        filterVisibleState: {
-          ...state.filterVisibleState,
-          [action.displayName]: false
-        },
-        tiles: state.tiles.filter(tile => tile.displayName !== action.displayName)
-      };
-    case TILES_ADD_TILES:
-      const tileArray = action.tileArray === undefined ? mockTiles : action.tileArray;
-      const filterVisibleState = tileArray.reduce((obj, tile) => {
-        if (tile.tile.type === 'filter') {
-          obj[tile.tile.displayName] = true;
-        }
-        return obj;
-      }, {});
-      return {
-        ...state,
-        filterVisibleState,
-        tiles: tileArray
       };
     case SET_SEARCH_STRING:
       return {

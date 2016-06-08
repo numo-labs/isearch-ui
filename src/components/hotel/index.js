@@ -41,7 +41,7 @@ class HotelPage extends Component {
   }
 
   getHotelData () {
-    this.props.getHotel(this.props.params.bucketId, this.props.params.itemId);
+    this.props.getHotel(this.props.params.url);
   }
   renderFact (fact) {
     const { packageOffer } = this.props;

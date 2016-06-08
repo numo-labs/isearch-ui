@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+
 // components
 import ISearch from '../containers/isearch.js';
 import ArticleFullPage from '../containers/article.js';
@@ -11,6 +12,7 @@ import HotelPage from '../containers/hotel';
 import App from '../components/app';
 import EditDetails from '../containers/editDetails';
 import TagView from '../containers/tag-view';
+import DestinationFullPage from '../containers/destination';
 
 // store
 import configureStore from '../store/configure-store.js';
@@ -49,6 +51,7 @@ export default class Root extends Component {
             <Route path='search/:bucketId' component={ISearch}/>
             <Route path='article/:bucketId/:itemId' component={ArticleFullPage} />
             <Route path='hotel/:bucketId/:itemId' component={HotelPage} />
+            <Route path='destination/:bucketId/:itemId' component={DestinationFullPage} />
             <Route path='editDetails' component={EditDetails} />
             <Route path='tagView' component={TagView} />
           </Route>

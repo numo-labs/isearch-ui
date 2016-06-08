@@ -22,6 +22,9 @@ class ISearch extends Component {
 
   componentWillMount () {
     window.addEventListener('resize', this.handleResize);
+    if (!this.props.tags.length) {
+      this.props.resetTags();
+    }
   }
 
   handleResize () {
@@ -36,7 +39,6 @@ class ISearch extends Component {
     const {
       onYesFilter,
       onFilterClick,
-      filterVisibleState,
       setHotelPage,
       numberOfChildrenTitle,
       numberOfAdultsTitle,
@@ -61,7 +63,6 @@ class ISearch extends Component {
           items={displayedItems}
           onYesFilter={onYesFilter}
           onFilterClick={onFilterClick}
-          filterVisibleState={filterVisibleState}
           setHotelPage={setHotelPage}
           totalPassengers={Number(numberOfAdultsTitle) + Number(numberOfChildrenTitle)}
           resultId={resultId}
@@ -194,9 +195,7 @@ ISearch.propTypes = {
   displayedItems: PropTypes.array,
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
-  filterVisibleState: PropTypes.object,
 
-  // scroll view
   loadMoreItemsIntoFeed: PropTypes.func,
   scrollPage: PropTypes.number,
 

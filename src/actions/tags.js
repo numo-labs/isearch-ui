@@ -1,8 +1,6 @@
 import {
   TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
-  FILTER_ON_CLICK,
-  TILES_ADD_TILES,
   TILES_REMOVE_TILE,
   TAG_ADD_SINGLE_TAG,
   CLEAR_SEARCH_STRING,
@@ -18,17 +16,6 @@ export function addTags (tags) {
   return {
     type: TAG_ADD_TAGS,
     tags: tags
-  };
-}
-
-/**
-* TEMP FUNCTIONS TO ADD MOCK TILES
-*/
-
-export function addTiles (tileArray) {
-  return {
-    type: TILES_ADD_TILES,
-    tileArray
   };
 }
 
@@ -59,16 +46,8 @@ export function deleteTag (displayName) {
 */
 
 export const onYesFilter = (displayName, id) => (dispatch) => {
-  dispatch(addSingleTag(displayName, id));
-  dispatch(onFilterClick(displayName));
-  return dispatch(startSearch());
+  return dispatch(addSingleTag(displayName, id));
 };
-
-/**
-* Sets the filter visible state to false to hide the filter after it is clicked
-* NB: May not be necessary any more if the tile is removed from the displayed items
-*/
-export const onFilterClick = (displayName) => { return {type: FILTER_ON_CLICK, displayName}; };
 
 /**
 * Action to add a tag either fron the search bar or a filterString

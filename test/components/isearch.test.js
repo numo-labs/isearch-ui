@@ -5,6 +5,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import jsdom from 'mocha-jsdom';
+import sinon from 'sinon';
 
 import ISearch from '../../src/components/isearch/';
 
@@ -15,11 +16,11 @@ const defaultProps = {
   onFilterClick: () => {},
   showAddMessage: () => {},
   hideAddMessage: () => {},
-  filterVisibleState: {},
   fetchQuerySearchResults: () => {},
   removeTag: () => {},
   addSingleTag: () => {},
-  addTag: () => {}
+  addTag: () => {},
+  resetTags: () => {}
 };
 
 describe('Component', function () {
@@ -76,6 +77,20 @@ describe('Component', function () {
       const thirdChild = children[2].type;
       const searchBar = wrapper.find('SearchBarContainer').node.type;
       expect(thirdChild).to.deep.equal(searchBar);
+      done();
+    });
+    it('should call reset tags if there is no tags at store while rendering', function (done) {
+      const stub = sinon.stub();
+      const props = {...defaultProps, resetTags: stub};
+      shallow(<ISearch {...props} />);
+      expect(stub.callCount).to.equal(1);
+      done();
+    });
+    it('should not call reset tags if there is tags ', function (done) {
+      const stub = sinon.stub();
+      const props = {...defaultProps, tags: ['testing tag'], resetTags: stub};
+      shallow(<ISearch {...props} />);
+      expect(stub.callCount).to.equal(0);
       done();
     });
   });
