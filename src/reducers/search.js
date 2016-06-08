@@ -22,6 +22,8 @@ import {
   UPDATE_DISPLAYED_ITEMS
 } from '../constants/actionTypes';
 
+import DEFAULT_TAG from '../constants/default-tag.js';
+
 // import {
 //   shuffleTilesIntoResults,
 //   getPackages,
@@ -31,11 +33,8 @@ import union from 'lodash.union';
 import uniqBy from 'lodash.uniqby';
 
 export const initialState = {
-  defaultTag: {
-    displayName: 'Top inspiration',
-    id: 'marketing:homepage.dk.spies'
-  },
   scrollPage: 6,
+  defaultTag: DEFAULT_TAG,
   fingerprint: '',
   bucketId: '',
   resultId: '',
