@@ -22,6 +22,9 @@ class ISearch extends Component {
 
   componentWillMount () {
     window.addEventListener('resize', this.handleResize);
+    if (!this.props.tags.length) {
+      this.props.resetTags();
+    }
   }
 
   handleResize () {

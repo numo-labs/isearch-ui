@@ -19,7 +19,8 @@ const defaultProps = {
   fetchQuerySearchResults: () => {},
   removeTag: () => {},
   addSingleTag: () => {},
-  addTag: () => {}
+  addTag: () => {},
+  resetTags: () => {}
 };
 
 describe('Component', function () {
