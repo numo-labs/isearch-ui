@@ -9,7 +9,7 @@
   "scripts": {
     "test": "npm run lint && npm run generate-graphql-schema && npm run coverage",
     "dev:build": "webpack -d --config ./webpack.config.js",
-    "dev:serve": "webpack-dev-server -d --config ./webpack.config.js",
+    "dev:serve": "webpack-dev-server -d --config ./webpack.config.js  --host 0.0.0.0 --port 8080",
     "lint": "semistandard",
     "lib:test": "mocha ./lib/**/*.test.js --compilers js:babel-register",
     "src:test": "npm run generate-graphql-schema && mocha ./test/**/*.test.js --compilers js:babel-register",
