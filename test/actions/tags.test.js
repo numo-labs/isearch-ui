@@ -1,9 +1,7 @@
 import {
   TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
-  TILES_ADD_TILES,
   TAG_ADD_SINGLE_TAG,
-  FILTER_ON_CLICK,
   RESET_TAGS,
   TILES_REMOVE_TILE
 } from '../../src/constants/actionTypes';
@@ -53,17 +51,6 @@ describe('actions', () => {
       done();
     });
   });
-  describe('tiles', () => {
-    it('should create an action to add tiles', (done) => {
-      const tileArray = ['a', 'b', 'c'];
-      const expectedAction = {
-        type: TILES_ADD_TILES,
-        tileArray: tileArray
-      };
-      expect(actions.addTiles(tileArray)).to.deep.equal(expectedAction);
-      done();
-    });
-  });
   describe('addSingleTag', () => {
     it(`should create an action to add a single tag if the tag doesnt exist`, (done) => {
       const store = mockStore(initialState);
@@ -77,16 +64,6 @@ describe('actions', () => {
       };
       store.dispatch(actions.addSingleTag('test', 'test'));
       expect(store.getActions()).to.deep.equal([expectedAction]);
-      done();
-    });
-  });
-  describe('onFilterClick', () => {
-    it('should create an action to remove a filter once clicked', (done) => {
-      const expectedAction = {
-        type: FILTER_ON_CLICK,
-        displayName: 'test'
-      };
-      expect(actions.onFilterClick('test')).to.deep.equal(expectedAction);
       done();
     });
   });

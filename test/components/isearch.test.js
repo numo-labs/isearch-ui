@@ -15,7 +15,6 @@ const defaultProps = {
   onFilterClick: () => {},
   showAddMessage: () => {},
   hideAddMessage: () => {},
-  filterVisibleState: {},
   fetchQuerySearchResults: () => {},
   removeTag: () => {},
   addSingleTag: () => {},

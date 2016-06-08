@@ -196,14 +196,13 @@
       }
     },
     {
-      "type": "tile",
       "id": "amenity:wifi",
-      "tile": {
+      "type": "filter",
+      "filter": {
         "prefix": "Do you need access to",
-        "displayName": "Wifi",
+        "label": "Wifi",
         "type": "filter",
-        "color": "#8EB8C4",
-        "id": "amenity:wifi"
+        "tagid": "amenity:wifi"
       }
     }
   ]

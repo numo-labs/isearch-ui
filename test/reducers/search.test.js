@@ -6,9 +6,7 @@ import {
   RESET_TAGS,
   SEARCH_ERROR,
   TAG_ADD_SINGLE_TAG,
-  FILTER_ON_CLICK,
   SET_SEARCH_STRING,
-  TILES_ADD_TILES,
   SET_AUTOCOMPLETE_ERROR,
   SET_AUTOCOMPLETE_OPTIONS,
   SET_AUTOCOMPLETE_IN_SEARCH,
@@ -25,14 +23,8 @@ import {
 import { expect } from 'chai';
 import reducer, { initialState } from '../../src/reducers/search';
 import mockResults from '../../src/utils/mock-search-results.json';
-import { mockTiles } from '../../src/reducers/utils/mockData.js';
 
 const mockItems = [mockResults.items[0]]; // an array with one packageOffer
-
-const initialStateWithTiles = {
-  ...initialState,
-  tiles: mockTiles
-};
 
 describe('Search Reducer', () => {
   it('should return the initial state', (done) => {
@@ -56,7 +48,7 @@ describe('Search Reducer', () => {
         set it to the first 5 elements of items. Also sets loading to false`, (done) => {
       const action = {type: RECEIVE_SEARCH_RESULT, items: mockItems};
       const state = reducer(undefined, action);
-      const items = mockItems.concat(mockTiles);
+      const items = mockItems;
       const expectedState = {
         ...initialState,
         items,
@@ -239,42 +231,6 @@ describe('Search Reducer', () => {
         ...initialState,
         tags: [initialState.defaultTag],
         isInitialTag: true
-      };
-      expect(state).to.deep.equal(expectedState);
-      done();
-    });
-    it(`FILTER_ON_CLICK -> updates the filter visible state and removes the tile
-        from the tiles array`, (done) => {
-      const action = {type: FILTER_ON_CLICK, displayName: 'Wifi'};
-      const initialStateWithFilters = {
-        ...initialStateWithTiles,
-        filterVisibleState: {
-          'Wifi': true
-        }
-      };
-      const state = reducer(initialStateWithFilters, action);
-      const expectedState = {
-        ...initialState,
-        filterVisibleState: {
-          'Wifi': false
-        },
-        tiles: mockTiles.filter(tile => tile.displayName !== 'Wifi')
-      };
-      expect(state).to.deep.equal(expectedState);
-      done();
-    });
-    it(`TILES_ADD_TILES -> adds the tiles to the state and sets the
-        filterVisibleState`, (done) => {
-      const action = {type: TILES_ADD_TILES};
-      const state = reducer(undefined, action);
-      const expectedState = {
-        ...initialState,
-        tiles: mockTiles,
-        filterVisibleState: {
-          'Wifi': true,
-          'Kids': true,
-          'All inclusive': true
-        }
       };
       expect(state).to.deep.equal(expectedState);
       done();
