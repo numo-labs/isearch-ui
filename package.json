@@ -9,7 +9,7 @@
   "scripts": {
     "test": "npm run lint && npm run generate-graphql-schema && npm run coverage",
     "dev:build": "webpack -d --config ./webpack.config.js",
-    "dev:serve": "webpack-dev-server -d --config ./webpack.config.js",
+    "dev:serve": "webpack-dev-server -d --config ./webpack.config.js  --host 0.0.0.0 --port 8080",
     "lint": "semistandard",
     "lib:test": "mocha ./lib/**/*.test.js --compilers js:babel-register",
     "src:test": "npm run generate-graphql-schema && mocha ./test/**/*.test.js --compilers js:babel-register",
@@ -54,7 +54,6 @@
     "enzyme": "^2.2.0",
     "expect": "^1.19.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "font-awesome-webpack": "0.0.4",
     "graphql": "^0.4.14",
     "gulp": "^3.9.1",
     "html-webpack-plugin": "^2.9.0",
