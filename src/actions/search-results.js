@@ -113,6 +113,10 @@ function isTile (item) {
   return !item.packageOffer;
 }
 
+function isFilter (item) {
+  return item.type === 'filter';
+}
+
 /**
 * Buffer and show tiles in a mixed fashion
 * to be used by saveSearchResult
@@ -148,12 +152,20 @@ export function mixDataInput () {
   }
 
   function stir (amount) {
+    // Special case for filters, if they arrive all at once we do not want them
+    // next to each other, so we will take them out of the mixture, put them back
+    // on the tiles array so that they are reshuffled next time.
+    if (mixture.every(item => isFilter(item))) {
+      tiles = mixture.filter(item => isFilter(item));
+      mixture = [];
+      return false;
+    }
+
     // Take all packages out of the mixture
-    const pkg = mixture.filter(item => !isTile(item));
+    packages = mixture.filter(item => !isTile(item));
     // take all tiles out of the mixture
-    const ts = mixture.filter(item => isTile(item));
-    packages = pkg;
-    tiles = ts;
+    tiles = mixture.filter(item => isTile(item));
+
     // mix them up again, if we have packages it is interleaved with tiles.
     shake();
 
@@ -178,8 +190,9 @@ export function mixDataInput () {
       timeout = setTimeout(() => {
         mixture = mixture.concat(tiles);
         tiles = [];
-        const amount = mixture.length;
-        const res = stir(amount);
+        let amount = mixture.length;
+        let res = stir(amount);
+        if (!res) return;
         return dispatch(receiveSearchResult(res, false, false));
       }, 700);
 
@@ -195,17 +208,19 @@ export function mixDataInput () {
 
       // Dispatch 5 items to the front-end at the same
       if (steps < 5 && mixture.length >= 5) {
-        const amount = 5;
+        let amount = 5;
         steps = steps + amount;
-        dispatch(receiveSearchResult(stir(amount), false, false));
+        let res = stir(amount);
+        if (res) dispatch(receiveSearchResult(res, false, false));
       }
 
       steps++;
 
       // return at least the highwatermark to ensure a nice mixture of tiles.
       if (mixture.length >= highwatermark) {
-        const amount = mixture.length;
-        const res = stir(amount);
+        let amount = mixture.length;
+        let res = stir(amount);
+        if (!res) return;
         return dispatch(receiveSearchResult(res, false, false));
       }
     };
