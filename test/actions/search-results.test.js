@@ -7,7 +7,8 @@ import {
   SEARCH_ERROR,
   UPDATE_HEADER_TITLES,
   CLEAR_FEED,
-  UPDATE_DISPLAYED_ITEMS
+  UPDATE_DISPLAYED_ITEMS,
+  SEARCH_COMPLETE
   // TILES_ADD_TILES,
 } from '../../src/constants/actionTypes';
 import moment from 'moment';
@@ -62,8 +63,9 @@ describe('Search Results Actions', () => {
   });
   describe('search actions', () => {
     it(`startSearch: should dispatch an action to set loading to true and an
-        action fetchQuerySearchResults if there are tags`, function (done) {
-      this.timeout(10100);
+        action fetchQuerySearchResults if there are tags. Shoud also call
+        an action to mark the search as complete after 4 seconds`, function (done) {
+      this.timeout(6000);
       const json = {
         data: {
           viewer: {
@@ -87,20 +89,23 @@ describe('Search Results Actions', () => {
             'method': 'push'
           },
           'type': '@@router/CALL_HISTORY_METHOD'
-        }
+        },
+        { type: SEARCH_COMPLETE }
       ];
-      store.dispatch(actions.startSearch());
-      graphqlService.query.lastCall.returned
-        .then(() => {
-          expect(store.getActions()).to.deep.equal(expectedActions);
-          expect(graphqlService.query.calls[0].args[0]).to.equal(MUTATION_START_SEARCH);
-          done();
-        })
-        .catch(done);
+      store.dispatch(actions.startSearch('testing test'));
+      setTimeout(() => {
+        graphqlService.query.lastCall.returned
+          .then(() => {
+            expect(store.getActions()).to.deep.equal(expectedActions);
+            expect(graphqlService.query.calls[0].args[0]).to.equal(MUTATION_START_SEARCH);
+            done();
+          })
+          .catch(done);
+      }, 5000);
     });
     it(`startSearch: should dispatch an action to set the search error if no search id
       is returned`, function (done) {
-      this.timeout(10100);
+      this.timeout(600);
       const json = {
         data: {
           viewer: {

@@ -22,7 +22,7 @@ import { formatQuery } from './helpers.js';
 // routing actionCreator
 import { push } from 'react-router-redux';
 import shuffle from 'shuffle-array';
-
+import timers from 'timers';
 /*
 * saves the error to the store to display an error message
 */
@@ -255,20 +255,20 @@ var mixer = mixDataInput();
 * 2. launch a graphql mutation to return a searchBucketId
 */
 
-export function startSearch () {
+export function startSearch (a) {
   return (dispatch, getState) => {
     mixer = mixDataInput();
     const store = getState();
     const { search: { tags, fingerprint: clientId, socketConnectionId: connectionId } } = store;
     if (tags.length > 0) {
       dispatch(busySearching(true));
-      setTimeout(() => dispatch(setSearchComplete()), 4000); // wait 4 seconds and then set search as complete so at least related results are shown
+      timers.setTimeout(() => dispatch(setSearchComplete()), 4000); // wait 4 seconds and then set search as complete so at least related results are shown
       const query = formatQuery(store);
       console.log('query', JSON.stringify(query));
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query), clientId, connectionId})
         .then(json => {
-          console.log('search response json', json);
+          console.log('search response json', json.data.viewer.searchResultId);
           dispatch(clearFeed());
           const bucketId = json.data.viewer.searchResultId.id;
           if (bucketId) {
