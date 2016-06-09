@@ -168,7 +168,7 @@ class SearchResults extends Component {
         return (
           <div>
             {this.removeButton(item.id)}
-            <div className='clickable'>
+            <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
               <DestinationTile {...item} />
             </div>
           </div>

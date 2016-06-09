@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { GoogleMapLoader, GoogleMap } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import ArticleFullPage from '../article';
 
 class DestinationFullPage extends Component {
@@ -11,6 +11,13 @@ class DestinationFullPage extends Component {
       params,
       addSingleTag
     } = this.props;
+    const marker = {
+      position: {
+        lat: 40.41,
+        lng: -3.7
+      },
+      defaultAnimation: 4
+    };
     return (
       <ArticleFullPage
         articleContent={articleContent}
@@ -25,9 +32,14 @@ class DestinationFullPage extends Component {
             googleMapElement={
               <GoogleMap
                 ref={(map) => (map) => console.log(map)}
-                defaultZoom={5}
+                defaultZoom={8}
                 defaultCenter={{ lat: 40.41, lng: -3.7 }}
+              >
+              <Marker
+                {...marker}
+                opacity={0.8}
               />
+              </GoogleMap>
             }
           />
         </div>

@@ -80,6 +80,10 @@
   background-repeat: no-repeat;
 }
 
+.destinationTileContainer {
+  cursor: pointer;
+}
+
 .destinationTitle {
   font-family: ThomasHeadlineBold;
   font-size: 1.8rem;
