@@ -195,7 +195,7 @@ describe('Search Reducer', () => {
         displayedItems: mockItems,
         searchComplete: true,
         loading: false,
-        feedEnd: true
+        feedEnd: false
       };
       expect(state).to.deep.equal(expectedState);
       done();

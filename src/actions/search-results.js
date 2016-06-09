@@ -53,12 +53,16 @@ export function receiveSearchResult (items, initialSearch, append) {
 
 export function receiveRelatedResult (items) {
   const relatedItems = items.map(item => { return { ...item, related: true }; });
-  console.log('related items', relatedItems);
   return { type: RECEIVE_RELATED_RESULT, items: relatedItems };
 }
 
-export function setSearchComplete () {
-  return { type: SEARCH_COMPLETE };
+export function setSearchComplete (result = 'timeout') {
+  return (dispatch, getState) => {
+    const { search: { resultId } } = getState();
+    if (result === 'timeout' || result.graphql.searchId === resultId) { // check result corresponds to the current search
+      return dispatch({ type: SEARCH_COMPLETE });
+    }
+  };
 }
 
 /*
@@ -254,7 +258,7 @@ var mixer = mixDataInput();
 * 1. format the query based on the tags
 * 2. launch a graphql mutation to return a searchBucketId
 */
-
+let timer;
 export function startSearch (a) {
   return (dispatch, getState) => {
     mixer = mixDataInput();
@@ -262,7 +266,8 @@ export function startSearch (a) {
     const { search: { tags, fingerprint: clientId, socketConnectionId: connectionId } } = store;
     if (tags.length > 0) {
       dispatch(busySearching(true));
-      timers.setTimeout(() => dispatch(setSearchComplete()), 4000); // wait 4 seconds and then set search as complete so at least related results are shown
+      if (timer) clearTimeout(timer);
+      timer = timers.setTimeout(() => dispatch(setSearchComplete()), 3000); // wait 4 seconds and then set search as complete so at least related results are shown
       const query = formatQuery(store);
       console.log('query', JSON.stringify(query));
       return graphqlService

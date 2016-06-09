@@ -86,7 +86,8 @@ export default function search (state = initialState, action) {
     case BUSY_SEARCHING:
       return {
         ...state,
-        loading: action.isBusy
+        loading: action.isBusy,
+        searchComplete: false
       };
     case SEARCH_ERROR:
       return {
@@ -99,8 +100,7 @@ export default function search (state = initialState, action) {
         ...state,
         searchComplete: true,
         loading: false,
-        displayedItems: state.displayedItems.length === 0 ? state.relatedItems : state.displayedItems,
-        feedEnd: state.displayedItems.length === 0 ? true : state.feedEnd
+        displayedItems: state.displayedItems.length === 0 ? state.relatedItems : state.displayedItems
       };
     // case TAG_ADD_TAGS:
     //   /*
@@ -189,7 +189,6 @@ export default function search (state = initialState, action) {
         items: [],
         relatedItems: [],
         scrollPage: 6,
-        searchComplete: false,
         feedEnd: false
       };
     case TILES_REMOVE_TILE:

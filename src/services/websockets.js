@@ -25,9 +25,8 @@ export function initialise (actionCreatorBinder, location) {
   primus.on('data', function received (data) {
     // console.log('incoming socket data', data);
     if (data.graphql) {
-      if (data.graphql.searchComplete) { // event send by the package provider when all packages have been sent
-        console.log('SEARCH COMPLETE >>>>>>>>>>>>', data.graphql.searchComplete);
-        setSearchComplete();
+      if (data.graphql.searchComplete) { // event sent by the package provider when all packages have been sent
+        setSearchComplete(data);
       } else if (data.graphql.items.length > 0) {
         saveSearchResult(data);
       }
