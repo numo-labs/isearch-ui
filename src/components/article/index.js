@@ -96,7 +96,7 @@ class ArticleFullPage extends Component {
               <section>
                 <div className='articleSection'>
                   <div className='articleHeader'>{introSection.title}</div>
-                  {introSection.text ? <p className='articleIntroText'>{introSection.text}</p> : null}
+                  {introSection.text ? <div className='articleIntroText' dangerouslySetInnerHTML={this.rawMarkup(introSection.text)}/> : null}
                 </div>
               </section>
             { content.map((section, key) => {
