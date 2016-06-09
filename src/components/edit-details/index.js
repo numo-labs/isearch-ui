@@ -38,6 +38,7 @@ export default class EditDetails extends Component {
       departureDate,
       goBack
     } = this.props;
+    console.log('---------->', numberOfAdults);
     const childAges = [childAge1, childAge2, childAge3, childAge4].slice(0, Number(numberOfChildren));
     return (
       <div className='blueContainer'>
