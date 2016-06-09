@@ -12,7 +12,7 @@ import {
 
 export const initialState = {
   numberOfChildren: '0',
-  numberOfAdults: '2',
+  numberOfAdults: '1',
   childAge1: '2 Barns alder',
   childAge2: '4 Barns alder',
   childAge3: '0 Barns alder',
@@ -22,7 +22,7 @@ export const initialState = {
   departureDate: moment().add(14, 'days').format('YYYY-MM-DD'),
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
-  numberOfAdultsTitle: '2',
+  numberOfAdultsTitle: '1',
   durationTitle: '1 uger'
 };
 
