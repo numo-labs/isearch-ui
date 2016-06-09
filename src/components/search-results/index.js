@@ -5,6 +5,7 @@ import PackageTile from '../../../lib/package-tile';
 import ArticleTile from '../../../lib/article-tile';
 import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
+import { impresionDataFactory } from './analytics-helper';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
@@ -21,7 +22,6 @@ class SearchResults extends Component {
     super();
     this.mapItems = this.mapItems.bind(this);
   }
-
   shouldComponentUpdate (nextProps) {
     if (nextProps.items.length === this.props.items.length) {
       return false;
@@ -29,63 +29,32 @@ class SearchResults extends Component {
       return true;
     }
   }
+
   handleVisibility (isVisible, item) {
     if (!dataLayer || !isVisible) {
       return;
     }
-    if (item.type === 'packageOffer') {
-      dataLayer.push({
-        'ecommerce': {
-          'impressions': [{
-            'id': item.packageOffer.provider.reference,
-            'brand': 'hotel_tile',
-            'list': 'inspirational search feed'
-          }]
-        },
-        'event': 'impressionsPushed'
-      });
-    } else if (item.type === 'filter') {
-      dataLayer.push({
-        'ecommerce': {
-          'impressions': [{
-            'id': item.id,
-            'brand': 'filter_tile',
-            'list': 'inspirational search feed'
-          }]
-        },
-        'event': 'impressionsPushed'
-      });
-    } else if (item.type === 'article') {
-      dataLayer.push({
-        'event': 'impressionsPushed',
-        'ecommerce': {
-          'impressions': [{
-            'id': 'article name', // can this be extracted from the backend?
-            'category': 'article category', // can this be fetched?
-            'brand': 'article_tile', // hardcoded
-            'list': 'inspirational search feed'
-          }]
-        }});
-    }
+    dataLayer.push(impresionDataFactory(item));
     return;
   }
+
   handleClickEvent (item) {
     const clickEventObject = {
       'event': 'productClick',
       'ecommerce': {
         'click': {
-          'actionField': {'list': 'inspirational search feed'},
+          'actionField': { 'list': 'inspirational search feed' },
           'products': []
         }
       }
     };
-    if (dataLayer && item.type === 'packageOffer') {
+    if (dataLayer && item.type === 'package') {
       clickEventObject.ecommerce.click.products.push({
         'id': item.packageOffer.provider.reference,
         'brand': 'hotel_tile'
       });
       dataLayer.push(clickEventObject);
-    } else if (dataLayer && item.type === 'article') {
+    } else if (dataLayer && item.type === 'tile') {
       clickEventObject.ecommerce.click.products.push({
         'id': item.tile.id,
         'brand': 'article_tile'
@@ -118,7 +87,7 @@ class SearchResults extends Component {
     } = this.props;
     return (
       <div onClick={() => removeTile(id)}>
-        <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
+        <img className='removeTileButton' src={removeTileButton} alt='cancelled'/>
       </div>
     );
   }
@@ -137,7 +106,8 @@ class SearchResults extends Component {
       return (
         <div>
           {this.removeButton(item.id)}
-          <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
+          <div className='clickable'
+               onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
             <PackageTile
               key={item.packageOffer.id}
               packageOffer={item.packageOffer}
@@ -155,7 +125,8 @@ class SearchResults extends Component {
         return (
           <div>
             {this.removeButton(item.id)}
-            <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
+            <div className='clickable'
+                 onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
               <ArticleTile
                 className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
                 {...item}
@@ -168,7 +139,8 @@ class SearchResults extends Component {
         return (
           <div>
             {this.removeButton(item.id)}
-            <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
+            <div className='clickable'
+                 onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
               <DestinationTile {...item} />
             </div>
           </div>
@@ -194,7 +166,7 @@ class SearchResults extends Component {
         disableImagesLoaded={false}
         className='grid load-effect'
       >
-      {this.mapItems()}
+        {this.mapItems()}
       </Masonry>
     );
   }
