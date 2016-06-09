@@ -83,7 +83,22 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         displayedItems: mockItems,
-        scrollPage: 7
+        scrollPage: 7,
+        feedEnd: true
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it(`UPDATE_DISPLAYED_ITEMS: -> adds items from action to the displayedItems
+      state and sets feedEnd to false if action.items.length < items.length`, (done) => {
+      const action = {type: UPDATE_DISPLAYED_ITEMS, items: mockItems};
+      const state = reducer({...initialState, items: mockItems.concat(mockItems)}, action);
+      const expectedState = {
+        ...initialState,
+        displayedItems: mockItems,
+        scrollPage: 7,
+        feedEnd: false,
+        items: mockItems.concat(mockItems)
       };
       expect(state).to.deep.equal(expectedState);
       done();

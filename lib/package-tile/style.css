@@ -28,6 +28,26 @@
   width: 100%;
   cursor: pointer;
 }
+  .labelVisible {
+    color: #ffffff;
+    position: absolute;
+    z-index: 10;
+    display: inline-block;
+    background-color: #444f51;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    top: 1.5em;
+    font-size: 1.4rem;
+    padding-bottom: 0.2rem;
+    padding-top: 0.1rem;
+    font-family: SourceSansLight;
+    opacity: 0.9;
+  }
+
+  .labelHidden {
+    display: none;
+  }
+
   .packageImage {
     height: 200px;
     position: relative;

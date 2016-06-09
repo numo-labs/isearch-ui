@@ -23,14 +23,13 @@ import {
   SEARCH_COMPLETE
 } from '../constants/actionTypes';
 
+import DEFAULT_TAG from '../constants/default-tag.js';
+
 import union from 'lodash.union';
 import uniqBy from 'lodash.uniqby';
 
 export const initialState = {
-  defaultTag: {
-    displayName: 'Top inspiration',
-    id: 'marketing:homepage.dk.spies'
-  },
+  defaultTag: DEFAULT_TAG,
   fingerprint: '',
   socketConnectionId: '',
   bucketId: '',
@@ -82,7 +81,7 @@ export default function search (state = initialState, action) {
         ...state,
         displayedItems: action.items,
         scrollPage: state.scrollPage + 1,
-        feedEnd: action.items.length === state.items.length
+        feedEnd: action.items.length >= state.items.length
       };
     case BUSY_SEARCHING:
       return {
@@ -98,7 +97,10 @@ export default function search (state = initialState, action) {
     case SEARCH_COMPLETE:
       return {
         ...state,
-        searchComplete: true
+        searchComplete: true,
+        loading: false,
+        displayedItems: state.displayedItems.length === 0 ? state.relatedItems : state.displayedItems,
+        feedEnd: state.displayedItems.length === 0 ? true : state.feedEnd
       };
     // case TAG_ADD_TAGS:
     //   /*

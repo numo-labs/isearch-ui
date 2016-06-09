@@ -53,6 +53,7 @@ export function receiveSearchResult (items, initialSearch, append) {
 
 export function receiveRelatedResult (items) {
   const relatedItems = items.map(item => { return { ...item, related: true }; });
+  console.log('related items', relatedItems);
   return { type: RECEIVE_RELATED_RESULT, items: relatedItems };
 }
 
@@ -128,6 +129,10 @@ function isTile (item) {
   return !item.packageOffer;
 }
 
+function isFilter (item) {
+  return item.type === 'filter';
+}
+
 /**
 * Buffer and show tiles in a mixed fashion
 * to be used by saveSearchResult
@@ -163,12 +168,20 @@ export function mixDataInput () {
   }
 
   function stir (amount) {
+    // Special case for filters, if they arrive all at once we do not want them
+    // next to each other, so we will take them out of the mixture, put them back
+    // on the tiles array so that they are reshuffled next time.
+    if (mixture.every(item => isFilter(item))) {
+      tiles = mixture.filter(item => isFilter(item));
+      mixture = [];
+      return false;
+    }
+
     // Take all packages out of the mixture
-    const pkg = mixture.filter(item => !isTile(item));
+    packages = mixture.filter(item => !isTile(item));
     // take all tiles out of the mixture
-    const ts = mixture.filter(item => isTile(item));
-    packages = pkg;
-    tiles = ts;
+    tiles = mixture.filter(item => isTile(item));
+
     // mix them up again, if we have packages it is interleaved with tiles.
     shake();
 
@@ -193,8 +206,9 @@ export function mixDataInput () {
       timeout = setTimeout(() => {
         mixture = mixture.concat(tiles);
         tiles = [];
-        const amount = mixture.length;
-        const res = stir(amount);
+        let amount = mixture.length;
+        let res = stir(amount);
+        if (!res) return;
         return dispatch(receiveSearchResult(res, false, false));
       }, 700);
 
@@ -210,17 +224,19 @@ export function mixDataInput () {
 
       // Dispatch 5 items to the front-end at the same
       if (steps < 5 && mixture.length >= 5) {
-        const amount = 5;
+        let amount = 5;
         steps = steps + amount;
-        dispatch(receiveSearchResult(stir(amount), false, false));
+        let res = stir(amount);
+        if (res) dispatch(receiveSearchResult(res, false, false));
       }
 
       steps++;
 
       // return at least the highwatermark to ensure a nice mixture of tiles.
       if (mixture.length >= highwatermark) {
-        const amount = mixture.length;
-        const res = stir(amount);
+        let amount = mixture.length;
+        let res = stir(amount);
+        if (!res) return;
         return dispatch(receiveSearchResult(res, false, false));
       }
     };
@@ -246,6 +262,7 @@ export function startSearch () {
     const { search: { tags, fingerprint: clientId, socketConnectionId: connectionId } } = store;
     if (tags.length > 0) {
       dispatch(busySearching(true));
+      setTimeout(() => dispatch(setSearchComplete()), 4000); // wait 4 seconds and then set search as complete so at least related results are shown
       const query = formatQuery(store);
       console.log('query', JSON.stringify(query));
       return graphqlService
@@ -268,8 +285,8 @@ export function startSearch () {
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
-    if (result.graphql.searchId === resultId) { // check data corresponds to the current search
-      if (result.graphql.related) { // if result is from a search for related content, save it separately
+    if (result.graphql.searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
+      if (result.graphql.searchId.indexOf('related') > -1) { // if result is from a search for related content, save it separately
         return dispatch(receiveRelatedResult(result.graphql.items));
       } else {
         return dispatch(mixer(result));
@@ -298,6 +315,7 @@ export function loadMoreItemsIntoFeed (page) {
     } else if (displayedItems.length === items.length) {  // if items store has been exhausted retrieve from relatedContent store
       const newPage = page - Math.floor(items.length / 5);
       const relatedContent = relatedItems.slice(0, newPage * 5);
+      console.log('getting rleated content!!!');
       return dispatch(updateDisplayedItems(items.concat(relatedContent)));
     }
   };
