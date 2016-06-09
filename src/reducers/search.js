@@ -185,8 +185,10 @@ export default function search (state = initialState, action) {
         ...state,
         displayedItems: [],
         items: [],
+        relatedItems: [],
         scrollPage: 6,
-        searchComplete: false
+        searchComplete: false,
+        feedEnd: false
       };
     case TILES_REMOVE_TILE:
       const iterator = item => {
