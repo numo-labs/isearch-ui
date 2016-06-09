@@ -75,7 +75,6 @@ class ISearch extends Component {
   }
 
   render () {
-    console.log('----RENDERING GRID----');
     const {
       tags,
       removeTag,
