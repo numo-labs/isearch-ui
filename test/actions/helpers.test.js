@@ -29,8 +29,12 @@ describe('Helpers', () => {
     });
   });
   describe('combinePassengersForQuery', () => {
+    var timers;
     before(() => {
-      sinon.useFakeTimers((new Date('2016-05-31')).getTime());
+      timers = sinon.useFakeTimers((new Date('2016-05-31')).getTime());
+    });
+    after(() => {
+      timers.restore();
     });
     it('sets birthday properties of children according to their age', () => {
       const result = combinePassengersForQuery(['10', '12'], 2, 2);

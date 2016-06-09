@@ -114,6 +114,7 @@
       "describe",
       "it",
       "dataLayer",
+      "after",
       "afterEach",
       "before",
       "beforeEach",
