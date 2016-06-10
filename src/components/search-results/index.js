@@ -5,7 +5,7 @@ import PackageTile from '../../../lib/package-tile';
 import ArticleTile from '../../../lib/article-tile';
 import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
-import { impresionDataFactory } from './analytics-helper';
+import { impresionDataFactory } from '../../../lib/analytics-helper/index';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
