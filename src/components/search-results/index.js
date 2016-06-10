@@ -190,7 +190,9 @@ class SearchResults extends Component {
     const relatedItems = items.filter(item => item.related && item.type !== 'filter');
     // we might want to have this depend on the browser language at some point:
     // const message = searchItems.length > 0 ? 'You might also be interested in...' : `Looks like we don't have any results that match your search. But you might be interested in...`;
-    const message = searchItems.length > 0 ? 'Måske er du også interesseret i...' : `Din søgning gav ingen resultater, men måske er du interesseret i ...`;
+    const message = searchItems.length > 0
+      ? 'Måske er du også interesseret i…'
+      : `Din søgning gav ingen resultater, men måske er du interesseret i…`;
     // see: https://github.com/numo-labs/isearch-ui/issues/257
     if ((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) {
       return (
