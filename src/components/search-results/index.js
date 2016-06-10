@@ -210,7 +210,6 @@ class SearchResults extends Component {
   }
 
   render () {
-    console.log('items', this.props.items);
     const {
       items
     } = this.props;
