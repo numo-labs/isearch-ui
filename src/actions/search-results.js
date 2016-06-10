@@ -12,7 +12,9 @@ import {
   SAVE_SOCKET_CONNECTION_ID,
   SAVE_BUCKET_ID,
   CLEAR_FEED,
-  UPDATE_DISPLAYED_ITEMS
+  UPDATE_DISPLAYED_ITEMS,
+  RECEIVE_RELATED_RESULT,
+  SEARCH_COMPLETE
 } from '../constants/actionTypes';
 
 import * as graphqlService from '../services/graphql';
@@ -20,7 +22,7 @@ import { formatQuery } from './helpers.js';
 // routing actionCreator
 import { push } from 'react-router-redux';
 import shuffle from 'shuffle-array';
-
+import timers from 'timers';
 /*
 * saves the error to the store to display an error message
 */
@@ -42,6 +44,24 @@ export function receiveSearchResult (items, initialSearch, append) {
     items,
     initialSearch,
     append: append || false
+  };
+}
+
+/*
+* Adds items to the relatedItems store to be shown when there are no more packages
+*/
+
+export function receiveRelatedResult (items) {
+  const relatedItems = items.map(item => { return { ...item, related: true }; });
+  return { type: RECEIVE_RELATED_RESULT, items: relatedItems };
+}
+
+export function setSearchComplete (result = 'timeout') {
+  return (dispatch, getState) => {
+    const { search: { resultId } } = getState();
+    if (result === 'timeout' || result.graphql.searchId === resultId) { // check result corresponds to the current search
+      return dispatch({ type: SEARCH_COMPLETE });
+    }
   };
 }
 
@@ -238,20 +258,22 @@ var mixer = mixDataInput();
 * 1. format the query based on the tags
 * 2. launch a graphql mutation to return a searchBucketId
 */
-
-export function startSearch () {
+let timer;
+export function startSearch (a) {
   return (dispatch, getState) => {
     mixer = mixDataInput();
     const store = getState();
     const { search: { tags, fingerprint: clientId, socketConnectionId: connectionId } } = store;
     if (tags.length > 0) {
       dispatch(busySearching(true));
+      if (timer) clearTimeout(timer);
+      timer = timers.setTimeout(() => dispatch(setSearchComplete()), 3000); // wait 4 seconds and then set search as complete so at least related results are shown
       const query = formatQuery(store);
       console.log('query', JSON.stringify(query));
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query), clientId, connectionId})
         .then(json => {
-          console.log('search response json', json);
+          console.log('search response json', json.data.viewer.searchResultId);
           dispatch(clearFeed());
           const bucketId = json.data.viewer.searchResultId.id;
           if (bucketId) {
@@ -268,8 +290,12 @@ export function startSearch () {
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
-    if (result.graphql.searchId === resultId) { // check data corresponds to the current search
-      return dispatch(mixer(result));
+    if (result.graphql.searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
+      if (result.graphql.searchId.indexOf('related') > -1) { // if result is from a search for related content, save it separately
+        return dispatch(receiveRelatedResult(result.graphql.items));
+      } else {
+        return dispatch(mixer(result));
+      }
     }
   };
 }
@@ -284,15 +310,18 @@ export function updateDisplayedItems (items) {
 
 export function loadMoreItemsIntoFeed (page) {
   return (dispatch, getState) => {
-    const { search: { displayedItems, items } } = getState();
-    if (displayedItems.length < 10 && items.length > 0) {
-      return dispatch(updateDisplayedItems(items.slice(0, 10)));
+    const { search: { displayedItems, items, relatedItems } } = getState();
+    if (displayedItems.length === 0 && items.length === 0) {
+      return; // no unecessary re-render if no items returned
     } else if (items.length >= page * 5) {
       return dispatch(updateDisplayedItems(items.slice(0, page * 5))); // if 5 x page number exists send back 5 x
     } else if (items.length > displayedItems.length) {
       return dispatch(updateDisplayedItems(items)); // if 5 x page number doesn't exist send all available items
-    } else if (displayedItems.length === 0 && items.length === 0) {
-      return; // no unecessary re-render if no items returned
+    } else if (displayedItems.length === items.length) {  // if items store has been exhausted retrieve from relatedContent store
+      const newPage = page - Math.floor(items.length / 5);
+      const relatedContent = relatedItems.slice(0, newPage * 5);
+      console.log('getting rleated content!!!');
+      return dispatch(updateDisplayedItems(items.concat(relatedContent)));
     }
   };
 }

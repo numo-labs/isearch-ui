@@ -7,7 +7,8 @@ import {
   SEARCH_ERROR,
   UPDATE_HEADER_TITLES,
   CLEAR_FEED,
-  UPDATE_DISPLAYED_ITEMS
+  UPDATE_DISPLAYED_ITEMS,
+  SEARCH_COMPLETE
   // TILES_ADD_TILES,
 } from '../../src/constants/actionTypes';
 import moment from 'moment';
@@ -62,8 +63,9 @@ describe('Search Results Actions', () => {
   });
   describe('search actions', () => {
     it(`startSearch: should dispatch an action to set loading to true and an
-        action fetchQuerySearchResults if there are tags`, function (done) {
-      this.timeout(10100);
+        action fetchQuerySearchResults if there are tags. Shoud also call
+        an action to mark the search as complete after 4 seconds`, function (done) {
+      this.timeout(6000);
       const json = {
         data: {
           viewer: {
@@ -87,20 +89,23 @@ describe('Search Results Actions', () => {
             'method': 'push'
           },
           'type': '@@router/CALL_HISTORY_METHOD'
-        }
+        },
+        { type: SEARCH_COMPLETE }
       ];
-      store.dispatch(actions.startSearch());
-      graphqlService.query.lastCall.returned
-        .then(() => {
-          expect(store.getActions()).to.deep.equal(expectedActions);
-          expect(graphqlService.query.calls[0].args[0]).to.equal(MUTATION_START_SEARCH);
-          done();
-        })
-        .catch(done);
+      store.dispatch(actions.startSearch('testing test'));
+      setTimeout(() => {
+        graphqlService.query.lastCall.returned
+          .then(() => {
+            expect(store.getActions()).to.deep.equal(expectedActions);
+            expect(graphqlService.query.calls[0].args[0]).to.equal(MUTATION_START_SEARCH);
+            done();
+          })
+          .catch(done);
+      }, 5000);
     });
     it(`startSearch: should dispatch an action to set the search error if no search id
       is returned`, function (done) {
-      this.timeout(10100);
+      this.timeout(600);
       const json = {
         data: {
           viewer: {
@@ -171,7 +176,7 @@ describe('Search Results Actions', () => {
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });
-    it(`loadMoreItemsIntoFeed: if displayedItems has more than 10 items should dispatch updateDisplayedItems action
+    it(`loadMoreItemsIntoFeed: if items has more than '5 x page' items dispatch updateDisplayedItems action
       with a list of items equal to 5 x 'page'`, done => {
       const items = [
         {name: 1},
@@ -208,6 +213,26 @@ describe('Search Results Actions', () => {
       const store = mockStore({search: { displayedItems: [], items }});
       const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items}];
       store.dispatch(actions.loadMoreItemsIntoFeed(2));
+      expect(store.getActions()).to.deep.equal(expectedActions);
+      done();
+    });
+    it(`loadMoreItemsIntoFeed: if the number of displayedItems equals number of
+      items then get items from the relatedItems store'`, done => {
+      const items = [
+        {name: 1},
+        {name: 2},
+        {name: 3},
+        {name: 4},
+        {name: 5},
+        {name: 6},
+        {name: 7}
+      ];
+      const store = mockStore({search: { displayedItems: items, items, relatedItems: items }});
+      store.dispatch(actions.loadMoreItemsIntoFeed(3));
+      const expectedActions = [{
+        type: UPDATE_DISPLAYED_ITEMS,
+        items: items.concat(items)
+      }];
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });

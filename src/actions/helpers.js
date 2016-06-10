@@ -34,6 +34,7 @@ export function formatQuery (store) {
   const departureAirports = constructDepartureAirportQuery(departureAirport);
   const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
   const query = {passengers: passengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
+  query.related = true;
   return query;
 }
 

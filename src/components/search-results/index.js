@@ -11,7 +11,6 @@ import './style.css';
 
 const masonryOptions = {
   transitionDuration: '0.4s',
-  itemSelector: '.gridItem',
   fitWidth: true,
   gutter: 14 // horizontal spacing between tiles
 };
@@ -20,15 +19,9 @@ class SearchResults extends Component {
   constructor () {
     super();
     this.mapItems = this.mapItems.bind(this);
+    this.getRelatedContent = this.getRelatedContent.bind(this);
   }
 
-  shouldComponentUpdate (nextProps) {
-    if (nextProps.items.length === this.props.items.length) {
-      return false;
-    } else {
-      return true;
-    }
-  }
   handleVisibility (isVisible, item) {
     if (!dataLayer || !isVisible) {
       return;
@@ -95,19 +88,20 @@ class SearchResults extends Component {
     return;
   }
 
-  mapItems () {
-    const {
-      items
-    } = this.props;
+  mapItems (items, start = 0) {
     return (
       items.map((item, index) => {
-        return (
-          <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-            <div key={index} className='gridItem'>
-              {this.renderItem(item, index)}
-            </div>
-          </VisibilitySensor>
-        );
+        if (item.message) {
+          return item.message;
+        } else {
+          return (
+            <VisibilitySensor key={start + index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+              <div key={index} className='gridItem'>
+                {this.renderItem(item, index)}
+              </div>
+            </VisibilitySensor>
+          );
+        }
       })
     );
   }
@@ -186,16 +180,48 @@ class SearchResults extends Component {
     return <div/>;
   }
 
+  getRelatedContent () {
+    const {
+      items,
+      searchComplete,
+      feedEnd
+    } = this.props;
+    const searchItems = items.filter(item => !item.related);
+    const relatedItems = items.filter(item => item.related && item.type !== 'filter');
+    const message = searchItems.length > 0 ? 'You might also be interested in...' : `Looks like we don't have any results that match your search. But you might be interested in...`;
+
+    if ((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) {
+      return (
+        [<div className='feed-end-message'>{message}</div>,
+        <Masonry
+          elementType={'div'}
+          options={masonryOptions}
+          disableImagesLoaded={false}
+          className='grid load-effect'
+        >
+        {this.mapItems(relatedItems, searchItems.length)}
+        </Masonry>]
+      );
+    }
+  }
+
   render () {
+    const {
+      items
+    } = this.props;
+    const searchItems = items.filter(item => !item.related);
     return (
-      <Masonry
-        elementType={'div'}
-        options={masonryOptions}
-        disableImagesLoaded={false}
-        className='grid load-effect'
-      >
-      {this.mapItems()}
-      </Masonry>
+      <div>
+        <Masonry
+          elementType={'div'}
+          options={masonryOptions}
+          disableImagesLoaded={false}
+          className='grid load-effect'
+        >
+        {this.mapItems(searchItems)}
+        </Masonry>
+        {this.getRelatedContent()}
+      </div>
     );
   }
 }
@@ -210,7 +236,9 @@ SearchResults.propTypes = {
   changeRoute: PropTypes.func,
   viewedArticles: PropTypes.array,
   removeTile: PropTypes.func,
-  addSingleTag: PropTypes.func
+  addSingleTag: PropTypes.func,
+  searchComplete: PropTypes.bool,
+  feedEnd: PropTypes.bool
 };
 
 export default SearchResults;

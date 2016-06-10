@@ -21,7 +21,7 @@ describe('Component', function () {
     });
     it('should render our SearchResults component', function (done) {
       const children = wrapper.children().nodes;
-      expect(children).to.have.length(4);
+      expect(children).to.have.length(1);
       done();
     });
     it('should render 4 elements with the class .gridItem and none .visited', function (done) {

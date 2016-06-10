@@ -3,7 +3,6 @@
 import {
   RECEIVE_SEARCH_RESULT,
   BUSY_SEARCHING,
-  // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
   TAG_ADD_SINGLE_TAG,
   RESET_TAGS,
@@ -19,32 +18,28 @@ import {
   SET_FINGERPRINT,
   SAVE_BUCKET_ID,
   CLEAR_FEED,
-  UPDATE_DISPLAYED_ITEMS
+  UPDATE_DISPLAYED_ITEMS,
+  RECEIVE_RELATED_RESULT,
+  SEARCH_COMPLETE
 } from '../constants/actionTypes';
 
 import DEFAULT_TAG from '../constants/default-tag.js';
 
-// import {
-//   shuffleTilesIntoResults,
-//   getPackages,
-//   getTiles
-// } from './utils/helpers.js';
 import union from 'lodash.union';
 import uniqBy from 'lodash.uniqby';
 
 export const initialState = {
-  scrollPage: 6,
   defaultTag: DEFAULT_TAG,
   fingerprint: '',
+  socketConnectionId: '',
   bucketId: '',
   resultId: '',
   displayedItems: [],
   items: [],
-  bucketCount: 0,
-  status: undefined,
+  relatedItems: [],
   loading: false,
+  isInitialTag: false,
   tags: [],
-  tiles: [],
   searchString: '',
   error: '',
   autocompleteError: '',
@@ -53,25 +48,15 @@ export const initialState = {
   departureAirport: '',
   departureDate: '',
   passengerBirthdays: [],
-  // durationTitle: '2 uger',
-  // bucketId: '8aeb3560-0b92-11e6-9605-eb677966096c'
-  isInitialTag: false,
-  socketConnectionId: ''
+  scrollPage: 6,
+  searchComplete: false, // set to false until a message is recieved from the web socket channel
+  feedEnd: false
 };
-
-// function scrambleSearchItems (items, state, append) {
-//   const packages = getPackages(items);
-//   const tiles = getTiles(items);
-//   return shuffleTilesIntoResults(packages, append ? state.tiles : tiles.concat(state.tiles)); // add filters back in
-// }
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
-      // const scrambled = scrambleSearchItems(action.items, state, action.append);
-      // const displayedItems = action.append ? state.displayedItems.concat(scrambled) : scrambled;
-      const items = action.items;
-      const itemsToDisplay = uniqBy(union(state.items, items), (a) => {
+      const itemsToDisplay = uniqBy(union(state.items, action.items), (a) => {
         if (a.packageOffer) {
           return a.packageOffer.provider.reference;
         } else {
@@ -86,22 +71,36 @@ export default function search (state = initialState, action) {
         loading: false,
         error: ''
       };
+    case RECEIVE_RELATED_RESULT:
+      return {
+        ...state,
+        relatedItems: state.relatedItems.concat(action.items)
+      };
     case UPDATE_DISPLAYED_ITEMS:
       return {
         ...state,
         displayedItems: action.items,
-        scrollPage: state.scrollPage + 1
+        scrollPage: state.scrollPage + 1,
+        feedEnd: action.items.length >= state.items.length
       };
     case BUSY_SEARCHING:
       return {
         ...state,
-        loading: action.isBusy
+        loading: action.isBusy,
+        searchComplete: false
       };
     case SEARCH_ERROR:
       return {
         ...state,
         loading: false,
         error: action.error
+      };
+    case SEARCH_COMPLETE:
+      return {
+        ...state,
+        searchComplete: true,
+        loading: false,
+        displayedItems: state.displayedItems.length === 0 ? state.relatedItems : state.displayedItems
       };
     // case TAG_ADD_TAGS:
     //   /*
@@ -187,7 +186,10 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         displayedItems: [],
-        items: []
+        items: [],
+        relatedItems: [],
+        scrollPage: 6,
+        feedEnd: false
       };
     case TILES_REMOVE_TILE:
       const iterator = item => {
