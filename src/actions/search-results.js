@@ -290,8 +290,9 @@ export function startSearch (a) {
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
-    if (result.graphql.searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
-      if (result.graphql.searchId.indexOf('related') > -1) { // if result is from a search for related content, save it separately
+    const searchId = result.graphql.searchId;
+    if (searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
+      if (searchId.indexOf('related') > -1) { // if result is from a search for related content, save it separately
         return dispatch(receiveRelatedResult(result.graphql.items));
       } else {
         return dispatch(mixer(result));

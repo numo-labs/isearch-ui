@@ -194,7 +194,7 @@ class SearchResults extends Component {
       ? 'Måske er du også interesseret i…'
       : `Din søgning gav ingen resultater, men måske er du interesseret i…`;
     // see: https://github.com/numo-labs/isearch-ui/issues/257
-    if ((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) {
+    if (((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) && relatedItems.length > 0) {
       return (
         [<div className='feed-end-message'>{message}</div>,
         <Masonry

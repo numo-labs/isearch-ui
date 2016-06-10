@@ -1,4 +1,7 @@
 'use strict';
+
+import isHomepage from '../utils/is-homepage';
+
 /*
 * Function to format the query and add keys to the query object based on the tags
 *
@@ -34,7 +37,11 @@ export function formatQuery (store) {
   const departureAirports = constructDepartureAirportQuery(departureAirport);
   const travelPeriod = constructTravelPeriodQuery(departureDate, duration);
   const query = {passengers: passengers, travelPeriod: travelPeriod, departureAirports: departureAirports, ...formattedTags};
-  query.related = true;
+  if (!isHomepage(tags)) {
+    query.related = true;
+  } else {
+    query.related = false;
+  }
   return query;
 }
 
