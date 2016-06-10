@@ -196,7 +196,7 @@ class SearchResults extends Component {
     // see: https://github.com/numo-labs/isearch-ui/issues/257
     if (((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) && relatedItems.length > 0) {
       return (
-        [<div className='feed-end-message'>{message}</div>,
+        [<div key={'message'} className='feed-end-message'>{message}</div>,
         <Masonry
           elementType={'div'}
           options={masonryOptions}
