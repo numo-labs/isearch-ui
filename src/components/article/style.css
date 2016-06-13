@@ -52,7 +52,7 @@ h5 {
 .articleImage {
     display: inline-block;
     height: 20em;
-    width: 100%;
+    width: 90%;
     object-fit: cover;
 }
 
@@ -119,12 +119,8 @@ h1 {
 }
 
 .articleFullPageContainer .articleImage {
-    width: auto;
     max-height: 350px;
     height: auto;
-    background-size: contain;
-    background-position: 50%;
-    background-repeat: no-repeat;
 }
 .articleFullPageContainer .articleImage img {
     visibility: hidden;
