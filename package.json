@@ -16,7 +16,8 @@
     "nocov": "npm run lib:test && npm run src:test",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js ./lib/**/*.test.js --report lcov -- -R spec",
     "clean": "rm -rf public && mkdir -p public/",
-    "build": "npm run clean && ./node_modules/.bin/webpack --optimize-dedupe -p --config ./webpack.production.config.js",
+    "ci:build": "npm run clean && ./node_modules/.bin/webpack --optimize-dedupe -p --config ./webpack.ci.config.js",
+    "prod:build": "npm run clean && ./node_modules/.bin/webpack --optimize-dedupe -p --config ./webpack.production.config.js",
     "stats": "npm run clean && ./node_modules/.bin/webpack --optimize-dedupe -p --config ./webpack.production.config.js --profile --json > public/stats.json",
     "deploy": "gulp deploy",
     "generate-graphql-schema": "babel-node ./test/constants/helpers/update-schema.js > ./test/constants/helpers/schema.json"
@@ -50,6 +51,7 @@
     "babel-register": "^6.6.0",
     "bl": "^1.1.2",
     "chai": "^3.5.0",
+    "con.figure": "1.0.0",
     "css-loader": "^0.23.1",
     "engine.io-client": "^1.6.9",
     "enzyme": "^2.2.0",
