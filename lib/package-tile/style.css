@@ -51,7 +51,7 @@
   .packageImage {
     height: 200px;
     position: relative;
-    width: 305px;
+    width: 375px;
   }
     .mintBar {
       background-color: rgba(109,180,169, 0.7);
@@ -125,3 +125,10 @@
           color: #7e7e7e;
           font-family: SourceSansLight;
         }
+
+
+  @media (max-width: 325px) {
+   .packageImage {
+     width: 305px;
+   }
+  }

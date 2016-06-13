@@ -75,7 +75,7 @@
 .destinationImage {
   height: 200px;
   position: relative;
-  width: inherit;
+  width: 375px;
   background-size: 375px 200px;
   background-repeat: no-repeat;
 }
@@ -146,4 +146,11 @@
   display: inline-block;
   font-size: 1.1rem;
   font-family: ThomasHeadlineBold;
+}
+
+@media (max-width: 325px) {
+ .destinationImage {
+   margin-bottom: 14px;
+   width: 305px;
+ }
 }
