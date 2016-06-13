@@ -1,5 +1,10 @@
 import { VIEW_ARTICLE } from '../constants/actionTypes';
 
+import configuration from '../../config';
+import configure from 'con.figure';
+
+const config = configure(configuration);
+
 /**
  * Action function that handles viewing articles
  * @param  {object} content   article content
@@ -11,7 +16,7 @@ export const getArticle = (bucketId, itemId) => {
   return (dispatch) => {
     // JQuery imported at index.html and intex.template.html
     $.getJSON(
-      `https://numo-search-results.s3.amazonaws.com/ci/${bucketId}/${itemId}.json`,
+      `${config.bucketUrl}${bucketId}/${itemId}.json`,
       (data) => {
         console.info(data);
         dispatch(viewArticle(data.tile));
