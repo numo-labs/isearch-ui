@@ -1,7 +1,9 @@
 # isearch-ui
 The ui for inspirational search!
 
-## Adding a component
+The ui is hosted as a static website from an s3 bucket. We use React and Redux with Babel and Webpack for transpiling and bundling.
+
+## Folder Structure
 
 The eventual aim is to abstract all the individual components (filter-tile, package-tile) into separate npm modules. Currently the main elements of the project are structured as follows:
 
@@ -19,73 +21,78 @@ The eventual aim is to abstract all the individual components (filter-tile, pack
 │         └── home
 │               ├── index.js
 │               └── styles.css
+│     ├──containers
+│     ├──reducers
+│     ├──constants
+│     ├──actions
+│     ├──store
 |     ├── index.js
 |     ├── index.html
 │     └── index.template.html
 ├── test         
 ```
 
-The webpack config is set up so that any folder inside the lib folder behaves like an npm module so can be required as e.g. `const FilterTile = require('filter-tile');`
+All the re-usable React components are kept in the lib folder with their own tests so that they can easily be published to NPM if desired.
 
-This line in the webpack config is the important part, so it can be removed once the modules have been published to npm:
-
-```js
-  root: [
-    path.join(process.cwd(), 'lib')
-  ]
-```
-
-To test out a new component before publishing to NPM:
-
+To create a new component:
 * add a folder to the lib folder with an index.js file with the component
 * add a styles.css file for the component. If custom fonts are required, they have to be linked from the fonts folder in the root of the project (as otherwise webpack wont be able to resolve the paths)
 
 To move a component out into its own npm module
 * Set up a babel-react-webpack project (use the [canary project](https://github.com/numo-labs/react-canary-component) as a template)
 * Copy over the contents of the component from the lib folder
-* Create a font folder and copy over the necessary font files
+* Create a font folder and copy over the necessary font files and the same for assets
 
 ## Routing
 
-This project uses 'react-router' and 'react-router-redux' for routing. The possible routes are specified in the file `src/containers/router.js`.
+This project uses 'react-router' and 'react-router-redux' for routing. The possible routes are specified in the file `src/containers/router.js`. Each route is a redux container - i.e. a React component which directly gets props from the redux store. The containers are in the folder `src/containers`.
 
-**NOTE**
+### Routing history
 
-Every time a new version is deployed to s3 the following code needs to be added to the s3 static permission hosting redirection rules - replace '0.14' with the name of the new version..
+Currently, `hashHistory` is being used with react-router to enable shareable links - the website is served from an s3 bucket so with `browserHistory` the user would get 404 errors (no files in the bucket matching the browser url).
 
-```
-<RoutingRule>
-<Condition>
-  <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals >
-  <KeyPrefixEquals>isearch/0.14</KeyPrefixEquals>
-</Condition>
-<Redirect>
-  <ReplaceKeyWith>isearch/0.14/index.html</ReplaceKeyWith>
-</Redirect>
-</RoutingRule>
-```
+**TODO: To enable `browserHistory`, we need to be able to redirect the user to the index.html page whenever there is a 404 error so react-router can use the url to render the correct page.**
 
-This is needed in order for s3 to not issue a `404 Not Found` error for changes to the browser URL (which is modified by react-router). The loading of the correct content is handled by the router rather than needing a server to serve the correct content based on url.
+## Services
+
+### GraphQL
+
+### Websockets
 
 
 ## Deployment to S3
 
 A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.  
 
-**Currently the bucket folder is set 'isearch/' plus the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be 'isearch/0.1'.  
-You also need to update the basename path in config.js with the new version number**
+**Currently the bucket folder is set 'isearch/' plus the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be 'isearch/0.1'**
 
 You also need to check you have the AWS CLI set up with the correct access keys. Then, in your terminal type:
 
 ```js
-npm run deploy
+npm run ci:build
+
+or
+
+npm run prod:build
 
 ```
 
-This will build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed (to prevent caching by s3)and the index.html file will be built from the template in the src folder ('index.template.html'). The contents of the public folder will then be uploaded to the specified Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
+This will use webpack config (either ci or prod) to build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed (to prevent caching by s3) and the index.html file will be built from the template in the src folder ('index.template.html').
 
-**We will use continuous integration with Codeship so the deployment will be done after code has been merged into the demo branch**
+To upload the files to s3 use the corresponding deploy commands using gulp:
 
+```js
+gulp ci:deploy
+
+or
+
+gulp prod:deploy
+
+```
+
+The contents of the public folder will then be uploaded to the specified Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
+
+# APPENDIX
 
 ## Setting up the React Webpack Babel Project
 
