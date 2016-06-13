@@ -90,7 +90,7 @@ class ArticleFullPage extends Component {
         <section>
           <NavHeader backToSearch={goBack}/>
           <div className='articleFullPageContainer'>
-            <FadeImage className='articleHeaderImage' src={introSection.image} />
+            <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
             <div className='articleContentContainer'>
               <section>
                 <div className='articleSection'>
@@ -101,7 +101,7 @@ class ArticleFullPage extends Component {
             { content.map((section, key) => {
               return (
                 <section key={key}>
-                  {key === 0 && section.image ? <FadeImage className='articleHeader' src={section.image}/> : null}
+                  {key === 0 && section.image ? <FadeImage className='articleHeader articleImage' src={section.image}/> : null}
                   <div key={key} className='articleSection'>
                     {key !== 0 && section.image ? <FadeImage className='articleImage' src={section.image}/> : null}
                     {section.title ? (key === 0 ? <h1>{section.title}</h1> : <h2 >{section.title}</h2>) : null}

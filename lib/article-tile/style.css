@@ -20,10 +20,11 @@
     cursor: pointer;
 }
 
-.articleImage {
+.articleTileImage {
     display: inline-block;
     height: 20em;
-    width: 375px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .text {
