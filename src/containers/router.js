@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory, applyRouterMiddleware } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-
+import useScroll from 'react-router-scroll';
 // components
 import ISearch from '../containers/isearch.js';
 import ArticleFullPage from '../containers/article.js';
@@ -42,13 +42,17 @@ export default class Root extends Component {
     if (this.socket) { this.socket.destroy(); }
   }
 
+  determineScrollBehaviour ({ location: prevLocation }, { location }) {
+    return location.pathname.indexOf('hotel') > -1 ? [0, 0] : true; // scroll to top for hotel route
+  }
+
   render () {
     return (
       <Provider store={store}>
-        <Router history={syncedHistory}>
-          <Route path='/' component={App} ignoreScrollBehavior>
-            <IndexRoute component={ISearch}/>
-            <Route path='search/:bucketId' component={ISearch}/>
+        <Router history={syncedHistory} render={applyRouterMiddleware(useScroll(this.determineScrollBehaviour))}>
+          <Route path='/' component={App}>
+            <IndexRoute component={ISearch} />
+            <Route path='search/:bucketId' component={ISearch} />
             <Route path='article/:bucketId/:itemId' component={ArticleFullPage} />
             <Route path='hotel/:bucketId/:itemId' component={HotelPage} />
             <Route path='destination/:bucketId/:itemId' component={DestinationFullPage} />

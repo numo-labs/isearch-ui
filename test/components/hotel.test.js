@@ -76,8 +76,10 @@ describe('Component', function () {
     it('should render our HotelPage component', function (done) {
       global.dataLayer = [];
       const wrapper = shallow(<HotelPage {...defaultProps} />);
+      const title = wrapper.find('.titlePackage').text();
       const children = wrapper.children().nodes;
       expect(children).to.have.length(4);
+      expect(title).to.equal('Sun Wing');
       done();
     });
     it('should admit a boolean at amenities', function (done) {
@@ -88,12 +90,14 @@ describe('Component', function () {
       expect(children).to.have.length(4);
       done();
     });
-    it('should render a loading spinner if there is no hotel description', function (done) {
+    it('should render the full page with empty contents if there is no hotel description', function (done) {
       global.dataLayer = null;
       const props = { ...defaultProps, packageOffer: { hotel: { description: null } } };
       const wrapper = shallow(<HotelPage {...props} />);
+      const title = wrapper.find('.titlePackage').text();
       const children = wrapper.children().nodes;
-      expect(children).to.have.length(0);
+      expect(children).to.have.length(4);
+      expect(title).to.equal('');
       done();
     });
   });
