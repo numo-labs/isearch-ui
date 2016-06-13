@@ -4,6 +4,7 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 var pkg = require('./package.json');
 var mime = require('mime-types');
+var zopfli = require('node-zopfli');
 
 /*
 * config values
@@ -65,8 +66,12 @@ gulp.task('prod:deploy', function () {
         var params = {
           Bucket: bucketName,
           Key: bucketfolder + filename,
-          Body: fs.readFileSync(__dirname + '/public/' + filename),
-          ContentType
+          Body: zopfli.gzipSync(fs.readFileSync(__dirname + '/public/' + filename), {
+            numiterations: 15,
+            blocksplitting: true
+          }),
+          ContentType,
+          ContentEncoding: 'gzip'
         };
         s3.putObject(params, function (err, data) {
           if (err) console.log('Object upload unsuccessful!', err);
