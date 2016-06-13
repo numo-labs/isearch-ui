@@ -1,7 +1,7 @@
 # isearch-ui
 The ui for inspirational search!
 
-The ui is hosted as a static website from an s3 bucket. We use React and Redux with Babel and Webpack for transpiling and bundling.
+The ui is hosted as a static website from an s3 bucket. We use React and Redux with Babel and Webpack for transpiling and bundling. Data fetching is done by making GrahQL requests and recieving results through a web socket channel.
 
 ## Folder Structure
 
@@ -15,7 +15,9 @@ The eventual aim is to abstract all the individual components (filter-tile, pack
 ├── lib
 │   ├── filter-tile
 │         |── index.js
-│         └── styles.css
+│         |── styles.css
+│         └── test
+│           └── index.test.js
 ├── src
 │     └──components
 │         └── home
@@ -55,10 +57,43 @@ Currently, `hashHistory` is being used with react-router to enable shareable lin
 
 ## Services
 
+### Websocket channel
+
+When the app is mounted a connection is established with a web socket server. A connection ID is obtained which is saved to the redux store and used for every search request.
+
 ### GraphQL
 
-### Websockets
+To initiate a search, a GraphQL mutation is launched (defined in `src/constants/mutations.js`) with the search query, along with the web socket connection id and a client id.
 
+The results of the search are sent from the socket server through the web socket channel and saved to the redux store.
+
+## Testing
+
+### React
+
+Front end React tests are written using a testing utility called [Enzyme](https://github.com/airbnb/enzyme) which has useful methods for shallow rendering as well as full DOM rendering (using jsdom) and easy traversal using jQuery like syntax. Examples of tests can be found in the `src/test/components` folder or in each of the individual component folders within `lib`.
+Assertions are written using Chai `expect`.
+
+### Redux
+
+Synchronous Redux actions can be tested as normal functions. Asynchronous actions which use 'redux-thunk' and the `dispatch` and `getState` functions can be tested using the `mockConfigureStore` helper function from the `test/actions/test-helpers.js` file. This can be used to initialise a mock store with an initial state. `store.dispatch` can be used to mock dispatch an action and the `store.getActions` function can be used to retrieve the actions dispatched within the action being tested to check that the correct actions are being called.
+
+```js
+import thunk from 'redux-thunk';
+import configureMockStore from './test-helpers';
+import { expect } from 'chai';
+const mockStore = configureMockStore([thunk]);
+describe('Autocomplete actions', () => {
+  it(`getAutocompleteOptions does not launch graphql query when the
+      searchString value is 0`, (done) => {
+    const expectedActions = [];
+    const store = mockStore({search: { searchString: '' }});
+    store.dispatch(actions.getAutocompleteOptions());
+    expect(store.getActions()).to.deep.equal(expectedActions);
+    done();
+  });
+});
+```
 
 ## Deployment to S3
 
@@ -187,6 +222,7 @@ You can now visit your server by going to `http://localhost:8080/`
 FYI: If you go to `http://localhost:8080/webpack-dev-server/#/` you can see hot-loading with errors.
 
 ## Linting
+
 For linting we have chosen to use 'semistandard'. To install it run the following command in the command line:
 
 `$ npm i --save-dev semistandard`
