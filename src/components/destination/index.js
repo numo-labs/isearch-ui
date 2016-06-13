@@ -11,10 +11,12 @@ class DestinationFullPage extends Component {
       params,
       addSingleTag
     } = this.props;
+    const latitude = articleContent.location ? Number(articleContent.location.lat) : 0;
+    const longitude = articleContent.location ? Number(articleContent.location.lon) : 0;
     const marker = {
       position: {
-        lat: 40.41,
-        lng: -3.7
+        lat: latitude,
+        lng: longitude
       },
       defaultAnimation: 4
     };
@@ -32,8 +34,8 @@ class DestinationFullPage extends Component {
             googleMapElement={
               <GoogleMap
                 ref={(map) => (map) => console.log(map)}
-                defaultZoom={5}
-                defaultCenter={{ lat: 40.41, lng: -3.7 }}
+                defaultZoom={6}
+                defaultCenter={{ lat: latitude, lng: longitude }}
               >
               <Marker
                 {...marker}
