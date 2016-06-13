@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ArticleFooter from '../../../lib/article-tile/article-footer.js';
 import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
-
+import FadeImage from '../../../lib/fade-image';
 import './style.css';
 
 /*
@@ -58,7 +58,6 @@ class ArticleFullPage extends Component {
   }
 
   render () {
-    console.log('RENDERED ARTICLE');
     const { articleContent, goBack } = this.props;
     const tagColours = {
       amenities: 'rgba(12,125,125,0.6)',
@@ -91,7 +90,7 @@ class ArticleFullPage extends Component {
         <section>
           <NavHeader backToSearch={goBack}/>
           <div className='articleFullPageContainer'>
-            <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
+            <FadeImage className='articleHeaderImage' src={introSection.image} />
             <div className='articleContentContainer'>
               <section>
                 <div className='articleSection'>
@@ -102,10 +101,9 @@ class ArticleFullPage extends Component {
             { content.map((section, key) => {
               return (
                 <section key={key}>
-                  {key === 0 && section.image ? <div className='articleHeader' style={{backgroundImage: `url(${section.image})`}}/> : null}
+                  {key === 0 && section.image ? <FadeImage className='articleHeader' src={section.image}/> : null}
                   <div key={key} className='articleSection'>
-                    {key !== 0 && section.image ? <div className='articleImage' style={{backgroundImage: `url(${section.image})`}}><img
-                        src={section.image}/></div> : null}
+                    {key !== 0 && section.image ? <FadeImage className='articleImage' src={section.image}/> : null}
                     {section.title ? (key === 0 ? <h1>{section.title}</h1> : <h2 >{section.title}</h2>) : null}
                     {section.text ? <div className='articleText' dangerouslySetInnerHTML={this.rawMarkup(section.text)}/> : null}
                   </div>
