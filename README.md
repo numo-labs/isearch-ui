@@ -55,11 +55,17 @@ Currently, `hashHistory` is being used with react-router to enable shareable lin
 
 **TODO: To enable `browserHistory`, we need to be able to redirect the user to the index.html page whenever there is a 404 error so react-router can use the url to render the correct page.**
 
+### Scroll Position
+
+Scroll behaviour when transitioning between routes is controlled using 'react-router-scroll' which can be customised in the router `src/containers/router.js`.
+
 ## Services
 
 ### Websocket channel
 
 When the app is mounted a connection is established with a web socket server. A connection ID is obtained which is saved to the redux store and used for every search request.
+
+The web socket handler functions can be found in `src/services/websockets.js`;
 
 ### GraphQL
 
@@ -94,6 +100,9 @@ describe('Autocomplete actions', () => {
   });
 });
 ```
+
+## Analytics
+
 
 ## Deployment to S3
 
