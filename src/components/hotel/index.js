@@ -5,7 +5,6 @@ import capitalize from 'lodash.capitalize';
 import './styles.css';
 
 import ISearchSlider from '../../../lib/image-slider';
-import LoadingSpinner from '../../../lib/spinner';
 
 const heartShareSrc = 'https://cloud.githubusercontent.com/assets/12450298/14609563/3e0af0b6-0582-11e6-9668-d15a38cdea14.png';
 const ratingIconUrl = '../../../src/assets/ratingIcon.png';
@@ -123,8 +122,8 @@ class HotelPage extends Component {
     });
   }
 
-  renderHotelPage () {
-    const { packageOffer, goBack } = this.props;
+  renderHotelPage (props) {
+    const { packageOffer, goBack } = props;
     const hotelImages = packageOffer.hotel.images.large.map(i => i.uri);
     const roundedStarRating = Math.floor(packageOffer.hotel.starRating);
     const image = hotelImages[ 0 ];
@@ -191,15 +190,23 @@ class HotelPage extends Component {
 
   render () {
     const { packageOffer } = this.props;
+    const defaultPackage = {
+      goBack: this.props.goBack,
+      packageOffer: defaultProps.packageOffer
+    };
     if (packageOffer.hotel.description) {
       this.addAnalyticsData();
       return (
         <div className='hotelPageContainer'>
-          {this.renderHotelPage()}
+          {this.renderHotelPage(this.props)}
         </div>
       );
     } else {
-      return <LoadingSpinner />;
+      return (
+        <div className='hotelPageContainer'>
+          {this.renderHotelPage(defaultPackage)}
+        </div>
+      );
     }
   }
 }
@@ -209,6 +216,74 @@ HotelPage.propTypes = {
   getHotel: PropTypes.func,
   params: PropTypes.object,
   packageOffer: PropTypes.object
+};
+
+const defaultProps = {
+  packageOffer: {
+    hotel: {
+      starRating: 0,
+      images: {
+        small: [
+          {
+            uri: ''
+          }
+        ],
+        large: [
+          {
+            uri: ''
+          }
+        ]
+      },
+      name: '',
+      description: '',
+      place: {
+        country: '',
+        region: '',
+        name: ''
+      }
+    },
+    provider: {
+      context: ''
+    },
+    nights: 5,
+    flights: {
+      outbound: [ {
+        departure: {
+          localDateTime: ''
+        }
+      } ],
+      inbound: [ {
+        departure: {
+          localDateTime: ''
+        }
+      } ]
+    },
+    price: {
+      perPerson: ''
+    },
+    amenities: {
+      allinclusive: false,
+      bar: true,
+      childrenpool: true,
+      cleaningdaysperweek: '6',
+      distancetobeach: '300 m',
+      distancetocenter: '200 m',
+      elevator: true,
+      isadulthotel: false,
+      lolloandbernie: false,
+      minimarket: false,
+      outdoorpool: '2 stk.',
+      poolbar: true,
+      restaurant: true,
+      waterslide: false,
+      wifi: true
+    }
+  },
+  params: {
+    bucketId: '12345',
+    itemId: '1234556'
+  },
+  getHotel: () => {}
 };
 
 export default HotelPage;
