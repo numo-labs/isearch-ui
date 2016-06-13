@@ -51,7 +51,7 @@
     "babel-register": "^6.6.0",
     "bl": "^1.1.2",
     "chai": "^3.5.0",
-    "con.figure": "0.0.0",
+    "con.figure": "1.0.0",
     "css-loader": "^0.23.1",
     "engine.io-client": "^1.6.9",
     "enzyme": "^2.2.0",
