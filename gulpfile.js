@@ -4,20 +4,21 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 var pkg = require('./package.json');
 var mime = require('mime-types');
+
+/*
+* config values
+*
+*/
+
+var version = pkg.version.split('.')[2]; // using the patch version number
+var bucketName = 'www.tcdl.io';
+var bucketfolder = 'isearch/0.' + version + '/';
+
 /**
  * building the bundle
  */
 
 gulp.task('ci:deploy', function () {
-  /*
-  * config values
-  *
-  */
-
-  var version = pkg.version.split('.')[2]; // using the patch version number
-  var bucketName = 'www.tcdl.io';
-  var bucketfolder = 'isearch/0.' + version + '/';
-
   return exec('npm run ci:build', function (error, stdout, stderr) {
     if (error === null) {
       var s3 = new AWS.S3({region: 'eu-west-1'});
@@ -49,9 +50,7 @@ gulp.task('prod:deploy', function () {
   *
   */
 
-  var version = pkg.version;
-  var bucketName = 'www.tcdl.io-prod';
-  var bucketfolder = 'isearch/' + version + '/';
+  var bucketfolder = 'isearch/prod/';
 
   return exec('npm run prod:build', function (error, stdout, stderr) {
     if (error === null) {
