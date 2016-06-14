@@ -35,7 +35,7 @@ class DestinationFullPage extends Component {
               <GoogleMap
                 ref={(map) => (map) => console.log(map)}
                 defaultZoom={6}
-                defaultCenter={{ lat: latitude, lng: longitude }}
+                defaultCenter={marker.position}
               >
               <Marker
                 {...marker}
