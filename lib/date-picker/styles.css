@@ -74,6 +74,14 @@
   color: #ccc;
 }
 
+.datePickerInput {
+  cursor: pointer;
+}
+
+.departDate {
+  cursor: pointer;
+}
+
 @media (min-width: 650px) {
   .datePickerContainer {
     height: 3.55em;
