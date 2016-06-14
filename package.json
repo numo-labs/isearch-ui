@@ -105,6 +105,7 @@
     "react-visibility-sensor": "^3.0.0",
     "redux": "^3.5.2",
     "shuffle-array": "^1.0.0",
+    "striptags": "^2.1.1",
     "uuid": "^2.0.2"
   },
   "pre-commit": [
