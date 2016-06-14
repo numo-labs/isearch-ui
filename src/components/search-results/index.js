@@ -160,7 +160,7 @@ class SearchResults extends Component {
         );
       } else if (item.tile.type === 'destination' && contentExists) {
         return (
-          <div>
+          <div className='shadowHover'>
             {this.removeButton(item.id)}
             <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
               <DestinationTile {...item} />
