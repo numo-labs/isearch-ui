@@ -57,7 +57,7 @@ class SearchResults extends Component {
     } else if (dataLayer && item.type === 'tile') {
       clickEventObject.ecommerce.click.products.push({
         'id': item.tile.id,
-        'brand': 'article_tile'
+        'brand': item.tile.type === 'article' ? 'article_tile' : 'destination_tile'
       });
       dataLayer.push(clickEventObject);
     }
