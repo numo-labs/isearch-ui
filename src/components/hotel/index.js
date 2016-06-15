@@ -176,7 +176,7 @@ class HotelPage extends Component {
             <div className='ppp'>ppp <span className='hotelPrice'>
               {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
             </span></div>
-            <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick()}>
+            <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
               <div className='bookButton'>SEE PRIS OCH BOKA</div>
             </a>
           </div>
@@ -185,7 +185,7 @@ class HotelPage extends Component {
             {this.renderImageList(hotelImages.slice(1))}
           </div>
           <div className='bookButtonFooter'>
-            <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick()}>
+            <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
               <div className='hotelInfoLink'>Se fuld information hotel og bog</div>
               <div className='bookButton'>SEE PRIS OCH BOKA</div>
             </a>
