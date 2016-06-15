@@ -12,7 +12,8 @@ import './style.css';
 const masonryOptions = {
   transitionDuration: '0.4s',
   fitWidth: true,
-  gutter: 14 // horizontal spacing between tiles
+  gutter: 14, // horizontal spacing between tiles
+  itemSelector: '.gridItem'
 };
 
 class SearchResults extends Component {
