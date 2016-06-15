@@ -6,11 +6,11 @@ import Tag from '../../../lib/tags/tag.js';
 import './style.css';
 
 /*
-* This component uses dangerouslySetInnerHTML to render the article text
-* This is because text from the article editor (http://numo-labs-articles.s3-website-eu-west-1.amazonaws.com/)
-* is saved as a html string - React escapes html to prevent XSS attacks unless
-* it is set using dangerouslySetInnerHTML
-*/
+ * This component uses dangerouslySetInnerHTML to render the article text
+ * This is because text from the article editor (http://numo-labs-articles.s3-website-eu-west-1.amazonaws.com/)
+ * is saved as a html string - React escapes html to prevent XSS attacks unless
+ * it is set using dangerouslySetInnerHTML
+ */
 
 class ArticleFullPage extends Component {
   constructor () {
@@ -27,20 +27,25 @@ class ArticleFullPage extends Component {
 
   getArticleData () {
     this.props.getArticle(this.props.params.bucketId, this.props.params.itemId);
-    this.setState({articleContent: this.props.articleContent});
+    this.setState({ articleContent: this.props.articleContent });
   }
 
   addAnalyticsData () {
+    const content = this.props.articleContent;
+    const product = content.type === 'article' ? {
+      id: content.sections[ 0 ].tile,
+      brand: 'article_tile'
+    } : {
+      id: content.name,
+      brand: 'destination_tile'
+    };
     if (dataLayer) {
       dataLayer.push({
         'event': 'productViewed',
         'ecommerce': {
           'detail': {
-            'actionField': {'list': 'inspirational search feed'},
-            'products': [{
-              'id': this.props.articleContent.sections[0].title,
-              'brand': 'article_tile'
-            }]
+            'actionField': { 'list': 'inspirational search feed' },
+            'products': [ product ]
           }
         }
       });

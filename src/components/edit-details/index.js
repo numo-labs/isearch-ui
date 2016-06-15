@@ -15,6 +15,9 @@ import {
 import './style.css';
 export default class EditDetails extends Component {
   onSearchClick () {
+    dataLayer.push({
+      event: 'travelInfoUpdate'
+    });
     this.props.updateHeaderTitles();
     this.props.startSearch();
     this.props.goBack();
