@@ -13,7 +13,6 @@
   width: 375px;
   position: relative;
   box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-  transition: all 0.3s ease-in-out;
 }
 
 .gridItem::after {
@@ -27,6 +26,7 @@
 
 .gridItem:hover {
   transform: scale(1.025, 1.025);
+  transition: all 0.3s ease-in-out;
 }
 
 .gridItem:hover::after {
