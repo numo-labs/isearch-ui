@@ -212,19 +212,29 @@ class SearchResults extends Component {
 
   render () {
     const {
+      searchComplete,
       items
     } = this.props;
     const searchItems = items.filter(item => !item.related);
+    const hideGridStyle = {
+      minHeight: '0'
+    };
+    const showGridStyle = {
+      minHeight: '80vh'
+    };
+    const gridStyle = searchComplete && searchItems.length === 0 ? hideGridStyle : showGridStyle;
     return (
       <div>
-        <Masonry
-          elementType={'div'}
-          options={masonryOptions}
-          disableImagesLoaded={false}
-          className='grid load-effect'
-        >
-        {this.mapItems(searchItems)}
-        </Masonry>
+        <div style={gridStyle}>
+          <Masonry
+            elementType={'div'}
+            options={masonryOptions}
+            disableImagesLoaded={false}
+            className='grid load-effect'
+          >
+          {this.mapItems(searchItems)}
+          </Masonry>
+        </div>
         {this.getRelatedContent()}
       </div>
     );

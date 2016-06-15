@@ -34,3 +34,9 @@
 .articleFooter .addTagButton:hover {
   background-color: #F37800;
 }
+
+@media (max-width: 750px) {
+  .articleFooter {
+    margin-bottom: 1em;
+  }
+}
