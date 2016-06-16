@@ -7,6 +7,7 @@ import {
   RESET_TAGS
 } from '../constants/actionTypes';
 import { startSearch } from './search-results.js';
+import { analyticsAddTagObject, analyticsRemoveTagObject } from '../../lib/analytics-helper';
 
 /**
 * TEMP FUNCTIONS TO ADD MOCK TAGS
@@ -26,6 +27,9 @@ export function addTags (tags) {
 export function removeTag (displayName) {
   return (dispatch, getState) => {
     dispatch(deleteTag(displayName));
+    const { search: { tags } } = getState();
+    const currentTagsNames = tags.map((tag) => tag.displayName);
+    dataLayer.push(analyticsRemoveTagObject(displayName, currentTagsNames));
     return dispatch(startSearch());
   };
 }
@@ -59,9 +63,11 @@ export const addSingleTag = (displayName, id, isInitialTag) => {
   return (dispatch, getState) => {
     const { search: { tags } } = getState();
     const tagExists = tags.filter(tag => tag.displayName === displayName).length > 0;
+    const currentTagsNames = tags.map((tag) => tag.displayName);
     if (tagExists) {
       return;
     } else {
+      dataLayer.push(analyticsAddTagObject(displayName, currentTagsNames));
       dispatch(addTag(displayName, id, isInitialTag || false));
       dispatch(startSearch());
     }
