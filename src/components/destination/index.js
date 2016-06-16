@@ -9,7 +9,8 @@ class DestinationFullPage extends Component {
       goBack,
       getArticle,
       params,
-      addSingleTag
+      addSingleTag,
+      go
     } = this.props;
     const latitude = articleContent.location ? Number(articleContent.location.lat) : 0;
     const longitude = articleContent.location ? Number(articleContent.location.lon) : 0;
@@ -24,6 +25,7 @@ class DestinationFullPage extends Component {
       <ArticleFullPage
         articleContent={articleContent}
         goBack={goBack}
+        go={go}
         getArticle={getArticle}
         params={params}
         addSingleTag={addSingleTag}
@@ -53,6 +55,7 @@ class DestinationFullPage extends Component {
 DestinationFullPage.propTypes = {
   articleContent: PropTypes.object,
   goBack: PropTypes.func,
+  go: PropTypes.func,
   getArticle: PropTypes.func,
   params: PropTypes.object,
   addSingleTag: PropTypes.func,
