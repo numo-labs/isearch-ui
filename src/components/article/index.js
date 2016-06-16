@@ -32,12 +32,9 @@ class ArticleFullPage extends Component {
 
   addAnalyticsData () {
     const content = this.props.articleContent;
-    const product = content.type === 'article' ? {
-      id: content.sections[ 0 ].tile,
-      brand: 'article_tile'
-    } : {
+    const product = {
       id: content.name,
-      brand: 'destination_tile'
+      brand: content.type === 'article' ? 'article_tile' : 'destination_tile'
     };
     if (dataLayer) {
       dataLayer.push({
