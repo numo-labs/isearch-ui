@@ -82,6 +82,13 @@
    margin-bottom: 14px;
    width: 360px;
  }
+ .gridItem:hover {
+   transform: none;
+   transition: none;
+ }
+ .gridItem:hover::after {
+   opacity: 1;
+ }
 }
 
 @media (max-width: 325px) {
