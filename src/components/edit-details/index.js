@@ -3,6 +3,7 @@ import DropDown from '../../../lib/select-drop-down';
 import Calendar from '../../../lib/date-picker';
 import { Link } from 'react-router';
 import '../../../lib/react-date-picker/css/index.css';
+const travelInfoExitButton = require('../../../src/assets/close-white.svg');
 
 import {
   adultOptions,
@@ -48,7 +49,7 @@ export default class EditDetails extends Component {
           <Link to='/' onClick={() => goBack()}>
             <div>
               <img
-                src={'../../src/assets/close-white.svg'}
+                src={travelInfoExitButton}
                 alt='exit button'
                 className='travelInfoExitButton'
               />
