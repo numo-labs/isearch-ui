@@ -19,7 +19,7 @@ export const initialState = {
   childAge4: '0 Barns alder',
   departureAirport: 'Copenhagen - CPH',
   duration: '1 uge',
-  departureDate: moment().add(14, 'days').format('YYYY-MM-DD'),
+  departureDate: moment().add(3, 'months').format('YYYY-MM-DD'),
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
