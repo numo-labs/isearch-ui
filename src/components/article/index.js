@@ -87,6 +87,7 @@ class ArticleFullPage extends Component {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
       this.addAnalyticsData();
+      if (document.querySelector('title')) document.querySelector('title').innerHTML = introSection.title;
       return (
         <section>
           <NavHeader backToSearch={goBack}/>

@@ -73,8 +73,8 @@ class ISearch extends Component {
       </ScrollView>
     );
   }
-
   render () {
+    if (document.querySelector('title')) document.querySelector('title').innerHTML = 'ISearch';
     const {
       tags,
       removeTag,
