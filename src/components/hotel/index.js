@@ -139,6 +139,7 @@ class HotelPage extends Component {
     const region = packageOffer.hotel.place.region === null ? '' : packageOffer.hotel.place.region + ', ';
     const name = packageOffer.hotel.place.name;
 
+    if (document.querySelector('title')) document.querySelector('title').innerHTML = packageOffer.hotel.name;
     return ([
       <NavHeader backToSearch={goBack}/>,
       <div className='hotelPackageImage' style={{backgroundImage: `url(${image})`}}/>,
