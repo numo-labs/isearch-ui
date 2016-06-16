@@ -34,7 +34,8 @@ class HotelPage extends Component {
             'actionField': {'list': 'inspirational search feed'},
             'products': [{
               'id': this.props.packageOffer.provider.reference,
-              'brand': 'article_tile'
+              'brand': 'hotel_tile',
+              'pageName': '/hotel/' + this.props.packageOffer.hotel.name.replace(/ /g, '-')
             }]
           }
         }
