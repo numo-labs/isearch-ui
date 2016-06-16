@@ -34,7 +34,8 @@ class ArticleFullPage extends Component {
     const content = this.props.articleContent;
     const product = {
       id: content.name,
-      brand: content.type === 'article' ? 'article_tile' : 'destination_tile'
+      brand: content.type === 'article' ? 'article_tile' : 'destination_tile',
+      pageName: content.type === 'article' ? '/article/' : '/destination/' + content.name.replace(/ /g, '-')
     };
     if (dataLayer) {
       dataLayer.push({
@@ -88,7 +89,7 @@ class ArticleFullPage extends Component {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
       this.addAnalyticsData();
-      if (document.querySelector('title')) document.querySelector('title').innerHTML = introSection.title;
+      if (document.querySelector('title')) document.querySelector('title').innerHTML = 'article | ' + introSection.title;
       return (
         <section>
           <NavHeader backToSearch={goBack} go={go}/>

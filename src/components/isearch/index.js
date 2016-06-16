@@ -35,6 +35,24 @@ class ISearch extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
+  addAnalyticsData () {
+    if (dataLayer) {
+      dataLayer.push({
+        'event': 'homepageViewed',
+        'ecommerce': {
+          'detail': {
+            'actionField': {'list': 'inspirational search feed'},
+            'products': [{
+              'id': 'isearch_homepage',
+              'brand': 'homepage_tile',
+              'pageName': '/InspirationalSearch'
+            }]
+          }
+        }
+      });
+    }
+  }
+
   renderResults () {
     const {
       onYesFilter,
@@ -78,7 +96,8 @@ class ISearch extends Component {
     );
   }
   render () {
-    if (document.querySelector('title')) document.querySelector('title').innerHTML = 'ISearch';
+    if (document.querySelector('title')) document.querySelector('title').innerHTML = 'Thomas Cook Inspirational Search';
+    this.addAnalyticsData();
     const {
       tags,
       removeTag,
