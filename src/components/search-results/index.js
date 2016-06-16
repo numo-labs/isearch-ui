@@ -12,15 +12,16 @@ import './style.css';
 
 const masonryOptions = {
   transitionDuration: '0.4s',
-  itemSelector: '.gridItem',
   fitWidth: true,
-  gutter: 14 // horizontal spacing between tiles
+  gutter: 14, // horizontal spacing between tiles
+  itemSelector: '.gridItem'
 };
 
 class SearchResults extends Component {
   constructor () {
     super();
     this.mapItems = this.mapItems.bind(this);
+    this.getRelatedContent = this.getRelatedContent.bind(this);
   }
   shouldComponentUpdate (nextProps) {
     if (nextProps.items.length === this.props.items.length) {
@@ -64,19 +65,20 @@ class SearchResults extends Component {
     return;
   }
 
-  mapItems () {
-    const {
-      items
-    } = this.props;
+  mapItems (items, start = 0) {
     return (
       items.map((item, index) => {
-        return (
-          <VisibilitySensor key={index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
-            <div key={index} className='gridItem'>
-              {this.renderItem(item, index)}
-            </div>
-          </VisibilitySensor>
-        );
+        if (item.message) {
+          return item.message;
+        } else {
+          return (
+            <VisibilitySensor key={start + index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
+              <div key={index} className='gridItem'>
+                {this.renderItem(item, index)}
+              </div>
+            </VisibilitySensor>
+          );
+        }
       })
     );
   }
@@ -137,7 +139,7 @@ class SearchResults extends Component {
         );
       } else if (item.tile.type === 'destination' && contentExists) {
         return (
-          <div>
+          <div className='shadowHover'>
             {this.removeButton(item.id)}
             <div className='clickable'
                  onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
@@ -158,16 +160,52 @@ class SearchResults extends Component {
     return <div/>;
   }
 
+  getRelatedContent () {
+    const {
+      items,
+      searchComplete,
+      feedEnd
+    } = this.props;
+    const searchItems = items.filter(item => !item.related);
+    const relatedItems = items.filter(item => item.related && item.type !== 'filter');
+    // we might want to have this depend on the browser language at some point:
+    // const message = searchItems.length > 0 ? 'You might also be interested in...' : `Looks like we don't have any results that match your search. But you might be interested in...`;
+    const message = searchItems.length > 0
+      ? 'Måske er du også interesseret i…'
+      : `Din søgning gav ingen resultater, men måske er du interesseret i…`;
+    // see: https://github.com/numo-labs/isearch-ui/issues/257
+    if (((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) && relatedItems.length > 0) {
+      return (
+        [<div key={'message'} className='feed-end-message'>{message}</div>,
+        <Masonry
+          elementType={'div'}
+          options={masonryOptions}
+          disableImagesLoaded={false}
+          className='grid load-effect'
+        >
+        {this.mapItems(relatedItems, searchItems.length)}
+        </Masonry>]
+      );
+    }
+  }
+
   render () {
+    const {
+      items
+    } = this.props;
+    const searchItems = items.filter(item => !item.related);
     return (
-      <Masonry
-        elementType={'div'}
-        options={masonryOptions}
-        disableImagesLoaded={false}
-        className='grid load-effect'
-      >
-        {this.mapItems()}
-      </Masonry>
+      <div>
+        <Masonry
+          elementType={'div'}
+          options={masonryOptions}
+          disableImagesLoaded={false}
+          className='grid load-effect'
+        >
+        {this.mapItems(searchItems)}
+        </Masonry>
+        {this.getRelatedContent()}
+      </div>
     );
   }
 }
@@ -182,7 +220,9 @@ SearchResults.propTypes = {
   changeRoute: PropTypes.func,
   viewedArticles: PropTypes.array,
   removeTile: PropTypes.func,
-  addSingleTag: PropTypes.func
+  addSingleTag: PropTypes.func,
+  searchComplete: PropTypes.bool,
+  feedEnd: PropTypes.bool
 };
 
 export default SearchResults;

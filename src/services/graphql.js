@@ -2,6 +2,11 @@
 
 import fetch from 'isomorphic-fetch';
 import uuid from 'uuid';
+import configure from 'con.figure';
+import configuration from '../../config';
+
+const config = configure(configuration);
+
 /**
 * Express-graphql accepts request with the parameters
 * @{query} - A valid GraphQL query or mutation
@@ -10,7 +15,7 @@ import uuid from 'uuid';
 **/
 
 export function query (query, variables) {
-  return fetch('https://f0uih51vu0.execute-api.eu-west-1.amazonaws.com/ci/graphql', {
+  return fetch(config.graphqlUrl, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

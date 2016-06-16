@@ -115,7 +115,7 @@ export default class EditDetails extends Component {
             );
           })}
           <div className='changeInputButtonContainer'>
-            <div className='changeInputButton' onClick={this.onSearchClick.bind(this)}>SEARCH</div>
+            <div className='changeInputButton' onClick={this.onSearchClick.bind(this)}>UPPDATERING</div>
           </div>
         </div>
       </div>

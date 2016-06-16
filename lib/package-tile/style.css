@@ -51,23 +51,14 @@
   .packageImage {
     height: 200px;
     position: relative;
-    width: inherit;
-    background-size: 375px 200px;
-    background-repeat: no-repeat;
+    width: 375px;
   }
     .mintBar {
       background-color: rgba(109,180,169, 0.7);
       position: absolute;
-      bottom: 0;
       width: inherit;
-      text-align: center;
-      margin: 0 auto;
+      top: 12.5em;
       height: 25px;
-      line-height: 25px;
-      color: #ffffff;
-      font-family: SourceSansSemiBold;
-      font-size: 1em;
-      text-transform: uppercase;
     }
 
   .descriptionContainer {
@@ -134,3 +125,10 @@
           color: #7e7e7e;
           font-family: SourceSansLight;
         }
+
+
+  @media (max-width: 325px) {
+   .packageImage {
+     width: 305px;
+   }
+  }

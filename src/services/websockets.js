@@ -1,10 +1,11 @@
 import * as SearchResultActions from '../actions/search-results.js';
 import * as TagActions from '../actions/tags.js';
 import Primus from '../../src/services/primus.js';
+import configuration from '../../config';
+import configure from 'con.figure';
 
-// TODO: Switch URL's based on the deployed environment. Maybe by using
-// process.env and the setup within the webpack.config?
-const socketUrl = 'https://ci-socket-server.tcdl.io?auto_room=false';
+const config = configure(configuration);
+
 /**
 * Function that initialises a connection with the web socket server and saves
 * the id to the redux store
@@ -15,16 +16,21 @@ const socketUrl = 'https://ci-socket-server.tcdl.io?auto_room=false';
 */
 
 export function initialise (actionCreatorBinder, location) {
-  const primus = new Primus(socketUrl);
+  const primus = new Primus(config.socketUrl);
   const {
     saveSearchResult,
     saveSocketConnectionId,
-    resetTags
+    resetTags,
+    setSearchComplete
   } = actionCreatorBinder({...SearchResultActions, ...TagActions});
   primus.on('data', function received (data) {
     // console.log('incoming socket data', data);
     if (data.graphql) {
-      saveSearchResult(data);
+      if (data.graphql.searchComplete) { // event sent by the package provider when all packages have been sent
+        setSearchComplete(data);
+      } else if (data.graphql.items.length > 0) {
+        saveSearchResult(data);
+      }
     }
   });
 

@@ -1,7 +1,6 @@
 import {
   RECEIVE_SEARCH_RESULT,
   BUSY_SEARCHING,
-  // TAG_ADD_TAGS,
   TAG_REMOVE_TAG,
   RESET_TAGS,
   SEARCH_ERROR,
@@ -17,7 +16,9 @@ import {
   SAVE_BUCKET_ID,
   UPDATE_DISPLAYED_ITEMS,
   CLEAR_FEED,
-  TILES_REMOVE_TILE
+  TILES_REMOVE_TILE,
+  RECEIVE_RELATED_RESULT,
+  SEARCH_COMPLETE
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
@@ -83,7 +84,33 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         displayedItems: mockItems,
-        scrollPage: 7
+        scrollPage: 7,
+        feedEnd: true
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it(`UPDATE_DISPLAYED_ITEMS: -> adds items from action to the displayedItems
+      state and sets feedEnd to false if action.items.length < items.length`, (done) => {
+      const action = {type: UPDATE_DISPLAYED_ITEMS, items: mockItems};
+      const state = reducer({...initialState, items: mockItems.concat(mockItems)}, action);
+      const expectedState = {
+        ...initialState,
+        displayedItems: mockItems,
+        scrollPage: 7,
+        feedEnd: false,
+        items: mockItems.concat(mockItems)
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it(`RECEIVE_RELATED_RESULT: -> appends items from action to the relatedItems
+        state`, (done) => {
+      const action = {type: RECEIVE_RELATED_RESULT, items: mockItems};
+      const state = reducer({...initialState, relatedItems: mockItems}, action);
+      const expectedState = {
+        ...initialState,
+        relatedItems: mockItems.concat(mockItems)
       };
       expect(state).to.deep.equal(expectedState);
       done();
@@ -153,6 +180,36 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         bucketId: '12345'
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it(`SEARCH_COMPLETE -> marks searchComplete as true and loading as false. If
+      the displayedItems is zero then marks feedEnd as true (end of search Items)
+      and sets the displayedItems to the relatedItems from the state`, (done) => {
+      const action = {type: SEARCH_COMPLETE};
+      const state = reducer({ ...initialState, relatedItems: mockItems }, action);
+      const expectedState = {
+        ...initialState,
+        relatedItems: mockItems,
+        displayedItems: mockItems,
+        searchComplete: true,
+        loading: false,
+        feedEnd: false
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it(`SEARCH_COMPLETE -> marks searchComplete as true and loading as false. If
+      the displayedItems is greater than zero then doesn't update displayedItems
+      or feedEnd`, (done) => {
+      const action = {type: SEARCH_COMPLETE};
+      const state = reducer({...initialState, displayedItems: mockItems}, action);
+      const expectedState = {
+        ...initialState,
+        displayedItems: mockItems,
+        searchComplete: true,
+        loading: false
       };
       expect(state).to.deep.equal(expectedState);
       done();

@@ -11,6 +11,7 @@
   display: inline;
   padding-left: 1.5em;
   padding-right: 0.2em;
+  cursor: pointer;
 }
 
 .inputBar {
@@ -50,6 +51,7 @@
   height: 2em;
   line-height: 2em;
   margin-top: 1.5em;
+  cursor: pointer;
 }
 
 .searchButton:hover {

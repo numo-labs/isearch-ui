@@ -30,7 +30,9 @@ function mapStateToProps (state) {
       autocompleteOptions,
       inAutoCompleteSearch,
       resultId,
-      scrollPage
+      scrollPage,
+      searchComplete,
+      feedEnd
     },
     travelInfo: {
       numberOfChildren,
@@ -86,7 +88,9 @@ function mapStateToProps (state) {
     durationTitle,
     resultId,
     viewedArticles,
-    scrollPage
+    scrollPage,
+    searchComplete,
+    feedEnd
   };
 }
 
