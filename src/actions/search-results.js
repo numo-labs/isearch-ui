@@ -20,7 +20,6 @@ import {
 import * as graphqlService from '../services/graphql';
 import { formatQuery } from './helpers.js';
 // routing actionCreator
-import { push } from 'react-router-redux';
 import shuffle from 'shuffle-array';
 import timers from 'timers';
 /*
@@ -278,7 +277,6 @@ export function startSearch (a) {
           const bucketId = json.data.viewer.searchResultId.id;
           if (bucketId) {
             dispatch(saveSearchResultId(bucketId));
-            dispatch(push(`/search/${bucketId}`));
           } else {
             return dispatch(searchError('No results found'));
           }
