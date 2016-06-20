@@ -5,9 +5,18 @@ import { Link } from 'react-router';
 const closeImage = require('../../../src/assets/close-white.svg');
 
 export default class TagView extends Component {
+  handleOnClick () {
+    const { go } = this.props;
+    // if statement checks if the browser is safari
+    // using go(-2) for safari instead of go(-1) because it hangs
+    if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+      go(-2);
+    } else {
+      go(-1);
+    }
+  }
   render () {
     const {
-      goBack,
       addSingleTag,
       startSearch,
       setSearchString,
@@ -23,7 +32,7 @@ export default class TagView extends Component {
     return (
       <div className='blueContainer'>
         <div className={'tagViewActive dropDown'}>
-          <Link to='/' onClick={() => goBack()}>
+          <Link to='/' onClick={this.handleOnClick.bind(this)}>
             <img
               src={closeImage}
               alt='exit button'
@@ -53,7 +62,7 @@ export default class TagView extends Component {
 }
 
 TagView.propTypes = {
-  goBack: PropTypes.func,
+  go: PropTypes.func,
   addSingleTag: PropTypes.func,
   startSearch: PropTypes.func,
   setSearchString: PropTypes.func,

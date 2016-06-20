@@ -16,12 +16,27 @@ import {
 import './style.css';
 export default class EditDetails extends Component {
   onSearchClick () {
+    const { go } = this.props;
     dataLayer.push({
       event: 'travelInfoUpdate'
     });
     this.props.updateHeaderTitles();
     this.props.startSearch();
-    this.props.goBack();
+    // if statement checks if the browser is safari
+    // using go(-2) for safari instead of go(-1) because it hangs
+    if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+      go(-2);
+    } else {
+      go(-1);
+    }
+  }
+  handleOnClick () {
+    const { go } = this.props;
+    if (navigator.userAgent.indexOf('Chrome') !== -1) {
+      go(-1);
+    } else {
+      go(-2);
+    }
   }
   render () {
     const {
@@ -39,14 +54,13 @@ export default class EditDetails extends Component {
       setDuration,
       departureAirport,
       duration,
-      departureDate,
-      goBack
+      departureDate
     } = this.props;
     const childAges = [childAge1, childAge2, childAge3, childAge4].slice(0, Number(numberOfChildren));
     return (
       <div className='blueContainer'>
         <div className={'changeDetailsContainer dropDown'}>
-          <Link to='/' onClick={() => goBack()}>
+          <Link to='/' onClick={this.handleOnClick.bind(this)}>
             <div>
               <img
                 src={travelInfoExitButton}
@@ -143,6 +157,6 @@ EditDetails.propTypes = {
   departureAirport: PropTypes.string,
   exitButtonClick: PropTypes.func,
   onSearchClick: PropTypes.func,
-  goBack: PropTypes.func,
+  go: PropTypes.func,
   updateHeaderTitles: PropTypes.func
 };
