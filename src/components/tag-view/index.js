@@ -3,17 +3,12 @@ import Searchbar from '../../../lib/search-bar';
 import Tags from '../../../lib/tags';
 import { Link } from 'react-router';
 const closeImage = require('../../../src/assets/close-white.svg');
+import goBackBrowserDetect from '../../utils/browser-detection';
 
 export default class TagView extends Component {
   handleOnClick () {
     const { go } = this.props;
-    // if statement checks if the browser is safari
-    // using go(-2) for safari instead of go(-1) because it hangs
-    if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
-      go(-2);
-    } else {
-      go(-1);
-    }
+    goBackBrowserDetect(go);
   }
   render () {
     const {

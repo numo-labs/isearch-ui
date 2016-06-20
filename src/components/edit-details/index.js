@@ -4,6 +4,7 @@ import Calendar from '../../../lib/date-picker';
 import { Link } from 'react-router';
 import '../../../lib/react-date-picker/css/index.css';
 const travelInfoExitButton = require('../../../src/assets/close-white.svg');
+import goBackBrowserDetect from '../../utils/browser-detection';
 
 import {
   adultOptions,
@@ -22,21 +23,11 @@ export default class EditDetails extends Component {
     });
     this.props.updateHeaderTitles();
     this.props.startSearch();
-    // if statement checks if the browser is safari
-    // using go(-2) for safari instead of go(-1) because it hangs
-    if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
-      go(-2);
-    } else {
-      go(-1);
-    }
+    goBackBrowserDetect(go);
   }
   handleOnClick () {
     const { go } = this.props;
-    if (navigator.userAgent.indexOf('Chrome') !== -1) {
-      go(-1);
-    } else {
-      go(-2);
-    }
+    goBackBrowserDetect(go);
   }
   render () {
     const {
