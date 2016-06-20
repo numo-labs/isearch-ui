@@ -26,6 +26,7 @@ const defaultProps = {
 describe('Component', function () {
   jsdom({ skipWindowCheck: true });
   describe('<ISearch /> Search view', function () {
+    global.dataLayer = [];
     const wrapper = shallow(<ISearch {...defaultProps} />);
     const children = wrapper.children().nodes;
 
