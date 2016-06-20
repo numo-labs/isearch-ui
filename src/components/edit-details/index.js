@@ -4,6 +4,7 @@ import Calendar from '../../../lib/date-picker';
 import { Link } from 'react-router';
 import '../../../lib/react-date-picker/css/index.css';
 const travelInfoExitButton = require('../../../src/assets/close-white.svg');
+import goBackBrowserDetect from '../../utils/browser-detection';
 
 import {
   adultOptions,
@@ -16,12 +17,17 @@ import {
 import './style.css';
 export default class EditDetails extends Component {
   onSearchClick () {
+    const { go } = this.props;
     dataLayer.push({
       event: 'travelInfoUpdate'
     });
     this.props.updateHeaderTitles();
     this.props.startSearch();
-    this.props.goBack();
+    goBackBrowserDetect(go);
+  }
+  handleOnClick () {
+    const { go } = this.props;
+    goBackBrowserDetect(go);
   }
   render () {
     const {
@@ -39,14 +45,13 @@ export default class EditDetails extends Component {
       setDuration,
       departureAirport,
       duration,
-      departureDate,
-      goBack
+      departureDate
     } = this.props;
     const childAges = [childAge1, childAge2, childAge3, childAge4].slice(0, Number(numberOfChildren));
     return (
       <div className='blueContainer'>
         <div className={'changeDetailsContainer dropDown'}>
-          <Link to='/' onClick={() => goBack()}>
+          <Link to='/' onClick={this.handleOnClick.bind(this)}>
             <div>
               <img
                 src={travelInfoExitButton}
@@ -143,6 +148,6 @@ EditDetails.propTypes = {
   departureAirport: PropTypes.string,
   exitButtonClick: PropTypes.func,
   onSearchClick: PropTypes.func,
-  goBack: PropTypes.func,
+  go: PropTypes.func,
   updateHeaderTitles: PropTypes.func
 };
