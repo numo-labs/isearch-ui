@@ -57,6 +57,7 @@
   position: relative;
   height: 17em;
   display: inline-block;
+  margin: 0 auto;
 }
 
 .headerBarWrapper {
@@ -160,7 +161,7 @@
 
 @media (max-height: 705px) {
   .headerContent {
-    margin-top: 14em;
+    margin: 0 auto;
   }
 }
 
@@ -172,7 +173,7 @@
     height: 46vh;
   }
   .headerContent {
-    margin-top: 8em;
+    margin: 0 auto;
   }
 }
 
