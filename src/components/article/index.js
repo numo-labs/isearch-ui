@@ -51,7 +51,7 @@ class ArticleFullPage extends Component {
 
   onAddTagClick () {
     const { articleContent, goBack, addSingleTag } = this.props;
-    addSingleTag(articleContent.name, articleContent.id);
+    addSingleTag(articleContent.name, articleContent.id, undefined, articleContent.name);
     goBack();
   }
 

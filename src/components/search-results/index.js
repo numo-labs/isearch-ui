@@ -135,7 +135,7 @@ class SearchResults extends Component {
               <ArticleTile
                 className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
                 {...item}
-                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id); removeTile(item.id); }}
+                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id, undefined, item.tile.name); removeTile(item.id); }}
               />
             </div>
           </div>
