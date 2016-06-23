@@ -29,13 +29,16 @@ class HotelPage extends Component {
     if (dataLayer) {
       dataLayer.push({
         'event': 'productViewed',
+        'pageName': '/hotel/' + this.props.packageOffer.hotel.name.replace(/ /g, '-'),
         'ecommerce': {
           'detail': {
             'actionField': {'list': 'inspirational search feed'},
             'products': [{
               'id': this.props.packageOffer.provider.reference,
               'brand': 'hotel_tile',
-              'pageName': '/hotel/' + this.props.packageOffer.hotel.name.replace(/ /g, '-')
+              'dimension11': this.props.packageOffer.destinationCode,
+              'dimension12': this.props.packageOffer.destinationName,
+              'dimension13': this.props.packageOffer.departureCode
             }]
           }
         }

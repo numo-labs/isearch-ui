@@ -104,7 +104,10 @@ describe('Component', function () {
             actionField: { list: 'inspirational search feed' },
             products: [{
               id: 'A01A37',
-              brand: 'hotel_tile'
+              brand: 'hotel_tile',
+              dimension11: 'destCode',
+              dimension12: 'destName',
+              dimension13: 'depCode'
             }]
           }
         }

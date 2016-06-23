@@ -22,6 +22,7 @@ class ISearch extends Component {
 
   componentWillMount () {
     window.addEventListener('resize', this.handleResize);
+    this.addAnalyticsData();
     if (!this.props.tags.length) {
       this.props.resetTags();
     }
@@ -39,16 +40,7 @@ class ISearch extends Component {
     if (dataLayer) {
       dataLayer.push({
         'event': 'homepageViewed',
-        'ecommerce': {
-          'detail': {
-            'actionField': {'list': 'inspirational search feed'},
-            'products': [{
-              'id': 'isearch_homepage',
-              'brand': 'homepage_tile',
-              'pageName': '/InspirationalSearch'
-            }]
-          }
-        }
+        'pageName': '/InspirationalSearch'
       });
     }
   }
@@ -97,7 +89,6 @@ class ISearch extends Component {
   }
   render () {
     if (document.querySelector('title')) document.querySelector('title').innerHTML = 'Thomas Cook Inspirational Search';
-    this.addAnalyticsData();
     const {
       tags,
       removeTag,

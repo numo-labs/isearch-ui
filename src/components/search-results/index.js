@@ -52,7 +52,10 @@ class SearchResults extends Component {
     if (dataLayer && item.type === 'package') {
       clickEventObject.ecommerce.click.products.push({
         'id': item.packageOffer.provider.reference,
-        'brand': 'hotel_tile'
+        'brand': 'hotel_tile',
+        'dimension11': item.packageOffer.destinationCode,
+        'dimension12': item.packageOffer.destinationName,
+        'dimension13': item.packageOffer.departureCode
       });
       dataLayer.push(clickEventObject);
     } else if (dataLayer && item.type === 'tile') {
@@ -132,7 +135,7 @@ class SearchResults extends Component {
               <ArticleTile
                 className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
                 {...item}
-                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id); removeTile(item.id); }}
+                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id, item.tile.name); removeTile(item.id); }}
               />
             </div>
           </div>
