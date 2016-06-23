@@ -50,7 +50,7 @@ export function deleteTag (displayName) {
 */
 
 export const onYesFilter = (displayName, id) => (dispatch) => {
-  return dispatch(addSingleTag(displayName, id));
+  return dispatch(addSingleTag(displayName, id, 'filter'));
 };
 
 /**
@@ -59,7 +59,7 @@ export const onYesFilter = (displayName, id) => (dispatch) => {
 * If it doesn't exist, it is added and a new search is started
 */
 
-export const addSingleTag = (displayName, id, isInitialTag, context = 'search') => {
+export const addSingleTag = (displayName, id, context = 'search') => {
   return (dispatch, getState) => {
     const { search: { tags } } = getState();
     const tagExists = tags.filter(tag => tag.displayName === displayName).length > 0;
@@ -68,7 +68,7 @@ export const addSingleTag = (displayName, id, isInitialTag, context = 'search') 
       return;
     } else {
       dataLayer.push(analyticsAddTagObject(displayName, currentTagsNames, context));
-      dispatch(addTag(displayName, id, isInitialTag || false));
+      dispatch(addTag(displayName, id, false));
       dispatch(startSearch());
     }
   };
