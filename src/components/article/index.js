@@ -32,18 +32,17 @@ class ArticleFullPage extends Component {
 
   addAnalyticsData () {
     const content = this.props.articleContent;
-    const product = {
-      id: content.name,
-      brand: content.type === 'article' ? 'article_tile' : 'destination_tile',
-      pageName: content.type === 'article' ? '/article/' : '/destination/' + content.name.replace(/ /g, '-')
-    };
     if (dataLayer) {
       dataLayer.push({
         'event': 'productViewed',
+        'pageName': content.type === 'article' ? '/article/' : '/destination/' + content.name.replace(/ /g, '-'),
         'ecommerce': {
           'detail': {
             'actionField': { 'list': 'inspirational search feed' },
-            'products': [ product ]
+            'products': [ {
+              'id': content.name,
+              'brand': content.type === 'article' ? 'article_tile' : 'destination_tile'
+            } ]
           }
         }
       });

@@ -155,7 +155,10 @@
           "lolloandbernie": false,
           "isadulthotel": false,
           "allinclusive": false
-        }
+        },
+       "destinationCode": "destCode",
+       "destinationName": "destName",
+       "departureCode": "depCode"
       }
     },
     {

@@ -52,7 +52,10 @@ class SearchResults extends Component {
     if (dataLayer && item.type === 'package') {
       clickEventObject.ecommerce.click.products.push({
         'id': item.packageOffer.provider.reference,
-        'brand': 'hotel_tile'
+        'brand': 'hotel_tile',
+        'dimension11': item.packageOffer.destinationCode,
+        'dimension12': item.packageOffer.destinationName,
+        'dimension13': item.packageOffer.departureCode
       });
       dataLayer.push(clickEventObject);
     } else if (dataLayer && item.type === 'tile') {
