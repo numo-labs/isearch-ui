@@ -28,6 +28,7 @@ export const initialState = {
 };
 
 export default function travelInfo (state = initialState, action) {
+  console.log('****************', moment().add(3, 'months'));
   switch (action.type) {
     case SET_CHILD_AGE:
       return {
