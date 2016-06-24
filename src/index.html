@@ -30,10 +30,10 @@
         'initial_search_month': (URL_PARAMS.departure_date && URL_PARAMS.departure_date.indexOf('-') > -1) ? URL_PARAMS.departure_date.split('-')[ 1 ] : '',
         'initial_search_year': (URL_PARAMS.departure_date && URL_PARAMS.departure_date.indexOf('-') > -1) ? URL_PARAMS.departure_date.split('-')[ 0 ] : '2016'
       };
-      console.log(event);
       dataLayer.push(event);
     }
     console.log('Google Tag Manager Initialised');
+    impressionsTimestamp = {}; // this map will be used to track impressions timeouts
     </script>
 
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-53SBVW"

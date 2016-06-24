@@ -126,7 +126,8 @@
       "primus",
       "window",
       "localStorage",
-      "$"
+      "$",
+      "impressionsTimestamp"
     ],
     "parser": "babel-eslint"
   }
