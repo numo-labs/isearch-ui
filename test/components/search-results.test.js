@@ -12,14 +12,14 @@ import sinon from 'sinon';
 
 describe('Component', function () {
   global.dataLayer = [];
-  global.auxDataLayer = new Map();
+  global.impressionsTimestamp = new Map();
   describe('<SearchResults />', function () {
     const removeStub = sinon.stub();
     const wrapper = shallow(<SearchResults changeRoute={() => {}} items={mockTiles.items} viewedArticles={[]} removeTile={removeStub} />);
     beforeEach(() => {
       removeStub.reset();
       global.dataLayer = [];
-      global.auxDataLayer = new Map();
+      global.impressionsTimestamp = new Map();
     });
     it('should render our SearchResults component', function (done) {
       const children = wrapper.children().nodes;

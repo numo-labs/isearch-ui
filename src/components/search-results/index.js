@@ -35,7 +35,7 @@ class SearchResults extends Component {
     if (!dataLayer || !isVisible) {
       return;
     }
-    addAnalyticsImpression(item, dataLayer, auxDataLayer);
+    addAnalyticsImpression(item, dataLayer, impressionsTimestamp);
     return;
   }
 

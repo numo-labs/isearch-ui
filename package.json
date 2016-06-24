@@ -127,7 +127,7 @@
       "window",
       "localStorage",
       "$",
-      "auxDataLayer"
+      "impressionsTimestamp"
     ],
     "parser": "babel-eslint"
   }
