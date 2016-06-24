@@ -126,7 +126,8 @@
       "primus",
       "window",
       "localStorage",
-      "$"
+      "$",
+      "auxDataLayer"
     ],
     "parser": "babel-eslint"
   }
