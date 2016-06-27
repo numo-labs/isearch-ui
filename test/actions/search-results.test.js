@@ -81,15 +81,6 @@ describe('Search Results Actions', () => {
         { type: BUSY_SEARCHING, isBusy: true },
         { type: CLEAR_FEED },
         { type: SAVE_SEARCH_RESULT_ID, id: '12345' },
-        {
-          'payload': {
-            'args': [
-              '/search/12345'
-            ],
-            'method': 'push'
-          },
-          'type': '@@router/CALL_HISTORY_METHOD'
-        },
         { type: SEARCH_COMPLETE }
       ];
       store.dispatch(actions.startSearch('testing test'));

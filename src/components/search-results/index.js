@@ -5,6 +5,7 @@ import PackageTile from '../../../lib/package-tile';
 import ArticleTile from '../../../lib/article-tile';
 import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
+import { addAnalyticsImpression } from '../../../lib/analytics-helper/index';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
@@ -12,7 +13,8 @@ import './style.css';
 const masonryOptions = {
   transitionDuration: '0.4s',
   fitWidth: true,
-  gutter: 14 // horizontal spacing between tiles
+  gutter: 14, // horizontal spacing between tiles
+  itemSelector: '.gridItem'
 };
 
 class SearchResults extends Component {
@@ -21,67 +23,45 @@ class SearchResults extends Component {
     this.mapItems = this.mapItems.bind(this);
     this.getRelatedContent = this.getRelatedContent.bind(this);
   }
+  shouldComponentUpdate (nextProps) {
+    if (nextProps.items.length === this.props.items.length) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   handleVisibility (isVisible, item) {
     if (!dataLayer || !isVisible) {
       return;
     }
-    if (item.type === 'packageOffer') {
-      dataLayer.push({
-        'ecommerce': {
-          'impressions': [{
-            'id': item.packageOffer.provider.reference,
-            'brand': 'hotel_tile',
-            'list': 'inspirational search feed'
-          }]
-        },
-        'event': 'impressionsPushed'
-      });
-    } else if (item.type === 'filter') {
-      dataLayer.push({
-        'ecommerce': {
-          'impressions': [{
-            'id': item.id,
-            'brand': 'filter_tile',
-            'list': 'inspirational search feed'
-          }]
-        },
-        'event': 'impressionsPushed'
-      });
-    } else if (item.type === 'article') {
-      dataLayer.push({
-        'event': 'impressionsPushed',
-        'ecommerce': {
-          'impressions': [{
-            'id': 'article name', // can this be extracted from the backend?
-            'category': 'article category', // can this be fetched?
-            'brand': 'article_tile', // hardcoded
-            'list': 'inspirational search feed'
-          }]
-        }});
-    }
+    addAnalyticsImpression(item, dataLayer, impressionsTimestamp);
     return;
   }
+
   handleClickEvent (item) {
     const clickEventObject = {
       'event': 'productClick',
       'ecommerce': {
         'click': {
-          'actionField': {'list': 'inspirational search feed'},
+          'actionField': { 'list': 'inspirational search feed' },
           'products': []
         }
       }
     };
-    if (dataLayer && item.type === 'packageOffer') {
+    if (dataLayer && item.type === 'package') {
       clickEventObject.ecommerce.click.products.push({
         'id': item.packageOffer.provider.reference,
-        'brand': 'hotel_tile'
+        'brand': 'hotel_tile',
+        'dimension11': item.packageOffer.destinationCode,
+        'dimension12': item.packageOffer.destinationName,
+        'dimension13': item.packageOffer.departureCode
       });
       dataLayer.push(clickEventObject);
-    } else if (dataLayer && item.type === 'article') {
+    } else if (dataLayer && item.type === 'tile') {
       clickEventObject.ecommerce.click.products.push({
         'id': item.tile.id,
-        'brand': 'article_tile'
+        'brand': item.tile.type === 'article' ? 'article_tile' : 'destination_tile'
       });
       dataLayer.push(clickEventObject);
     }
@@ -112,7 +92,7 @@ class SearchResults extends Component {
     } = this.props;
     return (
       <div onClick={() => removeTile(id)}>
-        <img className='removeTileButton' src={removeTileButton} alt='cancelled' />
+        <img className='removeTileButton' src={removeTileButton} alt='cancelled'/>
       </div>
     );
   }
@@ -131,7 +111,8 @@ class SearchResults extends Component {
       return (
         <div>
           {this.removeButton(item.id)}
-          <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
+          <div className='clickable'
+               onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
             <PackageTile
               key={item.packageOffer.id}
               packageOffer={item.packageOffer}
@@ -149,20 +130,22 @@ class SearchResults extends Component {
         return (
           <div>
             {this.removeButton(item.id)}
-            <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
+            <div className='clickable'
+                 onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
               <ArticleTile
                 className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
                 {...item}
-                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id); removeTile(item.id); }}
+                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id, item.tile.name); removeTile(item.id); }}
               />
             </div>
           </div>
         );
       } else if (item.tile.type === 'destination' && contentExists) {
         return (
-          <div>
+          <div className='shadowHover'>
             {this.removeButton(item.id)}
-            <div className='clickable' onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
+            <div className='clickable'
+                 onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
               <DestinationTile {...item} />
             </div>
           </div>
@@ -211,19 +194,29 @@ class SearchResults extends Component {
 
   render () {
     const {
+      searchComplete,
       items
     } = this.props;
     const searchItems = items.filter(item => !item.related);
+    const hideGridStyle = {
+      minHeight: '0'
+    };
+    const showGridStyle = {
+      minHeight: '80vh'
+    };
+    const gridStyle = searchComplete && searchItems.length === 0 ? hideGridStyle : showGridStyle;
     return (
       <div>
-        <Masonry
-          elementType={'div'}
-          options={masonryOptions}
-          disableImagesLoaded={false}
-          className='grid load-effect'
-        >
-        {this.mapItems(searchItems)}
-        </Masonry>
+        <div style={gridStyle}>
+          <Masonry
+            elementType={'div'}
+            options={masonryOptions}
+            disableImagesLoaded={false}
+            className='grid load-effect'
+          >
+          {this.mapItems(searchItems)}
+          </Masonry>
+        </div>
         {this.getRelatedContent()}
       </div>
     );

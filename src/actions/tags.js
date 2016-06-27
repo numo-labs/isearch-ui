@@ -7,6 +7,7 @@ import {
   RESET_TAGS
 } from '../constants/actionTypes';
 import { startSearch } from './search-results.js';
+import { analyticsAddTagObject, analyticsRemoveTagObject } from '../../lib/analytics-helper';
 
 /**
 * TEMP FUNCTIONS TO ADD MOCK TAGS
@@ -26,6 +27,9 @@ export function addTags (tags) {
 export function removeTag (displayName) {
   return (dispatch, getState) => {
     dispatch(deleteTag(displayName));
+    const { search: { tags } } = getState();
+    const currentTagsNames = tags.map((tag) => tag.displayName);
+    dataLayer.push(analyticsRemoveTagObject(displayName, currentTagsNames));
     return dispatch(startSearch());
   };
 }
@@ -46,7 +50,7 @@ export function deleteTag (displayName) {
 */
 
 export const onYesFilter = (displayName, id) => (dispatch) => {
-  return dispatch(addSingleTag(displayName, id));
+  return dispatch(addSingleTag(displayName, id, 'filter'));
 };
 
 /**
@@ -55,14 +59,16 @@ export const onYesFilter = (displayName, id) => (dispatch) => {
 * If it doesn't exist, it is added and a new search is started
 */
 
-export const addSingleTag = (displayName, id, isInitialTag) => {
+export const addSingleTag = (displayName, id, context = 'search') => {
   return (dispatch, getState) => {
     const { search: { tags } } = getState();
     const tagExists = tags.filter(tag => tag.displayName === displayName).length > 0;
+    const currentTagsNames = tags.map((tag) => tag.displayName);
     if (tagExists) {
       return;
     } else {
-      dispatch(addTag(displayName, id, isInitialTag || false));
+      dataLayer.push(analyticsAddTagObject(displayName, currentTagsNames, context));
+      dispatch(addTag(displayName, id, false));
       dispatch(startSearch());
     }
   };

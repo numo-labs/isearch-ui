@@ -7,6 +7,9 @@ import './styles.css';
 import ISearchSlider from '../../../lib/image-slider';
 
 const heartShareSrc = 'https://cloud.githubusercontent.com/assets/12450298/14609563/3e0af0b6-0582-11e6-9668-d15a38cdea14.png';
+
+import { analyticsAddToCart } from '../../../lib/analytics-helper';
+
 const ratingIconUrl = '../../../src/assets/ratingIcon.png';
 const analyticsReferer = '&landingfrom=inspirational_search';
 
@@ -15,6 +18,7 @@ class HotelPage extends Component {
     super();
     this.getHotelData = this.getHotelData.bind(this);
     this.renderHotelPage = this.renderHotelPage.bind(this);
+    this.registerAnalyticsClick = this.registerAnalyticsClick.bind(this);
   }
 
   componentWillMount () {
@@ -25,17 +29,25 @@ class HotelPage extends Component {
     if (dataLayer) {
       dataLayer.push({
         'event': 'productViewed',
+        'pageName': '/hotel/' + this.props.packageOffer.hotel.name.replace(/ /g, '-'),
         'ecommerce': {
           'detail': {
             'actionField': {'list': 'inspirational search feed'},
             'products': [{
               'id': this.props.packageOffer.provider.reference,
-              'brand': 'article_tile'
+              'brand': 'hotel_tile',
+              'dimension11': this.props.packageOffer.destinationCode,
+              'dimension12': this.props.packageOffer.destinationName,
+              'dimension13': this.props.packageOffer.departureCode
             }]
           }
         }
       });
     }
+  }
+
+  registerAnalyticsClick () {
+    dataLayer.push(analyticsAddToCart(this.props.packageOffer));
   }
 
   getHotelData () {
@@ -131,6 +143,7 @@ class HotelPage extends Component {
     const region = packageOffer.hotel.place.region === null ? '' : packageOffer.hotel.place.region + ', ';
     const name = packageOffer.hotel.place.name;
 
+    if (document.querySelector('title')) document.querySelector('title').innerHTML = packageOffer.hotel.name;
     return ([
       <NavHeader backToSearch={goBack}/>,
       <div className='hotelPackageImage' style={{backgroundImage: `url(${image})`}}/>,
@@ -169,7 +182,7 @@ class HotelPage extends Component {
             <div className='ppp'>ppp <span className='hotelPrice'>
               {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
             </span></div>
-            <a href={packageOffer.provider.deepLink + analyticsReferer}>
+            <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
               <div className='bookButton'>SEE PRIS OCH BOKA</div>
             </a>
           </div>
@@ -178,7 +191,7 @@ class HotelPage extends Component {
             {this.renderImageList(hotelImages.slice(1))}
           </div>
           <div className='bookButtonFooter'>
-            <a href={packageOffer.provider.deepLink + analyticsReferer}>
+            <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
               <div className='hotelInfoLink'>Se fuld information hotel og bog</div>
               <div className='bookButton'>SEE PRIS OCH BOKA</div>
             </a>

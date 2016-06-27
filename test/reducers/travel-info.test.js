@@ -13,10 +13,10 @@ describe('TravelInfo reducer', function () {
       const state = reducer(undefined, action);
       const expectedState = {
         ...initialState,
-        numberOfAdultsTitle: '1',
+        numberOfAdultsTitle: '2',
         numberOfChildrenTitle: '0',
         durationTitle: '1 uge',
-        numberOfAdults: '1',
+        numberOfAdults: '2',
         numberOfChildren: '0',
         duration: '1 uge'
       };

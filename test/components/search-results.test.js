@@ -12,12 +12,14 @@ import sinon from 'sinon';
 
 describe('Component', function () {
   global.dataLayer = [];
+  global.impressionsTimestamp = {};
   describe('<SearchResults />', function () {
     const removeStub = sinon.stub();
     const wrapper = shallow(<SearchResults changeRoute={() => {}} items={mockTiles.items} viewedArticles={[]} removeTile={removeStub} />);
     beforeEach(() => {
       removeStub.reset();
       global.dataLayer = [];
+      global.impressionsTimestamp = {};
     });
     it('should render our SearchResults component', function (done) {
       const children = wrapper.children().nodes;
@@ -104,7 +106,10 @@ describe('Component', function () {
             actionField: { list: 'inspirational search feed' },
             products: [{
               id: 'A01A37',
-              brand: 'hotel_tile'
+              brand: 'hotel_tile',
+              dimension11: 'destCode',
+              dimension12: 'destName',
+              dimension13: 'depCode'
             }]
           }
         }

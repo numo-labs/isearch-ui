@@ -6,11 +6,11 @@ import FadeImage from '../../../lib/fade-image';
 import './style.css';
 
 /*
-* This component uses dangerouslySetInnerHTML to render the article text
-* This is because text from the article editor (http://numo-labs-articles.s3-website-eu-west-1.amazonaws.com/)
-* is saved as a html string - React escapes html to prevent XSS attacks unless
-* it is set using dangerouslySetInnerHTML
-*/
+ * This component uses dangerouslySetInnerHTML to render the article text
+ * This is because text from the article editor (http://numo-labs-articles.s3-website-eu-west-1.amazonaws.com/)
+ * is saved as a html string - React escapes html to prevent XSS attacks unless
+ * it is set using dangerouslySetInnerHTML
+ */
 
 class ArticleFullPage extends Component {
   constructor () {
@@ -27,20 +27,22 @@ class ArticleFullPage extends Component {
 
   getArticleData () {
     this.props.getArticle(this.props.params.bucketId, this.props.params.itemId);
-    this.setState({articleContent: this.props.articleContent});
+    this.setState({ articleContent: this.props.articleContent });
   }
 
   addAnalyticsData () {
+    const content = this.props.articleContent;
     if (dataLayer) {
       dataLayer.push({
         'event': 'productViewed',
+        'pageName': (content.type === 'article' ? '/article/' : '/destination/') + content.name.replace(/ /g, '-'),
         'ecommerce': {
           'detail': {
-            'actionField': {'list': 'inspirational search feed'},
-            'products': [{
-              'id': this.props.articleContent.sections[0].title,
-              'brand': 'article_tile'
-            }]
+            'actionField': { 'list': 'inspirational search feed' },
+            'products': [ {
+              'id': content.name,
+              'brand': content.type === 'article' ? 'article_tile' : 'destination_tile'
+            } ]
           }
         }
       });
@@ -49,7 +51,7 @@ class ArticleFullPage extends Component {
 
   onAddTagClick () {
     const { articleContent, goBack, addSingleTag } = this.props;
-    addSingleTag(articleContent.name, articleContent.id);
+    addSingleTag(articleContent.name, articleContent.id, articleContent.name);
     goBack();
   }
 
@@ -58,7 +60,7 @@ class ArticleFullPage extends Component {
   }
 
   render () {
-    const { articleContent, goBack } = this.props;
+    const { articleContent, goBack, go } = this.props;
     const tagColours = {
       amenities: 'rgba(12,125,125,0.6)',
       geo: 'rgba(12,125,12,0.6)'
@@ -86,9 +88,10 @@ class ArticleFullPage extends Component {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
       this.addAnalyticsData();
+      if (document.querySelector('title')) document.querySelector('title').innerHTML = 'article | ' + introSection.title;
       return (
         <section>
-          <NavHeader backToSearch={goBack}/>
+          <NavHeader backToSearch={goBack} go={go}/>
           <div className='articleFullPageContainer'>
             <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
             <div className='articleContentContainer'>
@@ -130,6 +133,7 @@ class ArticleFullPage extends Component {
 ArticleFullPage.propTypes = {
   articleContent: PropTypes.object,
   goBack: PropTypes.func,
+  go: PropTypes.func,
   getArticle: PropTypes.func,
   params: PropTypes.object,
   addSingleTag: PropTypes.func,

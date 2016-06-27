@@ -22,6 +22,7 @@ class ISearch extends Component {
 
   componentWillMount () {
     window.addEventListener('resize', this.handleResize);
+    this.addAnalyticsData();
     if (!this.props.tags.length) {
       this.props.resetTags();
     }
@@ -33,6 +34,15 @@ class ISearch extends Component {
 
   componentWillUnmount () {
     window.removeEventListener('resize', this.handleResize);
+  }
+
+  addAnalyticsData () {
+    if (dataLayer) {
+      dataLayer.push({
+        'event': 'homepageViewed',
+        'pageName': '/InspirationalSearch'
+      });
+    }
   }
 
   renderResults () {
@@ -77,8 +87,8 @@ class ISearch extends Component {
       </ScrollView>
     );
   }
-
   render () {
+    if (document.querySelector('title')) document.querySelector('title').innerHTML = 'Thomas Cook Inspirational Search';
     const {
       tags,
       removeTag,

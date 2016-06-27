@@ -12,7 +12,27 @@
   margin: 10px 5px;
   width: 375px;
   position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
 }
+
+.gridItem::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.gridItem:hover {
+  transform: scale(1.025, 1.025);
+  transition: all 0.3s ease-in-out;
+}
+
+.gridItem:hover::after {
+  opacity: 1;
+}
+
 .tileSizer {
   width: 375px;
 }
@@ -61,6 +81,13 @@
  .gridItem {
    margin-bottom: 14px;
    width: 360px;
+ }
+ .gridItem:hover {
+   transform: none;
+   transition: none;
+ }
+ .gridItem:hover::after {
+   opacity: 1;
  }
 }
 

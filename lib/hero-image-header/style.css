@@ -57,10 +57,10 @@
   position: relative;
   height: 17em;
   display: inline-block;
+  margin: 0 auto;
 }
 
 .headerBarWrapper {
-  background-image: url('https://cloud.githubusercontent.com/assets/12450298/14560385/62833d9a-0307-11e6-8a23-a0d1793d4e72.jpg');
   background-size: cover;
   text-align: center;
   background-position: 50% 100%;
@@ -161,7 +161,7 @@
 
 @media (max-height: 705px) {
   .headerContent {
-    margin-top: 14em;
+    margin: 0 auto;
   }
 }
 
@@ -173,7 +173,7 @@
     height: 46vh;
   }
   .headerContent {
-    margin-top: 8em;
+    margin: 0 auto;
   }
 }
 

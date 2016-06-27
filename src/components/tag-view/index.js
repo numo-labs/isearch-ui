@@ -3,11 +3,15 @@ import Searchbar from '../../../lib/search-bar';
 import Tags from '../../../lib/tags';
 import { Link } from 'react-router';
 const closeImage = require('../../../src/assets/close-white.svg');
+import goBackBrowserDetect from '../../utils/browser-detection';
 
 export default class TagView extends Component {
+  handleOnClick () {
+    const { go } = this.props;
+    goBackBrowserDetect(go);
+  }
   render () {
     const {
-      goBack,
       addSingleTag,
       startSearch,
       setSearchString,
@@ -23,7 +27,7 @@ export default class TagView extends Component {
     return (
       <div className='blueContainer'>
         <div className={'tagViewActive dropDown'}>
-          <Link to='/' onClick={() => goBack()}>
+          <Link to='/' onClick={this.handleOnClick.bind(this)}>
             <img
               src={closeImage}
               alt='exit button'
@@ -53,7 +57,7 @@ export default class TagView extends Component {
 }
 
 TagView.propTypes = {
-  goBack: PropTypes.func,
+  go: PropTypes.func,
   addSingleTag: PropTypes.func,
   startSearch: PropTypes.func,
   setSearchString: PropTypes.func,
