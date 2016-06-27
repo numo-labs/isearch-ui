@@ -113,7 +113,8 @@
   ],
   "semistandard": {
     "ignore": [
-      "/src/services/primus.js"
+      "/src/services/primus.js",
+      "/src/utils/debugger.js"
     ],
     "globals": [
       "describe",
