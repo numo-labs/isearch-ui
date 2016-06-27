@@ -18,13 +18,14 @@
     font-family: SourceSansLight;
     display: inline-block;
     cursor: pointer;
+    height: 20em;
 }
 
 .articleTileImage {
-    display: inline-block;
-    height: 20em;
     width: 100%;
-    object-fit: cover;
+    height: 100%;
+    position: absolute;
+    background-size: cover;
 }
 
 .text {
