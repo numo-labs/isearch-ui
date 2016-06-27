@@ -136,6 +136,10 @@ gulp prod:deploy
 
 The contents of the public folder will then be uploaded to the specified Amazon S3 bucket. Have a look at the 'gulpfile.js' for implementation details.
 
+### Deploying to Production
+
+When the gulp task `prod:deploy` is called, a git tag is created based on the version number in the `package.json`. If a tag for that version exists, an error is shown. Once the tag has been created, it is pushed to github and the code is deployed to s3. Rollbacks can be done more easily if all production deployments have an associated artifict in the form of a git tag. Github _releases_ still need to be created manually from the tags. 
+
 # APPENDIX
 
 ## Setting up the React Webpack Babel Project
