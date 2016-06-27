@@ -6,6 +6,14 @@ import configure from 'con.figure';
 import configuration from '../../config';
 
 const config = configure(configuration);
+var id = '';
+
+import traceable from '../utils/debugger';
+// input up, up, down, down, left, right, left, right, b, a
+// or on mobile up, up, down, down, left, right, left, right, tap, tap, tap
+traceable(() => {
+  window.prompt('Copy your trace-request-id:', id);
+});
 
 /**
 * Express-graphql accepts request with the parameters
@@ -15,12 +23,13 @@ const config = configure(configuration);
 **/
 
 export function query (query, variables) {
+  id = uuid.v4();
   return fetch(config.graphqlUrl, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'trace-request-id': uuid.v4()
+      'trace-request-id': id
     },
     body: JSON.stringify({ 'query': query, 'variables': JSON.stringify(variables) })
   })
