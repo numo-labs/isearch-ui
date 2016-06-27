@@ -55,7 +55,7 @@
 }
 
 .articleContainer.visited .tagField {
-    display: initial;
+    display: block;
 }
 
 .articleContainer.visited .text {
