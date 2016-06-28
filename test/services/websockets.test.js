@@ -4,10 +4,11 @@ import thunk from 'redux-thunk';
 import simple from 'simple-mock';
 import { bindActionCreators } from 'redux';
 import { SAVE_SOCKET_CONNECTION_ID, RESET_TAGS } from '../../src/constants/actionTypes';
+import querystring from '../../src/utils/querystring';
+import * as tagActions from '../../src/actions/tags';
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
-import querystring from '../../src/utils/querystring';
 
 describe('Web Socket Service', function () {
   afterEach(() => {
@@ -44,12 +45,15 @@ describe('Web Socket Service', function () {
   });
   it('performs an autocomplete lookup for a default tag if a query string search parameter is provided', () => {
     simple.mock(querystring, 'parse').returnWith({ search: 'family' });
+    simple.mock(tagActions, 'searchForTag');
     const store = mockStore({search: { tags: [], resultId: '1234' }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
     const primus = initialise(actionCreatorBinder, 'search');
     primus.id = (cb) => { cb('abc123'); };
     primus.emit('open');
     expect(store.getActions()).not.to.contain({ type: RESET_TAGS });
+    expect(tagActions.searchForTag.called).to.be.true;
+    expect(tagActions.searchForTag.lastCall.args[0]).to.equal('family');
   });
   it('only calls the saveSocketConnectionId action on first connection', () => {
     const store = mockStore({search: { tags: [], resultId: '1234' }});
