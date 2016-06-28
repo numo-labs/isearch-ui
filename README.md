@@ -138,7 +138,9 @@ The contents of the public folder will then be uploaded to the specified Amazon 
 
 ### Deploying to Production
 
-When the gulp task `prod:deploy` is called, a git tag is created based on the version number in the `package.json`. If a tag for that version exists, an error is shown. Once the tag has been created, it is pushed to github and the code is deployed to s3. Rollbacks can be done more easily if all production deployments have an associated artifict in the form of a git tag. Github _releases_ still need to be created manually from the tags.
+The production URL is [http://inspirationalsearch.spies.dk/isearch/prod/index.html](http://inspirationalsearch.spies.dk/isearch/prod/index.html)
+
+To deploy to production merge `master` into `prod` and Codeship will do the rest (call `gulp prod:deploy` with the S3 bucket name set to `inspirationalsearch.spies.dk`)
 
 # APPENDIX
 
