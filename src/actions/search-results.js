@@ -69,6 +69,7 @@ export function setSearchComplete (result = 'timeout') {
 */
 
 export function saveSearchResultId (id) {
+  window.searchResultId = id;
   return {
     type: SAVE_SEARCH_RESULT_ID,
     id: id

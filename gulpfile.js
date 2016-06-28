@@ -11,13 +11,9 @@ var zopfli = require('node-zopfli');
 *
 */
 
-var version = pkg.version.split('.')[2]; // using the patch version number
-var bucketName = 'www.tcdl.io';
-var bucketfolder = 'isearch/0.' + version + '/';
-
-/**
- * building the bundle
- */
+var version = pkg.version;
+var bucketName = process.env.BUCKET_NAME || 'www.tcdl.io';
+var bucketfolder = 'isearch/' + version + '/';
 
 gulp.task('ci:deploy', function () {
   return exec('npm run ci:build', function (error, stdout, stderr) {
@@ -45,15 +41,29 @@ gulp.task('ci:deploy', function () {
   });
 });
 
+function createTag (next) {
+  const cmd = 'git tag v' + pkg.version;
+  exec(cmd, function (err, stdout, stderr) {
+    if (err && err.message.includes('already exists')) {
+      console.log('tag for version', pkg.version, ' already exists. Update version in package.json and re run the deployment script');
+      return;
+    } else {
+      next();
+    }
+  });
+}
+
 gulp.task('prod:deploy', function () {
+  return createTag(deployProd);
+});
+
+function deployProd () {
   /*
-  * config values
-  *
+  * config
   */
-
   var bucketfolder = 'isearch/prod/';
-
-  return exec('npm run prod:build', function (error, stdout, stderr) {
+  const cmd = 'git push origin v' + pkg.version + ' && npm run prod:build';
+  return exec(cmd, function (error, stdout, stderr) {
     if (error === null) {
       var s3 = new AWS.S3({region: 'eu-west-1'});
       var filesToUpload = fs.readdirSync(__dirname + '/public');
@@ -80,4 +90,4 @@ gulp.task('prod:deploy', function () {
       });
     }
   });
-});
+}

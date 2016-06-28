@@ -19,7 +19,8 @@
     "ci:build": "npm run clean && ./node_modules/.bin/webpack --optimize-dedupe -p --config ./webpack.ci.config.js",
     "prod:build": "npm run clean && ./node_modules/.bin/webpack --optimize-dedupe -p --config ./webpack.production.config.js",
     "stats": "npm run clean && ./node_modules/.bin/webpack --optimize-dedupe -p --config ./webpack.production.config.js --profile --json > public/stats.json",
-    "deploy": "gulp deploy",
+    "ci:deploy": "gulp ci:deploy",
+    "prod:deploy": "gulp prod:deploy",
     "generate-graphql-schema": "babel-node ./test/constants/helpers/update-schema.js > ./test/constants/helpers/schema.json"
   },
   "repository": {
@@ -115,7 +116,8 @@
   "semistandard": {
     "ignore": [
       "/src/services/primus.js",
-      "/src/utils/debugger.js"
+      "/src/utils/debugger.js",
+      "/src/utils/justice.all.js"
     ],
     "globals": [
       "describe",
