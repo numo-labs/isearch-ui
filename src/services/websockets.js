@@ -3,7 +3,7 @@ import * as TagActions from '../actions/tags.js';
 import Primus from '../../src/services/primus.js';
 import configuration from '../../config';
 import configure from 'con.figure';
-import querystring from 'querystring';
+import querystring from '../utils/querystring';
 
 const config = configure(configuration);
 
@@ -47,7 +47,7 @@ export function initialise (actionCreatorBinder, location) {
       var articlePage = location.indexOf('article') > -1;
       var isHomePage = (!hotelPage && !articlePage);
       if (isHomePage) {
-        const query = querystring.parse(window.location.search.replace(/^\?/, ''));
+        const query = querystring.parse();
         if (query.search) {
           return searchForTag(query.search);
         } else {
