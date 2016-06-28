@@ -11,9 +11,9 @@ var zopfli = require('node-zopfli');
 *
 */
 
-var version = pkg.version.split('.')[2]; // using the patch version number
+var version = pkg.version;
 var bucketName = process.env.BUCKET_NAME || 'www.tcdl.io';
-var bucketfolder = 'isearch/0.' + version + '/';
+var bucketfolder = 'isearch/' + version + '/';
 
 gulp.task('ci:deploy', function () {
   return exec('npm run ci:build', function (error, stdout, stderr) {
