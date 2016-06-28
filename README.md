@@ -31,7 +31,7 @@ The eventual aim is to abstract all the individual components (filter-tile, pack
 |     ├── index.js
 |     ├── index.html
 │     └── index.template.html
-├── test         
+├── test
 ```
 
 All the re-usable React components are kept in the lib folder with their own tests so that they can easily be published to NPM if desired.
@@ -106,7 +106,7 @@ describe('Autocomplete actions', () => {
 
 ## Deployment to S3
 
-A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.  
+A gulp script is used to deploy to an s3 bucket. At the top of the file you can define the bucket and folder options - change the variables: `bucketName` and `bucketfolder`.
 
 **Currently the bucket folder is set 'isearch/' plus the minor and patch version from the version in the package.json e.g. if the version is '1.0.1' the folder name will be 'isearch/0.1'**
 
@@ -123,14 +123,14 @@ npm run prod:build
 
 This will use webpack config (either ci or prod) to build the bundle and put the index.html and bundle.js in to the public folder. The bundle will be hashed (to prevent caching by s3) and the index.html file will be built from the template in the src folder ('index.template.html').
 
-To upload the files to s3 use the corresponding deploy commands using gulp:
+To upload the files to s3 use the corresponding deploy commands:
 
 ```js
-gulp ci:deploy
+npm run ci:deploy
 
 or
 
-gulp prod:deploy
+npm run prod:deploy
 
 ```
 
@@ -138,13 +138,13 @@ The contents of the public folder will then be uploaded to the specified Amazon 
 
 ### Deploying to Production
 
-When the gulp task `prod:deploy` is called, a git tag is created based on the version number in the `package.json`. If a tag for that version exists, an error is shown. Once the tag has been created, it is pushed to github and the code is deployed to s3. Rollbacks can be done more easily if all production deployments have an associated artifict in the form of a git tag. Github _releases_ still need to be created manually from the tags. 
+When the gulp task `prod:deploy` is called, a git tag is created based on the version number in the `package.json`. If a tag for that version exists, an error is shown. Once the tag has been created, it is pushed to github and the code is deployed to s3. Rollbacks can be done more easily if all production deployments have an associated artifict in the form of a git tag. Github _releases_ still need to be created manually from the tags.
 
 # APPENDIX
 
 ## Setting up the React Webpack Babel Project
 
-Initialize your project by running the `$ npm init` command in the terminal.  
+Initialize your project by running the `$ npm init` command in the terminal.
 
 Basic file structure:
 ```
@@ -155,7 +155,7 @@ Basic file structure:
 ├── src
 │   ├── index.js
 │   └── index.html
-├── test         
+├── test
 ```
 
 
