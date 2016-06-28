@@ -166,8 +166,8 @@ var Justice = function() {
   }
 
   function getTraceyLink() {
-    if (window.traceRequestId) {
-      return '<a href="http://numo-tracey.s3-website-eu-west-1.amazonaws.com/">' + window.traceRequestId + '</a>';
+    if (window.searchResultId) {
+      return `<a href="http://numo-tracey.s3-website-eu-west-1.amazonaws.com/#/${window.searchResultId}">${window.searchResultId}</a>`;
     } else {
       return '¯\\_(ツ)_/¯';
     }
