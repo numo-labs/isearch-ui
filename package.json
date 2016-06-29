@@ -109,7 +109,8 @@
     "redux": "^3.5.2",
     "shuffle-array": "^1.0.0",
     "striptags": "^2.1.1",
-    "uuid": "^2.0.2"
+    "uuid": "^2.0.2",
+    "whatwg-fetch": "^1.0.0"
   },
   "pre-commit": [
     "test"
@@ -121,6 +122,7 @@
       "/src/utils/justice.all.js"
     ],
     "globals": [
+      "fetch",
       "describe",
       "it",
       "dataLayer",
