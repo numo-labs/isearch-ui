@@ -60,7 +60,7 @@ class SearchResults extends Component {
       dataLayer.push(clickEventObject);
     } else if (dataLayer && item.type === 'tile') {
       clickEventObject.ecommerce.click.products.push({
-        'id': item.tile.id,
+        'id': (item.tile.type === 'article' || item.tile.type === 'destination') ? item.tile.name : item.tile.id,
         'brand': item.tile.type === 'article' ? 'article_tile' : 'destination_tile'
       });
       dataLayer.push(clickEventObject);
