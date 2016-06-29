@@ -1,3 +1,8 @@
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
 .calendar__day {
     font-size: 13px;
     cursor: pointer;
@@ -25,7 +30,7 @@
 }
 
 .datePickerContainer {
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
   color: black;
   width: 9.1em;
   float: left;

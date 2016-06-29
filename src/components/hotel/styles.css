@@ -1,4 +1,19 @@
 @font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
   font-family: ThomasHeadlineBold;
   src: url('../../../fonts/ThomasHeadline-Bold.otf');
 }
@@ -22,7 +37,7 @@
 }
 
 .amenityWrapper {
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
   margin-bottom: 0.8em;
   display: inline-block;
   text-align: center;
@@ -33,7 +48,7 @@
   color: #ffffff;
   background-color: #F39110;
   display: inline-block;
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
   font-weight: bold;
   font-size: 1.1em;
   padding: 0.4em 2.3em;
@@ -49,7 +64,7 @@
 }
 
 .descriptionWrapper {
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
   margin-top: 0.3em;
 }
 
@@ -85,7 +100,7 @@
 }
 
 .factWrapper {
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
 }
 
 .gradientOut {
@@ -134,7 +149,7 @@
 .hotelPrice {
   font-size: 2.5em;
   color: #DC3767;
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
   font-weight: bold;
 }
 
@@ -168,7 +183,7 @@
   height: 22px;
   line-height: 25px;
   color: #ffffff;
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
   font-size: 1em;
   text-transform: uppercase;
 }
@@ -183,7 +198,7 @@
   border: 1px solid #F39110;
   color: #F39110;
   display: inline-block;
-  font-family: 'Source Sans Pro Bold';
+  font-family: SourceSansBold;
   font-size: 1.2em;
   padding: 0.3em;
   padding-left: 1em;
@@ -202,7 +217,7 @@
 }
 
 .ppp {
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
   font-weight: bold;
   font-size: 0.9em;
 }
@@ -220,7 +235,7 @@
 }
 
 .subtitlePackage {
-  font-family: 'Source Sans Pro Light';
+  font-family: SourceSansLight;
   font-size: 1.2em;
   color: #939393;
   margin-left: 1.2em;
@@ -302,7 +317,7 @@
     height: 500px;
   }
   .subtitlePackage {
-    font-family: 'Source Sans Pro Light';
+    font-family: SourceSansLight;
     font-size: 2rem;
     color: #939393;
     margin-left: 1em;

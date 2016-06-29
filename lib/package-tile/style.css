@@ -1,4 +1,19 @@
 @font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
   font-family: ThomasHeadlineBold;
   src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
@@ -25,7 +40,7 @@
     font-size: 1.4rem;
     padding-bottom: 0.2rem;
     padding-top: 0.1rem;
-    font-family: 'Source Sans Pro Light';
+    font-family: SourceSansLight;
     opacity: 0.9;
   }
 
@@ -59,7 +74,7 @@
         font-size: 1.8rem;
       }
       .packageSubtitle {
-        font-family: 'Source Sans Pro Light';
+        font-family: SourceSansLight;
         font-size: 1.6rem;
         color: #939393;
       }
@@ -82,13 +97,13 @@
       }
         .date {
          display: inline-block;
-         font-family: 'Source Sans Pro Light';
+         font-family: SourceSansLight;
          font-size: 1.1em;
          color: #7e7e7e;
          line-height: 1.5em;
         }
         .nights {
-          font-family: 'Source Sans Pro Light';
+          font-family: SourceSansLight;
           font-size: 1.1em;
           color: #7e7e7e;
           display: inline-block;
@@ -99,7 +114,7 @@
          right: 20px;
          font-size: 1.5em;
          color:  #DC3763;
-         font-family: 'Source Sans Pro Semi Bold';
+         font-family: SourceSansSemiBold;
         }
         .discountPrice {
           text-decoration: line-through;
@@ -108,7 +123,7 @@
           right: 20px;
           font-size: 1.1em;
           color: #7e7e7e;
-          font-family: 'Source Sans Pro Light';
+          font-family: SourceSansLight;
         }
 
 

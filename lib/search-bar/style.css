@@ -15,7 +15,7 @@
 }
 
 .inputBar {
-  font-family: 'Source Sans Pro Light';
+  font-family: SourceSansLight;
   /*height: 1em;*/
   width: 30em;
   margin-top: 1.5em;
@@ -41,7 +41,7 @@
 }
 
 .searchButton {
-  font-family: 'Source Sans Pro Light';
+  font-family: SourceSansLight;
   background-color: #F39100;
   display: inline-block;
   border-radius: 100%;

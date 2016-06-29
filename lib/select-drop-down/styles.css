@@ -1,3 +1,13 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
 .downArrow {
   position: absolute;
   width: 0.8em;
@@ -6,7 +16,7 @@
 }
 
 .drop {
-  font-family: 'Source Sans Pro Regular';
+  font-family: SourceSansRegular;
   font-size: 1.6rem;
   text-align: left;
   height: 50px;
