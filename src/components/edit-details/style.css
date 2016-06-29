@@ -1,17 +1,3 @@
-@font-face {
-  font-family: SourceSansLight;
-  src: url('../../../fonts/SourceSansPro-Light.otf');
-}
-
-@font-face {
-  font-family: SourceSansSemiBold;
-  src: url('../../../fonts/SourceSansPro-SemiBold.otf');
-}
-@font-face {
-  font-family: SourceSansRegular;
-  src: url('../../../fonts/SourceSansPro-Regular.otf');
-}
-
 .changeDetailsContainer {
   width: 100%;
   margin-top: 5em;
@@ -147,7 +133,7 @@
   outline-width: 0;
   outline: none !important;
   margin-top: 1em;
-  font-family: SourceSansLight;
+  font-family: 'Source Sans Pro Light';
   height: 2em;
   color: black;
 }
@@ -171,11 +157,11 @@ h1 {
 }
 
 .lightText {
-  font-family: SourceSansLight;
+  font-family: 'Source Sans Pro Light';
 }
 
 .paxMix {
-  font-family: SourceSansLight;
+  font-family: 'Source Sans Pro Light';
   display: inline-block;
 }
 
@@ -186,16 +172,16 @@ h1 {
 .search {
   padding-left: 0.5em;
   padding-top: 1em;
-  font-family: SourceSansRegular;
+  font-family: 'Source Sans Pro Regular';
 }
 
 .searchSummaryContainer {
-  font-family: SourceSansSemiBold;
+  font-family: 'Source Sans Pro Semi Bold';
   width: 100%;
 }
 
 .tagExitButton {
-  font-family: SourceSansLight;
+  font-family: 'Source Sans Pro Light';
   position: absolute;
   top: -4.5em;
   right: 0.5em;
@@ -255,7 +241,7 @@ h1 {
     font-size: 1.4em;
   }
   .spiesTitle {
-    font-family: SourceSansBold;
+    font-family: 'Source Sans Pro Bold';
     display: inline-block;
     color: #ffffff;
     font-size: 2.8em;

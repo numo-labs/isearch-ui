@@ -1,19 +1,4 @@
 @font-face {
-  font-family: SourceSansSemiBold;
-  src: url('../../fonts/SourceSansPro-SemiBold.otf');
-}
-
-@font-face {
-  font-family: SourceSansBold;
-  src: url('../../fonts/SourceSansPro-Bold.otf');
-}
-
-@font-face {
-  font-family: SourceSansLight;
-  src: url('../../fonts/SourceSansPro-Light.otf');
-}
-
-@font-face {
   font-family: TCScript;
   src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
 }
@@ -53,7 +38,7 @@
   text-align: center;
   padding: 1em;
   padding-bottom: 1.5em;
-  font-family: SourceSansSemiBold;
+  font-family: 'Source Sans Pro Semi Bold';
   position: relative;
   height: 17em;
   display: inline-block;
