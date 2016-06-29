@@ -81,7 +81,8 @@ function deployProd () {
             blocksplitting: true
           }),
           ContentType,
-          ContentEncoding: 'gzip'
+          ContentEncoding: 'gzip',
+          CacheControl: 'max-age=1209600'
         };
         s3.putObject(params, function (err, data) {
           if (err) console.log('Object upload unsuccessful!', err);

@@ -1,9 +1,4 @@
 @font-face {
-    font-family: SourceSansLight;
-    src: url('../../fonts/SourceSansPro-Light.otf');
-}
-
-@font-face {
     font-family: ThomasHeadlineBold;
     src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
@@ -15,7 +10,7 @@
 
 .articleContainer {
     text-align: center;
-    font-family: SourceSansLight;
+    font-family: 'Source Sans Pro Light';
     display: inline-block;
     cursor: pointer;
 }

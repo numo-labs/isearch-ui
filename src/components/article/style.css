@@ -1,19 +1,4 @@
 @font-face {
-    font-family: SourceSansLight;
-    src: url('../../../fonts/SourceSansPro-Light.otf');
-}
-
-@font-face {
-    font-family: SourceSansSemiBold;
-    src: url('../../../fonts/SourceSansPro-SemiBold.otf');
-}
-
-@font-face {
-    font-family: SourceSansRegular;
-    src: url('../../../fonts/SourceSansPro-Regular.otf');
-}
-
-@font-face {
     font-family: ThomasHeadlineBold;
     src: url('../../../fonts/ThomasHeadline-Bold.otf');
 }
@@ -27,7 +12,7 @@ h5 {
 
 .articleContainer {
     text-align: center;
-    font-family: SourceSansLight;
+    font-family: 'Source Sans Pro Light';
     display: inline-block;
     cursor: pointer;
 }
@@ -68,7 +53,7 @@ h5 {
 
 
 h1 {
-    font-family: SourceSansSemiBold;
+    font-family: 'Source Sans Pro Semi Bold';
     font-size: 2.1em;
 }
 
@@ -81,7 +66,7 @@ h1 {
 .articleFullPageContainer {
     text-align: center;
     /* commenting this out as it prevents the bold/italics etc styling on the article text being applied */
-    /*font-family: SourceSansLight;*/
+    /*font-family: 'Source Sans Pro Light';*/
     display: inline-block;
     width: 100%;
 }
@@ -102,13 +87,13 @@ h1 {
 }
 
 .articleIntroText {
-    font-family: SourceSansSemiBold;
+    font-family: 'Source Sans Pro Semi Bold';
     font-size: 1.8rem;
     padding: 1em;
 }
 
 .articleSectionHeading {
-    font-family: SourceSansRegular;
+    font-family: 'Source Sans Pro Regular';
     font-size: 2.4rem;
     margin: 1em auto;
 }
@@ -134,7 +119,7 @@ h1 {
     width: 100%;
     font-size: 1.6rem;
     text-align: left;
-    font-family: SourceSansRegular;
+    font-family: 'Source Sans Pro Regular';
     font-weight: 300;
 }
 
@@ -146,7 +131,7 @@ h1 {
 
 .articleFullPageContainer h1 {
     text-align: center;
-    font-family: SourceSansSemiBold;
+    font-family: 'Source Sans Pro Semi Bold';
     font-size: 2.1em;
     padding: 1.5em;
 }
@@ -154,7 +139,7 @@ h1 {
 .articleFullPageContainer h2 {
     padding: 0 1.5em;
     font-size: 1em;
-    font-family: SourceSansSemiBold;
+    font-family: 'Source Sans Pro Semi Bold';
     color: #666;
     text-align: left;
 }

@@ -1,19 +1,4 @@
 @font-face {
-  font-family: SourceSansSemiBold;
-  src: url('../../fonts/SourceSansPro-SemiBold.otf');
-}
-
-@font-face {
-  font-family: SourceSansRegular;
-  src: url('../../fonts/SourceSansPro-Regular.otf');
-}
-
-@font-face {
-  font-family: SourceSansLight;
-  src: url('../../fonts/SourceSansPro-Light.otf');
-}
-
-@font-face {
   font-family: ThomasHeadlineBold;
   src: url('../../fonts/ThomasHeadline-Light.otf');
 }
@@ -28,7 +13,7 @@
   height: 25px;
   line-height: 25px;
   color: #ffffff;
-  font-family: SourceSansRegular;
+  font-family: 'Source Sans Pro Regular';
   font-size: 1em;
 }
 
@@ -42,7 +27,7 @@
   display: inline-block;
   text-align: center;
   font-size: 1.9rem;
-  font-family: SourceSansLight;
+  font-family: 'Source Sans Pro Light';
   padding-left: 0.1em;
   line-height: 0.1em;
 }

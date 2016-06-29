@@ -1,8 +1,3 @@
-@font-face {
-  font-family: SourceSansSemiBold;
-  src: url('../../../fonts/SourceSansPro-SemiBold.otf');
-}
-
 .grid {
   margin: 0 auto;
   margin-bottom: 2em;
@@ -62,7 +57,7 @@
   height: 40px;
   margin: 10px 5px;
   position: relative;
-  font-family: SourceSansSemiBold;
+  font-family: 'Source Sans Pro Semi Bold';
   font-size: 1.4em;
   text-align: center;
 }
