@@ -81,7 +81,9 @@ function deployProd () {
             blocksplitting: true
           }),
           ContentType,
-          ContentEncoding: 'gzip'
+          ContentEncoding: 'gzip',
+          Vary: 'Accept-Encoding',
+          ETag: version
         };
         s3.putObject(params, function (err, data) {
           if (err) console.log('Object upload unsuccessful!', err);
