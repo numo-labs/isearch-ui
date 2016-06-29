@@ -61,7 +61,7 @@ export default class EditDetails extends Component {
             </div>
           </Link>
           <div className='contentHeader'>
-            <img className='logoHeart' src='https://www.tcdl.io.s3-website-eu-west-1.amazonaws.com/isearch/images/spieslogo.png'/>
+            <img className='logoHeart' src='http://www.tcdl.io.s3-website-eu-west-1.amazonaws.com/isearch/images/spieslogo.png'/>
             <h1 className='spiesTitle'>SPIES</h1>
             <div className='inspirationTitle'>Inspiration</div>
           </div>
