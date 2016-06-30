@@ -41,21 +41,7 @@ gulp.task('ci:deploy', function () {
   });
 });
 
-function createTag (next) {
-  const cmd = 'git tag v' + pkg.version;
-  exec(cmd, function (err, stdout, stderr) {
-    if (err && err.message.includes('already exists')) {
-      console.log('tag for version', pkg.version, ' already exists. Update version in package.json and re run the deployment script');
-      return;
-    } else {
-      next();
-    }
-  });
-}
-
-gulp.task('prod:deploy', function () {
-  return createTag(deployProd);
-});
+gulp.task('prod:deploy', deployProd);
 
 function deployProd () {
   /*
