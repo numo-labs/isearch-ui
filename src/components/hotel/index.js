@@ -165,8 +165,8 @@ class HotelPage extends Component {
                 starRating={roundedStarRating}
                 ratingIconUrl={ratingIconUrl}
                 size={1.8}
-                width={1.8}
-                height={1.9}
+                width={'2.2em'}
+                height={'2em'}
               />
             </div>
           </div>
