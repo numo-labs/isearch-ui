@@ -135,7 +135,7 @@ class HotelPage extends Component {
   }
 
   renderHotelPage (props) {
-    const { packageOffer, goBack } = props;
+    const { packageOffer, goBack, go } = props;
     const hotelImages = packageOffer.hotel.images.large.map(i => i.uri);
     const roundedStarRating = Math.floor(packageOffer.hotel.starRating);
     const image = hotelImages[ 0 ];
@@ -145,7 +145,7 @@ class HotelPage extends Component {
 
     if (document.querySelector('title')) document.querySelector('title').innerHTML = packageOffer.hotel.name;
     return ([
-      <NavHeader backToSearch={goBack}/>,
+      <NavHeader backToSearch={goBack} go={go}/>,
       <div className='hotelPackageImage' style={{backgroundImage: `url(${image})`}}/>,
       <ISearchSlider images={hotelImages} className='headerSlider'/>,
       <div className='infoContainer'>
