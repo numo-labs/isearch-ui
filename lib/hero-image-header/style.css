@@ -15,10 +15,7 @@
 
 @font-face {
   font-family: TCScript;
-  src: url('../../fonts/thomas_script_1_5_base-webfont.woff2') format('woff2'),
-       url('../../fonts/thomas_script_1_5_base-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+  src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
 }
 
 .bouncingArrow {
@@ -28,57 +25,13 @@
 .bouncingArrowContainer {
   margin-top: 6em;
   -webkit-animation: bounce 2s infinite ease-in-out;
-  -o-animation: bounce 2s infinite ease-in-out;
-  animation: bounce 2s infinite ease-in-out;
   cursor: pointer;
 }
 
 @-webkit-keyframes bounce {
-	0%, 20%, 60%, 100%  {
-      -webkit-transform: translateY(0);
-      -moz-transform: translateY(0);
-      -ms-transform: translateY(0);
-      -o-transform: translateY(0);
-      transform: translateY(0);
-    }
-    40%  {
-      -webkit-transform: translateY(10px);
-      -moz-transform: translateY(10px);
-      -ms-transform: translateY(10px);
-      -o-transform: translateY(10px);
-      transform: translateY(10px);
-    }
-    80% {
-      -webkit-transform: translateY(5px);
-      -moz-transform: translateY(5px);
-      -ms-transform: translateY(5px);
-      -o-transform: translateY(5px);
-      transform: translateY(5px);
-    }
-}
-
-@keyframes bounce {
-	0%, 20%, 60%, 100%  {
-      -webkit-transform: translateY(0);
-      -moz-transform: translateY(0);
-      -ms-transform: translateY(0);
-      -o-transform: translateY(0);
-      transform: translateY(0);
-    }
-    40%  {
-      -webkit-transform: translateY(10px);
-      -moz-transform: translateY(10px);
-      -ms-transform: translateY(10px);
-      -o-transform: translateY(10px);
-      transform: translateY(10px);
-    }
-    80% {
-      -webkit-transform: translateY(5px);
-      -moz-transform: translateY(5px);
-      -ms-transform: translateY(5px);
-      -o-transform: translateY(5px);
-      transform: translateY(5px);
-    }
+	0%, 20%, 60%, 100%  { -webkit-transform: translateY(0); }
+    40%  { -webkit-transform: translateY(10px); }
+    80% { -webkit-transform: translateY(5px); }
 }
 
 .spies {
@@ -105,10 +58,6 @@
   height: 17em;
   display: inline-block;
   margin: 0 auto;
-  top: 60%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
 }
 
 .headerBarWrapper {
