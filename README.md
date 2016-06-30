@@ -138,9 +138,9 @@ The contents of the public folder will then be uploaded to the specified Amazon 
 
 ### Deploying to Production
 
-The production URL is [http://inspirationalsearch.spies.dk/isearch/prod/index.html](http://inspirationalsearch.spies.dk/isearch/prod/index.html)
+The production URL is [http://inspirationalsearch.spies.dk/isearch/prod/index.html](http://inspirationalsearch.spies.dk/)
 
-To deploy to production merge `master` into `prod` and Codeship will do the rest (call `gulp prod:deploy` with the S3 bucket name set to `inspirationalsearch.spies.dk`)
+To deploy to production create a PR from `master` into `prod`. Once that's merged Codeship will do the rest (basically calling `gulp prod:deploy` with the S3 bucket name set to `inspirationalsearch.spies.dk`).
 
 # APPENDIX
 
