@@ -6,8 +6,11 @@ import {
   CLEAR_SEARCH_STRING,
   RESET_TAGS
 } from '../constants/actionTypes';
+import * as graphqlService from '../services/graphql';
 import { startSearch } from './search-results.js';
 import { analyticsAddTagObject, analyticsRemoveTagObject } from '../../lib/analytics-helper';
+
+import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
 
 /**
 * TEMP FUNCTIONS TO ADD MOCK TAGS
@@ -51,6 +54,25 @@ export function deleteTag (displayName) {
 
 export const onYesFilter = (displayName, id) => (dispatch) => {
   return dispatch(addSingleTag(displayName, id, 'filter'));
+};
+
+export const searchForTag = (searchString) => (dispatch) => {
+  const variables = {
+    input: searchString,
+    size: 1
+  };
+  graphqlService
+    .query(QUERY_AUTOCOMPLETE_INPUT, variables)
+    .then(json => {
+      console.log('Autocomplete response', json);
+      const { data: { viewer: { autocomplete } } } = json;
+      if (autocomplete && autocomplete.items && autocomplete.items.length) {
+        const tag = autocomplete.items[0];
+        dispatch(addSingleTag(tag.label, tag.tagid));
+      } else {
+        dispatch(resetTags());
+      }
+    });
 };
 
 /**

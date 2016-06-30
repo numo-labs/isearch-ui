@@ -10,6 +10,8 @@ import * as actions from '../../src/actions/tags';
 import simple from 'simple-mock';
 import thunk from 'redux-thunk';
 import configureMockStore from './test-helpers';
+import * as graphqlService from '../../src/services/graphql';
+import { QUERY_AUTOCOMPLETE_INPUT } from '../../src/constants/queries.js';
 const mockStore = configureMockStore([thunk]);
 const initialState = {
   search: {
@@ -49,6 +51,68 @@ describe('actions', () => {
       };
       expect(actions.deleteTag(displayName)).to.deep.equal(expectedAction);
       done();
+    });
+  });
+  describe('searchForTag', () => {
+    beforeEach(() => {
+      simple.mock(graphqlService, 'query').resolveWith({
+        data: {
+          viewer: {
+            autocomplete: {
+              items: [
+                { label: 'Test Tag', tagid: 'abc123' }
+              ]
+            }
+          }
+        }
+      });
+    });
+    afterEach(() => {
+      simple.restore();
+    });
+    it('performs a lookup on the autocomplete service with the search term provided', () => {
+      const store = mockStore(initialState);
+      store.dispatch(actions.searchForTag('test'));
+      expect(graphqlService.query.called).to.be.true;
+      expect(graphqlService.query.lastCall.args[0]).to.deep.equal(QUERY_AUTOCOMPLETE_INPUT);
+      expect(graphqlService.query.lastCall.args[1].input).to.equal('test');
+    });
+    it('adds a single tag if autocomplete returns results', (done) => {
+      const store = mockStore(initialState);
+      const expectedAction = {
+        type: TAG_ADD_SINGLE_TAG,
+        tag: {
+          displayName: 'Test Tag',
+          id: 'abc123'
+        },
+        isInitialTag: false
+      };
+      store.dispatch(actions.searchForTag('test'));
+      setImmediate(() => {
+        expect(store.getActions()).to.contain(expectedAction);
+        done();
+      });
+    });
+    it('resets tags if autocomplete returns no results', (done) => {
+      simple.mock(graphqlService, 'query').resolveWith({
+        data: {
+          viewer: {
+            autocomplete: {
+              items: []
+            }
+          }
+        }
+      });
+      const store = mockStore(initialState);
+      const expectedAction = {
+        type: RESET_TAGS
+      };
+      store.dispatch(actions.searchForTag('test'));
+      setImmediate(() => {
+        console.log(store.getActions()[0]);
+        expect(store.getActions()).to.contain(expectedAction);
+        done();
+      });
     });
   });
   describe('addSingleTag', () => {

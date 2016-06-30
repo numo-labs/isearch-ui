@@ -1,4 +1,5 @@
 import { VIEW_ARTICLE } from '../constants/actionTypes';
+import 'whatwg-fetch';
 
 import configuration from '../../config';
 import configure from 'con.figure';
@@ -14,13 +15,12 @@ export const viewArticle = (content) => { return { type: VIEW_ARTICLE, content }
 
 export const getArticle = (bucketId, itemId) => {
   return (dispatch) => {
-    // JQuery imported at index.html and intex.template.html
-    $.getJSON(
-      `${config.bucketUrl}${bucketId}/${itemId}.json`,
-      (data) => {
-        console.info(data);
-        dispatch(viewArticle(data.tile));
-      }
-    );
+    const url = `${config.bucketUrl}${bucketId}/${itemId}.json`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log('parsed json', json);
+        dispatch(viewArticle(json.tile));
+      });
   };
 };
