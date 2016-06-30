@@ -23,7 +23,7 @@ export default class EditDetails extends Component {
     });
     this.props.updateHeaderTitles();
     this.props.startSearch();
-    goBackBrowserDetect(go);
+    go(-1);
   }
   handleOnClick () {
     const { go } = this.props;
