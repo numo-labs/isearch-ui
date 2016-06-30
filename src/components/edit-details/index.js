@@ -23,7 +23,7 @@ export default class EditDetails extends Component {
     });
     this.props.updateHeaderTitles();
     this.props.startSearch();
-    goBackBrowserDetect(go);
+    go(-1);
   }
   handleOnClick () {
     const { go } = this.props;
@@ -121,7 +121,7 @@ export default class EditDetails extends Component {
             );
           })}
           <div className='changeInputButtonContainer'>
-            <div className='changeInputButton' onClick={this.onSearchClick.bind(this)}>UPPDATERING</div>
+            <div className='changeInputButton' onClick={this.onSearchClick.bind(this)}>Opdatér</div>
           </div>
         </div>
       </div>
