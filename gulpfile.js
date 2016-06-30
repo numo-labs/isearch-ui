@@ -48,7 +48,7 @@ function deployProd () {
   * config
   */
   var bucketfolder = 'isearch/prod/';
-  const cmd = 'git push origin v' + pkg.version + ' && npm run prod:build';
+  const cmd = 'npm run prod:build';
   return exec(cmd, function (error, stdout, stderr) {
     if (error === null) {
       var s3 = new AWS.S3({region: 'eu-west-1'});
