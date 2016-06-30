@@ -10,7 +10,7 @@ const heartShareSrc = 'https://cloud.githubusercontent.com/assets/12450298/14609
 
 import { analyticsAddToCart } from '../../../lib/analytics-helper';
 
-const ratingIconUrl = '../../../src/assets/ratingIcon.png';
+const ratingIconUrl = '../../../src/assets/rating.png';
 const analyticsReferer = '&landingfrom=inspirational_search';
 
 class HotelPage extends Component {
@@ -165,8 +165,8 @@ class HotelPage extends Component {
                 starRating={roundedStarRating}
                 ratingIconUrl={ratingIconUrl}
                 size={1.8}
-                width={'2.2em'}
-                height={'2em'}
+                width={'2.5em'}
+                height={'2.5em'}
               />
             </div>
           </div>
