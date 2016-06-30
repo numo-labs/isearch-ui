@@ -10,7 +10,10 @@
 
 @font-face {
     font-family: TCScript;
-    src: url('../../fonts/Thomas_Script_1_5_BASE.otf');
+    src: url('../../fonts/thomas_script_1_5_base-webfont.woff2') format('woff2'),
+    url('../../fonts/thomas_script_1_5_base-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .articleContainer {
@@ -18,13 +21,15 @@
     font-family: SourceSansLight;
     display: inline-block;
     cursor: pointer;
+    height: 20em;
 }
 
 .articleTileImage {
-    display: inline-block;
-    height: 20em;
     width: 100%;
-    object-fit: cover;
+    height: 100%;
+    position: absolute;
+    background-size: cover;
+    background-position: 50%;
 }
 
 .text {
@@ -55,7 +60,7 @@
 }
 
 .articleContainer.visited .tagField {
-    display: initial;
+    display: block;
 }
 
 .articleContainer.visited .text {
