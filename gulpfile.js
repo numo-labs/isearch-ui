@@ -41,28 +41,14 @@ gulp.task('ci:deploy', function () {
   });
 });
 
-function createTag (next) {
-  const cmd = 'git tag v' + pkg.version;
-  exec(cmd, function (err, stdout, stderr) {
-    if (err && err.message.includes('already exists')) {
-      console.log('tag for version', pkg.version, ' already exists. Update version in package.json and re run the deployment script');
-      return;
-    } else {
-      next();
-    }
-  });
-}
-
-gulp.task('prod:deploy', function () {
-  return createTag(deployProd);
-});
+gulp.task('prod:deploy', deployProd);
 
 function deployProd () {
   /*
   * config
   */
   var bucketfolder = 'isearch/prod/';
-  const cmd = 'git push origin v' + pkg.version + ' && npm run prod:build';
+  const cmd = 'npm run prod:build';
   return exec(cmd, function (error, stdout, stderr) {
     if (error === null) {
       var s3 = new AWS.S3({region: 'eu-west-1'});
@@ -81,7 +67,8 @@ function deployProd () {
             blocksplitting: true
           }),
           ContentType,
-          ContentEncoding: 'gzip'
+          ContentEncoding: 'gzip',
+          CacheControl: 'max-age=1209600'
         };
         s3.putObject(params, function (err, data) {
           if (err) console.log('Object upload unsuccessful!', err);

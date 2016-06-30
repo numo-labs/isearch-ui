@@ -47,7 +47,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
-      template: 'src/index.template.html'
+      template: 'src/index.template.html',
+      minify: {
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeAttributeQuotes: true,
+        removeComments: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true
+      }
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /da/),
     new webpack.optimize.UglifyJsPlugin({ comments: false })

@@ -23,7 +23,7 @@ export default class EditDetails extends Component {
     });
     this.props.updateHeaderTitles();
     this.props.startSearch();
-    goBackBrowserDetect(go);
+    go(-1);
   }
   handleOnClick () {
     const { go } = this.props;
@@ -61,7 +61,7 @@ export default class EditDetails extends Component {
             </div>
           </Link>
           <div className='contentHeader'>
-            <img className='logoHeart' src='https://cloud.githubusercontent.com/assets/12450298/13631826/8a5cb062-e5de-11e5-8b73-f2ec9d622d5f.png'/>
+            <img className='logoHeart' src='http://www.tcdl.io.s3-website-eu-west-1.amazonaws.com/isearch/images/spieslogo.png'/>
             <h1 className='spiesTitle'>SPIES</h1>
             <div className='inspirationTitle'>Inspiration</div>
           </div>
@@ -121,7 +121,7 @@ export default class EditDetails extends Component {
             );
           })}
           <div className='changeInputButtonContainer'>
-            <div className='changeInputButton' onClick={this.onSearchClick.bind(this)}>UPPDATERING</div>
+            <div className='changeInputButton' onClick={this.onSearchClick.bind(this)}>Opdatér</div>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ const heartShareSrc = 'https://cloud.githubusercontent.com/assets/12450298/14609
 
 import { analyticsAddToCart } from '../../../lib/analytics-helper';
 
-const ratingIconUrl = '../../../src/assets/ratingIcon.png';
+const ratingIconUrl = '../../../src/assets/rating.png';
 const analyticsReferer = '&landingfrom=inspirational_search';
 
 class HotelPage extends Component {
@@ -135,7 +135,7 @@ class HotelPage extends Component {
   }
 
   renderHotelPage (props) {
-    const { packageOffer, goBack } = props;
+    const { packageOffer, goBack, go } = props;
     const hotelImages = packageOffer.hotel.images.large.map(i => i.uri);
     const roundedStarRating = Math.floor(packageOffer.hotel.starRating);
     const image = hotelImages[ 0 ];
@@ -145,7 +145,7 @@ class HotelPage extends Component {
 
     if (document.querySelector('title')) document.querySelector('title').innerHTML = packageOffer.hotel.name;
     return ([
-      <NavHeader backToSearch={goBack}/>,
+      <NavHeader backToSearch={goBack} go={go}/>,
       <div className='hotelPackageImage' style={{backgroundImage: `url(${image})`}}/>,
       <ISearchSlider images={hotelImages} className='headerSlider'/>,
       <div className='infoContainer'>
@@ -165,8 +165,8 @@ class HotelPage extends Component {
                 starRating={roundedStarRating}
                 ratingIconUrl={ratingIconUrl}
                 size={1.8}
-                width={1.8}
-                height={1.9}
+                width={'2.5em'}
+                height={'2.5em'}
               />
             </div>
           </div>
