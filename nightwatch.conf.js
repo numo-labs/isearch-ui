@@ -2,7 +2,8 @@ require('env2')('.env'); // optionally store youre Evironment Variables in .env 
 const PKG = require('./package.json'); // so we can get the version of the project
 const BINPATH = './node_modules/nightwatch/bin/'; // change if required.
 const SCREENSHOT_PATH = './node_modules/nightwatch/screenshots/' + PKG.version + '/';
-
+// set PROD as default BASE_URL for tests
+process.env.BASE_URL = process.env.BASE_URL || 'http://inspirationalsearch.spies.dk/isearch/prod';
 const config = { // we use a nightwatch.conf.js file so we can include comments and helper functions
   'src_folders': [
     'test/e2e'     // we use /test as the name of our test directory by default. so test/e2e for e2e
