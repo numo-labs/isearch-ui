@@ -21,7 +21,9 @@
     "stats": "npm run clean && ./node_modules/.bin/webpack --optimize-dedupe -p --config ./webpack.production.config.js --profile --json > public/stats.json",
     "ci:deploy": "gulp ci:deploy",
     "prod:deploy": "gulp prod:deploy",
-    "generate-graphql-schema": "babel-node ./test/constants/helpers/update-schema.js > ./test/constants/helpers/schema.json"
+    "generate-graphql-schema": "babel-node ./test/constants/helpers/update-schema.js > ./test/constants/helpers/schema.json",
+    "postinstall": "node nightwatch.conf.js",
+    "nightwatch": "./node_modules/.bin/nightwatch --env local"
   },
   "repository": {
     "type": "git",
@@ -56,6 +58,7 @@
     "con.figure": "1.0.0",
     "css-loader": "^0.23.1",
     "engine.io-client": "^1.6.9",
+    "env2": "^2.1.0",
     "enzyme": "^2.2.0",
     "expect": "^1.19.0",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -68,6 +71,7 @@
     "mocha": "^2.4.5",
     "mocha-jsdom": "^1.1.0",
     "mock-require": "^1.2.1",
+    "nightwatch": "^0.9.5",
     "node-zopfli": "^1.4.0",
     "pre-commit": "^1.1.3",
     "react-addons-test-utils": "^0.14.8",
@@ -76,6 +80,8 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "request": "^2.65.0",
+    "saucelabs": "^1.2.0",
+    "selenium-download": "^2.0.2",
     "semistandard": "^7.0.5",
     "simple-mock": "^0.6.0",
     "sinon": "^1.17.3",

@@ -259,3 +259,5 @@ Include this script in your `package.json` to run your tests:
 ```json
 "test": "npm run lint && mocha test/**/*.test.js --compilers js:babel-register"
 ```
+
+## Automated Browser Testing
