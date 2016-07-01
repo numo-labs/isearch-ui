@@ -42,8 +42,11 @@ export default class Root extends Component {
     if (this.socket) { this.socket.destroy(); }
   }
 
-  determineScrollBehaviour ({ location: prevLocation }, { location }) {
-    return location.pathname.indexOf('hotel') > -1 ? [0, 0] : true; // scroll to top for hotel route
+  determineScrollBehaviour (prev, curr) {
+    if (!curr) {
+      return false;
+    }
+    return curr.location.pathname.indexOf('hotel') > -1 ? [0, 0] : true; // scroll to top for hotel route
   }
 
   render () {
