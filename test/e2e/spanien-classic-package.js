@@ -5,7 +5,7 @@ module.exports = {
     browser
       // .url('http://www.tcdl.io.s3-website-eu-west-1.amazonaws.com/isearch/0.18/index.html')
       // .url('http://localhost:8080')
-      .url(process.env.BASE_URL)
+      .url(process.env.BASE_URL || 'http://inspirationalsearch.spies.dk/isearch/prod')
       .waitForElementVisible('body')
       .saveScreenshot(config.imgpath(browser) + 'tc_home.png')
       .setValue('input[type=text]', 'Span')
