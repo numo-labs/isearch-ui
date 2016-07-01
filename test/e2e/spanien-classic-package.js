@@ -4,7 +4,8 @@ module.exports = {
   'Inspirational Search': function (browser) {
     browser
       // .url('http://www.tcdl.io.s3-website-eu-west-1.amazonaws.com/isearch/0.18/index.html')
-      .url('')
+      // .url('http://localhost:8080')
+      .url(process.env.BASE_URL)
       .waitForElementVisible('body')
       .saveScreenshot(config.imgpath(browser) + 'tc_home.png')
       .setValue('input[type=text]', 'Span')
@@ -17,12 +18,10 @@ module.exports = {
       .click('.list-group-item') // click on "Spanien" in auto suggestions
       .assert.containsText('.tags', 'Spanien') //
       // find the first article on the page:
-      .waitForElementVisible('.articleTileImage')
       .pause(500)
       .moveToElement('.tags', 800, 800)
       .saveScreenshot(config.imgpath(browser) + 'tc_tags.png')
-      .moveToElement('.articleTileImage', 200, 800)
-      .saveScreenshot(config.imgpath(browser) + 'tc_result_initial.png')
+      .waitForElementVisible('.articleTileImage')
       .moveToElement('.articleTileImage', 200, 800)
       .saveScreenshot(config.imgpath(browser) + 'tc_result_article.png')
 
@@ -33,11 +32,11 @@ module.exports = {
       .click('.packageContainer')
       .pause(500)
       .waitForElementVisible('.bookButton')
-      .waitForElementVisible('.hotelPackageImage')
+      .waitForElementVisible('.ratingIcon')
       .assert.containsText('.bookButton', 'SEE PRIS OCH BOKA')
       // .pause(500)
       .saveScreenshot(config.imgpath(browser) + 'tc_package.png')
-      // click on bookButton
+      // click on bookButton (takes you to the booking page on spies.dk)
       .click('.bookButton')
       .pause(500)
       .waitForElementVisible('.quickfactheader')

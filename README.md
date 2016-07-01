@@ -260,4 +260,42 @@ Include this script in your `package.json` to run your tests:
 "test": "npm run lint && mocha test/**/*.test.js --compilers js:babel-register"
 ```
 
+
 ## Automated Browser Testing
+
+We are using Nightwatch to run User Acceptance Tests.
+
+As a developer, all you need to do is run the following commands:
+
+```sh
+npm install
+```
+(_ensure that you have the 
+> Note: if you don't already have Java installed on your localhost, 
+see: [#**installing-java**](https://github.com/dwyl/learn-nightwatch/#installing-java-runtime-environment-jre)
+
+Once all `devDependencies` have installed, simply run:
+```sh
+npm run nightwatch
+```
+This will run the tests locally using Selenium and Chromedriver
+
+
+
+
+## Debugging (Tracing Requests)
+
+isearch-ui now comes with it's own debugging toolbar baked in, it is shown when the Konami code:
+
+`up, up, down, down, left, right, left, right, b, a` is pressed on the arrow keys and keyboard.
+
+![screenshot from 2016-07-01 11-22-44](https://cloud.githubusercontent.com/assets/524382/16519035/3ae2969c-3f7e-11e6-9796-e371be3a15de.png)
+
+A breakdown of what the toolbar shows is:
+
+Interactive: The number of miliseconds until the DOM is responsive to use.
+Complete: The number of miliseconds until the DOM is complete.
+Load: The number of miliseconds until everything has loaded.
+[Tracey](https://github.com/numo-labs/tracey): A link to tracey with the current search result id.
+[Logs](https://github.com/numo-labs/inspirational-search-docs/blob/master/logging.md): A link to kibana to view the logs of the current request.
+
