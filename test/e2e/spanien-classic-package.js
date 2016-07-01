@@ -44,7 +44,7 @@ module.exports = {
       .assert.containsText('.quickfactheader', 'Hotelfakta')
       .saveScreenshot(config.imgpath(browser) + 'tc_booking_page.png')
       .execute(function () {
-        window.history.back()
+        window.history.back();
       })
       .pause(500)
       .saveScreenshot(config.imgpath(browser) + 'tc_package_again.png')

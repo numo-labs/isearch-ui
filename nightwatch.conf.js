@@ -1,7 +1,7 @@
 require('env2')('.env'); // optionally store youre Evironment Variables in .env
 const PKG = require('./package.json'); // so we can get the version of the project
 const BINPATH = './node_modules/nightwatch/bin/'; // change if required.
-const SCREENSHOT_PATH = './node_modules/nightwatch/screenshots/' + PKG.version + '/'
+const SCREENSHOT_PATH = './node_modules/nightwatch/screenshots/' + PKG.version + '/';
 
 const config = { // we use a nightwatch.conf.js file so we can include comments and helper functions
   'src_folders': [
@@ -15,10 +15,10 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     'host': '127.0.0.1',
     'port': 4444,
     'cli_args': {
-      'webdriver.chrome.driver' : BINPATH + 'chromedriver'// also downloaded by selenium-download
+      'webdriver.chrome.driver': BINPATH + 'chromedriver'// also downloaded by selenium-download
     }
   },
-  'test_workers' : {'enabled' : true, 'workers' : 'auto'}, // perform tests in parallel where possible
+  'test_workers': {'enabled': true, 'workers': 'auto'}, // perform tests in parallel where possible
   'test_settings': {
     'default': {
       'launch_url': 'http://localhost', // we're testing a Public or 'staging' site on Saucelabs
@@ -29,8 +29,8 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
         'enabled': true, // save screenshots to this directory (excluded by .gitignore)
         'path': SCREENSHOT_PATH
       },
-      'username' : '${SAUCE_USERNAME}',     // if you want to use Saucelabs remember to
-      'access_key' : '${SAUCE_ACCESS_KEY}', // export your environment variables (see readme)
+      'username': '${SAUCE_USERNAME}',     // if you want to use Saucelabs remember to
+      'access_key': '${SAUCE_ACCESS_KEY}', // export your environment variables (see readme)
       'globals': {
         'waitForConditionTimeout': 10000    // wait for content on the page bsauefore continuing
       }
@@ -81,14 +81,14 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
         'version': '11.0'
       }
     },
-    'firefox' : {
+    'firefox': {
       'desiredCapabilities': {
         'platform': 'XP',
         'browserName': 'firefox',
         'version': '33'
       }
     },
-    'internet_explorer_10' : {
+    'internet_explorer_10': {
       'desiredCapabilities': {
         'platform': 'Windows 7',
         'browserName': 'internet explorer',
@@ -113,7 +113,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
       }
     }
   }
-}
+};
 module.exports = config;
 
 /**
@@ -123,7 +123,7 @@ module.exports = config;
  */
 require('fs').stat(BINPATH + 'selenium.jar', function (err, stat) { // got it?
   if (err || !stat || stat.size < 1) {
-    require('selenium-download').ensure(BINPATH, function(error) {
+    require('selenium-download').ensure(BINPATH, function (error) {
       if (error) throw new Error(error); // no point continuing so exit!
       console.log('✔ Selenium & Chromedriver downloaded to:', BINPATH);
     });
