@@ -10,7 +10,7 @@ const heartShareSrc = 'https://cloud.githubusercontent.com/assets/12450298/14609
 
 import { analyticsAddToCart } from '../../../lib/analytics-helper';
 
-const ratingIconUrl = '../../../src/assets/rating.png';
+import ratingIconUrl from '../../constants/rating-icon';
 const analyticsReferer = '&landingfrom=inspirational_search';
 
 class HotelPage extends Component {
