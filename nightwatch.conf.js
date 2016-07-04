@@ -30,8 +30,8 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
         'enabled': true, // save screenshots to this directory (excluded by .gitignore)
         'path': SCREENSHOT_PATH
       },
-      'username': '${SAUCE_USERNAME}',     // if you want to use Saucelabs remember to
-      'access_key': '${SAUCE_ACCESS_KEY}', // export your environment variables (see readme)
+      'username': process.env.SAUCE_USERNAME,     // if you want to use Saucelabs remember to
+      'access_key': process.env.SAUCE_ACCESS_KEY, // export your environment variables (see readme)
       'globals': {
         'waitForConditionTimeout': 10000    // wait for content on the page bsauefore continuing
       }

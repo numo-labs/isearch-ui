@@ -2,6 +2,7 @@ var config = require('../../nightwatch.conf.js');
 
 module.exports = {
   'Inspirational Search': function (browser) {
+    var PACKAGE_PRICE = 0;
     browser
       .url(process.env.BASE_URL)
       .waitForElementVisible('body')
@@ -19,37 +20,49 @@ module.exports = {
       .pause(500)
       .moveToElement('.tags', 800, 800)
       .saveScreenshot(config.imgpath(browser) + 'tc_tags.png')
-      .waitForElementVisible('.articleTileImage')
-      .moveToElement('.articleTileImage', 200, 800)
-      .saveScreenshot(config.imgpath(browser) + 'tc_result_article.png')
+      // .waitForElementVisible('.articleTileImage')
+      // .moveToElement('.articleTileImage', 200, 800)
+      // .saveScreenshot(config.imgpath(browser) + 'tc_result_article.png')
 
       .waitForElementVisible('.packageContainer')
-      .assert.containsText('.packageContainer', 'Spanien') //
+      // .assert.containsText('.packageContainer', 'Spanien') // spainish package
       .moveToElement('.packageContainer', 10, 400)
       .saveScreenshot(config.imgpath(browser) + 'tc_result_package.png')
-      .click('.packageContainer')
-      .pause(500)
-      .waitForElementVisible('.bookButton')
-      .waitForElementVisible('.ratingIcon')
-      .assert.containsText('.bookButton', 'SEE PRIS OCH BOKA')
-      // .pause(500)
-      .saveScreenshot(config.imgpath(browser) + 'tc_package.png')
-      // click on bookButton (takes you to the booking page on spies.dk)
-      .click('.bookButton')
-      .pause(500)
-      .waitForElementVisible('.quickfactheader')
-      .assert.containsText('.quickfactheader', 'Hotelfakta')
-      .saveScreenshot(config.imgpath(browser) + 'tc_booking_page.png')
-      .execute(function () {
-        window.history.back();
+      .getText('.packageContainer .price',function(result) {
+        var price = result.value.replace(',-', '');
+        console.log(' - - - - - - - - - - #1 Price:', price)
+        PACKAGE_PRICE = price;
       })
-      .pause(500)
-      .saveScreenshot(config.imgpath(browser) + 'tc_package_again.png')
-      .click('.backButton')
-      .waitForElementVisible('#container')
-      .pause(500)
-      .assert.containsText('#container', 'Hvor vil du rejse hen')
-      .saveScreenshot(config.imgpath(browser) + 'tc_isearch_home.png')
+      .getText('.packageContainer:nth-child(1) + .packageContainer .price',function(result) {
+        console.log('result', result);
+        // var price = result.value.replace(',-', '');
+        // console.log(' - - - - - - - - - - #2 Price:', price)
+        // PACKAGE_PRICE = price;
+      })
+      // .click('.packageContainer')
+      // .pause(500)
+      // .waitForElementVisible('.bookButton')
+      // .waitForElementVisible('.ratingIcon')
+      // .assert.containsText('.bookButton', 'SEE PRIS OCH BOKA')
+      // // .pause(500)
+      // .saveScreenshot(config.imgpath(browser) + 'tc_package.png')
+      // // click on bookButton (takes you to the booking page on spies.dk)
+      // .click('.bookButton')
+      // .pause(500)
+      // .waitForElementVisible('.quickfactheader')
+      // .assert.containsText('.quickfactheader', 'Hotelfakta')
+      // .saveScreenshot(config.imgpath(browser) + 'tc_booking_page.png')
+      // .execute(function () {
+      //   window.history.back();
+      // })
+      // .pause(500)
+      // .saveScreenshot(config.imgpath(browser) + 'tc_package_again.png')
+      // .click('.backButton')
+      // .waitForElementVisible('#container')
+      // .pause(500)
+      // .assert.containsText('#container', 'Hvor vil du rejse hen')
+      // .saveScreenshot(config.imgpath(browser) + 'tc_isearch_home.png')
       .end();
+      console.log('Price:', PACKAGE_PRICE);
   }
 };
