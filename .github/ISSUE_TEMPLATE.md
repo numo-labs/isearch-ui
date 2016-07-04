@@ -5,7 +5,7 @@ To ensure a full fix for the issue being opened can you please provide:
 
 ### Screen Shot
 
-[Screenshot](http://image.url)
+![Screenshot](http://image.url)
 
 ### Expected Behaviour
 
