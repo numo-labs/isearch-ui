@@ -270,8 +270,8 @@ As a developer, all you need to do is run the following commands:
 ```sh
 npm install
 ```
-(_ensure that you have the 
-> Note: if you don't already have Java installed on your localhost, 
+
+> Note: if you _don't_ already have Java installed on your localhost,
 see: [#**installing-java**](https://github.com/dwyl/learn-nightwatch/#installing-java-runtime-environment-jre)
 
 Once all `devDependencies` have installed, simply run:
@@ -279,7 +279,6 @@ Once all `devDependencies` have installed, simply run:
 npm run nightwatch
 ```
 This will run the tests locally using Selenium and Chromedriver
-
 
 
 
@@ -298,4 +297,3 @@ Complete: The number of miliseconds until the DOM is complete.
 Load: The number of miliseconds until everything has loaded.
 [Tracey](https://github.com/numo-labs/tracey): A link to tracey with the current search result id.
 [Logs](https://github.com/numo-labs/inspirational-search-docs/blob/master/logging.md): A link to kibana to view the logs of the current request.
-

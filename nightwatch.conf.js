@@ -135,7 +135,7 @@ function padLeft (count) { // theregister.co.uk/2016/03/23/npm_left_pad_chaos/
   return count < 10 ? '0' + count : count.toString();
 }
 
-var FILECOUNT = 0; // 'global' screenshot file count
+var FILECOUNT = 1; // 'global' screenshot file count
 /**
  * The default is to save screenshots to the root of your project even though
  * there is a screenshots path in the config object above! ... so we need a
