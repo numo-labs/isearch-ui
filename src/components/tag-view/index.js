@@ -22,7 +22,8 @@ export default class TagView extends Component {
       clearSearchString,
       tags,
       removeTag,
-      resetTags
+      resetTags,
+      go
      } = this.props;
     return (
       <div className='blueContainer'>
@@ -43,6 +44,7 @@ export default class TagView extends Component {
             getAutocompleteOptions={getAutocompleteOptions}
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
+            go={go}
            />
            <Tags
              tags={tags}
