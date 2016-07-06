@@ -45,6 +45,7 @@ export default class TagView extends Component {
             inAutoCompleteSearch={inAutoCompleteSearch}
             clearSearchString={clearSearchString}
             go={go}
+            tagView={Boolean(true)}
            />
            <Tags
              tags={tags}
