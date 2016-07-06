@@ -16,7 +16,7 @@ var version = pkg.version;
 var bucketName = process.env.BUCKET_NAME || 'www.tcdl.io';
 var bucketfolder = 'isearch/' + version + '/';
 
-function uploadVersionFile(s3) {
+function uploadVersionFile (s3) {
   var params = {
     Bucket: bucketName,
     Key: bucketfolder + 'version',
