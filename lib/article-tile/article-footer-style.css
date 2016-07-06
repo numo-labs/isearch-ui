@@ -15,6 +15,7 @@
   background: white;
   margin-right: 10px;
   color: #666;
+  cursor: pointer;
 }
 
 .articleFooter .addTagButton {
