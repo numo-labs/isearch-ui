@@ -60,7 +60,7 @@
   text-align: center;
   background-color: #E9E5E0;
   padding-top: 1.5em;
-  padding-bottom: 2em;
+  padding-bottom: 1.8em;
 }
 
 .descriptionWrapper {
@@ -220,6 +220,9 @@
   font-family: SourceSansRegular;
   font-weight: bold;
   font-size: 0.9em;
+  color: #4F4F4F;
+  line-height: 0.5em;
+  margin-bottom: 0.2em;
 }
 
 .titleHeartContainer {
