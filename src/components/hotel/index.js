@@ -140,7 +140,7 @@ class HotelPage extends Component {
     const roundedStarRating = Math.floor(packageOffer.hotel.starRating);
     const image = hotelImages[ 0 ];
     const country = packageOffer.hotel.place.country + ', ';
-    const region = packageOffer.hotel.place.region === null ? '' : packageOffer.hotel.place.region + ', ';
+    const region = packageOffer.hotel.place.region ? packageOffer.hotel.place.region + ', ' : '';
     const name = packageOffer.hotel.place.name;
 
     if (document.querySelector('title')) document.querySelector('title').innerHTML = packageOffer.hotel.name;
