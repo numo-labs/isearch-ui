@@ -2,6 +2,7 @@ var AWS = require('aws-sdk');
 var gulp = require('gulp');
 var fs = require('fs');
 var exec = require('child_process').exec;
+var execSync = require('child_process').execSync;
 var pkg = require('./package.json');
 var mime = require('mime-types');
 var zopfli = require('node-zopfli');
@@ -14,6 +15,23 @@ var zopfli = require('node-zopfli');
 var version = pkg.version;
 var bucketName = process.env.BUCKET_NAME || 'www.tcdl.io';
 var bucketfolder = 'isearch/' + version + '/';
+
+function uploadVersionFile (s3) {
+  var params = {
+    Bucket: bucketName,
+    Key: bucketfolder + 'version',
+    Body: JSON.stringify({
+      version,
+      hash: execSync('git rev-parse --verify HEAD').toString().split('\n')[0],
+      date: new Date()
+    }, null, 2),
+    ContentType: 'text/plain'
+  };
+  s3.putObject(params, function (err, data) {
+    if (err) console.log('Object upload unsuccessful!', err);
+    else console.log('Object version was created!');
+  });
+}
 
 gulp.task('ci:deploy', function () {
   return exec('npm run ci:build', function (error, stdout, stderr) {
@@ -37,6 +55,7 @@ gulp.task('ci:deploy', function () {
           else console.log('Object ' + filename + ' was created!');
         });
       });
+      uploadVersionFile(s3);
     }
   });
 });
@@ -75,6 +94,7 @@ function deployProd () {
           else console.log('Object ' + filename + ' was created!');
         });
       });
+      uploadVersionFile(s3);
     }
   });
 }
