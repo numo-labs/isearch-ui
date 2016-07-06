@@ -179,9 +179,10 @@ class HotelPage extends Component {
             {this.renderFactlist(this.retrieveAmenities())}
           </div>
           <div className='bookButtonContainer'>
-            <div className='ppp'>ppp <span className='hotelPrice'>
+            <span className='hotelPrice'>
               {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
-            </span></div>
+            </span>
+            <div className='ppp'>Pr. person</div>
             <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
               <div className='bookButton'>SEE PRIS OCH BOKA</div>
             </a>
