@@ -70,7 +70,7 @@ export const searchForTag = (searchString) => (dispatch) => {
       if (autocomplete && autocomplete.items && autocomplete.items.length) {
         const tag = autocomplete.items[0];
         dispatch(addSingleTag(tag.label, tag.tagid));
-        scroll.scrollTo(window.innerHeight - 56);
+        scroll.scrollTo(window.innerHeight * 0.95);
       } else {
         dispatch(resetTags());
       }
