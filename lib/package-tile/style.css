@@ -112,6 +112,7 @@
          display: inline-block;
          position: absolute;
          right: 20px;
+         bottom: 1.7em;
          font-size: 1.5em;
          color:  #DC3763;
          font-family: SourceSansSemiBold;
@@ -121,9 +122,18 @@
           display: inline-block;
           position: absolute;
           right: 20px;
+          bottom: 3.7em;
           font-size: 1.1em;
           color: #7e7e7e;
           font-family: SourceSansLight;
+        }
+        .pricePerPerson {
+          display: inline-block;
+          position: absolute;
+          right: 20px;
+          bottom: 1em;
+          font-family: SourceSansLight;
+          color: #C4C4C4;
         }
 
 

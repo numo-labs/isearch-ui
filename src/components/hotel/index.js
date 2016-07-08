@@ -140,7 +140,7 @@ class HotelPage extends Component {
     const roundedStarRating = Math.floor(packageOffer.hotel.starRating);
     const image = hotelImages[ 0 ];
     const country = packageOffer.hotel.place.country + ', ';
-    const region = packageOffer.hotel.place.region === null ? '' : packageOffer.hotel.place.region + ', ';
+    const region = packageOffer.hotel.place.region ? packageOffer.hotel.place.region + ', ' : '';
     const name = packageOffer.hotel.place.name;
 
     if (document.querySelector('title')) document.querySelector('title').innerHTML = packageOffer.hotel.name;
@@ -179,9 +179,10 @@ class HotelPage extends Component {
             {this.renderFactlist(this.retrieveAmenities())}
           </div>
           <div className='bookButtonContainer'>
-            <div className='ppp'>ppp <span className='hotelPrice'>
+            <span className='hotelPrice'>
               {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
-            </span></div>
+            </span>
+            <div className='ppp'>Pr. person</div>
             <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
               <div className='bookButton'>SEE PRIS OCH BOKA</div>
             </a>
