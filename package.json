@@ -23,7 +23,10 @@
     "prod:deploy": "gulp prod:deploy",
     "generate-graphql-schema": "babel-node ./test/constants/helpers/update-schema.js > ./test/constants/helpers/schema.json",
     "postinstall": "node nightwatch.conf.js",
-    "nightwatch": "./node_modules/.bin/nightwatch --env local"
+    "nightwatch": "./node_modules/.bin/nightwatch --env local",
+    "sauce": "./node_modules/.bin/nightwatch -e chrome,ie11,android_s4_emulator,iphone_6_simulator",
+    "upload": "node test/e2e/upload_screenshots_to_s3.js",
+    "e2e": "npm run sauce; npm run upload"
   },
   "repository": {
     "type": "git",
