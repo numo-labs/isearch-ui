@@ -4,30 +4,6 @@
   margin-bottom: 1em;
 }
 
-.cross { /* Fuera de sitio */
-  color: #ffffff;
-  font-family: sans-serif;
-  font-weight: lighter;
-  display: inline;
-  padding-left: 1.5em;
-  padding-right: 0.2em;
-  cursor: pointer;
-}
-
-.inputBar {
-  font-family: SourceSansLight;
-  /*height: 1em;*/
-  width: 30em;
-  margin-top: 1.5em;
-  border: none;
-  outline-width: 0;
-  outline: none !important;
-  padding-left: 0.5em;
-  float: left;
-  margin-right: 1em;
-  margin-bottom: 0.1em;
-}
-
 .searchBox {
   display: block;
   width: 100%;
@@ -57,7 +33,7 @@
   padding: 0;
   width: 30em;
   list-style-type: none;
-  max-height: 197px;
+  max-height: 200px;
   overflow-y: auto;
   box-shadow: 0 2px 5px #666;
 }
@@ -70,6 +46,8 @@
 li:nth-child(odd) .suggestionItem{
   background: #D5EBF2;
 }
+
+.react-autosuggest__suggestion.react-autosuggest__suggestion--focused .suggestionItem,
 li:nth-child(even) .suggestionItem:hover,
 li:nth-child(odd) .suggestionItem:hover{
   background: #F39100;
@@ -80,7 +58,6 @@ li:nth-child(odd) .suggestionItem:hover{
   position: relative;
   display: block;
   padding: 10px 15px;
-  margin-bottom: -1px;
   background-color: #fff;
   text-align: left;
 }
@@ -155,34 +132,8 @@ li:nth-child(odd) .suggestionItem:hover{
 }
 
 @media (max-width: 485px) {
-  .inputBar {
-    width: 23em;
-  }
-  .input-results,
-  .react-autosuggest__suggestions-container{
-    width: 22.5em;
-  }
+  .react-autosuggest__suggestions-container,
   .inputContainer {
     width: 80%;
-  }
-}
-
-@media (max-width: 376px) {
-  .inputBar {
-    width: 18em;
-  }
-  .input-results,
-  .react-autosuggest__suggestions-container{
-    width: 17.6em;
-  }
-}
-
-@media (max-width: 305px) {
-  .inputBar {
-    width: 15em;
-  }
-  .input-results,
-  .react-autosuggest__suggestions-container{
-    width: 14.5em;
   }
 }

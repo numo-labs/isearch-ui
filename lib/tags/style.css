@@ -52,3 +52,13 @@
 .resetButton.hidden {
   display: none;
 }
+
+.cross {
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: lighter;
+  display: inline;
+  padding-left: 1.5em;
+  padding-right: 0.2em;
+  cursor: pointer;
+}
