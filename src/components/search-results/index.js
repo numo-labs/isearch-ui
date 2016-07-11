@@ -122,7 +122,7 @@ class SearchResults extends Component {
       changeRoute,
       viewedArticles,
       removeTile,
-      addSingleTag
+      addArticleTag
     } = this.props;
 
     if (item.packageOffer) {
@@ -153,7 +153,7 @@ class SearchResults extends Component {
               <ArticleTile
                 className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
                 {...item}
-                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id, item.tile.name); removeTile(item.id); }}
+                onAddTagClick={(event) => { event.stopPropagation(); addArticleTag(item.tile.name, item.tile.id); }}
               />
             </div>
           </div>
@@ -251,7 +251,7 @@ SearchResults.propTypes = {
   changeRoute: PropTypes.func,
   viewedArticles: PropTypes.array,
   removeTile: PropTypes.func,
-  addSingleTag: PropTypes.func,
+  addArticleTag: PropTypes.func,
   searchComplete: PropTypes.bool,
   feedEnd: PropTypes.bool
 };

@@ -1,4 +1,5 @@
 import { VIEW_HOTEL, SET_HOTEL_PAGE } from '../constants/actionTypes';
+import * as eventStream from './event-stream.js';
 import configuration from '../../config';
 import configure from 'con.figure';
 import 'whatwg-fetch';
@@ -16,6 +17,7 @@ export const getHotel = (bucketId, itemId) => {
       .then(response => response.json())
       .then((json) => {
         console.log('parsed json', json);
+        dispatch(eventStream.push('view', itemId));
         dispatch(setHotelPage(json.packageOffer));
       });
   };

@@ -58,7 +58,7 @@ class ISearch extends Component {
       removeTile,
       displayedItems,
       loadMoreItemsIntoFeed,
-      addSingleTag,
+      addArticleTag,
       scrollPage,
       searchComplete,
       feedEnd
@@ -80,7 +80,7 @@ class ISearch extends Component {
           resultId={resultId}
           removeTile={removeTile}
           viewedArticles={viewedArticles}
-          addSingleTag={addSingleTag}
+          addArticleTag={addArticleTag}
           searchComplete={searchComplete}
           feedEnd={feedEnd}
         />
@@ -238,6 +238,7 @@ ISearch.propTypes = {
   tags: PropTypes.array,
   addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
+  addArticleTag: PropTypes.func,
   removeTag: PropTypes.func,
   resetTags: PropTypes.func,
   feedEnd: PropTypes.bool,

@@ -8,6 +8,7 @@ import {
 } from '../constants/actionTypes';
 import * as graphqlService from '../services/graphql';
 import { startSearch } from './search-results.js';
+import * as eventStream from './event-stream.js';
 import { analyticsAddTagObject, analyticsRemoveTagObject } from '../../lib/analytics-helper';
 
 import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
@@ -77,6 +78,13 @@ export const searchForTag = (searchString) => (dispatch) => {
     });
 };
 
+export const addArticleTag = (displayName, id) => {
+  return (dispatch) => {
+    dispatch(eventStream.push('add-tag', id));
+    return dispatch(addSingleTag(displayName, id, displayName));
+  };
+};
+
 /**
 * Action to add a tag either fron the search bar or a filterString
 * If the tag already exists, it is not added
@@ -138,8 +146,11 @@ export const resetToInitialTag = () => {
 */
 
 export const removeTile = (id) => {
-  return {
-    type: TILES_REMOVE_TILE,
-    id: id
+  return (dispatch, getState) => {
+    dispatch(eventStream.push('remove', id));
+    return dispatch({
+      type: TILES_REMOVE_TILE,
+      id: id
+    });
   };
 };

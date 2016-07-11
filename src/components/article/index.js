@@ -50,8 +50,8 @@ class ArticleFullPage extends Component {
   }
 
   onAddTagClick () {
-    const { articleContent, goBack, addSingleTag } = this.props;
-    addSingleTag(articleContent.name, articleContent.id, articleContent.name);
+    const { articleContent, goBack, addArticleTag } = this.props;
+    addArticleTag(articleContent.name, articleContent.id, articleContent.name);
     goBack();
   }
 
@@ -137,6 +137,7 @@ ArticleFullPage.propTypes = {
   getArticle: PropTypes.func,
   params: PropTypes.object,
   addSingleTag: PropTypes.func,
+  addArticleTag: PropTypes.func,
   children: PropTypes.object
 };
 
