@@ -68,7 +68,7 @@ export const searchForTag = (searchString) => (dispatch) => {
       const { data: { viewer: { autocomplete } } } = json;
       if (autocomplete && autocomplete.items && autocomplete.items.length) {
         const tag = autocomplete.items[0];
-        dispatch(addSingleTag(tag.label, tag.tagid));
+        dispatch(addSingleTag(tag.label, tag.tagid, 'url'));
       } else {
         dispatch(resetTags());
       }
