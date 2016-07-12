@@ -97,7 +97,7 @@ export function combinePassengersForQuery (childAgeArray, numberOfChildren, numb
 export function constructTravelPeriodQuery (departureDate, duration) {
   const nights = (Number(duration.split(' ')[0]) * 7);
   const travelPeriod = {
-    departureBetween: [departureDate],
+    departureBetween: departureDate ? [departureDate] : [],
     nights: [nights]
   };
   return travelPeriod;
@@ -110,6 +110,6 @@ export function constructTravelPeriodQuery (departureDate, duration) {
 export function constructDepartureAirportQuery (departureAirport) {
   const airportCode = departureAirport.split(' ')[2];
   const departureAirportMapped = `airport:master.${airportCode}`;
-  const airport = [departureAirportMapped];
+  const airport = airportCode ? [departureAirportMapped] : [];
   return airport;
 }

@@ -3,6 +3,8 @@ import DropDown from '../../../lib/select-drop-down';
 import Calendar from '../../../lib/date-picker';
 import { Link } from 'react-router';
 import '../../../lib/react-date-picker/css/index.css';
+import moment from 'moment';
+import departOnFriday from '../../utils/departure-day-format';
 const travelInfoExitButton = require('../../../src/assets/close-white.svg');
 import goBackBrowserDetect from '../../utils/browser-detection';
 
@@ -87,7 +89,7 @@ export default class EditDetails extends Component {
               label={'TIDLIGASTE AFREJSE'}
               setValue={setDepartureDate}
               optionsTitle={'-'}
-              date={departureDate}
+              date={departureDate || departOnFriday(moment().add(3, 'months')).format('YYYY-MM-DD')}
             />
             <DropDown
               width={'22.5%'}

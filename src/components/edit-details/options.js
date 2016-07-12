@@ -1,24 +1,24 @@
 export const adultOptions = [1, 2, 3, 4, 5, 6];
 export const childOptions = [0, 1, 2, 3, 4];
-export const departureOptions = ['København - CPH', 'Billund - BLL', 'Aalborg - AAL', 'Odense - ODE', 'Rønne - RNN'];
+export const departureOptions = ['Overalt', 'København - CPH', 'Billund - BLL', 'Aalborg - AAL', 'Odense - ODE', 'Rønne - RNN'];
 export const durationOptions = ['1 uge', '2 uger', '3 uger', '4 uger'];
 export const childAgeOptions = [
-  '0 years',
-  '1 year',
-  '2 years',
-  '3 years',
-  '4 years',
-  '5 years',
-  '6 years',
-  '7 years',
-  '8 years',
-  '9 years',
-  '10 years',
-  '11 years',
-  '12 years',
-  '13 years',
-  '14 years',
-  '15 years',
-  '16 years',
-  '17 years'
+  '0 år',
+  '1 år',
+  '2 år',
+  '3 år',
+  '4 år',
+  '5 år',
+  '6 år',
+  '7 år',
+  '8 år',
+  '9 år',
+  '10 år',
+  '11 år',
+  '12 år',
+  '13 år',
+  '14 år',
+  '15 år',
+  '16 år',
+  '17 år'
 ];
