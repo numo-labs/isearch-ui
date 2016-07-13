@@ -8,6 +8,7 @@ module.exports = function (config) {
     frameworks: ['mocha', 'sinon'],
 
     files: [
+      require.resolve('babel-polyfill/dist/polyfill.js'),
       '../lib/**/*.test.js',
       '../test/**/*.test.js'
     ],
