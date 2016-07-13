@@ -145,7 +145,8 @@
       "window",
       "localStorage",
       "$",
-      "impressionsTimestamp"
+      "impressionsTimestamp",
+      "sinon"
     ],
     "parser": "babel-eslint"
   }
