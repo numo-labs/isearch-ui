@@ -17,12 +17,7 @@ module.exports = function (config) {
       exitOnResourceError: true
     },
 
-    client: {
-      mocha: {
-        // change Karma's debug.html to the mocha web reporter
-        reporter: 'spec'
-      }
-    },
+    reporters: ['mocha'],
 
     preprocessors: {
       '../test/**/*.js': ['webpack'],
