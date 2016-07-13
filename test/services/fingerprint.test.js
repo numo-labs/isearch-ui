@@ -10,8 +10,13 @@ import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
 
 describe('Fingerprint Service', () => {
-  let localStorage = global.localStorage;
-  it('createFingerprint - creates a unique id based on the window object', done => {
+  beforeEach(() => {
+    simple.mock(localStorage, 'getItem').returnWith(null);
+  });
+  afterEach(() => {
+    simple.restore();
+  });
+  it.skip('createFingerprint - creates a unique id based on the window object', done => {
     window.navigator.mimeTypes = '123';
     window.navigator.plugins = '';
     window.screen.height = '';
