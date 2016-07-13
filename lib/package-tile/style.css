@@ -51,7 +51,7 @@
   .packageImage {
     height: 200px;
     position: relative;
-    width: 375px;
+    width: 100%;
   }
     .mintBar {
       background-color: rgba(109,180,169, 0.7);

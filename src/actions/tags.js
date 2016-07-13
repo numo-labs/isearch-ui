@@ -11,7 +11,8 @@ import { startSearch } from './search-results.js';
 import { analyticsAddTagObject, analyticsRemoveTagObject } from '../../lib/analytics-helper';
 
 import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
-
+var Scroll = require('react-scroll');
+var scroll = Scroll.animateScroll;
 /**
 * TEMP FUNCTIONS TO ADD MOCK TAGS
 */
@@ -68,7 +69,8 @@ export const searchForTag = (searchString) => (dispatch) => {
       const { data: { viewer: { autocomplete } } } = json;
       if (autocomplete && autocomplete.items && autocomplete.items.length) {
         const tag = autocomplete.items[0];
-        dispatch(addSingleTag(tag.label, tag.tagid));
+        dispatch(addSingleTag(tag.label, tag.tagid, 'url'));
+        scroll.scrollTo(window.innerHeight * 0.95);
       } else {
         dispatch(resetTags());
       }
