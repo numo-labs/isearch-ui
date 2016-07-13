@@ -1,9 +1,11 @@
+const browser = process.env.KARMA_BROWSER || 'PhantomJS';
+
 module.exports = function (config) {
   config.set({
 
     singleRun: true,
 
-    browsers: ['Chrome'],
+    browsers: [browser],
 
     frameworks: ['mocha', 'sinon'],
 
@@ -30,7 +32,8 @@ module.exports = function (config) {
     },
 
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
+      quiet: true
     },
 
     webpack: {
