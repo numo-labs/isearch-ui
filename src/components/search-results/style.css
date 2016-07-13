@@ -13,6 +13,8 @@
   width: 375px;
   position: relative;
   box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  transform: scale(1, 1);
+  transition: all 0.3s ease-in-out;
 }
 
 .gridItem::after {
