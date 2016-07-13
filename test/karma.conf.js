@@ -20,8 +20,8 @@ module.exports = function (config) {
     reporters: ['mocha'],
 
     preprocessors: {
-      '../test/**/*.js': ['webpack'],
-      '../lib/**/*.js': ['webpack']
+      '../test/**/*.js': ['webpack', 'sourcemap'],
+      '../lib/**/*.js': ['webpack', 'sourcemap']
     },
 
     webpackMiddleware: {
@@ -54,7 +54,8 @@ module.exports = function (config) {
             query: { mimetype: 'image/png' }
           }
         ]
-      }
+      },
+      devtool: 'inline-source-map'
     }
 
   });
