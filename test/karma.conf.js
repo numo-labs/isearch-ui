@@ -20,6 +20,10 @@ module.exports = function (config) {
 
     reporters: ['mocha'],
 
+    mochaReporter: {
+      showDiff: true
+    },
+
     preprocessors: {
       '../test/**/*.js': ['webpack', 'sourcemap'],
       '../lib/**/*.js': ['webpack', 'sourcemap']
@@ -30,6 +34,7 @@ module.exports = function (config) {
     },
 
     webpack: {
+      cache: true,
       module: {
         loaders: [
           {
