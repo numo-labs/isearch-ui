@@ -4,15 +4,12 @@ import simple from 'simple-mock';
 import thunk from 'redux-thunk';
 import { bindActionCreators } from 'redux';
 import { SET_FINGERPRINT } from '../../src/constants/actionTypes';
-require('../dom-mock.js')('<html><body></body></html>');
-import jsdom from 'mocha-jsdom';
 
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
 
 describe('Fingerprint Service', () => {
-  jsdom({ skipWindowCheck: true });
   let localStorage = global.localStorage;
   it('createFingerprint - creates a unique id based on the window object', done => {
     window.navigator.mimeTypes = '123';

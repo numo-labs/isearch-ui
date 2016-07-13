@@ -8,7 +8,6 @@ import DestinationTile from '../../lib/destination-tile';
 import FilterTile from '../../lib/filter-tile';
 import VisibilitySensor from 'react-visibility-sensor';
 import mockTiles from '../../src/utils/mock-search-results';
-import sinon from 'sinon';
 
 describe('Component', function () {
   global.dataLayer = [];
