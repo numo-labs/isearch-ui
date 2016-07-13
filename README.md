@@ -77,7 +77,7 @@ The results of the search are sent from the socket server through the web socket
 
 ### React
 
-Front end React tests are written using a testing utility called [Enzyme](https://github.com/airbnb/enzyme) which has useful methods for shallow rendering as well as full DOM rendering (using jsdom) and easy traversal using jQuery like syntax. Examples of tests can be found in the `src/test/components` folder or in each of the individual component folders within `lib`.
+Front end React tests are written using a testing utility called [Enzyme](https://github.com/airbnb/enzyme) which has useful methods for shallow rendering as well as full DOM rendering and easy traversal using jQuery like syntax. Examples of tests can be found in the `src/test/components` folder or in each of the individual component folders within `lib`.
 Assertions are written using Chai `expect`.
 
 ### Redux
