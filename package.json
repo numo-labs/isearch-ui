@@ -21,7 +21,8 @@
     "stats": "npm run clean && webpack --optimize-dedupe -p --config ./webpack.production.config.js --profile --json > public/stats.json",
     "ci:deploy": "gulp ci:deploy",
     "prod:deploy": "gulp prod:deploy",
-    "generate-graphql-schema": "babel-node ./test/constants/helpers/update-schema.js > ./test/constants/helpers/schema.json"
+    "generate-graphql-schema": "babel-node ./test/constants/helpers/update-schema.js > ./test/constants/helpers/schema.json",
+    "karma": "karma start ./test/karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -64,6 +65,14 @@
     "html-webpack-plugin": "^2.9.0",
     "imports-loader": "^0.6.5",
     "jsdom": "^8.1.0",
+    "json-loader": "^0.5.4",
+    "karma": "^1.1.1",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-mocha": "^1.1.1",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-sinon": "^1.0.5",
+    "karma-webpack": "^1.7.0",
     "mime-types": "^2.1.11",
     "mocha": "^2.4.5",
     "mocha-jsdom": "^1.1.0",
