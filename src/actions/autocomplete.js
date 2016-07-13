@@ -23,7 +23,7 @@ export function getAutocompleteOptions () {
         input: searchString,
         size: 100
       };
-      graphqlService
+      return graphqlService
         .query(QUERY_AUTOCOMPLETE_INPUT, variables)
         .then(json => {
           console.log('Autocomplete response', json);
