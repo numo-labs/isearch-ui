@@ -52,6 +52,7 @@
     "chai": "^3.5.0",
     "con.figure": "1.0.0",
     "css-loader": "^0.23.1",
+    "diff": "^2.2.3",
     "engine.io-client": "^1.6.9",
     "enzyme": "^2.2.0",
     "expect": "^1.19.0",
