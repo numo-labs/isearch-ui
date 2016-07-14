@@ -22,7 +22,6 @@ const defaultProps = {
 
 describe('Component', function () {
   describe('<ISearch /> Search view', function () {
-
     let wrapper, children;
 
     beforeEach(() => {
