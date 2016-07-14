@@ -155,23 +155,6 @@ li:nth-child(odd) .suggestionItem:hover{
   outline-width: 0;
 } /* oldIE ;) */
 
-/*.list-group-item a:hover {*/
-  /*text-decoration: none;*/
-/*}*/
-
-/*.list-group-item a {*/
-  /*color: black;*/
-/*}*/
-
-/*.list-group-item:hover {*/
-  /*background-color: #F39100;*/
-/*}*/
-
-/*.list-group-item.active, .list-group-item.active:hover {*/
-  /*background-color: #F39100;*/
-  /*border-color: #F39100;*/
-/*}*/
-
 @media (max-width: 485px) {
   .react-autosuggest__suggestions-container {
     width: 100%;
