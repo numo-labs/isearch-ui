@@ -1,11 +1,8 @@
-// Mocking window and document object:
-require('../dom-mock.js')('<html><body></body></html>');
+'use strict';
 
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import jsdom from 'mocha-jsdom';
-import sinon from 'sinon';
 
 import ISearch from '../../src/components/isearch/';
 
@@ -24,11 +21,15 @@ const defaultProps = {
 };
 
 describe('Component', function () {
-  jsdom({ skipWindowCheck: true });
   describe('<ISearch /> Search view', function () {
-    global.dataLayer = [];
-    const wrapper = shallow(<ISearch {...defaultProps} />);
-    const children = wrapper.children().nodes;
+    let wrapper, children;
+
+    beforeEach(() => {
+      window.innerWidth = 800;
+      global.dataLayer = [];
+      wrapper = shallow(<ISearch {...defaultProps} />);
+      children = wrapper.children().nodes;
+    });
 
     it('should render the ISearch container', function (done) {
       expect(children).to.have.length(4);

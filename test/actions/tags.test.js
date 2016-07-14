@@ -150,11 +150,13 @@ describe('actions', () => {
   });
   describe('removeTile', () => {
     it('should create an action that removes a tile from the list of displayed items', (done) => {
+      const store = mockStore(initialState);
       const expectedAction = {
         type: TILES_REMOVE_TILE,
         id: 'test'
       };
-      expect(actions.removeTile('test')).to.deep.equal(expectedAction);
+      store.dispatch(actions.removeTile('test'));
+      expect(store.getActions()).to.contain(expectedAction);
       done();
     });
   });
