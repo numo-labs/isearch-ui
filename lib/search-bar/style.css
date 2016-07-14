@@ -164,7 +164,9 @@ li:nth-child(odd) .suggestionItem:hover{
 }
 
 @media (max-width: 485px) {
-  .react-autosuggest__suggestions-container,
+  .react-autosuggest__suggestions-container {
+    width: 100%;
+  }
   .inputContainer {
     width: 80%;
   }
