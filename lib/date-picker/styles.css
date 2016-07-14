@@ -3,6 +3,11 @@
   src: url('../../fonts/SourceSansPro-Regular.otf');
 }
 
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
 .calendar__day {
     font-size: 13px;
     cursor: pointer;
@@ -14,6 +19,14 @@
 .calendar thead td {
   padding: 10px 0;
   color: #4F4F4F;
+}
+
+.calendarIcon {
+  width: 1em;
+  position: absolute;
+  right: 0.7em;
+  z-index: 5;
+  bottom: 0.7em;
 }
 
 .dateLabel {
@@ -37,6 +50,7 @@
   background-color: #ffffff;
   margin-top: 0.3em;
   text-align: left;
+  position: relative;
 }
 
 /*.datePicker {
@@ -48,7 +62,7 @@
 .datePickerContainer input {
   height: 2.1em;
   padding-top: 0.7em;
-  padding-bottom: 0.8em;
+  padding-bottom: 1em;
   padding-left: 0.75em;
   width: 9.1em;
   border-top: #ffffff;
@@ -80,6 +94,13 @@
 
 .departDate {
   cursor: pointer;
+}
+
+.travelInfoTitle {
+  position: absolute;
+  top: -3.3em;
+  font-size: 1.3em;
+  left: 0.5em;
 }
 
 @media (min-width: 650px) {
