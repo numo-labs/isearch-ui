@@ -49,7 +49,6 @@ export default class EditDetails extends Component {
       departureDate,
       hideTravelInfo
     } = this.props;
-    console.log('PROPS------', this.props);
     const childAges = [childAge1, childAge2, childAge3, childAge4].slice(0, Number(numberOfChildren));
     return (
       <div className='blueWrapper'>
