@@ -108,14 +108,6 @@
   line-height: 0.8em;
 }
 
-.goingPlaces {
-  width: 2em;
-  float: right;
-  margin-top: 0.4em;
-  margin-right: 0.5em;
-  cursor: pointer;
-}
-
 .icon {
   width: 2em;
   float: left;
