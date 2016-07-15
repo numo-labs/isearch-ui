@@ -132,7 +132,6 @@ class ISearch extends Component {
       showTravelInfo,
       hideTravelInfo
     } = this.props;
-    console.log(')))))))))', danishDepartureDate);
     return (
       <section>
         <SearchSummary
@@ -201,6 +200,7 @@ class ISearch extends Component {
             searchBar
             displayedItems={displayedItems}
             departureDate={danishDepartureDate || departOnFriday(moment().add(3, 'months')).format('DD/MM-YYYY')}
+            showTravelInfo={showTravelInfo}
           />
         <Tags
           tags={tags}

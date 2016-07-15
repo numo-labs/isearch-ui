@@ -18,13 +18,12 @@ import {
 import './style.css';
 export default class EditDetails extends Component {
   onSearchClick () {
-    const { go } = this.props;
     dataLayer.push({
       event: 'travelInfoUpdate'
     });
     this.props.updateHeaderTitles();
     this.props.startSearch();
-    go(-1);
+    this.props.hideTravelInfo();
   }
   handleOnClick () {
     const { go } = this.props;

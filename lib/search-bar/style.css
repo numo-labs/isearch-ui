@@ -9,7 +9,19 @@
   float: left;
   font-size: 0.9em;
   padding-top: 0.6em;
-  padding-left: 0.3em;
+  padding-left: 0.5em;
+  color: #474747;
+}
+
+.leavingDateChangeButton {
+  float: right;
+  font-family: SourceSansLight;
+  display: inline-block;
+  font-size: 0.9em;
+  padding-top: 0.6em;
+  padding-right: 0.5em;
+  text-decoration: underline;
+  color: #009999;
 }
 
 .searchBarContainer {
