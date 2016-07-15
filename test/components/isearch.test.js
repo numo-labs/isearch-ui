@@ -72,15 +72,6 @@ describe('Component', function () {
       expect(error).to.have.length(1);
       done();
     });
-    it('should render the <SearchBar /> as the third child if window.innerWidth is less than 553', function (done) {
-      global.window.innerWidth = 550;
-      const wrapper = shallow(<ISearch {...defaultProps} />);
-      const children = wrapper.children().nodes;
-      const thirdChild = children[2].type;
-      const searchBar = wrapper.find('SearchBarContainer').node.type;
-      expect(thirdChild).to.deep.equal(searchBar);
-      done();
-    });
     it('should call reset tags if there is no tags at store while rendering', function (done) {
       const stub = sinon.stub();
       const props = {...defaultProps, resetTags: stub};
