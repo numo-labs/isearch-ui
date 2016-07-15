@@ -6,7 +6,9 @@ import {
   SET_DURATION,
   SET_DEPARTURE_DATE,
   SET_DEPARTURE_AIRPORT,
-  UPDATE_HEADER_TITLES
+  UPDATE_HEADER_TITLES,
+  SHOW_TRAVEL_INFO,
+  HIDE_TRAVEL_INFO
 } from '../constants/actionTypes';
 
 export const initialState = {
@@ -22,7 +24,8 @@ export const initialState = {
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
-  durationTitle: '1 uger'
+  durationTitle: '1 uger',
+  editDetailsVisible: false
 };
 
 export default function travelInfo (state = initialState, action) {
@@ -63,6 +66,16 @@ export default function travelInfo (state = initialState, action) {
         numberOfAdultsTitle: state.numberOfAdults,
         numberOfChildrenTitle: state.numberOfChildren,
         durationTitle: state.duration
+      };
+    case SHOW_TRAVEL_INFO:
+      return {
+        ...state,
+        editDetailsVisible: true
+      };
+    case HIDE_TRAVEL_INFO:
+      return {
+        ...state,
+        editDetailsVisible: false
       };
     default:
       return state;
