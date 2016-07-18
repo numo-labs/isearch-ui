@@ -55,8 +55,14 @@
   margin: 0 auto;
 }
 
-.react-autosuggest__suggestion:hover {
-  color: #fff;
+.react-autosuggest__suggestion:nth-child(odd) {
+  clear: left;
+  background: #00AAEE;
+  float: left;
+}
+.react-autosuggest__suggestion:nth-child(even) {
+  clear: right;
+  float: right;
 }
 
 .input-results,
@@ -82,8 +88,9 @@
 .react-autosuggest__suggestion.react-autosuggest__suggestion--focused .suggestionItem,
 li:nth-child(even) .suggestionItem:hover,
 li:nth-child(odd) .suggestionItem:hover{
-  background: #F39100;
+  background: #f5f5f5;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .suggestionItem {
@@ -109,7 +116,9 @@ li:nth-child(odd) .suggestionItem:hover{
 .sectionItem .tryThis {
   font-size: 0.8em;
   text-align: left;
-  padding: 10px 0 0 5px;
+  padding: 10px 5px;
+  background: #f5f5f5;
+  text-align: center;
 }
 
 .inputContainer {
@@ -145,23 +154,6 @@ li:nth-child(odd) .suggestionItem:hover{
   outline:none !important;
   outline-width: 0;
 } /* oldIE ;) */
-
-.list-group-item a:hover {
-  text-decoration: none;
-}
-
-.list-group-item a {
-  color: black;
-}
-
-.list-group-item:hover {
-  background-color: #F39100;
-}
-
-.list-group-item.active, .list-group-item.active:hover {
-  background-color: #F39100;
-  border-color: #F39100;
-}
 
 @media (max-width: 485px) {
   .react-autosuggest__suggestions-container {
