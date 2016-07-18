@@ -35,6 +35,7 @@ export function getAutocompleteOptions () {
           }
         });
     }
+    return new Promise((resolve) => resolve());
   };
 }
 
