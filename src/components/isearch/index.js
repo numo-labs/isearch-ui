@@ -213,6 +213,7 @@ class ISearch extends Component {
           removeTag={removeTag}
           resetTags={resetTags}
           resetColour={'#F39110'}
+          resetBorderColour={'#F39110'}
         />
         }
         { loading &&

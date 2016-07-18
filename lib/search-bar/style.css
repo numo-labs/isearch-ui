@@ -37,6 +37,7 @@
   width: 100%;
   height: 44px;
   padding: 6px 12px;
+  padding-left: 2.5em;
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
@@ -53,6 +54,39 @@
   outline: 0;
 }
 
+.searchIcon {
+  width: 1.3em;
+  position: absolute;
+  top: 1em;
+  left: 0.7em;
+}
+
+.react-autosuggest__section-container {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.react-autosuggest__suggestion {
+  width: 50%;
+  display: inline-block;
+  float: left;
+  border-bottom: solid 1px #DCDCDC;
+  border-right: solid 1px #DCDCDC;
+  color: #F39100;
+  font-family: SourceSansLight;
+  margin: 0 auto;
+}
+
+.react-autosuggest__suggestion:nth-child(odd) {
+  clear: left;
+  background: #00AAEE;
+  float: left;
+}
+.react-autosuggest__suggestion:nth-child(even) {
+  clear: right;
+  float: right;
+}
+
 .input-results,
 .react-autosuggest__suggestions-container{
   z-index: 9999;
@@ -64,6 +98,8 @@
   max-height: 200px;
   overflow-y: auto;
   box-shadow: 0 2px 5px #666;
+  background-color: #fff;
+  text-align: center;
 }
 
 .react-autosuggest__suggestions-container ul {
@@ -71,15 +107,12 @@
   list-style-type: none;
 }
 
-li:nth-child(odd) .suggestionItem{
-  background: #D5EBF2;
-}
-
 .react-autosuggest__suggestion.react-autosuggest__suggestion--focused .suggestionItem,
 li:nth-child(even) .suggestionItem:hover,
 li:nth-child(odd) .suggestionItem:hover{
-  background: #F39100;
+  background: #f5f5f5;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .suggestionItem {
@@ -87,7 +120,7 @@ li:nth-child(odd) .suggestionItem:hover{
   display: block;
   padding: 10px 15px;
   background-color: #fff;
-  text-align: left;
+  text-align: center;
 }
 
 .sectionItem {
@@ -105,7 +138,9 @@ li:nth-child(odd) .suggestionItem:hover{
 .sectionItem .tryThis {
   font-size: 0.8em;
   text-align: left;
-  padding: 10px 0 0 5px;
+  padding: 10px 5px;
+  background: #f5f5f5;
+  text-align: center;
 }
 
 .travelInfoChange {
@@ -117,10 +152,10 @@ li:nth-child(odd) .suggestionItem:hover{
 }
 
 .inputContainer {
-  top: 3em;
   display: inline-block;
   width: 30em;
   margin-top: 20px;
+  position: relative;
 }
 
 .input:focus {
@@ -150,25 +185,10 @@ li:nth-child(odd) .suggestionItem:hover{
   outline-width: 0;
 } /* oldIE ;) */
 
-.list-group-item a:hover {
-  text-decoration: none;
-}
-
-.list-group-item a {
-  color: black;
-}
-
-.list-group-item:hover {
-  background-color: #F39100;
-}
-
-.list-group-item.active, .list-group-item.active:hover {
-  background-color: #F39100;
-  border-color: #F39100;
-}
-
 @media (max-width: 485px) {
-  .react-autosuggest__suggestions-container,
+  .react-autosuggest__suggestions-container {
+    width: 100%;
+  }
   .inputContainer {
     width: 100%;
   }
