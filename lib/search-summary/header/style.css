@@ -26,6 +26,19 @@
   display: inline-block;
 }
 
+.goingPlaces {
+  float: right;
+  cursor: pointer;
+  font-family: SourceSansLight;
+  border: solid 1px #ffffff;
+  border-radius: 500px;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top: 0.65em;
+  margin-right: 0.5em;
+  font-size: 1.2em;
+}
+
 .searchSummaryHeaderContainer {
   background-color: #6DB4A9;
   color: #ffffff;
@@ -58,9 +71,18 @@
   font-size: 2em;
 }
 
+@media (max-width: 750px) {
+  .goingPlaces {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-top: 1em;
+    font-size: 1em;
+  }
+}
+
 @media (max-width: 479px) {
   .searchSummaryHeaderLogoContainer {
-    width: 40%
+    width: 35%
   }
   .weeksPaxMixContainer {
     width: 30%;

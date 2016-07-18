@@ -3,6 +3,13 @@
   src: url('../../../fonts/SourceSansPro-SemiBold.otf');
 }
 
+.changeDetailsLink {
+  color: #008ab7;
+  text-decoration: underline;
+  display: inline-block;
+  cursor: pointer;
+}
+
 .grid {
   margin: 0 auto;
   margin-bottom: 2em;
@@ -67,6 +74,7 @@
   font-family: SourceSansSemiBold;
   font-size: 1.4em;
   text-align: center;
+  padding-right: 10px; 
 }
 
 @-webkit-keyframes moveUp {
@@ -77,6 +85,18 @@
 @keyframes moveUp {
 	0% { }
 	100% { -webkit-transform: translateY(0); transform: translateY(0); opacity: 1; }
+}
+
+.noHotelsErrorMessage {
+  font-size: 0.8em;
+  margin-top: 1em;
+  width: 95%;
+  color: #a94442;
+  border: 1px solid #a94442;
+  text-align: center;
+  background-color: #f2dede;
+  margin: 0 auto;
+  padding: 1em;
 }
 
 @media (max-width: 380px) {

@@ -3,10 +3,32 @@
   src: url('../../fonts/SourceSansPro-Light.otf');
 }
 
+.leavingDate {
+  font-family: SourceSansLight;
+  display: inline-block;
+  float: left;
+  font-size: 0.9em;
+  padding-top: 0.6em;
+  padding-left: 0.5em;
+  color: #474747;
+}
+
+.leavingDateChangeButton {
+  float: right;
+  font-family: SourceSansLight;
+  display: inline-block;
+  font-size: 0.9em;
+  padding-top: 0.6em;
+  padding-right: 0.5em;
+  text-decoration: underline;
+  color: #008ab7;
+}
+
 .searchBarContainer {
   margin: 0 auto;
   text-align: center;
   margin-bottom: 1em;
+  width: 100%;
 }
 
 .searchBox {
@@ -121,6 +143,14 @@ li:nth-child(odd) .suggestionItem:hover{
   text-align: center;
 }
 
+.travelInfoChange {
+  height: 2.5em;
+  width: 100%;
+  background-color: #F0F0F0;
+  border-top: 1px solid #C4C4C4;
+  cursor: pointer;
+}
+
 .inputContainer {
   display: inline-block;
   width: 30em;
@@ -160,6 +190,6 @@ li:nth-child(odd) .suggestionItem:hover{
     width: 100%;
   }
   .inputContainer {
-    width: 80%;
+    width: 100%;
   }
 }

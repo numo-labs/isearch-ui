@@ -18,13 +18,12 @@ import {
 import './style.css';
 export default class EditDetails extends Component {
   onSearchClick () {
-    const { go } = this.props;
     dataLayer.push({
       event: 'travelInfoUpdate'
     });
     this.props.updateHeaderTitles();
     this.props.startSearch();
-    go(-1);
+    this.props.hideTravelInfo();
   }
   handleOnClick () {
     const { go } = this.props;
@@ -55,7 +54,7 @@ export default class EditDetails extends Component {
         <div className='travelInfoOpacity'></div>
         <div className='blueContainer'>
           <div className={'changeDetailsContainer dropDown'}>
-            <div className='travelInfoTitle'>Skift søgemuligheder</div>
+            <div className='travelInfoTitle'>Ændre søgning</div>
             <div onClick={() => hideTravelInfo()}>
               <div>
                 <img
