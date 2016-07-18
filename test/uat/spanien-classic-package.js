@@ -40,7 +40,7 @@ module.exports = {
       .getText('.hotelPrice span', function (result) {
         HOTEL_PAGE_PRICE = result.value;
         console.log(' - - - - - - - - - - HOTEL_PAGE_PRICE', HOTEL_PAGE_PRICE);
-        browser.assert.equal(PACKAGE_PRICE, HOTEL_PAGE_PRICE * 2, 'Price Check');
+        browser.assert.equal(PACKAGE_PRICE, HOTEL_PAGE_PRICE, 'Price Check');
       }) // see: github.com/numo-labs/isearch-ui/issues/141
       .click('.bookButton') // click on bookButton (go to spies.dk booking page)
       .pause(500)
@@ -52,11 +52,6 @@ module.exports = {
       })
       .pause(500)
       .saveScreenshot(config.imgpath(browser) + 'tc_package_again.png')
-      .click('.backButton')
-      .waitForElementVisible('#container')
-      .pause(500)
-      .assert.containsText('#container', 'Hvor vil du rejse hen')
-      .saveScreenshot(config.imgpath(browser) + 'tc_isearch_home.png')
       .end();
   }
 };

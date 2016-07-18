@@ -14,11 +14,11 @@ module.exports = {
       .keys(browser.Keys.DOWN_ARROW) // simulate the down arrow keyboard key
       .keys(browser.Keys.DOWN_ARROW) // simulate the down arrow keyboard key
       .saveScreenshot(config.imgpath(browser) + 'tc_autocomplete_selected.png')
-      .click('.list-group-item:nth-child(2)') // click on "Spanien" in auto suggestions
+      .click('.list-group-item:nth-child(2)') // click on "Cykling" in auto suggestions
       .assert.containsText('.tags', 'Cykling') //
       .pause(500)
       .moveToElement('.tags', 10, 10)
-      .saveScreenshot(config.imgpath(browser) + 'tc_tags.png')
+      .saveScreenshot(config.imgpath(browser) + 'cycling_tag.png')
       // find the first article on the page:
       .waitForElementVisible('.articleTileImage')
       .pause(1000)
