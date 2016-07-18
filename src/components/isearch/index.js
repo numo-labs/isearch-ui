@@ -208,7 +208,7 @@ class ISearch extends Component {
             resetTags={resetTags}
             resetColour={'#F39110'}
           />
-        { (window.innerWidth < 750) && <Tags
+        { (window.innerWidth <= 750) && <Tags
           tags={tags}
           removeTag={removeTag}
           resetTags={resetTags}
