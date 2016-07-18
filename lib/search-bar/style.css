@@ -21,7 +21,7 @@
   padding-top: 0.6em;
   padding-right: 0.5em;
   text-decoration: underline;
-  color: #009999;
+  color: #008ab7;
 }
 
 .searchBarContainer {
@@ -113,6 +113,7 @@ li:nth-child(odd) .suggestionItem:hover{
   width: 100%;
   background-color: #F0F0F0;
   border-top: 1px solid #C4C4C4;
+  cursor: pointer;
 }
 
 .inputContainer {

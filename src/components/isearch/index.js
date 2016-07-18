@@ -63,7 +63,8 @@ class ISearch extends Component {
       addArticleTag,
       scrollPage,
       searchComplete,
-      feedEnd
+      feedEnd,
+      showTravelInfo
     } = this.props;
     return (
       <ScrollView
@@ -85,6 +86,7 @@ class ISearch extends Component {
           addArticleTag={addArticleTag}
           searchComplete={searchComplete}
           feedEnd={feedEnd}
+          showTravelInfo={showTravelInfo}
         />
       </ScrollView>
     );
@@ -201,13 +203,18 @@ class ISearch extends Component {
             displayedItems={displayedItems}
             departureDate={danishDepartureDate || departOnFriday(moment().add(3, 'months')).format('DD/MM-YYYY')}
             showTravelInfo={showTravelInfo}
+            tags={tags}
+            removeTag={removeTag}
+            resetTags={resetTags}
+            resetColour={'#F39110'}
           />
-        <Tags
+        { (window.innerWidth < 750) && <Tags
           tags={tags}
           removeTag={removeTag}
           resetTags={resetTags}
           resetColour={'#F39110'}
         />
+        }
         { loading &&
           <div className='spinnerContainer'>
             <LoadingSpinner/>

@@ -32,7 +32,7 @@ describe('Component', function () {
     });
 
     it('should render the ISearch container', function (done) {
-      expect(children).to.have.length(4);
+      expect(children).to.have.length(3);
       done();
     });
     it('should render the <SearchSummary /> as the first child', function (done) {
@@ -47,22 +47,16 @@ describe('Component', function () {
       expect(secondChild).to.deep.equal(header);
       done();
     });
-    it('should render the <TagContainer /> as the third child', function (done) {
-      const thirdChild = children[2].type;
-      const tags = wrapper.find('TagContainer').node.type;
-      expect(thirdChild).to.deep.equal(tags);
-      done();
-    });
-    it('should render the <ScrollView /> as the fourth child if the loading and error props are false', function (done) {
-      const fourthChild = children[3].type;
+    it('should render the <ScrollView /> as the third child if the loading and error props are false', function (done) {
+      const fourthChild = children[2].type;
       const scrollView = wrapper.find('ScrollView').node.type;
       expect(fourthChild).to.deep.equal(scrollView);
       done();
     });
-    it('should render the <LoadingSpinner /> as the fourth child if the loading prop is true', function (done) {
+    it('should render the <LoadingSpinner /> as the third child if the loading prop is true', function (done) {
       wrapper.setProps({loading: true});
       const children = wrapper.children().nodes;
-      const fourthChild = children[3].type;
+      const fourthChild = children[2].type;
       expect(fourthChild).to.deep.equal('div');
       done();
     });
