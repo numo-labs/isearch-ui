@@ -274,8 +274,15 @@ npm install
 > Note: if you _don't_ already have Java installed on your localhost,
 see: [#**installing-java**](https://github.com/dwyl/learn-nightwatch/#installing-java-runtime-environment-jre)
 
-Once all `devDependencies` have installed, simply run:
+Once all `devDependencies` have installed, ensure that you have a `BASE_URL`
+environment variable:
 ```sh
+export BASE_URL=http://localhost:8080
+```
+
+then run:
+```sh
+npm run dev:serve
 npm run nightwatch
 ```
 This will run the tests locally using Selenium and Chromedriver
