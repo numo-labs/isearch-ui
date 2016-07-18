@@ -12,8 +12,7 @@ import * as eventStream from './event-stream.js';
 import { analyticsAddTagObject, analyticsRemoveTagObject } from '../../lib/analytics-helper';
 
 import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
-var Scroll = require('react-scroll');
-var scroll = Scroll.animateScroll;
+import { animateScroll as scroll } from 'react-scroll';
 /**
 * TEMP FUNCTIONS TO ADD MOCK TAGS
 */
