@@ -28,7 +28,7 @@
   margin: 0 auto;
   text-align: center;
   margin-bottom: 1em;
-  width: 95%;
+  width: 100%;
 }
 
 .searchBox {
@@ -59,7 +59,7 @@
   position: absolute;
   margin: 0;
   padding: 0;
-  width: 30em;
+  width: 100%;
   list-style-type: none;
   max-height: 200px;
   overflow-y: auto;
