@@ -54,7 +54,7 @@ export default class EditDetails extends Component {
         <div className='travelInfoOpacity'></div>
         <div className='blueContainer'>
           <div className={'changeDetailsContainer dropDown'}>
-            <div className='travelInfoTitle'>Skift søgemuligheder</div>
+            <div className='travelInfoTitle'>Ændre søgning</div>
             <div onClick={() => hideTravelInfo()}>
               <div>
                 <img
