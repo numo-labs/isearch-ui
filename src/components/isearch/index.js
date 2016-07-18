@@ -4,9 +4,10 @@ import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
-import SearchBar from '../../../lib/search-bar';
 import ScrollView from '../../../lib/scroll-view';
 import EditDetails from '../edit-details';
+import departOnFriday from '../../utils/departure-day-format';
+import moment from 'moment';
 import './style.css';
 
 class ISearch extends Component {
@@ -62,7 +63,8 @@ class ISearch extends Component {
       addArticleTag,
       scrollPage,
       searchComplete,
-      feedEnd
+      feedEnd,
+      showTravelInfo
     } = this.props;
     return (
       <ScrollView
@@ -84,6 +86,7 @@ class ISearch extends Component {
           addArticleTag={addArticleTag}
           searchComplete={searchComplete}
           feedEnd={feedEnd}
+          showTravelInfo={showTravelInfo}
         />
       </ScrollView>
     );
@@ -113,6 +116,7 @@ class ISearch extends Component {
       departureAirport,
       duration,
       departureDate,
+      danishDepartureDate,
       setNumberOfChildren,
       setNumberOfAdults,
       setChildAge,
@@ -186,24 +190,7 @@ class ISearch extends Component {
           showTravelInfo={showTravelInfo}
           hideTravelInfo={hideTravelInfo}
            />}
-        {
-          this.state.screenWidth < 553 ? [
-            <Header
-              searchBar={false}
-              displayedItems={displayedItems}
-            />,
-            <SearchBar
-              addSingleTag={addSingleTag}
-              startSearch={startSearch}
-              setSearchString={setSearchString}
-              autocompleteOptions={autocompleteOptions}
-              searchString={searchString}
-              getAutocompleteOptions={getAutocompleteOptions}
-              inAutoCompleteSearch={inAutoCompleteSearch}
-              clearSearchString={clearSearchString}
-            />
-          ]
-            : <Header
+          <Header
             addSingleTag={addSingleTag}
             startSearch={startSearch}
             setSearchString={setSearchString}
@@ -214,14 +201,21 @@ class ISearch extends Component {
             clearSearchString={clearSearchString}
             searchBar
             displayedItems={displayedItems}
+            departureDate={danishDepartureDate || departOnFriday(moment().add(3, 'months')).format('DD/MM-YYYY')}
+            showTravelInfo={showTravelInfo}
+            tags={tags}
+            removeTag={removeTag}
+            resetTags={resetTags}
+            resetColour={'#F39110'}
           />
-        }
-        <Tags
+        { (window.innerWidth <= 750) && <Tags
           tags={tags}
           removeTag={removeTag}
           resetTags={resetTags}
           resetColour={'#F39110'}
+          resetBorderColour={'#F39110'}
         />
+        }
         { loading &&
           <div className='spinnerContainer'>
             <LoadingSpinner/>
@@ -294,6 +288,7 @@ ISearch.propTypes = {
   departureAirport: PropTypes.string,
   duration: PropTypes.string,
   departureDate: PropTypes.string,
+  danishDepartureDate: PropTypes.string,
   setChildAge: PropTypes.func,
   numberOfAdultsTitle: PropTypes.string,
   numberOfChildrenTitle: PropTypes.string,

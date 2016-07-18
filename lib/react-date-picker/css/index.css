@@ -75,3 +75,10 @@
   text-shadow: 0 0 0 #666;
   outline: none;
 }
+
+@media (max-height: 480px) {
+  .calendar {
+    top: -20px;
+    left: 0;
+  }
+}

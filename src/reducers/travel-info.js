@@ -21,6 +21,7 @@ export const initialState = {
   departureAirport: 'Overalt',
   duration: '1 uge',
   departureDate: '',
+  danishDepartureDate: '',
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
   numberOfAdultsTitle: '2',
@@ -51,9 +52,14 @@ export default function travelInfo (state = initialState, action) {
         duration: action.duration
       };
     case SET_DEPARTURE_DATE:
+      const day = action.departureDate.split('-')[2];
+      const month = action.departureDate.split('-')[1];
+      const year = action.departureDate.split('-')[0];
+      const danishDepartureDate = `${day}/${month}-${year}`;
       return {
         ...state,
-        departureDate: action.departureDate
+        departureDate: action.departureDate,
+        danishDepartureDate: danishDepartureDate
       };
     case SET_DEPARTURE_AIRPORT:
       return {

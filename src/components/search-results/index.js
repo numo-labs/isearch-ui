@@ -124,7 +124,6 @@ class SearchResults extends Component {
       removeTile,
       addArticleTag
     } = this.props;
-
     if (item.packageOffer) {
       return (
         <div>
@@ -213,18 +212,27 @@ class SearchResults extends Component {
   render () {
     const {
       searchComplete,
-      items
+      items,
+      showTravelInfo
     } = this.props;
     const searchItems = items.filter(item => !item.related);
+    const hotelItems = searchItems.filter(item => item.packageOffer);
     const hideGridStyle = {
       minHeight: '0'
     };
     const showGridStyle = {
       minHeight: '80vh'
     };
+    const noHotelsErrorMessage = (
+      <div className='noHotelsErrorMessage'>
+        <div>Ingen hoteller er ledige i den valgte tidsperiode</div>
+        <div className='changeDetailsLink' onClick={() => showTravelInfo()}>Ændre tidsperioden</div>
+      </div>
+    );
     const gridStyle = searchComplete && searchItems.length === 0 ? hideGridStyle : showGridStyle;
     return (
-      <div>
+      <div className='gridContainer'>
+        {searchComplete && hotelItems.length === 0 && noHotelsErrorMessage}
         <div style={gridStyle}>
           <Masonry
             elementType={'div'}
@@ -253,7 +261,8 @@ SearchResults.propTypes = {
   removeTile: PropTypes.func,
   addArticleTag: PropTypes.func,
   searchComplete: PropTypes.bool,
-  feedEnd: PropTypes.bool
+  feedEnd: PropTypes.bool,
+  showTravelInfo: PropTypes.func
 };
 
 export default SearchResults;

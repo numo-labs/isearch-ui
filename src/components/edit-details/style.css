@@ -36,7 +36,7 @@
   height: 24em;
   width: 95%;
   left: 2.5%;
-  top: 5em;
+  top: 0.5em;
   border-radius: 5px;
 }
 
@@ -125,14 +125,6 @@
 .flights {
   padding-bottom: 2em;
   line-height: 0.8em;
-}
-
-.goingPlaces {
-  width: 2em;
-  float: right;
-  margin-top: 0.4em;
-  margin-right: 0.5em;
-  cursor: pointer;
 }
 
 .icon {
@@ -242,6 +234,9 @@ h1 {
 @media (min-width: 490px) {
   .search {
     padding-left: 3em;
+  }
+  .blueContainer {
+    top: 5em;
   }
 }
 @media (min-width: 650px) {
