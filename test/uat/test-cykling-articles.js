@@ -7,6 +7,7 @@ module.exports = {
       .url(process.env.BASE_URL)
       .waitForElementVisible('body')
       .saveScreenshot(config.imgpath(browser) + 'tc_home.png')
+      .pause(3000)
       .setValue('input[type=search]', 'cykl')
       .pause(1000)
       .waitForElementVisible('.suggestionItem')

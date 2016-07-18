@@ -1,7 +1,7 @@
 var config = require('../../nightwatch.conf.js');
 
 module.exports = {
-  'Inspirational Search > Spanien': '' + function (browser) {
+  'Inspirational Search > Spanien': function (browser) {
     var PACKAGE_PRICE = 0;
     var HOTEL_PAGE_PRICE = 0;
     browser
