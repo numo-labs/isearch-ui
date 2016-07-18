@@ -1,11 +1,8 @@
 import * as SearchResultActions from '../actions/search-results.js';
 import * as TagActions from '../actions/tags.js';
-import Primus from '../../src/services/primus.js';
-import configuration from '../../config';
-import configure from 'con.figure';
 import querystring from '../utils/querystring';
 
-const config = configure(configuration);
+import connect from '../utils/websockets';
 
 /**
 * Function that initialises a connection with the web socket server and saves
@@ -17,7 +14,7 @@ const config = configure(configuration);
 */
 
 export function initialise (actionCreatorBinder, location) {
-  const primus = new Primus(config.socketUrl);
+  const primus = connect();
   const {
     saveSearchResult,
     saveSocketConnectionId,

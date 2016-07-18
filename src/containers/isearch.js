@@ -46,7 +46,8 @@ function mapStateToProps (state) {
       departureDate,
       numberOfAdultsTitle,
       numberOfChildrenTitle,
-      durationTitle
+      durationTitle,
+      editDetailsVisible
     },
     hotel: {
       hotelPage,
@@ -90,7 +91,8 @@ function mapStateToProps (state) {
     viewedArticles,
     scrollPage,
     searchComplete,
-    feedEnd
+    feedEnd,
+    editDetailsVisible
   };
 }
 

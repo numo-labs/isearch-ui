@@ -6,6 +6,7 @@ import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
 import SearchBar from '../../../lib/search-bar';
 import ScrollView from '../../../lib/scroll-view';
+import EditDetails from '../edit-details';
 import './style.css';
 
 class ISearch extends Component {
@@ -58,7 +59,7 @@ class ISearch extends Component {
       removeTile,
       displayedItems,
       loadMoreItemsIntoFeed,
-      addSingleTag,
+      addArticleTag,
       scrollPage,
       searchComplete,
       feedEnd
@@ -80,7 +81,7 @@ class ISearch extends Component {
           resultId={resultId}
           removeTile={removeTile}
           viewedArticles={viewedArticles}
-          addSingleTag={addSingleTag}
+          addArticleTag={addArticleTag}
           searchComplete={searchComplete}
           feedEnd={feedEnd}
         />
@@ -124,7 +125,10 @@ class ISearch extends Component {
       setDepartureDate,
       push: changeRoute,
       goBack,
-      displayedItems
+      displayedItems,
+      editDetailsVisible,
+      showTravelInfo,
+      hideTravelInfo
     } = this.props;
     return (
       <section>
@@ -151,7 +155,37 @@ class ISearch extends Component {
           startSearch={startSearch}
           changeRoute={changeRoute}
           goBack={goBack}
+          editDetailsVisible={editDetailsVisible}
+          showTravelInfo={showTravelInfo}
+          hideTravelInfo={hideTravelInfo}
         />
+        {editDetailsVisible && <EditDetails
+          numberOfChildren={numberOfChildren}
+          numberOfAdults={numberOfAdults}
+          setChildAge={setChildAge}
+          childAge1={childAge1}
+          childAge2={childAge2}
+          childAge3={childAge3}
+          childAge4={childAge4}
+          departureAirport={departureAirport}
+          duration={duration}
+          departureDate={departureDate}
+          setNumberOfChildren={setNumberOfChildren}
+          setNumberOfAdults={setNumberOfAdults}
+          setDepartureAirport={setDepartureAirport}
+          setDuration={setDuration}
+          updateHeaderTitles={updateHeaderTitles}
+          numberOfAdultsTitle={numberOfAdultsTitle}
+          numberOfChildrenTitle={numberOfChildrenTitle}
+          durationTitle={durationTitle}
+          setDepartureDate={setDepartureDate}
+          startSearch={startSearch}
+          changeRoute={changeRoute}
+          goBack={goBack}
+          editDetailsVisible={editDetailsVisible}
+          showTravelInfo={showTravelInfo}
+          hideTravelInfo={hideTravelInfo}
+           />}
         {
           this.state.screenWidth < 553 ? [
             <Header
@@ -238,6 +272,7 @@ ISearch.propTypes = {
   tags: PropTypes.array,
   addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
+  addArticleTag: PropTypes.func,
   removeTag: PropTypes.func,
   resetTags: PropTypes.func,
   feedEnd: PropTypes.bool,
@@ -265,6 +300,9 @@ ISearch.propTypes = {
   durationTitle: PropTypes.string,
   updateHeaderTitles: PropTypes.func,
   setDepartureDate: PropTypes.func,
+  editDetailsVisible: PropTypes.bool,
+  showTravelInfo: PropTypes.func,
+  hideTravelInfo: PropTypes.func,
 
   // routing
   push: PropTypes.func,

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import StarRating from '../../../lib/star-rating';
 import NavHeader from '../../../lib/nav-header';
 import capitalize from 'lodash.capitalize';
+import FadeImage from '../../../lib/fade-image';
 import './styles.css';
 
 import ISearchSlider from '../../../lib/image-slider';
@@ -146,7 +147,7 @@ class HotelPage extends Component {
     if (document.querySelector('title')) document.querySelector('title').innerHTML = packageOffer.hotel.name;
     return ([
       <NavHeader backToSearch={goBack} go={go}/>,
-      <div className='hotelPackageImage' style={{backgroundImage: `url(${image})`}}/>,
+      <FadeImage isBackground={Boolean(true)} className='hotelPackageImage' src={image} />,
       <ISearchSlider images={hotelImages} className='headerSlider'/>,
       <div className='infoContainer'>
         <div className='heartShareContainer'>

@@ -5,7 +5,7 @@ import PackageTile from '../../../lib/package-tile';
 import ArticleTile from '../../../lib/article-tile';
 import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
-import { addAnalyticsImpression } from '../../../lib/analytics-helper/index';
+import { addAnalyticsImpression, analyticsRemoveTile } from '../../../lib/analytics-helper/index';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
@@ -16,6 +16,21 @@ const masonryOptions = {
   gutter: 14, // horizontal spacing between tiles
   itemSelector: '.gridItem'
 };
+
+function getItemAnalyticsId (item) {
+  let id;
+  switch (item.type) {
+    case 'package':
+      id = item.packageOffer.provider.reference;
+      break;
+    case 'tile':
+      id = (item.tile.type === 'article' || item.tile.type === 'destination') ? item.tile.name : item.tile.id;
+      break;
+    default:
+      id = 'error';
+  }
+  return id;
+}
 
 class SearchResults extends Component {
   constructor () {
@@ -51,7 +66,7 @@ class SearchResults extends Component {
     };
     if (dataLayer && item.type === 'package') {
       clickEventObject.ecommerce.click.products.push({
-        'id': item.packageOffer.provider.reference,
+        'id': getItemAnalyticsId(item),
         'brand': 'hotel_tile',
         'dimension11': item.packageOffer.destinationCode,
         'dimension12': item.packageOffer.destinationName,
@@ -60,7 +75,7 @@ class SearchResults extends Component {
       dataLayer.push(clickEventObject);
     } else if (dataLayer && item.type === 'tile') {
       clickEventObject.ecommerce.click.products.push({
-        'id': (item.tile.type === 'article' || item.tile.type === 'destination') ? item.tile.name : item.tile.id,
+        'id': getItemAnalyticsId(item),
         'brand': item.tile.type === 'article' ? 'article_tile' : 'destination_tile'
       });
       dataLayer.push(clickEventObject);
@@ -86,12 +101,15 @@ class SearchResults extends Component {
     );
   }
 
-  removeButton (id) {
+  removeButton (item) {
     const {
       removeTile
     } = this.props;
     return (
-      <div onClick={() => removeTile(id)}>
+      <div onClick={() => {
+        dataLayer.push(analyticsRemoveTile(getItemAnalyticsId(item)));
+        removeTile(item.id);
+      }}>
         <img className='removeTileButton' src={removeTileButton} alt='cancelled'/>
       </div>
     );
@@ -104,13 +122,13 @@ class SearchResults extends Component {
       changeRoute,
       viewedArticles,
       removeTile,
-      addSingleTag
+      addArticleTag
     } = this.props;
 
     if (item.packageOffer) {
       return (
         <div>
-          {this.removeButton(item.id)}
+          {this.removeButton(item)}
           <div className='clickable'
                onClick={() => { this.handleClickEvent(item); changeRoute(`/hotel/${item.url}`); }}>
             <PackageTile
@@ -129,13 +147,13 @@ class SearchResults extends Component {
       if (item.tile.type === 'article' && contentExists) {
         return (
           <div>
-            {this.removeButton(item.id)}
+            {this.removeButton(item)}
             <div className='clickable'
                  onClick={() => { this.handleClickEvent(item); changeRoute(`/article/${item.url}`); }}>
               <ArticleTile
                 className={viewedArticles.indexOf(item.tile.id) > -1 ? 'visited' : ''}
                 {...item}
-                onAddTagClick={(event) => { event.stopPropagation(); addSingleTag(item.tile.name, item.tile.id, item.tile.name); removeTile(item.id); }}
+                onAddTagClick={(event) => { event.stopPropagation(); addArticleTag(item.tile.name, item.tile.id); }}
               />
             </div>
           </div>
@@ -143,7 +161,7 @@ class SearchResults extends Component {
       } else if (item.tile.type === 'destination' && contentExists) {
         return (
           <div className='shadowHover'>
-            {this.removeButton(item.id)}
+            {this.removeButton(item)}
             <div className='clickable'
                  onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
               <DestinationTile {...item} />
@@ -233,7 +251,7 @@ SearchResults.propTypes = {
   changeRoute: PropTypes.func,
   viewedArticles: PropTypes.array,
   removeTile: PropTypes.func,
-  addSingleTag: PropTypes.func,
+  addArticleTag: PropTypes.func,
   searchComplete: PropTypes.bool,
   feedEnd: PropTypes.bool
 };
