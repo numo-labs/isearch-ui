@@ -48,16 +48,16 @@ describe('Component', function () {
       done();
     });
     it('should render the <ScrollView /> as the third child if the loading and error props are false', function (done) {
-      const fourthChild = children[2].type;
+      const thirdChild = children[2].type;
       const scrollView = wrapper.find('ScrollView').node.type;
-      expect(fourthChild).to.deep.equal(scrollView);
+      expect(thirdChild).to.deep.equal(scrollView);
       done();
     });
     it('should render the <LoadingSpinner /> as the third child if the loading prop is true', function (done) {
       wrapper.setProps({loading: true});
       const children = wrapper.children().nodes;
-      const fourthChild = children[2].type;
-      expect(fourthChild).to.deep.equal('div');
+      const thirdChild = children[2].type;
+      expect(thirdChild).to.deep.equal('div');
       done();
     });
     it('should render a <div/> with class errorMessage as the fourth child if the loading prop is false but there is an error', function (done) {
