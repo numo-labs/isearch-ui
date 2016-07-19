@@ -171,6 +171,16 @@ class SearchResults extends Component {
     } = this.props;
     const searchItems = items.filter(item => !item.related);
     const relatedItems = items.filter(item => item.related && item.type !== 'filter');
+    const searchItemIds = [];
+    const relatedItemIds = [];
+    const uniqueRelatedItems = relatedItems.filter((obj, index) => {
+      searchItemIds.push(searchItems[index].id);
+      relatedItemIds.push(obj.id);
+      const uniqueIdArray = relatedItemIds.filter(relatedItem => {
+        return searchItemIds.indexOf(relatedItem) === -1;
+      });
+      return uniqueIdArray.indexOf(obj.id);
+    });
     // we might want to have this depend on the browser language at some point:
     // const message = searchItems.length > 0 ? 'You might also be interested in...' : `Looks like we don't have any results that match your search. But you might be interested in...`;
     const message = searchItems.length > 0
@@ -186,7 +196,7 @@ class SearchResults extends Component {
           disableImagesLoaded={false}
           className='grid load-effect'
         >
-        {this.mapItems(relatedItems, searchItems.length)}
+        {this.mapItems(uniqueRelatedItems, searchItems.length)}
         </Masonry>]
       );
     }
