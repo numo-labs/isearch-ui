@@ -8,13 +8,15 @@ module.exports = {
       .url(process.env.BASE_URL)
       .waitForElementVisible('body')
       .saveScreenshot(config.imgpath(browser) + 'tc_home.png')
-      .setValue('input[type=text]', 'Span')
-      .waitForElementVisible('.list-group-item')
+      .setValue('input[type=search]', 'Spani')
+      .waitForElementVisible('.suggestionItem')
       .pause(500)
       .saveScreenshot(config.imgpath(browser) + 'tc_autocomplete.png')
       .keys(browser.Keys.DOWN_ARROW) // simulate the down arrow keyboard key
       .saveScreenshot(config.imgpath(browser) + 'tc_autocomplete_click_first.png')
-      .click('.list-group-item') // click on "Spanien" in auto suggestions
+      .click('.suggestionItem') // click on "Spanien" in auto suggestions
+      .pause(500)
+      .waitForElementVisible('.tags')
       .assert.containsText('.tags', 'Spanien') //
       // find the first article on the page:
       .pause(500)
@@ -40,23 +42,17 @@ module.exports = {
       .getText('.hotelPrice span', function (result) {
         HOTEL_PAGE_PRICE = result.value;
         console.log(' - - - - - - - - - - HOTEL_PAGE_PRICE', HOTEL_PAGE_PRICE);
-        browser.assert.equal(PACKAGE_PRICE, HOTEL_PAGE_PRICE * 2, 'Price Check');
+        browser.assert.equal(PACKAGE_PRICE, HOTEL_PAGE_PRICE, 'Price Check');
       }) // see: github.com/numo-labs/isearch-ui/issues/141
       .click('.bookButton') // click on bookButton (go to spies.dk booking page)
-      .pause(500)
-      .waitForElementVisible('.quickfactheader')
-      .assert.containsText('.quickfactheader', 'Hotelfakta')
+      .pause(1500)
+      // .waitForElementVisible('.nav-lists') // always visible on spies.dk pages
       .saveScreenshot(config.imgpath(browser) + 'tc_booking_page.png')
       .execute(function () {
         window.history.back();
       })
       .pause(500)
       .saveScreenshot(config.imgpath(browser) + 'tc_package_again.png')
-      .click('.backButton')
-      .waitForElementVisible('#container')
-      .pause(500)
-      .assert.containsText('#container', 'Hvor vil du rejse hen')
-      .saveScreenshot(config.imgpath(browser) + 'tc_isearch_home.png')
       .end();
   }
 };

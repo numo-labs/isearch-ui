@@ -7,18 +7,20 @@ module.exports = {
       .url(process.env.BASE_URL)
       .waitForElementVisible('body')
       .saveScreenshot(config.imgpath(browser) + 'tc_home.png')
-      .setValue('input[type=text]', 'Cyk')
+      .pause(3000)
+      .setValue('input[type=search]', 'cykl')
       .pause(1000)
-      .waitForElementVisible('.list-group-item')
+      .waitForElementVisible('.suggestionItem')
       .saveScreenshot(config.imgpath(browser) + 'tc_autocomplete.png')
       .keys(browser.Keys.DOWN_ARROW) // simulate the down arrow keyboard key
-      .keys(browser.Keys.DOWN_ARROW) // simulate the down arrow keyboard key
       .saveScreenshot(config.imgpath(browser) + 'tc_autocomplete_selected.png')
-      .click('.list-group-item:nth-child(2)') // click on "Spanien" in auto suggestions
+      .click('.suggestionItem') // click on "Cykling" in auto suggestions
+      .pause(500)
+      .waitForElementVisible('.tags')
       .assert.containsText('.tags', 'Cykling') //
       .pause(500)
       .moveToElement('.tags', 10, 10)
-      .saveScreenshot(config.imgpath(browser) + 'tc_tags.png')
+      .saveScreenshot(config.imgpath(browser) + 'cycling_tag.png')
       // find the first article on the page:
       .waitForElementVisible('.articleTileImage')
       .pause(1000)

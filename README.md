@@ -261,7 +261,7 @@ Include this script in your `package.json` to run your tests:
 ```
 
 
-## Automated Browser Testing
+## Automated Browser Testing (UAT)
 
 We are using Nightwatch to run User Acceptance Tests.
 
@@ -274,12 +274,44 @@ npm install
 > Note: if you _don't_ already have Java installed on your localhost,
 see: [#**installing-java**](https://github.com/dwyl/learn-nightwatch/#installing-java-runtime-environment-jre)
 
-Once all `devDependencies` have installed, simply run:
+Once all `devDependencies` have installed, ensure that you have a `BASE_URL`
+environment variable:
 ```sh
+export BASE_URL=http://localhost:8080
+```
+
+then run:
+```sh
+npm run dev:serve
 npm run nightwatch
 ```
 This will run the tests locally using Selenium and Chromedriver
 
+### Saucelabs (*Run Tests in Several Browsers*)
+
+We have a task on CodeShip that runs our Nightwatch Tests
+in several Browsers on Saucelabs and uploads the resulting screenshots to S3.
+
+If you want to run/debug the Saucelabs tests _locally_,
+you will need to get the `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY`
+environment vairables from Codeship:
+https://codeship.com/projects/140431/configure_environment
+
+Then execute the following command: `npm run uat`
+
+#### Screenshots Uploaded to S3
+
+Screenshots taken in the various browsers/devices on Saucelabs are
+uploaded by the [`test/uat/upload_screenshots_to_s3.js`]() script.
+
+These are stored in the same folder as the latest release version
+(`1.0.23` currently)
+
+>Example: http://inspirationalsearch.spies.dk/isearch/1.0.23/uat/index.html
+
+The UI has _basic_ navigation using **left/right keyboard arrows**
+and routing (_which allows us to share a link to a specific screenshot_)
+e.g: http://inspirationalsearch.spies.dk/isearch/1.0.23/uat/index.html#osx10.10~iphone~8.4~spanienclassicpackage_04_tc_tags.png
 
 
 ## Debugging (Tracing Requests)

@@ -6,7 +6,7 @@ const SCREENSHOT_PATH = './node_modules/nightwatch/screenshots/' + PKG.version +
 process.env.BASE_URL = process.env.BASE_URL || 'http://inspirationalsearch.spies.dk/isearch/prod';
 const config = { // we use a nightwatch.conf.js file so we can include comments and helper functions
   'src_folders': [
-    'test/e2e'     // we use /test as the name of our test directory by default. so test/e2e for e2e
+    'test/uat'     // we use /test as the name of our test directory by default. so test/e2e for e2e
   ],
   'output_folder': './node_modules/nightwatch/reports', // reports (test outcome) output by nightwatch
   'selenium': {
