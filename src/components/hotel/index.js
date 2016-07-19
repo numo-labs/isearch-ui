@@ -185,7 +185,7 @@ class HotelPage extends Component {
             </span>
             <div className='ppp'>Pr. person</div>
             <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
-              <div className='bookButton'>SEE PRIS OCH BOKA</div>
+              <div className='bookButton'>SEE PRIS OG BESTIL</div>
             </a>
           </div>
           <div className='hotelImagesContainer'>
@@ -194,8 +194,7 @@ class HotelPage extends Component {
           </div>
           <div className='bookButtonFooter'>
             <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
-              <div className='hotelInfoLink'>Se fuld information hotel og bog</div>
-              <div className='bookButton'>SEE PRIS OCH BOKA</div>
+              <div className='bookButton'>SEE PRIS OG BESTIL</div>
             </a>
           </div>
         </div>
