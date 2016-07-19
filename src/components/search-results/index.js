@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Masonry from 'react-masonry-component';
+import Pluck from 'lodash.pluck';
 import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import ArticleTile from '../../../lib/article-tile';
@@ -171,11 +172,9 @@ class SearchResults extends Component {
     } = this.props;
     const searchItems = items.filter(item => !item.related);
     const relatedItems = items.filter(item => item.related && item.type !== 'filter');
-    const searchItemIds = [];
-    const relatedItemIds = [];
-    const uniqueRelatedItems = relatedItems.filter((obj, index) => {
-      searchItemIds.push(searchItems[index].id);
-      relatedItemIds.push(obj.id);
+    const searchItemIds = Pluck(searchItems, 'id');
+    const relatedItemIds = Pluck(relatedItems, 'id');
+    const uniqueRelatedItems = relatedItems.filter((obj) => {
       const uniqueIdArray = relatedItemIds.filter(relatedItem => {
         return searchItemIds.indexOf(relatedItem) === -1;
       });
@@ -187,7 +186,7 @@ class SearchResults extends Component {
       ? 'Måske er du også interesseret i…'
       : `Din søgning gav ingen resultater, men måske er du interesseret i…`;
     // see: https://github.com/numo-labs/isearch-ui/issues/257
-    if (((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) && relatedItems.length > 0) {
+    if (relatedItems.length > 0 && searchComplete && (feedEnd || searchItems.length === 0)) {
       return (
         [<div key={'message'} className='feed-end-message'>{message}</div>,
         <Masonry
