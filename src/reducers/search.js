@@ -121,13 +121,19 @@ export default function search (state = initialState, action) {
         isInitialTag: action.isInitialTag
       };
     case TAG_REMOVE_TAG:
-      const newTags = state.tags.filter(tag => {
+      let newTags = state.tags.filter(tag => {
         return tag.displayName !== action.displayName;
       });
+      let isInitialTag = false;
+      if (newTags.length === 0) {
+        newTags = [initialState.defaultTag];
+        isInitialTag = true;
+      }
       return {
         ...state,
         tags: newTags,
-        error: ''
+        error: '',
+        isInitialTag
       };
     case RESET_TAGS:
       return {
