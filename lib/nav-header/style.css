@@ -9,7 +9,7 @@
 
 .navBarContainer {
   width: 100%;
-  height: 5vh;
+  height: 4em;
   min-height: 50px;
   line-height: 100%;
   background-color: #6DB4A9;
@@ -18,7 +18,7 @@
 }
 .navBarLayout {
   width: 100%;
-  height: 5vh;
+  height: 4em;
   min-height: 40px;
   line-height: 100%;
   background-color: #6DB4A9;
@@ -47,4 +47,14 @@
   height: 100%;
   vertical-align: middle;
   line-height: 3em;
+}
+
+.betaFlagBar {
+  background-color: #f39100;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 4em;
+  z-index: 20000;
 }
