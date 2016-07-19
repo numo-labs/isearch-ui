@@ -52,10 +52,7 @@ module.exports = {
         collapseWhitespace: true,
         minifyCSS: true,
         minifyJS: true,
-        removeAttributeQuotes: true,
         removeComments: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
         useShortDoctype: true
       }
     }),
