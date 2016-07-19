@@ -265,13 +265,28 @@ describe('Search Reducer', () => {
     it('TAG_REMOVE_TAG -> removes action.tag from the tags array', (done) => {
       const initialStateWithTags = {
         ...initialState,
+        tags: [{ displayName: 'hello' }, { displayName: 'world' }]
+      };
+      const action = {type: TAG_REMOVE_TAG, displayName: 'hello'};
+      const state = reducer(initialStateWithTags, action);
+      const expectedState = {
+        ...initialState,
+        tags: [{ displayName: 'world' }]
+      };
+      expect(state).to.deep.equal(expectedState);
+      done();
+    });
+    it('TAG_REMOVE_TAG -> resets to default tags if removing the only tag', (done) => {
+      const initialStateWithTags = {
+        ...initialState,
         tags: [{ displayName: 'hello' }]
       };
       const action = {type: TAG_REMOVE_TAG, displayName: 'hello'};
       const state = reducer(initialStateWithTags, action);
       const expectedState = {
         ...initialState,
-        tags: []
+        tags: [initialState.defaultTag],
+        isInitialTag: true
       };
       expect(state).to.deep.equal(expectedState);
       done();
