@@ -26,7 +26,7 @@
   display: inline-block;
 }
 
-.goingPlaces {
+.goUpButton {
   float: right;
   cursor: pointer;
   font-family: SourceSansLight;
@@ -76,7 +76,7 @@
 }
 
 @media (max-width: 750px) {
-  .goingPlaces {
+  .goUpButton {
     padding-left: 0.5em;
     padding-right: 0.5em;
     margin-top: 1em;
