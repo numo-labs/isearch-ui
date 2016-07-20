@@ -20,7 +20,6 @@ import {
 import * as graphqlService from '../services/graphql';
 import { formatQuery } from './helpers.js';
 // routing actionCreator
-import shuffle from 'shuffle-array';
 import timers from 'timers';
 /*
 * saves the error to the store to display an error message
@@ -156,17 +155,16 @@ export function mixDataInput () {
 
   function shake () {
     const total = tiles.length + packages.length;
-    // randomise tiles
-    shuffle(tiles);
-    // sort by rank packages
 
     // weave tiles and packages to mixture
     for (let i = 1; i < total + 1; i++) {
       if (packages.length > 0) {
-        if (i % 6) {
-          tiles.length ? mixture.push(tiles.pop()) : false;
+        if (i % 6 && tiles.length) {
+          mixture.push(tiles.pop());
         }
         mixture.push(packages.pop());
+      } else if (tiles.length > 0) {
+        mixture.push(tiles.pop());
       }
     }
   }

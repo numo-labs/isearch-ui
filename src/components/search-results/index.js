@@ -39,7 +39,7 @@ class SearchResults extends Component {
     this.getRelatedContent = this.getRelatedContent.bind(this);
   }
   shouldComponentUpdate (nextProps) {
-    if (nextProps.items.length === this.props.items.length) {
+    if (nextProps.items.length === this.props.items.length && nextProps.searchComplete === this.props.searchComplete) {
       return false;
     } else {
       return true;
@@ -188,15 +188,9 @@ class SearchResults extends Component {
     } = this.props;
     const searchItems = items.filter(item => !item.related);
     const relatedItems = items.filter(item => item.related && item.type !== 'filter');
-    const searchItemIds = [];
-    const relatedItemIds = [];
+    const searchItemIds = searchItems.map(item => item.id);
     const uniqueRelatedItems = relatedItems.filter((obj, index) => {
-      searchItemIds.push(searchItems[index].id);
-      relatedItemIds.push(obj.id);
-      const uniqueIdArray = relatedItemIds.filter(relatedItem => {
-        return searchItemIds.indexOf(relatedItem) === -1;
-      });
-      return uniqueIdArray.indexOf(obj.id);
+      return searchItemIds.indexOf(obj.id) === -1;
     });
     // we might want to have this depend on the browser language at some point:
     // const message = searchItems.length > 0 ? 'You might also be interested in...' : `Looks like we don't have any results that match your search. But you might be interested in...`;
@@ -204,7 +198,7 @@ class SearchResults extends Component {
       ? 'Måske er du også interesseret i…'
       : `Din søgning gav ingen resultater, men måske er du interesseret i…`;
     // see: https://github.com/numo-labs/isearch-ui/issues/257
-    if (((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) && relatedItems.length > 0) {
+    if (((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) && uniqueRelatedItems.length > 0) {
       return (
         [<div key={'message'} className='feed-end-message'>{message}</div>,
         <Masonry
