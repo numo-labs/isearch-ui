@@ -64,7 +64,8 @@ class ISearch extends Component {
       scrollPage,
       searchComplete,
       feedEnd,
-      showTravelInfo
+      showTravelInfo,
+      tags
     } = this.props;
     return (
       <ScrollView
@@ -87,6 +88,7 @@ class ISearch extends Component {
           searchComplete={searchComplete}
           feedEnd={feedEnd}
           showTravelInfo={showTravelInfo}
+          tags={tags}
         />
       </ScrollView>
     );
