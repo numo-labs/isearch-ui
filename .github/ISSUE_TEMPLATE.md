@@ -3,6 +3,7 @@ To ensure a full fix for the issue being opened can you please provide:
 - Tags Searched:
 - Page URL:
 - Web Browser: http://www.whatsmybrowser.org/
+- Mobile make & model (if applicable): 
 
 ### Screen Shot
 
