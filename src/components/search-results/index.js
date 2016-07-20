@@ -24,7 +24,7 @@ class SearchResults extends Component {
     this.getRelatedContent = this.getRelatedContent.bind(this);
   }
   shouldComponentUpdate (nextProps) {
-    if (nextProps.items.length === this.props.items.length) {
+    if (nextProps.items.length === this.props.items.length && nextProps.searchComplete === this.props.searchComplete) {
       return false;
     } else {
       return true;
