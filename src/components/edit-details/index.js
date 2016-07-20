@@ -51,7 +51,7 @@ export default class EditDetails extends Component {
     const childAges = [childAge1, childAge2, childAge3, childAge4].slice(0, Number(numberOfChildren));
     return (
       <div className='blueWrapper'>
-        <div className='travelInfoOpacity'></div>
+        <div className='travelInfoOpacity' onClick={() => hideTravelInfo()}></div>
         <div className='blueContainer'>
           <div className={'changeDetailsContainer dropDown'}>
             <div className='travelInfoTitle'>Ændre søgning</div>
