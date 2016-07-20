@@ -223,7 +223,8 @@ class SearchResults extends Component {
     const {
       searchComplete,
       items,
-      showTravelInfo
+      showTravelInfo,
+      isInitialTag
     } = this.props;
     const searchItems = items.filter(item => !item.related);
     const hotelItems = searchItems.filter(item => item.packageOffer);
@@ -242,7 +243,7 @@ class SearchResults extends Component {
     const gridStyle = searchComplete && searchItems.length === 0 ? hideGridStyle : showGridStyle;
     return (
       <div className='gridContainer'>
-        {searchComplete && hotelItems.length === 0 && noHotelsErrorMessage}
+        {isInitialTag && searchComplete && hotelItems.length === 0 && noHotelsErrorMessage}
         <div style={gridStyle}>
           <Masonry
             elementType={'div'}
@@ -272,7 +273,8 @@ SearchResults.propTypes = {
   addArticleTag: PropTypes.func,
   searchComplete: PropTypes.bool,
   feedEnd: PropTypes.bool,
-  showTravelInfo: PropTypes.func
+  showTravelInfo: PropTypes.func,
+  isInitialTag: PropTypes.bool
 };
 
 export default SearchResults;
