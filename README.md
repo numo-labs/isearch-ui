@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/numo-labs/isearch-ui.png?label=ready&title=Ready)](https://waffle.io/numo-labs/isearch-ui)
 # isearch-ui
 The ui for inspirational search!
 
