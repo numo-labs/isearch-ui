@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { SAVE_SOCKET_CONNECTION_ID, RESET_TAGS } from '../../src/constants/actionTypes';
 import querystring from '../../src/utils/querystring';
 import * as tagActions from '../../src/actions/tags';
+import * as searchActions from '../../src/actions/tags';
 // mock redux store
 import configureMockStore from '../actions/test-helpers';
 const mockStore = configureMockStore([thunk]);
@@ -96,75 +97,53 @@ describe('Web Socket Service', function () {
     expect(primus.write.callCount).to.equal(2);
     expect(primus.write.lastCall.args[0]).to.deep.equal({ action: 'join', room: 'abc123' });
   });
-  it('if there are search results in the data, saves the search results by buffering', done => {
-    const store = mockStore({search: { tags: [], resultId: 'abc123' }});
+  it('if there are search results in the data, calls saveSearchResult action', done => {
+    simple.mock(searchActions, 'saveSearchResult');
+    const store = mockStore({search: { tags: [], resultId: 'abc123', displayedItems: [], items: [] }});
     const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
     const primus = initialise(actionCreatorBinder, 'search');
-    primus.once('data', data => {
-      process.nextTick(() => {
-        expect(store.getActions()).to.deep.equal([]);
-        done();
-      });
-    });
-    primus.emit('data', {
-      graphql: {
-        searchId: 'abc123',
-        items: [{
-          name: 'test',
-          packageOffer: {}
-        }]
-      }
-    });
-  });
-  it('should interlace packages and tiles.', done => {
-    const store = mockStore({search: { tags: [], resultId: 'abc123' }});
-    const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
-    const primus = initialise(actionCreatorBinder, 'search');
-    let count = 0;
-    primus.on('data', data => {
-      if (count++ < 10) {
-        return;
-      }
-      primus.removeAllListeners();
-
-      // Find all of the action types that are tiles or packages.
-      let items = store.getActions().map(
-          i => i.items ? i.items.map(
-            j => j.tile ? 'tile' : 'package'
-          ) : []
-        );
-      // flatten array
-      items = items.reduce((a, b) => a.concat(b), []);
-
-      expect(items).to.contain('tile');
-      done();
-    });
-    primus.emit('data', {
+    const event = {
       graphql: {
         searchId: 'abc123',
         items: [
-          { name: 'test',
-            tile: {}
-          },
-          { name: 'test',
-            tile: {}
-          },
-          { name: 'test',
-            tile: {}
+          {
+            name: 'test',
+            packageOffer: {}
           }
         ]
       }
-    });
-    for (let i = 0; i < 10; i++) {
-      primus.emit('data', {
-        graphql: {
-          searchId: 'abc123',
-          items: [{
-            name: 'test',
-            packageOffer: {}
-          }]
-        }
+    };
+    primus.once('data', data => {
+      process.nextTick(() => {
+        expect(searchActions.saveSearchResult.callCount).to.equal(1);
+        expect(searchActions.saveSearchResult.lastCall.args[0]).to.deep.equal(event);
+        done();
       });
-    }
+    });
+    primus.emit('data', event);
+  });
+  it('if there are search rankings in the data, calls updateTileRanking action', done => {
+    simple.mock(searchActions, 'updateTileRanking');
+    const store = mockStore({search: { tags: [], resultId: 'abc123', displayedItems: [], items: [] }});
+    const actionCreatorBinder = actions => bindActionCreators(actions, store.dispatch);
+    const primus = initialise(actionCreatorBinder, 'search');
+    const event = {
+      graphql: {
+        searchId: 'abc123',
+        ranking: {
+          a: 1,
+          b: 0,
+          c: -1
+        }
+      }
+    };
+    primus.once('data', data => {
+      process.nextTick(() => {
+        expect(searchActions.updateTileRanking.callCount).to.equal(1);
+        expect(searchActions.updateTileRanking.lastCall.args[0]).to.deep.equal(event);
+        done();
+      });
+    });
+    primus.emit('data', event);
   });
 });

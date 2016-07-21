@@ -35,9 +35,12 @@ const initialState = {
       {id: 'amenity:wifi', displayName: 'wifi'},
       {id: 'amenity:pool', displayName: 'pool'}
     ],
+    items: [],
+    ranking: {},
     bucketId: '1',
     resultId: '1',
-    displayedItems: []
+    displayedItems: [],
+    pageSize: 5
   },
   travelInfo: {
     numberOfChildren: '0',
@@ -78,8 +81,8 @@ describe('Search Results Actions', () => {
       simple.mock(graphqlService, 'query').resolveWith(json);
       const store = mockStore(initialState);
       const expectedActions = [
-        { type: BUSY_SEARCHING, isBusy: true },
         { type: CLEAR_FEED },
+        { type: BUSY_SEARCHING, isBusy: true },
         { type: SAVE_SEARCH_RESULT_ID, id: '12345' },
         { type: SEARCH_COMPLETE }
       ];
@@ -109,8 +112,8 @@ describe('Search Results Actions', () => {
       simple.mock(graphqlService, 'query').resolveWith(json);
       const store = mockStore(initialState);
       const expectedActions = [
-        { type: BUSY_SEARCHING, isBusy: true },
         { type: CLEAR_FEED },
+        { type: BUSY_SEARCHING, isBusy: true },
         { type: SEARCH_ERROR, error: 'No results found' }
       ];
       store.dispatch(actions.startSearch());
@@ -153,76 +156,83 @@ describe('Search Results Actions', () => {
     });
   });
   describe('Inifinite Scroll actions', () => {
-    it(`loadMoreItemsIntoFeed: dispatch updateDisplayedItems action
-      with up to 10 items if current 'displayedItems' state is less than 10 and
+    it(`loadMoreItemsIntoFeed: dispatch updateDisplayedItems action with
+      items if current 'displayedItems' state is less than initialPageSize and
       'items' state has items`, done => {
       const items = [
-        {name: 'one'},
-        {name: 'two'},
-        {name: 'three'}
+        {id: 'one', rank: 3},
+        {id: 'two', rank: 2},
+        {id: 'three', rank: 1}
       ];
-      const store = mockStore({search: { displayedItems: [], items }});
+      const store = mockStore({search: { displayedItems: [], items, pageSize: 5, initialPageSize: 10 }});
       const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items}];
-      store.dispatch(actions.loadMoreItemsIntoFeed(1));
+      store.dispatch(actions.loadMoreItemsIntoFeed());
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });
-    it(`loadMoreItemsIntoFeed: if items has more than '5 x page' items dispatch updateDisplayedItems action
-      with a list of items equal to 5 x 'page'`, done => {
+    it(`loadMoreItemsIntoFeed: if items has more than "pageSize" items more than
+      displayedItems then dispatch updateDisplayedItems action
+      with a list of items including the next "pageSize" items`, done => {
       const items = [
-        {name: 1},
-        {name: 2},
-        {name: 3},
-        {name: 4},
-        {name: 5},
-        {name: 6},
-        {name: 7},
-        {name: 8},
-        {name: 9},
-        {name: 10}
+        {id: 1},
+        {id: 2},
+        {id: 3},
+        {id: 4},
+        {id: 5},
+        {id: 6},
+        {id: 7},
+        {id: 8},
+        {id: 9},
+        {id: 10}
       ];
-      const store = mockStore({search: { displayedItems: items, items }});
-      const expectedAction1 = {type: UPDATE_DISPLAYED_ITEMS, items};
-      const expectedAction2 = {type: UPDATE_DISPLAYED_ITEMS, items: items.slice(0, 5)};
-      store.dispatch(actions.loadMoreItemsIntoFeed(2));
-      expect(store.getActions()[0]).to.deep.equal(expectedAction1);
-      store.dispatch(actions.loadMoreItemsIntoFeed(1));
-      expect(store.getActions()[1]).to.deep.equal(expectedAction2);
+      const store = mockStore({search: { displayedItems: items.slice(0, 2), items, pageSize: 5, initialPageSize: 0 }});
+      const expectedAction = {type: UPDATE_DISPLAYED_ITEMS, items: items.slice(0, 7)};
+      store.dispatch(actions.loadMoreItemsIntoFeed());
+      expect(store.getActions()[0]).to.deep.equal(expectedAction);
       done();
     });
-    it(`loadMoreItemsIntoFeed: if the length of items is less than 5 x page number
+    it(`loadMoreItemsIntoFeed: if the length of items is less than the initialPageSize
       dispatch updateDisplayedItems with all the available items`, done => {
       const items = [
-        {name: 1},
-        {name: 2},
-        {name: 3},
-        {name: 4},
-        {name: 5},
-        {name: 6},
-        {name: 7}
+        {id: 1},
+        {id: 2},
+        {id: 3},
+        {id: 4},
+        {id: 5},
+        {id: 6},
+        {id: 7}
       ];
-      const store = mockStore({search: { displayedItems: [], items }});
+      const store = mockStore({search: { displayedItems: [], items, initialPageSize: 10, pageSize: 5 }});
       const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items}];
-      store.dispatch(actions.loadMoreItemsIntoFeed(2));
+      store.dispatch(actions.loadMoreItemsIntoFeed());
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
     });
     it(`loadMoreItemsIntoFeed: if the number of displayedItems equals number of
-      items then get items from the relatedItems store'`, done => {
+      items then get "pageSize" items from the relatedItems store'`, done => {
       const items = [
-        {name: 1},
-        {name: 2},
-        {name: 3},
-        {name: 4},
-        {name: 5},
-        {name: 6},
-        {name: 7}
+        {id: 1},
+        {id: 2},
+        {id: 3},
+        {id: 4},
+        {id: 5},
+        {id: 6},
+        {id: 7}
       ];
-      const store = mockStore({search: { displayedItems: items, items, relatedItems: items }});
-      store.dispatch(actions.loadMoreItemsIntoFeed(3));
+      const relatedItems = [
+        {id: 8},
+        {id: 9},
+        {id: 10},
+        {id: 11},
+        {id: 12},
+        {id: 13},
+        {id: 14}
+      ];
+      const store = mockStore({search: { displayedItems: items, items, relatedItems, pageSize: 5 }});
+      store.dispatch(actions.loadMoreItemsIntoFeed());
       const expectedActions = [{
         type: UPDATE_DISPLAYED_ITEMS,
-        items: items.concat(items)
+        items: items.concat(relatedItems.slice(0, 5))
       }];
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();

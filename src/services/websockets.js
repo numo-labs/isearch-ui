@@ -20,15 +20,18 @@ export function initialise (actionCreatorBinder, location) {
     saveSocketConnectionId,
     resetTags,
     searchForTag,
-    setSearchComplete
+    setSearchComplete,
+    updateTileRanking
   } = actionCreatorBinder({...SearchResultActions, ...TagActions});
   primus.on('data', function received (data) {
     // console.log('incoming socket data', data);
     if (data.graphql) {
       if (data.graphql.searchComplete) { // event sent by the package provider when all packages have been sent
         setSearchComplete(data);
-      } else if (data.graphql.items.length > 0) {
+      } else if (data.graphql.items && data.graphql.items.length > 0) {
         saveSearchResult(data);
+      } else if (data.graphql.ranking) {
+        updateTileRanking(data);
       }
     }
   });
