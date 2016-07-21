@@ -3151,7 +3151,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "SearchResultId",
+                "name": "startSearch",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -3165,7 +3165,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "SearchResultId",
+          "name": "startSearch",
           "description": "Search result id schema",
           "fields": [
             {
