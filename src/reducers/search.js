@@ -210,8 +210,8 @@ export default function search (state = initialState, action) {
         ...state,
         displayedItems: [],
         items: [],
+        ranking: {},
         relatedItems: [],
-        scrollPage: 6,
         feedEnd: false
       };
     case TILES_REMOVE_TILE:

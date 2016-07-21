@@ -165,32 +165,39 @@ let renderTimer, fallbackTimer;
 
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
-    const { search: { displayedItems, resultId, items, initialPageSize } } = getState();
+    const { search: { resultId } } = getState();
     const searchId = result.graphql.searchId;
     if (searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
       if (searchId.indexOf('related') > -1) { // if result is from a search for related content, save it separately
         return dispatch(receiveRelatedResult(result.graphql.items));
       } else {
         dispatch(receiveSearchResult(result.graphql.items, false, true));
-        // if there is enough data to render the first page of results, do so immediately and clear any timers
-        if (displayedItems.length < initialPageSize && items.length > initialPageSize) {
-          if (renderTimer) timers.clearTimeout(renderTimer);
-          if (fallbackTimer) timers.clearTimeout(fallbackTimer);
-          dispatch(loadMoreItemsIntoFeed());
-        // wait up to 3s for results before rendering anyway
-        } else if (items.length === 0) {
-          if (renderTimer) timers.clearTimeout(renderTimer);
-          fallbackTimer = timers.setTimeout(() => {
-            dispatch(loadMoreItemsIntoFeed());
-          }, 3000);
-        // otherwise if no results are received for 1s then push what we have
-        } else {
-          if (renderTimer) timers.clearTimeout(renderTimer);
-          renderTimer = timers.setTimeout(() => {
-            dispatch(loadMoreItemsIntoFeed());
-          }, 1000);
-        }
+        dispatch(loadInitialData());
       }
+    }
+  };
+}
+
+export function loadInitialData () {
+  return (dispatch, getState) => {
+    const { search: { displayedItems, items, initialPageSize } } = getState();
+    // if there is enough data to render the first page of results, do so immediately and clear any timers
+    if (displayedItems.length < initialPageSize && items.length > initialPageSize) {
+      if (renderTimer) timers.clearTimeout(renderTimer);
+      if (fallbackTimer) timers.clearTimeout(fallbackTimer);
+      dispatch(loadMoreItemsIntoFeed());
+    // wait up to 3s for results before rendering anyway
+    } else if (displayedItems.length === 0) {
+      if (renderTimer) timers.clearTimeout(renderTimer);
+      fallbackTimer = timers.setTimeout(() => {
+        dispatch(loadMoreItemsIntoFeed());
+      }, 3000);
+    // otherwise if no results are received for 1s then push what we have
+    } else {
+      if (renderTimer) timers.clearTimeout(renderTimer);
+      renderTimer = timers.setTimeout(() => {
+        dispatch(loadMoreItemsIntoFeed());
+      }, 1000);
     }
   };
 }
