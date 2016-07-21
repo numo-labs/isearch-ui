@@ -30,7 +30,6 @@ function mapStateToProps (state) {
       autocompleteOptions,
       inAutoCompleteSearch,
       resultId,
-      scrollPage,
       searchComplete,
       feedEnd,
       isInitialTag
@@ -92,7 +91,6 @@ function mapStateToProps (state) {
     durationTitle,
     resultId,
     viewedArticles,
-    scrollPage,
     searchComplete,
     feedEnd,
     editDetailsVisible,

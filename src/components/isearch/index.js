@@ -61,7 +61,6 @@ class ISearch extends Component {
       displayedItems,
       loadMoreItemsIntoFeed,
       addArticleTag,
-      scrollPage,
       searchComplete,
       feedEnd,
       showTravelInfo,
@@ -72,7 +71,6 @@ class ISearch extends Component {
         loadingThreshold={500}
         loadData={loadMoreItemsIntoFeed}
         endScroll={displayedItems.length === 0}
-        page={scrollPage}
       >
         <SearchResults
           changeRoute={changeRoute}
@@ -241,7 +239,6 @@ ISearch.propTypes = {
 
   // scroll view
   loadMoreItemsIntoFeed: PropTypes.func,
-  scrollPage: PropTypes.number,
   searchComplete: PropTypes.bool,
 
   // autocomplete

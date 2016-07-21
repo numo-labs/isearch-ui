@@ -20,7 +20,8 @@ export function initialise (actionCreatorBinder, location) {
     saveSocketConnectionId,
     resetTags,
     searchForTag,
-    setSearchComplete
+    setSearchComplete,
+    updateTileRanking
   } = actionCreatorBinder({...SearchResultActions, ...TagActions});
   primus.on('data', function received (data) {
     // console.log('incoming socket data', data);
@@ -29,6 +30,8 @@ export function initialise (actionCreatorBinder, location) {
         setSearchComplete(data);
       } else if (data.graphql.items.length > 0) {
         saveSearchResult(data);
+      } else if (data.graphql.ranking) {
+        updateTileRanking(data);
       }
     }
   });
