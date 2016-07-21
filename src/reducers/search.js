@@ -21,7 +21,7 @@ import {
   UPDATE_DISPLAYED_ITEMS,
   RECEIVE_RELATED_RESULT,
   SEARCH_COMPLETE,
-  UPDATE_TILE_RANKING,
+  UPDATE_TILE_RANKING
 } from '../constants/actionTypes';
 
 import DEFAULT_TAG from '../constants/default-tag.js';

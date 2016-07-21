@@ -57,8 +57,12 @@ export function receiveRelatedResult (items) {
 
 export function setSearchComplete (result = 'timeout') {
   return (dispatch, getState) => {
-    const { search: { resultId } } = getState();
+    const { search: { resultId, displayedItems } } = getState();
     if (result === 'timeout' || result.graphql.searchId === resultId) { // check result corresponds to the current search
+      // if there are still no items rendered then flush any buffered results to the page
+      if (displayedItems.length === 0) {
+        dispatch(loadMoreItemsIntoFeed());
+      }
       return dispatch({ type: SEARCH_COMPLETE });
     }
   };
@@ -161,8 +165,6 @@ export function startSearch (a) {
   };
 }
 
-let renderTimer, fallbackTimer;
-
 export function saveSearchResult (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
@@ -178,22 +180,16 @@ export function saveSearchResult (result) {
   };
 }
 
+let renderTimer;
 export function loadInitialData () {
   return (dispatch, getState) => {
     const { search: { displayedItems, items, initialPageSize } } = getState();
     // if there is enough data to render the first page of results, do so immediately and clear any timers
     if (displayedItems.length < initialPageSize && items.length > initialPageSize) {
       if (renderTimer) timers.clearTimeout(renderTimer);
-      if (fallbackTimer) timers.clearTimeout(fallbackTimer);
       dispatch(loadMoreItemsIntoFeed());
-    // wait up to 3s for results before rendering anyway
-    } else if (displayedItems.length === 0) {
-      if (renderTimer) timers.clearTimeout(renderTimer);
-      fallbackTimer = timers.setTimeout(() => {
-        dispatch(loadMoreItemsIntoFeed());
-      }, 3000);
-    // otherwise if no results are received for 1s then push what we have
-    } else {
+    } else if (displayedItems.length < initialPageSize) {
+      // otherwise if no results are received for 1s then push what we have
       if (renderTimer) timers.clearTimeout(renderTimer);
       renderTimer = timers.setTimeout(() => {
         dispatch(loadMoreItemsIntoFeed());
