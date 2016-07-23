@@ -8,6 +8,7 @@ import {
 
 import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
 
+import { clearSearchString } from './tags';
 /**
 * Function to fetch the autocomplete options from the graphql suggestion
 * service
@@ -17,6 +18,7 @@ import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
 export function getAutocompleteOptions () {
   return (dispatch, getState) => {
     const { search: { searchString } } = getState();
+    // alert('LENGTH: ' + searchString.length)
     if (searchString.length > 0) {
       dispatch(setAutocompleteInSearch());
       const variables = {
@@ -35,7 +37,10 @@ export function getAutocompleteOptions () {
           }
         });
     }
-    return new Promise((resolve) => resolve());
+    return new Promise((resolve) => {
+      dispatch(clearSearchString());
+      return resolve();
+    });
   };
 }
 
