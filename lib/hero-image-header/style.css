@@ -50,7 +50,7 @@
   background-size: cover;
   text-align: center;
   background-position: 50% 100%;
-  height: 100vh;
+  height: 50vh;
   background-repeat: no-repeat;
   position: relative;
 }
@@ -132,7 +132,7 @@
     font-size: 3.5em;
   }
   .headerBarWrapper {
-    height: 88vh;
+    height: 60vh;
   }
 }
 
@@ -170,7 +170,6 @@
   }
   .headerContent {
     margin: 0 auto;
-    top: -4em;
   }
 }
 
@@ -183,8 +182,5 @@
 @media (max-width: 320px) {
   .spies {
     font-size: 2.5em;
-  }
-  .headerContent {
-    top: -1em;
   }
 }
