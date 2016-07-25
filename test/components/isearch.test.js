@@ -66,19 +66,5 @@ describe('Component', function () {
       expect(error).to.have.length(1);
       done();
     });
-    it('should call reset tags if there is no tags at store while rendering', function (done) {
-      const stub = sinon.stub();
-      const props = {...defaultProps, resetTags: stub};
-      shallow(<ISearch {...props} />);
-      expect(stub.callCount).to.equal(1);
-      done();
-    });
-    it('should not call reset tags if there is tags ', function (done) {
-      const stub = sinon.stub();
-      const props = {...defaultProps, tags: ['testing tag'], resetTags: stub};
-      shallow(<ISearch {...props} />);
-      expect(stub.callCount).to.equal(0);
-      done();
-    });
   });
 });
