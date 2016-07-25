@@ -3105,7 +3105,7 @@
           "description": "Mutations for a person who uses our app",
           "fields": [
             {
-              "name": "searchResultId",
+              "name": "startSearch",
               "description": null,
               "args": [
                 {
