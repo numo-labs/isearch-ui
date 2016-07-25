@@ -144,7 +144,6 @@ export function startSearch (a) {
     const store = getState();
     const { search: { tags, fingerprint: clientId, socketConnectionId: connectionId } } = store;
     if (tags.length > 0) {
-      dispatch(clearFeed());
       dispatch(busySearching(true));
       if (timer) clearTimeout(timer);
       timer = timers.setTimeout(() => dispatch(setSearchComplete()), 3000); // wait 4 seconds and then set search as complete so at least related results are shown
@@ -153,11 +152,13 @@ export function startSearch (a) {
       return graphqlService
         .query(MUTATION_START_SEARCH, {'query': JSON.stringify(query), clientId, connectionId})
         .then(json => {
-          console.log('search response json', json.data.viewer.searchResultId);
-          const bucketId = json.data.viewer.searchResultId.id;
+          dispatch(clearFeed());
+          console.log('search response json', json.data.viewer.startSearch);
+          const bucketId = json.data.viewer.startSearch.id;
           if (bucketId) {
             dispatch(saveSearchResultId(bucketId));
           } else {
+            dispatch(saveSearchResultId(null));
             return dispatch(searchError('No results found'));
           }
         });
@@ -169,7 +170,7 @@ export function saveSearchResult (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
     const searchId = result.graphql.searchId;
-    if (searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
+    if (resultId && searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
       if (searchId.indexOf('related') > -1) { // if result is from a search for related content, save it separately
         return dispatch(receiveRelatedResult(result.graphql.items));
       } else {
