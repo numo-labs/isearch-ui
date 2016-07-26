@@ -20,7 +20,8 @@ import {
   CLEAR_FEED,
   UPDATE_DISPLAYED_ITEMS,
   RECEIVE_RELATED_RESULT,
-  SEARCH_COMPLETE
+  SEARCH_COMPLETE,
+  UPDATE_TILE_RANKING
 } from '../constants/actionTypes';
 
 import DEFAULT_TAG from '../constants/default-tag.js';
@@ -48,9 +49,11 @@ export const initialState = {
   departureAirport: '',
   departureDate: '',
   passengerBirthdays: [],
-  scrollPage: 6,
+  initialPageSize: 10,
+  pageSize: 5,
   searchComplete: false, // set to false until a message is recieved from the web socket channel
-  feedEnd: false
+  feedEnd: false,
+  ranking: {}
 };
 
 export default function search (state = initialState, action) {
@@ -63,11 +66,14 @@ export default function search (state = initialState, action) {
           return a.id;
         }
       });
-      const display = state.displayedItems.length < 30 ? itemsToDisplay.slice(0, 30) : state.displayedItems;
+      itemsToDisplay.forEach((item) => {
+        if (state.ranking) {
+          item.rank = parseFloat(state.ranking[item.id]) || 0;
+        }
+      });
       return {
         ...state,
         items: itemsToDisplay,
-        displayedItems: display,
         loading: false,
         error: ''
       };
@@ -80,7 +86,6 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         displayedItems: action.items,
-        scrollPage: state.scrollPage + 1,
         feedEnd: action.items.length >= state.items.length
       };
     case BUSY_SEARCHING:
@@ -100,7 +105,16 @@ export default function search (state = initialState, action) {
         ...state,
         searchComplete: true,
         loading: false,
-        displayedItems: state.displayedItems.length === 0 ? state.relatedItems : state.displayedItems
+        displayedItems: state.displayedItems.length === 0 ? state.relatedItems : state.displayedItems,
+        autocompleteOptions: []
+      };
+    case UPDATE_TILE_RANKING:
+      state.items.forEach(item => {
+        item.rank = parseFloat(action.ranking[item.id]) || 0;
+      });
+      return {
+        ...state,
+        ranking: action.ranking
       };
     // case TAG_ADD_TAGS:
     //   /*
@@ -113,12 +127,13 @@ export default function search (state = initialState, action) {
     //   };
     case TAG_ADD_SINGLE_TAG:
       if (state.isInitialTag) {
-        return {...state, tags: [action.tag], isInitialTag: false};
+        return {...state, tags: [action.tag], isInitialTag: false, autocompleteOptions: []};
       }
       return {
         ...state,
         tags: uniqBy([...state.tags, action.tag], 'displayName'),
-        isInitialTag: action.isInitialTag
+        isInitialTag: action.isInitialTag,
+        autocompleteOptions: []
       };
     case TAG_REMOVE_TAG:
       let newTags = state.tags.filter(tag => {
@@ -139,7 +154,8 @@ export default function search (state = initialState, action) {
       return {
         ...state,
         tags: [initialState.defaultTag],
-        isInitialTag: true
+        isInitialTag: true,
+        autocompleteOptions: []
       };
     case SET_SEARCH_STRING:
       return {
@@ -149,7 +165,8 @@ export default function search (state = initialState, action) {
     case CLEAR_SEARCH_STRING:
       return {
         ...state,
-        searchString: ''
+        searchString: '',
+        autocompleteOptions: []
       };
     case SET_AUTOCOMPLETE_ERROR:
       return {
@@ -193,8 +210,8 @@ export default function search (state = initialState, action) {
         ...state,
         displayedItems: [],
         items: [],
+        ranking: {},
         relatedItems: [],
-        scrollPage: 6,
         feedEnd: false
       };
     case TILES_REMOVE_TILE:

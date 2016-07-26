@@ -1,4 +1,5 @@
 import { VIEW_ARTICLE } from '../constants/actionTypes';
+import * as eventStream from './event-stream.js';
 import 'whatwg-fetch';
 
 import configuration from '../../config';
@@ -20,6 +21,7 @@ export const getArticle = (bucketId, itemId) => {
       .then((response) => response.json())
       .then((json) => {
         console.log('parsed json', json);
+        dispatch(eventStream.push('view', itemId));
         dispatch(viewArticle(json.tile));
       });
   };

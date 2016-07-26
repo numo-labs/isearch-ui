@@ -30,9 +30,9 @@ function mapStateToProps (state) {
       autocompleteOptions,
       inAutoCompleteSearch,
       resultId,
-      scrollPage,
       searchComplete,
-      feedEnd
+      feedEnd,
+      isInitialTag
     },
     travelInfo: {
       numberOfChildren,
@@ -44,9 +44,11 @@ function mapStateToProps (state) {
       departureAirport,
       duration,
       departureDate,
+      danishDepartureDate,
       numberOfAdultsTitle,
       numberOfChildrenTitle,
-      durationTitle
+      durationTitle,
+      editDetailsVisible
     },
     hotel: {
       hotelPage,
@@ -83,14 +85,16 @@ function mapStateToProps (state) {
     departureAirport,
     duration,
     departureDate,
+    danishDepartureDate,
     numberOfAdultsTitle,
     numberOfChildrenTitle,
     durationTitle,
     resultId,
     viewedArticles,
-    scrollPage,
     searchComplete,
-    feedEnd
+    feedEnd,
+    editDetailsVisible,
+    isInitialTag
   };
 }
 

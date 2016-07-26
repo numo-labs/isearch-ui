@@ -1,11 +1,8 @@
 import * as SearchResultActions from '../actions/search-results.js';
 import * as TagActions from '../actions/tags.js';
-import Primus from '../../src/services/primus.js';
-import configuration from '../../config';
-import configure from 'con.figure';
 import querystring from '../utils/querystring';
 
-const config = configure(configuration);
+import connect from '../utils/websockets';
 
 /**
 * Function that initialises a connection with the web socket server and saves
@@ -17,21 +14,24 @@ const config = configure(configuration);
 */
 
 export function initialise (actionCreatorBinder, location) {
-  const primus = new Primus(config.socketUrl);
+  const primus = connect();
   const {
     saveSearchResult,
     saveSocketConnectionId,
     resetTags,
     searchForTag,
-    setSearchComplete
+    setSearchComplete,
+    updateTileRanking
   } = actionCreatorBinder({...SearchResultActions, ...TagActions});
   primus.on('data', function received (data) {
     // console.log('incoming socket data', data);
     if (data.graphql) {
       if (data.graphql.searchComplete) { // event sent by the package provider when all packages have been sent
         setSearchComplete(data);
-      } else if (data.graphql.items.length > 0) {
+      } else if (data.graphql.items && data.graphql.items.length > 0) {
         saveSearchResult(data);
+      } else if (data.graphql.ranking) {
+        updateTileRanking(data);
       }
     }
   });

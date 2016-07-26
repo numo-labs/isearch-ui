@@ -2,7 +2,6 @@
 
 import { formatTags, combinePassengersForQuery } from '../../src/actions/helpers.js';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 describe('Helpers', () => {
   const tags = [

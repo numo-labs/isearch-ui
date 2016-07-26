@@ -18,7 +18,8 @@ import {
   CLEAR_FEED,
   TILES_REMOVE_TILE,
   RECEIVE_RELATED_RESULT,
-  SEARCH_COMPLETE
+  SEARCH_COMPLETE,
+  UPDATE_TILE_RANKING
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
@@ -44,28 +45,26 @@ describe('Search Reducer', () => {
     done();
   });
   describe('Search actions', () => {
-    it(`RECEIVE_SEARCH_RESULT:-> adds items from action to the items
-        state and if the number of displayedItems is less than 5 will
-        set it to the first 5 elements of items. Also sets loading to false`, (done) => {
+    it(`RECEIVE_SEARCH_RESULT:-> sets loading to false`, (done) => {
       const action = {type: RECEIVE_SEARCH_RESULT, items: mockItems};
       const state = reducer(undefined, action);
       const items = mockItems;
       const expectedState = {
         ...initialState,
         items,
-        displayedItems: items.slice(0, 5),
         loading: false
       };
       expect(state).to.deep.equal(expectedState);
       expect(state.loading).to.be.false;
       done();
     });
-    it(`RECEIVE_SEARCH_RESULT-> sets displayedItems to the existing state if
-      it has length greater than 5`, (done) => {
+    it(`RECEIVE_SEARCH_RESULT-> includes ranking data on saved results`, (done) => {
       const initialStateWithItems = {
         ...initialState,
         items: mockItems,
-        displayedItems: mockItems
+        ranking: {
+          e73e4919e237887f70f6024011502243: '7'
+        }
       };
       const action = {
         type: RECEIVE_SEARCH_RESULT,
@@ -73,8 +72,8 @@ describe('Search Reducer', () => {
       };
       const state = reducer(initialStateWithItems, action);
       expect(state.loading).to.be.false;
-      expect(state.items).to.deep.equal(mockItems);
-      expect(state.displayedItems).to.deep.equal(mockItems);
+      expect(state.items[0].id).to.equal('e73e4919e237887f70f6024011502243');
+      expect(state.items[0].rank).to.equal(7);
       done();
     });
     it(`UPDATE_DISPLAYED_ITEMS: -> adds items from action to the displayedItems
@@ -84,7 +83,6 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         displayedItems: mockItems,
-        scrollPage: 7,
         feedEnd: true
       };
       expect(state).to.deep.equal(expectedState);
@@ -97,7 +95,6 @@ describe('Search Reducer', () => {
       const expectedState = {
         ...initialState,
         displayedItems: mockItems,
-        scrollPage: 7,
         feedEnd: false,
         items: mockItems.concat(mockItems)
       };
@@ -213,6 +210,48 @@ describe('Search Reducer', () => {
       };
       expect(state).to.deep.equal(expectedState);
       done();
+    });
+    it(`UPDATE_TILE_RANKING -> saves the updated ranking data`, () => {
+      const action = {
+        type: UPDATE_TILE_RANKING,
+        ranking: {
+          a: '1',
+          b: '2.5',
+          c: '-3'
+        }
+      };
+      const state = reducer({...initialState, ranking: {}}, action);
+      const expectedState = {
+        ...initialState,
+        ranking: action.ranking
+      };
+      expect(state).to.deep.equal(expectedState);
+    });
+    it(`UPDATE_TILE_RANKING -> adds a rank property to existing items`, () => {
+      const action = {
+        type: UPDATE_TILE_RANKING,
+        ranking: {
+          a: '1',
+          b: '2.5',
+          c: '-3'
+        }
+      };
+      const items = [
+        { id: 'a' },
+        { id: 'b' },
+        { id: 'c' }
+      ];
+      const state = reducer({...initialState, ranking: {}, items}, action);
+      const expectedState = {
+        ...initialState,
+        ranking: action.ranking,
+        items: [
+          { id: 'a', rank: 1 },
+          { id: 'b', rank: 2.5 },
+          { id: 'c', rank: -3 }
+        ]
+      };
+      expect(state).to.deep.equal(expectedState);
     });
   });
   describe('Tag and Tile actions', () => {

@@ -1,70 +1,161 @@
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+.leavingDate {
+  font-family: SourceSansLight;
+  display: inline-block;
+  float: left;
+  font-size: 0.9em;
+  padding-top: 0.6em;
+  padding-left: 0.5em;
+  color: #474747;
+}
+
+.leavingDateChangeButton {
+  float: right;
+  font-family: SourceSansLight;
+  display: inline-block;
+  font-size: 0.9em;
+  padding-top: 0.6em;
+  padding-right: 0.5em;
+  text-decoration: underline;
+  color: #008ab7;
+}
+
 .searchBarContainer {
   margin: 0 auto;
   text-align: center;
   margin-bottom: 1em;
+  width: 100%;
 }
 
-.cross {
-  color: #ffffff;
-  font-family: sans-serif;
-  font-weight: lighter;
-  display: inline;
-  padding-left: 1.5em;
-  padding-right: 0.2em;
-  cursor: pointer;
-}
-
-.inputBar {
+.searchBox {
+  display: block;
   font-family: SourceSansLight;
-  /*height: 1em;*/
-  width: 30em;
-  margin-top: 1.5em;
-  border: none;
-  outline-width: 0;
-  outline: none !important;
-  padding-left: 0.5em;
-  float: left;
-  margin-right: 1em;
-  margin-bottom: 0.1em;
-}
-
-.form-control {
   width: 100%;
   height: 44px;
+  padding: 6px 12px;
+  padding-left: 2.5em;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border: none;
+  background-color: #fff;
+  background-image: none;
+  -webkit-transition: -webkit-box-shadow ease-in-out .35s;
+  -o-transition: box-shadow ease-in-out .35s;
+  transition: box-shadow ease-in-out .35s;
+}
+.searchBox:focus {
+  -webkit-box-shadow: 0 2px 5px #666;
+  box-shadow: 0 2px 5px #666;
+  outline: 0;
 }
 
-.input-results {
+.searchIcon {
+  width: 1.3em;
+  position: absolute;
+  top: 1em;
+  left: 0.7em;
+}
+
+.react-autosuggest__section-container {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.react-autosuggest__suggestion {
+  width: 50%;
+  display: inline-block;
+  float: left;
+  border-bottom: solid 1px #DCDCDC;
+  border-right: solid 1px #DCDCDC;
+  color: #F39100;
+  font-family: SourceSansLight;
+  margin: 0 auto;
+}
+
+.react-autosuggest__suggestion:nth-child(odd) {
+  clear: left;
+  background: #00AAEE;
+  float: left;
+}
+.react-autosuggest__suggestion:nth-child(even) {
+  clear: right;
+  float: right;
+}
+
+.input-results,
+.react-autosuggest__suggestions-container{
   z-index: 9999;
   position: absolute;
   margin: 0;
-  width: 29.5em;
+  padding: 0;
+  width: 30em;
+  list-style-type: none;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 2px 5px #666;
+  background-color: #fff;
+  text-align: center;
 }
 
-.searchButton {
-  font-family: SourceSansLight;
-  background-color: #F39100;
-  display: inline-block;
-  border-radius: 100%;
-  color: #ffffff;
-  font-size: 1.25em;
-  width: 2em;
-  height: 2em;
-  line-height: 2em;
-  margin-top: 1.5em;
+.react-autosuggest__suggestions-container ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion.react-autosuggest__suggestion--focused .suggestionItem,
+li:nth-child(even) .suggestionItem:hover,
+li:nth-child(odd) .suggestionItem:hover{
+  background: #f5f5f5;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.suggestionItem {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.sectionItem {
+  position: relative;
+  display: block;
+  background-color: #fff;
+}
+
+.sectionItem .noSuggestion {
+  background: #F2D5D5;
+  color: #EB6565;
+  padding: 10px 15px;
+}
+
+.sectionItem .tryThis {
+  font-size: 0.8em;
+  text-align: left;
+  padding: 10px 5px;
+  background: #f5f5f5;
+  text-align: center;
+}
+
+.travelInfoChange {
+  height: 2.5em;
+  width: 100%;
+  background-color: #F0F0F0;
+  border-top: 1px solid #C4C4C4;
   cursor: pointer;
 }
 
-.searchButton:hover {
-  background-color: #F37800;
-}
-
-.searchButton:active {
-  background-color: #F39100;
-}
-
 .inputContainer {
-  top: 3em;
   display: inline-block;
+  width: 30em;
+  margin-top: 20px;
+  position: relative;
 }
 
 .input:focus {
@@ -94,46 +185,11 @@
   outline-width: 0;
 } /* oldIE ;) */
 
-.list-group-item a:hover {
-  text-decoration: none;
-}
-
-.list-group-item a {
-  color: black;
-}
-
-.list-group-item:hover {
-  background-color: #F39100;
-}
-
-.list-group-item.active, .list-group-item.active:hover {
-  background-color: #F39100;
-  border-color: #F39100;
-}
-
 @media (max-width: 485px) {
-  .inputBar {
-    width: 23em;
+  .react-autosuggest__suggestions-container {
+    width: 100%;
   }
-  .input-results {
-    width: 22.5em;
-  }
-}
-
-@media (max-width: 376px) {
-  .inputBar {
-    width: 18em;
-  }
-  .input-results {
-    width: 17.6em;
-  }
-}
-
-@media (max-width: 305px) {
-  .inputBar {
-    width: 15em;
-  }
-  .input-results {
-    width: 14.5em;
+  .inputContainer {
+    width: 100%;
   }
 }

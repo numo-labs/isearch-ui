@@ -17,7 +17,9 @@ function mapStateToProps (state) {
      departureAirport,
      duration,
      departureDate,
-     passengerBirthdays
+     danishDepartureDate,
+     passengerBirthdays,
+     editDetailsVisible
     }
   } = state;
   return {
@@ -30,7 +32,9 @@ function mapStateToProps (state) {
     departureAirport,
     duration,
     departureDate,
-    passengerBirthdays
+    danishDepartureDate,
+    passengerBirthdays,
+    editDetailsVisible
   };
 }
 

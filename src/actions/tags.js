@@ -8,10 +8,11 @@ import {
 } from '../constants/actionTypes';
 import * as graphqlService from '../services/graphql';
 import { startSearch } from './search-results.js';
+import * as eventStream from './event-stream.js';
 import { analyticsAddTagObject, analyticsRemoveTagObject } from '../../lib/analytics-helper';
 
 import { QUERY_AUTOCOMPLETE_INPUT } from '../constants/queries.js';
-
+import { animateScroll as scroll } from 'react-scroll';
 /**
 * TEMP FUNCTIONS TO ADD MOCK TAGS
 */
@@ -68,11 +69,19 @@ export const searchForTag = (searchString) => (dispatch) => {
       const { data: { viewer: { autocomplete } } } = json;
       if (autocomplete && autocomplete.items && autocomplete.items.length) {
         const tag = autocomplete.items[0];
-        dispatch(addSingleTag(tag.label, tag.tagid));
+        dispatch(addSingleTag(tag.label, tag.tagid, 'url'));
+        scroll.scrollTo(window.innerHeight * 0.95);
       } else {
         dispatch(resetTags());
       }
     });
+};
+
+export const addArticleTag = (displayName, id) => {
+  return (dispatch) => {
+    dispatch(eventStream.push('add-tag', id));
+    return dispatch(addSingleTag(displayName, id, displayName));
+  };
 };
 
 /**
@@ -136,8 +145,11 @@ export const resetToInitialTag = () => {
 */
 
 export const removeTile = (id) => {
-  return {
-    type: TILES_REMOVE_TILE,
-    id: id
+  return (dispatch, getState) => {
+    dispatch(eventStream.push('remove', id));
+    return dispatch({
+      type: TILES_REMOVE_TILE,
+      id: id
+    });
   };
 };

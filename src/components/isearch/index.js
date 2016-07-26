@@ -4,8 +4,10 @@ import SearchSummary from '../../../lib/search-summary';
 import Tags from '../../../lib/tags/';
 import SearchResults from '../search-results';
 import LoadingSpinner from '../../../lib/spinner';
-import SearchBar from '../../../lib/search-bar';
 import ScrollView from '../../../lib/scroll-view';
+import EditDetails from '../edit-details';
+import departOnFriday from '../../utils/departure-day-format';
+import moment from 'moment';
 import './style.css';
 
 class ISearch extends Component {
@@ -23,9 +25,6 @@ class ISearch extends Component {
   componentWillMount () {
     window.addEventListener('resize', this.handleResize);
     this.addAnalyticsData();
-    if (!this.props.tags.length) {
-      this.props.resetTags();
-    }
   }
 
   handleResize () {
@@ -58,17 +57,18 @@ class ISearch extends Component {
       removeTile,
       displayedItems,
       loadMoreItemsIntoFeed,
-      addSingleTag,
-      scrollPage,
+      addArticleTag,
       searchComplete,
-      feedEnd
+      feedEnd,
+      showTravelInfo,
+      tags,
+      isInitialTag
     } = this.props;
     return (
       <ScrollView
         loadingThreshold={500}
         loadData={loadMoreItemsIntoFeed}
         endScroll={displayedItems.length === 0}
-        page={scrollPage}
       >
         <SearchResults
           changeRoute={changeRoute}
@@ -80,9 +80,12 @@ class ISearch extends Component {
           resultId={resultId}
           removeTile={removeTile}
           viewedArticles={viewedArticles}
-          addSingleTag={addSingleTag}
+          addArticleTag={addArticleTag}
           searchComplete={searchComplete}
           feedEnd={feedEnd}
+          showTravelInfo={showTravelInfo}
+          tags={tags}
+          isInitialTag={isInitialTag}
         />
       </ScrollView>
     );
@@ -112,6 +115,7 @@ class ISearch extends Component {
       departureAirport,
       duration,
       departureDate,
+      danishDepartureDate,
       setNumberOfChildren,
       setNumberOfAdults,
       setChildAge,
@@ -124,7 +128,10 @@ class ISearch extends Component {
       setDepartureDate,
       push: changeRoute,
       goBack,
-      displayedItems
+      displayedItems,
+      editDetailsVisible,
+      showTravelInfo,
+      hideTravelInfo
     } = this.props;
     return (
       <section>
@@ -151,25 +158,38 @@ class ISearch extends Component {
           startSearch={startSearch}
           changeRoute={changeRoute}
           goBack={goBack}
+          editDetailsVisible={editDetailsVisible}
+          showTravelInfo={showTravelInfo}
+          hideTravelInfo={hideTravelInfo}
         />
-        {
-          this.state.screenWidth < 553 ? [
-            <Header
-              searchBar={false}
-              displayedItems={displayedItems}
-            />,
-            <SearchBar
-              addSingleTag={addSingleTag}
-              startSearch={startSearch}
-              setSearchString={setSearchString}
-              autocompleteOptions={autocompleteOptions}
-              searchString={searchString}
-              getAutocompleteOptions={getAutocompleteOptions}
-              inAutoCompleteSearch={inAutoCompleteSearch}
-              clearSearchString={clearSearchString}
-            />
-          ]
-            : <Header
+        {editDetailsVisible && <EditDetails
+          numberOfChildren={numberOfChildren}
+          numberOfAdults={numberOfAdults}
+          setChildAge={setChildAge}
+          childAge1={childAge1}
+          childAge2={childAge2}
+          childAge3={childAge3}
+          childAge4={childAge4}
+          departureAirport={departureAirport}
+          duration={duration}
+          departureDate={departureDate}
+          setNumberOfChildren={setNumberOfChildren}
+          setNumberOfAdults={setNumberOfAdults}
+          setDepartureAirport={setDepartureAirport}
+          setDuration={setDuration}
+          updateHeaderTitles={updateHeaderTitles}
+          numberOfAdultsTitle={numberOfAdultsTitle}
+          numberOfChildrenTitle={numberOfChildrenTitle}
+          durationTitle={durationTitle}
+          setDepartureDate={setDepartureDate}
+          startSearch={startSearch}
+          changeRoute={changeRoute}
+          goBack={goBack}
+          editDetailsVisible={editDetailsVisible}
+          showTravelInfo={showTravelInfo}
+          hideTravelInfo={hideTravelInfo}
+           />}
+          <Header
             addSingleTag={addSingleTag}
             startSearch={startSearch}
             setSearchString={setSearchString}
@@ -180,14 +200,21 @@ class ISearch extends Component {
             clearSearchString={clearSearchString}
             searchBar
             displayedItems={displayedItems}
+            departureDate={danishDepartureDate || departOnFriday(moment().add(3, 'months')).format('DD/MM-YYYY')}
+            showTravelInfo={showTravelInfo}
+            tags={tags}
+            removeTag={removeTag}
+            resetTags={resetTags}
+            resetColour={'#F39110'}
           />
-        }
-        <Tags
+        { (window.innerWidth <= 750) && <Tags
           tags={tags}
           removeTag={removeTag}
           resetTags={resetTags}
           resetColour={'#F39110'}
+          resetBorderColour={'#F39110'}
         />
+        }
         { loading &&
           <div className='spinnerContainer'>
             <LoadingSpinner/>
@@ -211,7 +238,6 @@ ISearch.propTypes = {
 
   // scroll view
   loadMoreItemsIntoFeed: PropTypes.func,
-  scrollPage: PropTypes.number,
   searchComplete: PropTypes.bool,
 
   // autocomplete
@@ -238,6 +264,7 @@ ISearch.propTypes = {
   tags: PropTypes.array,
   addTag: PropTypes.func,
   addSingleTag: PropTypes.func,
+  addArticleTag: PropTypes.func,
   removeTag: PropTypes.func,
   resetTags: PropTypes.func,
   feedEnd: PropTypes.bool,
@@ -259,16 +286,21 @@ ISearch.propTypes = {
   departureAirport: PropTypes.string,
   duration: PropTypes.string,
   departureDate: PropTypes.string,
+  danishDepartureDate: PropTypes.string,
   setChildAge: PropTypes.func,
   numberOfAdultsTitle: PropTypes.string,
   numberOfChildrenTitle: PropTypes.string,
   durationTitle: PropTypes.string,
   updateHeaderTitles: PropTypes.func,
   setDepartureDate: PropTypes.func,
+  editDetailsVisible: PropTypes.bool,
+  showTravelInfo: PropTypes.func,
+  hideTravelInfo: PropTypes.func,
 
   // routing
   push: PropTypes.func,
 
+  isInitialTag: PropTypes.bool,
   viewedArticles: PropTypes.array,
   goBack: PropTypes.func
 };

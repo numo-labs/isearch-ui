@@ -18,9 +18,8 @@ import configureMockStore from './test-helpers';
 const mockStore = configureMockStore([thunk]);
 
 describe('Autocomplete actions', () => {
-  it(`getAutocompleteOptions does not launch graphql query when the
-      searchString value is 0`, (done) => {
-    const expectedActions = [];
+  it(`getAutocompleteOptions launches clearSearchString if there is a empty searchString`, (done) => {
+    const expectedActions = [{ type: 'CLEAR_SEARCH_STRING' }];
     const store = mockStore({search: { searchString: '' }});
     store.dispatch(actions.getAutocompleteOptions());
     expect(store.getActions()).to.deep.equal(expectedActions);
