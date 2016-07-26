@@ -61,7 +61,8 @@ class ISearch extends Component {
       searchComplete,
       feedEnd,
       showTravelInfo,
-      tags
+      tags,
+      isInitialTag
     } = this.props;
     return (
       <ScrollView
@@ -84,6 +85,7 @@ class ISearch extends Component {
           feedEnd={feedEnd}
           showTravelInfo={showTravelInfo}
           tags={tags}
+          isInitialTag={isInitialTag}
         />
       </ScrollView>
     );
@@ -298,6 +300,7 @@ ISearch.propTypes = {
   // routing
   push: PropTypes.func,
 
+  isInitialTag: PropTypes.bool,
   viewedArticles: PropTypes.array,
   goBack: PropTypes.func
 };
