@@ -18,7 +18,6 @@ import { clearSearchString } from './tags';
 export function getAutocompleteOptions () {
   return (dispatch, getState) => {
     const { search: { searchString } } = getState();
-    // alert('LENGTH: ' + searchString.length)
     if (searchString.length > 0) {
       dispatch(setAutocompleteInSearch());
       const variables = {

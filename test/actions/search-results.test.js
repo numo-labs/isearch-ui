@@ -72,7 +72,7 @@ describe('Search Results Actions', () => {
       const json = {
         data: {
           viewer: {
-            searchResultId: {
+            startSearch: {
               id: '12345'
             }
           }
@@ -81,8 +81,8 @@ describe('Search Results Actions', () => {
       simple.mock(graphqlService, 'query').resolveWith(json);
       const store = mockStore(initialState);
       const expectedActions = [
-        { type: CLEAR_FEED },
         { type: BUSY_SEARCHING, isBusy: true },
+        { type: CLEAR_FEED },
         { type: SAVE_SEARCH_RESULT_ID, id: '12345' },
         { type: SEARCH_COMPLETE }
       ];
@@ -103,7 +103,7 @@ describe('Search Results Actions', () => {
       const json = {
         data: {
           viewer: {
-            searchResultId: {
+            startSearch: {
               id: null
             }
           }
@@ -111,15 +111,11 @@ describe('Search Results Actions', () => {
       };
       simple.mock(graphqlService, 'query').resolveWith(json);
       const store = mockStore(initialState);
-      const expectedActions = [
-        { type: CLEAR_FEED },
-        { type: BUSY_SEARCHING, isBusy: true },
-        { type: SEARCH_ERROR, error: 'No results found' }
-      ];
+      const expectedAction = { type: SEARCH_ERROR, error: 'No results found' };
       store.dispatch(actions.startSearch());
       graphqlService.query.lastCall.returned
         .then(() => {
-          expect(store.getActions()).to.deep.equal(expectedActions);
+          expect(store.getActions()).to.contain(expectedAction);
           expect(graphqlService.query.calls[0].args[0]).to.equal(MUTATION_START_SEARCH);
           done();
         })
