@@ -166,8 +166,8 @@ class HotelPage extends Component {
                 starRating={roundedStarRating}
                 ratingIconUrl={ratingIconUrl}
                 size={1.8}
-                width={'2.5em'}
-                height={'2.5em'}
+                width={'1.7em'}
+                height={'1.7em'}
               />
             </div>
           </div>
@@ -189,10 +189,14 @@ class HotelPage extends Component {
             </a>
           </div>
           <div className='hotelImagesContainer'>
-            <h2 className='imagesHeading'>Billeder</h2>
+            {hotelImages.length > 1 && <h2 className='imagesHeading'>Billeder</h2>}
             {this.renderImageList(hotelImages.slice(1))}
           </div>
           <div className='bookButtonFooter'>
+            <span className='hotelPrice'>
+              {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
+            </span>
+            <div className='ppp'>Pr. person</div>
             <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
               <div className='bookButton'>SE PRIS OG BESTIL</div>
             </a>

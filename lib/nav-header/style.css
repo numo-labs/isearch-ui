@@ -71,3 +71,10 @@
   top: 4em;
   z-index: 20000;
 }
+
+@media (max-width: 750px) {
+  .navBackButtonText {
+    font-size: 1.2em;
+    margin-top: 0.25em;
+  }
+}
