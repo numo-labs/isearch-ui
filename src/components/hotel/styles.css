@@ -85,8 +85,19 @@
   padding-left: 0.3em;
 }
 
+.fact {
+  display: inline-block;
+  float: left;
+}
+
 .factHolder {
   width: 100%;
+}
+
+.factPair {
+  width: 100%;
+  display: inline-block;
+  border-bottom: 1px dotted;
 }
 
 .factTitles {
@@ -268,6 +279,11 @@
   width: 0.8em;
 }
 
+.value {
+  display: inline-block;
+  float: right;
+}
+
 @media (min-width: 750px) {
   .bookButtonContainer {
     display: inline-block;
@@ -287,16 +303,18 @@
   }
   .descriptionWrapper {
     width: 100%;
-    margin-bottom: 5em;
     margin-top: 2.05em;
   }
   .factHolder {
     margin: 0;
-    width: 31%;
+    width: 35%;
     padding-right: 1em;
     padding-top: 1em;
     display: inline-block;
-    margin-top: 15em;
+    margin-top: 13em;
+  }
+  .factPair {
+    border-bottom: 1px solid #999999;
   }
   .infoContainer {
     width: 750px;
@@ -330,7 +348,7 @@
     padding: 1.5em;
   }
   .textWrapper {
-    width: 69%;
+    width: 65%;
   }
   .titleHeartContainer {
     min-height: 8em;
