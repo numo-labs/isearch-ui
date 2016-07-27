@@ -107,7 +107,7 @@
 }
 
 .noHotelsErrorMessage {
-  font-size: 0.8em;
+  font-size: 1em;
   margin-top: 1em;
   width: 95%;
   color: #a94442;
@@ -143,4 +143,25 @@
    margin-bottom: 14px;
    width: 305px;
  }
+}
+
+@media (min-width: 385px) {
+  .noHotelsErrorMessage {
+    width: 385px;
+  }
+}
+@media (min-width: 785px) {
+  .noHotelsErrorMessage {
+    width: 785px;
+  }
+}
+@media (min-width: 1184px) {
+  .noHotelsErrorMessage {
+    width: 1184px;
+  }
+}
+@media (min-width: 1583px) {
+  .noHotelsErrorMessage {
+    width: 1583px;
+  }
 }
