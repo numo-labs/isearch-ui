@@ -1,0 +1,25 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf')
+}
+
+.betaText {
+  text-align: center;
+  line-height: 21px;
+  margin: 0 0 0 0;
+  font-family: SourceSansSemiBold;
+}
+
+.betaFlagTop,
+.betaFlagBar {
+  background-color: #f39100;
+  color: #fff;
+  width: 100%;
+  height: 21px;
+}
+
+.betaFlagBar {
+  position: fixed;
+  top: 4em;
+  z-index: 20000;
+}
