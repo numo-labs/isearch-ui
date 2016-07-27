@@ -120,8 +120,8 @@ h1 {
 }
 
 .articleFullPageContainer .articleImage {
-    max-height: 350px;
     height: auto;
+    max-width: 350px;
 }
 .articleFullPageContainer .articleImage img {
     visibility: hidden;

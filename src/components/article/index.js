@@ -107,7 +107,7 @@ class ArticleFullPage extends Component {
                   {key === 0 && section.image ? <FadeImage className='articleHeader articleImage' src={section.image}/> : null}
                   <div key={key} className='articleSection'>
                     {key !== 0 && section.image ? <FadeImage className='articleImage' src={section.image}/> : null}
-                    {section.title ? (key === 0 ? <h1>{section.title}</h1> : <h2 >{section.title}</h2>) : null}
+                    {section.title ? <h2>{section.title}</h2> : null}
                     {section.text ? <div className='articleText' dangerouslySetInnerHTML={this.rawMarkup(section.text)}/> : null}
                   </div>
                 </section>
