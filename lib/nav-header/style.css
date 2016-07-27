@@ -5,6 +5,19 @@
 
 .navBackButton {
   width: 1.5em;
+  float: left;
+}
+
+.navBackButtonText {
+  float: left;
+  font-family: SourceSansLight;
+  font-size: 2em;
+  font-weight: 300;
+  width: 84px;
+  height: 36px;
+  color: #ffffff;
+  margin-left: 0.7em;
+  margin-top: 0.1em;
 }
 
 .navBarContainer {
