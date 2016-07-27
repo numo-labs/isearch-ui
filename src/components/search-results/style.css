@@ -74,7 +74,7 @@
   font-family: SourceSansSemiBold;
   font-size: 1.4em;
   text-align: center;
-  padding-right: 10px; 
+  padding-right: 10px;
 }
 
 @-webkit-keyframes moveUp {
@@ -102,7 +102,7 @@
 @media (max-width: 380px) {
  .gridItem {
    margin-bottom: 14px;
-   width: 360px;
+   width: 350px;
  }
  .gridItem:hover {
    transform: none;
