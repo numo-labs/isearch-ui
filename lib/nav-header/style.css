@@ -61,3 +61,10 @@
   vertical-align: middle;
   line-height: 3em;
 }
+
+@media (max-width: 750px) {
+  .navBackButtonText {
+    font-size: 1.2em;
+    margin-top: 0.25em;
+  }
+}
