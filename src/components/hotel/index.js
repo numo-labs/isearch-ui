@@ -57,11 +57,16 @@ class HotelPage extends Component {
   renderFact (fact) {
     const { packageOffer } = this.props;
     const amenitiesObject = packageOffer.amenities;
+    console.log('-----------', amenitiesObject);
     for (var key in amenitiesObject) {
       if (!amenitiesObject.hasOwnProperty(key)) continue;
       if (key === fact) {
-        if (typeof amenitiesObject[key] !== 'string' || amenitiesObject[key] === 'true' || amenitiesObject[key] === 'false') {
+        if (typeof amenitiesObject[key] !== 'string' && amenitiesObject[key] !== true && amenitiesObject[key] !== false) {
           return '-';
+        } else if (amenitiesObject[key] === false) {
+          return 'Nej';
+        } else if (amenitiesObject[key] === true) {
+          return 'Ja';
         } else if (amenitiesObject[ key ].split(' ')[ 1 ] === 'km') {
           return amenitiesObject[ key ].split(' ')[ 0 ] + 'k';
         } else {
@@ -108,10 +113,6 @@ class HotelPage extends Component {
         <div className='factWrapper'>
           <div className='factHeading'>Hotelfakta</div>
           <div className='factContainer'>
-            <div className='factPair'>
-              <div className='fact'>Strand</div>
-              <div className='value'>{this.renderFact('distancetobeach')}m</div>
-            </div>
             <div className='factPair'>
               <div className='fact'>Lokalt centrum</div>
               <div className='value'>{this.renderFact('distancetocenter')}m</div>
