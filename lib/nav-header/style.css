@@ -62,16 +62,6 @@
   line-height: 3em;
 }
 
-.betaFlagBar {
-  background-color: #f39100;
-  color: #fff;
-  width: 100%;
-  text-align: center;
-  position: fixed;
-  top: 4em;
-  z-index: 20000;
-}
-
 @media (max-width: 750px) {
   .navBackButtonText {
     font-size: 1.2em;

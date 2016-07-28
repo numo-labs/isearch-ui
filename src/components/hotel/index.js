@@ -57,7 +57,6 @@ class HotelPage extends Component {
   renderFact (fact) {
     const { packageOffer } = this.props;
     const amenitiesObject = packageOffer.amenities;
-    console.log('-----------', amenitiesObject);
     for (var key in amenitiesObject) {
       if (!amenitiesObject.hasOwnProperty(key)) continue;
       if (key === fact) {
