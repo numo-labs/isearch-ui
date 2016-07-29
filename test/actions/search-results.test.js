@@ -153,14 +153,14 @@ describe('Search Results Actions', () => {
   });
   describe('Inifinite Scroll actions', () => {
     it(`loadMoreItemsIntoFeed: dispatch updateDisplayedItems action with
-      items if current 'displayedItems' state is less than initialPageSize and
+      items if current 'displayedItems' state is less than secondaryPageSize and
       'items' state has items`, done => {
       const items = [
         {id: 'one', rank: 3},
         {id: 'two', rank: 2},
         {id: 'three', rank: 1}
       ];
-      const store = mockStore({search: { displayedItems: [], items, pageSize: 5, initialPageSize: 10 }});
+      const store = mockStore({search: { displayedItems: [], items, pageSize: 5, secondaryPageSize: 10 }});
       const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items}];
       store.dispatch(actions.loadMoreItemsIntoFeed());
       expect(store.getActions()).to.deep.equal(expectedActions);
@@ -181,13 +181,13 @@ describe('Search Results Actions', () => {
         {id: 9},
         {id: 10}
       ];
-      const store = mockStore({search: { displayedItems: items.slice(0, 2), items, pageSize: 5, initialPageSize: 0 }});
+      const store = mockStore({search: { displayedItems: items.slice(0, 2), items, pageSize: 5, secondaryPageSize: 0 }});
       const expectedAction = {type: UPDATE_DISPLAYED_ITEMS, items: items.slice(0, 7)};
       store.dispatch(actions.loadMoreItemsIntoFeed());
       expect(store.getActions()[0]).to.deep.equal(expectedAction);
       done();
     });
-    it(`loadMoreItemsIntoFeed: if the length of items is less than the initialPageSize
+    it(`loadMoreItemsIntoFeed: if the length of items is less than the secondaryPageSize
       dispatch updateDisplayedItems with all the available items`, done => {
       const items = [
         {id: 1},
@@ -198,7 +198,7 @@ describe('Search Results Actions', () => {
         {id: 6},
         {id: 7}
       ];
-      const store = mockStore({search: { displayedItems: [], items, initialPageSize: 10, pageSize: 5 }});
+      const store = mockStore({search: { displayedItems: [], items, secondaryPageSize: 10, pageSize: 5 }});
       const expectedActions = [{type: UPDATE_DISPLAYED_ITEMS, items}];
       store.dispatch(actions.loadMoreItemsIntoFeed());
       expect(store.getActions()).to.deep.equal(expectedActions);
