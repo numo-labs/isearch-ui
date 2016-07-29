@@ -49,9 +49,10 @@ export const initialState = {
   departureAirport: '',
   departureDate: '',
   passengerBirthdays: [],
-  initialPageSize: 10,
+  initialPageSize: 2, // the number of search results to show *immediately*
+  secondaryPageSize: 20, // show this many results after 3 seconds or when there is a gap in incoming results
   pageSize: 5,
-  searchComplete: false, // set to false until a message is recieved from the web socket channel
+  searchComplete: false, // set to false until a message is received from the web socket channel
   feedEnd: false,
   ranking: {}
 };
