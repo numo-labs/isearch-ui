@@ -57,10 +57,10 @@ export function receiveRelatedResult (items) {
 
 export function setSearchComplete (result = 'timeout') {
   return (dispatch, getState) => {
-    const { search: { resultId, displayedItems } } = getState();
+    const { search: { resultId, displayedItems, secondaryPageSize } } = getState();
     if (result === 'timeout' || result.graphql.searchId === resultId) { // check result corresponds to the current search
       // if there are still no items rendered then flush any buffered results to the page
-      if (displayedItems.length === 0) {
+      if (displayedItems.length < secondaryPageSize) {
         dispatch(loadMoreItemsIntoFeed());
       }
       return dispatch({ type: SEARCH_COMPLETE });
@@ -184,12 +184,11 @@ export function saveSearchResult (result) {
 let renderTimer;
 export function loadInitialData () {
   return (dispatch, getState) => {
-    const { search: { displayedItems, items, initialPageSize } } = getState();
+    const { search: { displayedItems, items, initialPageSize, secondaryPageSize } } = getState();
     // if there is enough data to render the first page of results, do so immediately and clear any timers
-    if (displayedItems.length < initialPageSize && items.length > initialPageSize) {
-      if (renderTimer) timers.clearTimeout(renderTimer);
+    if (displayedItems.length < initialPageSize && items.length >= initialPageSize) {
       dispatch(loadMoreItemsIntoFeed());
-    } else if (displayedItems.length < initialPageSize) {
+    } else if (displayedItems.length < secondaryPageSize) {
       // otherwise if no results are received for 1s then push what we have
       if (renderTimer) timers.clearTimeout(renderTimer);
       renderTimer = timers.setTimeout(() => {
@@ -208,8 +207,12 @@ export function updateDisplayedItems (items) {
 }
 
 export function updateTileRanking (result) {
-  return (dispatch) => {
-    dispatch({ type: UPDATE_TILE_RANKING, ranking: result.graphql.ranking });
+  return (dispatch, getState) => {
+    const { search: { resultId } } = getState();
+    const searchId = result.graphql.searchId;
+    if (resultId && searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
+      dispatch({ type: UPDATE_TILE_RANKING, ranking: result.graphql.ranking });
+    }
   };
 }
 
@@ -224,12 +227,12 @@ function sortFeed (items, ranking, start) {
 
 export function loadMoreItemsIntoFeed () {
   return (dispatch, getState) => {
-    const { search: { displayedItems, items, relatedItems, ranking, pageSize, initialPageSize } } = getState();
+    const { search: { displayedItems, items, relatedItems, ranking, pageSize, secondaryPageSize } } = getState();
     if (displayedItems.length === 0 && items.length === 0) {
       return; // no unecessary re-render if no items returned
     } else if (items.length > displayedItems.length) {
       sortFeed(items, ranking, displayedItems.length);
-      const end = Math.max(initialPageSize, displayedItems.length + pageSize);
+      const end = Math.max(secondaryPageSize, displayedItems.length + pageSize);
       return dispatch(updateDisplayedItems(items.slice(0, end)));
     } else if (displayedItems.length >= items.length) {  // if items store has been exhausted retrieve from relatedContent store
       const start = displayedItems.length - items.length;
