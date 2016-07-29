@@ -222,10 +222,11 @@ class SearchResults extends Component {
       searchComplete,
       items,
       showTravelInfo,
-      isInitialTag
+      isInitialTag,
+      ranking
     } = this.props;
     const searchItems = items.filter(item => !item.related);
-    const hotelItems = searchItems.filter(item => item.packageOffer);
+    const hotelItems = ranking ? Object.keys(ranking).filter(key => key.match(/^hotel/)) : [];
     const hideGridStyle = {
       minHeight: '0'
     };
@@ -272,7 +273,8 @@ SearchResults.propTypes = {
   searchComplete: PropTypes.bool,
   feedEnd: PropTypes.bool,
   showTravelInfo: PropTypes.func,
-  isInitialTag: PropTypes.bool
+  isInitialTag: PropTypes.bool,
+  ranking: PropTypes.object
 };
 
 export default SearchResults;

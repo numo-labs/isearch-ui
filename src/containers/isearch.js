@@ -32,7 +32,8 @@ function mapStateToProps (state) {
       resultId,
       searchComplete,
       feedEnd,
-      isInitialTag
+      isInitialTag,
+      ranking
     },
     travelInfo: {
       numberOfChildren,
@@ -94,7 +95,8 @@ function mapStateToProps (state) {
     searchComplete,
     feedEnd,
     editDetailsVisible,
-    isInitialTag
+    isInitialTag,
+    ranking
   };
 }
 
