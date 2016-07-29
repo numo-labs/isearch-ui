@@ -54,11 +54,18 @@
   outline: 0;
 }
 
+.autosuggestSpinner,
 .searchIcon {
   width: 1.3em;
   position: absolute;
   top: 1em;
+}
+.searchIcon {
   left: 0.7em;
+}
+.autosuggestSpinner {
+  right: 1.3em;
+  top: 0.1em;
 }
 
 .react-autosuggest__section-container {

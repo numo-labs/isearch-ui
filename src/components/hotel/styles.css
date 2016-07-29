@@ -85,9 +85,19 @@
   padding-left: 0.3em;
 }
 
+.fact {
+  display: inline-block;
+  float: left;
+}
+
 .factHolder {
-  width: 80%;
-  margin: 0 auto 3em auto;
+  width: 100%;
+}
+
+.factPair {
+  width: 100%;
+  display: inline-block;
+  border-bottom: 1px dotted;
 }
 
 .factTitles {
@@ -101,6 +111,7 @@
 
 .factWrapper {
   font-family: SourceSansRegular;
+  margin-bottom: 2em;
 }
 
 .gradientOut {
@@ -119,7 +130,6 @@
 .heartRatingContainer {
   display: inline-block;
   padding-top: 5px;
-  margin-left: 1.4em;
 }
 
 .heartShare {
@@ -171,6 +181,8 @@
   display: inline-block;
   width: 100%;
   padding: 2em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
 }
 
 .mintBanner {
@@ -227,13 +239,14 @@
 
 .titleHeartContainer {
   min-height: 7em;
+  text-align: center;
+  margin-bottom: 2em;
 }
 
 .titlePackage {
   font-family: ThomasHeadlineBold;
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   color: #1F1F1F;
-  margin-left: 1em;
   position: relative;
 }
 
@@ -241,7 +254,6 @@
   font-family: SourceSansLight;
   font-size: 1.2em;
   color: #939393;
-  margin-left: 1.2em;
 }
 
 .textHidden {
@@ -252,9 +264,7 @@
 }
 
 .textVisible {
-  padding-right: 1em;
-  padding-left: 1em;
-  padding-bottom: 1em;
+  padding-bottom: 2.5em;
   font-size: 1.6rem;
 }
 
@@ -269,12 +279,17 @@
   width: 0.8em;
 }
 
+.value {
+  display: inline-block;
+  float: right;
+}
+
 @media (min-width: 750px) {
   .bookButtonContainer {
     display: inline-block;
     position: absolute;
     right: 2em;
-    top: 2em;
+    top: 14em;
     margin: 0 auto;
     width: 33%;
     background-color: rgba(233,229,224,0.7);
@@ -288,15 +303,18 @@
   }
   .descriptionWrapper {
     width: 100%;
-    margin-bottom: 5em;
     margin-top: 2.05em;
   }
   .factHolder {
     margin: 0;
-    width: 31%;
+    width: 35%;
     padding-right: 1em;
     padding-top: 1em;
     display: inline-block;
+    margin-top: 13em;
+  }
+  .factPair {
+    border-bottom: 1px solid #999999;
   }
   .infoContainer {
     width: 750px;
@@ -320,29 +338,29 @@
     height: 500px;
   }
   .subtitlePackage {
-    font-family: SourceSansLight;
+    font-family: SourceSansSemiBold;
     font-size: 2rem;
-    color: #939393;
-    margin-left: 1em;
+    color: #999999;
+    margin-bottom: 0.5em;
   }
   .textVisible {
     margin-right: 2em;
     padding: 1.5em;
   }
   .textWrapper {
-    width: 69%;
+    width: 65%;
   }
   .titleHeartContainer {
     min-height: 8em;
-    width: 66%;
+    width: 100%;
   }
   .titlePackage {
     font-family: ThomasHeadlineBold;
-    font-size: 3.2rem;
+    font-size: 4rem;
     color: #1F1F1F;
-    margin-left: 0.6em;
     position: relative;
     line-height: 0.9em;
+    margin-bottom: 0.5em;
   }
 }
 

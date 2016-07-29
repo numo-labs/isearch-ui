@@ -60,8 +60,12 @@ class HotelPage extends Component {
     for (var key in amenitiesObject) {
       if (!amenitiesObject.hasOwnProperty(key)) continue;
       if (key === fact) {
-        if (typeof amenitiesObject[key] !== 'string' || amenitiesObject[key] === 'true' || amenitiesObject[key] === 'false') {
+        if (typeof amenitiesObject[key] !== 'string' && amenitiesObject[key] !== true && amenitiesObject[key] !== false) {
           return '-';
+        } else if (amenitiesObject[key] === false) {
+          return 'Nej';
+        } else if (amenitiesObject[key] === true) {
+          return 'Ja';
         } else if (amenitiesObject[ key ].split(' ')[ 1 ] === 'km') {
           return amenitiesObject[ key ].split(' ')[ 0 ] + 'k';
         } else {
@@ -93,8 +97,9 @@ class HotelPage extends Component {
         amenity = 'børnepool';
       }
       return (
-        <div key={index} className='tickAmenity'>
-          <div className='amenity'>{capitalize(amenity)}</div>
+        <div key={index} className='factPair'>
+          <div className='fact'>{capitalize(amenity)}</div>
+          <div className='value'>Ja</div>
         </div>
       );
     });
@@ -107,20 +112,17 @@ class HotelPage extends Component {
         <div className='factWrapper'>
           <div className='factHeading'>Hotelfakta</div>
           <div className='factContainer'>
-            <div className='factTitles'>
-              <div>Strand</div>
-              <div>Lokalt centrum</div>
-              <div>Pool</div>
+            <div className='factPair'>
+              <div className='fact'>Lokalt centrum</div>
+              <div className='value'>{this.renderFact('distancetocenter')}m</div>
+            </div>
+            <div>
+            <div className='factPair'>
+              <div className='fact'>Pool</div>
+              <div className='value'>{this.renderFact('outdoorpool')}</div>
+            </div>
+            </div>
               {this.renderAmenities(amenities)}
-            </div>
-            <div className='factValues'>
-              <div>{this.renderFact('distancetobeach')}m</div>
-              <div>{this.renderFact('distancetocenter')}m</div>
-              <div>{this.renderFact('outdoorpool')}</div>
-              { amenities.map((a, idx) => {
-                return (<div key={idx}>Ja</div>);
-              }) }
-            </div>
           </div>
         </div>
       </div>
@@ -166,8 +168,8 @@ class HotelPage extends Component {
                 starRating={roundedStarRating}
                 ratingIconUrl={ratingIconUrl}
                 size={1.8}
-                width={'2.5em'}
-                height={'2.5em'}
+                width={'1.7em'}
+                height={'1.7em'}
               />
             </div>
           </div>
@@ -189,10 +191,14 @@ class HotelPage extends Component {
             </a>
           </div>
           <div className='hotelImagesContainer'>
-            <h2 className='imagesHeading'>Billeder</h2>
+            {hotelImages.length > 1 && <h2 className='imagesHeading'>Billeder</h2>}
             {this.renderImageList(hotelImages.slice(1))}
           </div>
           <div className='bookButtonFooter'>
+            <span className='hotelPrice'>
+              {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
+            </span>
+            <div className='ppp'>Pr. person</div>
             <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
               <div className='bookButton'>SE PRIS OG BESTIL</div>
             </a>
