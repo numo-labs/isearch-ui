@@ -95,11 +95,16 @@
   padding: 0;
   width: 30em;
   list-style-type: none;
-  max-height: 123px;
+  max-height: 200px;
   overflow-y: auto;
   box-shadow: 0 2px 5px #666;
   background-color: #fff;
   text-align: center;
+}
+
+.inputContainer.mobile .input-results,
+.inputContainer.mobile .react-autosuggest__suggestions-container {
+  max-height: 123px;
 }
 
 .react-autosuggest__suggestions-container ul {
