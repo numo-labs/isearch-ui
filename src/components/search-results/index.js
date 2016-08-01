@@ -90,6 +90,7 @@ class SearchResults extends Component {
         if (item.message) {
           return item.message;
         } else {
+          item.related = item.related || this.props.isInitialTag;
           return (
             <VisibilitySensor key={start + index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
               <div key={index} className='gridItem'>
