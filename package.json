@@ -1,6 +1,6 @@
 {
   "name": "isearch-ui",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
@@ -85,7 +85,6 @@
     "node-zopfli": "^1.4.0",
     "pre-commit": "^1.1.3",
     "react-addons-test-utils": "^0.14.8",
-    "react-autosuggest": "^3.7.4",
     "react-dom": "^0.14.8",
     "react-hot-loader": "^1.3.0",
     "redux-logger": "^2.6.1",
@@ -112,6 +111,7 @@
     "moment": "^2.12.0",
     "querystring": "^0.2.0",
     "react": "^0.14.7",
+    "react-autosuggest": "^3.9.0",
     "react-dom": "^0.14.7",
     "react-google-maps": "^4.11.0",
     "react-masonry-component": "^4.0.0",

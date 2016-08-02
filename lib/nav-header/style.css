@@ -5,6 +5,19 @@
 
 .navBackButton {
   width: 1.5em;
+  float: left;
+}
+
+.navBackButtonText {
+  float: left;
+  font-family: SourceSansLight;
+  font-size: 2em;
+  font-weight: 300;
+  width: 84px;
+  height: 36px;
+  color: #ffffff;
+  margin-left: 0.7em;
+  margin-top: 0.1em;
 }
 
 .navBarContainer {
@@ -49,12 +62,9 @@
   line-height: 3em;
 }
 
-.betaFlagBar {
-  background-color: #f39100;
-  color: #fff;
-  width: 100%;
-  text-align: center;
-  position: fixed;
-  top: 4em;
-  z-index: 20000;
+@media (max-width: 750px) {
+  .navBackButtonText {
+    font-size: 1.2em;
+    margin-top: 0.25em;
+  }
 }

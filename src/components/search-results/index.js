@@ -6,6 +6,7 @@ import ArticleTile from '../../../lib/article-tile';
 import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
 import { addAnalyticsImpression, analyticsRemoveTile } from '../../../lib/analytics-helper/index';
+import downArrow from '../../assets/down-arrow.svg';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
@@ -89,6 +90,7 @@ class SearchResults extends Component {
         if (item.message) {
           return item.message;
         } else {
+          item.autoDisplayed = item.related || this.props.isInitialTag;
           return (
             <VisibilitySensor key={start + index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
               <div key={index} className='gridItem'>
@@ -200,7 +202,10 @@ class SearchResults extends Component {
     // see: https://github.com/numo-labs/isearch-ui/issues/257
     if (((feedEnd && searchComplete) || (searchItems.length === 0 && searchComplete)) && uniqueRelatedItems.length > 0) {
       return (
-        [<div key={'message'} className='feed-end-message'>{message}</div>,
+        [<div className='feed-end-message-container'>
+            <div key={'message'} className='feed-end-message'>{message}</div>
+            <img src={downArrow} alt='downArrow' className='feedEndDownArrow'/>
+        </div>,
         <Masonry
           elementType={'div'}
           options={masonryOptions}
@@ -218,10 +223,11 @@ class SearchResults extends Component {
       searchComplete,
       items,
       showTravelInfo,
-      isInitialTag
+      isInitialTag,
+      ranking
     } = this.props;
     const searchItems = items.filter(item => !item.related);
-    const hotelItems = searchItems.filter(item => item.packageOffer);
+    const hotelItems = ranking ? Object.keys(ranking).filter(key => key.match(/^hotel/)) : [];
     const hideGridStyle = {
       minHeight: '0'
     };
@@ -268,7 +274,8 @@ SearchResults.propTypes = {
   searchComplete: PropTypes.bool,
   feedEnd: PropTypes.bool,
   showTravelInfo: PropTypes.func,
-  isInitialTag: PropTypes.bool
+  isInitialTag: PropTypes.bool,
+  ranking: PropTypes.object
 };
 
 export default SearchResults;

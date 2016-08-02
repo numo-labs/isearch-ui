@@ -261,17 +261,3 @@ h1 {
     padding-left: 13em;
   }
 }
-
-.betaFlagTop,
-.betaFlagBar {
-  background-color: #f39100;
-  color: #fff;
-  width: 100%;
-  text-align: center;
-}
-
-.betaFlagBar {
-  position: fixed;
-  top: 4em;
-  z-index: 20000;
-}

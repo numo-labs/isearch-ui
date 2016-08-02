@@ -103,8 +103,10 @@ h1 {
 
 .articleIntroText {
     font-family: SourceSansSemiBold;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     padding: 1em;
+    text-align: left;
+    color: #595959;
 }
 
 .articleSectionHeading {
@@ -120,8 +122,8 @@ h1 {
 }
 
 .articleFullPageContainer .articleImage {
-    max-height: 350px;
     height: auto;
+    max-width: 350px;
 }
 .articleFullPageContainer .articleImage img {
     visibility: hidden;

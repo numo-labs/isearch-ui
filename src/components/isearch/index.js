@@ -62,7 +62,8 @@ class ISearch extends Component {
       feedEnd,
       showTravelInfo,
       tags,
-      isInitialTag
+      isInitialTag,
+      ranking
     } = this.props;
     return (
       <ScrollView
@@ -86,6 +87,7 @@ class ISearch extends Component {
           showTravelInfo={showTravelInfo}
           tags={tags}
           isInitialTag={isInitialTag}
+          ranking={ranking}
         />
       </ScrollView>
     );
@@ -235,6 +237,7 @@ ISearch.propTypes = {
   displayedItems: PropTypes.array,
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
+  ranking: PropTypes.object,
 
   // scroll view
   loadMoreItemsIntoFeed: PropTypes.func,
