@@ -210,7 +210,7 @@ export function updateTileRanking (result) {
   return (dispatch, getState) => {
     const { search: { resultId } } = getState();
     const searchId = result.graphql.searchId;
-    if (resultId && searchId.indexOf(resultId) > -1) { // check data corresponds to the current search
+    if (resultId && searchId.indexOf(resultId) > -1 && searchId.indexOf('related') === -1) { // check data corresponds to the current search
       dispatch({ type: UPDATE_TILE_RANKING, ranking: result.graphql.ranking });
     }
   };
