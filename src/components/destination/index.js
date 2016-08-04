@@ -29,7 +29,7 @@ class DestinationFullPage extends Component {
         getArticle={getArticle}
         params={params}
         addSingleTag={addSingleTag}
-        isDestination={Boolean(true)}
+        isDestination
       >
         <div style={{height: '400px', marginBottom: '50px'}}>
           <GoogleMapLoader
