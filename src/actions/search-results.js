@@ -15,7 +15,8 @@ import {
   UPDATE_DISPLAYED_ITEMS,
   RECEIVE_RELATED_RESULT,
   SEARCH_COMPLETE,
-  UPDATE_TILE_RANKING
+  UPDATE_TILE_RANKING,
+  VIEW_FILM
 } from '../constants/actionTypes';
 
 import * as graphqlService from '../services/graphql';
@@ -241,3 +242,4 @@ export function loadMoreItemsIntoFeed () {
     }
   };
 }
+export const viewFilm = () => { return {type: VIEW_FILM}; };

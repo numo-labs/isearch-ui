@@ -14,6 +14,7 @@ export const CLEAR_FEED = 'CLEAR_FEED';
 export const UPDATE_DISPLAYED_ITEMS = 'UPDATE_DISPLAYED_ITEMS';
 export const SEARCH_COMPLETE = 'SEARCH_COMPLETE';
 export const UPDATE_TILE_RANKING = 'UPDATE_TILE_RANKING';
+export const VIEW_FILM = 'VIEW_FILM';
 
 // tiles and tags
 export const TAG_ADD_SINGLE_TAG = 'TAG_ADD_SINGLE_TAG';

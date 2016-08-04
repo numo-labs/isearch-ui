@@ -7,6 +7,8 @@ import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
 import { addAnalyticsImpression, analyticsRemoveTile } from '../../../lib/analytics-helper/index';
 import downArrow from '../../assets/down-arrow.svg';
+import videoCameraIcon from '../../assets/video-camera.svg';
+import mapIcon from '../../assets/map.svg';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
@@ -116,6 +118,9 @@ class SearchResults extends Component {
       </div>
     );
   }
+  handleOnClick () {
+    this.props.viewFilm();
+  }
 
   renderItem (item, index) {
     const {
@@ -124,7 +129,8 @@ class SearchResults extends Component {
       changeRoute,
       viewedArticles,
       removeTile,
-      addArticleTag
+      addArticleTag,
+      filmInView
     } = this.props;
     if (item.packageOffer) {
       return (
@@ -165,7 +171,17 @@ class SearchResults extends Component {
             {this.removeButton(item)}
             <div className='clickable'
                  onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
-              <DestinationTile {...item} />
+              <DestinationTile filmInView={filmInView} {...item} />
+            </div>
+            <div className='mapVideoIconContainer'>
+              <div className='mapIconContainer'>
+                <img src={mapIcon} alt='map' className='mapIcon' />
+                <div className='mapIconText'>Vis på kort</div>
+              </div>
+              <div className='videoIconContainer' onClick={() => this.handleOnClick()}>
+                <img src={videoCameraIcon} alt='videoCamera' className='videoIcon' />
+                <div className='videoIconText'>Se film</div>
+              </div>
             </div>
           </div>
         );
@@ -275,7 +291,9 @@ SearchResults.propTypes = {
   feedEnd: PropTypes.bool,
   showTravelInfo: PropTypes.func,
   isInitialTag: PropTypes.bool,
-  ranking: PropTypes.object
+  ranking: PropTypes.object,
+  filmInView: PropTypes.bool,
+  viewFilm: PropTypes.func
 };
 
 export default SearchResults;

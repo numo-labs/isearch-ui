@@ -21,7 +21,8 @@ import {
   UPDATE_DISPLAYED_ITEMS,
   RECEIVE_RELATED_RESULT,
   SEARCH_COMPLETE,
-  UPDATE_TILE_RANKING
+  UPDATE_TILE_RANKING,
+  VIEW_FILM
 } from '../constants/actionTypes';
 
 import DEFAULT_TAG from '../constants/default-tag.js';
@@ -54,7 +55,8 @@ export const initialState = {
   pageSize: 5,
   searchComplete: false, // set to false until a message is received from the web socket channel
   feedEnd: false,
-  ranking: {}
+  ranking: {},
+  filmInView: false
 };
 
 export default function search (state = initialState, action) {
@@ -225,6 +227,11 @@ export default function search (state = initialState, action) {
         ...state,
         displayedItems: displayed,
         items: backlog
+      };
+    case VIEW_FILM:
+      return {
+        ...state,
+        filmInView: true
       };
     default:
       return state;
