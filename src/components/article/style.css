@@ -38,11 +38,25 @@ h5 {
     padding-top: 2em;
 }
 
+.destinationContainer {
+    background-color: #ffffff;
+    position: relative;
+    padding-top: 2em;
+}
+
 @media (min-width: 750px) {
     .articleContentContainer {
         width: 750px;
         position: absolute;
         top: 21em;
+        left: 50%;
+        margin-left: -375px;
+        padding: 2em;
+    }
+    .destinationContainer {
+        width: 750px;
+        position: absolute;
+        top: 45em;
         left: 50%;
         margin-left: -375px;
         padding: 2em;

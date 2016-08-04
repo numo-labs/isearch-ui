@@ -3,6 +3,7 @@ import ArticleFooter from '../../../lib/article-tile/article-footer.js';
 import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
 import FadeImage from '../../../lib/fade-image';
+import ReactPlayer from 'react-player';
 import './style.css';
 
 /*
@@ -87,14 +88,21 @@ class ArticleFullPage extends Component {
     } else {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
+      const videoPlayerHeight = window.innerWidth < 750 ? '' : 600;
+      const headerVideo = <ReactPlayer url='https://www.youtube.com/watch?v=TNCJh9WwU6w' playing className='articleHeaderImage' width={'100%'} height={videoPlayerHeight}/>;
+      const headerImage = <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />;
+      const headerContent = this.props.isDestination ? headerVideo : headerImage;
+      // const headerContent = this.props.isDestination && articleContent.videoUrl ? headerVideo : headerImage;
+      const contentContainerStyle = this.props.isDestination ? 'destinationContainer' : 'articleContentContainer';
+      // const contentContainerStyle = this.props.isDestination && articleContent.videoUrl ? 'destinationContainer' : 'articleContentContainer';
       this.addAnalyticsData();
       if (document.querySelector('title')) document.querySelector('title').innerHTML = 'article | ' + introSection.title;
       return (
         <section>
           <NavHeader backToSearch={goBack} go={go}/>
           <div className='articleFullPageContainer'>
-            <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
-            <div className='articleContentContainer'>
+            {headerContent}
+            <div className={contentContainerStyle}>
               <section>
                 <div className='articleSection'>
                   <div className='articleHeader'>{introSection.title}</div>
@@ -138,7 +146,8 @@ ArticleFullPage.propTypes = {
   params: PropTypes.object,
   addSingleTag: PropTypes.func,
   addArticleTag: PropTypes.func,
-  children: PropTypes.object
+  children: PropTypes.object,
+  isDestination: PropTypes.bool
 };
 
 export default ArticleFullPage;
