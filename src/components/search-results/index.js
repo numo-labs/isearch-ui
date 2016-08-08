@@ -243,7 +243,7 @@ class SearchResults extends Component {
     const gridStyle = searchComplete && searchItems.length === 0 ? hideGridStyle : showGridStyle;
     return (
       <div className='gridContainer'>
-        {!isInitialTag && searchComplete && hotelItems.length === 0 ? noHotelsErrorMessage : ''}
+        {!isInitialTag && ranking && searchComplete && hotelItems.length === 0 ? noHotelsErrorMessage : ''}
         <div style={gridStyle}>
           <Masonry
             elementType={'div'}
