@@ -1,0 +1,146 @@
+
+.slick-slider {
+    margin-bottom: 0;
+}
+
+.slick-slider .sliderImage {
+    width: auto;
+    max-height: 400px;
+    min-height: 250px;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    margin-top: 3.6em;
+}
+
+.slick-slider .sliderImage img {
+    visibility: hidden;
+    max-width: 100%;
+    width: 100%;
+}
+
+.slick-slider .slick-prev {
+    left: 25px;
+}
+
+.slick-slider .slick-next {
+    right: 25px;
+}
+
+@font-face {
+    font-family: SourceSansLight;
+    src: url('../../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+    font-family: SourceSansSemiBold;
+    src: url('../../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+    font-family: SourceSansRegular;
+    src: url('../../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+    font-family: ThomasHeadlineBold;
+    src: url('../../../fonts/ThomasHeadline-Bold.otf');
+}
+
+h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0.3em;
+    font-size: 0.9em;
+}
+
+.articleContainer {
+    text-align: center;
+    font-family: SourceSansLight;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.articleContentContainer {
+    background-color: #ffffff;
+    position: relative;
+    padding-top: 2em;
+}
+
+@media (min-width: 750px) {
+    .articleContentContainer {
+        width: 750px;
+        position: absolute;
+        top: 21em;
+        left: 50%;
+        margin-left: -375px;
+        padding: 2em;
+    }
+}
+
+.articleImage {
+    display: inline-block;
+    height: 20em;
+    width: 90%;
+    object-fit: cover;
+}
+
+.text {
+    bottom: 2em;
+    color: #595959;
+    position: absolute;;
+    line-height: 0.5em;
+    padding: 0.4em;
+    background-color: rgba(255,255,255,0.7);
+    width: 100%;
+}
+
+
+h1 {
+    font-family: SourceSansSemiBold;
+    font-size: 2.1em;
+}
+
+.text h2 {
+    font-family: ThomasHeadlineBold;
+    font-size: 2.4rem;
+    margin-top: 10px;
+}
+
+.articleHeaderImage {
+    height: 400px;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.articleHeader {
+    font-family: ThomasHeadlineBold;
+    font-size: 3.2rem;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.articleIntroText {
+    font-family: SourceSansSemiBold;
+    font-size: 1.7rem;
+    padding: 1em;
+    text-align: left;
+    color: #595959;
+}
+
+.articleSectionHeading {
+    font-family: SourceSansRegular;
+    font-size: 2.4rem;
+    margin: 1em auto;
+}
+
+.articleSection {
+    margin: auto;
+    margin-bottom: 2.5em;
+    max-width: 700px;
+}
+
