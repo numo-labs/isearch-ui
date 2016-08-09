@@ -3,6 +3,7 @@ import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import ISearchSlider from '../../../lib/image-slider';
 import NavHeader from '../../../lib/nav-header/';
 import ArticleFooter from '../../../lib/article-tile/article-footer.js';
+import FadeImage from '../../../lib/fade-image';
 import './style.css';
 import StaticBaseClass from '../staticBaseClass';
 
@@ -12,6 +13,13 @@ const destinationImages = [
 ];
 
 class DestinationFullPage extends StaticBaseClass {
+  renderImageList (images) {
+    return images.map((image, idx) => {
+      return (
+        <img key={idx} src={image}/>
+      );
+    });
+  }
   render () {
     const {
       articleContent,
@@ -34,6 +42,7 @@ class DestinationFullPage extends StaticBaseClass {
     return (
       <section>
         <NavHeader backToSearch={goBack} go={go}/>
+        <FadeImage isBackground={Boolean(true)} className='hotelPackageImage' src={destinationImages[0]} />
         <ISearchSlider images={destinationImages} className='destSlider'/>
         <div className='articleContentContainer'>
           <section>
@@ -58,6 +67,10 @@ class DestinationFullPage extends StaticBaseClass {
                 </GoogleMap>
               }
             />
+          </div>
+          <div className='destImagesContainer'>
+            {destinationImages.length > 1 && <h2 className='imagesHeading'>Billeder</h2>}
+            {this.renderImageList(destinationImages.slice(1))}
           </div>
         <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick} />
         </div>
