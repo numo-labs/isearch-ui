@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import ArticleFooter from '../../../lib/article-tile/article-footer.js';
 import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
 import FadeImage from '../../../lib/fade-image';
+import StaticBaseClass from '../staticBaseClass';
 import './style.css';
 
 /*
@@ -12,51 +13,13 @@ import './style.css';
  * it is set using dangerouslySetInnerHTML
  */
 
-class ArticleFullPage extends Component {
+class ArticleFullPage extends StaticBaseClass {
   constructor () {
     super();
     this.getArticleData = this.getArticleData.bind(this);
     this.state = {
       articleContent: {}
     };
-  }
-
-  componentWillMount () {
-    this.getArticleData();
-  }
-
-  getArticleData () {
-    this.props.getArticle(this.props.params.bucketId, this.props.params.itemId);
-    this.setState({ articleContent: this.props.articleContent });
-  }
-
-  addAnalyticsData () {
-    const content = this.props.articleContent;
-    if (dataLayer) {
-      dataLayer.push({
-        'event': 'productViewed',
-        'pageName': (content.type === 'article' ? '/article/' : '/destination/') + content.name.replace(/ /g, '-'),
-        'ecommerce': {
-          'detail': {
-            'actionField': { 'list': 'inspirational search feed' },
-            'products': [ {
-              'id': content.name,
-              'brand': content.type === 'article' ? 'article_tile' : 'destination_tile'
-            } ]
-          }
-        }
-      });
-    }
-  }
-
-  onAddTagClick () {
-    const { articleContent, goBack, addArticleTag } = this.props;
-    addArticleTag(articleContent.name, articleContent.id, articleContent.name);
-    goBack();
-  }
-
-  rawMarkup (value) {
-    return { __html: value };
   }
 
   render () {
