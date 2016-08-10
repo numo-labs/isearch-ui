@@ -124,7 +124,6 @@
     "react-visibility-sensor": "^3.0.0",
     "redux": "^3.5.2",
     "shuffle-array": "^1.0.0",
-    "spies-url-parser": "^1.0.5",
     "striptags": "^2.1.1",
     "uuid": "^2.0.2",
     "whatwg-fetch": "^1.0.0"
