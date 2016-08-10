@@ -17,7 +17,8 @@ const defaultProps = {
   removeTag: () => {},
   addSingleTag: () => {},
   addTag: () => {},
-  resetTags: () => {}
+  resetTags: () => {},
+  updateHeaderTitles: () => {}
 };
 
 describe('Component', function () {

@@ -20,11 +20,40 @@ class ISearch extends Component {
       endScroll: false
     };
     this.handleResize = this.handleResize.bind(this);
+    this.loadQueryParams = this.loadQueryParams.bind(this);
   }
 
   componentWillMount () {
     window.addEventListener('resize', this.handleResize);
     this.addAnalyticsData();
+    let params = document.location.search.replace('?', '').split('&');
+    this.loadQueryParams(params);
+  }
+  loadQueryParams (params) {
+    if (!params.length) return;
+    const departureOptions = {
+      BLL: 'Billund - BLL',
+      CPH: 'København - CPH',
+      ALL: 'Aalborg - AAL',
+      ODE: 'Odense - ODE',
+      RNN: 'Rønne - RNN'
+    };
+    const {
+      setNumberOfChildren,
+      setNumberOfAdults,
+      setDepartureAirport,
+      setDuration,
+      updateHeaderTitles
+    } = this.props;
+    let parsedQuery = {};
+    params.map((param) => {
+      parsedQuery[param.split('=')[0]] = param.split('=')[1] || true;
+    });
+    if (parsedQuery.travelAdults > 0) setNumberOfAdults(parsedQuery.travelAdults);
+    if (parsedQuery.travelChildren > 0) setNumberOfChildren(parsedQuery.travelChildren);
+    if (parsedQuery.travelDuration > 0) setDuration(parsedQuery.travelDuration + ' uge' + (parsedQuery.travelDuration > 1 ? 'r' : ''));
+    if (parsedQuery.travelDepartureCode) setDepartureAirport(departureOptions[parsedQuery.travelDepartureCode]);
+    updateHeaderTitles();
   }
 
   handleResize () {
