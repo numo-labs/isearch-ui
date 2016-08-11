@@ -7,6 +7,7 @@ import LoadingSpinner from '../../../lib/spinner';
 import ScrollView from '../../../lib/scroll-view';
 import EditDetails from '../edit-details';
 import departOnFriday from '../../utils/departure-day-format';
+import departureOptions from '../../constants/departureOptions';
 import moment from 'moment';
 import './style.css';
 
@@ -26,18 +27,11 @@ class ISearch extends Component {
   componentWillMount () {
     window.addEventListener('resize', this.handleResize);
     this.addAnalyticsData();
-    let params = document.location.search.replace('?', '').split('&');
-    this.loadQueryParams(params);
+    this.loadQueryParams(document.location.search);
   }
-  loadQueryParams (params) {
+  loadQueryParams (query) {
+    let params = query.replace('?', '').split('&');
     if (!params.length) return;
-    const departureOptions = {
-      BLL: 'Billund - BLL',
-      CPH: 'København - CPH',
-      ALL: 'Aalborg - AAL',
-      ODE: 'Odense - ODE',
-      RNN: 'Rønne - RNN'
-    };
     const {
       setNumberOfChildren,
       setNumberOfAdults,
@@ -49,14 +43,14 @@ class ISearch extends Component {
     params.map((param) => {
       parsedQuery[param.split('=')[0]] = param.split('=')[1] || true;
     });
-    if (parsedQuery.travelAdults > 0) setNumberOfAdults(parsedQuery.travelAdults);
-    if (parsedQuery.travelChildren > 0) setNumberOfChildren(parsedQuery.travelChildren);
+    if (!isNaN(parsedQuery.travelAdults) && parsedQuery.travelAdults > 0) setNumberOfAdults(parsedQuery.travelAdults);
+    if (!isNaN(parsedQuery.travelChildren) && parsedQuery.travelChildren > 0) setNumberOfChildren(parsedQuery.travelChildren);
     if (!isNaN(parsedQuery.travelDuration) && parsedQuery.travelDuration > 0) {
       // We get duration as number of days, but we are using weeks so we need to convert it.
       let durationWeeks = Math.round(parsedQuery.travelDuration / 7);
       setDuration(durationWeeks + ' uge' + (durationWeeks > 1 ? 'r' : ''));
     }
-    if (parsedQuery.travelDepartureCode) setDepartureAirport(departureOptions[parsedQuery.travelDepartureCode]);
+    if (parsedQuery.travelDepartureCode && departureOptions[parsedQuery.travelDepartureCode]) setDepartureAirport(departureOptions[parsedQuery.travelDepartureCode]);
     updateHeaderTitles();
   }
 
