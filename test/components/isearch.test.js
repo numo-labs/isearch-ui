@@ -17,7 +17,8 @@ const defaultProps = {
   removeTag: () => {},
   addSingleTag: () => {},
   addTag: () => {},
-  resetTags: () => {}
+  resetTags: () => {},
+  updateHeaderTitles: () => {}
 };
 
 describe('Component', function () {
@@ -64,6 +65,38 @@ describe('Component', function () {
       wrapper.setProps({loading: false, error: 'error'});
       const error = wrapper.find('.errorMessage');
       expect(error).to.have.length(1);
+      done();
+    });
+    it('should update travel preferences if provided', (done) => {
+      const query = '?travelAdults=3&travelChildren=1&travelDuration=8&travelDepartureCode=ODE';
+      const spies = {
+        setNumberOfAdults: sinon.spy(),
+        setNumberOfChildren: sinon.spy(),
+        setDuration: sinon.spy(),
+        setDepartureAirport: sinon.spy()
+      };
+      wrapper.setProps(spies);
+      wrapper.instance().loadQueryParams(query);
+      expect(spies.setNumberOfAdults.calledWith('3')).to.be.true;
+      expect(spies.setNumberOfChildren.calledWith('1')).to.be.true;
+      expect(spies.setDuration.calledWith('1 uge')).to.be.true;
+      expect(spies.setDepartureAirport.calledWith('Odense - ODE')).to.be.true;
+      done();
+    });
+    it('should not update travel preferences if provided is not valid', (done) => {
+      const query = '?travelAdults=three&travelChildren=one&travelDuration=eight&travelDepartureCode=invalidCode';
+      const spies = {
+        setNumberOfAdults: sinon.spy(),
+        setNumberOfChildren: sinon.spy(),
+        setDuration: sinon.spy(),
+        setDepartureAirport: sinon.spy()
+      };
+      wrapper.setProps(spies);
+      wrapper.instance().loadQueryParams(query);
+      expect(spies.setNumberOfAdults.called).to.be.false;
+      expect(spies.setNumberOfChildren.called).to.be.false;
+      expect(spies.setDuration.called).to.be.false;
+      expect(spies.setDepartureAirport.called).to.be.false;
       done();
     });
   });
