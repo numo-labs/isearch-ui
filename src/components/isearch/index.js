@@ -51,7 +51,11 @@ class ISearch extends Component {
     });
     if (parsedQuery.travelAdults > 0) setNumberOfAdults(parsedQuery.travelAdults);
     if (parsedQuery.travelChildren > 0) setNumberOfChildren(parsedQuery.travelChildren);
-    if (parsedQuery.travelDuration > 0) setDuration(parsedQuery.travelDuration + ' uge' + (parsedQuery.travelDuration > 1 ? 'r' : ''));
+    if (!isNaN(parsedQuery.travelDuration) && parsedQuery.travelDuration > 0) {
+      // We get duration as number of days, but we are using weeks so we need to convert it.
+      let durationWeeks = Math.round(parsedQuery.travelDuration / 7);
+      setDuration(durationWeeks + ' uge' + (durationWeeks > 1 ? 'r' : ''));
+    }
     if (parsedQuery.travelDepartureCode) setDepartureAirport(departureOptions[parsedQuery.travelDepartureCode]);
     updateHeaderTitles();
   }
