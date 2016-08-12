@@ -61,15 +61,15 @@ export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
       const itemsToDisplay = uniqBy(union(state.items, action.items), (a) => {
-        if (a.packageOffer) {
-          return a.packageOffer.provider.reference;
-        } else {
-          return a.id;
-        }
+        return a.id;
       });
       itemsToDisplay.forEach((item) => {
         if (state.ranking) {
-          item.rank = parseFloat(state.ranking[item.id]) || 0;
+          let id = item.id;
+          if (item.type === 'package') {
+            id = `hotel:ne.wvid.${item.id}`;
+          }
+          item.rank = parseFloat(state.ranking[id]) || 0;
         }
       });
       return {
@@ -111,7 +111,11 @@ export default function search (state = initialState, action) {
       };
     case UPDATE_TILE_RANKING:
       state.items.forEach(item => {
-        item.rank = parseFloat(action.ranking[item.id]) || 0;
+        let id = item.id;
+        if (item.type === 'package') {
+          id = `hotel:ne.wvid.${item.id}`;
+        }
+        item.rank = parseFloat(action.ranking[id]) || 0;
       });
       return {
         ...state,

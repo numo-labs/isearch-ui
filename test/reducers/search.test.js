@@ -61,18 +61,37 @@ describe('Search Reducer', () => {
     it(`RECEIVE_SEARCH_RESULT-> includes ranking data on saved results`, (done) => {
       const initialStateWithItems = {
         ...initialState,
-        items: mockItems,
+        items: [],
         ranking: {
-          e73e4919e237887f70f6024011502243: '7'
+          'tile:marketing.1234': '7'
         }
       };
       const action = {
         type: RECEIVE_SEARCH_RESULT,
-        items: mockItems
+        items: [ { id: 'tile:marketing.1234', type: 'tile' } ]
       };
       const state = reducer(initialStateWithItems, action);
       expect(state.loading).to.be.false;
-      expect(state.items[0].id).to.equal('e73e4919e237887f70f6024011502243');
+      expect(state.items[0].id).to.equal('tile:marketing.1234');
+      expect(state.items[0].rank).to.equal(7);
+      done();
+    });
+    it(`RECEIVE_SEARCH_RESULT-> maps package hotel ids to full ids`, (done) => {
+      const initialStateWithItems = {
+        ...initialState,
+        items: [],
+        ranking: {
+          'hotel:ne.wvid.1234': '7'
+        }
+      };
+      const action = {
+        type: RECEIVE_SEARCH_RESULT,
+        items: [
+          { id: '1234', type: 'package' }
+        ]
+      };
+      const state = reducer(initialStateWithItems, action);
+      expect(state.items[0].id).to.equal('1234');
       expect(state.items[0].rank).to.equal(7);
       done();
     });
