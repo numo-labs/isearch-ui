@@ -68,12 +68,13 @@ describe('Component', function () {
       done();
     });
     it('should update travel preferences if provided', (done) => {
-      const query = '?travelAdults=3&travelChildren=1&travelDuration=8&travelDepartureCode=ODE';
+      const query = '?travelAdults=3&travelChildren=1&travelDuration=8&travelDepartureCode=ODE&travelCountryCode=ES';
       const spies = {
         setNumberOfAdults: sinon.spy(),
         setNumberOfChildren: sinon.spy(),
         setDuration: sinon.spy(),
-        setDepartureAirport: sinon.spy()
+        setDepartureAirport: sinon.spy(),
+        searchForTag: sinon.spy()
       };
       wrapper.setProps(spies);
       wrapper.instance().loadQueryParams(query);
@@ -81,6 +82,7 @@ describe('Component', function () {
       expect(spies.setNumberOfChildren.calledWith('1')).to.be.true;
       expect(spies.setDuration.calledWith('1 uge')).to.be.true;
       expect(spies.setDepartureAirport.calledWith('Odense - ODE')).to.be.true;
+      expect(spies.searchForTag.calledWith('ES')).to.be.true;
       done();
     });
     it('should not update travel preferences if provided is not valid', (done) => {
@@ -89,7 +91,8 @@ describe('Component', function () {
         setNumberOfAdults: sinon.spy(),
         setNumberOfChildren: sinon.spy(),
         setDuration: sinon.spy(),
-        setDepartureAirport: sinon.spy()
+        setDepartureAirport: sinon.spy(),
+        searchForTag: sinon.spy()
       };
       wrapper.setProps(spies);
       wrapper.instance().loadQueryParams(query);
@@ -97,6 +100,7 @@ describe('Component', function () {
       expect(spies.setNumberOfChildren.called).to.be.false;
       expect(spies.setDuration.called).to.be.false;
       expect(spies.setDepartureAirport.called).to.be.false;
+      expect(spies.searchForTag.called).to.be.false;
       done();
     });
   });
