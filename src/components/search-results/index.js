@@ -218,32 +218,39 @@ class SearchResults extends Component {
     }
   }
 
-  render () {
+  getNoHotelsMessage () {
     const {
       searchComplete,
       items,
       showTravelInfo,
-      isInitialTag,
-      ranking
+      isInitialTag
     } = this.props;
-    const searchItems = items.filter(item => !item.related);
-    const hotelItems = ranking ? Object.keys(ranking).filter(key => key.match(/^hotel/)) : [];
-    const hideGridStyle = {
-      minHeight: '0'
-    };
-    const showGridStyle = {
-      minHeight: '80vh'
-    };
+    const hotelItems = items.filter(item => item.type === 'package');
     const noHotelsErrorMessage = (
       <div className='noHotelsErrorMessage'>
         <div>Ingen hoteller er ledige i den valgte tidsperiode</div>
         <div className='changeDetailsLink' onClick={() => showTravelInfo()}>Ændre tidsperioden</div>
       </div>
     );
+    return (!isInitialTag && searchComplete && hotelItems.length === 0) ? noHotelsErrorMessage : '';
+  }
+
+  render () {
+    const {
+      searchComplete,
+      items
+    } = this.props;
+    const searchItems = items.filter(item => !item.related);
+    const hideGridStyle = {
+      minHeight: '0'
+    };
+    const showGridStyle = {
+      minHeight: '80vh'
+    };
     const gridStyle = searchComplete && searchItems.length === 0 ? hideGridStyle : showGridStyle;
     return (
       <div className='gridContainer'>
-        {!isInitialTag && searchComplete && hotelItems.length === 0 ? noHotelsErrorMessage : ''}
+        {this.getNoHotelsMessage()}
         <div style={gridStyle}>
           <Masonry
             elementType={'div'}

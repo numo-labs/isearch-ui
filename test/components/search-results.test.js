@@ -123,20 +123,20 @@ describe('Component', function () {
       done();
     });
     it('should show a warning message when search is complete if results contain no hotels', () => {
-      const ranking = {
-        'article:1': 1,
-        'article:2': 2
-      };
-      const wrapper = shallow(<SearchResults changeRoute={() => {}} items={mockTiles.items} viewedArticles={[]} searchComplete ranking={ranking}/>);
+      const items = [
+        { type: 'tile', id: 'tile:123', tile: { sections: [] } },
+        { type: 'tile', id: 'tile:456', tile: { sections: [] } }
+      ];
+      const wrapper = shallow(<SearchResults changeRoute={() => {}} items={items} viewedArticles={[]} searchComplete/>);
       expect(wrapper.find('.noHotelsErrorMessage').length).to.equal(1);
     });
     it('should not show a warning message when search is complete if results contains hotels', () => {
-      const ranking = {
-        'article:1': 1,
-        'article:2': 2,
-        'hotel:1': 3
-      };
-      const wrapper = shallow(<SearchResults changeRoute={() => {}} items={mockTiles.items} viewedArticles={[]} searchComplete ranking={ranking}/>);
+      const items = [
+        { type: 'tile', id: 'tile:123', tile: { sections: [] } },
+        { type: 'tile', id: 'tile:456', tile: { sections: [] } },
+        { type: 'package', id: 'package:789' }
+      ];
+      const wrapper = shallow(<SearchResults changeRoute={() => {}} items={items} viewedArticles={[]} searchComplete/>);
       expect(wrapper.find('.noHotelsErrorMessage').length).to.equal(0);
     });
   });
