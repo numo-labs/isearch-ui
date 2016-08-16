@@ -8,7 +8,7 @@ import {
   UPDATE_HEADER_TITLES,
   CLEAR_FEED,
   UPDATE_DISPLAYED_ITEMS,
-  SEARCH_COMPLETE
+  REGISTER_PROVIDER
   // TILES_ADD_TILES,
 } from '../../src/constants/actionTypes';
 import moment from 'moment';
@@ -66,8 +66,7 @@ describe('Search Results Actions', () => {
   });
   describe('search actions', () => {
     it(`startSearch: should dispatch an action to set loading to true and an
-        action fetchQuerySearchResults if there are tags. Shoud also call
-        an action to mark the search as complete after 4 seconds`, function (done) {
+        action fetchQuerySearchResults if there are tags.`, function (done) {
       this.timeout(6000);
       const json = {
         data: {
@@ -83,8 +82,7 @@ describe('Search Results Actions', () => {
       const expectedActions = [
         { type: BUSY_SEARCHING, isBusy: true },
         { type: CLEAR_FEED },
-        { type: SAVE_SEARCH_RESULT_ID, id: '12345' },
-        { type: SEARCH_COMPLETE }
+        { type: SAVE_SEARCH_RESULT_ID, id: '12345' }
       ];
       store.dispatch(actions.startSearch('testing test'));
       setTimeout(() => {
@@ -323,6 +321,41 @@ describe('Search Results Actions', () => {
       store.dispatch(actions.updateHeaderTitles());
       expect(store.getActions()).to.deep.equal(expectedActions);
       done();
+    });
+  });
+  describe('registerProvider', () => {
+    it('dispatches a REGISTER_PROVIDER action if the searchId matches the resultId on the state', () => {
+      const store = mockStore(initialState);
+      const input = {
+        graphql: {
+          searchId: initialState.search.resultId,
+          provider: 'test-provider'
+        }
+      };
+      store.dispatch(actions.registerProvider(input));
+      expect(store.getActions().length).to.equal(1);
+      expect(store.getActions()[0]).to.deep.equal({
+        type: REGISTER_PROVIDER,
+        provider: 'test-provider',
+        complete: false
+      });
+    });
+    it('marks a provider as complete if the event passed has a searchComplete property of `true`', () => {
+      const store = mockStore(initialState);
+      const input = {
+        graphql: {
+          searchId: initialState.search.resultId,
+          provider: 'test-provider',
+          searchComplete: true
+        }
+      };
+      store.dispatch(actions.registerProvider(input));
+      expect(store.getActions().length).to.equal(1);
+      expect(store.getActions()[0]).to.deep.equal({
+        type: REGISTER_PROVIDER,
+        provider: 'test-provider',
+        complete: true
+      });
     });
   });
 });

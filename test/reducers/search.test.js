@@ -18,8 +18,8 @@ import {
   CLEAR_FEED,
   TILES_REMOVE_TILE,
   RECEIVE_RELATED_RESULT,
-  SEARCH_COMPLETE,
-  UPDATE_TILE_RANKING
+  UPDATE_TILE_RANKING,
+  REGISTER_PROVIDER
 } from '../../src/constants/actionTypes';
 
 import { expect } from 'chai';
@@ -131,11 +131,17 @@ describe('Search Reducer', () => {
       expect(state).to.deep.equal(expectedState);
       done();
     });
-    it(`CLEAR_FEED: -> sets the items and displayedItems to empty
-        state`, (done) => {
+    it(`CLEAR_FEED: -> sets the items, displayedItems and providers to empty state`, (done) => {
       const action = {type: CLEAR_FEED};
-      const state = reducer(undefined, action);
-      expect(state).to.deep.equal(initialState);
+      const state = reducer({
+        ...initialState,
+        items: [ { type: 'tile', id: 'tile:123' } ],
+        displayedItems: [ { type: 'tile', id: 'tile:123' } ],
+        providers: { 'test-provider': true }
+      }, action);
+      expect(state.items).to.deep.equal([]);
+      expect(state.displayedItems).to.deep.equal([]);
+      expect(state.providers).to.deep.equal({});
       done();
     });
     it('BUSY_SEARCHING -> sets loading to true', (done) => {
@@ -200,36 +206,6 @@ describe('Search Reducer', () => {
       expect(state).to.deep.equal(expectedState);
       done();
     });
-    it(`SEARCH_COMPLETE -> marks searchComplete as true and loading as false. If
-      the displayedItems is zero then marks feedEnd as true (end of search Items)
-      and sets the displayedItems to the relatedItems from the state`, (done) => {
-      const action = {type: SEARCH_COMPLETE};
-      const state = reducer({ ...initialState, relatedItems: mockItems }, action);
-      const expectedState = {
-        ...initialState,
-        relatedItems: mockItems,
-        displayedItems: mockItems,
-        searchComplete: true,
-        loading: false,
-        feedEnd: false
-      };
-      expect(state).to.deep.equal(expectedState);
-      done();
-    });
-    it(`SEARCH_COMPLETE -> marks searchComplete as true and loading as false. If
-      the displayedItems is greater than zero then doesn't update displayedItems
-      or feedEnd`, (done) => {
-      const action = {type: SEARCH_COMPLETE};
-      const state = reducer({...initialState, displayedItems: mockItems}, action);
-      const expectedState = {
-        ...initialState,
-        displayedItems: mockItems,
-        searchComplete: true,
-        loading: false
-      };
-      expect(state).to.deep.equal(expectedState);
-      done();
-    });
     it(`UPDATE_TILE_RANKING -> saves the updated ranking data`, () => {
       const action = {
         type: UPDATE_TILE_RANKING,
@@ -271,6 +247,26 @@ describe('Search Reducer', () => {
         ]
       };
       expect(state).to.deep.equal(expectedState);
+    });
+    it('REGISTER_PROVIDER -> stores the provider passed on the providers map', () => {
+      const action = {
+        type: REGISTER_PROVIDER,
+        provider: 'test-provider',
+        complete: true
+      };
+      const state = reducer({...initialState}, action);
+      expect(state.providers).to.deep.equal({
+        'test-provider': true
+      });
+    });
+    it('REGISTER_PROVIDER -> sets searchComplete to true if all providers are complete', () => {
+      const action = {
+        type: REGISTER_PROVIDER,
+        provider: 'test-provider',
+        complete: true
+      };
+      const state = reducer({ ...initialState, providers: { 'other-provider': true, 'test-provider': false } }, action);
+      expect(state.searchComplete).to.equal(true);
     });
   });
   describe('Tag and Tile actions', () => {
