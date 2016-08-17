@@ -89,7 +89,7 @@ class ArticleFullPage extends Component {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
       const videoPlayerHeight = window.innerWidth < 750 ? '' : 600;
-      const headerVideo = <ReactPlayer url='https://www.youtube.com/watch?v=TNCJh9WwU6w' playing className='articleHeaderImage' width={'100%'} height={videoPlayerHeight}/>;
+      const headerVideo = <ReactPlayer url='https://www.youtube.com/watch?v=TNCJh9WwU6w' playing className='articleHeaderImage videoPlayer' width={'100%'} height={videoPlayerHeight} style={{ backgroundColor: 'white' }}/>;
       const headerImage = <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />;
       const headerContent = this.props.isDestination ? headerVideo : headerImage;
       // const headerContent = this.props.isDestination && articleContent.videoUrl ? headerVideo : headerImage;
@@ -101,7 +101,7 @@ class ArticleFullPage extends Component {
         <section>
           <NavHeader backToSearch={goBack} go={go}/>
           <div className='articleFullPageContainer'>
-            {headerContent}
+              {headerContent}
             <div className={contentContainerStyle}>
               <section>
                 <div className='articleSection'>
