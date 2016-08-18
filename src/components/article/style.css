@@ -56,7 +56,7 @@ h5 {
     .destinationContainer {
         width: 750px;
         position: absolute;
-        top: 45em;
+        top: 28em;
         left: 50%;
         margin-left: -375px;
         padding: 2em;
@@ -173,4 +173,8 @@ h1 {
     font-family: SourceSansSemiBold;
     color: #666;
     text-align: left;
+}
+
+.videoPlayerContainer {
+  margin-bottom: 2em;
 }

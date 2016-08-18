@@ -88,10 +88,9 @@ class ArticleFullPage extends Component {
     } else {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
+      const videoClipUrl = articleContent.videoUrl;
       const videoPlayerHeight = window.innerWidth < 750 ? '' : 600;
-      const headerVideo = <ReactPlayer url='https://www.youtube.com/watch?v=TNCJh9WwU6w' playing className='articleHeaderImage videoPlayer' width={'100%'} height={videoPlayerHeight} style={{ backgroundColor: 'white' }}/>;
-      const headerImage = <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />;
-      const headerContent = this.props.isDestination ? headerVideo : headerImage;
+      const videoPlayer = <ReactPlayer url={videoClipUrl} className='articleHeaderImage videoPlayer' width={'100%'} height={videoPlayerHeight} style={{ backgroundColor: 'white' }}/>;
       // const headerContent = this.props.isDestination && articleContent.videoUrl ? headerVideo : headerImage;
       const contentContainerStyle = this.props.isDestination ? 'destinationContainer' : 'articleContentContainer';
       // const contentContainerStyle = this.props.isDestination && articleContent.videoUrl ? 'destinationContainer' : 'articleContentContainer';
@@ -101,7 +100,7 @@ class ArticleFullPage extends Component {
         <section>
           <NavHeader backToSearch={goBack} go={go}/>
           <div className='articleFullPageContainer'>
-              {headerContent}
+            <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
             <div className={contentContainerStyle}>
               <section>
                 <div className='articleSection'>
@@ -129,6 +128,12 @@ class ArticleFullPage extends Component {
                 </div>
               }
               {this.props.children}
+              {
+                videoClipUrl &&
+                <div className='videoPlayerContainer'>
+                  {videoPlayer}
+                </div>
+              }
             <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
             </div>
           </div>
