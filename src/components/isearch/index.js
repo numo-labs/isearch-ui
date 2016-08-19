@@ -7,6 +7,7 @@ import LoadingSpinner from '../../../lib/spinner';
 import ScrollView from '../../../lib/scroll-view';
 import EditDetails from '../edit-details';
 import departOnFriday from '../../utils/departure-day-format';
+import departureOptions from '../../constants/departureOptions';
 import moment from 'moment';
 import './style.css';
 
@@ -20,11 +21,39 @@ class ISearch extends Component {
       endScroll: false
     };
     this.handleResize = this.handleResize.bind(this);
+    this.loadQueryParams = this.loadQueryParams.bind(this);
   }
 
   componentWillMount () {
     window.addEventListener('resize', this.handleResize);
     this.addAnalyticsData();
+    this.loadQueryParams(document.location.search);
+  }
+  loadQueryParams (query) {
+    let params = query.replace('?', '').split('&');
+    if (!params.length) return;
+    const {
+      setNumberOfChildren,
+      setNumberOfAdults,
+      setDepartureAirport,
+      setDuration,
+      updateHeaderTitles,
+      searchForTag
+    } = this.props;
+    let parsedQuery = {};
+    params.map((param) => {
+      parsedQuery[param.split('=')[0]] = param.split('=')[1] || true;
+    });
+    if (!isNaN(parsedQuery.travelAdults) && parsedQuery.travelAdults > 0) setNumberOfAdults(parsedQuery.travelAdults);
+    if (!isNaN(parsedQuery.travelChildren) && parsedQuery.travelChildren > 0) setNumberOfChildren(parsedQuery.travelChildren);
+    if (!isNaN(parsedQuery.travelDuration) && parsedQuery.travelDuration > 0) {
+      // We get duration as number of days, but we are using weeks so we need to convert it.
+      let durationWeeks = Math.round(parsedQuery.travelDuration / 7);
+      setDuration(durationWeeks + ' uge' + (durationWeeks > 1 ? 'r' : ''));
+    }
+    if (parsedQuery.travelDepartureCode && departureOptions[parsedQuery.travelDepartureCode]) setDepartureAirport(departureOptions[parsedQuery.travelDepartureCode]);
+    if (parsedQuery.travelCountryCode) searchForTag(parsedQuery.travelCountryCode);
+    updateHeaderTitles();
   }
 
   handleResize () {
@@ -277,6 +306,7 @@ ISearch.propTypes = {
   removeTag: PropTypes.func,
   resetTags: PropTypes.func,
   feedEnd: PropTypes.bool,
+  searchForTag: PropTypes.func,
 
   // tiles
   removeTile: PropTypes.func,

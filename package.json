@@ -1,6 +1,6 @@
 {
   "name": "isearch-ui",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
@@ -106,6 +106,7 @@
     "history": "^2.1.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash.capitalize": "^4.1.1",
+    "lodash.every": "^4.6.0",
     "lodash.union": "^4.4.0",
     "lodash.uniqby": "^4.5.0",
     "moment": "^2.12.0",

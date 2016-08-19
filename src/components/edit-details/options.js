@@ -1,6 +1,6 @@
 export const adultOptions = [1, 2, 3, 4, 5, 6];
 export const childOptions = [0, 1, 2, 3, 4];
-export const departureOptions = ['Overalt', 'København - CPH', 'Billund - BLL', 'Aalborg - AAL', 'Odense - ODE', 'Rønne - RNN'];
+export const departureOptions = ['Alle lufthavne', 'København - CPH', 'Billund - BLL', 'Aalborg - AAL', 'Odense - ODE', 'Rønne - RNN'];
 export const durationOptions = ['1 uge', '2 uger', '3 uger', '4 uger'];
 export const childAgeOptions = [
   '0 år',

@@ -14,9 +14,9 @@ import {
   CLEAR_FEED,
   UPDATE_DISPLAYED_ITEMS,
   RECEIVE_RELATED_RESULT,
-  SEARCH_COMPLETE,
+  VIEW_FILM,
   UPDATE_TILE_RANKING,
-  VIEW_FILM
+  REGISTER_PROVIDER
 } from '../constants/actionTypes';
 
 import * as graphqlService from '../services/graphql';
@@ -56,15 +56,25 @@ export function receiveRelatedResult (items) {
   return { type: RECEIVE_RELATED_RESULT, items: relatedItems };
 }
 
-export function setSearchComplete (result = 'timeout') {
+export function searchTimeout () {
   return (dispatch, getState) => {
-    const { search: { resultId, displayedItems, secondaryPageSize } } = getState();
-    if (result === 'timeout' || result.graphql.searchId === resultId) { // check result corresponds to the current search
-      // if there are still no items rendered then flush any buffered results to the page
-      if (displayedItems.length < secondaryPageSize) {
-        dispatch(loadMoreItemsIntoFeed());
-      }
-      return dispatch({ type: SEARCH_COMPLETE });
+    const { search: { displayedItems, secondaryPageSize } } = getState();
+    // if there are still no items rendered then flush any buffered results to the page
+    if (displayedItems.length < secondaryPageSize) {
+      dispatch(loadMoreItemsIntoFeed());
+    }
+  };
+}
+
+export function registerProvider (result) {
+  return (dispatch, getState) => {
+    const { search: { resultId } } = getState();
+    if (result.graphql.searchId === resultId) { // check result corresponds to the current search
+      dispatch({
+        type: REGISTER_PROVIDER,
+        provider: result.graphql.provider,
+        complete: result.graphql.searchComplete === true
+      });
     }
   };
 }
@@ -147,7 +157,7 @@ export function startSearch (a) {
     if (tags.length > 0) {
       dispatch(busySearching(true));
       if (timer) clearTimeout(timer);
-      timer = timers.setTimeout(() => dispatch(setSearchComplete()), 3000); // wait 4 seconds and then set search as complete so at least related results are shown
+      timer = timers.setTimeout(() => dispatch(searchTimeout()), 3000);
       const query = formatQuery(store);
       console.log('query', JSON.stringify(query));
       return graphqlService

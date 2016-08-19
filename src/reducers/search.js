@@ -20,15 +20,15 @@ import {
   CLEAR_FEED,
   UPDATE_DISPLAYED_ITEMS,
   RECEIVE_RELATED_RESULT,
-  SEARCH_COMPLETE,
   UPDATE_TILE_RANKING,
-  VIEW_FILM
+  REGISTER_PROVIDER
 } from '../constants/actionTypes';
 
 import DEFAULT_TAG from '../constants/default-tag.js';
 
 import union from 'lodash.union';
 import uniqBy from 'lodash.uniqby';
+import every from 'lodash.every';
 
 export const initialState = {
   defaultTag: DEFAULT_TAG,
@@ -56,22 +56,22 @@ export const initialState = {
   searchComplete: false, // set to false until a message is received from the web socket channel
   feedEnd: false,
   ranking: {},
-  filmInView: false
+  providers: {}
 };
 
 export default function search (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_RESULT:
       const itemsToDisplay = uniqBy(union(state.items, action.items), (a) => {
-        if (a.packageOffer) {
-          return a.packageOffer.provider.reference;
-        } else {
-          return a.id;
-        }
+        return a.id;
       });
       itemsToDisplay.forEach((item) => {
         if (state.ranking) {
-          item.rank = parseFloat(state.ranking[item.id]) || 0;
+          let id = item.id;
+          if (item.type === 'package') {
+            id = `hotel:ne.wvid.${item.id}`;
+          }
+          item.rank = parseFloat(state.ranking[id]) || 0;
         }
       });
       return {
@@ -103,17 +103,13 @@ export default function search (state = initialState, action) {
         loading: false,
         error: action.error
       };
-    case SEARCH_COMPLETE:
-      return {
-        ...state,
-        searchComplete: true,
-        loading: false,
-        displayedItems: state.displayedItems.length === 0 ? state.relatedItems : state.displayedItems,
-        autocompleteOptions: []
-      };
     case UPDATE_TILE_RANKING:
       state.items.forEach(item => {
-        item.rank = parseFloat(action.ranking[item.id]) || 0;
+        let id = item.id;
+        if (item.type === 'package') {
+          id = `hotel:ne.wvid.${item.id}`;
+        }
+        item.rank = parseFloat(action.ranking[id]) || 0;
       });
       return {
         ...state,
@@ -214,6 +210,7 @@ export default function search (state = initialState, action) {
         displayedItems: [],
         items: [],
         ranking: {},
+        providers: {},
         relatedItems: [],
         feedEnd: false
       };
@@ -228,10 +225,15 @@ export default function search (state = initialState, action) {
         displayedItems: displayed,
         items: backlog
       };
-    case VIEW_FILM:
+    case REGISTER_PROVIDER:
+      const providers = state.providers;
+      providers[action.provider] = action.complete;
+      const complete = every(providers, (done) => done);
       return {
         ...state,
-        filmInView: true
+        providers,
+        searchComplete: complete,
+        loading: !complete
       };
     default:
       return state;

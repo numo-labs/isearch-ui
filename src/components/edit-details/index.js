@@ -83,7 +83,7 @@ export default class EditDetails extends Component {
             <div className='dropContainer departurePaxmix'>
               <Calendar
                 className='departureCalendar'
-                label={'TIDLIGASTE AFREJSE'}
+                label={'TIDLIGSTE AFREJSE'}
                 setValue={setDepartureDate}
                 optionsTitle={'-'}
                 date={departureDate || departOnFriday(moment().add(3, 'months')).format('YYYY-MM-DD')}

@@ -10,6 +10,7 @@ class DestinationFullPage extends Component {
       getArticle,
       params,
       addSingleTag,
+      addArticleTag,
       go
     } = this.props;
     const latitude = articleContent.location ? Number(articleContent.location.lat) : 0;
@@ -29,6 +30,7 @@ class DestinationFullPage extends Component {
         getArticle={getArticle}
         params={params}
         addSingleTag={addSingleTag}
+        addArticleTag={addArticleTag}
         isDestination
       >
         <div style={{height: '400px', marginBottom: '50px'}}>
@@ -60,6 +62,7 @@ DestinationFullPage.propTypes = {
   getArticle: PropTypes.func,
   params: PropTypes.object,
   addSingleTag: PropTypes.func,
+  addArticleTag: PropTypes.func,
   markers: PropTypes.array
 };
 
