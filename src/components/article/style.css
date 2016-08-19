@@ -178,3 +178,8 @@ h1 {
 .videoPlayerContainer {
   margin-bottom: 2em;
 }
+
+.videoPlay {
+  border-style: none;
+  border-width: 0px;
+}

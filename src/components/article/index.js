@@ -3,7 +3,6 @@ import ArticleFooter from '../../../lib/article-tile/article-footer.js';
 import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
 import FadeImage from '../../../lib/fade-image';
-import ReactPlayer from 'react-player';
 import './style.css';
 
 /*
@@ -88,9 +87,7 @@ class ArticleFullPage extends Component {
     } else {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
-      const videoClipUrl = articleContent.videoUrl;
-      const videoPlayerHeight = window.innerWidth < 750 ? '' : 600;
-      const videoPlayer = <ReactPlayer url={videoClipUrl} className='articleHeaderImage videoPlayer' width={'100%'} height={videoPlayerHeight} style={{ backgroundColor: 'white' }}/>;
+      const videoClipUrl = articleContent.sections[0].videoUrl;
       // const headerContent = this.props.isDestination && articleContent.videoUrl ? headerVideo : headerImage;
       const contentContainerStyle = this.props.isDestination ? 'destinationContainer' : 'articleContentContainer';
       // const contentContainerStyle = this.props.isDestination && articleContent.videoUrl ? 'destinationContainer' : 'articleContentContainer';
@@ -131,7 +128,7 @@ class ArticleFullPage extends Component {
               {
                 videoClipUrl &&
                 <div className='videoPlayerContainer'>
-                  {videoPlayer}
+                  <video controls width={'100%'} src={videoClipUrl} className='videoPlay'></video>
                 </div>
               }
             <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
