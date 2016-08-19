@@ -140,6 +140,7 @@
 
 .videoIconContainer {
   display: inline-block;
+  z-index: 1000000;
 }
 
 .videoIconText {
