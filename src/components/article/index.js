@@ -87,6 +87,10 @@ class ArticleFullPage extends Component {
     } else {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
+      const videoClipUrl = articleContent.sections[0].videoUrl;
+      // const headerContent = this.props.isDestination && articleContent.videoUrl ? headerVideo : headerImage;
+      const contentContainerStyle = this.props.isDestination ? 'destinationContainer' : 'articleContentContainer';
+      // const contentContainerStyle = this.props.isDestination && articleContent.videoUrl ? 'destinationContainer' : 'articleContentContainer';
       this.addAnalyticsData();
       if (document.querySelector('title')) document.querySelector('title').innerHTML = 'article | ' + introSection.title;
       return (
@@ -94,7 +98,7 @@ class ArticleFullPage extends Component {
           <NavHeader backToSearch={goBack} go={go}/>
           <div className='articleFullPageContainer'>
             <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
-            <div className='articleContentContainer'>
+            <div className={contentContainerStyle}>
               <section>
                 <div className='articleSection'>
                   <div className='articleHeader'>{introSection.title}</div>
@@ -121,6 +125,12 @@ class ArticleFullPage extends Component {
                 </div>
               }
               {this.props.children}
+              {
+                videoClipUrl &&
+                <div className='videoPlayerContainer'>
+                  <video controls width={'100%'} src={videoClipUrl} className='videoPlay'></video>
+                </div>
+              }
             <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
             </div>
           </div>
@@ -138,7 +148,8 @@ ArticleFullPage.propTypes = {
   params: PropTypes.object,
   addSingleTag: PropTypes.func,
   addArticleTag: PropTypes.func,
-  children: PropTypes.object
+  children: PropTypes.object,
+  isDestination: PropTypes.bool
 };
 
 export default ArticleFullPage;

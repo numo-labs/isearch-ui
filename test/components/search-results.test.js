@@ -122,5 +122,22 @@ describe('Component', function () {
       expect(wrapper2.find('.visited').length).to.equal(1);
       done();
     });
+    it('should show a warning message when search is complete if results contain no hotels', () => {
+      const items = [
+        { type: 'tile', id: 'tile:123', tile: { sections: [] } },
+        { type: 'tile', id: 'tile:456', tile: { sections: [] } }
+      ];
+      const wrapper = shallow(<SearchResults changeRoute={() => {}} items={items} viewedArticles={[]} searchComplete/>);
+      expect(wrapper.find('.noHotelsErrorMessage').length).to.equal(1);
+    });
+    it('should not show a warning message when search is complete if results contains hotels', () => {
+      const items = [
+        { type: 'tile', id: 'tile:123', tile: { sections: [] } },
+        { type: 'tile', id: 'tile:456', tile: { sections: [] } },
+        { type: 'package', id: 'package:789' }
+      ];
+      const wrapper = shallow(<SearchResults changeRoute={() => {}} items={items} viewedArticles={[]} searchComplete/>);
+      expect(wrapper.find('.noHotelsErrorMessage').length).to.equal(0);
+    });
   });
 });

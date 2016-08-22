@@ -7,6 +7,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
 import { addAnalyticsImpression, analyticsRemoveTile } from '../../../lib/analytics-helper/index';
 import downArrow from '../../assets/down-arrow.svg';
+import mapIcon from '../../assets/map.svg';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
@@ -90,6 +91,7 @@ class SearchResults extends Component {
         if (item.message) {
           return item.message;
         } else {
+          item.autoDisplayed = item.related || this.props.isInitialTag;
           return (
             <VisibilitySensor key={start + index} onChange={(isVisible) => this.handleVisibility(isVisible, item)}>
               <div key={index} className='gridItem'>
@@ -115,6 +117,9 @@ class SearchResults extends Component {
       </div>
     );
   }
+  handleOnClick () {
+    this.props.viewFilm();
+  }
 
   renderItem (item, index) {
     const {
@@ -123,7 +128,8 @@ class SearchResults extends Component {
       changeRoute,
       viewedArticles,
       removeTile,
-      addArticleTag
+      addArticleTag,
+      filmInView
     } = this.props;
     if (item.packageOffer) {
       return (
@@ -159,12 +165,19 @@ class SearchResults extends Component {
           </div>
         );
       } else if (item.tile.type === 'destination' && contentExists) {
+        console.log('destination tile', item.tile);
         return (
           <div className='shadowHover'>
             {this.removeButton(item)}
             <div className='clickable'
                  onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
-              <DestinationTile {...item} />
+              <DestinationTile filmInView={filmInView} {...item} />
+            </div>
+            <div className='mapVideoIconContainer'>
+              <div className='mapIconContainer'>
+                <img src={mapIcon} alt='map' className='mapIcon' />
+                <div className='mapIconText'>Vis på kort</div>
+              </div>
             </div>
           </div>
         );
@@ -217,31 +230,39 @@ class SearchResults extends Component {
     }
   }
 
-  render () {
+  getNoHotelsMessage () {
     const {
       searchComplete,
       items,
       showTravelInfo,
       isInitialTag
     } = this.props;
-    const searchItems = items.filter(item => !item.related);
-    const hotelItems = searchItems.filter(item => item.packageOffer);
-    const hideGridStyle = {
-      minHeight: '0'
-    };
-    const showGridStyle = {
-      minHeight: '80vh'
-    };
+    const hotelItems = items.filter(item => item.type === 'package');
     const noHotelsErrorMessage = (
       <div className='noHotelsErrorMessage'>
         <div>Ingen hoteller er ledige i den valgte tidsperiode</div>
         <div className='changeDetailsLink' onClick={() => showTravelInfo()}>Ændre tidsperioden</div>
       </div>
     );
+    return (!isInitialTag && searchComplete && hotelItems.length === 0) ? noHotelsErrorMessage : '';
+  }
+
+  render () {
+    const {
+      searchComplete,
+      items
+    } = this.props;
+    const searchItems = items.filter(item => !item.related);
+    const hideGridStyle = {
+      minHeight: '0'
+    };
+    const showGridStyle = {
+      minHeight: '80vh'
+    };
     const gridStyle = searchComplete && searchItems.length === 0 ? hideGridStyle : showGridStyle;
     return (
       <div className='gridContainer'>
-        {!isInitialTag && searchComplete && hotelItems.length === 0 ? noHotelsErrorMessage : ''}
+        {this.getNoHotelsMessage()}
         <div style={gridStyle}>
           <Masonry
             elementType={'div'}
@@ -272,7 +293,10 @@ SearchResults.propTypes = {
   searchComplete: PropTypes.bool,
   feedEnd: PropTypes.bool,
   showTravelInfo: PropTypes.func,
-  isInitialTag: PropTypes.bool
+  isInitialTag: PropTypes.bool,
+  ranking: PropTypes.object,
+  filmInView: PropTypes.bool,
+  viewFilm: PropTypes.func
 };
 
 export default SearchResults;
