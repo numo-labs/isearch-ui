@@ -165,7 +165,6 @@ class SearchResults extends Component {
           </div>
         );
       } else if (item.tile.type === 'destination' && contentExists) {
-        console.log('destination tile', item.tile);
         return (
           <div className='shadowHover'>
             {this.removeButton(item)}
