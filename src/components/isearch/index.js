@@ -92,7 +92,9 @@ class ISearch extends Component {
       showTravelInfo,
       tags,
       isInitialTag,
-      ranking
+      ranking,
+      viewFilm,
+      filmInView
     } = this.props;
     return (
       <ScrollView
@@ -117,6 +119,8 @@ class ISearch extends Component {
           tags={tags}
           isInitialTag={isInitialTag}
           ranking={ranking}
+          viewFilm={viewFilm}
+          filmInView={filmInView}
         />
       </ScrollView>
     );
@@ -267,6 +271,8 @@ ISearch.propTypes = {
   onYesFilter: PropTypes.func,
   onFilterClick: PropTypes.func,
   ranking: PropTypes.object,
+  filmInView: PropTypes.bool,
+  viewFilm: PropTypes.func,
 
   // scroll view
   loadMoreItemsIntoFeed: PropTypes.func,

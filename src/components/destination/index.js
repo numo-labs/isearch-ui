@@ -41,6 +41,7 @@ class DestinationFullPage extends Component {
                 ref={(map) => (map) => console.log(map)}
                 defaultZoom={6}
                 defaultCenter={marker.position}
+                options={{scrollwheel: false}}
               >
               <Marker
                 {...marker}

@@ -109,6 +109,11 @@
   text-align: center;
 }
 
+.inputContainer.mobile .input-results,
+.inputContainer.mobile .react-autosuggest__suggestions-container {
+  max-height: 123px;
+}
+
 .react-autosuggest__suggestions-container ul {
   padding: 0;
   list-style-type: none;

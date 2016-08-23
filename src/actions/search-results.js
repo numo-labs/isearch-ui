@@ -14,6 +14,7 @@ import {
   CLEAR_FEED,
   UPDATE_DISPLAYED_ITEMS,
   RECEIVE_RELATED_RESULT,
+  VIEW_FILM,
   UPDATE_TILE_RANKING,
   REGISTER_PROVIDER
 } from '../constants/actionTypes';
@@ -251,3 +252,4 @@ export function loadMoreItemsIntoFeed () {
     }
   };
 }
+export const viewFilm = () => { return {type: VIEW_FILM}; };
