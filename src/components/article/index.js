@@ -88,7 +88,6 @@ class ArticleFullPage extends Component {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
       const videoClipUrl = articleContent.sections[0].videoUrl;
-      const image = articleContent.sections[0].image;
       // const headerContent = this.props.isDestination && articleContent.videoUrl ? headerVideo : headerImage;
       const contentContainerStyle = this.props.isDestination ? 'destinationContainer' : 'articleContentContainer';
       // const contentContainerStyle = this.props.isDestination && articleContent.videoUrl ? 'destinationContainer' : 'articleContentContainer';
@@ -129,7 +128,7 @@ class ArticleFullPage extends Component {
               {
                 videoClipUrl &&
                 <div className='videoPlayerContainer'>
-                  <video controls poster={image} width={'100%'} src={videoClipUrl} className='videoPlay'></video>
+                  <video controls width={'100%'} src={`${videoClipUrl}#t=2`} className='videoPlay'></video>
                 </div>
               }
             <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
