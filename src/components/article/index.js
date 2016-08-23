@@ -128,7 +128,7 @@ class ArticleFullPage extends Component {
               {
                 videoClipUrl &&
                 <div className='videoPlayerContainer'>
-                  <video controls width={'100%'} src={videoClipUrl} className='videoPlay'></video>
+                  <video controls width={'100%'} src={`${videoClipUrl}#t=2`} className='videoPlay'></video>
                 </div>
               }
             <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
