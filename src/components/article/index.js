@@ -89,7 +89,6 @@ class ArticleFullPage extends Component {
       const content = articleContent.sections.slice(1);
       const videoClipUrl = articleContent.sections[0].videoUrl;
       const image = articleContent.sections[0].image;
-      console.log('------------', articleContent.sections[0]);
       // const headerContent = this.props.isDestination && articleContent.videoUrl ? headerVideo : headerImage;
       const contentContainerStyle = this.props.isDestination ? 'destinationContainer' : 'articleContentContainer';
       // const contentContainerStyle = this.props.isDestination && articleContent.videoUrl ? 'destinationContainer' : 'articleContentContainer';
