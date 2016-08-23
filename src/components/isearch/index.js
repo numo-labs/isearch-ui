@@ -94,7 +94,8 @@ class ISearch extends Component {
       isInitialTag,
       ranking,
       viewFilm,
-      filmInView
+      filmInView,
+      departureDate
     } = this.props;
     return (
       <ScrollView
@@ -121,6 +122,7 @@ class ISearch extends Component {
           ranking={ranking}
           viewFilm={viewFilm}
           filmInView={filmInView}
+          departureDate={departureDate}
         />
       </ScrollView>
     );
