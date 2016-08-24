@@ -38,6 +38,12 @@
   padding-top: 1.2rem;
 }
 
+.weatherHeadline img {
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 1rem 0.8rem;
+}
+
 .weatherImage {
   height: 200px;
   position: relative;
