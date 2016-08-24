@@ -3,6 +3,7 @@ import Masonry from 'react-masonry-component';
 import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import ArticleTile from '../../../lib/article-tile';
+import WeatherTile from '../../../lib/weather-tile';
 import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
 import { addAnalyticsImpression, analyticsRemoveTile } from '../../../lib/analytics-helper/index';
@@ -129,7 +130,8 @@ class SearchResults extends Component {
       viewedArticles,
       removeTile,
       addArticleTag,
-      filmInView
+      filmInView,
+      departureDate
     } = this.props;
     if (item.packageOffer) {
       return (
@@ -187,6 +189,13 @@ class SearchResults extends Component {
           onYesFilter={onYesFilter}
           onNoFilter={() => removeTile(item.id)}
           description={item.filter}
+        />
+      );
+    } else if (item.type === 'weather') {
+      return (
+        <WeatherTile
+          weather={item.tile}
+          departureDate={departureDate}
         />
       );
     }
@@ -295,7 +304,8 @@ SearchResults.propTypes = {
   isInitialTag: PropTypes.bool,
   ranking: PropTypes.object,
   filmInView: PropTypes.bool,
-  viewFilm: PropTypes.func
+  viewFilm: PropTypes.func,
+  departureDate: PropTypes.string
 };
 
 export default SearchResults;
