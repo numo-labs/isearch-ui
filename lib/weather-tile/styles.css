@@ -18,6 +18,26 @@
   src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
 
+.weatherTitle {
+  font-family: ThomasHeadlineBold;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.weatherSubtitle {
+  font-family: SourceSansLight;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #999;
+}
+
+.weatherHeadline {
+  font-family: ThomasHeadlineBold;
+  font-size: 3.2rem;
+  text-align: center;
+  padding-top: 1.2rem;
+}
+
 .weatherImage {
   height: 200px;
   position: relative;
