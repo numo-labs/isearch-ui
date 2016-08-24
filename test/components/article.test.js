@@ -10,7 +10,8 @@ const defaultProps = {
     sections: [{
       image: 'image',
       title: 'title',
-      text: 'text'
+      text: 'text',
+      videoUrl: 'url'
     }, {
       image: 'image2',
       title: 'title2',
@@ -39,6 +40,11 @@ describe('Component', function () {
       const wrapper = shallow(<ArticleFullPage {...props} />);
       const children = wrapper.children().nodes;
       expect(children).to.have.length(0);
+      done();
+    });
+    it('should render our video component if there is a video url', function (done) {
+      const wrapper = shallow(<ArticleFullPage {...defaultProps} />);
+      expect(wrapper.find('video')).to.have.length(1);
       done();
     });
   });
