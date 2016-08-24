@@ -17,3 +17,11 @@
   font-family: ThomasHeadlineBold;
   src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
+
+.weatherImage {
+  height: 200px;
+  position: relative;
+  width: 375px;
+  background-size: 375px 200px;
+  background-repeat: no-repeat;
+}
