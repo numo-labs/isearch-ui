@@ -82,6 +82,17 @@ describe('Component', function () {
       expect(title).to.equal('Sun Wing');
       done();
     });
+    it('should render the correct children', function (done) {
+      const wrapper = shallow(<HotelPage {...defaultProps} />);
+      expect(wrapper.find('div')).to.have.length(47);
+      expect(wrapper.find('NavHeader')).to.have.length(1);
+      expect(wrapper.find('FadeImage')).to.have.length(1);
+      expect(wrapper.find('ISearchSlider')).to.have.length(1);
+      expect(wrapper.find('StarRating')).to.have.length(1);
+      expect(wrapper.find('img')).to.have.length(1);
+      expect(wrapper.find('span')).to.have.length(2);
+      done();
+    });
     it('should admit a boolean at amenities', function (done) {
       var props2 = {...defaultProps};
       props2.packageOffer.amenities.distancetobeach = true;
