@@ -55,3 +55,6 @@ export const SAVE_SOCKET_CONNECTION_ID = 'SAVE_SOCKET_CONNECTION_ID';
 
 // fingerprint
 export const SET_FINGERPRINT = 'SET_FINGERPRINT';
+
+// weather
+export const UPDATE_WEATHER = 'UPDATE_WEATHER';

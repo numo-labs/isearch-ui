@@ -193,10 +193,13 @@ class SearchResults extends Component {
       );
     } else if (item.type === 'weather') {
       return (
-        <WeatherTile
-          weather={item.tile}
-          departureDate={departureDate}
-        />
+        <div className='clickable'
+           onClick={() => { this.handleClickEvent(item); changeRoute(`/weather/${item.id}`); }}>
+          <WeatherTile
+            weather={item.tile}
+            departureDate={departureDate}
+          />
+        </div>
       );
     }
     return <div/>;
