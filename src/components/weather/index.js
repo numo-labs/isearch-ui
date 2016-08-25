@@ -1,6 +1,10 @@
 import NavHeader from '../../../lib/nav-header/';
 import React, { Component, PropTypes } from 'react';
 
+import './style.css';
+
+import months from '../../constants/month-names';
+
 class WeatherFullPage extends Component {
 
   loadWeather () {
@@ -17,6 +21,25 @@ class WeatherFullPage extends Component {
     }
   }
 
+  renderTable (data) {
+    return (<table>
+      <thead>
+        <tr>
+          {months.map((month) => {
+            return (<th>{month.substr(0, 3)}</th>);
+          })}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {data.map((t) => {
+            return (<td>{typeof t === 'number' ? t : '-'}</td>);
+          })}
+        </tr>
+      </tbody>
+    </table>);
+  }
+
   render () {
     const { goBack, go } = this.props;
 
@@ -29,8 +52,21 @@ class WeatherFullPage extends Component {
     return (
       <section>
         <NavHeader backToSearch={goBack} go={go}/>
-        <div className='articleFullPageContainer'>
-          <div className='articleHeaderImage' style={{backgroundImage: `url(${weather.image})`}} />
+        <div className='weatherFullPageContainer'>
+          <div className='weatherHeaderImage' style={{backgroundImage: `url(${weather.image})`}} />
+          <div className='weatherHeader'>{weather.displayName}</div>
+          <div className='weatherSubtitle'>Vejrudsigt</div>
+
+          <h2>Temperatur per måned</h2>
+
+          <h2>Vandtemperatur (°C)</h2>
+          {this.renderTable(weather.high)}
+
+          <h2>Regnfri dage</h2>
+          {this.renderTable(weather.rainfree)}
+
+          <h2>Soltimer/dag</h2>
+          {this.renderTable(weather.sunhours)}
         </div>
       </section>
     );
