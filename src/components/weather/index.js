@@ -1,5 +1,6 @@
 import NavHeader from '../../../lib/nav-header/';
 import React, { Component, PropTypes } from 'react';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 
 import './style.css';
 
@@ -19,6 +20,32 @@ class WeatherFullPage extends Component {
       getWeather(itemId);
       return null;
     }
+  }
+
+  renderGraph (weather) {
+    const data = months.map((month, i) => {
+      return {
+        month: month.substr(0, 3),
+        high: weather.high[i],
+        low: weather.low[i]
+      };
+    });
+    const yFormatter = (value) => `${value}°C`;
+    const max = Math.max.apply(Math, weather.high);
+    const top = 5 * Math.ceil((max + 1) / 5);
+
+    return (
+      <ResponsiveContainer height={500}>
+        <BarChart data={data} margin={{left: 0, top: 5, right: 10, bottom: 5}}>
+          <XAxis dataKey='month'/>
+          <YAxis tickFormatter={yFormatter} tickLine={false} domain={[0, top]} tickCount={(top / 5) + 1} width={40}/>
+          <CartesianGrid vertical={false}/>
+          <Bar dataKey='high' name='High °C' fill='#fecd2f' isAnimationActive={false}/>
+          <Bar dataKey='low' name='Low °C' fill='#abd8a3' isAnimationActive={false}/>
+          <Legend/>
+        </BarChart>
+      </ResponsiveContainer>
+    );
   }
 
   renderTable (data) {
@@ -54,19 +81,22 @@ class WeatherFullPage extends Component {
         <NavHeader backToSearch={goBack} go={go}/>
         <div className='weatherFullPageContainer'>
           <div className='weatherHeaderImage' style={{backgroundImage: `url(${weather.image})`}} />
-          <div className='weatherHeader'>{weather.displayName}</div>
-          <div className='weatherSubtitle'>Vejrudsigt</div>
+          <div className='weatherContentContainer'>
+            <div className='weatherHeader'>{weather.displayName}</div>
+            <div className='weatherSubtitle'>Vejrudsigt</div>
 
-          <h2>Temperatur per måned</h2>
+            <h2>Temperatur per måned</h2>
+            {this.renderGraph(weather)}
 
-          <h2>Vandtemperatur (°C)</h2>
-          {this.renderTable(weather.high)}
+            <h2>Vandtemperatur (°C)</h2>
+            {this.renderTable(weather.high)}
 
-          <h2>Regnfri dage</h2>
-          {this.renderTable(weather.rainfree)}
+            <h2>Regnfri dage</h2>
+            {this.renderTable(weather.rainfree)}
 
-          <h2>Soltimer/dag</h2>
-          {this.renderTable(weather.sunhours)}
+            <h2>Soltimer/dag</h2>
+            {this.renderTable(weather.sunhours)}
+          </div>
         </div>
       </section>
     );

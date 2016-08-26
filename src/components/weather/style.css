@@ -18,13 +18,6 @@
     src: url('../../../fonts/ThomasHeadline-Bold.otf');
 }
 
-.weatherContainer {
-    text-align: center;
-    font-family: SourceSansLight;
-    display: inline-block;
-    cursor: pointer;
-}
-
 .weatherFullPageContainer {
     text-align: center;
     display: inline-block;
@@ -40,8 +33,49 @@
     background-position: center center;
 }
 
+.weatherContentContainer {
+    background-color: #ffffff;
+    position: relative;
+    padding: 2em 1em;
+}
+
+@media (min-width: 750px) {
+    .weatherContentContainer {
+        width: 750px;
+        margin: -150px auto 0;
+        padding: 2em;
+    }
+}
 .weatherHeader {
     font-family: ThomasHeadlineBold;
     font-size: 3.2rem;
-    margin-bottom: 1em;
+}
+
+.weatherFullPageContainer .weatherSubtitle {
+    margin-bottom: 2em;
+}
+
+.weatherFullPageContainer h2 {
+    text-align: left;
+    font-size: 2.4rem;
+    color: #5d5d5d;
+}
+
+.weatherFullPageContainer table {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.weatherFullPageContainer table th,
+.weatherFullPageContainer table td {
+    padding: 3px;
+}
+.weatherFullPageContainer table th {
+    text-align: center;
+}
+
+.weatherFullPageContainer table td {
+    background-color: #eee;
+    margin: 1px;
+    border: 2px solid white;
 }
