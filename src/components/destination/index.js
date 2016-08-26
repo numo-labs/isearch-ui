@@ -15,12 +15,17 @@ class DestinationFullPage extends Component {
     } = this.props;
     const latitude = articleContent.location ? Number(articleContent.location.lat) : 0;
     const longitude = articleContent.location ? Number(articleContent.location.lon) : 0;
+    const isDraggable = window.innerWidth > 750;
     const marker = {
       position: {
         lat: latitude,
         lng: longitude
       },
       defaultAnimation: 4
+    };
+    const mapOptions = {
+      scrollwheel: false,
+      draggable: isDraggable
     };
     return (
       <ArticleFullPage
@@ -41,7 +46,7 @@ class DestinationFullPage extends Component {
                 ref={(map) => (map) => console.log(map)}
                 defaultZoom={6}
                 defaultCenter={marker.position}
-                options={{scrollwheel: false}}
+                options={mapOptions}
               >
               <Marker
                 {...marker}
