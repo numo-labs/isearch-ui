@@ -18,6 +18,10 @@
   src: url('../../fonts/ThomasHeadline-Bold.otf');
 }
 
+.weatherTileContainer {
+  cursor: pointer;
+}
+
 .weatherTitle {
   font-family: ThomasHeadlineBold;
   font-size: 1.8rem;
