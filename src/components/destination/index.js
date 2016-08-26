@@ -3,6 +3,11 @@ import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import ArticleFullPage from '../article';
 
 class DestinationFullPage extends Component {
+  isTouchDevice () {
+    return (('ontouchstart' in window) ||
+      (navigator.MaxTouchPoints > 0) ||
+      (navigator.msMaxTouchPoints > 0));
+  }
   render () {
     const {
       articleContent,
@@ -15,7 +20,6 @@ class DestinationFullPage extends Component {
     } = this.props;
     const latitude = articleContent.location ? Number(articleContent.location.lat) : 0;
     const longitude = articleContent.location ? Number(articleContent.location.lon) : 0;
-    const isDraggable = window.innerWidth > 750;
     const marker = {
       position: {
         lat: latitude,
@@ -25,7 +29,7 @@ class DestinationFullPage extends Component {
     };
     const mapOptions = {
       scrollwheel: false,
-      draggable: isDraggable
+      draggable: !this.isTouchDevice()
     };
     return (
       <ArticleFullPage
