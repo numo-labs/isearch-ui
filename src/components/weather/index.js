@@ -89,7 +89,7 @@ class WeatherFullPage extends Component {
             {this.renderGraph(weather)}
 
             <h2>Vandtemperatur (°C)</h2>
-            {this.renderTable(weather.high)}
+            {this.renderTable(weather.watertemp)}
 
             <h2>Regnfri dage</h2>
             {this.renderTable(weather.rainfree)}
