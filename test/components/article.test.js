@@ -34,7 +34,7 @@ describe('Component', function () {
       expect(children).to.have.length(2);
       done();
     });
-    it.only('should render the correct content', function (done) {
+    it('should render the correct content', function (done) {
       const wrapper = shallow(<ArticleFullPage {...defaultProps} />);
       const articleHeaderIntro = wrapper.find('.articleHeaderIntro').text();
       const header = defaultProps.articleContent.sections[0].title;
