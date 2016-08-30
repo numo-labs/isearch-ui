@@ -3,6 +3,11 @@ import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import ArticleFullPage from '../article';
 
 class DestinationFullPage extends Component {
+  isTouchDevice () {
+    return (('ontouchstart' in window) ||
+      (navigator.MaxTouchPoints > 0) ||
+      (navigator.msMaxTouchPoints > 0));
+  }
   render () {
     const {
       articleContent,
@@ -21,6 +26,10 @@ class DestinationFullPage extends Component {
         lng: longitude
       },
       defaultAnimation: 4
+    };
+    const mapOptions = {
+      scrollwheel: false,
+      draggable: !this.isTouchDevice()
     };
     return (
       <ArticleFullPage
@@ -41,7 +50,7 @@ class DestinationFullPage extends Component {
                 ref={(map) => (map) => console.log(map)}
                 defaultZoom={6}
                 defaultCenter={marker.position}
-                options={{scrollwheel: false}}
+                options={mapOptions}
               >
               <Marker
                 {...marker}
