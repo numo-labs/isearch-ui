@@ -43,7 +43,20 @@
   text-align: center;
 }
 
-.bookButton {
+.bookButton1 {
+  border-radius: 600px;
+  color: #ffffff;
+  background-color: #F39110;
+  display: inline-block;
+  font-family: SourceSansRegular;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 0.4em 2.3em;
+  margin-top: 0.7em;
+  text-transform: uppercase;
+}
+
+.bookButton2 {
   border-radius: 600px;
   color: #ffffff;
   background-color: #F39110;
@@ -156,7 +169,14 @@
 .hotelPageContainer {
 }
 
-.hotelPrice {
+.hotelPrice1 {
+  font-size: 2.5em;
+  color: #DC3767;
+  font-family: SourceSansRegular;
+  font-weight: bold;
+}
+
+.hotelPrice2 {
   font-size: 2.5em;
   color: #DC3767;
   font-family: SourceSansRegular;
@@ -228,7 +248,16 @@
   background-position: center center;
 }
 
-.ppp {
+.ppp1 {
+  font-family: SourceSansRegular;
+  font-weight: bold;
+  font-size: 0.9em;
+  color: #4F4F4F;
+  line-height: 0.5em;
+  margin-bottom: 0.2em;
+}
+
+.ppp2 {
   font-family: SourceSansRegular;
   font-weight: bold;
   font-size: 0.9em;
