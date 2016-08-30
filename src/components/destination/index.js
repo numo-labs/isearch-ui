@@ -15,6 +15,11 @@ class DestinationFullPage extends StaticBaseClass {
       );
     });
   }
+  isTouchDevice () {
+    return (('ontouchstart' in window) ||
+      (navigator.MaxTouchPoints > 0) ||
+      (navigator.msMaxTouchPoints > 0));
+  }
   render () {
     const {
       articleContent,
@@ -29,6 +34,10 @@ class DestinationFullPage extends StaticBaseClass {
         lng: longitude
       },
       defaultAnimation: 4
+    };
+    const mapOptions = {
+      scrollwheel: false,
+      draggable: !this.isTouchDevice()
     };
     if (!articleContent.name) {
       return (<section/>);
@@ -55,6 +64,7 @@ class DestinationFullPage extends StaticBaseClass {
                   ref={(map) => (map) => console.log(map)}
                   defaultZoom={6}
                   defaultCenter={marker.position}
+                  options={mapOptions}
                 >
                 <Marker
                   {...marker}
