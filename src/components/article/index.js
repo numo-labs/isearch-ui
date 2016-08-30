@@ -101,7 +101,7 @@ class ArticleFullPage extends Component {
             <div className={contentContainerStyle}>
               <section>
                 <div className='articleSection'>
-                  <div className='articleHeader'>{introSection.title}</div>
+                  <div className='articleHeaderIntro'>{introSection.title}</div>
                   {introSection.text ? <div className='articleIntroText' dangerouslySetInnerHTML={this.rawMarkup(introSection.text)}/> : null}
                 </div>
               </section>

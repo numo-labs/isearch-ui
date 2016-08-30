@@ -115,6 +115,12 @@ h1 {
     margin-bottom: 1em;
 }
 
+.articleHeaderIntro {
+    font-family: ThomasHeadlineBold;
+    font-size: 3.2rem;
+    margin-bottom: 1em;
+}
+
 .articleIntroText {
     font-family: SourceSansSemiBold;
     font-size: 1.7rem;
