@@ -35,7 +35,6 @@ describe('Component', function () {
   });
   it('should render the correct children', function (done) {
     expect(wrapper.find('ArticleFullPage')).to.have.length(1);
-    expect(wrapper.find('div')).to.have.length(1);
     expect(wrapper.find('GoogleMapLoader')).to.have.length(1);
     done();
   });
