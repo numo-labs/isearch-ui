@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import ArticleFullPage from '../../src/components/article/';
+import DestinationFullPage from '../../src/components/destination/';
 
 const defaultProps = {
   articleContent: {
@@ -10,7 +11,8 @@ const defaultProps = {
     sections: [{
       image: 'image',
       title: 'title',
-      text: 'text'
+      text: 'text',
+      videoUrl: 'url'
     }, {
       image: 'image2',
       title: 'title2',
@@ -25,20 +27,25 @@ const defaultProps = {
 };
 
 describe('Component', function () {
-  describe('<ArticleFullPage /> Article view', function () {
-    it('should render the ISearch container', function (done) {
+  describe('<DestinationFullPage /> Destination view', function () {
+    it('should render the container', function (done) {
       global.dataLayer = [];
-      const wrapper = shallow(<ArticleFullPage {...defaultProps} />);
+      const wrapper = shallow(<DestinationFullPage {...defaultProps} />);
       const children = wrapper.children().nodes;
-      expect(children).to.have.length(2);
+      expect(children).to.have.length(3);
       done();
     });
-    it('should render a empty section if there is no article name', function (done) {
+    it('should render a empty section if there is no destination name', function (done) {
       global.dataLayer = null;
       const props = {...defaultProps, articleContent: {}};
-      const wrapper = shallow(<ArticleFullPage {...props} />);
+      const wrapper = shallow(<DestinationFullPage {...props} />);
       const children = wrapper.children().nodes;
       expect(children).to.have.length(0);
+      done();
+    });
+    it('should render our video component if there is a video url', function (done) {
+      const wrapper = shallow(<DestinationFullPage {...defaultProps} />);
+      expect(wrapper.find('video')).to.have.length(1);
       done();
     });
   });
