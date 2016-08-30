@@ -3,10 +3,12 @@ import Masonry from 'react-masonry-component';
 import FilterTile from '../../../lib/filter-tile';
 import PackageTile from '../../../lib/package-tile';
 import ArticleTile from '../../../lib/article-tile';
+import WeatherTile from '../../../lib/weather-tile';
 import VisibilitySensor from 'react-visibility-sensor';
 import DestinationTile from '../../../lib/destination-tile';
 import { addAnalyticsImpression, analyticsRemoveTile } from '../../../lib/analytics-helper/index';
 import downArrow from '../../assets/down-arrow.svg';
+import mapIcon from '../../assets/map.svg';
 
 const removeTileButton = require('../../assets/cancel.svg');
 import './style.css';
@@ -116,6 +118,9 @@ class SearchResults extends Component {
       </div>
     );
   }
+  handleOnClick () {
+    this.props.viewFilm();
+  }
 
   renderItem (item, index) {
     const {
@@ -124,7 +129,9 @@ class SearchResults extends Component {
       changeRoute,
       viewedArticles,
       removeTile,
-      addArticleTag
+      addArticleTag,
+      filmInView,
+      departureDate
     } = this.props;
     if (item.packageOffer) {
       return (
@@ -165,7 +172,13 @@ class SearchResults extends Component {
             {this.removeButton(item)}
             <div className='clickable'
                  onClick={() => { this.handleClickEvent(item); changeRoute(`/destination/${item.url}`); }}>
-              <DestinationTile {...item} />
+              <DestinationTile filmInView={filmInView} {...item} />
+            </div>
+            <div className='mapVideoIconContainer'>
+              <div className='mapIconContainer'>
+                <img src={mapIcon} alt='map' className='mapIcon' />
+                <div className='mapIconText'>Vis på kort</div>
+              </div>
             </div>
           </div>
         );
@@ -177,6 +190,16 @@ class SearchResults extends Component {
           onNoFilter={() => removeTile(item.id)}
           description={item.filter}
         />
+      );
+    } else if (item.type === 'weather') {
+      return (
+        <div className='clickable'
+           onClick={() => { this.handleClickEvent(item); changeRoute(`/weather/${item.id}`); }}>
+          <WeatherTile
+            weather={item.tile}
+            departureDate={departureDate}
+          />
+        </div>
       );
     }
     return <div/>;
@@ -218,32 +241,39 @@ class SearchResults extends Component {
     }
   }
 
-  render () {
+  getNoHotelsMessage () {
     const {
       searchComplete,
       items,
       showTravelInfo,
-      isInitialTag,
-      ranking
+      isInitialTag
     } = this.props;
-    const searchItems = items.filter(item => !item.related);
-    const hotelItems = ranking ? Object.keys(ranking).filter(key => key.match(/^hotel/)) : [];
-    const hideGridStyle = {
-      minHeight: '0'
-    };
-    const showGridStyle = {
-      minHeight: '80vh'
-    };
+    const hotelItems = items.filter(item => item.type === 'package');
     const noHotelsErrorMessage = (
       <div className='noHotelsErrorMessage'>
         <div>Ingen hoteller er ledige i den valgte tidsperiode</div>
         <div className='changeDetailsLink' onClick={() => showTravelInfo()}>Ændre tidsperioden</div>
       </div>
     );
+    return (!isInitialTag && searchComplete && hotelItems.length === 0) ? noHotelsErrorMessage : '';
+  }
+
+  render () {
+    const {
+      searchComplete,
+      items
+    } = this.props;
+    const searchItems = items.filter(item => !item.related);
+    const hideGridStyle = {
+      minHeight: '0'
+    };
+    const showGridStyle = {
+      minHeight: '80vh'
+    };
     const gridStyle = searchComplete && searchItems.length === 0 ? hideGridStyle : showGridStyle;
     return (
       <div className='gridContainer'>
-        {!isInitialTag && searchComplete && hotelItems.length === 0 ? noHotelsErrorMessage : ''}
+        {this.getNoHotelsMessage()}
         <div style={gridStyle}>
           <Masonry
             elementType={'div'}
@@ -275,7 +305,10 @@ SearchResults.propTypes = {
   feedEnd: PropTypes.bool,
   showTravelInfo: PropTypes.func,
   isInitialTag: PropTypes.bool,
-  ranking: PropTypes.object
+  ranking: PropTypes.object,
+  filmInView: PropTypes.bool,
+  viewFilm: PropTypes.func,
+  departureDate: PropTypes.string
 };
 
 export default SearchResults;

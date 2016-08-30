@@ -1,0 +1,57 @@
+@font-face {
+  font-family: SourceSansSemiBold;
+  src: url('../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+  font-family: SourceSansRegular;
+  src: url('../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+  font-family: SourceSansLight;
+  src: url('../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+  font-family: ThomasHeadlineBold;
+  src: url('../../fonts/ThomasHeadline-Bold.otf');
+}
+
+.weatherTileContainer {
+  cursor: pointer;
+}
+
+.weatherTitle {
+  font-family: ThomasHeadlineBold;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.weatherSubtitle {
+  font-family: SourceSansLight;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #999;
+}
+
+.weatherHeadline {
+  font-family: ThomasHeadlineBold;
+  font-size: 3.2rem;
+  text-align: center;
+  padding-top: 1.2rem;
+}
+
+.weatherHeadline img {
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 1rem 0.8rem;
+}
+
+.weatherImage {
+  height: 200px;
+  position: relative;
+  width: 375px;
+  background-size: 375px 200px;
+  background-repeat: no-repeat;
+}

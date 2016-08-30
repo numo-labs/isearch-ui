@@ -1,6 +1,6 @@
 {
   "name": "isearch-ui",
-  "version": "1.1.1",
+  "version": "1.2.3",
   "description": "UI for Inspirational Search",
   "main": "src/index.js",
   "directories": {
@@ -106,6 +106,7 @@
     "history": "^2.1.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash.capitalize": "^4.1.1",
+    "lodash.every": "^4.6.0",
     "lodash.union": "^4.4.0",
     "lodash.uniqby": "^4.5.0",
     "moment": "^2.12.0",
@@ -115,6 +116,7 @@
     "react-dom": "^0.14.7",
     "react-google-maps": "^4.11.0",
     "react-masonry-component": "^4.0.0",
+    "react-player": "^0.8.0",
     "react-redux": "^4.4.0",
     "react-router": "^2.3.0",
     "react-router-redux": "^4.0.4",
@@ -122,6 +124,7 @@
     "react-scroll": "^1.0.15",
     "react-slick": "^0.12.0",
     "react-visibility-sensor": "^3.0.0",
+    "recharts": "^0.13.4",
     "redux": "^3.5.2",
     "shuffle-array": "^1.0.0",
     "striptags": "^2.1.1",

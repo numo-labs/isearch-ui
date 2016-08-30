@@ -83,7 +83,6 @@ class ArticleFullPage extends StaticBaseClass {
                   {renderTags(articleContent.amenities, 'amenities')}
                 </div>
               }
-              {this.props.children}
             <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
             </div>
           </div>
@@ -100,8 +99,7 @@ ArticleFullPage.propTypes = {
   getArticle: PropTypes.func,
   params: PropTypes.object,
   addSingleTag: PropTypes.func,
-  addArticleTag: PropTypes.func,
-  children: PropTypes.object
+  addArticleTag: PropTypes.func
 };
 
 export default ArticleFullPage;

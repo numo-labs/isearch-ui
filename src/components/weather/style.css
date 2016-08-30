@@ -1,0 +1,81 @@
+@font-face {
+    font-family: SourceSansLight;
+    src: url('../../../fonts/SourceSansPro-Light.otf');
+}
+
+@font-face {
+    font-family: SourceSansSemiBold;
+    src: url('../../../fonts/SourceSansPro-SemiBold.otf');
+}
+
+@font-face {
+    font-family: SourceSansRegular;
+    src: url('../../../fonts/SourceSansPro-Regular.otf');
+}
+
+@font-face {
+    font-family: ThomasHeadlineBold;
+    src: url('../../../fonts/ThomasHeadline-Bold.otf');
+}
+
+.weatherFullPageContainer {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.weatherFullPageContainer .weatherHeaderImage {
+    height: 400px;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.weatherContentContainer {
+    background-color: #ffffff;
+    position: relative;
+    padding: 2em 1em;
+}
+
+@media (min-width: 750px) {
+    .weatherContentContainer {
+        width: 750px;
+        margin: -150px auto 0;
+        padding: 2em;
+    }
+}
+.weatherHeader {
+    font-family: ThomasHeadlineBold;
+    font-size: 3.2rem;
+}
+
+.weatherFullPageContainer .weatherSubtitle {
+    margin-bottom: 2em;
+}
+
+.weatherFullPageContainer h2 {
+    text-align: left;
+    font-size: 2.4rem;
+    color: #5d5d5d;
+}
+
+.weatherFullPageContainer table {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.weatherFullPageContainer table th,
+.weatherFullPageContainer table td {
+    padding: 3px;
+}
+.weatherFullPageContainer table th {
+    text-align: center;
+}
+
+.weatherFullPageContainer table td {
+    background-color: #eee;
+    margin: 1px;
+    border: 2px solid white;
+}

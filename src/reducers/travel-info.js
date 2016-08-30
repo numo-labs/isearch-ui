@@ -1,4 +1,8 @@
 'use strict';
+
+import moment from 'moment';
+import departOnFriday from '../utils/departure-day-format';
+
 import {
   SET_CHILD_AGE,
   SET_NUMBER_OF_ADULTS,
@@ -20,7 +24,7 @@ export const initialState = {
   childAge4: '0 Barns alder',
   departureAirport: 'Overalt',
   duration: '1 uge',
-  departureDate: '',
+  departureDate: departOnFriday(moment().add(3, 'months')).format('YYYY-MM-DD'),
   danishDepartureDate: '',
   passengerBirthdays: [],
   numberOfChildrenTitle: '0',
