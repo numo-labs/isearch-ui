@@ -12,6 +12,7 @@ import HotelPage from '../containers/hotel';
 import App from '../components/app';
 import EditDetails from '../containers/editDetails';
 import DestinationFullPage from '../containers/destination';
+import WeatherFullPage from '../containers/weather';
 
 // store
 import configureStore from '../store/configure-store.js';
@@ -58,6 +59,7 @@ export default class Root extends Component {
             <Route path='article/:bucketId/:itemId' component={ArticleFullPage} />
             <Route path='hotel/:bucketId/:itemId' component={HotelPage} />
             <Route path='destination/:bucketId/:itemId' component={DestinationFullPage} />
+            <Route path='weather/:itemId' component={WeatherFullPage} />
             <Route path='editDetails' component={EditDetails} />
           </Route>
         </Router>

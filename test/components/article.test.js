@@ -10,8 +10,7 @@ const defaultProps = {
     sections: [{
       image: 'image',
       title: 'title',
-      text: 'text',
-      videoUrl: 'url'
+      text: 'text'
     }, {
       image: 'image2',
       title: 'title2',
@@ -42,7 +41,6 @@ describe('Component', function () {
       expect(articleHeaderIntro).to.equal(header);
       expect(articleSection).to.equal('title2');
       expect(wrapper.find('NavHeader')).to.have.length(1);
-      expect(wrapper.find('video')).to.have.length(1);
       expect(wrapper.find('ArticleFooter')).to.have.length(1);
       done();
     });
@@ -52,11 +50,6 @@ describe('Component', function () {
       const wrapper = shallow(<ArticleFullPage {...props} />);
       const children = wrapper.children().nodes;
       expect(children).to.have.length(0);
-      done();
-    });
-    it('should render our video component if there is a video url', function (done) {
-      const wrapper = shallow(<ArticleFullPage {...defaultProps} />);
-      expect(wrapper.find('video')).to.have.length(1);
       done();
     });
   });

@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import ArticleFooter from '../../../lib/article-tile/article-footer.js';
 import NavHeader from '../../../lib/nav-header/';
 import Tag from '../../../lib/tags/tag.js';
 import FadeImage from '../../../lib/fade-image';
+import StaticBaseClass from '../staticBaseClass';
 import './style.css';
 
 /*
@@ -12,51 +13,13 @@ import './style.css';
  * it is set using dangerouslySetInnerHTML
  */
 
-class ArticleFullPage extends Component {
+class ArticleFullPage extends StaticBaseClass {
   constructor () {
     super();
     this.getArticleData = this.getArticleData.bind(this);
     this.state = {
       articleContent: {}
     };
-  }
-
-  componentWillMount () {
-    this.getArticleData();
-  }
-
-  getArticleData () {
-    this.props.getArticle(this.props.params.bucketId, this.props.params.itemId);
-    this.setState({ articleContent: this.props.articleContent });
-  }
-
-  addAnalyticsData () {
-    const content = this.props.articleContent;
-    if (dataLayer) {
-      dataLayer.push({
-        'event': 'productViewed',
-        'pageName': (content.type === 'article' ? '/article/' : '/destination/') + content.name.replace(/ /g, '-'),
-        'ecommerce': {
-          'detail': {
-            'actionField': { 'list': 'inspirational search feed' },
-            'products': [ {
-              'id': content.name,
-              'brand': content.type === 'article' ? 'article_tile' : 'destination_tile'
-            } ]
-          }
-        }
-      });
-    }
-  }
-
-  onAddTagClick () {
-    const { articleContent, goBack, addArticleTag } = this.props;
-    addArticleTag(articleContent.name, articleContent.id, articleContent.name);
-    goBack();
-  }
-
-  rawMarkup (value) {
-    return { __html: value };
   }
 
   render () {
@@ -87,10 +50,6 @@ class ArticleFullPage extends Component {
     } else {
       const introSection = articleContent.sections[0];
       const content = articleContent.sections.slice(1);
-      const videoClipUrl = articleContent.sections[0].videoUrl;
-      // const headerContent = this.props.isDestination && articleContent.videoUrl ? headerVideo : headerImage;
-      const contentContainerStyle = this.props.isDestination ? 'destinationContainer' : 'articleContentContainer';
-      // const contentContainerStyle = this.props.isDestination && articleContent.videoUrl ? 'destinationContainer' : 'articleContentContainer';
       this.addAnalyticsData();
       if (document.querySelector('title')) document.querySelector('title').innerHTML = 'article | ' + introSection.title;
       return (
@@ -98,7 +57,7 @@ class ArticleFullPage extends Component {
           <NavHeader backToSearch={goBack} go={go}/>
           <div className='articleFullPageContainer'>
             <div className='articleHeaderImage' style={{backgroundImage: `url(${introSection.image})`}} />
-            <div className={contentContainerStyle}>
+            <div className='articleContentContainer'>
               <section>
                 <div className='articleSection'>
                   <div className='articleHeaderIntro'>{introSection.title}</div>
@@ -124,13 +83,6 @@ class ArticleFullPage extends Component {
                   {renderTags(articleContent.amenities, 'amenities')}
                 </div>
               }
-              {this.props.children}
-              {
-                videoClipUrl &&
-                <div className='videoPlayerContainer'>
-                  <video controls width={'100%'} src={`${videoClipUrl}#t=2`} className='videoPlay'></video>
-                </div>
-              }
             <ArticleFooter articleName={articleContent.name} onAddTagClick={this.onAddTagClick.bind(this)} />
             </div>
           </div>
@@ -147,9 +99,7 @@ ArticleFullPage.propTypes = {
   getArticle: PropTypes.func,
   params: PropTypes.object,
   addSingleTag: PropTypes.func,
-  addArticleTag: PropTypes.func,
-  children: PropTypes.object,
-  isDestination: PropTypes.bool
+  addArticleTag: PropTypes.func
 };
 
 export default ArticleFullPage;
