@@ -180,15 +180,17 @@ class HotelPage extends Component {
                 {packageOffer.hotel.description}
               </div>
             </div>
-            {this.renderFactlist(this.retrieveAmenities())}
+            <div className='factListWrapper'>
+              {this.renderFactlist(this.retrieveAmenities())}
+            </div>
           </div>
           <div className='bookButtonContainer'>
-            <span className='hotelPrice'>
+            <span className='hotelPrice1'>
               {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
             </span>
-            <div className='ppp'>Pr. person</div>
+            <div className='ppp1'>Pr. person</div>
             <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
-              <div className='bookButton'>SE PRIS OG BESTIL</div>
+              <div className='bookButton1'>SE PRIS OG BESTIL</div>
             </a>
           </div>
           <div className='hotelImagesContainer'>
@@ -196,12 +198,12 @@ class HotelPage extends Component {
             {this.renderImageList(hotelImages.slice(1))}
           </div>
           <div className='bookButtonFooter'>
-            <span className='hotelPrice'>
+            <span className='hotelPrice2'>
               {parseFloat(packageOffer.price.perPerson).toLocaleString('da-DK')},-
             </span>
-            <div className='ppp'>Pr. person</div>
+            <div className='ppp2'>Pr. person</div>
             <a href={packageOffer.provider.deepLink + analyticsReferer} onClick={this.registerAnalyticsClick}>
-              <div className='bookButton'>SE PRIS OG BESTIL</div>
+              <div className='bookButton2'>SE PRIS OG BESTIL</div>
             </a>
           </div>
         </div>

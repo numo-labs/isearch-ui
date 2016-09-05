@@ -11,7 +11,6 @@ import ArticleFullPage from '../containers/article.js';
 import HotelPage from '../containers/hotel';
 import App from '../components/app';
 import EditDetails from '../containers/editDetails';
-import TagView from '../containers/tag-view';
 import DestinationFullPage from '../containers/destination';
 import WeatherFullPage from '../containers/weather';
 
@@ -62,7 +61,6 @@ export default class Root extends Component {
             <Route path='destination/:bucketId/:itemId' component={DestinationFullPage} />
             <Route path='weather/:itemId' component={WeatherFullPage} />
             <Route path='editDetails' component={EditDetails} />
-            <Route path='tagView' component={TagView} />
           </Route>
         </Router>
       </Provider>

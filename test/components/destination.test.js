@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-
-import DestinationFullPage from '../../src/components/destination/';
+import DestinationFullPage from '../../src/components/destination';
 
 const defaultProps = {
   articleContent: {
@@ -21,8 +19,11 @@ const defaultProps = {
     geo: [{label: 'Spain'}],
     amenities: [{label: 'Wifi'}]
   },
-  backToSearch: () => {},
+  goBack: () => {},
   getArticle: () => {},
+  go: () => {},
+  addSingleTag: () => {},
+  addArticleTag: () => {},
   params: {}
 };
 
@@ -33,6 +34,13 @@ describe('Component', function () {
       const wrapper = shallow(<DestinationFullPage {...defaultProps} />);
       const children = wrapper.children().nodes;
       expect(children).to.have.length(3);
+      done();
+    });
+    it('should render the correct children', function (done) {
+      const wrapper = shallow(<DestinationFullPage {...defaultProps} />);
+      expect(wrapper.find('NavHeader')).to.have.length(1);
+      expect(wrapper.find('FadeImage')).to.have.length(1);
+      expect(wrapper.find('GoogleMapLoader')).to.have.length(1);
       done();
     });
     it('should render a empty section if there is no destination name', function (done) {
